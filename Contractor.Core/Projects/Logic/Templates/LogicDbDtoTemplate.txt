@@ -1,0 +1,10 @@
+﻿using ProjectName.Contract.Persistence.Model.Domain;
+using System;
+
+namespace ProjectName.Logic.Model.Domain
+{
+    internal class DbEntity : IDbEntity
+    {
+        public Guid Id { get; set; }
+    }
+}

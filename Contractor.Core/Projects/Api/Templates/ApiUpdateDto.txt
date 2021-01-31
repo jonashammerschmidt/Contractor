@@ -1,0 +1,10 @@
+﻿using ProjectName.Contract.Logic.Model.Domain;
+using System;
+
+namespace ProjectName.API.Model.Domain
+{
+    public class EntityUpdate : IEntityUpdate
+    {
+        public Guid Id { get; set; }
+    }
+}

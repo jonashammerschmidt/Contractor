@@ -1,0 +1,8 @@
+﻿using ProjectName.Contract.Logic.Model.Domain;
+
+namespace ProjectName.API.Model.Domain
+{
+    public class EntityCreate : IEntityCreate
+    {
+    }
+}

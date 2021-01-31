@@ -1,0 +1,19 @@
+﻿using ProjectName.Contract.Logic.LogicResults;
+using System;
+using System.Collections.Generic;
+
+namespace ProjectName.Contract.Logic.Model.Domain
+{
+    public interface IEntitiesLogic
+    {
+        ILogicResult<Guid> CreateEntity(IEntityCreate entityCreate);
+
+        ILogicResult DeleteEntity(Guid entityId);
+
+        ILogicResult<IEntityDetail> GetEntityDetail(Guid entityId);
+
+        IEnumerable<IEntity> GetEntities();
+
+        ILogicResult UpdateEntity(IEntityUpdate entityUpdate);
+    }
+}

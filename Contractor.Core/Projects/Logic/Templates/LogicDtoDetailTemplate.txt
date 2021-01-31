@@ -1,0 +1,19 @@
+﻿using ProjectName.Contract.Logic.Model.Domain;
+using ProjectName.Contract.Persistence.Model.Domain;
+using System;
+
+namespace ProjectName.Logic.Model.Domain
+{
+    internal class EntityDetail : IEntityDetail
+    {
+        public Guid Id { get; set; }
+
+        internal static EntityDetail FromDbEntity(IDbEntity dbEntity)
+        {
+            return new EntityDetail()
+            {
+                Id = dbEntity.Id,
+            };
+        }
+    }
+}

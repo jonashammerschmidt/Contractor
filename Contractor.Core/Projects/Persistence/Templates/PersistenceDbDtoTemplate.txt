@@ -1,0 +1,32 @@
+﻿using ProjectName.Contract.Persistence.Model.Domain;
+using ProjectName.Persistence.Model.Domain.EfCore;
+using System;
+
+namespace ProjectName.Persistence.Model.Domain
+{
+    internal class DbEntity : IDbEntity
+    {
+        public Guid Id { get; set; }
+
+        internal static void UpdateEfEntity(EfEntity efEntity, IDbEntity dbEntity)
+        {
+        }
+
+        internal static IDbEntity FromEfEntity(EfEntity efEntity)
+        {
+            return new DbEntity()
+            {
+                Id = efEntity.Id,
+            };
+        }
+
+        internal static EfEntity ToEfEntity(IDbEntity dbEntity, Guid mandantId)
+        {
+            return new EfEntity()
+            {
+                Id = dbEntity.Id,
+                MandantId = mandantId,
+            };
+        }
+    }
+}

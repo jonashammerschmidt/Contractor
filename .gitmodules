@@ -1,0 +1,3 @@
+[submodule "Contract.Architecture"]
+	path = Contract.Architecture
+	url = https://github.com/jonashammerschmidt/Contract.Architecture.git

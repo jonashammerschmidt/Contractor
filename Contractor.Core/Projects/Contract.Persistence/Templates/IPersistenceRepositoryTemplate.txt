@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+
+namespace ProjectName.Contract.Persistence.Model.Domain
+{
+    public interface IEntitiesRepository
+    {
+        void CreateEntity(IDbEntity entity);
+
+        void DeleteEntity(Guid entityId);
+
+        IDbEntity GetEntity(Guid entityId);
+
+        IEnumerable<IDbEntity> GetEntities();
+
+        void UpdateEntity(IDbEntity entity);
+    }
+}

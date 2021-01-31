@@ -1,0 +1,9 @@
+﻿using System;
+
+namespace ProjectName.Contract.Persistence.Model.Domain
+{
+    public interface IDbEntity
+    {
+        Guid Id { get; set; }
+    }
+}

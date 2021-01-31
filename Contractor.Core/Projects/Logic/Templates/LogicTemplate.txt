@@ -1,0 +1,98 @@
+using Microsoft.Extensions.Logging;
+using ProjectName.Contract.Logic.LogicResults;
+using ProjectName.Contract.Logic.Model.Domain;
+using ProjectName.Contract.Logic.Services.Identifier;
+using ProjectName.Contract.Persistence.Model.Domain;
+using ProjectName.Logic.LogicResults;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ProjectName.Logic.Model.Domain
+{
+    internal class EntitiesLogic : IEntitiesLogic
+    {
+        private readonly IEntitiesRepository entitiesRepository;
+
+        private readonly IGuidGenerator guidGenerator;
+        private readonly ILogger<EntitiesLogic> logger;
+
+        public EntitiesLogic(
+            IEntitiesRepository entitiesRepository,
+            IGuidGenerator guidGenerator,
+            ILogger<EntitiesLogic> logger)
+        {
+            this.entitiesRepository = entitiesRepository;
+
+            this.guidGenerator = guidGenerator;
+            this.logger = logger;
+        }
+
+        public ILogicResult<Guid> CreateEntity(IEntityCreate entityCreate)
+        {
+            Guid newEntityId = this.guidGenerator.NewGuid();
+            IDbEntity entityToCreate = Entity.CreateEntity(newEntityId, entityCreate);
+
+            this.entitiesRepository.CreateEntity(entityToCreate);
+
+            this.logger.LogInformation("Entity ({entityId}) angelegt", newEntityId);
+            return LogicResult<Guid>.Ok(entityToCreate.Id);
+        }
+
+        public ILogicResult DeleteEntity(Guid entityId)
+        {
+            IDbEntity entityToDelete = this.entitiesRepository.GetEntity(entityId);
+            if (entityToDelete == null)
+            {
+                this.logger.LogDebug("Entity konnte nicht gefunden werden.");
+                return LogicResult.NotFound("Entity konnte nicht gefunden werden.");
+            }
+
+            this.entitiesRepository.DeleteEntity(entityId);
+
+            this.logger.LogInformation("Entity ({id}) gelöscht", entityId);
+            return LogicResult.Ok();
+        }
+
+        public ILogicResult<IEntityDetail> GetEntityDetail(Guid entityId)
+        {
+            IDbEntity entity = this.entitiesRepository.GetEntity(entityId);
+            if (entity == null)
+            {
+                this.logger.LogDebug("Entity konnte nicht gefunden werden.");
+                return LogicResult<IEntityDetail>.NotFound("Entity konnte nicht gefunden werden.");
+            }
+
+            EntityDetail entityDetail = EntityDetail.FromDbEntity(entity);
+
+            this.logger.LogDebug("Details für Entity wurde geladen");
+            return LogicResult<IEntityDetail>.Ok(entityDetail);
+        }
+
+        public IEnumerable<IEntity> GetEntities()
+        {
+            IEnumerable<IEntity> entities = this.entitiesRepository.GetEntities()
+                .Select(entity => Entity.FromDbEntity(entity));
+
+            this.logger.LogDebug("Entities wurden geladen");
+            return entities;
+        }
+
+        public ILogicResult UpdateEntity(IEntityUpdate entityUpdate)
+        {
+            IDbEntity entity = this.entitiesRepository.GetEntity(entityUpdate.Id);
+            if (entity == null)
+            {
+                this.logger.LogDebug("Entity konnte nicht gefunden werden.");
+                return LogicResult.NotFound("Entity konnte nicht gefunden werden.");
+            }
+
+            Entity.UpdateDbEntity(entity, entityUpdate);
+
+            this.entitiesRepository.UpdateEntity(entity);
+
+            this.logger.LogInformation("Entity ({id}) aktualisiert", entityUpdate.Id);
+            return LogicResult.Ok();
+        }
+    }
+}

@@ -1,0 +1,31 @@
+﻿using ProjectName.Contract.Logic.Model.Domain;
+using ProjectName.Contract.Persistence.Model.Domain;
+using System;
+
+namespace ProjectName.Logic.Model.Domain
+{
+    internal class Entity : IEntity
+    {
+        public Guid Id { get; set; }
+
+        internal static void UpdateDbEntity(IDbEntity dbEntity, IEntityUpdate entityUpdate)
+        {
+        }
+
+        internal static IEntity FromDbEntity(IDbEntity dbEntity)
+        {
+            return new Entity()
+            {
+                Id = dbEntity.Id,
+            };
+        }
+
+        internal static IDbEntity CreateEntity(Guid id, IEntityCreate entityCreate)
+        {
+            return new DbEntity()
+            {
+                Id = id,
+            };
+        }
+    }
+}

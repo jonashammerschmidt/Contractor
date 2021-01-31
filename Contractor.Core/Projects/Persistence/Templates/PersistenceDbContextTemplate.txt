@@ -1,0 +1,40 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+namespace ProjectName.Persistence.Model.Domain.EfCore
+{
+    internal partial class DomainDbContext : DbContext
+    {
+        private readonly IConfiguration configuration;
+
+        public DomainDbContext(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
+        private DomainDbContext(DbContextOptions<DomainDbContext> options)
+            : base(options)
+        {
+        }
+
+        public static DomainDbContext CustomInstantiate(DbContextOptions<DomainDbContext> options)
+        {
+            return new DomainDbContext(options);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("ProjectName.Database"));
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            this.OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    }
+}

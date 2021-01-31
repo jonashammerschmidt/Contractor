@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Contractor.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "test"
+    }
+  }
+}

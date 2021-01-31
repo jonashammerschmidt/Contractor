@@ -1,0 +1,68 @@
+﻿using ProjectName.Contract;
+using ProjectName.Contract.Persistence.Model.Domain;
+using ProjectName.Persistence.Model.Domain.EfCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ProjectName.Persistence.Model.Domain
+{
+    internal class EntitiesRepository : IEntitiesRepository
+    {
+        private readonly ISessionContext sessionContext;
+        private readonly DomainDbContext dbContext;
+
+        public EntitiesRepository(ISessionContext sessionContext, DomainDbContext dbContext)
+        {
+            this.sessionContext = sessionContext;
+            this.dbContext = dbContext;
+        }
+
+        public void CreateEntity(IDbEntity dbEntity)
+        {
+            this.dbContext.Entities.Add(DbEntity.ToEfEntity(dbEntity, this.sessionContext.MandantId));
+            this.dbContext.SaveChanges();
+        }
+
+        public void DeleteEntity(Guid entityId)
+        {
+            EfEntity efEntity = this.dbContext.Entities
+                .Where(efEntity => efEntity.Id == entityId)
+                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .FirstOrDefault();
+
+            this.dbContext.Entities.Remove(efEntity);
+            this.dbContext.SaveChanges();
+        }
+
+        public IDbEntity GetEntity(Guid entityId)
+        {
+            EfEntity efEntity = this.dbContext.Entities
+                .Where(efEntity => efEntity.Id == entityId)
+                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .FirstOrDefault();
+
+            return DbEntity.FromEfEntity(efEntity);
+        }
+
+        public IEnumerable<IDbEntity> GetEntities()
+        {
+            return this.dbContext.Entities
+                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .Select(efEntity => DbEntity.FromEfEntity(efEntity));
+        }
+
+        public void UpdateEntity(IDbEntity dbEntity)
+        {
+            EfEntity efEntity = this.dbContext.Entities
+                .Where(efEntity => efEntity.Id == dbEntity.Id)
+                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .FirstOrDefault();
+
+            DbEntity.UpdateEfEntity(efEntity, dbEntity);
+            this.dbContext.Entities.Update(efEntity);
+
+            this.dbContext.SaveChanges();
+        }
+    }
+}
