@@ -46,6 +46,9 @@
     <None Update="Projects\Contract.Persistence\Templates\IPersistenceRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\DB\Templates\TableTemplate-Mandant.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\DB\Templates\TableTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -61,10 +64,19 @@
     <None Update="Projects\Logic\Templates\LogicTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate-Mandant.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Persistence\Templates\PersistenceDbContextTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Persistence\Templates\PersistenceEfDtoTemplate-Mandant.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate-Mandant.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate.txt">

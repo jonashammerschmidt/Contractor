@@ -74,21 +74,26 @@ namespace Contractor.Core.Template.Logic
             this.pathService.AddDomainFolder(options, DomainEfCoreFolder);
             this.pathService.AddDtoFolder(options, DomainEfCoreFolder);
 
-            this.domainDependencyProvider.UpdateDependencyProvider(options, ProjectFolder, PersistenceDependencyProviderFileName);
-
             this.dbContextAddition.Add(options, DomainEfCoreFolder, PersistenceDbContextTemplateFileName, PersistenceDbContextFileName);
+
+            this.domainDependencyProvider.UpdateDependencyProvider(options, ProjectFolder, PersistenceDependencyProviderFileName);
         }
 
         public void AddEntity(EntityOptions options)
         {
-            this.entityCoreAddition.AddEntityCore(options, DomainFolder, PersistenceRepositoryTemplateFileName, PersistenceRepositoryFileName);
 
-            this.entityCoreDependencyProvider.UpdateDependencyProvider(options, ProjectFolder, PersistenceDependencyProviderFileName);
+            string persistenceRepositoryTemplateFileName = TemplateFileName.GetFileNameForEntityAddition(options, PersistenceRepositoryTemplateFileName);
+            this.entityCoreAddition.AddEntityCore(options, DomainFolder, persistenceRepositoryTemplateFileName, PersistenceRepositoryFileName);
 
-            this.dtoAddition.AddDto(options, DomainFolder, PersistenceDbDtoTemplateFileName, PersistenceDbDtoFileName);
+            string persistenceDbDtoTemplateFileName = TemplateFileName.GetFileNameForEntityAddition(options, PersistenceDbDtoTemplateFileName);
+            this.dtoAddition.AddDto(options, DomainFolder, persistenceDbDtoTemplateFileName, PersistenceDbDtoFileName);
+
+            string persistenceEfDtoTemplateFileName = TemplateFileName.GetFileNameForEntityAddition(options, PersistenceEfDtoTemplateFileName);
+            this.dtoAddition.AddDto(options, DomainEfCoreFolder, persistenceEfDtoTemplateFileName, PersistenceEfDtoFileName);
 
             this.dbContextEntityAddition.Add(options, DomainEfCoreFolder, PersistenceDbContextFileName);
-            this.dtoAddition.AddDto(options, DomainEfCoreFolder, PersistenceEfDtoTemplateFileName, PersistenceEfDtoFileName);
+
+            this.entityCoreDependencyProvider.UpdateDependencyProvider(options, ProjectFolder, PersistenceDependencyProviderFileName);
         }
 
         public void AddProperty(PropertyOptions options)

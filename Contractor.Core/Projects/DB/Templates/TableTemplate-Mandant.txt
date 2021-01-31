@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Entities] (
+    [Id]           UNIQUEIDENTIFIER NOT NULL,
+	[MandantId]	   UNIQUEIDENTIFIER NOT NULL,
+    CONSTRAINT [PK_Entities_Id] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Entities_MandantId] FOREIGN KEY ([MandantId]) REFERENCES [dbo].[Mandanten] ([Id])
+);

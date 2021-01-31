@@ -20,11 +20,12 @@ namespace ProjectName.Persistence.Model.Domain
             };
         }
 
-        internal static EfEntity ToEfEntity(IDbEntity dbEntity)
+        internal static EfEntity ToEfEntity(IDbEntity dbEntity, Guid mandantId)
         {
             return new EfEntity()
             {
                 Id = dbEntity.Id,
+                MandantId = mandantId,
             };
         }
     }

@@ -51,7 +51,8 @@ namespace Contractor.Core.Template.Logic
 
         public void AddEntity(EntityOptions options)
         {
-            this.dbTableAddition.AddEntityCore(options, DomainFolder, DbTableTemplateFileName, DbTableFileName);
+            string dbTableTemplateFileName = TemplateFileName.GetFileNameForEntityAddition(options, DbTableTemplateFileName);
+            this.dbTableAddition.AddEntityCore(options, DomainFolder, dbTableTemplateFileName, DbTableFileName);
 
             this.dbProjectFileEntityAddition.Add(options);
         }

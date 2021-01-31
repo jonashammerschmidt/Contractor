@@ -20,7 +20,7 @@ namespace ProjectName.Persistence.Model.Domain
 
         public void CreateEntity(IDbEntity dbEntity)
         {
-            this.dbContext.Entities.Add(DbEntity.ToEfEntity(dbEntity));
+            this.dbContext.Entities.Add(DbEntity.ToEfEntity(dbEntity, this.sessionContext.MandantId));
             this.dbContext.SaveChanges();
         }
 
@@ -28,6 +28,7 @@ namespace ProjectName.Persistence.Model.Domain
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
+                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
                 .FirstOrDefault();
 
             this.dbContext.Entities.Remove(efEntity);
@@ -38,6 +39,7 @@ namespace ProjectName.Persistence.Model.Domain
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
+                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
                 .FirstOrDefault();
 
             return DbEntity.FromEfEntity(efEntity);
@@ -46,6 +48,7 @@ namespace ProjectName.Persistence.Model.Domain
         public IEnumerable<IDbEntity> GetEntities()
         {
             return this.dbContext.Entities
+                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
                 .Select(efEntity => DbEntity.FromEfEntity(efEntity));
         }
 
@@ -53,6 +56,7 @@ namespace ProjectName.Persistence.Model.Domain
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == dbEntity.Id)
+                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
                 .FirstOrDefault();
 
             DbEntity.UpdateEfEntity(efEntity, dbEntity);

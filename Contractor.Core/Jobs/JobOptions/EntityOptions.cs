@@ -16,6 +16,8 @@
 
         public string EntityNamePlural { get; set; }
 
+        public bool ForMandant { get; set; }
+
         public string EntityNameLower
         {
             get

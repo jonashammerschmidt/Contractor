@@ -36,7 +36,8 @@ namespace Contractor.CLI
             EntityOptions entityAdditionOptions = new EntityOptions(options)
             {
                 EntityName = "Bank",
-                EntityNamePlural = "Banken"
+                EntityNamePlural = "Banken",
+                ForMandant = false
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
