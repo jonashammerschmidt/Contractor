@@ -61,6 +61,13 @@ namespace Contractor.CLI
 
             options.Domain = ExtractArgument(args, "-d", "--domain") ?? options.Domain;
             options.EntityNamePlural = ExtractArgument(args, "-p", "--plural") ?? options.EntityNamePlural;
+            options.ForMandant = HasArgument(args, "-m", "--mandant", "--for-mandant");
+        }
+
+        private static bool HasArgument(string[] args, params string[] argumentAlternatives)
+        {
+            int index = args.FindIndex((arg) => argumentAlternatives.Contains(arg));
+            return index != -1;
         }
 
         private static string ExtractArgument(string[] args, params string[] argumentAlternatives)
