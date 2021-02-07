@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ProjectName.Contract.Persistence.Model.Domain.Entities
 {
-    public interface IEntitiesRepository
+    public interface IEntitiesCrudRepository
     {
         void CreateEntity(IDbEntity entity);
 

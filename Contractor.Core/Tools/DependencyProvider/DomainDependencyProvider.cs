@@ -71,7 +71,6 @@ namespace Contractor.Core.Tools
                 startupMethod = @"
         private static void StartupDomain(IServiceCollection services)
         {
-            services.AddDbContext<DomainDbContext>();
         }";
             }
 

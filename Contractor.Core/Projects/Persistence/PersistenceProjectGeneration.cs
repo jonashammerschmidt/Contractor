@@ -16,7 +16,7 @@ namespace Contractor.Core.Template.Logic
         private static readonly string PersistenceDbDtoTemplateFileName = Path.Combine(TemplateFolder, "PersistenceDbDtoTemplate.txt");
         private static readonly string PersistenceEfDtoTemplateFileName = Path.Combine(TemplateFolder, "PersistenceEfDtoTemplate.txt");
 
-        private static readonly string PersistenceRepositoryFileName = "EntitiesRepository.cs";
+        private static readonly string PersistenceRepositoryFileName = "EntitiesCrudRepository.cs";
         private static readonly string PersistenceDbDtoFileName = "DbEntity.cs";
         private static readonly string PersistenceEfDtoFileName = "EfEntity.cs";
 

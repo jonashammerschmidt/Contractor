@@ -39,9 +39,9 @@ namespace Contractor.CLI
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
-            //entityAdditionOptions.EntityName = "Kunde";
-            //entityAdditionOptions.EntityNamePlural = "Kunden";
-            //contractorCoreApi.AddEntity(entityAdditionOptions);
+            entityAdditionOptions.EntityName = "Kunde";
+            entityAdditionOptions.EntityNamePlural = "Kunden";
+            contractorCoreApi.AddEntity(entityAdditionOptions);
 
             // Properties
             PropertyOptions propertyAdditionOptions = new PropertyOptions(options)
@@ -59,8 +59,8 @@ namespace Contractor.CLI
             propertyAdditionOptions.PropertyTypeExtra = null;
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
-            //propertyAdditionOptions.EntityName = "Bank";
-            //propertyAdditionOptions.EntityNamePlural = "Banken";
+            propertyAdditionOptions.EntityName = "Bank";
+            propertyAdditionOptions.EntityNamePlural = "Banken";
             propertyAdditionOptions.PropertyType = "int";
             propertyAdditionOptions.PropertyName = "Count";
             propertyAdditionOptions.PropertyTypeExtra = null;

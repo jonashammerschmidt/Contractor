@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Persistence
 {
     public class DbContextEntityAddition
     {
+        public UsingStatementAddition usingStatementAddition;
         public PathService pathService;
 
-        public DbContextEntityAddition(PathService pathService)
+        public DbContextEntityAddition(
+            UsingStatementAddition usingStatementAddition,
+            PathService pathService)
         {
+            this.usingStatementAddition = usingStatementAddition;
             this.pathService = pathService;
         }
 
@@ -25,6 +29,9 @@ namespace Contractor.Core.Projects.Persistence
         private string UpdateFileData(EntityOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
+
+            string usingStatement = $"{options.ProjectName}.Persistence.Model.{options.Domain}.{options.EntityNamePlural}";
+            fileData = this.usingStatementAddition.Add(fileData, usingStatement);
 
             StringEditor stringEditor = new StringEditor(fileData);
 

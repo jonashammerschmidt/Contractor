@@ -12,13 +12,13 @@ namespace ProjectName.Logic.Model.Domain.Entities
 {
     internal class EntitiesCrudLogic : IEntitiesCrudLogic
     {
-        private readonly IEntitiesRepository entitiesRepository;
+        private readonly IEntitiesCrudRepository entitiesRepository;
 
         private readonly IGuidGenerator guidGenerator;
         private readonly ILogger<EntitiesCrudLogic> logger;
 
         public EntitiesCrudLogic(
-            IEntitiesRepository entitiesRepository,
+            IEntitiesCrudRepository entitiesRepository,
             IGuidGenerator guidGenerator,
             ILogger<EntitiesCrudLogic> logger)
         {
