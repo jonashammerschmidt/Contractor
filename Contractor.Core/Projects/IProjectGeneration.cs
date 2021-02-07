@@ -1,12 +1,9 @@
-﻿using Contractor.Core.Jobs.DomainAddition;
-using Contractor.Core.Jobs.EntityAddition;
+﻿using Contractor.Core.Jobs;
 
 namespace Contractor.Core.Template
 {
     public interface IProjectGeneration
     {
-        void ClearDomain(DomainOptions options);
-
         void AddDomain(DomainOptions options);
 
         void AddEntity(EntityOptions options);

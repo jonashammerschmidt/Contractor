@@ -1,17 +1,7 @@
-﻿namespace Contractor.Core.Jobs.EntityAddition
+﻿namespace Contractor.Core.Jobs
 {
-    public class EntityOptions : IDomainOptions
+    public class EntityOptions : DomainOptions, IEntityOptions
     {
-        public string BackendDestinationFolder { get; set; }
-
-        public string DbDestinationFolder { get; set; }
-
-        public string ProjectName { get; set; }
-
-        public string DbProjectName { get; set; }
-
-        public string Domain { get; set; }
-
         public string EntityName { get; set; }
 
         public string EntityNamePlural { get; set; }
@@ -38,21 +28,12 @@
         {
         }
 
-        public EntityOptions(IContractorOptions options)
+        public EntityOptions(IContractorOptions options) : base(options)
         {
-            this.BackendDestinationFolder = options.BackendDestinationFolder;
-            this.DbDestinationFolder = options.DbDestinationFolder;
-            this.ProjectName = options.ProjectName;
-            this.DbProjectName = options.DbProjectName;
         }
 
-        public EntityOptions(IDomainOptions options)
+        public EntityOptions(IDomainOptions options) : base(options)
         {
-            this.BackendDestinationFolder = options.BackendDestinationFolder;
-            this.DbDestinationFolder = options.DbDestinationFolder;
-            this.ProjectName = options.ProjectName;
-            this.DbProjectName = options.DbProjectName;
-            this.Domain = options.Domain;
         }
     }
 }

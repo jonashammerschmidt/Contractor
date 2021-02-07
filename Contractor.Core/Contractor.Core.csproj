@@ -70,9 +70,6 @@
     <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceDbContextTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Projects\Persistence\Templates\PersistenceEfDtoTemplate-Mandant.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

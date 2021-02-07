@@ -1,10 +1,7 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.DomainAddition;
-using Contractor.Core.Jobs.EntityAddition;
+using Contractor.Core.Jobs;
 using Contractor.Core.Tools;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace Contractor.Core.Projects.Persistence
 {
@@ -17,20 +14,12 @@ namespace Contractor.Core.Projects.Persistence
             this.pathService = pathService;
         }
 
-        public void Add(EntityOptions options, string domainFolder, string templateFileName)
+        public void Add(EntityOptions options)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            string filePath = this.pathService.GetAbsolutePathForDbContext(options);
             string fileData = UpdateFileData(options, filePath);
 
             File.WriteAllText(filePath, fileData);
-        }
-
-        private string GetFilePath(EntityOptions options, string domainFolder, string templateFileName)
-        {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForDomain(options, domainFolder);
-            string fileName = templateFileName.Replace("Domain", options.Domain);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
         }
 
         private string UpdateFileData(EntityOptions options, string filePath)
@@ -68,8 +57,6 @@ namespace Contractor.Core.Projects.Persistence
                  "\n" +
                  $"                entity.Property(e => e.Id).ValueGeneratedNever();\n" +
                  "            });";
-
         }
-
     }
 }

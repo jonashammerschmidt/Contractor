@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectName.Contract.Persistence.Model.Domain
+namespace ProjectName.Contract.Persistence.Model.Domain.Entities
 {
     public interface IDbEntity
     {

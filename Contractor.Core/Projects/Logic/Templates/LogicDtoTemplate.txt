@@ -1,8 +1,8 @@
-﻿using ProjectName.Contract.Logic.Model.Domain;
-using ProjectName.Contract.Persistence.Model.Domain;
+﻿using ProjectName.Contract.Logic.Model.Domain.Entities;
+using ProjectName.Contract.Persistence.Model.Domain.Entities;
 using System;
 
-namespace ProjectName.Logic.Model.Domain
+namespace ProjectName.Logic.Model.Domain.Entities
 {
     internal class Entity : IEntity
     {

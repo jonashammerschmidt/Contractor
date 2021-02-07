@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace ProjectName.Contract.Logic.Model.Domain
+namespace ProjectName.Contract.Logic.Model.Domain.Entities
 {
-    public interface IEntitiesLogic
+    public interface IEntitiesCrudLogic
     {
         ILogicResult<Guid> CreateEntity(IEntityCreate entityCreate);
 

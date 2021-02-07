@@ -1,5 +1,5 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.EntityAddition;
+using Contractor.Core.Jobs;
 using System;
 using System.IO;
 
@@ -43,10 +43,10 @@ namespace Contractor.Core.Tools
 
         private string AddServices(string fileData, EntityOptions options, string projectFolder)
         {
-            string contractNamespace = GetContractNamespace(options.ProjectName, options.Domain, projectFolder);
+            string contractNamespace = GetContractNamespace(options, projectFolder);
             fileData = this.usingStatementAddition.Add(fileData, contractNamespace);
 
-            string projectNamespace = GetProjectNamespace(options.ProjectName, options.Domain, projectFolder);
+            string projectNamespace = GetProjectNamespace(options, projectFolder);
             fileData = this.usingStatementAddition.Add(fileData, projectNamespace);
 
             // Insert into Startup-Method
@@ -60,29 +60,29 @@ namespace Contractor.Core.Tools
             return stringEditor.GetText();
         }
 
-        private string GetContractNamespace(string projectName, string domain, string projectFolder)
+        private string GetContractNamespace(EntityOptions options, string projectFolder)
         {
             if (projectFolder.Equals(".Logic"))
             {
-                return $"{projectName}.Contract.Logic.Model.{domain}";
+                return $"{options.ProjectName}.Contract.Logic.Model.{options.Domain}.{options.EntityNamePlural}";
             }
             else if (projectFolder.Equals(".Persistence"))
             {
-                return $"{projectName}.Contract.Persistence.Model.{domain}";
+                return $"{options.ProjectName}.Contract.Persistence.Model.{options.Domain}.{options.EntityNamePlural}";
             }
 
             throw new ArgumentException("Argument 'projectFolder' invalid");
         }
 
-        private string GetProjectNamespace(string projectName, string domain, string projectFolder)
+        private string GetProjectNamespace(EntityOptions options, string projectFolder)
         {
             if (projectFolder.Equals(".Logic"))
             {
-                return $"{projectName}.Logic.Model.{domain}";
+                return $"{options.ProjectName}.Logic.Model.{options.Domain}.{options.EntityNamePlural}";
             }
             else if (projectFolder.Equals(".Persistence"))
             {
-                return $"{projectName}.Persistence.Model.{domain}";
+                return $"{options.ProjectName}.Persistence.Model.{options.Domain}.{options.EntityNamePlural}";
             }
 
             throw new ArgumentException("Argument 'projectFolder' invalid");
@@ -92,11 +92,11 @@ namespace Contractor.Core.Tools
         {
             if (projectFolder.Equals(".Logic"))
             {
-                return $"            services.AddScoped<I{entityNamePlural}Logic, {entityNamePlural}Logic>();";
+                return $"            services.AddScoped<I{entityNamePlural}CrudLogic, {entityNamePlural}CrudLogic>();";
             }
             else if (projectFolder.Equals(".Persistence"))
             {
-                return $"            services.AddScoped<I{entityNamePlural}Repository, {entityNamePlural}Repository>();";
+                return $"            services.AddScoped<I{entityNamePlural}CrudRepository, {entityNamePlural}CrudRepository>();";
             }
 
             throw new ArgumentException("Argument 'projectFolder' invalid");

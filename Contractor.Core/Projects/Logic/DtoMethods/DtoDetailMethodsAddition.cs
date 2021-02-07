@@ -1,5 +1,5 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.DomainAddition;
+using Contractor.Core.Jobs;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -40,7 +40,7 @@ namespace Contractor.Core.Projects.Persistence
             stringEditor.Next(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}.{options.PropertyName},");
-            
+
             return stringEditor.GetText();
         }
     }

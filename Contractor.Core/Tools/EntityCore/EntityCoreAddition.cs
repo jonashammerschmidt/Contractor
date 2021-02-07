@@ -1,5 +1,5 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.EntityAddition;
+using Contractor.Core.Jobs;
 using System.IO;
 
 namespace Contractor.Core.Tools
@@ -23,7 +23,7 @@ namespace Contractor.Core.Tools
 
         private string GetFilePath(EntityOptions options, string domainFolder, string templateFileName)
         {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForDomain(options, domainFolder);
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForEntity(options, domainFolder);
             string fileName = templateFileName.Replace("Entities", options.EntityNamePlural);
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;

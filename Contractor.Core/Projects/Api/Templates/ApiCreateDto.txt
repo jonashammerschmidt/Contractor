@@ -1,6 +1,6 @@
-﻿using ProjectName.Contract.Logic.Model.Domain;
+﻿using ProjectName.Contract.Logic.Model.Domain.Entities;
 
-namespace ProjectName.API.Model.Domain
+namespace ProjectName.API.Model.Domain.Entities
 {
     public class EntityCreate : IEntityCreate
     {

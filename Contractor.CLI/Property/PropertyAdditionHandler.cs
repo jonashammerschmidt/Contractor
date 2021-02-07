@@ -1,6 +1,6 @@
 ﻿using Contractor.Core;
 using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.DomainAddition;
+using Contractor.Core.Jobs;
 using System;
 using System.IO;
 using System.Linq;

@@ -1,6 +1,5 @@
 ﻿using Contractor.Core;
-using Contractor.Core.Jobs.DomainAddition;
-using Contractor.Core.Jobs.EntityAddition;
+using Contractor.Core.Jobs;
 using System.IO;
 
 namespace Contractor.CLI
@@ -29,7 +28,6 @@ namespace Contractor.CLI
 
             // Domain
             DomainOptions domainAdditionOptions = new DomainOptions(options);
-            contractorCoreApi.ClearDomain(domainAdditionOptions);
             contractorCoreApi.AddDomain(domainAdditionOptions);
 
             // Entities
@@ -41,15 +39,15 @@ namespace Contractor.CLI
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
-            entityAdditionOptions.EntityName = "BankKunde";
-            entityAdditionOptions.EntityNamePlural = "BankKunden";
-            contractorCoreApi.AddEntity(entityAdditionOptions);
+            //entityAdditionOptions.EntityName = "Kunde";
+            //entityAdditionOptions.EntityNamePlural = "Kunden";
+            //contractorCoreApi.AddEntity(entityAdditionOptions);
 
             // Properties
             PropertyOptions propertyAdditionOptions = new PropertyOptions(options)
             {
-                EntityName = "Bank",
-                EntityNamePlural = "Banken",
+                EntityName = "Kunde",
+                EntityNamePlural = "Kunden",
                 PropertyType = "string",
                 PropertyName = "Test",
                 PropertyTypeExtra = "256"
@@ -61,6 +59,8 @@ namespace Contractor.CLI
             propertyAdditionOptions.PropertyTypeExtra = null;
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
+            //propertyAdditionOptions.EntityName = "Bank";
+            //propertyAdditionOptions.EntityNamePlural = "Banken";
             propertyAdditionOptions.PropertyType = "int";
             propertyAdditionOptions.PropertyName = "Count";
             propertyAdditionOptions.PropertyTypeExtra = null;

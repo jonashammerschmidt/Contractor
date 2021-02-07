@@ -12,16 +12,24 @@ namespace Contractor.Core.Tools
             return absolutePathForDomain;
         }
 
-        public string GetAbsolutePathForDomain(IDomainOptions options, string domainFolder)
+        public string GetAbsolutePathForEntity(IEntityOptions options, string domainFolder)
         {
             string relativePath = options.ProjectName + domainFolder.Replace("{Domain}", options.Domain);
+            relativePath = relativePath.Replace("{Entities}", options.EntityNamePlural);
             string absolutePathForDomain = Path.Combine(options.BackendDestinationFolder, relativePath);
             return absolutePathForDomain;
         }
 
-        public string GetAbsolutePathForDTOs(IDomainOptions options, string domainFolder)
+        public string GetAbsolutePathForDbContext(IDomainOptions options)
         {
-            return Path.Combine(GetAbsolutePathForDomain(options, domainFolder), "DTOs");
+            string relativePath = options.ProjectName + ".Persistence/Model/PersistenceDbContext.cs";
+            string absolutePathForDomain = Path.Combine(options.BackendDestinationFolder, relativePath);
+            return absolutePathForDomain;
+        }
+
+        public string GetAbsolutePathForDTOs(IEntityOptions options, string domainFolder)
+        {
+            return Path.Combine(GetAbsolutePathForEntity(options, domainFolder), "DTOs");
         }
 
         public void AddDbDomainFolder(IDomainOptions options, string domainFolder)
@@ -33,30 +41,21 @@ namespace Contractor.Core.Tools
             }
         }
 
-        public void AddDomainFolder(IDomainOptions options, string domainFolder)
+        public void AddEntityFolder(IEntityOptions options, string domainFolder)
         {
-            string absolutePathForDomain = GetAbsolutePathForDomain(options, domainFolder);
+            string absolutePathForDomain = GetAbsolutePathForEntity(options, domainFolder);
             if (!Directory.Exists(absolutePathForDomain))
             {
                 Directory.CreateDirectory(absolutePathForDomain);
             }
         }
 
-        public void AddDtoFolder(IDomainOptions options, string domainFolder)
+        public void AddDtoFolder(IEntityOptions options, string domainFolder)
         {
             string absolutePathForDTOs = GetAbsolutePathForDTOs(options, domainFolder);
             if (!Directory.Exists(absolutePathForDTOs))
             {
                 Directory.CreateDirectory(absolutePathForDTOs);
-            }
-        }
-
-        public void DeleteDomainFolder(IDomainOptions options, string domainFolder)
-        {
-            string absolutePathForDomain = GetAbsolutePathForDomain(options, domainFolder);
-            if (Directory.Exists(absolutePathForDomain))
-            {
-                Directory.Delete(absolutePathForDomain, true);
             }
         }
     }

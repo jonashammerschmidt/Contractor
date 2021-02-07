@@ -36,7 +36,6 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DomainDependencyProvider>();
             serviceCollection.AddSingleton<EntityCoreDependencyProvider>();
 
-            serviceCollection.AddSingleton<DbContextAddition>();
             serviceCollection.AddSingleton<DbContextEntityAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();
             serviceCollection.AddSingleton<DbDtoMethodsAddition>();

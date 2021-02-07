@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProjectName.Persistence.Model.Domain.EfCore
+namespace ProjectName.Persistence.Model.Domain.Entities
 {
     internal class EfEntity
     {

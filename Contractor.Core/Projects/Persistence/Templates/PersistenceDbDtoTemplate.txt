@@ -1,8 +1,8 @@
-﻿using ProjectName.Contract.Persistence.Model.Domain;
-using ProjectName.Persistence.Model.Domain.EfCore;
+﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
+using ProjectName.Persistence.Model.Domain.Entities;
 using System;
 
-namespace ProjectName.Persistence.Model.Domain
+namespace ProjectName.Persistence.Model.Domain.Entities
 {
     internal class DbEntity : IDbEntity
     {

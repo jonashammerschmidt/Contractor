@@ -1,11 +1,11 @@
 ﻿using ProjectName.Contract;
-using ProjectName.Contract.Persistence.Model.Domain;
-using ProjectName.Persistence.Model.Domain.EfCore;
+using ProjectName.Contract.Persistence.Model.Domain.Entities;
+using ProjectName.Persistence.Model.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectName.Persistence.Model.Domain
+namespace ProjectName.Persistence.Model.Domain.Entities
 {
     internal class EntitiesRepository : IEntitiesRepository
     {

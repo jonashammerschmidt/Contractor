@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.DomainAddition;
-using Contractor.Core.Jobs.EntityAddition;
+using Contractor.Core.Jobs;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -8,21 +7,21 @@ namespace Contractor.Core.Template.API
 {
     public class ApiProjectGeneration : IProjectGeneration
     {
-        private static string DomainFolder = ".API/Model/{Domain}";
+        private static readonly string DomainFolder = ".API/Model/{Domain}/{Entities}";
 
-        private static string TemplateFolder = Folder.Executable + @"\Projects\Api\Templates";
-        private static string ApiControllerTemplateFileName = Path.Combine(TemplateFolder, "ApiControllerTemplate.txt");
-        private static string ApiCreateDtoTemplateFileName = Path.Combine(TemplateFolder, "ApiCreateDto.txt");
-        private static string ApiUpdateDtoTemplateFileName = Path.Combine(TemplateFolder, "ApiUpdateDto.txt");
+        private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Api\Templates";
+        private static readonly string ApiControllerTemplateFileName = Path.Combine(TemplateFolder, "ApiControllerTemplate.txt");
+        private static readonly string ApiCreateDtoTemplateFileName = Path.Combine(TemplateFolder, "ApiCreateDto.txt");
+        private static readonly string ApiUpdateDtoTemplateFileName = Path.Combine(TemplateFolder, "ApiUpdateDto.txt");
 
-        private static string ApiControllerFileName = "EntitiesController.cs";
-        private static string ApiCreateDtoFileName = "EntityCreate.cs";
-        private static string ApiUpdateDtoFileName = "EntityUpdate.cs";
+        private static readonly string ApiControllerFileName = "EntitiesCrudController.cs";
+        private static readonly string ApiCreateDtoFileName = "EntityCreate.cs";
+        private static readonly string ApiUpdateDtoFileName = "EntityUpdate.cs";
 
-        private EntityCoreAddition entityCoreAddition;
-        private DtoAddition dtoAddition;
-        private DtoPropertyAddition propertyAddition;
-        private PathService pathService;
+        private readonly EntityCoreAddition entityCoreAddition;
+        private readonly DtoAddition dtoAddition;
+        private readonly DtoPropertyAddition propertyAddition;
+        private readonly PathService pathService;
 
         public ApiProjectGeneration(
             EntityCoreAddition entityCoreAddition,
@@ -36,21 +35,16 @@ namespace Contractor.Core.Template.API
             this.pathService = pathService;
         }
 
-        public void ClearDomain(DomainOptions options)
-        {
-            this.pathService.DeleteDomainFolder(options, DomainFolder);
-        }
-
         public void AddDomain(DomainOptions options)
         {
-            this.pathService.AddDomainFolder(options, DomainFolder);
-            this.pathService.AddDtoFolder(options, DomainFolder);
         }
 
         public void AddEntity(EntityOptions options)
         {
+            this.pathService.AddEntityFolder(options, DomainFolder);
             this.entityCoreAddition.AddEntityCore(options, DomainFolder, ApiControllerTemplateFileName, ApiControllerFileName);
 
+            this.pathService.AddDtoFolder(options, DomainFolder);
             this.dtoAddition.AddDto(options, DomainFolder, ApiCreateDtoTemplateFileName, ApiCreateDtoFileName);
             this.dtoAddition.AddDto(options, DomainFolder, ApiUpdateDtoTemplateFileName, ApiUpdateDtoFileName);
         }

@@ -1,4 +1,4 @@
-﻿using Contractor.Core.Jobs.EntityAddition;
+﻿using Contractor.Core.Jobs;
 using System;
 using System.Collections.Generic;
 using System.Text;

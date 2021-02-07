@@ -1,5 +1,5 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.DomainAddition;
+using Contractor.Core.Jobs;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -14,25 +14,17 @@ namespace Contractor.Core.Projects.Persistence
             this.pathService = pathService;
         }
 
-        public void Add(PropertyOptions options, string domainFolder, string templateFileName)
+        public void Add(PropertyOptions options)
         {
             if (this.GetEntityDbModel(options) == null)
             {
                 return;
             }
 
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            string filePath = this.pathService.GetAbsolutePathForDbContext(options);
             string fileData = UpdateFileData(options, filePath);
 
             File.WriteAllText(filePath, fileData);
-        }
-
-        private string GetFilePath(PropertyOptions options, string domainFolder, string templateFileName)
-        {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForDomain(options, domainFolder);
-            string fileName = templateFileName.Replace("Domain", options.Domain);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
         }
 
         private string UpdateFileData(PropertyOptions options, string filePath)

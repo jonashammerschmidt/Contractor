@@ -1,26 +1,26 @@
 using Microsoft.Extensions.Logging;
 using ProjectName.Contract.Logic.LogicResults;
-using ProjectName.Contract.Logic.Model.Domain;
+using ProjectName.Contract.Logic.Model.Domain.Entities;
 using ProjectName.Contract.Logic.Services.Identifier;
-using ProjectName.Contract.Persistence.Model.Domain;
+using ProjectName.Contract.Persistence.Model.Domain.Entities;
 using ProjectName.Logic.LogicResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectName.Logic.Model.Domain
+namespace ProjectName.Logic.Model.Domain.Entities
 {
-    internal class EntitiesLogic : IEntitiesLogic
+    internal class EntitiesCrudLogic : IEntitiesCrudLogic
     {
         private readonly IEntitiesRepository entitiesRepository;
 
         private readonly IGuidGenerator guidGenerator;
-        private readonly ILogger<EntitiesLogic> logger;
+        private readonly ILogger<EntitiesCrudLogic> logger;
 
-        public EntitiesLogic(
+        public EntitiesCrudLogic(
             IEntitiesRepository entitiesRepository,
             IGuidGenerator guidGenerator,
-            ILogger<EntitiesLogic> logger)
+            ILogger<EntitiesCrudLogic> logger)
         {
             this.entitiesRepository = entitiesRepository;
 

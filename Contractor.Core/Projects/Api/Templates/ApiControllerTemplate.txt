@@ -1,38 +1,38 @@
 ﻿using ProjectName.API.Security;
 using ProjectName.API.Security.Authorization;
 using ProjectName.Contract.Logic.LogicResults;
-using ProjectName.Contract.Logic.Model.Domain;
+using ProjectName.Contract.Logic.Model.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-namespace ProjectName.API.Model.Domain
+namespace ProjectName.API.Model.Domain.Entities
 {
     [ApiController]
     [Route("api/domain-kebab/entity-kebab")]
-    public class EntitiesController : ControllerBase
+    public class EntitiesCrudController : ControllerBase
     {
-        private readonly IEntitiesLogic entitiesLogic;
+        private readonly IEntitiesCrudLogic entitiesCrudLogic;
 
-        public EntitiesController(IEntitiesLogic entitiesLogic)
+        public EntitiesCrudController(IEntitiesCrudLogic entitiesCrudLogic)
         {
-            this.entitiesLogic = entitiesLogic;
+            this.entitiesCrudLogic = entitiesCrudLogic;
         }
 
         [HttpGet]
         [Authorized]
         public ActionResult<IEnumerable<IEntity>> GetEntities()
         {
-            var entities = this.entitiesLogic.GetEntities();
+            var entities = this.entitiesCrudLogic.GetEntities();
             return this.Ok(entities);
         }
 
         [HttpGet]
         [Authorized]
         [Route("{entityId}")]
-        public ActionResult<IEntityDetail> GetEntity(Guid entityId)
+        public ActionResult<IEntityDetail> GetEntityDetail(Guid entityId)
         {
-            var getEntityDetailResult = this.entitiesLogic.GetEntityDetail(entityId);
+            var getEntityDetailResult = this.entitiesCrudLogic.GetEntityDetail(entityId);
             return this.FromLogicResult(getEntityDetailResult);
         }
 
@@ -40,7 +40,7 @@ namespace ProjectName.API.Model.Domain
         [Authorized]
         public ActionResult<DataBody<Guid>> CreateEntity([FromBody] EntityCreate entityCreate)
         {
-            ILogicResult<Guid> createEntityResult = this.entitiesLogic.CreateEntity(entityCreate);
+            ILogicResult<Guid> createEntityResult = this.entitiesCrudLogic.CreateEntity(entityCreate);
             if (!createEntityResult.IsSuccessful)
             {
                 return this.FromLogicResult(createEntityResult);
@@ -53,7 +53,7 @@ namespace ProjectName.API.Model.Domain
         [Authorized]
         public ActionResult UpdateEntity([FromBody] EntityUpdate entityUpdate)
         {
-            ILogicResult updateEntityResult = this.entitiesLogic.UpdateEntity(entityUpdate);
+            ILogicResult updateEntityResult = this.entitiesCrudLogic.UpdateEntity(entityUpdate);
             return this.FromLogicResult(updateEntityResult);
         }
 
@@ -62,7 +62,7 @@ namespace ProjectName.API.Model.Domain
         [Route("{entityId}")]
         public ActionResult DeleteEntity(Guid entityId)
         {
-            ILogicResult deleteEntityResult = this.entitiesLogic.DeleteEntity(entityId);
+            ILogicResult deleteEntityResult = this.entitiesCrudLogic.DeleteEntity(entityId);
             return this.FromLogicResult(deleteEntityResult);
         }
     }

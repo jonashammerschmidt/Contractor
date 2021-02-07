@@ -7,7 +7,7 @@ namespace Contractor.Core.Helpers
     public class StringEditor
     {
         private int lineNumber;
-        private List<string> lines;
+        private readonly List<string> lines;
 
         public StringEditor(string text)
         {

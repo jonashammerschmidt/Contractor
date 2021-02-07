@@ -1,5 +1,5 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.DomainAddition;
+using Contractor.Core.Jobs;
 using Contractor.Core.Tools;
 using System.IO;
 

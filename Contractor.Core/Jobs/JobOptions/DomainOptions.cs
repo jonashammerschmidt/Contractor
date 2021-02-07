@@ -1,4 +1,4 @@
-﻿namespace Contractor.Core.Jobs.DomainAddition
+﻿namespace Contractor.Core.Jobs
 {
     public class DomainOptions : IDomainOptions
     {

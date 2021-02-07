@@ -1,4 +1,4 @@
-﻿using Contractor.Core.Jobs.EntityAddition;
+﻿using Contractor.Core.Jobs;
 using System.IO;
 
 namespace Contractor.Core.Tools

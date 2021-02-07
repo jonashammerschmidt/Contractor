@@ -1,4 +1,4 @@
-﻿namespace ProjectName.Contract.Logic.Model.Domain
+﻿namespace ProjectName.Contract.Logic.Model.Domain.Entities
 {
     public interface IEntityCreate
     {

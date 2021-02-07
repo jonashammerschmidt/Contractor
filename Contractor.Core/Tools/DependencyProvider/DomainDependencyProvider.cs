@@ -1,5 +1,5 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs.DomainAddition;
+using Contractor.Core.Jobs;
 using System;
 using System.IO;
 
@@ -34,12 +34,6 @@ namespace Contractor.Core.Tools
         private string UpdateFileData(DomainOptions options, string filePath, string projectFolder)
         {
             string fileData = File.ReadAllText(filePath);
-
-            if (projectFolder.Equals(".Persistence"))
-            {
-                string domainEfCoreNamespace = $"{options.ProjectName}.Persistence.Model.{options.Domain}.EfCore";
-                fileData = this.usingStatementAddition.Add(fileData, domainEfCoreNamespace);
-            }
 
             fileData = AddStartupMethod(fileData, options, projectFolder);
             fileData = AddGetStartupMethodCall(fileData, options);

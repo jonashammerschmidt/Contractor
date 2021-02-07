@@ -1,20 +1,19 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Contractor.Core.Jobs.DomainAddition;
-using Contractor.Core.Jobs.EntityAddition;
+﻿using Contractor.Core.Jobs;
 using Contractor.Core.Template.API;
 using Contractor.Core.Template.Contract;
 using Contractor.Core.Template.Logic;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core
 {
     public class ContractorCoreApi
     {
-        private ContractPersistenceProjectGeneration contractPersistenceProjectGeneration;
-        private ContractLogicProjectGeneration contractLogicProjectGeneration;
-        private PersistenceProjectGeneration persistenceProjectGeneration;
-        private LogicProjectGeneration logicProjectGeneration;
-        private ApiProjectGeneration apiProjectGeneration;
-        private DBProjectGeneration dbProjectGeneration;
+        private readonly ContractPersistenceProjectGeneration contractPersistenceProjectGeneration;
+        private readonly ContractLogicProjectGeneration contractLogicProjectGeneration;
+        private readonly PersistenceProjectGeneration persistenceProjectGeneration;
+        private readonly LogicProjectGeneration logicProjectGeneration;
+        private readonly ApiProjectGeneration apiProjectGeneration;
+        private readonly DBProjectGeneration dbProjectGeneration;
 
         public ContractorCoreApi()
         {
@@ -25,16 +24,6 @@ namespace Contractor.Core
             this.logicProjectGeneration = serviceProvider.GetService<LogicProjectGeneration>();
             this.apiProjectGeneration = serviceProvider.GetService<ApiProjectGeneration>();
             this.dbProjectGeneration = serviceProvider.GetService<DBProjectGeneration>();
-        }
-
-        public void ClearDomain(DomainOptions options)
-        {
-            this.contractLogicProjectGeneration.ClearDomain(options);
-            this.contractPersistenceProjectGeneration.ClearDomain(options);
-            this.persistenceProjectGeneration.ClearDomain(options);
-            this.logicProjectGeneration.ClearDomain(options);
-            this.apiProjectGeneration.ClearDomain(options);
-            this.dbProjectGeneration.ClearDomain(options);
         }
 
         public void AddDomain(DomainOptions options)
