@@ -26,8 +26,13 @@ namespace Contractor.Core
             this.dbProjectGeneration = serviceProvider.GetService<DBProjectGeneration>();
         }
 
-        public void AddDomain(DomainOptions options)
+        public void AddDomain(IDomainAdditionOptions options)
         {
+            if (!DomainAdditionOptions.Validate(options))
+            {
+                throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
+            }
+
             this.contractPersistenceProjectGeneration.AddDomain(options);
             this.contractLogicProjectGeneration.AddDomain(options);
             this.persistenceProjectGeneration.AddDomain(options);
@@ -36,8 +41,13 @@ namespace Contractor.Core
             this.dbProjectGeneration.AddDomain(options);
         }
 
-        public void AddEntity(EntityOptions options)
+        public void AddEntity(IEntityAdditionOptions options)
         {
+            if (!EntityAdditionOptions.Validate(options))
+            {
+                throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
+            }
+
             this.contractLogicProjectGeneration.AddEntity(options);
             this.contractPersistenceProjectGeneration.AddEntity(options);
             this.persistenceProjectGeneration.AddEntity(options);
@@ -46,14 +56,34 @@ namespace Contractor.Core
             this.dbProjectGeneration.AddEntity(options);
         }
 
-        public void AddProperty(PropertyOptions options)
+        public void AddProperty(IPropertyAdditionOptions options)
         {
+            if (!PropertyAdditionOptions.Validate(options))
+            {
+                throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
+            }
+
             this.contractLogicProjectGeneration.AddProperty(options);
             this.contractPersistenceProjectGeneration.AddProperty(options);
             this.persistenceProjectGeneration.AddProperty(options);
             this.logicProjectGeneration.AddProperty(options);
             this.apiProjectGeneration.AddProperty(options);
             this.dbProjectGeneration.AddProperty(options);
+        }
+
+        public void Add1ToNRelation(IRelationAdditionOptions options)
+        {
+            if (!RelationAdditionOptions.Validate(options))
+            {
+                throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
+            }
+
+            this.contractLogicProjectGeneration.Add1ToNRelation(options);
+            this.contractPersistenceProjectGeneration.Add1ToNRelation(options);
+            this.persistenceProjectGeneration.Add1ToNRelation(options);
+            this.logicProjectGeneration.Add1ToNRelation(options);
+            this.apiProjectGeneration.Add1ToNRelation(options);
+            this.dbProjectGeneration.Add1ToNRelation(options);
         }
     }
 }

@@ -26,7 +26,7 @@ contractor remove entity Bank -d Finanzen.Bankwesen
 
 
 -------- Property --------
-contractor add property string?(256) KundenId -e Finanzen.Bankwesen.Bank
+contractor add property string?:256 KundenId -e Finanzen.Bankwesen.Bank
 contractor add property string KundenId -r --extra=256 -e Finanzen.Bankwesen.Bank
 contractor add property string KundenId --required --extra=256 --entity Finanzen.Bankwesen.Bank
 

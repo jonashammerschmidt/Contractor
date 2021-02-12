@@ -9,7 +9,11 @@ namespace ProjectName.Contract.Persistence.Model.Domain.Entities
 
         void DeleteEntity(Guid entityId);
 
+        bool DoesEntityExist(Guid entityId);
+
         IDbEntity GetEntity(Guid entityId);
+
+        IDbEntityDetail GetEntityDetail(Guid entityId);
 
         IEnumerable<IDbEntity> GetEntities();
 

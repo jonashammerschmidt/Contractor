@@ -7,32 +7,27 @@ namespace Contractor.Core.Tools
 {
     public class EntityCoreDependencyProvider
     {
-
-        public UsingStatementAddition usingStatementAddition;
         public PathService pathService;
 
-        public EntityCoreDependencyProvider(
-            UsingStatementAddition usingStatementAddition,
-            PathService pathService)
+        public EntityCoreDependencyProvider(PathService pathService)
         {
-            this.usingStatementAddition = usingStatementAddition;
             this.pathService = pathService;
         }
 
-        public void UpdateDependencyProvider(EntityOptions options, string projectFolder, string fileName)
+        public void UpdateDependencyProvider(IEntityAdditionOptions options, string projectFolder, string fileName)
         {
             string filePath = GetFilePath(options, projectFolder, fileName);
             string fileData = UpdateFileData(options, filePath, projectFolder);
 
-            File.WriteAllText(filePath, fileData);
+            CsharpClassWriter.Write(filePath, fileData);
         }
 
-        private string GetFilePath(EntityOptions options, string projectFolder, string fileName)
+        private string GetFilePath(IEntityAdditionOptions options, string projectFolder, string fileName)
         {
             return Path.Combine(options.BackendDestinationFolder, options.ProjectName + projectFolder, fileName);
         }
 
-        private string UpdateFileData(EntityOptions options, string filePath, string projectFolder)
+        private string UpdateFileData(IEntityAdditionOptions options, string filePath, string projectFolder)
         {
             string fileData = File.ReadAllText(filePath);
 
@@ -41,13 +36,13 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddServices(string fileData, EntityOptions options, string projectFolder)
+        private string AddServices(string fileData, IEntityAdditionOptions options, string projectFolder)
         {
             string contractNamespace = GetContractNamespace(options, projectFolder);
-            fileData = this.usingStatementAddition.Add(fileData, contractNamespace);
+            fileData = UsingStatements.Add(fileData, contractNamespace);
 
             string projectNamespace = GetProjectNamespace(options, projectFolder);
-            fileData = this.usingStatementAddition.Add(fileData, projectNamespace);
+            fileData = UsingStatements.Add(fileData, projectNamespace);
 
             // Insert into Startup-Method
             StringEditor stringEditor = new StringEditor(fileData);
@@ -60,7 +55,7 @@ namespace Contractor.Core.Tools
             return stringEditor.GetText();
         }
 
-        private string GetContractNamespace(EntityOptions options, string projectFolder)
+        private string GetContractNamespace(IEntityAdditionOptions options, string projectFolder)
         {
             if (projectFolder.Equals(".Logic"))
             {
@@ -74,7 +69,7 @@ namespace Contractor.Core.Tools
             throw new ArgumentException("Argument 'projectFolder' invalid");
         }
 
-        private string GetProjectNamespace(EntityOptions options, string projectFolder)
+        private string GetProjectNamespace(IEntityAdditionOptions options, string projectFolder)
         {
             if (projectFolder.Equals(".Logic"))
             {

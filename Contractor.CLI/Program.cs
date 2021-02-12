@@ -61,6 +61,10 @@ namespace Contractor.CLI
                     PropertyHandler.Perform(args);
                     break;
 
+                case "relation":
+                    RelationHandler.Perform(args);
+                    break;
+
                 default:
                     Console.WriteLine("Der Typ '" + args[1] + "' ist ungültig.");
                     Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");

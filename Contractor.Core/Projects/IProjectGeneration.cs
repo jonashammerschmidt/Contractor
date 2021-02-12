@@ -4,10 +4,12 @@ namespace Contractor.Core.Template
 {
     public interface IProjectGeneration
     {
-        void AddDomain(DomainOptions options);
+        void AddDomain(IDomainAdditionOptions options);
 
-        void AddEntity(EntityOptions options);
+        void AddEntity(IEntityAdditionOptions options);
 
-        void AddProperty(PropertyOptions options);
+        void AddProperty(IPropertyAdditionOptions options);
+
+        void Add1ToNRelation(IRelationAdditionOptions options);
     }
 }

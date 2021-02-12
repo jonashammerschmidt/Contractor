@@ -1,5 +1,4 @@
-﻿using ProjectName.API.Security;
-using ProjectName.API.Security.Authorization;
+﻿using ProjectName.API.Security.Authorization;
 using ProjectName.Contract.Logic.LogicResults;
 using ProjectName.Contract.Logic.Model.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Contractor.Core.Projects.DB.ProjectFile;
+﻿using Contractor.Core.Projects.DB.ProjectFile;
 using Contractor.Core.Projects.Persistence;
 using Contractor.Core.Template.API;
 using Contractor.Core.Template.Contract;
 using Contractor.Core.Template.Logic;
 using Contractor.Core.Tools;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core
 {
@@ -30,22 +30,33 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoAddition>();
             serviceCollection.AddSingleton<EntityCoreAddition>();
 
+            serviceCollection.AddSingleton<DtoDetailFromMethodsAddition>();
             serviceCollection.AddSingleton<DtoDetailMethodsAddition>();
+            serviceCollection.AddSingleton<DtoDetailToMethodsAddition>();
             serviceCollection.AddSingleton<DtoMethodsAddition>();
 
             serviceCollection.AddSingleton<DomainDependencyProvider>();
             serviceCollection.AddSingleton<EntityCoreDependencyProvider>();
 
+            serviceCollection.AddSingleton<LogicRelationAddition>();
+
             serviceCollection.AddSingleton<DbContextEntityAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();
+            serviceCollection.AddSingleton<DbContextRelationToAddition>();
             serviceCollection.AddSingleton<DbDtoMethodsAddition>();
+            serviceCollection.AddSingleton<DbDtoDetailMethodsAddition>();
+            serviceCollection.AddSingleton<DbDtoDetailFromMethodsAddition>();
+            serviceCollection.AddSingleton<DbDtoDetailToMethodsAddition>();
+            serviceCollection.AddSingleton<EfDtoContructorHashSetAddition>();
+            serviceCollection.AddSingleton<DtoFromRepositoryIncludeAddition>();
+            serviceCollection.AddSingleton<DtoToRepositoryIncludeAddition>();
 
             serviceCollection.AddSingleton<DbProjectFileDomainAddition>();
             serviceCollection.AddSingleton<DbProjectFileEntityAddition>();
             serviceCollection.AddSingleton<DbTableAddition>();
             serviceCollection.AddSingleton<DbTablePropertyAddition>();
+            serviceCollection.AddSingleton<DbTableRelationContraintAddition>();
 
-            serviceCollection.AddSingleton<UsingStatementAddition>();
             serviceCollection.AddSingleton<PathService>();
         }
     }

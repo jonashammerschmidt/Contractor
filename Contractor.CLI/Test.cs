@@ -16,22 +16,33 @@ namespace Contractor.CLI
 
         private static void TestApiProjectGeneration(string backendDestinationFolder, string dbDestinationFolder)
         {
-            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-            var options = new DomainOptions()
+            var contractorOptions = new ContractorOptions()
             {
                 BackendDestinationFolder = backendDestinationFolder,
                 DbDestinationFolder = dbDestinationFolder,
                 ProjectName = "Contract.Architecture",
                 DbProjectName = "Contract.Architecture.DB",
-                Domain = "Bankwesen"
             };
 
+            AddBankwesen(contractorOptions);
+            AddKonto(contractorOptions);
+            AddKundenstamm(contractorOptions);
+            AddRelation(contractorOptions);
+        }
+
+        private static void AddBankwesen(ContractorOptions contractorOptions)
+        {
+            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
+
             // Domain
-            DomainOptions domainAdditionOptions = new DomainOptions(options);
+            var domainAdditionOptions = new DomainAdditionOptions(contractorOptions)
+            {
+                Domain = "Bankwesen"
+            };
             contractorCoreApi.AddDomain(domainAdditionOptions);
 
             // Entities
-            EntityOptions entityAdditionOptions = new EntityOptions(options)
+            EntityAdditionOptions entityAdditionOptions = new EntityAdditionOptions(domainAdditionOptions)
             {
                 EntityName = "Bank",
                 EntityNamePlural = "Banken",
@@ -39,32 +50,94 @@ namespace Contractor.CLI
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
-            entityAdditionOptions.EntityName = "Kunde";
-            entityAdditionOptions.EntityNamePlural = "Kunden";
-            contractorCoreApi.AddEntity(entityAdditionOptions);
-
             // Properties
-            PropertyOptions propertyAdditionOptions = new PropertyOptions(options)
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                EntityName = "Kunde",
-                EntityNamePlural = "Kunden",
                 PropertyType = "string",
-                PropertyName = "Test",
+                PropertyName = "Name",
                 PropertyTypeExtra = "256"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
+        }
 
-            propertyAdditionOptions.PropertyType = "bool";
-            propertyAdditionOptions.PropertyName = "IsTestValue";
-            propertyAdditionOptions.PropertyTypeExtra = null;
-            contractorCoreApi.AddProperty(propertyAdditionOptions);
+        private static void AddKonto(ContractorOptions contractorOptions)
+        {
+            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
 
-            propertyAdditionOptions.EntityName = "Bank";
-            propertyAdditionOptions.EntityNamePlural = "Banken";
-            propertyAdditionOptions.PropertyType = "int";
-            propertyAdditionOptions.PropertyName = "Count";
-            propertyAdditionOptions.PropertyTypeExtra = null;
+            // Entities
+            EntityAdditionOptions entityAdditionOptions = new EntityAdditionOptions(contractorOptions)
+            {
+                Domain = "Bankwesen",
+                EntityName = "Konto",
+                EntityNamePlural = "Konten",
+                ForMandant = false
+            };
+            contractorCoreApi.AddEntity(entityAdditionOptions);
+
+            // Properties
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = "string",
+                PropertyName = "Typ",
+                PropertyTypeExtra = "20"
+            };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
+        }
+
+        private static void AddKundenstamm(ContractorOptions contractorOptions)
+        {
+            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
+
+            // Domain
+            var domainAdditionOptions = new DomainAdditionOptions(contractorOptions)
+            {
+                Domain = "Kundenstamm"
+            };
+            contractorCoreApi.AddDomain(domainAdditionOptions);
+
+            // Entities
+            EntityAdditionOptions entityAdditionOptions = new EntityAdditionOptions(domainAdditionOptions)
+            {
+                EntityName = "Kunde",
+                EntityNamePlural = "Kunden",
+                ForMandant = false
+            };
+            contractorCoreApi.AddEntity(entityAdditionOptions);
+
+            // Properties
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = "int",
+                PropertyName = "Balance"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+        }
+
+        private static void AddRelation(ContractorOptions contractorOptions)
+        {
+            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
+
+            RelationAdditionOptions relationOptions = new RelationAdditionOptions(contractorOptions)
+            {
+                DomainFrom = "Bankwesen",
+                DomainTo = "Kundenstamm",
+                EntityNameFrom = "Bank",
+                EntityNamePluralFrom = "Banken",
+                EntityNameTo = "Kunde",
+                EntityNamePluralTo = "Kunden",
+            };
+            contractorCoreApi.Add1ToNRelation(relationOptions);
+
+            relationOptions = new RelationAdditionOptions(contractorOptions)
+            {
+                DomainFrom = "Bankwesen",
+                DomainTo = "Kundenstamm",
+                EntityNameFrom = "Konto",
+                EntityNamePluralFrom = "Konten",
+                EntityNameTo = "Kunde",
+                EntityNamePluralTo = "Kunden",
+            };
+            contractorCoreApi.Add1ToNRelation(relationOptions);
         }
 
         private static DirectoryInfo GetRootFolder()

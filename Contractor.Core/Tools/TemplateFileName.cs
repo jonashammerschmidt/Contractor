@@ -1,13 +1,10 @@
 ﻿using Contractor.Core.Jobs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Contractor.Core.Tools
 {
-    class TemplateFileName
+    internal class TemplateFileName
     {
-        public static string GetFileNameForEntityAddition(EntityOptions options, string originalTemplateFileName)
+        public static string GetFileNameForEntityAddition(IEntityAdditionOptions options, string originalTemplateFileName)
         {
             if (options.ForMandant)
             {

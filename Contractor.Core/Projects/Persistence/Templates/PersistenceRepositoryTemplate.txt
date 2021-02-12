@@ -1,6 +1,4 @@
-﻿using ProjectName.Contract;
-using ProjectName.Contract.Persistence.Model.Domain.Entities;
-using ProjectName.Persistence.Model.Domain.Entities;
+﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +7,10 @@ namespace ProjectName.Persistence.Model.Domain.Entities
 {
     internal class EntitiesCrudRepository : IEntitiesCrudRepository
     {
-        private readonly ISessionContext sessionContext;
         private readonly PersistenceDbContext dbContext;
 
-        public EntitiesCrudRepository(ISessionContext sessionContext, PersistenceDbContext dbContext)
+        public EntitiesCrudRepository(PersistenceDbContext dbContext)
         {
-            this.sessionContext = sessionContext;
             this.dbContext = dbContext;
         }
 
@@ -34,6 +30,11 @@ namespace ProjectName.Persistence.Model.Domain.Entities
             this.dbContext.SaveChanges();
         }
 
+        public bool DoesEntityExist(Guid entityId)
+        {
+            return this.dbContext.Entities.Any(efEntity => efEntity.Id == entityId);
+        }
+
         public IDbEntity GetEntity(Guid entityId)
         {
             EfEntity efEntity = this.dbContext.Entities
@@ -41,6 +42,15 @@ namespace ProjectName.Persistence.Model.Domain.Entities
                 .FirstOrDefault();
 
             return DbEntity.FromEfEntity(efEntity);
+        }
+
+        public IDbEntityDetail GetEntityDetail(Guid entityId)
+        {
+            EfEntity efEntity = this.dbContext.Entities
+                .Where(efEntity => efEntity.Id == entityId)
+                .FirstOrDefault();
+
+            return DbEntityDetail.FromEfEntity(efEntity);
         }
 
         public IEnumerable<IDbEntity> GetEntities()

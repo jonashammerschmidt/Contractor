@@ -13,7 +13,7 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddProperty(PropertyOptions options, string domainFolder, string templateFileName)
+        public void AddProperty(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = GetFileData(options, filePath);
@@ -21,7 +21,7 @@ namespace Contractor.Core.Tools
             File.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(PropertyOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
             string absolutePathForDomain = this.pathService.GetAbsolutePathForDbDomain(options, domainFolder);
             string fileName = templateFileName.Replace("Entities", options.EntityNamePlural);
@@ -29,7 +29,7 @@ namespace Contractor.Core.Tools
             return filePath;
         }
 
-        private string GetFileData(PropertyOptions options, string filePath)
+        private string GetFileData(IPropertyAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
 
@@ -37,11 +37,11 @@ namespace Contractor.Core.Tools
             stringEditor.NextThatContains("PRIMARY KEY CLUSTERED");
 
             stringEditor.InsertLine(GetPropertyLine(options));
-            
+
             return stringEditor.GetText();
         }
 
-        private static string GetPropertyLine(PropertyOptions options)
+        private static string GetPropertyLine(IPropertyAdditionOptions options)
         {
             // TODO: PropertyName length determines spaces betweeen name and type
             if (options.PropertyType == "string")
@@ -68,9 +68,8 @@ namespace Contractor.Core.Tools
             {
                 return $"	[{options.PropertyName}]	   DATETIME         NOT NULL,";
             }
-            
 
-            return "-- TODO: ";
+            return $"-- TODO: {options.PropertyType} {options.PropertyName}";
         }
     }
 }

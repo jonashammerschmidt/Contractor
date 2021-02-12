@@ -13,15 +13,15 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddEntityCore(EntityOptions options, string domainFolder, string templateFilePath, string templateFileName)
+        public void AddEntityCore(IEntityAdditionOptions options, string domainFolder, string templateFilePath, string templateFileName)
         {
             string fileData = GetFileData(options, templateFilePath);
             string filePath = GetFilePath(options, domainFolder, templateFileName);
 
-            File.WriteAllText(filePath, fileData);
+            CsharpClassWriter.Write(filePath, fileData);
         }
 
-        private string GetFilePath(EntityOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
         {
             string absolutePathForDomain = this.pathService.GetAbsolutePathForEntity(options, domainFolder);
             string fileName = templateFileName.Replace("Entities", options.EntityNamePlural);
@@ -29,7 +29,7 @@ namespace Contractor.Core.Tools
             return filePath;
         }
 
-        private string GetFileData(EntityOptions options, string templateFilePath)
+        private string GetFileData(IEntityAdditionOptions options, string templateFilePath)
         {
             string fileData = File.ReadAllText(templateFilePath);
             fileData = fileData.Replace("ProjectName", options.ProjectName);

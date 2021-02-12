@@ -7,7 +7,7 @@ namespace Contractor.Core.Template.Contract
 {
     public class ContractLogicProjectGeneration : IProjectGeneration
     {
-        private static readonly string DomainFolder = ".Contract/Logic/Model/{Domain}/{Entities}";
+        private static readonly string DomainFolder = ".Contract\\Logic\\Model\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Contract.Logic\Templates";
 
@@ -40,11 +40,11 @@ namespace Contractor.Core.Template.Contract
             this.pathService = pathService;
         }
 
-        public void AddDomain(DomainOptions options)
+        public void AddDomain(IDomainAdditionOptions options)
         {
         }
 
-        public void AddEntity(EntityOptions options)
+        public void AddEntity(IEntityAdditionOptions options)
         {
             this.pathService.AddEntityFolder(options, DomainFolder);
             this.entityCoreAddition.AddEntityCore(options, DomainFolder, ILogicTemplateFileName, ILogicFileName);
@@ -56,12 +56,39 @@ namespace Contractor.Core.Template.Contract
             this.dtoAddition.AddDto(options, DomainFolder, ILogicUpdateDtoTemplateFileName, ILogicUpdateDtoFileName);
         }
 
-        public void AddProperty(PropertyOptions options)
+        public void AddProperty(IPropertyAdditionOptions options)
         {
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, ILogicDtoFileName, true);
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, ILogicDtoDetailFileName, true);
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, ILogicCreateDtoFileName, true);
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, ILogicUpdateDtoFileName, true);
+        }
+
+        public void Add1ToNRelation(IRelationAdditionOptions options)
+        {
+            // From
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>", $"{options.EntityNamePluralTo}"),
+                DomainFolder, ILogicDtoDetailFileName, true,
+                $"{options.ProjectName}.Contract.Logic.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+
+            // To
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                DomainFolder, ILogicDtoFileName, true);
+
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", options.EntityNameFrom),
+                DomainFolder, ILogicDtoDetailFileName, true,
+                $"{options.ProjectName}.Contract.Logic.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                DomainFolder, ILogicCreateDtoFileName, true);
+
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                DomainFolder, ILogicUpdateDtoFileName, true);
         }
     }
 }

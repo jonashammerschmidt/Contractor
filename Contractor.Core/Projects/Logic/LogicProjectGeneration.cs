@@ -9,7 +9,7 @@ namespace Contractor.Core.Template.Logic
     public class LogicProjectGeneration : IProjectGeneration
     {
         private static readonly string ProjectFolder = ".Logic";
-        private static readonly string DomainFolder = ".Logic/Model/{Domain}/{Entities}";
+        private static readonly string DomainFolder = ".Logic\\Model\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Logic\Templates";
         private static readonly string LogicTemplateFileName = Path.Combine(TemplateFolder, "LogicTemplate.txt");
@@ -31,6 +31,9 @@ namespace Contractor.Core.Template.Logic
         private readonly DtoPropertyAddition propertyAddition;
         private readonly DtoDetailMethodsAddition dtoDetailMethodsAddition;
         private readonly DtoMethodsAddition dtoMethodsAddition;
+        private readonly DtoDetailFromMethodsAddition dtoDetailFromMethodsAddition;
+        private readonly DtoDetailToMethodsAddition dtoDetailToMethodsAddition;
+        private readonly LogicRelationAddition logicRelationAddition;
         private readonly PathService pathService;
 
         public LogicProjectGeneration(
@@ -41,6 +44,9 @@ namespace Contractor.Core.Template.Logic
             DtoPropertyAddition propertyAddition,
             DtoMethodsAddition dtoMethodsAddition,
             DtoDetailMethodsAddition dtoDetailMethodsAddition,
+            DtoDetailFromMethodsAddition dtoDetailMethodsFromListAddition,
+            DtoDetailToMethodsAddition dtoDetailToMethodsAddition,
+            LogicRelationAddition logicRelationAddition,
             PathService pathService)
         {
             this.domainDependencyProvider = domainDependencyProvider;
@@ -50,15 +56,18 @@ namespace Contractor.Core.Template.Logic
             this.propertyAddition = propertyAddition;
             this.dtoMethodsAddition = dtoMethodsAddition;
             this.dtoDetailMethodsAddition = dtoDetailMethodsAddition;
+            this.dtoDetailFromMethodsAddition = dtoDetailMethodsFromListAddition;
+            this.dtoDetailToMethodsAddition = dtoDetailToMethodsAddition;
+            this.logicRelationAddition = logicRelationAddition;
             this.pathService = pathService;
         }
 
-        public void AddDomain(DomainOptions options)
+        public void AddDomain(IDomainAdditionOptions options)
         {
             this.domainDependencyProvider.UpdateDependencyProvider(options, ProjectFolder, LogicDependencyProviderFileName);
         }
 
-        public void AddEntity(EntityOptions options)
+        public void AddEntity(IEntityAdditionOptions options)
         {
             this.pathService.AddEntityFolder(options, DomainFolder);
             this.entityCoreAddition.AddEntityCore(options, DomainFolder, LogicTemplateFileName, LogicFileName);
@@ -71,7 +80,7 @@ namespace Contractor.Core.Template.Logic
             this.entityCoreDependencyProvider.UpdateDependencyProvider(options, ProjectFolder, LogicDependencyProviderFileName);
         }
 
-        public void AddProperty(PropertyOptions options)
+        public void AddProperty(IPropertyAdditionOptions options)
         {
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, LogicDtoFileName);
             this.dtoMethodsAddition.Add(options, DomainFolder, LogicDtoFileName);
@@ -80,6 +89,38 @@ namespace Contractor.Core.Template.Logic
 
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, LogicDtoDetailFileName);
             this.dtoDetailMethodsAddition.Add(options, DomainFolder, LogicDtoDetailFileName);
+        }
+
+        public void Add1ToNRelation(IRelationAdditionOptions options)
+        {
+            // From
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>", $"{options.EntityNamePluralTo}"),
+                DomainFolder, LogicDtoDetailFileName,
+                $"{options.ProjectName}.Contract.Logic.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+            this.dtoDetailFromMethodsAddition.Add(options, DomainFolder, LogicDtoDetailFileName,
+                $"{options.ProjectName}.Logic.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+
+            // To
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                DomainFolder, LogicDtoFileName);
+            this.dtoMethodsAddition.Add(
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                DomainFolder, LogicDtoFileName);
+
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                DomainFolder, LogicDbDtoFileName);
+
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", options.EntityNameFrom),
+                DomainFolder, LogicDtoDetailFileName,
+                $"{options.ProjectName}.Contract.Logic.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+            this.dtoDetailToMethodsAddition.Add(options, DomainFolder, LogicDtoDetailFileName);
+
+            this.logicRelationAddition.Add(options, DomainFolder, LogicFileName,
+                $"{options.ProjectName}.Contract.Persistence.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
     }
 }

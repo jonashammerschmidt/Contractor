@@ -14,7 +14,7 @@ namespace Contractor.Core.Projects.Persistence
             this.pathService = pathService;
         }
 
-        public void Add(PropertyOptions options)
+        public void Add(IPropertyAdditionOptions options)
         {
             if (this.GetEntityDbModel(options) == null)
             {
@@ -24,10 +24,10 @@ namespace Contractor.Core.Projects.Persistence
             string filePath = this.pathService.GetAbsolutePathForDbContext(options);
             string fileData = UpdateFileData(options, filePath);
 
-            File.WriteAllText(filePath, fileData);
+            CsharpClassWriter.Write(filePath, fileData);
         }
 
-        private string UpdateFileData(PropertyOptions options, string filePath)
+        private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
 
@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Persistence
             return stringEditor.GetText();
         }
 
-        private string GetEntityDbModel(PropertyOptions options)
+        private string GetEntityDbModel(IPropertyAdditionOptions options)
         {
             if (options.PropertyType.Contains("string"))
             {

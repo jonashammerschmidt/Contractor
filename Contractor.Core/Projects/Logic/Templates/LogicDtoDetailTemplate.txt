@@ -8,11 +8,11 @@ namespace ProjectName.Logic.Model.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        internal static EntityDetail FromDbEntity(IDbEntity dbEntity)
+        internal static EntityDetail FromDbEntityDetail(IDbEntityDetail dbEntityDetail)
         {
             return new EntityDetail()
             {
-                Id = dbEntity.Id,
+                Id = dbEntityDetail.Id,
             };
         }
     }

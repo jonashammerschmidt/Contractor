@@ -1,5 +1,4 @@
 ﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
-using ProjectName.Persistence.Model.Domain.Entities;
 using System;
 
 namespace ProjectName.Persistence.Model.Domain.Entities
@@ -14,6 +13,11 @@ namespace ProjectName.Persistence.Model.Domain.Entities
 
         internal static IDbEntity FromEfEntity(EfEntity efEntity)
         {
+            if (efEntity == null)
+            {
+                return null;
+            }
+
             return new DbEntity()
             {
                 Id = efEntity.Id,

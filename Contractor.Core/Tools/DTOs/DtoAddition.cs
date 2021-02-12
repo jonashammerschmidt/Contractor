@@ -12,15 +12,15 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddDto(EntityOptions options, string domainFolder, string templateFilePath, string templateFileName)
+        public void AddDto(IEntityAdditionOptions options, string domainFolder, string templateFilePath, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = GetFileData(options, templateFilePath);
 
-            File.WriteAllText(filePath, fileData);
+            CsharpClassWriter.Write(filePath, fileData);
         }
 
-        private string GetFilePath(EntityOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
         {
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(options, domainFolder);
             string fileName = templateFileName.Replace("Entity", options.EntityName);
@@ -28,7 +28,7 @@ namespace Contractor.Core.Tools
             return filePath;
         }
 
-        private string GetFileData(EntityOptions options, string templateFileName)
+        private string GetFileData(IEntityAdditionOptions options, string templateFileName)
         {
             string fileData = File.ReadAllText(templateFileName);
             fileData = fileData.Replace("Entities", options.EntityNamePlural);

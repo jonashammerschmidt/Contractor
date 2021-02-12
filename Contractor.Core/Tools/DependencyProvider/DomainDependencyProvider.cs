@@ -1,37 +1,32 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Jobs;
-using System;
 using System.IO;
 
 namespace Contractor.Core.Tools
 {
     public class DomainDependencyProvider
     {
-        public UsingStatementAddition usingStatementAddition;
         public PathService pathService;
 
-        public DomainDependencyProvider(
-            UsingStatementAddition usingStatementAddition,
-            PathService pathService)
+        public DomainDependencyProvider(PathService pathService)
         {
-            this.usingStatementAddition = usingStatementAddition;
             this.pathService = pathService;
         }
 
-        public void UpdateDependencyProvider(DomainOptions options, string projectFolder, string fileName)
+        public void UpdateDependencyProvider(IDomainAdditionOptions options, string projectFolder, string fileName)
         {
             string filePath = GetFilePath(options, projectFolder, fileName);
             string fileData = UpdateFileData(options, filePath, projectFolder);
 
-            File.WriteAllText(filePath, fileData);
+            CsharpClassWriter.Write(filePath, fileData);
         }
 
-        private string GetFilePath(DomainOptions options, string projectFolder, string fileName)
+        private string GetFilePath(IDomainAdditionOptions options, string projectFolder, string fileName)
         {
             return Path.Combine(options.BackendDestinationFolder, options.ProjectName + projectFolder, fileName);
         }
 
-        private string UpdateFileData(DomainOptions options, string filePath, string projectFolder)
+        private string UpdateFileData(IDomainAdditionOptions options, string filePath, string projectFolder)
         {
             string fileData = File.ReadAllText(filePath);
 
@@ -41,7 +36,7 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddStartupMethod(string fileData, DomainOptions options, string projectFolder)
+        private string AddStartupMethod(string fileData, IDomainAdditionOptions options, string projectFolder)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
@@ -66,7 +61,7 @@ namespace Contractor.Core.Tools
         {
         }";
             }
-            else if(projectFolder.Equals(".Persistence"))
+            else if (projectFolder.Equals(".Persistence"))
             {
                 startupMethod = @"
         private static void StartupDomain(IServiceCollection services)
@@ -77,7 +72,7 @@ namespace Contractor.Core.Tools
             return startupMethod.Replace("Domain", domain);
         }
 
-        private string AddGetStartupMethodCall(string fileData, DomainOptions options)
+        private string AddGetStartupMethodCall(string fileData, IDomainAdditionOptions options)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 

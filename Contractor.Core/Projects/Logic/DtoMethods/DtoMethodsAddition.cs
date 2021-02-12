@@ -14,15 +14,15 @@ namespace Contractor.Core.Projects.Persistence
             this.pathService = pathService;
         }
 
-        public void Add(PropertyOptions options, string domainFolder, string templateFileName)
+        public void Add(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            File.WriteAllText(filePath, fileData);
+            CsharpClassWriter.Write(filePath, fileData);
         }
 
-        private string GetFilePath(PropertyOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(options, domainFolder);
             string fileName = templateFileName.Replace("Entity", options.EntityName);
@@ -30,7 +30,7 @@ namespace Contractor.Core.Projects.Persistence
             return filePath;
         }
 
-        private string UpdateFileData(PropertyOptions options, string filePath)
+        private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
 

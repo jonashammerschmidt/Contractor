@@ -1,6 +1,7 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Jobs;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
@@ -13,20 +14,35 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(PropertyOptions options, string domainFolder, string templateFileName)
+        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
             AddPropertyToDTO(options, domainFolder, templateFileName, false);
         }
 
-        public void AddPropertyToDTO(PropertyOptions options, string domainFolder, string templateFileName, bool forInterface)
+        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd)
+        {
+            AddPropertyToDTO(options, domainFolder, templateFileName, false, namespaceToAdd);
+        }
+
+        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface)
+        {
+            AddPropertyToDTO(options, domainFolder, templateFileName, forInterface, null);
+        }
+
+        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, string namespaceToAdd)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath, forInterface);
 
-            File.WriteAllText(filePath, fileData);
+            if (namespaceToAdd != null)
+            {
+                fileData = UsingStatements.Add(fileData, namespaceToAdd);
+            }
+
+            CsharpClassWriter.Write(filePath, fileData);
         }
 
-        private string GetFilePath(PropertyOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(options, domainFolder);
             string fileName = templateFileName.Replace("Entity", options.EntityName);
@@ -34,21 +50,35 @@ namespace Contractor.Core.Tools
             return filePath;
         }
 
-        private string UpdateFileData(PropertyOptions options, string filePath, bool forInterface)
+        private string UpdateFileData(IPropertyAdditionOptions options, string filePath, bool forInterface)
         {
             string fileData = File.ReadAllText(filePath);
 
-            fileData = AddProperty(fileData, options.PropertyType, options.PropertyName, forInterface);
+            fileData = AddUsingStatements(options, fileData);
+            fileData = AddProperty(fileData, options, forInterface);
 
             return fileData;
         }
 
-        private string AddProperty(string file, string propertyType, string propertyName, bool forInterface)
+        private string AddUsingStatements(IPropertyAdditionOptions options, string fileData)
+        {
+            if (options.PropertyType.Contains("Guid") || options.PropertyType.Contains("DateTime"))
+            {
+                fileData = UsingStatements.Add(fileData, "System");
+            }
+
+            if (options.PropertyType.Contains("Enumerable"))
+            {
+                fileData = UsingStatements.Add(fileData, "System.Collections.Generic");
+            }
+
+            return fileData;
+        }
+
+        private string AddProperty(string file, IPropertyAdditionOptions options, bool forInterface)
         {
             StringEditor stringEditor = new StringEditor(file);
-            stringEditor.NextThatContains("{")
-                      .NextThatContains("{")
-                      .Next(line => !IsLineEmpty(line) && !ContainsProperty(line));
+            FindStartingLineForNewProperty(file, options, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {
@@ -61,11 +91,27 @@ namespace Contractor.Core.Tools
             }
 
             if (forInterface)
-                stringEditor.InsertLine(GetInterfaceProperty(propertyType, propertyName));
+                stringEditor.InsertLine(GetInterfaceProperty(options.PropertyType, options.PropertyName));
             else
-                stringEditor.InsertLine(GetProperty(propertyType, propertyName));
+                stringEditor.InsertLine(GetProperty(options.PropertyType, options.PropertyName));
 
             return stringEditor.GetText();
+        }
+
+        private void FindStartingLineForNewProperty(string file, IPropertyAdditionOptions options, StringEditor stringEditor)
+        {
+            bool hasConstructor = Regex.IsMatch(file, $"public .*{options.EntityName}.*\\(");
+            bool hasProperty = file.Contains("{ get; set; }");
+            if (hasConstructor && hasProperty)
+            {
+                stringEditor.NextThatContains("{ get; set; }");
+            }
+            else
+            {
+                stringEditor.NextThatContains("{")
+                          .NextThatContains("{");
+            }
+            stringEditor.Next(line => !IsLineEmpty(line) && !ContainsProperty(line));
         }
 
         private bool IsLineEmpty(string line)

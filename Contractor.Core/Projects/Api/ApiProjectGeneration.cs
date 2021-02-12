@@ -7,7 +7,7 @@ namespace Contractor.Core.Template.API
 {
     public class ApiProjectGeneration : IProjectGeneration
     {
-        private static readonly string DomainFolder = ".API/Model/{Domain}/{Entities}";
+        private static readonly string DomainFolder = ".API\\Model\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Api\Templates";
         private static readonly string ApiControllerTemplateFileName = Path.Combine(TemplateFolder, "ApiControllerTemplate.txt");
@@ -35,11 +35,11 @@ namespace Contractor.Core.Template.API
             this.pathService = pathService;
         }
 
-        public void AddDomain(DomainOptions options)
+        public void AddDomain(IDomainAdditionOptions options)
         {
         }
 
-        public void AddEntity(EntityOptions options)
+        public void AddEntity(IEntityAdditionOptions options)
         {
             this.pathService.AddEntityFolder(options, DomainFolder);
             this.entityCoreAddition.AddEntityCore(options, DomainFolder, ApiControllerTemplateFileName, ApiControllerFileName);
@@ -49,12 +49,23 @@ namespace Contractor.Core.Template.API
             this.dtoAddition.AddDto(options, DomainFolder, ApiUpdateDtoTemplateFileName, ApiUpdateDtoFileName);
         }
 
-        public void AddProperty(PropertyOptions options)
+        public void AddProperty(IPropertyAdditionOptions options)
         {
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, ApiCreateDtoFileName);
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, ApiUpdateDtoFileName);
 
             // TODO: Add Annotations based on PropertyType/PropertyTypeExtra
+        }
+
+        public void Add1ToNRelation(IRelationAdditionOptions options)
+        {
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                DomainFolder, ApiCreateDtoFileName);
+
+            this.propertyAddition.AddPropertyToDTO(
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                DomainFolder, ApiUpdateDtoFileName);
         }
     }
 }

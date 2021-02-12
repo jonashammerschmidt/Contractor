@@ -1,10 +1,13 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectName.Persistence.Model.Domain.Entities
 {
     internal class EfEntity
     {
+        public EfEntity()
+        {
+        }
+
         public Guid Id { get; set; }
 
         public Guid MandantId { get; set; }

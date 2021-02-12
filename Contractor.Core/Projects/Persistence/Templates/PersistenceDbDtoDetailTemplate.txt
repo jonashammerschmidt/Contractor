@@ -1,0 +1,23 @@
+﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
+using System;
+
+namespace ProjectName.Persistence.Model.Domain.Entities
+{
+    internal class DbEntityDetail : IDbEntityDetail
+    {
+        public Guid Id { get; set; }
+
+        internal static IDbEntityDetail FromEfEntity(EfEntity efEntity)
+        {
+            if (efEntity == null)
+            {
+                return null;
+            }
+
+            return new DbEntityDetail()
+            {
+                Id = efEntity.Id,
+            };
+        }
+    }
+}

@@ -14,7 +14,7 @@ namespace Contractor.Core.Projects.DB.ProjectFile
             this.pathService = pathService;
         }
 
-        public void Add(EntityOptions options)
+        public void Add(IEntityAdditionOptions options)
         {
             string filePath = GetFilePath(options);
             string fileData = UpdateFileData(options, filePath);
@@ -22,14 +22,14 @@ namespace Contractor.Core.Projects.DB.ProjectFile
             File.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(EntityOptions options)
+        private string GetFilePath(IEntityAdditionOptions options)
         {
             string fileName = options.DbProjectName + ".sqlproj";
             string filePath = Path.Combine(options.DbDestinationFolder, fileName);
             return filePath;
         }
 
-        private string UpdateFileData(EntityOptions options, string filePath)
+        private string UpdateFileData(IEntityAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
 
@@ -45,7 +45,7 @@ namespace Contractor.Core.Projects.DB.ProjectFile
             return stringEditor.GetText();
         }
 
-        private string GetDbDomainFolderLine(EntityOptions options)
+        private string GetDbDomainFolderLine(IEntityAdditionOptions options)
         {
             return $"    <Build Include=\"dbo\\Tables\\{options.Domain}\\{options.EntityNamePlural}.sql\" />";
         }

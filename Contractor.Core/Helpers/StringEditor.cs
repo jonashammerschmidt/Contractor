@@ -38,7 +38,7 @@ namespace Contractor.Core.Helpers
                 new[] { "\r\n", "\r", "\n" },
                 StringSplitOptions.None);
 
-            foreach (var splittedLine in splittedLines) 
+            foreach (var splittedLine in splittedLines)
             {
                 this.lines.Insert(this.lineNumber, splittedLine);
                 this.lineNumber++;
@@ -83,6 +83,13 @@ namespace Contractor.Core.Helpers
         public StringEditor NextThatContains(string pattern)
         {
             this.Next((line) => line.Contains(pattern));
+
+            return this;
+        }
+
+        public StringEditor NextThatStartsWith(string pattern)
+        {
+            this.Next((line) => line.StartsWith(pattern));
 
             return this;
         }
