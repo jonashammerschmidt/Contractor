@@ -1,6 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 
-namespace Contractor.Core.Jobs
+namespace Contractor.Core.Options
 {
     public class EntityAdditionOptions : DomainAdditionOptions, IEntityAdditionOptions
     {

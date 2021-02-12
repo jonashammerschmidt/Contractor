@@ -1,11 +1,11 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using System;
 using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    public class EntityCoreDependencyProvider
+    internal class EntityCoreDependencyProvider
     {
         public PathService pathService;
 

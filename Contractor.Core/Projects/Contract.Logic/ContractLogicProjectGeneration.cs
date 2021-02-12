@@ -1,11 +1,11 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Template.Contract
+namespace Contractor.Core.Projects
 {
-    public class ContractLogicProjectGeneration : IProjectGeneration
+    internal class ContractLogicProjectGeneration : IProjectGeneration
     {
         private static readonly string DomainFolder = ".Contract\\Logic\\Model\\{Domain}\\{Entities}";
 

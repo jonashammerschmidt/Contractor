@@ -1,10 +1,10 @@
-﻿using Contractor.Core.Jobs;
+﻿using Contractor.Core.Options;
 using Newtonsoft.Json;
 using System.IO;
 
 namespace Contractor.CLI
 {
-    public class ContractorOptionsLoader
+    internal class ContractorOptionsLoader
     {
         public static IContractorOptions Load(string folder)
         {

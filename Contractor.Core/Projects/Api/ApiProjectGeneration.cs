@@ -1,11 +1,11 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Template.API
+namespace Contractor.Core.Projects
 {
-    public class ApiProjectGeneration : IProjectGeneration
+    internal class ApiProjectGeneration : IProjectGeneration
     {
         private static readonly string DomainFolder = ".API\\Model\\{Domain}\\{Entities}";
 

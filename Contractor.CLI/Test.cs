@@ -1,10 +1,10 @@
 ﻿using Contractor.Core;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using System.IO;
 
 namespace Contractor.CLI
 {
-    public class Test
+    internal class Test
     {
         public static void Testen()
         {

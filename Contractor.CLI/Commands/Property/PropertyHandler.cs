@@ -1,6 +1,6 @@
 ﻿namespace Contractor.CLI
 {
-    public class PropertyHandler
+    internal class PropertyHandler
     {
         public static void Perform(string[] args)
         {

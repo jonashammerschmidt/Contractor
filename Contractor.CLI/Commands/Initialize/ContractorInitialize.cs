@@ -1,5 +1,5 @@
 ﻿using Contractor.CLI.Tools;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using Newtonsoft.Json;
 using System.IO;
 using System.Linq;

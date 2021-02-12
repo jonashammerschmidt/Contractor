@@ -1,6 +1,6 @@
 ﻿namespace Contractor.CLI
 {
-    public class DomainHandler
+    internal class DomainHandler
     {
         public static void Perform(string[] args)
         {

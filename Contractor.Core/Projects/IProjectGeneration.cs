@@ -1,8 +1,8 @@
-﻿using Contractor.Core.Jobs;
+﻿using Contractor.Core.Options;
 
-namespace Contractor.Core.Template
+namespace Contractor.Core.Projects
 {
-    public interface IProjectGeneration
+    internal interface IProjectGeneration
     {
         void AddDomain(IDomainAdditionOptions options);
 

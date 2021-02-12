@@ -1,7 +1,5 @@
-﻿using Contractor.Core.Jobs;
-using Contractor.Core.Template.API;
-using Contractor.Core.Template.Contract;
-using Contractor.Core.Template.Logic;
+﻿using Contractor.Core.Options;
+using Contractor.Core.Projects;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core

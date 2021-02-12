@@ -2,7 +2,7 @@
 
 namespace Contractor.Core.Tools
 {
-    public class CsharpClassWriter
+    internal class CsharpClassWriter
     {
         public static void Write(string filePath, string fileData)
         {

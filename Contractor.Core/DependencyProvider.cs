@@ -1,14 +1,10 @@
-﻿using Contractor.Core.Projects.DB.ProjectFile;
-using Contractor.Core.Projects.Persistence;
-using Contractor.Core.Template.API;
-using Contractor.Core.Template.Contract;
-using Contractor.Core.Template.Logic;
+﻿using Contractor.Core.Projects;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core
 {
-    public class DependencyProvider
+    internal class DependencyProvider
     {
         public static ServiceProvider GetServiceProvider()
         {

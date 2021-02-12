@@ -2,7 +2,7 @@
 
 namespace Contractor.CLI
 {
-    public class RelationHandler
+    internal class RelationHandler
     {
         public static void Perform(string[] args)
         {

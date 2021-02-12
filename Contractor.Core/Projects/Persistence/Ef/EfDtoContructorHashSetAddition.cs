@@ -1,11 +1,11 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Persistence
+namespace Contractor.Core.Projects
 {
-    public class EfDtoContructorHashSetAddition
+    internal class EfDtoContructorHashSetAddition
     {
         public PathService pathService;
 

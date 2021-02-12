@@ -1,6 +1,6 @@
 ﻿namespace Contractor.CLI
 {
-    public class EntityHandler
+    internal class EntityHandler
     {
         public static void Perform(string[] args)
         {

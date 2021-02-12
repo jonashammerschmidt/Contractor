@@ -1,4 +1,4 @@
-﻿namespace Contractor.Core.Jobs
+﻿namespace Contractor.Core.Options
 {
     public class ContractorOptions : IContractorOptions
     {

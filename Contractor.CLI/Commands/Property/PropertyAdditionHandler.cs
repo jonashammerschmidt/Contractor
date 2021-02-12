@@ -1,12 +1,12 @@
 ﻿using Contractor.CLI.Tools;
 using Contractor.Core;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using System;
 using System.IO;
 
 namespace Contractor.CLI
 {
-    public class PropertyAdditionHandler
+    internal class PropertyAdditionHandler
     {
         public static void Perform(string[] args)
         {

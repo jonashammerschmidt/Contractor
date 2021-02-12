@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Contractor.CLI.Tools
 {
-    public static class LogoWriter
+    internal static class LogoWriter
     {
         public static void Write()
         {

@@ -1,9 +1,9 @@
-﻿using Contractor.Core.Jobs;
+﻿using Contractor.Core.Options;
 using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    public class DtoAddition
+    internal class DtoAddition
     {
         public PathService pathService;
 

@@ -1,11 +1,11 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.DB.ProjectFile
+namespace Contractor.Core.Projects
 {
-    public class DbProjectFileDomainAddition
+    internal class DbProjectFileDomainAddition
     {
         public PathService pathService;
 

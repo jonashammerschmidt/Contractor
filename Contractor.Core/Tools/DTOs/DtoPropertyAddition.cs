@@ -1,11 +1,11 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
-    public class DtoPropertyAddition
+    internal class DtoPropertyAddition
     {
         public PathService pathService;
 

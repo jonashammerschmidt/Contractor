@@ -1,9 +1,9 @@
-﻿using Contractor.Core.Jobs;
+﻿using Contractor.Core.Options;
 using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    public class PathService
+    internal class PathService
     {
         public string GetAbsolutePathForDbDomain(IDomainAdditionOptions options, string domainFolder)
         {

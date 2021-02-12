@@ -2,7 +2,7 @@
 
 namespace Contractor.CLI
 {
-    public class ContractorHelp
+    internal class ContractorHelp
     {
         public static void WriteHelp()
         {

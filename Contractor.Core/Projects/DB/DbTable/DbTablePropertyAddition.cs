@@ -1,10 +1,11 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
+using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Tools
+namespace Contractor.Core.Projects
 {
-    public class DbTablePropertyAddition
+    internal class DbTablePropertyAddition
     {
         public PathService pathService;
 

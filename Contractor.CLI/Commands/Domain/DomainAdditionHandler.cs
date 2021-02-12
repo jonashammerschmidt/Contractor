@@ -1,12 +1,12 @@
 ﻿using Contractor.Core;
 using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using System;
 using System.IO;
 
 namespace Contractor.CLI
 {
-    public class DomainAdditionHandler
+    internal class DomainAdditionHandler
     {
         public static void Perform(string[] args)
         {

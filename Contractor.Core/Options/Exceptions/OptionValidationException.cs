@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contractor.Core
+namespace Contractor.Core.Options
 {
     public class OptionValidationException : ApplicationException
     {

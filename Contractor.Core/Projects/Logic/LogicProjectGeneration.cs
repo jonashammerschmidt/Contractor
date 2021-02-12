@@ -1,12 +1,12 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
-using Contractor.Core.Projects.Persistence;
+using Contractor.Core.Options;
+using Contractor.Core.Projects;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Template.Logic
+namespace Contractor.Core.Projects
 {
-    public class LogicProjectGeneration : IProjectGeneration
+    internal class LogicProjectGeneration : IProjectGeneration
     {
         private static readonly string ProjectFolder = ".Logic";
         private static readonly string DomainFolder = ".Logic\\Model\\{Domain}\\{Entities}";

@@ -1,10 +1,10 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Jobs;
+using Contractor.Core.Options;
 using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    public class DomainDependencyProvider
+    internal class DomainDependencyProvider
     {
         public PathService pathService;
 
