@@ -1,4 +1,5 @@
 ﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
+using ProjectName.Persistence.Model;
 using ProjectName.Persistence.Model.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -9,16 +10,31 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
     public class EntitiesCrudRepositoryTests
     {
         [TestMethod]
+        public void CreateEntityTest()
+        {
+            // Arrange
+            PersistenceDbContext persistenceDbContext = InMemoryDbContext.CreatePersistenceDbContext();
+            EntitiesCrudRepository entitiesCrudRepository = new EntitiesCrudRepository(persistenceDbContext);
+
+            // Act
+            entitiesCrudRepository.CreateEntity(DbEntityTest.ForCreate());
+
+            // Assert
+            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.IdForCreate);
+            DbEntityTest.AssertForCreate(dbEntity);
+        }
+
+        [TestMethod]
         public void DeleteEntityTest()
         {
             // Arrange
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            entitiesCrudRepository.DeleteEntity(EntityTestValues.Id);
+            entitiesCrudRepository.DeleteEntity(EntityTestValues.IdDbDefault);
 
             // Assert
-            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.Id);
+            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.IdDbDefault);
             Assert.IsFalse(doesEntityExist);
         }
 
@@ -29,7 +45,7 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryEmpty();
 
             // Act
-            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.Id);
+            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.IdDbDefault);
 
             // Assert
             Assert.IsFalse(doesEntityExist);
@@ -42,7 +58,7 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.Id);
+            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.IdDbDefault);
 
             // Assert
             Assert.IsTrue(doesEntityExist);
@@ -55,10 +71,10 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.Id);
+            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.IdDbDefault);
 
             // Assert
-            DbEntityTest.AssertWithDefault(dbEntity);
+            DbEntityTest.AssertDbDefault(dbEntity);
         }
 
         [TestMethod]
@@ -68,10 +84,10 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            IDbEntityDetail dbEntityDetail = entitiesCrudRepository.GetEntityDetail(EntityTestValues.Id);
+            IDbEntityDetail dbEntityDetail = entitiesCrudRepository.GetEntityDetail(EntityTestValues.IdDbDefault);
 
             // Assert
-            DbEntityDetailTest.AssertWithDefault(dbEntityDetail);
+            DbEntityDetailTest.AssertDbDefault(dbEntityDetail);
         }
 
         [TestMethod]
@@ -81,7 +97,7 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryEmpty();
 
             // Act
-            IDbEntityDetail dbEntityDetail = entitiesCrudRepository.GetEntityDetail(EntityTestValues.Id);
+            IDbEntityDetail dbEntityDetail = entitiesCrudRepository.GetEntityDetail(EntityTestValues.IdDbDefault);
 
             // Assert
             Assert.IsNull(dbEntityDetail);
@@ -94,11 +110,11 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            IDbEntity[] dbEntities = entitiesCrudRepository.GetEntities().ToArray();
+            IDbEntity[] entities = entitiesCrudRepository.GetEntities().ToArray();
 
             // Assert
-            Assert.AreEqual(1, dbEntities.Length);
-            DbEntityTest.AssertWithDefault(dbEntities[0]);
+            Assert.AreEqual(1, entities.Length);
+            DbEntityTest.AssertDbDefault(entities[0]);
         }
 
         [TestMethod]
@@ -108,7 +124,7 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryEmpty();
 
             // Act
-            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.Id);
+            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.IdDbDefault);
 
             // Assert
             Assert.IsNull(dbEntity);
@@ -121,18 +137,16 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            entitiesCrudRepository.UpdateEntity(DbEntityTest.Updated());
+            entitiesCrudRepository.UpdateEntity(DbEntityTest.ForUpdate());
 
             // Assert
-            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.Id);
-            DbEntityTest.AssertWithUpdated(dbEntity);
+            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.IdDbDefault);
+            DbEntityTest.AssertForUpdate(dbEntity);
         }
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryDefault()
         {
-            EntitiesCrudRepository entitiesCrudRepository = new EntitiesCrudRepository(InMemoryDbContext.CreatePersistenceDbContext());
-            entitiesCrudRepository.CreateEntity(DbEntityTest.Default());
-            return entitiesCrudRepository;
+            return new EntitiesCrudRepository(InMemoryDbContext.CreatePersistenceDbContextWithDefault());
         }
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryEmpty()

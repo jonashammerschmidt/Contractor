@@ -8,17 +8,9 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        public static IDbEntityDetail Default()
+        public static void AssertDbDefault(IDbEntityDetail dbEntityDetail)
         {
-            return new DbEntityDetailTest()
-            {
-                Id = EntityTestValues.Id,
-            };
-        }
-
-        public static void AssertWithDefault(IDbEntityDetail dbEntityDetail)
-        {
-            Assert.AreEqual(EntityTestValues.Id, dbEntityDetail.Id);
+            Assert.AreEqual(EntityTestValues.IdDbDefault, dbEntityDetail.Id);
         }
     }
 }

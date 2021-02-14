@@ -54,6 +54,11 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DbTablePropertyAddition>();
             serviceCollection.AddSingleton<DbTableRelationContraintAddition>();
 
+            serviceCollection.AddSingleton<InMemoryDbContextEntityAddition>();
+            serviceCollection.AddSingleton<DbDtoTestMethodsAddition>();
+            serviceCollection.AddSingleton<DbDtoDetailTestMethodsAddition>();
+            serviceCollection.AddSingleton<DtoTestValuesAddition>();
+
             serviceCollection.AddSingleton<PathService>();
         }
     }

@@ -27,7 +27,7 @@ namespace Contractor.CLI
             AddBankwesen(contractorOptions);
             AddKonto(contractorOptions);
             AddKundenstamm(contractorOptions);
-            AddRelation(contractorOptions);
+            //AddRelation(contractorOptions);
         }
 
         private static void AddBankwesen(ContractorOptions contractorOptions)
@@ -77,9 +77,8 @@ namespace Contractor.CLI
             // Properties
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = "string",
-                PropertyName = "Typ",
-                PropertyTypeExtra = "20"
+                PropertyType = "DateTime",
+                PropertyName = "EroeffnetAm"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
