@@ -20,6 +20,7 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<ApiProjectGeneration>();
             serviceCollection.AddSingleton<LogicProjectGeneration>();
             serviceCollection.AddSingleton<PersistenceProjectGeneration>();
+            serviceCollection.AddSingleton<PersistenceTestsProjectGeneration>();
             serviceCollection.AddSingleton<DBProjectGeneration>();
 
             serviceCollection.AddSingleton<DtoPropertyAddition>();

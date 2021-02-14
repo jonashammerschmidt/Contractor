@@ -1,27 +1,25 @@
 ﻿using Contractor.Core.Options;
 using Contractor.Core.Projects;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace Contractor.Core
 {
     public class ContractorCoreApi
     {
-        private readonly ContractPersistenceProjectGeneration contractPersistenceProjectGeneration;
-        private readonly ContractLogicProjectGeneration contractLogicProjectGeneration;
-        private readonly PersistenceProjectGeneration persistenceProjectGeneration;
-        private readonly LogicProjectGeneration logicProjectGeneration;
-        private readonly ApiProjectGeneration apiProjectGeneration;
-        private readonly DBProjectGeneration dbProjectGeneration;
+
+        private List<IProjectGeneration> projectGenerations = new List<IProjectGeneration>();
 
         public ContractorCoreApi()
         {
             ServiceProvider serviceProvider = DependencyProvider.GetServiceProvider();
-            this.contractPersistenceProjectGeneration = serviceProvider.GetService<ContractPersistenceProjectGeneration>();
-            this.contractLogicProjectGeneration = serviceProvider.GetService<ContractLogicProjectGeneration>();
-            this.persistenceProjectGeneration = serviceProvider.GetService<PersistenceProjectGeneration>();
-            this.logicProjectGeneration = serviceProvider.GetService<LogicProjectGeneration>();
-            this.apiProjectGeneration = serviceProvider.GetService<ApiProjectGeneration>();
-            this.dbProjectGeneration = serviceProvider.GetService<DBProjectGeneration>();
+            projectGenerations.Add(serviceProvider.GetService<ContractPersistenceProjectGeneration>());
+            projectGenerations.Add(serviceProvider.GetService<ContractLogicProjectGeneration>());
+            projectGenerations.Add(serviceProvider.GetService<PersistenceProjectGeneration>());
+            projectGenerations.Add(serviceProvider.GetService<PersistenceTestsProjectGeneration>());
+            projectGenerations.Add(serviceProvider.GetService<LogicProjectGeneration>());
+            projectGenerations.Add(serviceProvider.GetService<ApiProjectGeneration>());
+            projectGenerations.Add(serviceProvider.GetService<DBProjectGeneration>());
         }
 
         public void AddDomain(IDomainAdditionOptions options)
@@ -31,12 +29,10 @@ namespace Contractor.Core
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
             }
 
-            this.contractPersistenceProjectGeneration.AddDomain(options);
-            this.contractLogicProjectGeneration.AddDomain(options);
-            this.persistenceProjectGeneration.AddDomain(options);
-            this.logicProjectGeneration.AddDomain(options);
-            this.apiProjectGeneration.AddDomain(options);
-            this.dbProjectGeneration.AddDomain(options);
+            foreach (IProjectGeneration projectGeneration in projectGenerations)
+            {
+                projectGeneration.AddDomain(options);
+            }
         }
 
         public void AddEntity(IEntityAdditionOptions options)
@@ -46,12 +42,10 @@ namespace Contractor.Core
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
             }
 
-            this.contractLogicProjectGeneration.AddEntity(options);
-            this.contractPersistenceProjectGeneration.AddEntity(options);
-            this.persistenceProjectGeneration.AddEntity(options);
-            this.logicProjectGeneration.AddEntity(options);
-            this.apiProjectGeneration.AddEntity(options);
-            this.dbProjectGeneration.AddEntity(options);
+            foreach (IProjectGeneration projectGeneration in projectGenerations)
+            {
+                projectGeneration.AddEntity(options);
+            }
         }
 
         public void AddProperty(IPropertyAdditionOptions options)
@@ -61,12 +55,10 @@ namespace Contractor.Core
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
             }
 
-            this.contractLogicProjectGeneration.AddProperty(options);
-            this.contractPersistenceProjectGeneration.AddProperty(options);
-            this.persistenceProjectGeneration.AddProperty(options);
-            this.logicProjectGeneration.AddProperty(options);
-            this.apiProjectGeneration.AddProperty(options);
-            this.dbProjectGeneration.AddProperty(options);
+            foreach (IProjectGeneration projectGeneration in projectGenerations)
+            {
+                projectGeneration.AddProperty(options);
+            }
         }
 
         public void Add1ToNRelation(IRelationAdditionOptions options)
@@ -76,12 +68,10 @@ namespace Contractor.Core
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
             }
 
-            this.contractLogicProjectGeneration.Add1ToNRelation(options);
-            this.contractPersistenceProjectGeneration.Add1ToNRelation(options);
-            this.persistenceProjectGeneration.Add1ToNRelation(options);
-            this.logicProjectGeneration.Add1ToNRelation(options);
-            this.apiProjectGeneration.Add1ToNRelation(options);
-            this.dbProjectGeneration.Add1ToNRelation(options);
+            foreach (IProjectGeneration projectGeneration in projectGenerations)
+            {
+                projectGeneration.Add1ToNRelation(options);
+            }
         }
     }
 }

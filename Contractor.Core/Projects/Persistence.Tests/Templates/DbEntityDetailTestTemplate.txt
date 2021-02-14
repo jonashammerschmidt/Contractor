@@ -1,0 +1,24 @@
+﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+namespace ProjectName.Persistence.Tests.Model.Domain.Entities
+{
+    internal class DbEntityDetailTest : IDbEntityDetail
+    {
+        public Guid Id { get; set; }
+
+        public static IDbEntityDetail Default()
+        {
+            return new DbEntityDetailTest()
+            {
+                Id = EntityTestValues.Id,
+            };
+        }
+
+        public static void AssertWithDefault(IDbEntityDetail dbEntityDetail)
+        {
+            Assert.AreEqual(EntityTestValues.Id, dbEntityDetail.Id);
+        }
+    }
+}

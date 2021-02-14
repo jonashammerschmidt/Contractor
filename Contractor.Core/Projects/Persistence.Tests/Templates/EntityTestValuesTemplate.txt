@@ -1,0 +1,10 @@
+﻿using System;
+
+namespace ProjectName.Persistence.Tests.Model.Domain.Entities
+{
+    public class BankTestValues
+    {
+        public static readonly Guid Id = Guid.Parse("{random-guid}");
+        public static readonly Guid Id2 = Guid.Parse("{random-guid}");
+    }
+}

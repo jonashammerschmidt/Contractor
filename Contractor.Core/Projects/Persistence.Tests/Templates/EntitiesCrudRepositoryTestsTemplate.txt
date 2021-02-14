@@ -1,0 +1,143 @@
+﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
+using ProjectName.Persistence.Model.Domain.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+
+namespace ProjectName.Persistence.Tests.Model.Domain.Entities
+{
+    [TestClass]
+    public class EntitiesCrudRepositoryTests
+    {
+        [TestMethod]
+        public void DeleteEntityTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
+
+            // Act
+            entitiesCrudRepository.DeleteEntity(EntityTestValues.Id);
+
+            // Assert
+            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.Id);
+            Assert.IsFalse(doesEntityExist);
+        }
+
+        [TestMethod]
+        public void DoesEntityExistFalseTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryEmpty();
+
+            // Act
+            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.Id);
+
+            // Assert
+            Assert.IsFalse(doesEntityExist);
+        }
+
+        [TestMethod]
+        public void DoesEntityExistTrueTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
+
+            // Act
+            bool doesEntityExist = entitiesCrudRepository.DoesEntityExist(EntityTestValues.Id);
+
+            // Assert
+            Assert.IsTrue(doesEntityExist);
+        }
+
+        [TestMethod]
+        public void GetEntityDefaultTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
+
+            // Act
+            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.Id);
+
+            // Assert
+            DbEntityTest.AssertWithDefault(dbEntity);
+        }
+
+        [TestMethod]
+        public void GetEntityDetailDefaultTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
+
+            // Act
+            IDbEntityDetail dbEntityDetail = entitiesCrudRepository.GetEntityDetail(EntityTestValues.Id);
+
+            // Assert
+            DbEntityDetailTest.AssertWithDefault(dbEntityDetail);
+        }
+
+        [TestMethod]
+        public void GetEntityDetailNullTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryEmpty();
+
+            // Act
+            IDbEntityDetail dbEntityDetail = entitiesCrudRepository.GetEntityDetail(EntityTestValues.Id);
+
+            // Assert
+            Assert.IsNull(dbEntityDetail);
+        }
+
+        [TestMethod]
+        public void GetEntitiesDefaultTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
+
+            // Act
+            IDbEntity[] dbEntities = entitiesCrudRepository.GetEntities().ToArray();
+
+            // Assert
+            Assert.AreEqual(1, dbEntities.Length);
+            DbEntityTest.AssertWithDefault(dbEntities[0]);
+        }
+
+        [TestMethod]
+        public void GetEntityNullTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryEmpty();
+
+            // Act
+            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.Id);
+
+            // Assert
+            Assert.IsNull(dbEntity);
+        }
+
+        [TestMethod]
+        public void UpdateEntityTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
+
+            // Act
+            entitiesCrudRepository.UpdateEntity(DbEntityTest.Updated());
+
+            // Assert
+            IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.Id);
+            DbEntityTest.AssertWithUpdated(dbEntity);
+        }
+
+        private EntitiesCrudRepository GetEntitiesCrudRepositoryDefault()
+        {
+            EntitiesCrudRepository entitiesCrudRepository = new EntitiesCrudRepository(InMemoryDbContext.CreatePersistenceDbContext());
+            entitiesCrudRepository.CreateEntity(DbEntityTest.Default());
+            return entitiesCrudRepository;
+        }
+
+        private EntitiesCrudRepository GetEntitiesCrudRepositoryEmpty()
+        {
+            return new EntitiesCrudRepository(InMemoryDbContext.CreatePersistenceDbContext());
+        }
+    }
+}
