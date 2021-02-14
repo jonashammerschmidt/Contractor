@@ -32,15 +32,11 @@ namespace Contractor.Core.Projects
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("persistenceDbContext.SaveChanges();");
-            
-            stringEditor.InsertLine(GetDbSetLine(options));
-            
-            return stringEditor.GetText();
-        }
 
-        private string GetDbSetLine(IEntityAdditionOptions options)
-        {
-            return $"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DatabaseDefault()));";
+            stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault()));");
+            stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault2()));");
+
+            return stringEditor.GetText();
         }
     }
 }

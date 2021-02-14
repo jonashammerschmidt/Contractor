@@ -58,6 +58,9 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DbDtoTestMethodsAddition>();
             serviceCollection.AddSingleton<DbDtoDetailTestMethodsAddition>();
             serviceCollection.AddSingleton<DtoTestValuesAddition>();
+            serviceCollection.AddSingleton<DtoTestValuesRelationAddition>();
+            serviceCollection.AddSingleton<DbDtoDetailTestFromAssertAddition>();
+            serviceCollection.AddSingleton<DbDtoDetailTestToAssertAddition>();
 
             serviceCollection.AddSingleton<PathService>();
         }

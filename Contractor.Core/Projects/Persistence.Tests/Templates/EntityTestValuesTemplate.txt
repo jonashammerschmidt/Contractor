@@ -5,6 +5,7 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
     public class EntityTestValues
     {
         public static readonly Guid IdDbDefault = Guid.Parse("{random-guid}");
+        public static readonly Guid IdDbDefault2 = Guid.Parse("{random-guid}");
         public static readonly Guid IdForCreate = Guid.Parse("{random-guid}");
     }
 }

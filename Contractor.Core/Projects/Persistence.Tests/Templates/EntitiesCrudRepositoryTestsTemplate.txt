@@ -113,8 +113,9 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
             IDbEntity[] entities = entitiesCrudRepository.GetEntities().ToArray();
 
             // Assert
-            Assert.AreEqual(1, entities.Length);
+            Assert.AreEqual(2, entities.Length);
             DbEntityTest.AssertDbDefault(entities[0]);
+            DbEntityTest.AssertDbDefault2(entities[1]);
         }
 
         [TestMethod]

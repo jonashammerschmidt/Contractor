@@ -44,6 +44,7 @@ namespace Contractor.Core.Projects
 
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault = {GetValueForProperty(options, "DbDefault")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault2 = {GetValueForProperty(options, "DbDefault2")};");
             stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = {GetValueForProperty(options, "ForCreate")};");
             stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = {GetValueForProperty(options, "ForUpdate")};");
             

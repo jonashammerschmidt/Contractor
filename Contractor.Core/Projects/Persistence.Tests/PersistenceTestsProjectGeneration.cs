@@ -23,8 +23,11 @@ namespace Contractor.Core.Projects
         private readonly InMemoryDbContextEntityAddition inMemoryDbContextEntityAddition;
         private readonly DbDtoTestMethodsAddition dbDtoTestMethodsAddition;
         private readonly DbDtoDetailTestMethodsAddition dbDtoDetailTestMethodsAddition;
-        private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoTestValuesAddition dtoTestValuesAddition;
+        private readonly DtoTestValuesRelationAddition dtoTestValuesRelationAddition;
+        private readonly DbDtoDetailTestFromAssertAddition dbDtoDetailTestFromAssertAddition;
+        private readonly DbDtoDetailTestToAssertAddition dbDtoDetailTestToAssertAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
         private readonly PathService pathService;
@@ -34,6 +37,9 @@ namespace Contractor.Core.Projects
             DbDtoTestMethodsAddition dbDtoTestMethodsAddition,
             DbDtoDetailTestMethodsAddition dbDtoDetailTestMethodsAddition,
             DtoTestValuesAddition dtoTestValuesAddition,
+            DtoTestValuesRelationAddition dtoTestValuesRelationAddition,
+            DbDtoDetailTestFromAssertAddition dbDtoDetailTestFromAssertAddition,
+            DbDtoDetailTestToAssertAddition dbDtoDetailTestToAssertAddition,
             EntityCoreAddition entityCoreAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition,
@@ -43,6 +49,9 @@ namespace Contractor.Core.Projects
             this.dbDtoTestMethodsAddition = dbDtoTestMethodsAddition;
             this.dbDtoDetailTestMethodsAddition = dbDtoDetailTestMethodsAddition;
             this.dtoTestValuesAddition = dtoTestValuesAddition;
+            this.dtoTestValuesRelationAddition = dtoTestValuesRelationAddition;
+            this.dbDtoDetailTestFromAssertAddition = dbDtoDetailTestFromAssertAddition;
+            this.dbDtoDetailTestToAssertAddition = dbDtoDetailTestToAssertAddition;
             this.entityCoreAddition = entityCoreAddition;
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
@@ -86,6 +95,21 @@ namespace Contractor.Core.Projects
 
         public void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            // From
+            IPropertyAdditionOptions dbFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
+            this.propertyAddition.AddPropertyToDTO(dbFromOptions, DomainFolder, DbEntityDetailTestFileName);
+            this.dbDtoDetailTestFromAssertAddition.Add(options, DomainFolder, DbEntityDetailTestFileName);
+
+            // To
+            this.dtoTestValuesRelationAddition.Add(options, DomainFolder, EntityTestValuesFileName);
+
+            IPropertyAdditionOptions dbToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", $"{options.EntityNameFrom}");
+            this.propertyAddition.AddPropertyToDTO(dbToOptions, DomainFolder, DbEntityDetailTestFileName);
+            this.dbDtoDetailTestToAssertAddition.Add(options, DomainFolder, DbEntityDetailTestFileName);
+
+            IPropertyAdditionOptions guidPropertyOptions = RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+            this.propertyAddition.AddPropertyToDTO(guidPropertyOptions, DomainFolder, DbEntityTestFileName);
+            this.dbDtoTestMethodsAddition.Add(guidPropertyOptions, DomainFolder, DbEntityTestFileName);
         }
     }
 }

@@ -8,11 +8,19 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        public static IDbEntity DatabaseDefault()
+        public static IDbEntity DbDefault()
         {
             return new DbEntityTest()
             {
                 Id = EntityTestValues.IdDbDefault,
+            };
+        }
+
+        public static IDbEntity DbDefault2()
+        {
+            return new DbEntityTest()
+            {
+                Id = EntityTestValues.IdDbDefault2,
             };
         }
 
@@ -35,6 +43,11 @@ namespace ProjectName.Persistence.Tests.Model.Domain.Entities
         public static void AssertDbDefault(IDbEntity dbEntity)
         {
             Assert.AreEqual(EntityTestValues.IdDbDefault, dbEntity.Id);
+        }
+
+        public static void AssertDbDefault2(IDbEntity dbEntity)
+        {
+            Assert.AreEqual(EntityTestValues.IdDbDefault2, dbEntity.Id);
         }
 
         public static void AssertForCreate(IDbEntity dbEntity)
