@@ -46,8 +46,16 @@ namespace ProjectName.Logic.Model.Domain.Entities
                 return LogicResult.NotFound("Entity konnte nicht gefunden werden.");
             }
 
-            // TODO: Relation Deletion
-            this.entitiesCrudRepository.DeleteEntity(entityId);
+            // TODO: If relations are implemented, resolve conflict with the FOREIGN KEY constraint
+            try
+            {
+                this.entitiesCrudRepository.DeleteEntity(entityId);
+            }
+            catch
+            {
+                this.logger.LogDebug("Entity konnte nicht gelöscht werden.");
+                return LogicResult.Conflict("Entity konnte nicht gelöscht werden.");
+            }
 
             this.logger.LogInformation("Entity ({id}) gelöscht", entityId);
             return LogicResult.Ok();

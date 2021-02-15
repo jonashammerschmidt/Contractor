@@ -19,7 +19,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         public void CreateEntityDefaultTest()
         {
             // Arrange
-            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryEmpty();
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryEmpty();
             Mock<IGuidGenerator> guidGenerator = this.SetupGuidGeneratorDefault();
             var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
 
@@ -38,10 +38,29 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         }
 
         [TestMethod]
+        public void DeleteEntityConflictTest()
+        {
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryDeleteConflict();
+            Mock<IGuidGenerator> guidGenerator = this.SetupGuidGeneratorDefault();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                guidGenerator.Object,
+                logger);
+
+            // Act
+            ILogicResult result = entitiesCrudLogic.DeleteEntity(EntityTestValues.IdDefault);
+
+            // Assert
+            Assert.AreEqual(LogicResultState.Conflict, result.State);
+        }
+
+        [TestMethod]
         public void DeleteEntityDefaultTest()
         {
             // Arrange
-            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryDefaultExists();
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryDefaultExists();
             var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
 
             EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
@@ -61,7 +80,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         public void DeleteEntityNotExistsTest()
         {
             // Arrange
-            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryEmpty();
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryEmpty();
             var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
 
             EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
@@ -81,7 +100,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         public void GetEntityDetailDefaultTest()
         {
             // Arrange
-            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryDefaultExists();
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryDefaultExists();
             var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
 
             EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
@@ -101,7 +120,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         public void GetEntityDetailNotExistsTest()
         {
             // Arrange
-            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryEmpty();
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryEmpty();
             var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
 
             EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
@@ -120,7 +139,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         public void GetEntitiesDefaultTest()
         {
             // Arrange
-            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryDefaultExists();
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryDefaultExists();
             var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
 
             EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
@@ -142,7 +161,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         public void UpdateEntityNotExistsTest()
         {
             // Arrange
-            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryEmpty();
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryEmpty();
             var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
 
             EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
@@ -162,7 +181,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         public void UpdateEntityDefaultTest()
         {
             // Arrange
-            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryDefaultExists();
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesCrudRepositoryDefaultExists();
             var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
 
             EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
@@ -178,7 +197,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
             entitiesCrudRepository.Verify((repository) => repository.UpdateEntity(It.IsAny<IDbEntity>()), Times.Once);
         }
 
-        private Mock<IEntitiesCrudRepository> SetupEntitiesRepositoryDefaultExists()
+        private Mock<IEntitiesCrudRepository> SetupEntitiesCrudRepositoryDefaultExists()
         {
             var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
             entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(true);
@@ -193,7 +212,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
             return entitiesCrudRepository;
         }
 
-        private Mock<IEntitiesCrudRepository> SetupEntitiesRepositoryEmpty()
+        private Mock<IEntitiesCrudRepository> SetupEntitiesCrudRepositoryEmpty()
         {
             var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
             entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(false);
@@ -203,6 +222,15 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
             {
                 DbEntityTest.AssertCreated(dbEntity);
             });
+            return entitiesCrudRepository;
+        }
+
+        private Mock<IEntitiesCrudRepository> SetupEntitiesCrudRepositoryDeleteConflict()
+        {
+            // Arrange
+            var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
+            entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(true);
+            entitiesCrudRepository.Setup(repository => repository.DeleteEntity(EntityTestValues.IdDefault)).Throws(new Exception());
             return entitiesCrudRepository;
         }
 
