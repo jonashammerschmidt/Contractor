@@ -22,8 +22,8 @@ namespace ProjectName.API.Model.Domain.Entities
         [Authorized]
         public ActionResult<IEnumerable<IEntity>> GetEntities()
         {
-            var entities = this.entitiesCrudLogic.GetEntities();
-            return this.Ok(entities);
+            var getEntitiesResult = this.entitiesCrudLogic.GetEntities();
+            return this.FromLogicResult(getEntitiesResult);
         }
 
         [HttpGet]

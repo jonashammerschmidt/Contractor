@@ -1,0 +1,16 @@
+﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+namespace ProjectName.Logic.Tests.Model.Domain.Entities
+{
+    internal class DbEntityDetailTest : IDbEntityDetail
+    {
+        public Guid Id { get; set; }
+
+        public static void AssertDbDefault(IDbEntityDetail dbEntityDetail)
+        {
+            Assert.AreEqual(EntityTestValues.IdDefault, dbEntityDetail.Id);
+        }
+    }
+}

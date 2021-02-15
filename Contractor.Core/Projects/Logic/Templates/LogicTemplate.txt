@@ -66,7 +66,7 @@ namespace ProjectName.Logic.Model.Domain.Entities
             return LogicResult<IEntityDetail>.Ok(EntityDetail.FromDbEntityDetail(dbEntityDetail));
         }
 
-        public IEnumerable<IEntity> GetEntities()
+        public ILogicResult<IEnumerable<IEntity>> GetEntities()
         {
             IEnumerable<IEntity> entities = this.entitiesCrudRepository.GetEntities()
                 .Select(entity => Entity.FromDbEntity(entity));

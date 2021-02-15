@@ -25,8 +25,8 @@ namespace Contractor.CLI
             };
 
             AddBankwesen(contractorOptions);
-            AddKonto(contractorOptions);
-            AddKundenstamm(contractorOptions);
+            //AddKonto(contractorOptions);
+            //AddKundenstamm(contractorOptions);
             //AddRelation(contractorOptions);
         }
 
@@ -51,13 +51,13 @@ namespace Contractor.CLI
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
             // Properties
-            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
-            {
-                PropertyType = "string",
-                PropertyName = "Name",
-                PropertyTypeExtra = "256"
-            };
-            contractorCoreApi.AddProperty(propertyAdditionOptions);
+            //PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            //{
+            //    PropertyType = "string",
+            //    PropertyName = "Name",
+            //    PropertyTypeExtra = "256"
+            //};
+            //contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
 
         private static void AddKonto(ContractorOptions contractorOptions)

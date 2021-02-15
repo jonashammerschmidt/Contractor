@@ -1,0 +1,217 @@
+﻿using ProjectName.Contract.Logic.LogicResults;
+using ProjectName.Contract.Logic.Model.Domain.Entities;
+using ProjectName.Contract.Logic.Services.Identifier;
+using ProjectName.Contract.Persistence.Model.Domain.Entities;
+using ProjectName.Logic.Model.Domain.Entities;
+using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ProjectName.Logic.Tests.Model.Domain.Entities
+{
+    [TestClass]
+    public class EntitiesCrudLogicTests
+    {
+        [TestMethod]
+        public void CreateEntityDefaultTest()
+        {
+            // Arrange
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryEmpty();
+            Mock<IGuidGenerator> guidGenerator = this.SetupGuidGeneratorDefault();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                guidGenerator.Object,
+                logger);
+
+            // Act
+            ILogicResult<Guid> result = entitiesCrudLogic.CreateEntity(EntityCreateTest.Default());
+
+            // Assert
+            Assert.AreEqual(LogicResultState.Ok, result.State);
+            Assert.AreEqual(EntityTestValues.IdDefault, result.Data);
+            entitiesCrudRepository.Verify((repository) => repository.CreateEntity(It.IsAny<IDbEntity>()), Times.Once);
+        }
+
+        [TestMethod]
+        public void DeleteEntityDefaultTest()
+        {
+            // Arrange
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryDefaultExists();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                null,
+                logger);
+
+            // Act
+            ILogicResult result = entitiesCrudLogic.DeleteEntity(EntityTestValues.IdDefault);
+
+            // Assert
+            Assert.AreEqual(LogicResultState.Ok, result.State);
+            entitiesCrudRepository.Verify((repository) => repository.DeleteEntity(EntityTestValues.IdDefault), Times.Once);
+        }
+
+        [TestMethod]
+        public void DeleteEntityNotExistsTest()
+        {
+            // Arrange
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryEmpty();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                null,
+                logger);
+
+            // Act
+            ILogicResult result = entitiesCrudLogic.DeleteEntity(EntityTestValues.IdDefault);
+
+            // Assert
+            Assert.AreEqual(LogicResultState.NotFound, result.State);
+            entitiesCrudRepository.Verify((repository) => repository.DeleteEntity(EntityTestValues.IdDefault), Times.Never);
+        }
+
+        [TestMethod]
+        public void GetEntityDetailDefaultTest()
+        {
+            // Arrange
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryDefaultExists();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                null,
+                logger);
+
+            // Act
+            ILogicResult<IEntityDetail> result = entitiesCrudLogic.GetEntityDetail(EntityTestValues.IdDefault);
+
+            // Assert
+            Assert.AreEqual(LogicResultState.Ok, result.State);
+            EntityDetailTest.AssertWithDefault(result.Data);
+        }
+
+        [TestMethod]
+        public void GetEntityDetailNotExistsTest()
+        {
+            // Arrange
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryEmpty();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                null,
+                logger);
+
+            // Act
+            ILogicResult<IEntityDetail> result = entitiesCrudLogic.GetEntityDetail(EntityTestValues.IdDefault);
+
+            // Assert
+            Assert.AreEqual(LogicResultState.NotFound, result.State);
+        }
+
+        [TestMethod]
+        public void GetEntitiesDefaultTest()
+        {
+            // Arrange
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryDefaultExists();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                null,
+                logger);
+
+            // Act
+            ILogicResult<IEnumerable<IEntity>> result = entitiesCrudLogic.GetEntities();
+
+            // Assert
+            Assert.AreEqual(LogicResultState.Ok, result.State);
+            IEntity[] entityResults = result.Data.ToArray();
+            Assert.AreEqual(1, entityResults.Length);
+            EntityTest.AssertWithDefault(entityResults[0]);
+        }
+
+        [TestMethod]
+        public void UpdateEntityNotExistsTest()
+        {
+            // Arrange
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryEmpty();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                null,
+                logger);
+
+            // Act
+            ILogicResult result = entitiesCrudLogic.UpdateEntity(EntityUpdateTest.ForUpdate());
+
+            // Assert
+            Assert.AreEqual(LogicResultState.NotFound, result.State);
+            entitiesCrudRepository.Verify((repository) => repository.UpdateEntity(DbEntityTest.Default()), Times.Never);
+        }
+
+        [TestMethod]
+        public void UpdateEntityDefaultTest()
+        {
+            // Arrange
+            Mock<IEntitiesCrudRepository> entitiesCrudRepository = this.SetupEntitiesRepositoryDefaultExists();
+            var logger = Mock.Of<ILogger<EntitiesCrudLogic>>();
+
+            EntitiesCrudLogic entitiesCrudLogic = new EntitiesCrudLogic(
+                entitiesCrudRepository.Object,
+                null,
+                logger);
+
+            // Act
+            ILogicResult result = entitiesCrudLogic.UpdateEntity(EntityUpdateTest.ForUpdate());
+
+            // Assert
+            Assert.AreEqual(LogicResultState.Ok, result.State);
+            entitiesCrudRepository.Verify((repository) => repository.UpdateEntity(It.IsAny<IDbEntity>()), Times.Once);
+        }
+
+        private Mock<IEntitiesCrudRepository> SetupEntitiesRepositoryDefaultExists()
+        {
+            var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
+            entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(true);
+            entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault)).Returns(DbEntityTest.Default());
+            entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdForUpdate)).Returns(DbEntityTest.ForUpdate());
+            entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault)).Returns(DbEntityDetailTest.Default());
+            entitiesCrudRepository.Setup(repository => repository.GetEntities()).Returns(new List<IDbEntity> { DbEntityTest.Default() });
+            entitiesCrudRepository.Setup(repository => repository.UpdateEntity(It.IsAny<IDbEntity>())).Callback((IDbEntity dbEntity) =>
+            {
+                DbEntityTest.AssertUpdated(dbEntity);
+            });
+            entitiesCrudRepository.Setup(repository => repository.DeleteEntity(EntityTestValues.IdDefault));
+            return entitiesCrudRepository;
+        }
+
+        private Mock<IEntitiesCrudRepository> SetupEntitiesRepositoryEmpty()
+        {
+            var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
+            entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(false);
+            entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault)).Returns(() => null);
+            entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault)).Returns(() => null);
+            entitiesCrudRepository.Setup(repository => repository.CreateEntity(It.IsAny<IDbEntity>())).Callback((IDbEntity dbEntity) =>
+            {
+                DbEntityTest.AssertCreated(dbEntity);
+            });
+            return entitiesCrudRepository;
+        }
+
+        private Mock<IGuidGenerator> SetupGuidGeneratorDefault()
+        {
+            var guidGeneration = new Mock<IGuidGenerator>(MockBehavior.Strict);
+            guidGeneration.Setup(generator => generator.NewGuid()).Returns(EntityTestValues.IdForCreate);
+            return guidGeneration;
+        }
+    }
+}

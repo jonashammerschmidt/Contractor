@@ -18,6 +18,7 @@ namespace Contractor.Core
             projectGenerations.Add(serviceProvider.GetService<PersistenceProjectGeneration>());
             projectGenerations.Add(serviceProvider.GetService<PersistenceTestsProjectGeneration>());
             projectGenerations.Add(serviceProvider.GetService<LogicProjectGeneration>());
+            projectGenerations.Add(serviceProvider.GetService<LogicTestsProjectGeneration>());
             projectGenerations.Add(serviceProvider.GetService<ApiProjectGeneration>());
             projectGenerations.Add(serviceProvider.GetService<DBProjectGeneration>());
         }

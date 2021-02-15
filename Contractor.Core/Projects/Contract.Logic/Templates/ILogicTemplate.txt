@@ -12,7 +12,7 @@ namespace ProjectName.Contract.Logic.Model.Domain.Entities
 
         ILogicResult<IEntityDetail> GetEntityDetail(Guid entityId);
 
-        IEnumerable<IEntity> GetEntities();
+        ILogicResult<IEnumerable<IEntity>> GetEntities();
 
         ILogicResult UpdateEntity(IEntityUpdate entityUpdate);
     }
