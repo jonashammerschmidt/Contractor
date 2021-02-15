@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"public static IDb{options.EntityNameFrom}Detail Default()");
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = new List<IDb{options.EntityNameTo}> " + "{" + $" Db{options.EntityNameTo}Test.Default() " + "}");
+            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = new List<IDb{options.EntityNameTo}> " + "{" + $" Db{options.EntityNameTo}Test.Default() " + "},");
 
             fileData = stringEditor.GetText();
 

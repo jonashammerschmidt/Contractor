@@ -42,7 +42,7 @@ namespace Contractor.Core.Projects
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"public static IDb{options.EntityNameTo}Detail Default()");
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.EntityNameFrom} = Db{options.EntityNameFrom}Test.Default()");
+            stringEditor.InsertLine($"                {options.EntityNameFrom} = Db{options.EntityNameFrom}Test.Default(),");
 
             fileData = stringEditor.GetText();
 
