@@ -22,6 +22,11 @@ namespace Contractor.Core.Helpers
             return this.lines[lineNumber];
         }
 
+        public int GetLineCount()
+        {
+            return this.lines.Count;
+        }
+
         public int GetLineNumber()
         {
             return lineNumber;

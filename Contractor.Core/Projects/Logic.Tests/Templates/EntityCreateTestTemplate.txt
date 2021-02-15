@@ -12,7 +12,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         {
             return new EntityCreateTest()
             {
-                Id = BankTestValues.IdForCreate,
+                Id = EntityTestValues.IdForCreate,
             };
         }
     }

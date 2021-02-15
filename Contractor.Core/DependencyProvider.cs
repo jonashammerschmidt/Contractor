@@ -45,6 +45,13 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<LogicDtoCreateTestMethodsAddition>();
             serviceCollection.AddSingleton<LogicDtoUpdateTestMethodsAddition>();
             serviceCollection.AddSingleton<LogicDtoTestValuesAddition>();
+            serviceCollection.AddSingleton<LogicDtoTestValuesRelationAddition>();
+
+            serviceCollection.AddSingleton<LogicDbDtoDetailTestFromAssertAddition>();
+            serviceCollection.AddSingleton<LogicDbDtoDetailTestToAssertAddition>();
+            serviceCollection.AddSingleton<LogicDtoDetailTestFromAssertAddition>();
+            serviceCollection.AddSingleton<LogicDtoDetailTestToAssertAddition>();
+            serviceCollection.AddSingleton<LogicTestsRelationAddition>();
 
             serviceCollection.AddSingleton<DbContextEntityAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();

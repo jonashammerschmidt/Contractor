@@ -30,31 +30,47 @@ namespace Contractor.Core.Projects
         private static readonly string EntityCreateTestFileName = "EntityCreateTest.cs";
         private static readonly string EntityUpdateTestFileName = "EntityUpdateTest.cs";
 
+        private readonly LogicDbDtoDetailTestFromAssertAddition logicDbDtoDetailTestFromAssertAddition;
+        private readonly LogicDbDtoDetailTestToAssertAddition logicDbDtoDetailTestToAssertAddition;
         private readonly LogicDbDtoDetailTestMethodsAddition logicDbDtoDetailTestMethodsAddition;
         private readonly LogicDbDtoTestMethodsAddition logicDbDtoTestMethodsAddition;
+        private readonly LogicDtoDetailTestFromAssertAddition logicDtoDetailTestFromAssertAddition;
         private readonly LogicDtoDetailTestMethodsAddition logicDtoDetailTestMethodsAddition;
+        private readonly LogicDtoDetailTestToAssertAddition logicDtoDetailTestToAssertAddition;
         private readonly LogicDtoTestMethodsAddition logicDtoTestMethodsAddition;
         private readonly LogicDtoCreateTestMethodsAddition logicDtoCreateTestMethodsAddition;
         private readonly LogicDtoUpdateTestMethodsAddition logicDtoUpdateTestMethodsAddition;
         private readonly LogicDtoTestValuesAddition logicDtoTestValuesAddition;
+        private readonly LogicDtoTestValuesRelationAddition logicDtoTestValuesRelationAddition;
+        private readonly LogicTestsRelationAddition logicTestsRelationAddition;
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
         private readonly PathService pathService;
 
         public LogicTestsProjectGeneration(
+            LogicDbDtoDetailTestFromAssertAddition logicDbDtoDetailTestFromAssertAddition,
+            LogicDbDtoDetailTestToAssertAddition logicDbDtoDetailTestToAssertAddition,
             LogicDbDtoDetailTestMethodsAddition logicDbDtoDetailTestMethodsAddition,
             LogicDbDtoTestMethodsAddition logicDbDtoTestMethodsAddition,
+            LogicDtoDetailTestFromAssertAddition logicDtoDetailTestFromAssertAddition,
             LogicDtoDetailTestMethodsAddition logicDtoDetailTestMethodsAddition,
+            LogicDtoDetailTestToAssertAddition logicDtoDetailTestToAssertAddition,
             LogicDtoTestMethodsAddition logicDtoTestMethodsAddition,
             LogicDtoCreateTestMethodsAddition logicDtoCreateTestMethodsAddition,
             LogicDtoUpdateTestMethodsAddition logicDtoUpdateTestMethodsAddition,
             LogicDtoTestValuesAddition logicDtoTestValuesAddition,
+            LogicDtoTestValuesRelationAddition logicDtoTestValuesRelationAddition,
+            LogicTestsRelationAddition logicTestsRelationAddition,
             EntityCoreAddition entityCoreAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition,
             PathService pathService)
         {
+            this.logicDbDtoDetailTestFromAssertAddition = logicDbDtoDetailTestFromAssertAddition;
+            this.logicDbDtoDetailTestToAssertAddition = logicDbDtoDetailTestToAssertAddition;
+            this.logicDtoDetailTestFromAssertAddition = logicDtoDetailTestFromAssertAddition;
+            this.logicDtoDetailTestToAssertAddition = logicDtoDetailTestToAssertAddition;
             this.logicDbDtoDetailTestMethodsAddition = logicDbDtoDetailTestMethodsAddition;
             this.logicDbDtoTestMethodsAddition = logicDbDtoTestMethodsAddition;
             this.logicDtoDetailTestMethodsAddition = logicDtoDetailTestMethodsAddition;
@@ -62,6 +78,8 @@ namespace Contractor.Core.Projects
             this.logicDtoCreateTestMethodsAddition = logicDtoCreateTestMethodsAddition;
             this.logicDtoUpdateTestMethodsAddition = logicDtoUpdateTestMethodsAddition;
             this.logicDtoTestValuesAddition = logicDtoTestValuesAddition;
+            this.logicDtoTestValuesRelationAddition = logicDtoTestValuesRelationAddition;
+            this.logicTestsRelationAddition = logicTestsRelationAddition;
             this.entityCoreAddition = entityCoreAddition;
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
@@ -100,11 +118,11 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, DbEntityDetailTestFileName);
             this.logicDbDtoDetailTestMethodsAddition.Add(options, DomainFolder, DbEntityDetailTestFileName);
 
-            this.propertyAddition.AddPropertyToDTO(options, DomainFolder, DbEntityTestFileName);
-            this.logicDbDtoTestMethodsAddition.Add(options, DomainFolder, DbEntityTestFileName);
-
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, EntityDetailTestFileName);
             this.logicDtoDetailTestMethodsAddition.Add(options, DomainFolder, EntityDetailTestFileName);
+
+            this.propertyAddition.AddPropertyToDTO(options, DomainFolder, DbEntityTestFileName);
+            this.logicDbDtoTestMethodsAddition.Add(options, DomainFolder, DbEntityTestFileName);
 
             this.propertyAddition.AddPropertyToDTO(options, DomainFolder, EntityTestFileName);
             this.logicDtoTestMethodsAddition.Add(options, DomainFolder, EntityTestFileName);
@@ -118,6 +136,40 @@ namespace Contractor.Core.Projects
 
         public void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            // From
+            IPropertyAdditionOptions dbFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
+            this.propertyAddition.AddPropertyToDTO(dbFromOptions, DomainFolder, DbEntityDetailTestFileName);
+            this.logicDbDtoDetailTestFromAssertAddition.Add(options, DomainFolder, DbEntityDetailTestFileName);
+
+            IPropertyAdditionOptions dtoFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
+            this.propertyAddition.AddPropertyToDTO(dtoFromOptions, DomainFolder, EntityDetailTestFileName);
+            this.logicDtoDetailTestFromAssertAddition.Add(options, DomainFolder, EntityDetailTestFileName);
+
+            // To
+            this.logicTestsRelationAddition.Add(options, DomainFolder, EntitiesCrudLogicTestsFileName);
+
+            this.logicDtoTestValuesRelationAddition.Add(options, DomainFolder, EntityTestValuesFileName);
+
+            IPropertyAdditionOptions dbToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", $"{options.EntityNameFrom}");
+            this.propertyAddition.AddPropertyToDTO(dbToOptions, DomainFolder, DbEntityDetailTestFileName);
+            this.logicDbDtoDetailTestToAssertAddition.Add(options, DomainFolder, DbEntityDetailTestFileName);
+
+            IPropertyAdditionOptions dtoToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", $"{options.EntityNameFrom}");
+            this.propertyAddition.AddPropertyToDTO(dtoToOptions, DomainFolder, EntityDetailTestFileName);
+            this.logicDtoDetailTestToAssertAddition.Add(options, DomainFolder, EntityDetailTestFileName);
+
+            IPropertyAdditionOptions guidPropertyOptions = RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+            this.propertyAddition.AddPropertyToDTO(guidPropertyOptions, DomainFolder, DbEntityTestFileName);
+            this.logicDbDtoTestMethodsAddition.Add(guidPropertyOptions, DomainFolder, DbEntityTestFileName);
+
+            this.propertyAddition.AddPropertyToDTO(guidPropertyOptions, DomainFolder, EntityTestFileName);
+            this.logicDtoTestMethodsAddition.Add(guidPropertyOptions, DomainFolder, EntityTestFileName);
+
+            this.propertyAddition.AddPropertyToDTO(guidPropertyOptions, DomainFolder, EntityCreateTestFileName);
+            this.logicDtoCreateTestMethodsAddition.Add(guidPropertyOptions, DomainFolder, EntityCreateTestFileName);
+
+            this.propertyAddition.AddPropertyToDTO(guidPropertyOptions, DomainFolder, EntityUpdateTestFileName);
+            this.logicDtoUpdateTestMethodsAddition.Add(guidPropertyOptions, DomainFolder, EntityUpdateTestFileName);
         }
     }
 }
