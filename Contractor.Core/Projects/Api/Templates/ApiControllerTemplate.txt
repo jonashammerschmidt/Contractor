@@ -1,11 +1,11 @@
 ﻿using ProjectName.API.Security.Authorization;
 using ProjectName.Contract.Logic.LogicResults;
-using ProjectName.Contract.Logic.Model.Domain.Entities;
+using ProjectName.Contract.Logic.Modules.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-namespace ProjectName.API.Model.Domain.Entities
+namespace ProjectName.API.Modules.Domain.Entities
 {
     [ApiController]
     [Route("api/domain-kebab/entity-kebab")]

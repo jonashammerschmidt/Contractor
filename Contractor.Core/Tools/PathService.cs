@@ -14,7 +14,7 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForEntity(IEntityAdditionOptions options, string domainFolder)
         {
-            string relativePath = options.ProjectName + domainFolder;
+            string relativePath = domainFolder;
             relativePath = relativePath.Replace("{Domain}", options.Domain);
             relativePath = relativePath.Replace("{Entities}", options.EntityNamePlural);
             string absolutePathForDomain = Path.Combine(options.BackendDestinationFolder, relativePath);
@@ -23,14 +23,14 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForDbContext(IContractorOptions options)
         {
-            string relativePath = options.ProjectName + ".Persistence\\Model\\PersistenceDbContext.cs";
+            string relativePath = "Persistence\\Modules\\PersistenceDbContext.cs";
             string absolutePathForDomain = Path.Combine(options.BackendDestinationFolder, relativePath);
             return absolutePathForDomain;
         }
 
         public string GetAbsolutePathForInMemoryDbContext(IContractorOptions options)
         {
-            string relativePath = options.ProjectName + ".Persistence.Tests\\Model\\InMemoryDbContext.cs";
+            string relativePath = "Persistence.Tests\\Modules\\InMemoryDbContext.cs";
             string absolutePathForDomain = Path.Combine(options.BackendDestinationFolder, relativePath);
             return absolutePathForDomain;
         }

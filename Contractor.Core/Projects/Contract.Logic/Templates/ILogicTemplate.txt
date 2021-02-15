@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ProjectName.Contract.Logic.Model.Domain.Entities
+namespace ProjectName.Contract.Logic.Modules.Domain.Entities
 {
     public interface IEntitiesCrudLogic
     {

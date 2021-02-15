@@ -1,8 +1,8 @@
-﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
+﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ProjectName.Logic.Tests.Model.Domain.Entities
+namespace ProjectName.Logic.Tests.Modules.Domain.Entities
 {
     internal class DbEntityDetailTest : IDbEntityDetail
     {

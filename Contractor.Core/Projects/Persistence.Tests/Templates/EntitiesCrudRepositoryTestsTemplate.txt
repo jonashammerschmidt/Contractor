@@ -1,10 +1,10 @@
-﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
-using ProjectName.Persistence.Model;
-using ProjectName.Persistence.Model.Domain.Entities;
+﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Persistence;
+using ProjectName.Persistence.Modules.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
-namespace ProjectName.Persistence.Tests.Model.Domain.Entities
+namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
 {
     [TestClass]
     public class EntitiesCrudRepositoryTests

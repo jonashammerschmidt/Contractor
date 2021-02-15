@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectName.Logic.Tests.Model.Domain.Entities
+namespace ProjectName.Logic.Tests.Modules.Domain.Entities
 {
     public class EntityTestValues
     {

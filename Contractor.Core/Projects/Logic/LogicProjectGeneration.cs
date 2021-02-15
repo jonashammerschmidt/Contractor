@@ -8,8 +8,8 @@ namespace Contractor.Core.Projects
 {
     internal class LogicProjectGeneration : IProjectGeneration
     {
-        private static readonly string ProjectFolder = ".Logic";
-        private static readonly string DomainFolder = ".Logic\\Model\\{Domain}\\{Entities}";
+        private static readonly string ProjectFolder = "Logic";
+        private static readonly string DomainFolder = "Logic\\Modules\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Logic\Templates";
         private static readonly string LogicTemplateFileName = Path.Combine(TemplateFolder, "LogicTemplate.txt");
@@ -97,9 +97,9 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>", $"{options.EntityNamePluralTo}"),
                 DomainFolder, LogicDtoDetailFileName,
-                $"{options.ProjectName}.Contract.Logic.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+                $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
             this.dtoDetailFromMethodsAddition.Add(options, DomainFolder, LogicDtoDetailFileName,
-                $"{options.ProjectName}.Logic.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+                $"{options.ProjectName}.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
             this.propertyAddition.AddPropertyToDTO(
@@ -116,11 +116,11 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", options.EntityNameFrom),
                 DomainFolder, LogicDtoDetailFileName,
-                $"{options.ProjectName}.Contract.Logic.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+                $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
             this.dtoDetailToMethodsAddition.Add(options, DomainFolder, LogicDtoDetailFileName);
 
             this.logicRelationAddition.Add(options, DomainFolder, LogicFileName,
-                $"{options.ProjectName}.Contract.Persistence.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
     }
 }

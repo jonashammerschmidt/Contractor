@@ -7,7 +7,7 @@ namespace Contractor.Core.Projects
 {
     internal class PersistenceTestsProjectGeneration : IProjectGeneration
     {
-        private static readonly string DomainFolder = ".Persistence.Tests\\Model\\{Domain}\\{Entities}";
+        private static readonly string DomainFolder = "Persistence.Tests\\Modules\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Persistence.Tests\Templates";
         private static readonly string EntitiesCrudRepositoryTestsTemplateFileName = Path.Combine(TemplateFolder, "EntitiesCrudRepositoryTestsTemplate.txt");

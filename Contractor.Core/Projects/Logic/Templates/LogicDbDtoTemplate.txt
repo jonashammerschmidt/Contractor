@@ -1,7 +1,7 @@
-﻿using ProjectName.Contract.Persistence.Model.Domain.Entities;
+﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using System;
 
-namespace ProjectName.Logic.Model.Domain.Entities
+namespace ProjectName.Logic.Modules.Domain.Entities
 {
     internal class DbEntity : IDbEntity
     {

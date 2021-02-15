@@ -7,7 +7,7 @@ namespace Contractor.Core.Projects
 {
     internal class LogicTestsProjectGeneration : IProjectGeneration
     {
-        private static readonly string DomainFolder = ".Logic.Tests\\Model\\{Domain}\\{Entities}";
+        private static readonly string DomainFolder = "Logic.Tests\\Modules\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Logic.Tests\Templates";
         private static readonly string EntitiesCrudLogicTestsTemplateTemplateFileName = Path.Combine(TemplateFolder, "EntitiesCrudLogicTestsTemplate.txt");

@@ -7,7 +7,7 @@ namespace Contractor.Core.Projects
 {
     internal class ContractLogicProjectGeneration : IProjectGeneration
     {
-        private static readonly string DomainFolder = ".Contract\\Logic\\Model\\{Domain}\\{Entities}";
+        private static readonly string DomainFolder = "Contract\\Logic\\Modules\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Contract.Logic\Templates";
 
@@ -70,7 +70,7 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>", $"{options.EntityNamePluralTo}"),
                 DomainFolder, ILogicDtoDetailFileName, true,
-                $"{options.ProjectName}.Contract.Logic.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+                $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
             this.propertyAddition.AddPropertyToDTO(
@@ -80,7 +80,7 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", options.EntityNameFrom),
                 DomainFolder, ILogicDtoDetailFileName, true,
-                $"{options.ProjectName}.Contract.Logic.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+                $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),

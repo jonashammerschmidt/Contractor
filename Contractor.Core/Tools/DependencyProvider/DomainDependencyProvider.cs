@@ -23,7 +23,7 @@ namespace Contractor.Core.Tools
 
         private string GetFilePath(IDomainAdditionOptions options, string projectFolder, string fileName)
         {
-            return Path.Combine(options.BackendDestinationFolder, options.ProjectName + projectFolder, fileName);
+            return Path.Combine(options.BackendDestinationFolder, projectFolder, fileName);
         }
 
         private string UpdateFileData(IDomainAdditionOptions options, string filePath, string projectFolder)
@@ -54,14 +54,14 @@ namespace Contractor.Core.Tools
         private string GetStartupMethod(string domain, string projectFolder)
         {
             string startupMethod = "";
-            if (projectFolder.Equals(".Logic"))
+            if (projectFolder.Equals("Logic"))
             {
                 startupMethod = @"
         private static void StartupDomain(IServiceCollection services)
         {
         }";
             }
-            else if (projectFolder.Equals(".Persistence"))
+            else if (projectFolder.Equals("Persistence"))
             {
                 startupMethod = @"
         private static void StartupDomain(IServiceCollection services)

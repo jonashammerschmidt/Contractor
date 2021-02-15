@@ -7,8 +7,8 @@ namespace Contractor.Core.Projects
 {
     internal class PersistenceProjectGeneration : IProjectGeneration
     {
-        private static readonly string ProjectFolder = ".Persistence";
-        private static readonly string DomainFolder = ".Persistence\\Model\\{Domain}\\{Entities}";
+        private static readonly string ProjectFolder = "Persistence";
+        private static readonly string DomainFolder = "Persistence\\Modules\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Persistence\Templates";
         private static readonly string PersistenceRepositoryTemplateFileName = Path.Combine(TemplateFolder, "PersistenceRepositoryTemplate.txt");
@@ -128,12 +128,12 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", options.EntityNamePluralTo),
                 DomainFolder, PersistenceDbDtoDetailFileName,
-                $"{options.ProjectName}.Contract.Persistence.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
             this.dbDtoDetailFromMethodsAddition.Add(options, DomainFolder, PersistenceDbDtoDetailFileName,
-                $"{options.ProjectName}.Persistence.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+                $"{options.ProjectName}.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             this.efDtoContructorHashSetAddition.Add(options, DomainFolder, PersistenceEfDtoFileName,
-                $"{options.ProjectName}.Persistence.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+                $"{options.ProjectName}.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             this.dtoFromRepositoryIncludeAddition.Add(options, DomainFolder, PersistenceRepositoryFileName);
 
@@ -144,7 +144,7 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, $"virtual Ef{options.EntityNameFrom}", options.EntityNameFrom),
                 DomainFolder, PersistenceEfDtoFileName,
-                $"{options.ProjectName}.Persistence.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+                $"{options.ProjectName}.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
@@ -156,9 +156,9 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", options.EntityNameFrom),
                 DomainFolder, PersistenceDbDtoDetailFileName,
-                $"{options.ProjectName}.Contract.Persistence.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
             this.dbDtoDetailToMethodsAddition.Add(options, DomainFolder, PersistenceDbDtoDetailFileName,
-                $"{options.ProjectName}.Persistence.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+                $"{options.ProjectName}.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
             this.dbContextRelationToAddition.Add(options);
 

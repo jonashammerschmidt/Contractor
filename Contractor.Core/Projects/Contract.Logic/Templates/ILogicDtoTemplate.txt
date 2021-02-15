@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectName.Contract.Logic.Model.Domain.Entities
+namespace ProjectName.Contract.Logic.Modules.Domain.Entities
 {
     public interface IEntity
     {

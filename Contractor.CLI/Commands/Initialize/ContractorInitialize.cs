@@ -54,7 +54,7 @@ namespace Contractor.CLI
                 defaultOptions.BackendDestinationFolder = userBackendDestinationFolder;
             }
 
-            // BackendDestinationFolder
+            // DbDestinationFolder
             System.Console.WriteLine($"Welches Datenbank-Projekt soll bearbeitet werden? (Empty = {defaultOptions.DbDestinationFolder})");
             var userDbDestinationFolder = System.Console.ReadLine().Trim();
             if (userDbDestinationFolder.Length > 0)
@@ -62,7 +62,7 @@ namespace Contractor.CLI
                 defaultOptions.DbDestinationFolder = userDbDestinationFolder;
             }
 
-            // BackendDestinationFolder
+            // ProjectName
             System.Console.WriteLine($"Wie heißt das Backend-Projekt? (Empty = {defaultOptions.ProjectName})");
             var userProjectName = System.Console.ReadLine().Trim();
             if (userProjectName.Length > 0)
@@ -70,7 +70,7 @@ namespace Contractor.CLI
                 defaultOptions.ProjectName = userProjectName;
             }
 
-            // BackendDestinationFolder
+            // DbProjectName
             System.Console.WriteLine($"Wie heißt das Datenbank-Projekt? (Empty = {defaultOptions.DbProjectName})");
             var userDbProjectName = System.Console.ReadLine().Trim();
             if (userDbProjectName.Length > 0)

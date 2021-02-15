@@ -1,8 +1,8 @@
 ﻿using ProjectName.Contract.Logic.LogicResults;
-using ProjectName.Contract.Logic.Model.Domain.Entities;
+using ProjectName.Contract.Logic.Modules.Domain.Entities;
 using ProjectName.Contract.Logic.Services.Identifier;
-using ProjectName.Contract.Persistence.Model.Domain.Entities;
-using ProjectName.Logic.Model.Domain.Entities;
+using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Logic.Modules.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectName.Logic.Tests.Model.Domain.Entities
+namespace ProjectName.Logic.Tests.Modules.Domain.Entities
 {
     [TestClass]
     public class EntitiesCrudLogicTests

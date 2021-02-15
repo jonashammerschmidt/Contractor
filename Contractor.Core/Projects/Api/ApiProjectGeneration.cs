@@ -7,7 +7,7 @@ namespace Contractor.Core.Projects
 {
     internal class ApiProjectGeneration : IProjectGeneration
     {
-        private static readonly string DomainFolder = ".API\\Model\\{Domain}\\{Entities}";
+        private static readonly string DomainFolder = "API\\Modules\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Api\Templates";
         private static readonly string ApiControllerTemplateFileName = Path.Combine(TemplateFolder, "ApiControllerTemplate.txt");

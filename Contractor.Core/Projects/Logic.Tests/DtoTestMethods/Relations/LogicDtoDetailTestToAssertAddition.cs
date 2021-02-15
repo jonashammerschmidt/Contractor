@@ -35,8 +35,8 @@ namespace Contractor.Core.Projects
         {
             string fileData = File.ReadAllText(filePath);
 
-            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Logic.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
-            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Logic.Tests.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Logic.Tests.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
             // ----------- AssertDbDefault -----------
             StringEditor stringEditor = new StringEditor(fileData);

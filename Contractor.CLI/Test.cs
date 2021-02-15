@@ -9,8 +9,8 @@ namespace Contractor.CLI
         public static void Testen()
         {
             DirectoryInfo rootFolder = GetRootFolder();
-            string backendDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Backend");
-            string dbDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.DB");
+            string backendDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Backends\\Contract.Architecture.Backend.Core");
+            string dbDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Databases\\Contract.Architecture.Database.Core");
             TestApiProjectGeneration(backendDestinationFolder, dbDestinationFolder);
         }
 
@@ -20,8 +20,8 @@ namespace Contractor.CLI
             {
                 BackendDestinationFolder = backendDestinationFolder,
                 DbDestinationFolder = dbDestinationFolder,
-                ProjectName = "Contract.Architecture",
-                DbProjectName = "Contract.Architecture.DB",
+                ProjectName = "Contract.Architecture.Backend.Core",
+                DbProjectName = "Contract.Architecture.Database.Core",
             };
 
             AddBankwesen(contractorOptions);

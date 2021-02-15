@@ -27,7 +27,7 @@ namespace Contractor.Core.Projects
         {
             string fileData = File.ReadAllText(filePath);
 
-            string usingStatement = $"{options.ProjectName}.Persistence.Model.{options.Domain}.{options.EntityNamePlural}";
+            string usingStatement = $"{options.ProjectName}.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}";
             fileData = UsingStatements.Add(fileData, usingStatement);
 
             StringEditor stringEditor = new StringEditor(fileData);

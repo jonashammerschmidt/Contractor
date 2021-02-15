@@ -7,7 +7,7 @@ namespace Contractor.Core.Projects
 {
     internal class ContractPersistenceProjectGeneration : IProjectGeneration
     {
-        private static readonly string DomainFolder = ".Contract\\Persistence\\Model\\{Domain}\\{Entities}";
+        private static readonly string DomainFolder = "Contract\\Persistence\\Modules\\{Domain}\\{Entities}";
 
         private static readonly string TemplateFolder = Folder.Executable + @"\Projects\Contract.Persistence\Templates";
 
@@ -61,7 +61,7 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", $"{options.EntityNamePluralTo}"),
                 DomainFolder, IPersistenceDbDtoDetailFileName, true,
-                $"{options.ProjectName}.Contract.Persistence.Model.{options.DomainTo}.{options.EntityNamePluralTo}");
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
@@ -69,7 +69,7 @@ namespace Contractor.Core.Projects
             this.propertyAddition.AddPropertyToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", options.EntityNameFrom),
                 DomainFolder, IPersistenceDbDtoDetailFileName, true,
-                $"{options.ProjectName}.Contract.Persistence.Model.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
     }
 }

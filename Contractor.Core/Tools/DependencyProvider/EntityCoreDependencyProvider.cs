@@ -24,7 +24,7 @@ namespace Contractor.Core.Tools
 
         private string GetFilePath(IEntityAdditionOptions options, string projectFolder, string fileName)
         {
-            return Path.Combine(options.BackendDestinationFolder, options.ProjectName + projectFolder, fileName);
+            return Path.Combine(options.BackendDestinationFolder, projectFolder, fileName);
         }
 
         private string UpdateFileData(IEntityAdditionOptions options, string filePath, string projectFolder)
@@ -57,13 +57,13 @@ namespace Contractor.Core.Tools
 
         private string GetContractNamespace(IEntityAdditionOptions options, string projectFolder)
         {
-            if (projectFolder.Equals(".Logic"))
+            if (projectFolder.Equals("Logic"))
             {
-                return $"{options.ProjectName}.Contract.Logic.Model.{options.Domain}.{options.EntityNamePlural}";
+                return $"{options.ProjectName}.Contract.Logic.Modules.{options.Domain}.{options.EntityNamePlural}";
             }
-            else if (projectFolder.Equals(".Persistence"))
+            else if (projectFolder.Equals("Persistence"))
             {
-                return $"{options.ProjectName}.Contract.Persistence.Model.{options.Domain}.{options.EntityNamePlural}";
+                return $"{options.ProjectName}.Contract.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}";
             }
 
             throw new ArgumentException("Argument 'projectFolder' invalid");
@@ -71,13 +71,13 @@ namespace Contractor.Core.Tools
 
         private string GetProjectNamespace(IEntityAdditionOptions options, string projectFolder)
         {
-            if (projectFolder.Equals(".Logic"))
+            if (projectFolder.Equals("Logic"))
             {
-                return $"{options.ProjectName}.Logic.Model.{options.Domain}.{options.EntityNamePlural}";
+                return $"{options.ProjectName}.Logic.Modules.{options.Domain}.{options.EntityNamePlural}";
             }
-            else if (projectFolder.Equals(".Persistence"))
+            else if (projectFolder.Equals("Persistence"))
             {
-                return $"{options.ProjectName}.Persistence.Model.{options.Domain}.{options.EntityNamePlural}";
+                return $"{options.ProjectName}.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}";
             }
 
             throw new ArgumentException("Argument 'projectFolder' invalid");
@@ -85,11 +85,11 @@ namespace Contractor.Core.Tools
 
         private string GetAddScopedStatement(string entityNamePlural, string projectFolder)
         {
-            if (projectFolder.Equals(".Logic"))
+            if (projectFolder.Equals("Logic"))
             {
                 return $"            services.AddScoped<I{entityNamePlural}CrudLogic, {entityNamePlural}CrudLogic>();";
             }
-            else if (projectFolder.Equals(".Persistence"))
+            else if (projectFolder.Equals("Persistence"))
             {
                 return $"            services.AddScoped<I{entityNamePlural}CrudRepository, {entityNamePlural}CrudRepository>();";
             }

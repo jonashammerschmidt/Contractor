@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectName.Persistence.Tests.Model.Domain.Entities
+namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
 {
     public class EntityTestValues
     {
