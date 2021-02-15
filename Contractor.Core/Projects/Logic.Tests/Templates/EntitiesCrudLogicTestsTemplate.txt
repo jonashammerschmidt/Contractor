@@ -29,11 +29,11 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
                 logger);
 
             // Act
-            ILogicResult<Guid> result = entitiesCrudLogic.CreateEntity(EntityCreateTest.Default());
+            ILogicResult<Guid> result = entitiesCrudLogic.CreateEntity(EntityCreateTest.ForCreate());
 
             // Assert
             Assert.AreEqual(LogicResultState.Ok, result.State);
-            Assert.AreEqual(EntityTestValues.IdDefault, result.Data);
+            Assert.AreEqual(EntityTestValues.IdForCreate, result.Data);
             entitiesCrudRepository.Verify((repository) => repository.CreateEntity(It.IsAny<IDbEntity>()), Times.Once);
         }
 
@@ -94,7 +94,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
 
             // Assert
             Assert.AreEqual(LogicResultState.Ok, result.State);
-            EntityDetailTest.AssertWithDefault(result.Data);
+            EntityDetailTest.AssertDefault(result.Data);
         }
 
         [TestMethod]
@@ -135,7 +135,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
             Assert.AreEqual(LogicResultState.Ok, result.State);
             IEntity[] entityResults = result.Data.ToArray();
             Assert.AreEqual(1, entityResults.Length);
-            EntityTest.AssertWithDefault(entityResults[0]);
+            EntityTest.AssertDefault(entityResults[0]);
         }
 
         [TestMethod]
@@ -183,7 +183,6 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
             var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
             entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(true);
             entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault)).Returns(DbEntityTest.Default());
-            entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdForUpdate)).Returns(DbEntityTest.ForUpdate());
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault)).Returns(DbEntityDetailTest.Default());
             entitiesCrudRepository.Setup(repository => repository.GetEntities()).Returns(new List<IDbEntity> { DbEntityTest.Default() });
             entitiesCrudRepository.Setup(repository => repository.UpdateEntity(It.IsAny<IDbEntity>())).Callback((IDbEntity dbEntity) =>

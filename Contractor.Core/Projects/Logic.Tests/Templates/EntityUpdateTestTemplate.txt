@@ -1,0 +1,19 @@
+﻿using ProjectName.Contract.Logic.Model.Domain.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+namespace ProjectName.Logic.Tests.Model.Domain.Entities
+{
+    internal class EntityUpdateTest : IEntityUpdate
+    {
+        public Guid Id { get; set; }
+
+        public static IEntityUpdate ForUpdate()
+        {
+            return new EntityUpdateTest()
+            {
+                Id = BankTestValues.IdDefault,
+            };
+        }
+    }
+}

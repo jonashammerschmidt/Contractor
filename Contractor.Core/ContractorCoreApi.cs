@@ -8,7 +8,7 @@ namespace Contractor.Core
     public class ContractorCoreApi
     {
 
-        private List<IProjectGeneration> projectGenerations = new List<IProjectGeneration>();
+        private readonly List<IProjectGeneration> projectGenerations = new List<IProjectGeneration>();
 
         public ContractorCoreApi()
         {

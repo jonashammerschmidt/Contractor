@@ -8,7 +8,15 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        public static void AssertDbDefault(IDbEntityDetail dbEntityDetail)
+        public static IDbEntityDetail Default()
+        {
+            return new DbEntityDetailTest()
+            {
+                Id = EntityTestValues.IdDefault,
+            };
+        }
+
+        public static void AssertDefault(IDbEntityDetail dbEntityDetail)
         {
             Assert.AreEqual(EntityTestValues.IdDefault, dbEntityDetail.Id);
         }

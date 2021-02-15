@@ -1,0 +1,24 @@
+﻿using ProjectName.Contract.Logic.Model.Domain.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+namespace ProjectName.Logic.Tests.Model.Domain.Entities
+{
+    internal class EntityTest : IEntity
+    {
+        public Guid Id { get; set; }
+
+        public static IEntity Default()
+        {
+            return new EntityTest()
+            {
+                Id = EntityTestValues.IdDefault,
+            };
+        }
+
+        public static void AssertDefault(IEntity entity)
+        {
+            Assert.AreEqual(EntityTestValues.IdDefault, entity.Id);
+        }
+    }
+}

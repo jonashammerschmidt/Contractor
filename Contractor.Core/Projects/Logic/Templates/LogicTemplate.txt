@@ -72,7 +72,7 @@ namespace ProjectName.Logic.Model.Domain.Entities
                 .Select(entity => Entity.FromDbEntity(entity));
 
             this.logger.LogDebug("Entities wurden geladen");
-            return entities;
+            return LogicResult<IEnumerable<IEntity>>.Ok(entities);
         }
 
         public ILogicResult UpdateEntity(IEntityUpdate entityUpdate)

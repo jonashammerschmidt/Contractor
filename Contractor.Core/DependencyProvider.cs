@@ -38,6 +38,14 @@ namespace Contractor.Core
 
             serviceCollection.AddSingleton<LogicRelationAddition>();
 
+            serviceCollection.AddSingleton<LogicDbDtoDetailTestMethodsAddition>();
+            serviceCollection.AddSingleton<LogicDbDtoTestMethodsAddition>();
+            serviceCollection.AddSingleton<LogicDtoDetailTestMethodsAddition>();
+            serviceCollection.AddSingleton<LogicDtoTestMethodsAddition>();
+            serviceCollection.AddSingleton<LogicDtoCreateTestMethodsAddition>();
+            serviceCollection.AddSingleton<LogicDtoUpdateTestMethodsAddition>();
+            serviceCollection.AddSingleton<LogicDtoTestValuesAddition>();
+
             serviceCollection.AddSingleton<DbContextEntityAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();
             serviceCollection.AddSingleton<DbContextRelationToAddition>();

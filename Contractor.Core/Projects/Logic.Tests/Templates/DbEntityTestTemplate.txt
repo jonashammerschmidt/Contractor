@@ -12,7 +12,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         {
             return new DbEntityTest()
             {
-                Id = EntityTestValues.IdDbDefault,
+                Id = EntityTestValues.IdDefault,
             };
         }
 
@@ -20,13 +20,13 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
         {
             return new DbEntityTest()
             {
-                Id = EntityTestValues.IdDbDefault,
+                Id = EntityTestValues.IdDefault,
             };
         }
 
         public static void AssertDefault(IDbEntity dbEntity)
         {
-            Assert.AreEqual(EntityTestValues.IdDbDefault, dbEntity.Id);
+            Assert.AreEqual(EntityTestValues.IdDefault, dbEntity.Id);
         }
 
         public static void AssertCreated(IDbEntity dbEntity)
@@ -36,7 +36,7 @@ namespace ProjectName.Logic.Tests.Model.Domain.Entities
 
         public static void AssertUpdated(IDbEntity dbEntity)
         {
-            Assert.AreEqual(EntityTestValues.IdForUpdate, dbEntity.Id);
+            Assert.AreEqual(EntityTestValues.IdDefault, dbEntity.Id);
         }
     }
 }
