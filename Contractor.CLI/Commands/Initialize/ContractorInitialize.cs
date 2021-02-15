@@ -117,7 +117,9 @@ namespace Contractor.CLI
         private static string FindDbDestinationFolder(string dir)
         {
             return Directory.GetDirectories(dir)
-                            .Where(directory => new DirectoryInfo(directory).Name.EndsWith(".DB"))
+                            .Concat(Directory.GetDirectories(dir)
+                                .SelectMany(subDir => Directory.GetDirectories(subDir)))
+                            .Where(directory => new DirectoryInfo(directory).Name.EndsWith(".Database.Core"))
                             .FirstOrDefault();
         }
     }

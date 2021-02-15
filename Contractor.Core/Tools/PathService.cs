@@ -23,14 +23,14 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForDbContext(IContractorOptions options)
         {
-            string relativePath = "Persistence\\Modules\\PersistenceDbContext.cs";
+            string relativePath = "Persistence\\PersistenceDbContext.cs";
             string absolutePathForDomain = Path.Combine(options.BackendDestinationFolder, relativePath);
             return absolutePathForDomain;
         }
 
         public string GetAbsolutePathForInMemoryDbContext(IContractorOptions options)
         {
-            string relativePath = "Persistence.Tests\\Modules\\InMemoryDbContext.cs";
+            string relativePath = "Persistence.Tests\\InMemoryDbContext.cs";
             string absolutePathForDomain = Path.Combine(options.BackendDestinationFolder, relativePath);
             return absolutePathForDomain;
         }
