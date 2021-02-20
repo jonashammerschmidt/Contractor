@@ -13,8 +13,7 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         public void CreateEntityTest()
         {
             // Arrange
-            PersistenceDbContext persistenceDbContext = InMemoryDbContext.CreatePersistenceDbContext();
-            EntitiesCrudRepository entitiesCrudRepository = new EntitiesCrudRepository(persistenceDbContext);
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryEmpty();
 
             // Act
             entitiesCrudRepository.CreateEntity(DbEntityTest.ForCreate());

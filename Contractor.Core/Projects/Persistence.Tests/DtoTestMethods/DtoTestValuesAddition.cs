@@ -63,11 +63,11 @@ namespace Contractor.Core.Projects
             }
             else if (options.PropertyType == "Guid")
             {
-                return $"Guid.Parse(\"{Guid.NewGuid().ToString()}\")";
+                return $"Guid.Parse(\"{Guid.NewGuid()}\")";
             }
             else if (options.PropertyType == "bool")
             {
-                return scope.Equals("DbDefault").ToString();
+                return scope.Equals("DbDefault").ToString().ToLower();
             }
             else if (options.PropertyType == "DateTime")
             {

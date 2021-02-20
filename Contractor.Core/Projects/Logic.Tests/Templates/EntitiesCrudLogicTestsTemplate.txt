@@ -1,6 +1,6 @@
 ﻿using ProjectName.Contract.Logic.LogicResults;
 using ProjectName.Contract.Logic.Modules.Domain.Entities;
-using ProjectName.Contract.Logic.Services.Identifier;
+using ProjectName.Contract.Logic.Tools.Identifier;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using ProjectName.Logic.Modules.Domain.Entities;
 using Microsoft.Extensions.Logging;

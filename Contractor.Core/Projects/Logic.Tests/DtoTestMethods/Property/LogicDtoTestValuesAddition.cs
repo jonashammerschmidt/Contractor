@@ -66,7 +66,7 @@ namespace Contractor.Core.Projects
             }
             else if (options.PropertyType == "bool")
             {
-                return scope.Equals("DbDefault").ToString();
+                return scope.Equals("Default").ToString().ToLower();
             }
             else if (options.PropertyType == "DateTime")
             {
