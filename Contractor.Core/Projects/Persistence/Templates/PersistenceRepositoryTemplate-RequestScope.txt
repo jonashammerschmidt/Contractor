@@ -1,4 +1,5 @@
-﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+﻿using ProjectName.Contract.Contexts;
+using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
 
         public void CreateEntity(IDbEntity dbEntity)
         {
-            this.dbContext.Entities.Add(DbEntity.ToEfEntity(dbEntity, this.sessionContext.MandantId));
+            this.dbContext.Entities.Add(DbEntity.ToEfEntity(dbEntity, this.sessionContext.RequestScopeId));
             this.dbContext.SaveChanges();
         }
 
@@ -26,7 +27,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
                 .FirstOrDefault();
 
             this.dbContext.Entities.Remove(efEntity);
@@ -36,14 +37,14 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         public bool DoesEntityExist(Guid entityId)
         {
             return this.dbContext.Entities
-                .Any(efEntity => efEntity.MandantId == this.sessionContext.MandantId && efEntity.Id == entityId);
+                .Any(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId && efEntity.Id == entityId);
         }
 
         public IDbEntity GetEntity(Guid entityId)
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
                 .FirstOrDefault();
 
             return DbEntity.FromEfEntity(efEntity);
@@ -53,7 +54,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
                 .FirstOrDefault();
 
             return DbEntityDetail.FromEfEntity(efEntity);
@@ -62,7 +63,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         public IEnumerable<IDbEntity> GetEntities()
         {
             return this.dbContext.Entities
-                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
                 .Select(efEntity => DbEntity.FromEfEntity(efEntity));
         }
 
@@ -70,7 +71,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == dbEntity.Id)
-                .Where(efEntity => efEntity.MandantId == this.sessionContext.MandantId)
+                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
                 .FirstOrDefault();
 
             DbEntity.UpdateEfEntity(efEntity, dbEntity);

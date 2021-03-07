@@ -24,12 +24,12 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             };
         }
 
-        internal static EfEntity ToEfEntity(IDbEntity dbEntity, Guid mandantId)
+        internal static EfEntity ToEfEntity(IDbEntity dbEntity, Guid requestScopeId)
         {
             return new EfEntity()
             {
                 Id = dbEntity.Id,
-                MandantId = mandantId,
+                RequestScopeId = requestScopeId,
             };
         }
     }

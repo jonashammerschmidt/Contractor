@@ -33,8 +33,16 @@ namespace Contractor.Core.Projects
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("persistenceDbContext.SaveChanges();");
 
-            stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault()));");
-            stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault2()));");
+            if (options.HasRequestScope)
+            {
+                stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault(), {options.EntityName}TestValues.{options.RequestScopeName}IdDbDefault));");
+                stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault2(), {options.EntityName}TestValues.{options.RequestScopeName}IdDbDefault));");
+            }
+            else
+            {
+                stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault()));");
+                stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault2()));");
+            }
 
             return stringEditor.GetText();
         }

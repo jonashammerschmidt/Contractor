@@ -45,8 +45,7 @@ namespace Contractor.CLI
             EntityAdditionOptions entityAdditionOptions = new EntityAdditionOptions(domainAdditionOptions)
             {
                 EntityName = "Bank",
-                EntityNamePlural = "Banken",
-                ForMandant = false
+                EntityNamePlural = "Banken"
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
@@ -69,8 +68,7 @@ namespace Contractor.CLI
             {
                 Domain = "Bankwesen",
                 EntityName = "Konto",
-                EntityNamePlural = "Konten",
-                ForMandant = false
+                EntityNamePlural = "Konten"
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
@@ -98,8 +96,7 @@ namespace Contractor.CLI
             EntityAdditionOptions entityAdditionOptions = new EntityAdditionOptions(domainAdditionOptions)
             {
                 EntityName = "Kunde",
-                EntityNamePlural = "Kunden",
-                ForMandant = false
+                EntityNamePlural = "Kunden"
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 

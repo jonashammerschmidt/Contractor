@@ -67,10 +67,12 @@ namespace Contractor.Core.Projects
             // Crud Tests
             this.pathService.AddEntityFolder(options, DomainFolder);
 
-            this.entityCoreAddition.AddEntityCore(options, DomainFolder, EntitiesCrudRepositoryTestsTemplateFileName, EntitiesCrudRepositoryTestsFileName);
+            string entitiesCrudRepositoryTestsTemplateFileName = TemplateFileName.GetFileNameForEntityAddition(options, EntitiesCrudRepositoryTestsTemplateFileName);
+            this.entityCoreAddition.AddEntityCore(options, DomainFolder, entitiesCrudRepositoryTestsTemplateFileName, EntitiesCrudRepositoryTestsFileName);
 
             // Entity Test Values
-            this.entityCoreAddition.AddEntityCore(options, DomainFolder, EntityTestValuesTemplateFileName, EntityTestValuesFileName);
+            string entityTestValuesTemplateFileName = TemplateFileName.GetFileNameForEntityAddition(options, EntityTestValuesTemplateFileName);
+            this.entityCoreAddition.AddEntityCore(options, DomainFolder, entityTestValuesTemplateFileName, EntityTestValuesFileName);
 
             // DTOs
             this.pathService.AddDtoFolder(options, DomainFolder);

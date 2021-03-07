@@ -31,12 +31,14 @@ namespace Contractor.Core.Tools
         private string GetFileData(IEntityAdditionOptions options, string templateFileName)
         {
             string fileData = File.ReadAllText(templateFileName);
+            fileData = fileData.Replace("ProjectName", options.ProjectName);
+            fileData = fileData.Replace("RequestScope", options.RequestScopeName);
+            fileData = fileData.Replace("requestScope", options.RequestScopeNameLower);
+            fileData = fileData.Replace("Domain", options.Domain);
             fileData = fileData.Replace("Entities", options.EntityNamePlural);
             fileData = fileData.Replace("Entity", options.EntityName);
             fileData = fileData.Replace("entities", options.EntityNamePluralLower);
             fileData = fileData.Replace("entity", options.EntityNameLower);
-            fileData = fileData.Replace("ProjectName", options.ProjectName);
-            fileData = fileData.Replace("Domain", options.Domain);
             return fileData;
         }
     }

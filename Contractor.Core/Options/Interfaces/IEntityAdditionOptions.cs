@@ -6,7 +6,13 @@
 
         string EntityNamePlural { get; set; }
 
-        bool ForMandant { get; set; }
+        bool HasRequestScope { get; }
+
+        string RequestScopeName { get; set; }
+
+        string RequestScopeNamePlural { get; set; }
+
+        string RequestScopeNameLower { get; }
 
         string EntityNameLower { get; }
 

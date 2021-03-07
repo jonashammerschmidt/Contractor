@@ -8,7 +8,25 @@ namespace Contractor.Core.Options
 
         public string EntityNamePlural { get; set; }
 
-        public bool ForMandant { get; set; }
+        public bool HasRequestScope
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(RequestScopeName) && !string.IsNullOrEmpty(RequestScopeNamePlural);
+            }
+        }
+
+        public string RequestScopeName { get; set; }
+
+        public string RequestScopeNamePlural { get; set; }
+
+        public string RequestScopeNameLower
+        {
+            get
+            {
+                return char.ToLower(RequestScopeName[0]) + RequestScopeName.Substring(1);
+            }
+        }
 
         public string EntityNameLower
         {
@@ -42,7 +60,8 @@ namespace Contractor.Core.Options
         {
             this.EntityName = options.EntityName;
             this.EntityNamePlural = options.EntityNamePlural;
-            this.ForMandant = options.ForMandant;
+            this.RequestScopeName = options.RequestScopeName;
+            this.RequestScopeNamePlural = options.RequestScopeNamePlural;
         }
 
         public static bool Validate(IEntityAdditionOptions options)

@@ -49,7 +49,7 @@
     <None Update="Projects\Contract.Persistence\Templates\IPersistenceRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\DB\Templates\TableTemplate-Mandant.txt">
+    <None Update="Projects\DB\Templates\TableTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\DB\Templates\TableTemplate.txt">
@@ -97,6 +97,12 @@
     <None Update="Projects\Persistence.Tests\Templates\DbEntityDetailTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate-RequestScope.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Persistence.Tests\Templates\EntityTestValuesTemplate-RequestScope.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Persistence.Tests\Templates\EntityTestValuesTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -106,16 +112,16 @@
     <None Update="Projects\Persistence\Templates\PersistenceDbDtoDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate-Mandant.txt">
+    <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceEfDtoTemplate-Mandant.txt">
+    <None Update="Projects\Persistence\Templates\PersistenceEfDtoTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate-Mandant.txt">
+    <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate.txt">

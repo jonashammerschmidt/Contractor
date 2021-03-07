@@ -34,6 +34,9 @@ namespace Contractor.Core.Projects
         {
             string fileData = File.ReadAllText(filePath);
 
+            fileData = fileData.Replace("RequestScopes", options.RequestScopeNamePlural);
+            fileData = fileData.Replace("RequestScope", options.RequestScopeName);
+
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("PRIMARY KEY CLUSTERED");
 

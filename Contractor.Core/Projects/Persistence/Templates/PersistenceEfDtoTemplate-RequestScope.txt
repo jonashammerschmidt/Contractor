@@ -2,7 +2,7 @@
 
 namespace ProjectName.Persistence.Modules.Domain.Entities
 {
-    internal class EfEntity
+    public class EfEntity
     {
         public EfEntity()
         {
@@ -10,6 +10,6 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
 
         public Guid Id { get; set; }
 
-        public Guid MandantId { get; set; }
+        public Guid RequestScopeId { get; set; }
     }
 }

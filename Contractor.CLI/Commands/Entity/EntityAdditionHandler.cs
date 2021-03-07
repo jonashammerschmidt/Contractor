@@ -12,7 +12,7 @@ namespace Contractor.CLI
         {
             if (args.Length < 3)
             {
-                Console.WriteLine("Bitte geben sie alle Informationen an. Beispiel: contractor add entity Bankwesen.Bank:Banken [-m | --for-mandant]");
+                Console.WriteLine("Bitte geben sie alle Informationen an. Beispiel: contractor add entity Bankwesen.Bank:Banken [-s|--scope Mandant:Mandanten]");
                 return;
             }
 
@@ -38,7 +38,13 @@ namespace Contractor.CLI
             options.Domain = entityName.Split('.')[0];
             options.EntityName = entityName.Split('.')[1].Split(':')[0];
             options.EntityNamePlural = entityName.Split(':')[1];
-            options.ForMandant = ArgumentParser.HasArgument(args, "-m", "--for-mandant");
+
+            if (ArgumentParser.HasArgument(args, "-s", "--scope"))
+            {
+                string st = ArgumentParser.ExtractArgument(args, "-s", "--scope");
+                options.RequestScopeName = st.Split(':')[0];
+                options.RequestScopeNamePlural = st.Split(':')[1];
+            }
         }
     }
 };

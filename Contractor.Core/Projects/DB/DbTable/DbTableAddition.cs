@@ -32,6 +32,8 @@ namespace Contractor.Core.Projects
         private string GetFileData(IEntityAdditionOptions options, string templateFilePath)
         {
             string fileData = File.ReadAllText(templateFilePath);
+            fileData = fileData.Replace("RequestScopes", options.RequestScopeNamePlural);
+            fileData = fileData.Replace("RequestScope", options.RequestScopeName);
             fileData = fileData.Replace("Entities", options.EntityNamePlural);
             fileData = fileData.Replace("Entity", options.EntityName);
             fileData = fileData.Replace("entities", options.EntityNamePluralLower);
