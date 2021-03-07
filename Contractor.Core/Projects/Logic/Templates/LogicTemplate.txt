@@ -31,7 +31,7 @@ namespace ProjectName.Logic.Modules.Domain.Entities
         public ILogicResult<Guid> CreateEntity(IEntityCreate entityCreate)
         {
             Guid newEntityId = this.guidGenerator.NewGuid();
-            IDbEntity entityToCreate = Entity.CreateEntity(newEntityId, entityCreate);
+            IDbEntity entityToCreate = Entity.CreateDbEntity(newEntityId, entityCreate);
             this.entitiesCrudRepository.CreateEntity(entityToCreate);
 
             this.logger.LogInformation("Entity ({entityId}) angelegt", newEntityId);

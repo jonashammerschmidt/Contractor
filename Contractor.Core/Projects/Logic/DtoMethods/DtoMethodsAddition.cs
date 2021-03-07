@@ -52,7 +52,7 @@ namespace Contractor.Core.Projects
 
             // ----------- DbSet -----------
             stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("Create" + options.EntityName);
+            stringEditor.NextThatContains("CreateDb" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityNameLower}Create.{options.PropertyName},");
