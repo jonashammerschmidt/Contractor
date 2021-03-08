@@ -2,6 +2,7 @@
 using Contractor.Core.Projects;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Contractor.Core
 {
@@ -10,17 +11,13 @@ namespace Contractor.Core
 
         private readonly List<IProjectGeneration> projectGenerations = new List<IProjectGeneration>();
 
+        private readonly List<ClassGeneration> classGenerations = new List<ClassGeneration>();
+
         public ContractorCoreApi()
         {
             ServiceProvider serviceProvider = DependencyProvider.GetServiceProvider();
-            projectGenerations.Add(serviceProvider.GetService<ContractPersistenceProjectGeneration>());
-            projectGenerations.Add(serviceProvider.GetService<ContractLogicProjectGeneration>());
-            projectGenerations.Add(serviceProvider.GetService<PersistenceProjectGeneration>());
-            projectGenerations.Add(serviceProvider.GetService<PersistenceTestsProjectGeneration>());
-            projectGenerations.Add(serviceProvider.GetService<LogicProjectGeneration>());
-            projectGenerations.Add(serviceProvider.GetService<LogicTestsProjectGeneration>());
-            projectGenerations.Add(serviceProvider.GetService<ApiProjectGeneration>());
-            projectGenerations.Add(serviceProvider.GetService<DBProjectGeneration>());
+            projectGenerations = serviceProvider.GetServices<IProjectGeneration>().ToList();
+            classGenerations = serviceProvider.GetServices<ClassGeneration>().ToList();
         }
 
         public void AddDomain(IDomainAdditionOptions options)
@@ -28,6 +25,11 @@ namespace Contractor.Core
             if (!DomainAdditionOptions.Validate(options))
             {
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
+            }
+
+            foreach (ClassGeneration classGeneration in classGenerations)
+            {
+                classGeneration.PerformAddDomainCommand(options);
             }
 
             foreach (IProjectGeneration projectGeneration in projectGenerations)
@@ -43,6 +45,11 @@ namespace Contractor.Core
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
             }
 
+            foreach (ClassGeneration classGeneration in classGenerations)
+            {
+                classGeneration.PerformAddEntityCommand(options);
+            }
+
             foreach (IProjectGeneration projectGeneration in projectGenerations)
             {
                 projectGeneration.AddEntity(options);
@@ -56,6 +63,11 @@ namespace Contractor.Core
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
             }
 
+            foreach (ClassGeneration classGeneration in classGenerations)
+            {
+                classGeneration.PerformAddPropertyCommand(options);
+            }
+
             foreach (IProjectGeneration projectGeneration in projectGenerations)
             {
                 projectGeneration.AddProperty(options);
@@ -67,6 +79,11 @@ namespace Contractor.Core
             if (!RelationAdditionOptions.Validate(options))
             {
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
+            }
+
+            foreach (ClassGeneration classGeneration in classGenerations)
+            {
+                classGeneration.PerformAdd1ToNRelationCommand(options);
             }
 
             foreach (IProjectGeneration projectGeneration in projectGenerations)

@@ -32,8 +32,11 @@ namespace Contractor.Core.Tools
         {
             string fileData = File.ReadAllText(templateFileName);
             fileData = fileData.Replace("ProjectName", options.ProjectName);
-            fileData = fileData.Replace("RequestScope", options.RequestScopeName);
-            fileData = fileData.Replace("requestScope", options.RequestScopeNameLower);
+            if (options.HasRequestScope)
+            {
+                fileData = fileData.Replace("RequestScope", options.RequestScopeName);
+                fileData = fileData.Replace("requestScope", options.RequestScopeNameLower);
+            }
             fileData = fileData.Replace("Domain", options.Domain);
             fileData = fileData.Replace("Entities", options.EntityNamePlural);
             fileData = fileData.Replace("Entity", options.EntityName);

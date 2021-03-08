@@ -16,13 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Projects\Api\Templates\ApiControllerTemplate.txt">
+    <None Update="Projects\Api\Templates\EntitiesCrudControllerTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Api\Templates\ApiCreateDto.txt">
+    <None Update="Projects\Api\Templates\EntityCreateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Api\Templates\ApiUpdateDto.txt">
+    <None Update="Projects\Api\Templates\EntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Contract.Logic\Templates\ILogicCreateDtoTemplate.txt">

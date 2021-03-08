@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Projects;
+using Contractor.Core.Projects.Api;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,14 +16,15 @@ namespace Contractor.Core
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ContractLogicProjectGeneration>();
-            serviceCollection.AddSingleton<ContractPersistenceProjectGeneration>();
-            serviceCollection.AddSingleton<ApiProjectGeneration>();
-            serviceCollection.AddSingleton<LogicProjectGeneration>();
-            serviceCollection.AddSingleton<LogicTestsProjectGeneration>();
-            serviceCollection.AddSingleton<PersistenceProjectGeneration>();
-            serviceCollection.AddSingleton<PersistenceTestsProjectGeneration>();
-            serviceCollection.AddSingleton<DBProjectGeneration>();
+            ApiProjectGeneration.ConfigureServices(serviceCollection);
+
+            serviceCollection.AddSingleton<IProjectGeneration, ContractLogicProjectGeneration>();
+            serviceCollection.AddSingleton<IProjectGeneration, ContractPersistenceProjectGeneration>();
+            serviceCollection.AddSingleton<IProjectGeneration, LogicProjectGeneration>();
+            serviceCollection.AddSingleton<IProjectGeneration, LogicTestsProjectGeneration>();
+            serviceCollection.AddSingleton<IProjectGeneration, PersistenceProjectGeneration>();
+            serviceCollection.AddSingleton<IProjectGeneration, PersistenceTestsProjectGeneration>();
+            serviceCollection.AddSingleton<IProjectGeneration, DBProjectGeneration>();
 
             serviceCollection.AddSingleton<DtoPropertyAddition>();
             serviceCollection.AddSingleton<DtoAddition>();
