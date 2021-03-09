@@ -1,6 +1,7 @@
 ﻿using Contractor.Core.Projects;
 using Contractor.Core.Projects.Api;
 using Contractor.Core.Projects.Contract.Logic;
+using Contractor.Core.Projects.Contract.Persistence;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,8 +20,8 @@ namespace Contractor.Core
         {
             ApiProjectGeneration.ConfigureServices(serviceCollection);
             ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
+            ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);
 
-            serviceCollection.AddSingleton<IProjectGeneration, ContractPersistenceProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, LogicProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, LogicTestsProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, PersistenceProjectGeneration>();

@@ -40,13 +40,13 @@
     <None Update="Projects\Contract.Logic\Templates\IEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Persistence\Templates\IPersistenceDbDtoDetailTemplate.txt">
+    <None Update="Projects\Contract.Persistence\Templates\IDbEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Persistence\Templates\IPersistenceDbDtoTemplate.txt">
+    <None Update="Projects\Contract.Persistence\Templates\IDbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Persistence\Templates\IPersistenceRepositoryTemplate.txt">
+    <None Update="Projects\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\DB\Templates\TableTemplate-RequestScope.txt">
