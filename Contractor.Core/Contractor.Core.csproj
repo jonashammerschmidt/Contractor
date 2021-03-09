@@ -25,19 +25,19 @@
     <None Update="Projects\Api\Templates\EntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicCreateDtoTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntityCreateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicDtoDetailTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicDtoTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntitiesCrudLogicTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicUpdateDtoTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Contract.Persistence\Templates\IPersistenceDbDtoDetailTemplate.txt">

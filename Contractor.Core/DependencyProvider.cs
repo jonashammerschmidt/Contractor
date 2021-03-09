@@ -1,5 +1,6 @@
 ﻿using Contractor.Core.Projects;
 using Contractor.Core.Projects.Api;
+using Contractor.Core.Projects.Contract.Logic;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,8 +18,8 @@ namespace Contractor.Core
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
             ApiProjectGeneration.ConfigureServices(serviceCollection);
+            ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
 
-            serviceCollection.AddSingleton<IProjectGeneration, ContractLogicProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, ContractPersistenceProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, LogicProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, LogicTestsProjectGeneration>();

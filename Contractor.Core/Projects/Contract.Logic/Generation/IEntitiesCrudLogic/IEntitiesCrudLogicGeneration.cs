@@ -2,18 +2,18 @@
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Api
+namespace Contractor.Core.Projects.Contract.Logic
 {
-    internal class EntitiesCrudControllerGeneration : ClassGeneration
+    internal class IEntitiesCrudLogicGeneration : ClassGeneration
     {
-        private static readonly string TemplatePath = 
-            Path.Combine(ApiProjectGeneration.TemplateFolder, "EntitiesCrudControllerTemplate.txt");
+        private static readonly string TemplatePath =
+            Path.Combine(ContractLogicProjectGeneration.TemplateFolder, "IEntitiesCrudLogicTemplate.txt");
 
-        private static readonly string FileName = "EntitiesCrudController.cs";
+        private static readonly string FileName = "IEntitiesCrudLogic.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
 
-        public EntitiesCrudControllerGeneration(
+        public IEntitiesCrudLogicGeneration(
             EntityCoreAddition entityCoreAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
@@ -25,7 +25,7 @@ namespace Contractor.Core.Projects.Api
 
         protected override void AddEntity(IEntityAdditionOptions options)
         {
-            this.entityCoreAddition.AddEntityCore(options, ApiProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityCore(options, ContractLogicProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)
