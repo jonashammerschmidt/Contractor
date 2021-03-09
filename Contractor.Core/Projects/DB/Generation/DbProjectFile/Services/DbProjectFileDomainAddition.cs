@@ -3,18 +3,18 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.DB
 {
-    internal class DbProjectFileEntityAddition
+    internal class DbProjectFileDomainAddition
     {
         public PathService pathService;
 
-        public DbProjectFileEntityAddition(PathService pathService)
+        public DbProjectFileDomainAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
 
-        public void Add(IEntityAdditionOptions options)
+        public void Add(IDomainAdditionOptions options)
         {
             string filePath = GetFilePath(options);
             string fileData = UpdateFileData(options, filePath);
@@ -22,21 +22,21 @@ namespace Contractor.Core.Projects
             File.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IEntityAdditionOptions options)
+        private string GetFilePath(IDomainAdditionOptions options)
         {
             string fileName = options.DbProjectName + ".sqlproj";
             string filePath = Path.Combine(options.DbDestinationFolder, fileName);
             return filePath;
         }
 
-        private string UpdateFileData(IEntityAdditionOptions options, string filePath)
+        private string UpdateFileData(IDomainAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
 
             string dbDomainFolderLine = GetDbDomainFolderLine(options);
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("Build Include");
+            stringEditor.NextThatContains("Folder Include");
             stringEditor.Prev();
             stringEditor.Next(line => line.CompareTo(dbDomainFolderLine) > 0 || line.Contains("</ItemGroup>"));
 
@@ -45,9 +45,9 @@ namespace Contractor.Core.Projects
             return stringEditor.GetText();
         }
 
-        private string GetDbDomainFolderLine(IEntityAdditionOptions options)
+        private string GetDbDomainFolderLine(IDomainAdditionOptions options)
         {
-            return $"    <Build Include=\"dbo\\Tables\\{options.Domain}\\{options.EntityNamePlural}.sql\" />";
+            return $"    <Folder Include=\"dbo\\Tables\\{options.Domain}\" />";
         }
     }
 }

@@ -2,7 +2,7 @@
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.DB
 {
     internal class DbTableAddition
     {

@@ -2,6 +2,7 @@
 using Contractor.Core.Projects.Api;
 using Contractor.Core.Projects.Contract.Logic;
 using Contractor.Core.Projects.Contract.Persistence;
+using Contractor.Core.Projects.DB;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,27 +19,26 @@ namespace Contractor.Core
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
+            ConfigureTools(serviceCollection);
+
             ApiProjectGeneration.ConfigureServices(serviceCollection);
             ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
             ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);
+            DBProjectGeneration.ConfigureServices(serviceCollection);
+
+            // Project 
 
             serviceCollection.AddSingleton<IProjectGeneration, LogicProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, LogicTestsProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, PersistenceProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, PersistenceTestsProjectGeneration>();
-            serviceCollection.AddSingleton<IProjectGeneration, DBProjectGeneration>();
 
-            serviceCollection.AddSingleton<DtoPropertyAddition>();
-            serviceCollection.AddSingleton<DtoAddition>();
-            serviceCollection.AddSingleton<EntityCoreAddition>();
+            // Services
 
             serviceCollection.AddSingleton<DtoDetailFromMethodsAddition>();
             serviceCollection.AddSingleton<DtoDetailMethodsAddition>();
             serviceCollection.AddSingleton<DtoDetailToMethodsAddition>();
             serviceCollection.AddSingleton<DtoMethodsAddition>();
-
-            serviceCollection.AddSingleton<DomainDependencyProvider>();
-            serviceCollection.AddSingleton<EntityCoreDependencyProvider>();
 
             serviceCollection.AddSingleton<LogicRelationAddition>();
 
@@ -68,12 +68,6 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoFromRepositoryIncludeAddition>();
             serviceCollection.AddSingleton<DtoToRepositoryIncludeAddition>();
 
-            serviceCollection.AddSingleton<DbProjectFileDomainAddition>();
-            serviceCollection.AddSingleton<DbProjectFileEntityAddition>();
-            serviceCollection.AddSingleton<DbTableAddition>();
-            serviceCollection.AddSingleton<DbTablePropertyAddition>();
-            serviceCollection.AddSingleton<DbTableRelationContraintAddition>();
-
             serviceCollection.AddSingleton<InMemoryDbContextEntityAddition>();
             serviceCollection.AddSingleton<DbDtoTestMethodsAddition>();
             serviceCollection.AddSingleton<DbDtoDetailTestMethodsAddition>();
@@ -81,6 +75,16 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoTestValuesRelationAddition>();
             serviceCollection.AddSingleton<DbDtoDetailTestFromAssertAddition>();
             serviceCollection.AddSingleton<DbDtoDetailTestToAssertAddition>();
+        }
+
+        private static void ConfigureTools(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddSingleton<DomainDependencyProvider>();
+            serviceCollection.AddSingleton<EntityCoreDependencyProvider>();
+
+            serviceCollection.AddSingleton<DtoAddition>();
+            serviceCollection.AddSingleton<DtoPropertyAddition>();
+            serviceCollection.AddSingleton<EntityCoreAddition>();
 
             serviceCollection.AddSingleton<PathService>();
         }
