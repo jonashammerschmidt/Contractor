@@ -5,25 +5,13 @@ namespace Contractor.Core.Projects
 {
     public abstract class ClassGeneration
     {
-        protected abstract void Add1ToNRelation(IRelationAdditionOptions options);
-
         protected abstract void AddDomain(IDomainAdditionOptions options);
 
         protected abstract void AddEntity(IEntityAdditionOptions options);
 
         protected abstract void AddProperty(IPropertyAdditionOptions options);
 
-        public void PerformAdd1ToNRelationCommand(IRelationAdditionOptions options)
-        {
-            try
-            {
-                this.Add1ToNRelation(options);
-            }
-            catch (Exception e)
-            {
-                this.HandleException(e);
-            }
-        }
+        protected abstract void Add1ToNRelation(IRelationAdditionOptions options);
 
         public void PerformAddDomainCommand(IDomainAdditionOptions options)
         {
@@ -33,7 +21,7 @@ namespace Contractor.Core.Projects
             }
             catch (Exception e)
             {
-                this.HandleException(e);
+                Console.WriteLine("Fehler bei Domain-Generierung: " + e.Message);
             }
         }
 
@@ -45,7 +33,7 @@ namespace Contractor.Core.Projects
             }
             catch (Exception e)
             {
-                this.HandleException(e);
+                Console.WriteLine("Fehler bei Entity-Generierung: " + e.Message);
             }
         }
 
@@ -57,13 +45,19 @@ namespace Contractor.Core.Projects
             }
             catch (Exception e)
             {
-                this.HandleException(e);
+                Console.WriteLine("Fehler bei Property-Generierung: " + e.Message);
             }
         }
-
-        private void HandleException(Exception e)
+        public void PerformAdd1ToNRelationCommand(IRelationAdditionOptions options)
         {
-            Console.WriteLine("Fehler bei Generierung: " + e.Message);
+            try
+            {
+                this.Add1ToNRelation(options);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
+            }
         }
     }
 }
