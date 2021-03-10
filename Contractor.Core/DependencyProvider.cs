@@ -3,6 +3,7 @@ using Contractor.Core.Projects.Api;
 using Contractor.Core.Projects.Contract.Logic;
 using Contractor.Core.Projects.Contract.Persistence;
 using Contractor.Core.Projects.DB;
+using Contractor.Core.Projects.Logic;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,23 +26,14 @@ namespace Contractor.Core
             ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
             ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);
             DBProjectGeneration.ConfigureServices(serviceCollection);
+            LogicProjectGeneration.ConfigureServices(serviceCollection);
 
-            // Project 
-
-            serviceCollection.AddSingleton<IProjectGeneration, LogicProjectGeneration>();
+            // Project
             serviceCollection.AddSingleton<IProjectGeneration, LogicTestsProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, PersistenceProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, PersistenceTestsProjectGeneration>();
 
-            // Services
-
-            serviceCollection.AddSingleton<DtoDetailFromMethodsAddition>();
-            serviceCollection.AddSingleton<DtoDetailMethodsAddition>();
-            serviceCollection.AddSingleton<DtoDetailToMethodsAddition>();
-            serviceCollection.AddSingleton<DtoMethodsAddition>();
-
-            serviceCollection.AddSingleton<LogicRelationAddition>();
-
+            // Logic.Tests
             serviceCollection.AddSingleton<LogicDbDtoDetailTestMethodsAddition>();
             serviceCollection.AddSingleton<LogicDbDtoTestMethodsAddition>();
             serviceCollection.AddSingleton<LogicDtoDetailTestMethodsAddition>();
@@ -50,13 +42,13 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<LogicDtoUpdateTestMethodsAddition>();
             serviceCollection.AddSingleton<LogicDtoTestValuesAddition>();
             serviceCollection.AddSingleton<LogicDtoTestValuesRelationAddition>();
-
             serviceCollection.AddSingleton<LogicDbDtoDetailTestFromAssertAddition>();
             serviceCollection.AddSingleton<LogicDbDtoDetailTestToAssertAddition>();
             serviceCollection.AddSingleton<LogicDtoDetailTestFromAssertAddition>();
             serviceCollection.AddSingleton<LogicDtoDetailTestToAssertAddition>();
             serviceCollection.AddSingleton<LogicTestsRelationAddition>();
 
+            // Persistence
             serviceCollection.AddSingleton<DbContextEntityAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();
             serviceCollection.AddSingleton<DbContextRelationToAddition>();
@@ -68,6 +60,7 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoFromRepositoryIncludeAddition>();
             serviceCollection.AddSingleton<DtoToRepositoryIncludeAddition>();
 
+            // Persistence.Tests
             serviceCollection.AddSingleton<InMemoryDbContextEntityAddition>();
             serviceCollection.AddSingleton<DbDtoTestMethodsAddition>();
             serviceCollection.AddSingleton<DbDtoDetailTestMethodsAddition>();
