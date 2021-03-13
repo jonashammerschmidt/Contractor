@@ -9,14 +9,11 @@ namespace Contractor.Core
     public class ContractorCoreApi
     {
 
-        private readonly List<IProjectGeneration> projectGenerations = new List<IProjectGeneration>();
-
         private readonly List<ClassGeneration> classGenerations = new List<ClassGeneration>();
 
         public ContractorCoreApi()
         {
             ServiceProvider serviceProvider = DependencyProvider.GetServiceProvider();
-            projectGenerations = serviceProvider.GetServices<IProjectGeneration>().ToList();
             classGenerations = serviceProvider.GetServices<ClassGeneration>().ToList();
         }
 
@@ -31,11 +28,6 @@ namespace Contractor.Core
             {
                 classGeneration.PerformAddDomainCommand(options);
             }
-
-            foreach (IProjectGeneration projectGeneration in projectGenerations)
-            {
-                projectGeneration.AddDomain(options);
-            }
         }
 
         public void AddEntity(IEntityAdditionOptions options)
@@ -48,11 +40,6 @@ namespace Contractor.Core
             foreach (ClassGeneration classGeneration in classGenerations)
             {
                 classGeneration.PerformAddEntityCommand(options);
-            }
-
-            foreach (IProjectGeneration projectGeneration in projectGenerations)
-            {
-                projectGeneration.AddEntity(options);
             }
         }
 
@@ -67,11 +54,6 @@ namespace Contractor.Core
             {
                 classGeneration.PerformAddPropertyCommand(options);
             }
-
-            foreach (IProjectGeneration projectGeneration in projectGenerations)
-            {
-                projectGeneration.AddProperty(options);
-            }
         }
 
         public void Add1ToNRelation(IRelationAdditionOptions options)
@@ -84,11 +66,6 @@ namespace Contractor.Core
             foreach (ClassGeneration classGeneration in classGenerations)
             {
                 classGeneration.PerformAdd1ToNRelationCommand(options);
-            }
-
-            foreach (IProjectGeneration projectGeneration in projectGenerations)
-            {
-                projectGeneration.Add1ToNRelation(options);
             }
         }
     }

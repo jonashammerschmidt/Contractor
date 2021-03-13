@@ -4,7 +4,7 @@ using Contractor.Core.Tools;
 using System;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.Persistence.Tests
 {
     internal class DtoTestValuesAddition
     {
@@ -47,7 +47,7 @@ namespace Contractor.Core.Projects
             stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault2 = {GetValueForProperty(options, "DbDefault2")};");
             stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = {GetValueForProperty(options, "ForCreate")};");
             stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = {GetValueForProperty(options, "ForUpdate")};");
-            
+
             return stringEditor.GetText();
         }
 

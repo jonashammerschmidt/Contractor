@@ -4,7 +4,7 @@ using Contractor.Core.Tools;
 using System;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.Persistence.Tests
 {
     internal class DbDtoTestMethodsAddition
     {

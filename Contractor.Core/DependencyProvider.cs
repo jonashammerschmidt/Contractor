@@ -1,9 +1,9 @@
-﻿using Contractor.Core.Projects;
-using Contractor.Core.Projects.Api;
+﻿using Contractor.Core.Projects.Api;
 using Contractor.Core.Projects.Contract.Logic;
 using Contractor.Core.Projects.Contract.Persistence;
 using Contractor.Core.Projects.DB;
 using Contractor.Core.Projects.Logic;
+using Contractor.Core.Projects.Logic.Tests;
 using Contractor.Core.Projects.Persistence;
 using Contractor.Core.Projects.Persistence.Tests;
 using Contractor.Core.Tools;

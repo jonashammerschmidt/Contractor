@@ -4,7 +4,7 @@ using Contractor.Core.Tools;
 using System;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.Persistence.Tests
 {
     internal class DtoTestValuesRelationAddition
     {
@@ -50,7 +50,7 @@ namespace Contractor.Core.Projects
             stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdDbDefault2 = {options.EntityNameFrom}TestValues.IdDbDefault2;");
             stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForCreate = {options.EntityNameFrom}TestValues.IdForCreate;");
             stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForUpdate = {options.EntityNameFrom}TestValues.IdDbDefault2;");
-            
+
             return stringEditor.GetText();
         }
     }

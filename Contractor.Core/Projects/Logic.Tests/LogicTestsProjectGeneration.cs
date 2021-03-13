@@ -1,8 +1,7 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Projects.Logic.Tests;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.Logic.Tests
 {
     internal class LogicTestsProjectGeneration
     {

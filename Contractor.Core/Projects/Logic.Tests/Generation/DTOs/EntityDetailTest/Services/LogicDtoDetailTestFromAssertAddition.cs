@@ -3,7 +3,7 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.Logic.Tests
 {
     internal class LogicDtoDetailTestFromAssertAddition
     {
