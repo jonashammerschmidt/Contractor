@@ -3,24 +3,23 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.Persistence
 {
-    internal class DbDtoDetailFromMethodsAddition
+    internal class DtoFromRepositoryIncludeAddition
     {
         public PathService pathService;
 
-        public DbDtoDetailFromMethodsAddition(PathService pathService)
+        public DtoFromRepositoryIncludeAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
 
-        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd)
+        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            fileData = UsingStatements.Add(fileData, "System.Linq");
-            fileData = UsingStatements.Add(fileData, namespaceToAdd);
+            fileData = UsingStatements.Add(fileData, "Microsoft.EntityFrameworkCore");
 
             CsharpClassWriter.Write(filePath, fileData);
         }
@@ -28,8 +27,8 @@ namespace Contractor.Core.Projects
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(entityOptions, domainFolder);
-            string fileName = templateFileName.Replace("Entity", entityOptions.EntityName);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForEntity(entityOptions, domainFolder);
+            string fileName = templateFileName.Replace("Entities", entityOptions.EntityNamePlural);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;
         }
@@ -40,11 +39,11 @@ namespace Contractor.Core.Projects
 
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromEf" + options.EntityNameFrom);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.NextThatContains($"Get{options.EntityNameFrom}Detail(");
+            stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralFrom}");
+            stringEditor.Next(line => !line.Contains("Include("));
 
-            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = ef{options.EntityNameFrom}.{options.EntityNamePluralTo}" +
-                $".Select(ef{options.EntityNameTo} => Db{options.EntityNameTo}.FromEf{options.EntityNameTo}(ef{options.EntityNameTo})),");
+            stringEditor.InsertLine($"                .Include(ef{options.EntityNameFrom} => ef{options.EntityNameFrom}.{options.EntityNamePluralTo})");
 
             return stringEditor.GetText();
         }

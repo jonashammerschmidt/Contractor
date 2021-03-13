@@ -4,6 +4,7 @@ using Contractor.Core.Projects.Contract.Logic;
 using Contractor.Core.Projects.Contract.Persistence;
 using Contractor.Core.Projects.DB;
 using Contractor.Core.Projects.Logic;
+using Contractor.Core.Projects.Persistence;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,22 +29,10 @@ namespace Contractor.Core
             DBProjectGeneration.ConfigureServices(serviceCollection);
             LogicProjectGeneration.ConfigureServices(serviceCollection);
             LogicTestsProjectGeneration.ConfigureServices(serviceCollection);
+            PersistenceProjectGeneration.ConfigureServices(serviceCollection);
 
             // Project
-            serviceCollection.AddSingleton<IProjectGeneration, PersistenceProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, PersistenceTestsProjectGeneration>();
-
-            // Persistence
-            serviceCollection.AddSingleton<DbContextEntityAddition>();
-            serviceCollection.AddSingleton<DbContextPropertyAddition>();
-            serviceCollection.AddSingleton<DbContextRelationToAddition>();
-            serviceCollection.AddSingleton<DbDtoMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailFromMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailToMethodsAddition>();
-            serviceCollection.AddSingleton<EfDtoContructorHashSetAddition>();
-            serviceCollection.AddSingleton<DtoFromRepositoryIncludeAddition>();
-            serviceCollection.AddSingleton<DtoToRepositoryIncludeAddition>();
 
             // Persistence.Tests
             serviceCollection.AddSingleton<InMemoryDbContextEntityAddition>();

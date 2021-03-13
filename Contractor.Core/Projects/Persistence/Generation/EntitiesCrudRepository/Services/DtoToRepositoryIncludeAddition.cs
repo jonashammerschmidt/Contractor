@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.Persistence
 {
-    internal class DtoFromRepositoryIncludeAddition
+    internal class DtoToRepositoryIncludeAddition
     {
         public PathService pathService;
 
-        public DtoFromRepositoryIncludeAddition(PathService pathService)
+        public DtoToRepositoryIncludeAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -26,7 +26,7 @@ namespace Contractor.Core.Projects
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
-            IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
+            IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForEntity(entityOptions, domainFolder);
             string fileName = templateFileName.Replace("Entities", entityOptions.EntityNamePlural);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
@@ -39,11 +39,11 @@ namespace Contractor.Core.Projects
 
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"Get{options.EntityNameFrom}Detail(");
-            stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralFrom}");
+            stringEditor.NextThatContains($"Get{options.EntityNameTo}Detail(");
+            stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralTo}");
             stringEditor.Next(line => !line.Contains("Include("));
 
-            stringEditor.InsertLine($"                .Include(ef{options.EntityNameFrom} => ef{options.EntityNameFrom}.{options.EntityNamePluralTo})");
+            stringEditor.InsertLine($"                .Include(ef{options.EntityNameTo} => ef{options.EntityNameTo}.{options.EntityNameFrom})");
 
             return stringEditor.GetText();
         }

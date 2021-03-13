@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects
+namespace Contractor.Core.Projects.Persistence
 {
-    internal class DbDtoMethodsAddition
+    internal class DbDtoDetailMethodsAddition
     {
         public PathService pathService;
 
-        public DbDtoMethodsAddition(PathService pathService)
+        public DbDtoDetailMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -36,26 +36,10 @@ namespace Contractor.Core.Projects
 
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("UpdateEf" + options.EntityName);
-            stringEditor.Next(line => line.Trim().Equals("}"));
-
-            stringEditor.InsertLine($"            ef{options.EntityName}.{options.PropertyName} = db{options.EntityName}.{options.PropertyName};");
-            fileData = stringEditor.GetText();
-
-            // ----------- DbSet -----------
-            stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromEf" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {options.PropertyName} = ef{options.EntityName}.{options.PropertyName},");
-            fileData = stringEditor.GetText();
-
-            // ----------- DbSet -----------
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("ToEf" + options.EntityName);
-            stringEditor.Next(line => line.Trim().Equals("};"));
-
-            stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}.{options.PropertyName},");
 
             return stringEditor.GetText();
         }
