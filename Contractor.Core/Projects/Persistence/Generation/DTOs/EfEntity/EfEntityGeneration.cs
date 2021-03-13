@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Persistence
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // From
-            IPropertyAdditionOptions optionsFrom = 
+            IPropertyAdditionOptions optionsFrom =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"virtual ICollection<Ef{options.EntityNameTo}>", options.EntityNamePluralTo);
             this.propertyAddition.AddPropertyToDTO(optionsFrom, PersistenceProjectGeneration.DomainFolder, FileName);
 
@@ -53,7 +53,7 @@ namespace Contractor.Core.Projects.Persistence
             // To
             IPropertyAdditionOptions propertyAdditionOptions = RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
             this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, PersistenceProjectGeneration.DomainFolder, FileName);
-            
+
             IPropertyAdditionOptions optionsTo2 = RelationAdditionOptions.GetPropertyForTo(options, $"virtual Ef{options.EntityNameFrom}", options.EntityNameFrom);
             this.propertyAddition.AddPropertyToDTO(optionsTo2, PersistenceProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");

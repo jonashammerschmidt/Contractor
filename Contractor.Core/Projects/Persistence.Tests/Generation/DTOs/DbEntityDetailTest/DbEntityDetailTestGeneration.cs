@@ -49,13 +49,13 @@ namespace Contractor.Core.Projects.Persistence.Tests
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // From
-            IPropertyAdditionOptions dbFromOptions = 
+            IPropertyAdditionOptions dbFromOptions =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
             this.propertyAddition.AddPropertyToDTO(dbFromOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbDtoDetailTestFromAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
 
             // To
-            IPropertyAdditionOptions dbToOptions = 
+            IPropertyAdditionOptions dbToOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", $"{options.EntityNameFrom}");
             this.propertyAddition.AddPropertyToDTO(dbToOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbDtoDetailTestToAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);

@@ -1,7 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
-using System;
 using System.IO;
 
 namespace Contractor.Core.Projects.Logic.Tests

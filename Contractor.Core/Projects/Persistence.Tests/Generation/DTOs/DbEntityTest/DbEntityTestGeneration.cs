@@ -40,7 +40,6 @@ namespace Contractor.Core.Projects.Persistence.Tests
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-
             this.propertyAddition.AddPropertyToDTO(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbDtoTestMethodsAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
@@ -48,7 +47,7 @@ namespace Contractor.Core.Projects.Persistence.Tests
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // To
-            IPropertyAdditionOptions guidPropertyOptions = 
+            IPropertyAdditionOptions guidPropertyOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
             this.propertyAddition.AddPropertyToDTO(guidPropertyOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbDtoTestMethodsAddition.Add(guidPropertyOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);

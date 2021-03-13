@@ -6,7 +6,7 @@ namespace Contractor.Core.Projects.Api
 {
     internal class EntitiesCrudControllerGeneration : ClassGeneration
     {
-        private static readonly string TemplatePath = 
+        private static readonly string TemplatePath =
             Path.Combine(ApiProjectGeneration.TemplateFolder, "EntitiesCrudControllerTemplate.txt");
 
         private static readonly string FileName = "EntitiesCrudController.cs";

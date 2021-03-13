@@ -39,13 +39,13 @@ namespace Contractor.Core.Projects.Contract.Logic
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // From
-            IPropertyAdditionOptions optionsFrom = 
+            IPropertyAdditionOptions optionsFrom =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
             this.propertyAddition.AddPropertyToDTO(optionsFrom, ContractLogicProjectGeneration.DomainFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
-            IPropertyAdditionOptions optionsTo = 
+            IPropertyAdditionOptions optionsTo =
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", options.EntityNameFrom);
             this.propertyAddition.AddPropertyToDTO(optionsTo, ContractLogicProjectGeneration.DomainFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");

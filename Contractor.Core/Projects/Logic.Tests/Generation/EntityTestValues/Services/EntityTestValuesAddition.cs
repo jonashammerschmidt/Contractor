@@ -71,7 +71,7 @@ namespace Contractor.Core.Projects.Logic.Tests
             else if (options.PropertyType == "DateTime")
             {
                 Random gen = new Random();
-                int range = 10 * 365; // 10 years          
+                int range = 10 * 365; // 10 years
                 var randomDate = DateTime.Today.AddDays(-gen.Next(range));
                 return $"new DateTime({randomDate.Year}, {randomDate.Month}, {randomDate.Day})";
             }

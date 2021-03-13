@@ -48,6 +48,7 @@ namespace Contractor.Core.Projects
                 Console.WriteLine("Fehler bei Property-Generierung: " + e.Message);
             }
         }
+
         public void PerformAdd1ToNRelationCommand(IRelationAdditionOptions options)
         {
             try

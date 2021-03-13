@@ -38,7 +38,7 @@ namespace Contractor.Core.Projects.Api
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            IPropertyAdditionOptions relationAdditionOptions = 
+            IPropertyAdditionOptions relationAdditionOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
             this.propertyAddition.AddPropertyToDTO(relationAdditionOptions, ApiProjectGeneration.DomainFolder, FileName);
         }

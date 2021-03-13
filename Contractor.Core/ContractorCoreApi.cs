@@ -8,7 +8,6 @@ namespace Contractor.Core
 {
     public class ContractorCoreApi
     {
-
         private readonly List<ClassGeneration> classGenerations = new List<ClassGeneration>();
 
         public ContractorCoreApi()
