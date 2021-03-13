@@ -7,7 +7,7 @@ namespace Contractor.Core.Projects.Persistence
     internal class EntitiesCrudRepositoryGeneration : ClassGeneration
     {
         public static readonly string TemplatePath =
-            Path.Combine(LogicTestsProjectGeneration.TemplateFolder, "EntitiesCrudRepositoryTemplate.txt");
+            Path.Combine(PersistenceProjectGeneration.TemplateFolder, "EntitiesCrudRepositoryTemplate.txt");
 
         public static readonly string FileName = "EntitiesCrudRepository.cs";
 

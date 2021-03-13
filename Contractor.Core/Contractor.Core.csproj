@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Projects\Persistence.Tests\DtoTestMethods\**" />
+    <EmbeddedResource Remove="Projects\Persistence.Tests\DtoTestMethods\**" />
+    <None Remove="Projects\Persistence.Tests\DtoTestMethods\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Projects\Api\ApiCreateDto.txt" />
     <None Remove="Projects\Api\ApiUpdateDto.txt" />
   </ItemGroup>
@@ -109,30 +115,26 @@
     <None Update="Projects\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceDbDtoDetailTemplate.txt">
+    <None Update="Projects\Persistence\Templates\DbEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate-RequestScope.txt">
+    <None Update="Projects\Persistence\Templates\DbEntityTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate.txt">
+    <None Update="Projects\Persistence\Templates\DbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceEfDtoTemplate-RequestScope.txt">
+    <None Update="Projects\Persistence\Templates\EfEntityTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate-RequestScope.txt">
+    <None Update="Projects\Persistence\Templates\EntitiesCrudRepositoryTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate.txt">
+    <None Update="Projects\Persistence\Templates\EntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceEfDtoTemplate.txt">
+    <None Update="Projects\Persistence\Templates\EfEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Projects\Persistence.Tests\DtoTestMethods\" />
   </ItemGroup>
 </Project>

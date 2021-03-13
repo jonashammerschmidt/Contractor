@@ -7,9 +7,9 @@ namespace Contractor.Core.Projects.Persistence.Tests
     internal class DbEntityTestGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(PersistenceTestsProjectGeneration.TemplateFolder, "EntitiesCrudRepositoryTestsTemplate.txt");
+            Path.Combine(PersistenceTestsProjectGeneration.TemplateFolder, "DbEntityTestTemplate.txt");
 
-        private static readonly string FileName = "EntitiesCrudRepositoryTests.cs";
+        private static readonly string FileName = "DbEntityTest.cs";
 
         private readonly DbDtoTestMethodsAddition dbDtoTestMethodsAddition;
         private readonly DtoAddition dtoAddition;
