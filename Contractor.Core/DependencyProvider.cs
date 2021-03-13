@@ -5,6 +5,7 @@ using Contractor.Core.Projects.Contract.Persistence;
 using Contractor.Core.Projects.DB;
 using Contractor.Core.Projects.Logic;
 using Contractor.Core.Projects.Persistence;
+using Contractor.Core.Projects.Persistence.Tests;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,18 +31,7 @@ namespace Contractor.Core
             LogicProjectGeneration.ConfigureServices(serviceCollection);
             LogicTestsProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceProjectGeneration.ConfigureServices(serviceCollection);
-
-            // Project
-            serviceCollection.AddSingleton<IProjectGeneration, PersistenceTestsProjectGeneration>();
-
-            // Persistence.Tests
-            serviceCollection.AddSingleton<InMemoryDbContextEntityAddition>();
-            serviceCollection.AddSingleton<DbDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<DtoTestValuesAddition>();
-            serviceCollection.AddSingleton<DtoTestValuesRelationAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestToAssertAddition>();
+            PersistenceTestsProjectGeneration.ConfigureServices(serviceCollection);
         }
 
         private static void ConfigureTools(IServiceCollection serviceCollection)

@@ -131,4 +131,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Projects\Persistence.Tests\DtoTestMethods\" />
+  </ItemGroup>
 </Project>
