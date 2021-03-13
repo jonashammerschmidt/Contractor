@@ -1,4 +1,11 @@
-﻿using Contractor.Core.Projects;
+﻿using Contractor.Core.Projects.Api;
+using Contractor.Core.Projects.Contract.Logic;
+using Contractor.Core.Projects.Contract.Persistence;
+using Contractor.Core.Projects.DB;
+using Contractor.Core.Projects.Logic;
+using Contractor.Core.Projects.Logic.Tests;
+using Contractor.Core.Projects.Persistence;
+using Contractor.Core.Projects.Persistence.Tests;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,68 +22,26 @@ namespace Contractor.Core
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ContractLogicProjectGeneration>();
-            serviceCollection.AddSingleton<ContractPersistenceProjectGeneration>();
-            serviceCollection.AddSingleton<ApiProjectGeneration>();
-            serviceCollection.AddSingleton<LogicProjectGeneration>();
-            serviceCollection.AddSingleton<LogicTestsProjectGeneration>();
-            serviceCollection.AddSingleton<PersistenceProjectGeneration>();
-            serviceCollection.AddSingleton<PersistenceTestsProjectGeneration>();
-            serviceCollection.AddSingleton<DBProjectGeneration>();
+            ConfigureTools(serviceCollection);
 
-            serviceCollection.AddSingleton<DtoPropertyAddition>();
-            serviceCollection.AddSingleton<DtoAddition>();
-            serviceCollection.AddSingleton<EntityCoreAddition>();
+            ApiProjectGeneration.ConfigureServices(serviceCollection);
+            ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
+            ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);
+            DBProjectGeneration.ConfigureServices(serviceCollection);
+            LogicProjectGeneration.ConfigureServices(serviceCollection);
+            LogicTestsProjectGeneration.ConfigureServices(serviceCollection);
+            PersistenceProjectGeneration.ConfigureServices(serviceCollection);
+            PersistenceTestsProjectGeneration.ConfigureServices(serviceCollection);
+        }
 
-            serviceCollection.AddSingleton<DtoDetailFromMethodsAddition>();
-            serviceCollection.AddSingleton<DtoDetailMethodsAddition>();
-            serviceCollection.AddSingleton<DtoDetailToMethodsAddition>();
-            serviceCollection.AddSingleton<DtoMethodsAddition>();
-
+        private static void ConfigureTools(IServiceCollection serviceCollection)
+        {
             serviceCollection.AddSingleton<DomainDependencyProvider>();
             serviceCollection.AddSingleton<EntityCoreDependencyProvider>();
 
-            serviceCollection.AddSingleton<LogicRelationAddition>();
-
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDbDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoCreateTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoUpdateTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestValuesAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestValuesRelationAddition>();
-
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestToAssertAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestToAssertAddition>();
-            serviceCollection.AddSingleton<LogicTestsRelationAddition>();
-
-            serviceCollection.AddSingleton<DbContextEntityAddition>();
-            serviceCollection.AddSingleton<DbContextPropertyAddition>();
-            serviceCollection.AddSingleton<DbContextRelationToAddition>();
-            serviceCollection.AddSingleton<DbDtoMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailFromMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailToMethodsAddition>();
-            serviceCollection.AddSingleton<EfDtoContructorHashSetAddition>();
-            serviceCollection.AddSingleton<DtoFromRepositoryIncludeAddition>();
-            serviceCollection.AddSingleton<DtoToRepositoryIncludeAddition>();
-
-            serviceCollection.AddSingleton<DbProjectFileDomainAddition>();
-            serviceCollection.AddSingleton<DbProjectFileEntityAddition>();
-            serviceCollection.AddSingleton<DbTableAddition>();
-            serviceCollection.AddSingleton<DbTablePropertyAddition>();
-            serviceCollection.AddSingleton<DbTableRelationContraintAddition>();
-
-            serviceCollection.AddSingleton<InMemoryDbContextEntityAddition>();
-            serviceCollection.AddSingleton<DbDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<DtoTestValuesAddition>();
-            serviceCollection.AddSingleton<DtoTestValuesRelationAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestToAssertAddition>();
+            serviceCollection.AddSingleton<DtoAddition>();
+            serviceCollection.AddSingleton<DtoPropertyAddition>();
+            serviceCollection.AddSingleton<EntityCoreAddition>();
 
             serviceCollection.AddSingleton<PathService>();
         }

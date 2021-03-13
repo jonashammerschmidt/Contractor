@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Projects\Persistence.Tests\DtoTestMethods\**" />
+    <EmbeddedResource Remove="Projects\Persistence.Tests\DtoTestMethods\**" />
+    <None Remove="Projects\Persistence.Tests\DtoTestMethods\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Projects\Api\ApiCreateDto.txt" />
     <None Remove="Projects\Api\ApiUpdateDto.txt" />
   </ItemGroup>
@@ -16,43 +22,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Projects\Api\Templates\ApiControllerTemplate.txt">
+    <None Update="Projects\Api\Templates\EntitiesCrudControllerTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Api\Templates\ApiCreateDto.txt">
+    <None Update="Projects\Api\Templates\EntityCreateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Api\Templates\ApiUpdateDto.txt">
+    <None Update="Projects\Api\Templates\EntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicCreateDtoTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntityCreateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicDtoDetailTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicDtoTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntitiesCrudLogicTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Logic\Templates\ILogicUpdateDtoTemplate.txt">
+    <None Update="Projects\Contract.Logic\Templates\IEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Persistence\Templates\IPersistenceDbDtoDetailTemplate.txt">
+    <None Update="Projects\Contract.Persistence\Templates\IDbEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Persistence\Templates\IPersistenceDbDtoTemplate.txt">
+    <None Update="Projects\Contract.Persistence\Templates\IDbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Contract.Persistence\Templates\IPersistenceRepositoryTemplate.txt">
+    <None Update="Projects\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\DB\Templates\TableTemplate-RequestScope.txt">
+    <None Update="Projects\DB\Templates\EntitiesTableTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\DB\Templates\TableTemplate.txt">
+    <None Update="Projects\DB\Templates\EntitiesTableTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Logic.Tests\Templates\EntityCreateTestTemplate.txt">
@@ -67,16 +73,16 @@
     <None Update="Projects\Logic.Tests\Templates\EntityUpdateTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Logic\Templates\LogicDbDtoTemplate.txt">
+    <None Update="Projects\Logic\Templates\DbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Logic\Templates\LogicDtoDetailTemplate.txt">
+    <None Update="Projects\Logic\Templates\EntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Logic\Templates\LogicDtoTemplate.txt">
+    <None Update="Projects\Logic\Templates\EntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Logic\Templates\LogicTemplate.txt">
+    <None Update="Projects\Logic\Templates\EntitiesCrudLogicTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Logic.Tests\Templates\DbEntityDetailTestTemplate.txt">
@@ -109,25 +115,25 @@
     <None Update="Projects\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceDbDtoDetailTemplate.txt">
+    <None Update="Projects\Persistence\Templates\DbEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate-RequestScope.txt">
+    <None Update="Projects\Persistence\Templates\DbEntityTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceDbDtoTemplate.txt">
+    <None Update="Projects\Persistence\Templates\DbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceEfDtoTemplate-RequestScope.txt">
+    <None Update="Projects\Persistence\Templates\EfEntityTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate-RequestScope.txt">
+    <None Update="Projects\Persistence\Templates\EntitiesCrudRepositoryTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceRepositoryTemplate.txt">
+    <None Update="Projects\Persistence\Templates\EntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Persistence\Templates\PersistenceEfDtoTemplate.txt">
+    <None Update="Projects\Persistence\Templates\EfEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
