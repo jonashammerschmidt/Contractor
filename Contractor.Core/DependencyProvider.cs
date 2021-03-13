@@ -27,26 +27,11 @@ namespace Contractor.Core
             ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);
             DBProjectGeneration.ConfigureServices(serviceCollection);
             LogicProjectGeneration.ConfigureServices(serviceCollection);
+            LogicTestsProjectGeneration.ConfigureServices(serviceCollection);
 
             // Project
-            serviceCollection.AddSingleton<IProjectGeneration, LogicTestsProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, PersistenceProjectGeneration>();
             serviceCollection.AddSingleton<IProjectGeneration, PersistenceTestsProjectGeneration>();
-
-            // Logic.Tests
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDbDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoCreateTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoUpdateTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestValuesAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestValuesRelationAddition>();
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestToAssertAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestToAssertAddition>();
-            serviceCollection.AddSingleton<LogicTestsRelationAddition>();
 
             // Persistence
             serviceCollection.AddSingleton<DbContextEntityAddition>();
