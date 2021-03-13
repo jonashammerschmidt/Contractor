@@ -7,7 +7,7 @@ namespace Contractor.Core.Projects.Persistence.Tests
     internal class EntityTestValuesGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(LogicTestsProjectGeneration.TemplateFolder, "EntityTestValuesTemplate.txt");
+            Path.Combine(PersistenceTestsProjectGeneration.TemplateFolder, "EntityTestValuesTemplate.txt");
 
         private static readonly string FileName = "EntityTestValues.cs";
 
@@ -32,18 +32,18 @@ namespace Contractor.Core.Projects.Persistence.Tests
         protected override void AddEntity(IEntityAdditionOptions options)
         {
             string templatePath = TemplateFileName.GetFileNameForEntityAddition(options, TemplatePath);
-            this.entityCoreAddition.AddEntityCore(options, LogicTestsProjectGeneration.DomainFolder, templatePath, FileName);
+            this.entityCoreAddition.AddEntityCore(options, PersistenceTestsProjectGeneration.DomainFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.dtoTestValuesAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.dtoTestValuesAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // To
-            this.dtoTestValuesRelationAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.dtoTestValuesRelationAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
     }
 }
