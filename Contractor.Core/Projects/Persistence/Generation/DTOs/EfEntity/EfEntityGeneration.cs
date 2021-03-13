@@ -11,12 +11,12 @@ namespace Contractor.Core.Projects.Persistence
 
         private static readonly string FileName = "EfEntity.cs";
 
-        private readonly EfDtoContructorHashSetAddition efDtoContructorHashSetAddition;
+        private readonly EfEntityContructorHashSetAddition efDtoContructorHashSetAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
 
         public EfEntityGeneration(
-            EfDtoContructorHashSetAddition efDtoContructorHashSetAddition,
+            EfEntityContructorHashSetAddition efDtoContructorHashSetAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition)
         {

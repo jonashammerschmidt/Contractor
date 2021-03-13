@@ -3,31 +3,28 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Persistence
+namespace Contractor.Core.Projects.Persistence.Tests
 {
-    internal class EfDtoContructorHashSetAddition
+    internal class DbEntityDetailTestFromAssertAddition
     {
         public PathService pathService;
 
-        public EfDtoContructorHashSetAddition(PathService pathService)
+        public DbEntityDetailTestFromAssertAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
 
-        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd)
+        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
-
-            fileData = UsingStatements.Add(fileData, "System.Collections.Generic");
-            fileData = UsingStatements.Add(fileData, namespaceToAdd);
 
             CsharpClassWriter.Write(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
-            IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
+            var entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(entityOptions, domainFolder);
             string fileName = templateFileName.Replace("Entity", entityOptions.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
@@ -38,12 +35,16 @@ namespace Contractor.Core.Projects.Persistence
         {
             string fileData = File.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
+            fileData = UsingStatements.Add(fileData, "System.Linq");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Tests.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+
+            // ----------- AssertDbDefault -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"public Ef{options.EntityNameFrom}()");
+            stringEditor.NextThatContains("AssertDbDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"            this.{options.EntityNamePluralTo} = new HashSet<Ef{options.EntityNameTo}>();");
+            stringEditor.InsertLine($"            Db{options.EntityNameTo}Test.AssertDbDefault(db{options.EntityNameFrom}Detail.{options.EntityNamePluralTo}.ToArray()[0]);");
 
             return stringEditor.GetText();
         }

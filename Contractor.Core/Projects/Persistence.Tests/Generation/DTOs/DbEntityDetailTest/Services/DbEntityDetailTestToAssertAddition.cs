@@ -3,31 +3,28 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Logic
+namespace Contractor.Core.Projects.Persistence.Tests
 {
-    internal class DtoDetailFromMethodsAddition
+    internal class DbEntityDetailTestToAssertAddition
     {
         public PathService pathService;
 
-        public DtoDetailFromMethodsAddition(PathService pathService)
+        public DbEntityDetailTestToAssertAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
 
-        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd)
+        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
-
-            fileData = UsingStatements.Add(fileData, "System.Linq");
-            fileData = UsingStatements.Add(fileData, namespaceToAdd);
 
             CsharpClassWriter.Write(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
-            IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
+            var entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(entityOptions, domainFolder);
             string fileName = templateFileName.Replace("Entity", entityOptions.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
@@ -38,13 +35,15 @@ namespace Contractor.Core.Projects.Logic
         {
             string fileData = File.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
-            StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromDb" + options.EntityNameFrom);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Tests.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
-            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = db{options.EntityNameFrom}Detail.{options.EntityNamePluralTo}" +
-                $".Select(db{options.EntityNameTo} => {options.EntityNameTo}.FromDb{options.EntityNameTo}(db{options.EntityNameTo})),");
+            // ----------- AssertDbDefault -----------
+            StringEditor stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("AssertDbDefault(");
+            stringEditor.Next(line => line.Trim().Equals("}"));
+
+            stringEditor.InsertLine($"            Db{options.EntityNameFrom}Test.AssertDbDefault(db{options.EntityNameTo}Detail.{options.EntityNameFrom});");
 
             return stringEditor.GetText();
         }

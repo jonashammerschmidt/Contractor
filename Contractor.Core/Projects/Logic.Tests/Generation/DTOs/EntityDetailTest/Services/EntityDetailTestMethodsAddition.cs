@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Logic
+namespace Contractor.Core.Projects.Logic.Tests
 {
-    internal class DtoDetailMethodsAddition
+    internal class EntityDetailTestMethodsAddition
     {
         public PathService pathService;
 
-        public DtoDetailMethodsAddition(PathService pathService)
+        public EntityDetailTestMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -34,12 +34,19 @@ namespace Contractor.Core.Projects.Logic
         {
             string fileData = File.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
+            // ----------- Default -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromDb" + options.EntityName);
+            stringEditor.NextThatContains($"public static I{options.EntityName}Detail Default()");
             stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}Default,");
+            fileData = stringEditor.GetText();
 
-            stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}Detail.{options.PropertyName},");
+            // ----------- AssertDefault -----------
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("AssertDefault(");
+            stringEditor.Next(line => line.Trim().Equals("}"));
+
+            stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}Default, {options.EntityNameLower}Detail.{options.PropertyName});");
 
             return stringEditor.GetText();
         }

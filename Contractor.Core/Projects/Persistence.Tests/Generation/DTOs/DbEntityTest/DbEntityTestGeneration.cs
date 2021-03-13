@@ -11,12 +11,12 @@ namespace Contractor.Core.Projects.Persistence.Tests
 
         private static readonly string FileName = "DbEntityTest.cs";
 
-        private readonly DbDtoTestMethodsAddition dbDtoTestMethodsAddition;
+        private readonly DbEntityTestMethodsAddition dbDtoTestMethodsAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
 
         public DbEntityTestGeneration(
-            DbDtoTestMethodsAddition dbDtoTestMethodsAddition,
+            DbEntityTestMethodsAddition dbDtoTestMethodsAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition)
         {

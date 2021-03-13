@@ -12,11 +12,11 @@ namespace Contractor.Core.Projects.Logic
         private static readonly string FileName = "EntitiesCrudLogic.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
-        private readonly LogicRelationAddition logicRelationAddition;
+        private readonly EntitiesCrudLogicRelationAddition logicRelationAddition;
 
         public EntitiesCrudLogicGeneration(
             EntityCoreAddition entityCoreAddition,
-            LogicRelationAddition logicRelationAddition)
+            EntitiesCrudLogicRelationAddition logicRelationAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.logicRelationAddition = logicRelationAddition;

@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Persistence.Tests
+namespace Contractor.Core.Projects.Logic
 {
-    internal class DbDtoDetailTestMethodsAddition
+    internal class EntityDetailMethodsAddition
     {
         public PathService pathService;
 
-        public DbDtoDetailTestMethodsAddition(PathService pathService)
+        public EntityDetailMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -34,12 +34,12 @@ namespace Contractor.Core.Projects.Persistence.Tests
         {
             string fileData = File.ReadAllText(filePath);
 
-            // ----------- AssertDbDefault -----------
+            // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("AssertDbDefault(");
-            stringEditor.Next(line => line.Trim().Equals("}"));
+            stringEditor.NextThatContains("FromDb" + options.EntityName);
+            stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}DbDefault, db{options.EntityName}Detail.{options.PropertyName});");
+            stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}Detail.{options.PropertyName},");
 
             return stringEditor.GetText();
         }

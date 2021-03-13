@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Logic
 {
-    internal class LogicRelationAddition
+    internal class EntitiesCrudLogicRelationAddition
     {
         public PathService pathService;
 
-        public LogicRelationAddition(PathService pathService)
+        public EntitiesCrudLogicRelationAddition(PathService pathService)
         {
             this.pathService = pathService;
         }

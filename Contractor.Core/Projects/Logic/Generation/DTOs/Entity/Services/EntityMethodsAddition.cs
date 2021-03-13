@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Logic.Tests
+namespace Contractor.Core.Projects.Logic
 {
-    internal class LogicDtoDetailTestMethodsAddition
+    internal class EntityMethodsAddition
     {
         public PathService pathService;
 
-        public LogicDtoDetailTestMethodsAddition(PathService pathService)
+        public EntityMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -34,19 +34,28 @@ namespace Contractor.Core.Projects.Logic.Tests
         {
             string fileData = File.ReadAllText(filePath);
 
-            // ----------- Default -----------
+            // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"public static I{options.EntityName}Detail Default()");
-            stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}Default,");
-            fileData = stringEditor.GetText();
-
-            // ----------- AssertDefault -----------
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("AssertDefault(");
+            stringEditor.NextThatContains("UpdateDb" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}Default, {options.EntityNameLower}Detail.{options.PropertyName});");
+            stringEditor.InsertLine($"            db{options.EntityName}.{options.PropertyName} = {options.EntityNameLower}Update.{options.PropertyName};");
+            fileData = stringEditor.GetText();
+
+            // ----------- DbSet -----------
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("FromDb" + options.EntityName);
+            stringEditor.Next(line => line.Trim().Equals("};"));
+
+            stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}.{options.PropertyName},");
+            fileData = stringEditor.GetText();
+
+            // ----------- DbSet -----------
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("CreateDb" + options.EntityName);
+            stringEditor.Next(line => line.Trim().Equals("};"));
+
+            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityNameLower}Create.{options.PropertyName},");
 
             return stringEditor.GetText();
         }

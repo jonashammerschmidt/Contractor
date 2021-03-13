@@ -4,13 +4,13 @@ using Contractor.Core.Tools;
 using System;
 using System.IO;
 
-namespace Contractor.Core.Projects.Persistence.Tests
+namespace Contractor.Core.Projects.Logic.Tests
 {
-    internal class DtoTestValuesAddition
+    internal class EntityTestValuesAddition
     {
         public PathService pathService;
 
-        public DtoTestValuesAddition(PathService pathService)
+        public EntityTestValuesAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -43,8 +43,7 @@ namespace Contractor.Core.Projects.Persistence.Tests
             stringEditor.PrevThatContains("}");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault = {GetValueForProperty(options, "DbDefault")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault2 = {GetValueForProperty(options, "DbDefault2")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}Default = {GetValueForProperty(options, "Default")};");
             stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = {GetValueForProperty(options, "ForCreate")};");
             stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = {GetValueForProperty(options, "ForUpdate")};");
 
@@ -67,7 +66,7 @@ namespace Contractor.Core.Projects.Persistence.Tests
             }
             else if (options.PropertyType == "bool")
             {
-                return scope.Equals("DbDefault").ToString().ToLower();
+                return scope.Equals("Default").ToString().ToLower();
             }
             else if (options.PropertyType == "DateTime")
             {

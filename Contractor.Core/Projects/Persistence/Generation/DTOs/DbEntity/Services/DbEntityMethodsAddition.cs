@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Logic
+namespace Contractor.Core.Projects.Persistence
 {
-    internal class DtoMethodsAddition
+    internal class DbEntityMethodsAddition
     {
         public PathService pathService;
 
-        public DtoMethodsAddition(PathService pathService)
+        public DbEntityMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -36,26 +36,26 @@ namespace Contractor.Core.Projects.Logic
 
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("UpdateDb" + options.EntityName);
+            stringEditor.NextThatContains("UpdateEf" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"            db{options.EntityName}.{options.PropertyName} = {options.EntityNameLower}Update.{options.PropertyName};");
+            stringEditor.InsertLine($"            ef{options.EntityName}.{options.PropertyName} = db{options.EntityName}.{options.PropertyName};");
             fileData = stringEditor.GetText();
 
             // ----------- DbSet -----------
             stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromDb" + options.EntityName);
+            stringEditor.NextThatContains("FromEf" + options.EntityName);
+            stringEditor.Next(line => line.Trim().Equals("};"));
+
+            stringEditor.InsertLine($"                {options.PropertyName} = ef{options.EntityName}.{options.PropertyName},");
+            fileData = stringEditor.GetText();
+
+            // ----------- DbSet -----------
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("ToEf" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}.{options.PropertyName},");
-            fileData = stringEditor.GetText();
-
-            // ----------- DbSet -----------
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("CreateDb" + options.EntityName);
-            stringEditor.Next(line => line.Trim().Equals("};"));
-
-            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityNameLower}Create.{options.PropertyName},");
 
             return stringEditor.GetText();
         }

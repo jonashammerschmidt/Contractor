@@ -22,13 +22,13 @@ namespace Contractor.Core.Projects.Persistence
             serviceCollection.AddSingleton<DbContextEntityAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();
             serviceCollection.AddSingleton<DbContextRelationToAddition>();
-            serviceCollection.AddSingleton<DbDtoMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailFromMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailToMethodsAddition>();
-            serviceCollection.AddSingleton<EfDtoContructorHashSetAddition>();
-            serviceCollection.AddSingleton<DtoFromRepositoryIncludeAddition>();
-            serviceCollection.AddSingleton<DtoToRepositoryIncludeAddition>();
+            serviceCollection.AddSingleton<DbEntityMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailFromMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailToMethodsAddition>();
+            serviceCollection.AddSingleton<EfEntityContructorHashSetAddition>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryFromIncludeAddition>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryToIncludeAddition>();
         }
     }
 }

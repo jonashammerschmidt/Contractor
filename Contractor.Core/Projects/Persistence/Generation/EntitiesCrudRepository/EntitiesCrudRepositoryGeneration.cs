@@ -12,13 +12,13 @@ namespace Contractor.Core.Projects.Persistence
         public static readonly string FileName = "EntitiesCrudRepository.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
-        private readonly DtoFromRepositoryIncludeAddition dtoFromRepositoryIncludeAddition;
-        private readonly DtoToRepositoryIncludeAddition dtoToRepositoryIncludeAddition;
+        private readonly EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition;
+        private readonly EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition;
 
         public EntitiesCrudRepositoryGeneration(
             EntityCoreAddition entityCoreAddition,
-            DtoFromRepositoryIncludeAddition dtoFromRepositoryIncludeAddition,
-            DtoToRepositoryIncludeAddition dtoToRepositoryIncludeAddition)
+            EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition,
+            EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.dtoFromRepositoryIncludeAddition = dtoFromRepositoryIncludeAddition;

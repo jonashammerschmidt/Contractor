@@ -6,11 +6,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Persistence.Tests
 {
-    internal class DtoTestValuesRelationAddition
+    internal class EntityTestValuesRelationAddition
     {
         public PathService pathService;
 
-        public DtoTestValuesRelationAddition(PathService pathService)
+        public EntityTestValuesRelationAddition(PathService pathService)
         {
             this.pathService = pathService;
         }

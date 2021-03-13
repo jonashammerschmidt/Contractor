@@ -18,12 +18,12 @@ namespace Contractor.Core.Projects.Persistence.Tests
             serviceCollection.AddSingleton<ClassGeneration, InMemoryDbContextGeneration>();
 
             serviceCollection.AddSingleton<InMemoryDbContextEntityAddition>();
-            serviceCollection.AddSingleton<DbDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<DtoTestValuesAddition>();
-            serviceCollection.AddSingleton<DtoTestValuesRelationAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<DbDtoDetailTestToAssertAddition>();
+            serviceCollection.AddSingleton<DbEntityTestMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailTestMethodsAddition>();
+            serviceCollection.AddSingleton<EntityTestValuesAddition>();
+            serviceCollection.AddSingleton<EntityTestValuesRelationAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailTestFromAssertAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailTestToAssertAddition>();
         }
     }
 }

@@ -11,12 +11,12 @@ namespace Contractor.Core.Projects.Logic.Tests
 
         private static readonly string FileName = "DbEntityTest.cs";
 
-        private readonly LogicDbDtoTestMethodsAddition logicDbDtoTestMethodsAddition;
+        private readonly DbEntityTestMethodsAddition logicDbDtoTestMethodsAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
 
         public DbEntityTestGeneration(
-            LogicDbDtoTestMethodsAddition logicDbDtoTestMethodsAddition,
+            DbEntityTestMethodsAddition logicDbDtoTestMethodsAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition)
         {

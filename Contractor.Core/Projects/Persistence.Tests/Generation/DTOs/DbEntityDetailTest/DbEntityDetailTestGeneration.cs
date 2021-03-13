@@ -11,16 +11,16 @@ namespace Contractor.Core.Projects.Persistence.Tests
 
         private static readonly string FileName = "DbEntityDetailTest.cs";
 
-        private readonly DbDtoDetailTestMethodsAddition dbDtoDetailTestMethodsAddition;
-        private readonly DbDtoDetailTestFromAssertAddition dbDtoDetailTestFromAssertAddition;
-        private readonly DbDtoDetailTestToAssertAddition dbDtoDetailTestToAssertAddition;
+        private readonly DbEntityDetailTestMethodsAddition dbDtoDetailTestMethodsAddition;
+        private readonly DbEntityDetailTestFromAssertAddition dbDtoDetailTestFromAssertAddition;
+        private readonly DbEntityDetailTestToAssertAddition dbDtoDetailTestToAssertAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
 
         public DbEntityDetailTestGeneration(
-            DbDtoDetailTestMethodsAddition dbDtoDetailTestMethodsAddition,
-            DbDtoDetailTestFromAssertAddition dbDtoDetailTestFromAssertAddition,
-            DbDtoDetailTestToAssertAddition dbDtoDetailTestToAssertAddition,
+            DbEntityDetailTestMethodsAddition dbDtoDetailTestMethodsAddition,
+            DbEntityDetailTestFromAssertAddition dbDtoDetailTestFromAssertAddition,
+            DbEntityDetailTestToAssertAddition dbDtoDetailTestToAssertAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition)
         {

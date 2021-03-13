@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Logic.Tests
 {
-    internal class LogicDtoCreateTestMethodsAddition
+    internal class EntityUpdateTestMethodsAddition
     {
         public PathService pathService;
 
-        public LogicDtoCreateTestMethodsAddition(PathService pathService)
+        public EntityUpdateTestMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -36,9 +36,9 @@ namespace Contractor.Core.Projects.Logic.Tests
 
             // ----------- Asserts -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"public static I{options.EntityName}Create ForCreate()");
+            stringEditor.NextThatContains($"public static I{options.EntityName}Update ForUpdate()");
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}ForCreate,");
+            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}ForUpdate,");
             fileData = stringEditor.GetText();
 
             return stringEditor.GetText();

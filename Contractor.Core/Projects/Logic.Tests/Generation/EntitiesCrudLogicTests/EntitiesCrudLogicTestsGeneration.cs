@@ -12,11 +12,11 @@ namespace Contractor.Core.Projects.Logic.Tests
         private static readonly string FileName = "EntitiesCrudLogicTests.cs";
 
         public EntityCoreAddition entityCoreAddition;
-        public LogicTestsRelationAddition logicTestsRelationAddition;
+        public EntitiesCrudLogicTestsRelationAddition logicTestsRelationAddition;
 
         public EntitiesCrudLogicTestsGeneration(
             EntityCoreAddition entityCoreAddition,
-            LogicTestsRelationAddition logicTestsRelationAddition)
+            EntitiesCrudLogicTestsRelationAddition logicTestsRelationAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.logicTestsRelationAddition = logicTestsRelationAddition;

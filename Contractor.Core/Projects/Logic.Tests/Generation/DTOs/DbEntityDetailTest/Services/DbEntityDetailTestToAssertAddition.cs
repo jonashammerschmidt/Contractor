@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Persistence.Tests
+namespace Contractor.Core.Projects.Logic.Tests
 {
-    internal class DbDtoDetailTestToAssertAddition
+    internal class DbEntityDetailTestToAssertAddition
     {
         public PathService pathService;
 
-        public DbDtoDetailTestToAssertAddition(PathService pathService)
+        public DbEntityDetailTestToAssertAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -36,14 +36,21 @@ namespace Contractor.Core.Projects.Persistence.Tests
             string fileData = File.ReadAllText(filePath);
 
             fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
-            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Tests.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Logic.Tests.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+
+            // ----------- Default -----------
+            StringEditor stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains($"public static IDb{options.EntityNameTo}Detail Default()");
+            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.InsertLine($"                {options.EntityNameFrom} = Db{options.EntityNameFrom}Test.Default(),");
+
+            fileData = stringEditor.GetText();
 
             // ----------- AssertDbDefault -----------
-            StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("AssertDbDefault(");
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("AssertDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
-
-            stringEditor.InsertLine($"            Db{options.EntityNameFrom}Test.AssertDbDefault(db{options.EntityNameTo}Detail.{options.EntityNameFrom});");
+            stringEditor.InsertLine($"            Db{options.EntityNameFrom}Test.AssertDefault(db{options.EntityNameTo}Detail.{options.EntityNameFrom});");
 
             return stringEditor.GetText();
         }

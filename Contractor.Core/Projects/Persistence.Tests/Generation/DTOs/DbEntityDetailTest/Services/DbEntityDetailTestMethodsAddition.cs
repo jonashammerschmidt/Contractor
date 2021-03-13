@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Persistence
+namespace Contractor.Core.Projects.Persistence.Tests
 {
-    internal class DbDtoMethodsAddition
+    internal class DbEntityDetailTestMethodsAddition
     {
         public PathService pathService;
 
-        public DbDtoMethodsAddition(PathService pathService)
+        public DbEntityDetailTestMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -34,28 +34,12 @@ namespace Contractor.Core.Projects.Persistence
         {
             string fileData = File.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
+            // ----------- AssertDbDefault -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("UpdateEf" + options.EntityName);
+            stringEditor.NextThatContains("AssertDbDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"            ef{options.EntityName}.{options.PropertyName} = db{options.EntityName}.{options.PropertyName};");
-            fileData = stringEditor.GetText();
-
-            // ----------- DbSet -----------
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromEf" + options.EntityName);
-            stringEditor.Next(line => line.Trim().Equals("};"));
-
-            stringEditor.InsertLine($"                {options.PropertyName} = ef{options.EntityName}.{options.PropertyName},");
-            fileData = stringEditor.GetText();
-
-            // ----------- DbSet -----------
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("ToEf" + options.EntityName);
-            stringEditor.Next(line => line.Trim().Equals("};"));
-
-            stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}.{options.PropertyName},");
+            stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}DbDefault, db{options.EntityName}Detail.{options.PropertyName});");
 
             return stringEditor.GetText();
         }

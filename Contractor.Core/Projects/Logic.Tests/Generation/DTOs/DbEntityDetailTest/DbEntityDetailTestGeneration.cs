@@ -13,16 +13,16 @@ namespace Contractor.Core.Projects.Logic.Tests
 
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
-        private readonly LogicDbDtoDetailTestFromAssertAddition logicDbDtoDetailTestFromAssertAddition;
-        private readonly LogicDbDtoDetailTestToAssertAddition logicDbDtoDetailTestToAssertAddition;
-        private readonly LogicDbDtoDetailTestMethodsAddition logicDbDtoDetailTestMethodsAddition;
+        private readonly DbEntityDetailTestFromAssertAddition logicDbDtoDetailTestFromAssertAddition;
+        private readonly DbEntityDetailTestToAssertAddition logicDbDtoDetailTestToAssertAddition;
+        private readonly DbEntityDetailTestMethodsAddition logicDbDtoDetailTestMethodsAddition;
 
         public DbEntityDetailTestGeneration(
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition,
-            LogicDbDtoDetailTestFromAssertAddition logicDbDtoDetailTestFromAssertAddition,
-            LogicDbDtoDetailTestToAssertAddition logicDbDtoDetailTestToAssertAddition,
-            LogicDbDtoDetailTestMethodsAddition logicDbDtoDetailTestMethodsAddition)
+            DbEntityDetailTestFromAssertAddition logicDbDtoDetailTestFromAssertAddition,
+            DbEntityDetailTestToAssertAddition logicDbDtoDetailTestToAssertAddition,
+            DbEntityDetailTestMethodsAddition logicDbDtoDetailTestMethodsAddition)
         {
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;

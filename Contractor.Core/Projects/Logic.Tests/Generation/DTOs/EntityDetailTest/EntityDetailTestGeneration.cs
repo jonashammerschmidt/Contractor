@@ -11,16 +11,16 @@ namespace Contractor.Core.Projects.Logic.Tests
 
         private static readonly string FileName = "EntityDetailTest.cs";
 
-        private readonly LogicDtoDetailTestFromAssertAddition logicDtoDetailTestFromAssertAddition;
-        private readonly LogicDtoDetailTestMethodsAddition logicDtoDetailTestMethodsAddition;
-        private readonly LogicDtoDetailTestToAssertAddition logicDtoDetailTestToAssertAddition;
+        private readonly EntityDetailTestFromAssertAddition logicDtoDetailTestFromAssertAddition;
+        private readonly EntityDetailTestMethodsAddition logicDtoDetailTestMethodsAddition;
+        private readonly EntityDetailTestToAssertAddition logicDtoDetailTestToAssertAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
 
         public EntityDetailTestGeneration(
-            LogicDtoDetailTestFromAssertAddition logicDtoDetailTestFromAssertAddition,
-            LogicDtoDetailTestMethodsAddition logicDtoDetailTestMethodsAddition,
-            LogicDtoDetailTestToAssertAddition logicDtoDetailTestToAssertAddition,
+            EntityDetailTestFromAssertAddition logicDtoDetailTestFromAssertAddition,
+            EntityDetailTestMethodsAddition logicDtoDetailTestMethodsAddition,
+            EntityDetailTestToAssertAddition logicDtoDetailTestToAssertAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition)
         {

@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Logic.Tests
 {
-    internal class LogicDtoTestValuesRelationAddition
+    internal class EntityTestValuesRelationAddition
     {
         public PathService pathService;
 
-        public LogicDtoTestValuesRelationAddition(PathService pathService)
+        public EntityTestValuesRelationAddition(PathService pathService)
         {
             this.pathService = pathService;
         }

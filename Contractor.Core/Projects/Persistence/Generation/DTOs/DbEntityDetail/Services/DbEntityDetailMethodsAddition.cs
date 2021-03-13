@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Persistence
 {
-    internal class DbDtoDetailMethodsAddition
+    internal class DbEntityDetailMethodsAddition
     {
         public PathService pathService;
 
-        public DbDtoDetailMethodsAddition(PathService pathService)
+        public DbEntityDetailMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }

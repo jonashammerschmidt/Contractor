@@ -20,19 +20,19 @@ namespace Contractor.Core.Projects.Logic.Tests
             serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudLogicTestsGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityTestValuesGeneration>();
 
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDbDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoCreateTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoUpdateTestMethodsAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestValuesAddition>();
-            serviceCollection.AddSingleton<LogicDtoTestValuesRelationAddition>();
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<LogicDbDtoDetailTestToAssertAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestFromAssertAddition>();
-            serviceCollection.AddSingleton<LogicDtoDetailTestToAssertAddition>();
-            serviceCollection.AddSingleton<LogicTestsRelationAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailTestMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityTestMethodsAddition>();
+            serviceCollection.AddSingleton<EntityDetailTestMethodsAddition>();
+            serviceCollection.AddSingleton<EntityTestMethodsAddition>();
+            serviceCollection.AddSingleton<EntityCreateTestMethodsAddition>();
+            serviceCollection.AddSingleton<EntityUpdateTestMethodsAddition>();
+            serviceCollection.AddSingleton<EntityTestValuesAddition>();
+            serviceCollection.AddSingleton<EntityTestValuesRelationAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailTestFromAssertAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailTestToAssertAddition>();
+            serviceCollection.AddSingleton<EntityDetailTestFromAssertAddition>();
+            serviceCollection.AddSingleton<EntityDetailTestToAssertAddition>();
+            serviceCollection.AddSingleton<EntitiesCrudLogicTestsRelationAddition>();
         }
     }
 }

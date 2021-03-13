@@ -12,13 +12,13 @@ namespace Contractor.Core.Projects.Logic.Tests
         private static readonly string FileName = "EntityTestValues.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
-        private readonly LogicDtoTestValuesAddition logicDtoTestValuesAddition;
-        private readonly LogicDtoTestValuesRelationAddition logicDtoTestValuesRelationAddition;
+        private readonly EntityTestValuesAddition logicDtoTestValuesAddition;
+        private readonly EntityTestValuesRelationAddition logicDtoTestValuesRelationAddition;
 
         public EntityTestValuesGeneration(
             EntityCoreAddition entityCoreAddition,
-            LogicDtoTestValuesAddition logicDtoTestValuesAddition,
-            LogicDtoTestValuesRelationAddition logicDtoTestValuesRelationAddition)
+            EntityTestValuesAddition logicDtoTestValuesAddition,
+            EntityTestValuesRelationAddition logicDtoTestValuesRelationAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.logicDtoTestValuesAddition = logicDtoTestValuesAddition;

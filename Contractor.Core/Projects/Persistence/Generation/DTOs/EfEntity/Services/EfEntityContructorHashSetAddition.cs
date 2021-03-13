@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Persistence
 {
-    internal class DbDtoDetailFromMethodsAddition
+    internal class EfEntityContructorHashSetAddition
     {
         public PathService pathService;
 
-        public DbDtoDetailFromMethodsAddition(PathService pathService)
+        public EfEntityContructorHashSetAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -19,7 +19,7 @@ namespace Contractor.Core.Projects.Persistence
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            fileData = UsingStatements.Add(fileData, "System.Linq");
+            fileData = UsingStatements.Add(fileData, "System.Collections.Generic");
             fileData = UsingStatements.Add(fileData, namespaceToAdd);
 
             CsharpClassWriter.Write(filePath, fileData);
@@ -40,11 +40,10 @@ namespace Contractor.Core.Projects.Persistence
 
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromEf" + options.EntityNameFrom);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.NextThatContains($"public Ef{options.EntityNameFrom}()");
+            stringEditor.Next(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = ef{options.EntityNameFrom}.{options.EntityNamePluralTo}" +
-                $".Select(ef{options.EntityNameTo} => Db{options.EntityNameTo}.FromEf{options.EntityNameTo}(ef{options.EntityNameTo})),");
+            stringEditor.InsertLine($"            this.{options.EntityNamePluralTo} = new HashSet<Ef{options.EntityNameTo}>();");
 
             return stringEditor.GetText();
         }

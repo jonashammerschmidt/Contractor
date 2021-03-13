@@ -3,30 +3,28 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Persistence
+namespace Contractor.Core.Projects.Logic.Tests
 {
-    internal class DbDtoDetailToMethodsAddition
+    internal class EntityDetailTestFromAssertAddition
     {
         public PathService pathService;
 
-        public DbDtoDetailToMethodsAddition(PathService pathService)
+        public EntityDetailTestFromAssertAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
 
-        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName, string namesapceToAdd)
+        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
-
-            fileData = UsingStatements.Add(fileData, namesapceToAdd);
 
             CsharpClassWriter.Write(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
-            IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
+            var entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(entityOptions, domainFolder);
             string fileName = templateFileName.Replace("Entity", entityOptions.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
@@ -37,12 +35,16 @@ namespace Contractor.Core.Projects.Persistence
         {
             string fileData = File.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
-            StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromEf" + options.EntityNameTo);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            fileData = UsingStatements.Add(fileData, "System.Linq");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Logic.Tests.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
-            stringEditor.InsertLine($"                {options.EntityNameFrom} = Db{options.EntityNameFrom}.FromEf{options.EntityNameFrom}(ef{options.EntityNameTo}.{options.EntityNameFrom}),");
+            // ----------- AssertDbDefault -----------
+            StringEditor stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("AssertDefault(");
+            stringEditor.Next(line => line.Trim().Equals("}"));
+
+            stringEditor.InsertLine($"            {options.EntityNameTo}Test.AssertDefault({options.EntityNameLowerFrom}Detail.{options.EntityNamePluralTo}.ToArray()[0]);");
 
             return stringEditor.GetText();
         }

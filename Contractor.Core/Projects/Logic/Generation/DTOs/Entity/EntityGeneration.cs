@@ -13,12 +13,12 @@ namespace Contractor.Core.Projects.Logic
 
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition dtoPropertyAddition;
-        private readonly DtoMethodsAddition dtoMethodsAddition;
+        private readonly EntityMethodsAddition dtoMethodsAddition;
 
         public EntityGeneration(
             DtoAddition dtoAddition,
             DtoPropertyAddition dtoPropertyAddition,
-            DtoMethodsAddition dtoMethodsAddition)
+            EntityMethodsAddition dtoMethodsAddition)
         {
             this.dtoAddition = dtoAddition;
             this.dtoPropertyAddition = dtoPropertyAddition;

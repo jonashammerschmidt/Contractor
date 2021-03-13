@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Logic.Tests
 {
-    internal class LogicDbDtoDetailTestFromAssertAddition
+    internal class EntityDetailTestToAssertAddition
     {
         public PathService pathService;
 
-        public LogicDbDtoDetailTestFromAssertAddition(PathService pathService)
+        public EntityDetailTestToAssertAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -24,7 +24,7 @@ namespace Contractor.Core.Projects.Logic.Tests
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
-            var entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
+            var entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(entityOptions, domainFolder);
             string fileName = templateFileName.Replace("Entity", entityOptions.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
@@ -35,23 +35,15 @@ namespace Contractor.Core.Projects.Logic.Tests
         {
             string fileData = File.ReadAllText(filePath);
 
-            fileData = UsingStatements.Add(fileData, "System.Linq");
-            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
-            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Logic.Tests.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
-
-            // ----------- Default -----------
-            StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"public static IDb{options.EntityNameFrom}Detail Default()");
-            stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = new List<IDb{options.EntityNameTo}> " + "{" + $" Db{options.EntityNameTo}Test.Default() " + "},");
-
-            fileData = stringEditor.GetText();
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Logic.Tests.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
             // ----------- AssertDbDefault -----------
-            stringEditor = new StringEditor(fileData);
+            StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("AssertDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
-            stringEditor.InsertLine($"            Db{options.EntityNameTo}Test.AssertDefault(db{options.EntityNameFrom}Detail.{options.EntityNamePluralTo}.ToArray()[0]);");
+
+            stringEditor.InsertLine($"            {options.EntityNameFrom}Test.AssertDefault({options.EntityNameLowerTo}Detail.{options.EntityNameFrom});");
 
             return stringEditor.GetText();
         }

@@ -11,16 +11,16 @@ namespace Contractor.Core.Projects.Persistence
 
         private static readonly string FileName = "DbEntityDetail.cs";
 
-        private readonly DbDtoDetailMethodsAddition dbDtoDetailMethodsAddition;
-        private readonly DbDtoDetailFromMethodsAddition dbDtoDetailFromMethodsAddition;
-        private readonly DbDtoDetailToMethodsAddition dbDtoDetailToMethodsAddition;
+        private readonly DbEntityDetailMethodsAddition dbDtoDetailMethodsAddition;
+        private readonly DbEntityDetailFromMethodsAddition dbDtoDetailFromMethodsAddition;
+        private readonly DbEntityDetailToMethodsAddition dbDtoDetailToMethodsAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
 
         public DbEntityDetailGeneration(
-            DbDtoDetailMethodsAddition dbDtoDetailMethodsAddition,
-            DbDtoDetailFromMethodsAddition dbDtoDetailFromMethodsAddition,
-            DbDtoDetailToMethodsAddition dbDtoDetailToMethodsAddition,
+            DbEntityDetailMethodsAddition dbDtoDetailMethodsAddition,
+            DbEntityDetailFromMethodsAddition dbDtoDetailFromMethodsAddition,
+            DbEntityDetailToMethodsAddition dbDtoDetailToMethodsAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition)
         {

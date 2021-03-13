@@ -13,12 +13,12 @@ namespace Contractor.Core.Projects.Logic.Tests
 
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
-        private readonly LogicDtoCreateTestMethodsAddition logicDtoCreateTestMethodsAddition;
+        private readonly EntityCreateTestMethodsAddition logicDtoCreateTestMethodsAddition;
 
         public EntityCreateTestGeneration(
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition,
-            LogicDtoCreateTestMethodsAddition logicDtoCreateTestMethodsAddition)
+            EntityCreateTestMethodsAddition logicDtoCreateTestMethodsAddition)
         {
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;

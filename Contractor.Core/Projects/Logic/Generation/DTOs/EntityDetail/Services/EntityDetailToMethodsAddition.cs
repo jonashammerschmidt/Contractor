@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Persistence
+namespace Contractor.Core.Projects.Logic
 {
-    internal class DtoToRepositoryIncludeAddition
+    internal class EntityDetailToMethodsAddition
     {
         public PathService pathService;
 
-        public DtoToRepositoryIncludeAddition(PathService pathService)
+        public EntityDetailToMethodsAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -19,16 +19,14 @@ namespace Contractor.Core.Projects.Persistence
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            fileData = UsingStatements.Add(fileData, "Microsoft.EntityFrameworkCore");
-
             CsharpClassWriter.Write(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForEntity(entityOptions, domainFolder);
-            string fileName = templateFileName.Replace("Entities", entityOptions.EntityNamePlural);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(entityOptions, domainFolder);
+            string fileName = templateFileName.Replace("Entity", entityOptions.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;
         }
@@ -39,11 +37,11 @@ namespace Contractor.Core.Projects.Persistence
 
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"Get{options.EntityNameTo}Detail(");
-            stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralTo}");
-            stringEditor.Next(line => !line.Contains("Include("));
+            stringEditor.NextThatContains("FromDb" + options.EntityNameTo);
+            stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                .Include(ef{options.EntityNameTo} => ef{options.EntityNameTo}.{options.EntityNameFrom})");
+            stringEditor.InsertLine($"                {options.EntityNameFrom} = {options.DomainFrom}.{options.EntityNamePluralFrom}.{options.EntityNameFrom}" +
+                $".FromDb{options.EntityNameFrom}(db{options.EntityNameTo}Detail.{options.EntityNameFrom}),");
 
             return stringEditor.GetText();
         }

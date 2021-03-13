@@ -17,11 +17,11 @@ namespace Contractor.Core.Projects.Logic
             serviceCollection.AddSingleton<ClassGeneration, DbEntityGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, LogicDependencyProviderGeneration>();
 
-            serviceCollection.AddSingleton<LogicRelationAddition>();
-            serviceCollection.AddSingleton<DtoDetailFromMethodsAddition>();
-            serviceCollection.AddSingleton<DtoDetailMethodsAddition>();
-            serviceCollection.AddSingleton<DtoDetailToMethodsAddition>();
-            serviceCollection.AddSingleton<DtoMethodsAddition>();
+            serviceCollection.AddSingleton<EntitiesCrudLogicRelationAddition>();
+            serviceCollection.AddSingleton<EntityDetailFromMethodsAddition>();
+            serviceCollection.AddSingleton<EntityDetailMethodsAddition>();
+            serviceCollection.AddSingleton<EntityDetailToMethodsAddition>();
+            serviceCollection.AddSingleton<EntityMethodsAddition>();
         }
     }
 }

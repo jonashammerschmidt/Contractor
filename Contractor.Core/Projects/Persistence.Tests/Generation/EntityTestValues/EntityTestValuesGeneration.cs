@@ -12,13 +12,13 @@ namespace Contractor.Core.Projects.Persistence.Tests
         private static readonly string FileName = "EntityTestValues.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
-        private readonly DtoTestValuesAddition dtoTestValuesAddition;
-        private readonly DtoTestValuesRelationAddition dtoTestValuesRelationAddition;
+        private readonly EntityTestValuesAddition dtoTestValuesAddition;
+        private readonly EntityTestValuesRelationAddition dtoTestValuesRelationAddition;
 
         public EntityTestValuesGeneration(
             EntityCoreAddition entityCoreAddition,
-            DtoTestValuesAddition dtoTestValuesAddition,
-            DtoTestValuesRelationAddition dtoTestValuesRelationAddition)
+            EntityTestValuesAddition dtoTestValuesAddition,
+            EntityTestValuesRelationAddition dtoTestValuesRelationAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.dtoTestValuesAddition = dtoTestValuesAddition;
