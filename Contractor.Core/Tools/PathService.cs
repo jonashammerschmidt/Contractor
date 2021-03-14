@@ -26,6 +26,17 @@ namespace Contractor.Core.Tools
         {
             string relativePath = domainFolder;
             relativePath = relativePath.Replace("{domain-kebab}", StringConverter.PascalToKebabCase(options.Domain));
+            relativePath = relativePath.Replace("{entity-kebab}", StringConverter.PascalToKebabCase(options.EntityName));
+            relativePath = relativePath.Replace("{entities-kebab}", StringConverter.PascalToKebabCase(options.EntityNamePlural));
+            string absolutePathForDomain = Path.Combine(options.FrontendDestinationFolder, relativePath);
+            return absolutePathForDomain;
+        }
+
+        public string GetAbsolutePathForFrontendPages(IEntityAdditionOptions options, string domainFolder)
+        {
+            string relativePath = domainFolder;
+            relativePath = relativePath.Replace("{domain-kebab}", StringConverter.PascalToKebabCase(options.Domain));
+            relativePath = relativePath.Replace("{entity-kebab}", StringConverter.PascalToKebabCase(options.EntityName));
             relativePath = relativePath.Replace("{entities-kebab}", StringConverter.PascalToKebabCase(options.EntityNamePlural));
             string absolutePathForDomain = Path.Combine(options.FrontendDestinationFolder, relativePath);
             return absolutePathForDomain;

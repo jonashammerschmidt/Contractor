@@ -1,14 +1,15 @@
 ﻿using Contractor.Core.Projects.Backend.Api;
 using Contractor.Core.Projects.Backend.Contract.Logic;
 using Contractor.Core.Projects.Backend.Contract.Persistence;
-using Contractor.Core.Projects.Database;
 using Contractor.Core.Projects.Backend.Logic;
 using Contractor.Core.Projects.Backend.Logic.Tests;
 using Contractor.Core.Projects.Backend.Persistence;
 using Contractor.Core.Projects.Backend.Persistence.Tests;
+using Contractor.Core.Projects.Database;
+using Contractor.Core.Projects.Frontend.Model;
+using Contractor.Core.Projects.Frontend.Pages;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
-using Contractor.Core.Projects.Frontend.Model;
 
 namespace Contractor.Core
 {
@@ -36,6 +37,7 @@ namespace Contractor.Core
             DBProjectGeneration.ConfigureServices(serviceCollection);
 
             ModelProjectGeneration.ConfigureServices(serviceCollection);
+            PagesProjectGeneration.ConfigureServices(serviceCollection);
         }
 
         private static void ConfigureTools(IServiceCollection serviceCollection)
@@ -47,9 +49,10 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoPropertyAddition>();
             serviceCollection.AddSingleton<EntityCoreAddition>();
 
-            serviceCollection.AddSingleton<FrontendEntityCoreAddition>();
+            serviceCollection.AddSingleton<FrontendModelEntityCoreAddition>();
+            serviceCollection.AddSingleton<FrontendPagesEntityCoreAddition>();
             serviceCollection.AddSingleton<FrontendDtoAddition>();
-            
+
             serviceCollection.AddSingleton<PathService>();
         }
     }

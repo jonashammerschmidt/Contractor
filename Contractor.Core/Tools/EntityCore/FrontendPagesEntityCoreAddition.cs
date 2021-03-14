@@ -1,16 +1,14 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Options;
-using System;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
-    internal class FrontendEntityCoreAddition
+    internal class FrontendPagesEntityCoreAddition
     {
         public PathService pathService;
 
-        public FrontendEntityCoreAddition(PathService pathService)
+        public FrontendPagesEntityCoreAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -28,6 +26,7 @@ namespace Contractor.Core.Tools
             string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontendModel(options, domainFolder);
             string fileName = templateFileName.Replace("entities-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
             fileName = fileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
+            fileName = fileName.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;
         }
