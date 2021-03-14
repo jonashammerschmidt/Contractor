@@ -1,11 +1,11 @@
 ﻿import { Injectable } from '@angular/core';
 import { BackendCoreService } from 'src/app/services/rest/backend-core.service';
-import { ApiEntity } from './dtos/api/api-entities-kebab';
-import { ApiEntityDetail } from './dtos/api/api-entities-kebab-detail';
-import { fromApiEntity, IEntity } from './dtos/i-entities-kebab';
-import { IEntityCreate, toApiEntityCreate } from './dtos/i-entities-kebab-create';
-import { fromApiEntityDetail, IEntityDetail } from './dtos/i-entities-kebab-detail';
-import { IEntityUpdate, toApiEntityUpdate } from './dtos/i-entities-kebab-update';
+import { ApiEntity } from './dtos/api/api-entity-kebab';
+import { ApiEntityDetail } from './dtos/api/api-entity-kebab-detail';
+import { fromApiEntity, IEntity } from './dtos/i-entity-kebab';
+import { IEntityCreate, toApiEntityCreate } from './dtos/i-entity-kebab-create';
+import { fromApiEntityDetail, IEntityDetail } from './dtos/i-entity-kebab-detail';
+import { IEntityUpdate, toApiEntityUpdate } from './dtos/i-entity-kebab-update';
 
 @Injectable()
 export class EntitiesCrudService {

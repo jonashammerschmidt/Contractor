@@ -48,7 +48,8 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<EntityCoreAddition>();
 
             serviceCollection.AddSingleton<FrontendEntityCoreAddition>();
-
+            serviceCollection.AddSingleton<FrontendDtoAddition>();
+            
             serviceCollection.AddSingleton<PathService>();
         }
     }

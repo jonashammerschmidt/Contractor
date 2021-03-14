@@ -167,9 +167,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Projects\Frontend\Global\Services\" />
-    <Folder Include="Projects\Frontend\Model\Generation\DTOs\API\" />
-  </ItemGroup>
 </Project>
