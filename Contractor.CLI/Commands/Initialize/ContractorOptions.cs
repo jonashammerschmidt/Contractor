@@ -8,6 +8,8 @@ namespace Contractor.CLI
 
         public string DbDestinationFolder { get; set; }
 
+        public string FrontendDestinationFolder { get; set; }
+
         public string ProjectName { get; set; }
 
         public string DbProjectName { get; set; }

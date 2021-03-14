@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Api
 {
-    internal class EntitiesCrudControllerGeneration : ClassGeneration
+    internal class EntitiesCrudController : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(ApiProjectGeneration.TemplateFolder, "EntitiesCrudControllerTemplate.txt");
@@ -13,7 +13,7 @@ namespace Contractor.Core.Projects.Backend.Api
 
         private readonly EntityCoreAddition entityCoreAddition;
 
-        public EntitiesCrudControllerGeneration(
+        public EntitiesCrudController(
             EntityCoreAddition entityCoreAddition)
         {
             this.entityCoreAddition = entityCoreAddition;

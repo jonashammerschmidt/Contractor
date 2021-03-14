@@ -8,6 +8,7 @@ using Contractor.Core.Projects.Backend.Persistence;
 using Contractor.Core.Projects.Backend.Persistence.Tests;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
+using Contractor.Core.Projects.Frontend.Model;
 
 namespace Contractor.Core
 {
@@ -27,11 +28,14 @@ namespace Contractor.Core
             ApiProjectGeneration.ConfigureServices(serviceCollection);
             ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
             ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);
-            DBProjectGeneration.ConfigureServices(serviceCollection);
             LogicProjectGeneration.ConfigureServices(serviceCollection);
             LogicTestsProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceTestsProjectGeneration.ConfigureServices(serviceCollection);
+
+            DBProjectGeneration.ConfigureServices(serviceCollection);
+
+            ModelProjectGeneration.ConfigureServices(serviceCollection);
         }
 
         private static void ConfigureTools(IServiceCollection serviceCollection)
@@ -42,6 +46,8 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoAddition>();
             serviceCollection.AddSingleton<DtoPropertyAddition>();
             serviceCollection.AddSingleton<EntityCoreAddition>();
+
+            serviceCollection.AddSingleton<FrontendEntityCoreAddition>();
 
             serviceCollection.AddSingleton<PathService>();
         }

@@ -1,0 +1,52 @@
+﻿import { Injectable } from '@angular/core';
+import { BackendCoreService } from 'src/app/services/rest/backend-core.service';
+import { ApiEntity } from './dtos/api/api-entities-kebab';
+import { ApiEntityDetail } from './dtos/api/api-entities-kebab-detail';
+import { fromApiEntity, IEntity } from './dtos/i-entities-kebab';
+import { IEntityCreate, toApiEntityCreate } from './dtos/i-entities-kebab-create';
+import { fromApiEntityDetail, IEntityDetail } from './dtos/i-entities-kebab-detail';
+import { IEntityUpdate, toApiEntityUpdate } from './dtos/i-entities-kebab-update';
+
+@Injectable()
+export class EntitiesCrudService {
+
+    constructor(private backendCoreService: BackendCoreService) { }
+
+    public async getEntities(): Promise<IEntity[]> {
+        const apiEntities = await this.backendCoreService.get<ApiEntity[]>('/api/domain-kebab/entities-kebab');
+
+        const entities = apiEntities.map(apiEntity => fromApiEntity(apiEntity));
+        return entities;
+    }
+
+    public async getEntityDetail(entityId: string): Promise<IEntityDetail> {
+        const apiEntityDetail = await this.backendCoreService.get<ApiEntityDetail>('/api/domain-kebab/entities-kebab/' + entityId);
+
+        const entityDetail = fromApiEntityDetail(apiEntityDetail);
+        return entityDetail;
+    }
+
+    public async createEntity(entityCreate: IEntityCreate): Promise<string> {
+        const options = {
+            body: toApiEntityCreate(entityCreate)
+        };
+
+        const result = await this.backendCoreService.post<{ data: string }>('/api/domain-kebab/entities-kebab', options);
+
+        const newEntityId = result.data;
+        return newEntityId;
+    }
+
+    public async updateEntity(entityUpdate: IEntityUpdate): Promise<void> {
+        const options = {
+            body: toApiEntityUpdate(entityUpdate)
+        };
+
+        await this.backendCoreService.put('/api/domain-kebab/entities-kebab', options);
+    }
+
+    public async deleteEntity(entityId: string): Promise<void> {
+        await this.backendCoreService.delete('/api/domain-kebab/entities-kebab/' + entityId);
+    }
+
+}

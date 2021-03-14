@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core.Helpers;
+using Contractor.Core.Options;
 using System.IO;
 
 namespace Contractor.Core.Tools
@@ -18,6 +19,15 @@ namespace Contractor.Core.Tools
             relativePath = relativePath.Replace("{Domain}", options.Domain);
             relativePath = relativePath.Replace("{Entities}", options.EntityNamePlural);
             string absolutePathForDomain = Path.Combine(options.BackendDestinationFolder, relativePath);
+            return absolutePathForDomain;
+        }
+
+        public string GetAbsolutePathForFrontendModel(IEntityAdditionOptions options, string domainFolder)
+        {
+            string relativePath = domainFolder;
+            relativePath = relativePath.Replace("{domain-kebab}", StringConverter.PascalToKebabCase(options.Domain));
+            relativePath = relativePath.Replace("{entities-kebab}", StringConverter.PascalToKebabCase(options.EntityNamePlural));
+            string absolutePathForDomain = Path.Combine(options.FrontendDestinationFolder, relativePath);
             return absolutePathForDomain;
         }
 
