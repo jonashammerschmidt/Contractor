@@ -12,11 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private static readonly string FileName = "entities-kebab.page.html";
 
         private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
+        private readonly EntitiesPageHtmlPropertyAddition entitiesPageHtmlPropertyAddition;
 
         public EntityPageHtmlGeneration(
-            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition)
+            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
+            EntitiesPageHtmlPropertyAddition entitiesPageHtmlPropertyAddition)
         {
             this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
+            this.entitiesPageHtmlPropertyAddition = entitiesPageHtmlPropertyAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -30,6 +33,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
+            this.entitiesPageHtmlPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)

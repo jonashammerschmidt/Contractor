@@ -69,6 +69,13 @@ namespace Contractor.CLI
                 PropertyName = "EroeffnetAm"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = "bool",
+                PropertyName = "IsPleite"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
 
         private static void AddKonto(ContractorOptions contractorOptions)

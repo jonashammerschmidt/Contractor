@@ -12,7 +12,9 @@ import { IEntity } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity
 export class EntitiesPage implements OnInit, AfterViewInit {
 
   public entitiesTableDataSource = new MatTableDataSource<IEntity>([]);
-  public entitiesGridColumns: string[] = ['detail'];
+  public entitiesGridColumns: string[] = [
+    'detail',
+  ];
 
   @ViewChild(MatSort) sort: MatSort;
 

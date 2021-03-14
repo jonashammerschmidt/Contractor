@@ -57,6 +57,9 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<FrontendDtoPropertyDefaultAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyMethodAddition>();
 
+            serviceCollection.AddSingleton<EntitiesPageHtmlPropertyAddition>();
+            serviceCollection.AddSingleton<EntitiesPageTsPropertyAddition>();
+
             serviceCollection.AddSingleton<PathService>();
         }
     }
