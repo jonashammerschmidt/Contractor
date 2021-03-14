@@ -11,7 +11,8 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ClassGeneration, EntityCrudServiceGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudServiceGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntitiesModuleGeneration>();
         }
     }
 }

@@ -136,12 +136,40 @@
     <None Update="Projects\Backend\Persistence\Templates\EfEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-create.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-detail.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-update.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Frontend\Model\Templates\entities-kebab-crud.service.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\entities-kebab.module.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-create.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-detail.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-update.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Projects\Frontend\Global\Services\" />
+    <Folder Include="Projects\Frontend\Model\Generation\DTOs\API\" />
   </ItemGroup>
 </Project>

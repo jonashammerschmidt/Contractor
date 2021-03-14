@@ -1,0 +1,17 @@
+import { ApiEntity } from './api/api-entity-kebab';
+
+export interface IEntity {
+    id: string;
+}
+
+export function fromApiEntity(apiEntity: ApiEntity): IEntity {
+    return {
+        id: apiEntity.id,
+    };
+}
+
+export function toApiEntity(entity: IEntity): ApiEntity {
+    return {
+        id: entity.id,
+    };
+}

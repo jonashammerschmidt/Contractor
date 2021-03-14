@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Model
 {
-    internal class EntityCrudServiceGeneration : ClassGeneration
+    internal class EntitiesCrudServiceGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(ModelProjectGeneration.TemplateFolder, "entities-kebab-crud.service.template.txt");
@@ -13,7 +13,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private readonly FrontendEntityCoreAddition frontendEntityCoreAddition;
 
-        public EntityCrudServiceGeneration(
+        public EntitiesCrudServiceGeneration(
             FrontendEntityCoreAddition frontendEntityCoreAddition)
         {
             this.frontendEntityCoreAddition = frontendEntityCoreAddition;
