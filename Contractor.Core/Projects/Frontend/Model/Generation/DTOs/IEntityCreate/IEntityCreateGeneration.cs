@@ -12,10 +12,20 @@ namespace Contractor.Core.Projects.Frontend.Model
         private static readonly string FileName = "dtos\\i-entity-kebab-create.ts";
 
         private readonly FrontendDtoAddition frontendDtoAddition;
+        private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
+        private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
+        private readonly FrontendDtoPropertyDefaultAddition frontendDtoPropertyDefaultAddition;
 
-        public IEntityCreateGeneration(FrontendDtoAddition frontendDtoAddition)
+        public IEntityCreateGeneration(
+            FrontendDtoAddition frontendDtoAddition,
+            FrontendDtoPropertyAddition frontendDtoPropertyAddition,
+            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
+            FrontendDtoPropertyDefaultAddition frontendDtoPropertyDefaultAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
+            this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
+            this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
+            this.frontendDtoPropertyDefaultAddition = frontendDtoPropertyDefaultAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -29,6 +39,11 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityCreate", "entityCreate", ModelProjectGeneration.DomainFolder, FileName);
+
+            this.frontendDtoPropertyDefaultAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)

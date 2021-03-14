@@ -9,9 +9,3 @@ export function fromApiEntity(apiEntity: ApiEntity): IEntity {
         id: apiEntity.id,
     };
 }
-
-export function toApiEntity(entity: IEntity): ApiEntity {
-    return {
-        id: entity.id,
-    };
-}

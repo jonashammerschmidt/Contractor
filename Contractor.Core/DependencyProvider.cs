@@ -53,6 +53,9 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<FrontendModelEntityCoreAddition>();
             serviceCollection.AddSingleton<FrontendPagesEntityCoreAddition>();
             serviceCollection.AddSingleton<FrontendDtoAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyDefaultAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyMethodAddition>();
 
             serviceCollection.AddSingleton<PathService>();
         }

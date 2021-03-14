@@ -12,10 +12,17 @@ namespace Contractor.Core.Projects.Frontend.Model
         private static readonly string FileName = "dtos\\i-entity-kebab-update.ts";
 
         private readonly FrontendDtoAddition frontendDtoAddition;
+        private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
+        private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
 
-        public IEntityUpdateGeneration(FrontendDtoAddition frontendDtoAddition)
+        public IEntityUpdateGeneration(
+            FrontendDtoAddition frontendDtoAddition,
+            FrontendDtoPropertyAddition frontendDtoPropertyAddition,
+            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
+            this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
+            this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -29,6 +36,9 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityUpdate", "entityUpdate", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)

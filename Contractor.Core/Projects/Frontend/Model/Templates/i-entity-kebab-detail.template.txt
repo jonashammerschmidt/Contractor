@@ -9,9 +9,3 @@ export function fromApiEntityDetail(apiEntityDetail: ApiEntityDetail): IEntityDe
         id: apiEntityDetail.id,
     };
 }
-
-export function toApiEntity(entityDetail: IEntityDetail): ApiEntityDetail {
-    return {
-        id: entityDetail.id,
-    };
-}

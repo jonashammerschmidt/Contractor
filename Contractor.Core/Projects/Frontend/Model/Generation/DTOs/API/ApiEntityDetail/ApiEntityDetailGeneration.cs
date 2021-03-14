@@ -12,10 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Model
         private static readonly string FileName = "dtos\\api\\api-entity-kebab-detail.ts";
 
         private readonly FrontendDtoAddition frontendDtoAddition;
+        private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
 
-        public ApiEntityDetailGeneration(FrontendDtoAddition frontendDtoAddition)
+        public ApiEntityDetailGeneration(
+            FrontendDtoAddition frontendDtoAddition,
+            FrontendDtoPropertyAddition frontendDtoPropertyAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
+            this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -29,6 +33,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
