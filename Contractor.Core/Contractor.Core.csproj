@@ -167,4 +167,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Projects\Frontend\Pages\Generation\DomainModule\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\DomainRouting\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\EntitiesPageTs\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\EntitiesPageScss\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityCreatePage\EntityCreatePageHtml\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityCreatePage\EntityCreatePageScss\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityCreatePage\EntityCreatePageTs\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\EntitiesPagesRouting\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\EntitiesPagesModule\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\EntitiesPageHtml\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityDetailPage\EntityDetailPageHtml\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityDetailPage\EntityDetailPageScss\" />
+    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityDetailPage\EntityDetailPageTs\" />
+  </ItemGroup>
 </Project>
