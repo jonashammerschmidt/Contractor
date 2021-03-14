@@ -12,11 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private static readonly string FileName = "domain-kebab-pages.routing.ts";
 
         private readonly FrontendPagesDomainCoreAddition frontendPagesDomainCoreAddition;
+        private readonly DomainRoutingEntityAddition domainRoutingEntityAddition;
 
         public DomainRoutingGeneration(
-            FrontendPagesDomainCoreAddition frontendPagesDomainCoreAddition)
+            FrontendPagesDomainCoreAddition frontendPagesDomainCoreAddition,
+            DomainRoutingEntityAddition domainRoutingEntityAddition)
         {
             this.frontendPagesDomainCoreAddition = frontendPagesDomainCoreAddition;
+            this.domainRoutingEntityAddition = domainRoutingEntityAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -26,6 +29,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddEntity(IEntityAdditionOptions options)
         {
+            this.domainRoutingEntityAddition.Add(options, PagesProjectGeneration.PagesFolder, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

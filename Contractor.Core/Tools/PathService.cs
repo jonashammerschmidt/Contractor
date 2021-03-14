@@ -57,6 +57,13 @@ namespace Contractor.Core.Tools
             return absolutePathForDomain;
         }
 
+        public string GetAbsolutePathForFrontendAppRouting(IContractorOptions options)
+        {
+            string relativePath = "src\\app\\app-routing.module.ts";
+            string absolutePathForDomain = Path.Combine(options.FrontendDestinationFolder, relativePath);
+            return absolutePathForDomain;
+        }
+
         public string GetAbsolutePathForInMemoryDbContext(IContractorOptions options)
         {
             string relativePath = "Persistence.Tests\\InMemoryDbContext.cs";

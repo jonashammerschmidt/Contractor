@@ -13,5 +13,15 @@ namespace Contractor.Core.Helpers
         {
             return char.ToUpper(text[0]) + text.Substring(1);
         }
+
+        public static string LowerFirstChar(this string text)
+        {
+            return char.ToLower(text[0]) + text.Substring(1);
+        }
+
+        public static string ToKebab(this string text)
+        {
+            return StringConverter.PascalToKebabCase(text);
+        }
     }
 }

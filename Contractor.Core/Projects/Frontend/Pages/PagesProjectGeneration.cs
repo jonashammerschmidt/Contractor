@@ -12,9 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
+            // App-Routing
+            serviceCollection.AddSingleton<ClassGeneration, AppRoutingGeneration>();
+            serviceCollection.AddSingleton<AppRoutingDomainAddition>();
+
             // Domain Core
             serviceCollection.AddSingleton<ClassGeneration, DomainModuleGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DomainRoutingGeneration>();
+            serviceCollection.AddSingleton<DomainRoutingEntityAddition>();
 
             // Entity Core
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPagesModuleGeneration>();
