@@ -166,6 +166,33 @@
     <None Update="Projects\Frontend\Model\Templates\i-entity-kebab.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab-create.page.html.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab-create.page.scss.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab-create.page.ts.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab-detail.page.html.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab-detail.page.scss.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab-detail.page.ts.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab.page.scss.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab.page.ts.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entities-kebab.page.html.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Frontend\Pages\Templates\entities-kebab-pages.routing.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -178,17 +205,5 @@
     <None Update="Projects\Frontend\Pages\Templates\domain-kebab-pages.module.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\EntitiesPageTs\" />
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\EntitiesPageScss\" />
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityCreatePage\EntityCreatePageHtml\" />
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityCreatePage\EntityCreatePageScss\" />
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityCreatePage\EntityCreatePageTs\" />
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\EntitiesPageHtml\" />
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityDetailPage\EntityDetailPageHtml\" />
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityDetailPage\EntityDetailPageScss\" />
-    <Folder Include="Projects\Frontend\Pages\Generation\Entities\SubPages\EntityDetailPage\EntityDetailPageTs\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,28 @@
+.entity-kebab-detail-page {
+    mat-card {
+        padding-bottom: 18px;
+
+        .toolbar {
+            display: grid;
+            grid-template-columns: auto min-content min-content;
+            grid-gap: 8px;
+            align-items: center;
+
+            h1 {
+                font-size: 1.2em;
+            }
+
+            .save-button {
+                height: min-content;
+            }
+        }
+
+        mat-form-field {
+            width: 100%;
+        }
+
+        mat-checkbox {
+            margin-left: 6px;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<div class="entity-kebab-detail-page" *ngIf="entity">
+    <mat-card>
+        <div class="toolbar">
+            <h1>Entity: {{initialEntity.name}}</h1>
+            <button mat-flat-button color="primary" class="save-button" (click)="onSaveClicked()">
+                <mat-icon class="mat-icon-button-fix">save</mat-icon>
+                Speichern und schließen
+            </button>
+            <button mat-flat-button color="warn" class="save-button" (click)="onDeleteClicked()">
+                <mat-icon class="mat-icon-button-fix">delete</mat-icon>
+                Löschen
+            </button>
+        </div>
+
+        <br>
+
+    </mat-card>
+</div>

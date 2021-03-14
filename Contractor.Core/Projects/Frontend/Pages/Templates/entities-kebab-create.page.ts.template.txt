@@ -1,0 +1,35 @@
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
+import { entityCreateDefault, IEntityCreate, toApiEntityCreate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-create';
+
+@Component({
+  selector: 'app-entity-kebab-create',
+  templateUrl: './entity-kebab-create.page.html',
+  styleUrls: ['./entity-kebab-create.page.scss']
+})
+export class EntityCreatePage implements OnInit {
+
+  entity: IEntityCreate;
+
+  constructor(
+    private entitiesCrudService: EntitiesCrudService,
+    private router: Router,
+    private location: Location) {
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.entity = entityCreateDefault;
+  }
+
+  async onCreateClicked(): Promise<void> {
+    const entityId = await this.entitiesCrudService.createEntity(toApiEntityCreate(this.entity));
+    await this.router.navigate(['/domain-kebab/entities-kebab/detail', entityId]);
+  }
+
+  async onCancelClicked(): Promise<void> {
+    this.location.back();
+  }
+
+}

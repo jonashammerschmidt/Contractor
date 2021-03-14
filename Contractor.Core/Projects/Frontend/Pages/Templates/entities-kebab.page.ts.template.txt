@@ -1,0 +1,33 @@
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
+import { IEntity } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab';
+
+@Component({
+  selector: 'app-entities-kebab',
+  templateUrl: './entities-kebab.page.html',
+  styleUrls: ['./entities-kebab.page.scss']
+})
+export class EntitiesPage implements OnInit, AfterViewInit {
+
+  public entitiesTableDataSource = new MatTableDataSource<IEntity>([]);
+  public entitiesGridColumns: string[] = ['detail'];
+
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(
+    private entitiesCrudService: EntitiesCrudService) { }
+
+  async ngOnInit(): Promise<void> {
+    const entities = await this.entitiesCrudService.getEntities();
+    this.entitiesTableDataSource.data = entities;
+  }
+
+  ngAfterViewInit(): void {
+    if (this.sort) {
+      this.entitiesTableDataSource.sort = this.sort;
+    }
+  }
+
+}

@@ -11,11 +11,28 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            // Entity Core
+            // Domain Core
             serviceCollection.AddSingleton<ClassGeneration, DomainModuleGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DomainRoutingGeneration>();
+
+            // Entity Core
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPagesModuleGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPagesRoutingGeneration>();
+
+            // Page
+            serviceCollection.AddSingleton<ClassGeneration, EntityPageHtmlGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntitiesPageScssGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntitiesPageTsGeneration>();
+
+            // Page-Create
+            serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageHtmlGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageScssGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageTsGeneration>();
+
+            // Page-Detail
+            serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageHtmlGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageScssGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageTsGeneration>();
         }
     }
 }

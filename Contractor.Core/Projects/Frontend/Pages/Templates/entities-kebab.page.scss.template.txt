@@ -1,0 +1,33 @@
+.entities-kebab-page {
+    height: 100%;
+
+    .toolbar {
+        height: 100px;
+        display: grid;
+        grid-template-columns: auto min-content;
+        grid-template-rows: 50px 50px;
+
+        h1 {
+            display: block;
+            margin: 0;
+            font-size: 1.5em;
+        }
+    }
+
+    .table-container {
+        height: calc(100% - 100px);
+        overflow: auto;
+
+        table {
+            width: 100%;
+        }
+
+        .mat-row {
+            transition: background-color 0.1s ease-in-out;
+
+            &:hover {
+                background-color: #ebebeb;
+            }
+        }
+    }
+}
