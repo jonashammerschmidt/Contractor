@@ -11,21 +11,21 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private static readonly string FileName = "domain-kebab-pages.module.ts";
 
-        private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
+        private readonly FrontendPagesDomainCoreAddition frontendPagesDomainCoreAddition;
 
         public DomainModuleGeneration(
-            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition)
+            FrontendPagesDomainCoreAddition frontendPagesDomainCoreAddition)
         {
-            this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
+            this.frontendPagesDomainCoreAddition = frontendPagesDomainCoreAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
         {
+            this.frontendPagesDomainCoreAddition.AddEntityCore(options, PagesProjectGeneration.PagesFolder, TemplatePath, FileName);
         }
 
         protected override void AddEntity(IEntityAdditionOptions options)
         {
-            this.frontendPagesEntityCoreAddition.AddEntityCore(options, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

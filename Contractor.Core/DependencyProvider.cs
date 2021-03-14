@@ -49,6 +49,7 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoPropertyAddition>();
             serviceCollection.AddSingleton<EntityCoreAddition>();
 
+            serviceCollection.AddSingleton<FrontendPagesDomainCoreAddition>();
             serviceCollection.AddSingleton<FrontendModelEntityCoreAddition>();
             serviceCollection.AddSingleton<FrontendPagesEntityCoreAddition>();
             serviceCollection.AddSingleton<FrontendDtoAddition>();

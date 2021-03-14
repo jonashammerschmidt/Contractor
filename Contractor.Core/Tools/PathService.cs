@@ -22,6 +22,14 @@ namespace Contractor.Core.Tools
             return absolutePathForDomain;
         }
 
+        public string GetAbsolutePathForFrontendModel(IDomainAdditionOptions options, string domainFolder)
+        {
+            string relativePath = domainFolder;
+            relativePath = relativePath.Replace("{domain-kebab}", StringConverter.PascalToKebabCase(options.Domain));
+            string absolutePathForDomain = Path.Combine(options.FrontendDestinationFolder, relativePath);
+            return absolutePathForDomain;
+        }
+
         public string GetAbsolutePathForFrontendModel(IEntityAdditionOptions options, string domainFolder)
         {
             string relativePath = domainFolder;

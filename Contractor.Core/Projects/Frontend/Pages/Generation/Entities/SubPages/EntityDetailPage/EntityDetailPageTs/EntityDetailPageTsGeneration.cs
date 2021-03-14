@@ -7,9 +7,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
     internal class EntityDetailPageTsGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(PagesProjectGeneration.TemplateFolder, "entities-kebab-detail.page.ts.template.txt");
+            Path.Combine(PagesProjectGeneration.TemplateFolder, "entity-kebab-detail.page.ts.template.txt");
 
-        private static readonly string FileName = "entities-kebab-detail\\entities-kebab-detail.page.ts";
+        private static readonly string FileName = "entity-kebab-detail\\entity-kebab-detail.page.ts";
 
         private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
 

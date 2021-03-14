@@ -2,6 +2,7 @@ import { ApiEntityUpdate } from './api/api-entity-kebab-update';
 
 export interface IEntityUpdate {
     id: string;
+}
 
 export function toApiEntityUpdate(entityUpdate: IEntityUpdate): ApiEntityUpdate {
     return {
