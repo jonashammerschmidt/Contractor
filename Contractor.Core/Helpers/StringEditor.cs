@@ -119,9 +119,9 @@ namespace Contractor.Core.Helpers
             return this;
         }
 
-        public StringEditor PrevThatContains(string pattern)
+        public StringEditor PrevThatContains(params string[] patterns)
         {
-            this.Prev((line) => line.Contains(pattern));
+            this.Prev((line) => patterns.Any(pattern => line.Contains(pattern)));
 
             return this;
         }

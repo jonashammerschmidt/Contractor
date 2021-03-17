@@ -29,16 +29,20 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, EntityPageHtmlGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPageScssGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPageTsGeneration>();
+            serviceCollection.AddSingleton<EntitiesPageHtmlPropertyAddition>();
+            serviceCollection.AddSingleton<EntitiesPageTsPropertyAddition>();
 
             // Page-Create
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageHtmlGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageScssGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageTsGeneration>();
+            serviceCollection.AddSingleton<EntityCreatePageHtmlPropertyAddition>();
 
             // Page-Detail
             serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageHtmlGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageScssGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageTsGeneration>();
+            serviceCollection.AddSingleton<EntityDetailPageHtmlPropertyAddition>();
         }
     }
 }

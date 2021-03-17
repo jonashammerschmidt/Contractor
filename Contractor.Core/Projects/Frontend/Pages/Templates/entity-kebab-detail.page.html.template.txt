@@ -11,8 +11,5 @@
                 Löschen
             </button>
         </div>
-
-        <br>
-
     </mat-card>
 </div>

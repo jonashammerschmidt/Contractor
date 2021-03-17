@@ -10,8 +10,5 @@
                 Erstellen
             </button>
         </div>
-
-        <br>
-        
     </mat-card>
 </div>
