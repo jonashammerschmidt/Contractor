@@ -12,6 +12,10 @@
             margin: 0;
             font-size: 1.5em;
         }
+        
+        button {
+            height: min-content;
+        }
     }
 
     .table-container {
