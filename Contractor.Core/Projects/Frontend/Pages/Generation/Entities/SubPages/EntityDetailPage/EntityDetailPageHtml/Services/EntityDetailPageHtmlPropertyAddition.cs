@@ -51,13 +51,38 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string GetLine(IPropertyAdditionOptions options)
         {
-            // TODO: Property types
-            return
-                 $"        <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + {options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
-                 $"            <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{options.PropertyName.ToReadable()}:</span>\n" +
-                 $"            <br>\n" +
-                 $"            <span aria-hidden=\"true\">{{{{{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}}}}}</span>\n" +
-                  "        </p>";
+            if (options.PropertyType == "bool")
+            {
+                return
+                  $"        <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + ({options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}) ? 'aktiv' : 'inaktiv' \">\n" +
+                  $"            <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{options.PropertyName.ToReadable()}:</span>\n" +
+                  $"            <br>\n" +
+                  $"            <mat-icon color=\"accent\" *ngIf=\"{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
+                  $"                check_box\n" +
+                  $"            </mat-icon>\n" +
+                  $"            <mat-icon style=\"color: gray\" *ngIf=\"!{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
+                  $"                check_box_outline_blank\n" +
+                  $"            </mat-icon>\n" +
+                   "        </p>";
+            }
+            else if (options.PropertyType == "DateTime")
+            {
+                return
+                     $"        <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + {options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
+                     $"            <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{options.PropertyName.ToReadable()}:</span>\n" +
+                     $"            <br>\n" +
+                     $"            <span aria-hidden=\"true\">{{{{{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}}</span>\n" +
+                      "        </p>";
+            }
+            else
+            {
+                return
+                     $"        <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + {options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
+                     $"            <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{options.PropertyName.ToReadable()}:</span>\n" +
+                     $"            <br>\n" +
+                     $"            <span aria-hidden=\"true\">{{{{{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}}}}}</span>\n" +
+                      "        </p>";
+            }
         }
     }
 }
