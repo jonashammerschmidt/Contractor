@@ -28,6 +28,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddEntity(IEntityAdditionOptions options)
         {
+            // TODO: Fix default by making it a function
             this.frontendPagesEntityCoreAddition.AddEntityCore(options, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 

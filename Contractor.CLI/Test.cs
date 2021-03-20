@@ -31,8 +31,8 @@ namespace Contractor.CLI
 
             AddBankwesen(contractorOptions);
             //AddKonto(contractorOptions);
-            //AddKundenstamm(contractorOptions);
-            //AddRelation(contractorOptions);
+            AddKundenstamm(contractorOptions);
+            AddRelation(contractorOptions);
         }
 
         private static void AddBankwesen(ContractorOptions contractorOptions)
@@ -143,16 +143,16 @@ namespace Contractor.CLI
             };
             contractorCoreApi.Add1ToNRelation(relationOptions);
 
-            relationOptions = new RelationAdditionOptions(contractorOptions)
-            {
-                DomainFrom = "Bankwesen",
-                DomainTo = "Kundenstamm",
-                EntityNameFrom = "Konto",
-                EntityNamePluralFrom = "Konten",
-                EntityNameTo = "Kunde",
-                EntityNamePluralTo = "Kunden",
-            };
-            contractorCoreApi.Add1ToNRelation(relationOptions);
+            //relationOptions = new RelationAdditionOptions(contractorOptions)
+            //{
+            //    DomainFrom = "Bankwesen",
+            //    DomainTo = "Kundenstamm",
+            //    EntityNameFrom = "Konto",
+            //    EntityNamePluralFrom = "Konten",
+            //    EntityNameTo = "Kunde",
+            //    EntityNamePluralTo = "Kunden",
+            //};
+            //contractorCoreApi.Add1ToNRelation(relationOptions);
         }
 
         private static DirectoryInfo GetRootFolder()
