@@ -1,4 +1,5 @@
 import { ApiEntityUpdate } from './api/api-entity-kebab-update';
+import { IEntityDetail } from './i-entity-kebab-detail';
 
 export interface IEntityUpdate {
     id: string;
@@ -7,5 +8,11 @@ export interface IEntityUpdate {
 export function toApiEntityUpdate(entityUpdate: IEntityUpdate): ApiEntityUpdate {
     return {
         id: entityUpdate.id,
+    };
+}
+
+export function fromEntityDetail(entityDetail: IEntityDetail): IEntityUpdate {
+    return {
+        id: entityDetail.id,
     };
 }

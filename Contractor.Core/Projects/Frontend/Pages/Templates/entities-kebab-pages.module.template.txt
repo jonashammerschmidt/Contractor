@@ -13,9 +13,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { UiComponentsModule } from 'src/app/components/ui/ui-components.module';
 import { EntitiesModule } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab.module';
 import { EntityCreatePage } from './entity-kebab-create/entity-kebab-create.page';
 import { EntityDetailPage } from './entity-kebab-detail/entity-kebab-detail.page';
+import { EntityUpdatePage } from './entity-kebab-update/entity-kebab-update.page';
 import { EntitiesPagesRouting } from './entities-kebab-pages.routing';
 import { EntitiesPage } from './entities-kebab.page';
 
@@ -24,6 +26,7 @@ import { EntitiesPage } from './entities-kebab.page';
     EntitiesPage,
     EntityCreatePage,
     EntityDetailPage,
+    EntityUpdatePage,
   ],
   imports: [
     // Routing Modules
@@ -31,6 +34,9 @@ import { EntitiesPage } from './entities-kebab.page';
 
     // Model Modules
     EntitiesModule,
+
+    // UI Components
+    UiComponentsModule,
 
     // Angular Material Modules
     MatButtonModule,

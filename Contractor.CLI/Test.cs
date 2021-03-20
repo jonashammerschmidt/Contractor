@@ -31,8 +31,8 @@ namespace Contractor.CLI
 
             AddBankwesen(contractorOptions);
             //AddKonto(contractorOptions);
-            AddKundenstamm(contractorOptions);
-            AddRelation(contractorOptions);
+            //AddKundenstamm(contractorOptions);
+            //AddRelation(contractorOptions);
         }
 
         private static void AddBankwesen(ContractorOptions contractorOptions)

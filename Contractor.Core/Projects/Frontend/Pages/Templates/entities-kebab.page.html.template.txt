@@ -8,6 +8,12 @@
         </button>
     </div>
 
+    <app-table-filter-bar [filterItems]="filterItems" [filterItemsValues]="filterValues"
+        (filterItemsValuesChange)="onFilterValuesChange($event)" (filterTermChange)="onFilterTermChange($event)">
+    </app-table-filter-bar>
+
+    <br>
+
     <div class="table-container">
         <table mat-table [dataSource]="entitiesTableDataSource" matSort matSortActive="name"
             matSortDirection="asc">

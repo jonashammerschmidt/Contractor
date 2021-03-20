@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
@@ -10,12 +11,12 @@ import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-
 })
 export class EntityDetailPage implements OnInit {
 
-  initialEntity: IEntityDetail;
   entity: IEntityDetail;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
     private activatedRoute: ActivatedRoute,
+    private location: Location,
     private router: Router) {
   }
 
@@ -29,20 +30,21 @@ export class EntityDetailPage implements OnInit {
     });
   }
 
-  async onSaveClicked(): Promise<void> {
-    await this.entitiesCrudService.updateEntity(this.entity);
-    await this.loadEntity(this.initialEntity.id);
-    await this.router.navigate(['/domain-kebab/entities-kebab']);
+  async onCancelClicked(): Promise<void> {
+    this.location.back();
+  }
+
+  async onUpdateClicked(): Promise<void> {
+    await this.router.navigate(['/domain-kebab/entities-kebab/update', this.entity.id]);
   }
 
   async onDeleteClicked(): Promise<void> {
-    await this.entitiesCrudService.deleteEntity(this.initialEntity.id);
+    await this.entitiesCrudService.deleteEntity(this.entity.id);
     await this.router.navigate(['/domain-kebab/entities-kebab']);
   }
 
   private async loadEntity(entityId: string): Promise<void> {
     this.entity = await this.entitiesCrudService.getEntityDetail(entityId);
-    this.initialEntity = JSON.parse(JSON.stringify(this.entity)); // Deep Copy
   }
 
 }

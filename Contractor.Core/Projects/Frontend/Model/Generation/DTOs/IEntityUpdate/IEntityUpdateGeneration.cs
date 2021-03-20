@@ -39,6 +39,8 @@ namespace Contractor.Core.Projects.Frontend.Model
             this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
 
             this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityUpdate", "entityUpdate", ModelProjectGeneration.DomainFolder, FileName);
+
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "fromEntityDetail", "entityDetail", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)

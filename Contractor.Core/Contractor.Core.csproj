@@ -166,6 +166,15 @@
     <None Update="Projects\Frontend\Model\Templates\i-entity-kebab.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-update.page.scss.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-update.page.ts.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-update.page.html.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Frontend\Pages\Templates\entity-kebab-create.page.html.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -1,0 +1,47 @@
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { fromEntityDetail, IEntityUpdate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-update';
+import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
+
+@Component({
+  selector: 'app-entity-kebab-update',
+  templateUrl: './entity-kebab-update.page.html',
+  styleUrls: ['./entity-kebab-update.page.scss']
+})
+export class EntityUpdatePage implements OnInit {
+
+  entityUpdate: IEntityUpdate;
+
+  constructor(
+    private entitiesCrudService: EntitiesCrudService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private location: Location) {
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params.id) {
+        this.loadEntity(params.id).then().catch((error) => {
+          console.error(error);
+        });
+      }
+    });
+  }
+
+  async onUpdateClicked(): Promise<void> {
+    await this.entitiesCrudService.updateEntity(this.entityUpdate);
+    await this.router.navigate(['/domain-kebab/entities-kebab/detail', this.entityUpdate.id]);
+  }
+
+  async onCancelClicked(): Promise<void> {
+    this.location.back();
+  }
+
+  private async loadEntity(entityId: string): Promise<void> {
+    const entityDetail = await this.entitiesCrudService.getEntityDetail(entityId);
+    this.entityUpdate = fromEntityDetail(entityDetail);
+  }
+
+}
