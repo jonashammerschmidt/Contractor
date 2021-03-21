@@ -122,6 +122,14 @@ namespace Contractor.CLI
             // Properties
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
+                PropertyType = "string",
+                PropertyName = "Name",
+                PropertyTypeExtra = "256"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
                 PropertyType = "int",
                 PropertyName = "Balance"
             };

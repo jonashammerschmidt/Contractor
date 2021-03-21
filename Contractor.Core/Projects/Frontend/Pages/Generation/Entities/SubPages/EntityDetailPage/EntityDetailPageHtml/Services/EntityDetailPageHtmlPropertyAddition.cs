@@ -40,7 +40,16 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             // ----------- DbSet -----------
-            stringEditor.NextThatContains("</mat-card>");
+
+            if (fileData.Contains("</mat-tab-group>"))
+            {
+                stringEditor.NextThatContains("<mat-tab label=\"Stammdaten\">");
+                stringEditor.NextThatContains("</mat-tab>");
+            }
+            else
+            {
+                stringEditor.NextThatContains("</mat-card>");
+            }
 
             stringEditor.InsertNewLine();
 

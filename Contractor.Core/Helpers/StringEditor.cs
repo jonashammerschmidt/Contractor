@@ -37,6 +37,26 @@ namespace Contractor.Core.Helpers
             return string.Join("\r\n", this.lines);
         }
 
+        public void AddPrefixBetweenLinesThatContain(string prefix, string startThatContains, string endThatContains)
+        {
+            var startLineNumber = this.lineNumber;
+
+            this.MoveToStart();
+            this.NextThatContains(startThatContains);
+            this.Next();
+
+            while (this.lineNumber < lines.Count() && !this.lines[lineNumber].Contains(endThatContains))
+            {
+                if (this.lines[lineNumber].Trim().Count() > 0)
+                {
+                    this.lines[lineNumber] = prefix + this.lines[lineNumber];
+                }
+                this.lineNumber++;
+            }
+
+            this.lineNumber = startLineNumber;
+        }
+
         public StringEditor InsertLine(string line)
         {
             var splittedLines = line.Split(
@@ -63,6 +83,11 @@ namespace Contractor.Core.Helpers
         public void MoveToEnd()
         {
             this.lineNumber = this.lines.Count - 1;
+        }
+
+        public void MoveToStart()
+        {
+            this.lineNumber = 0;
         }
 
         public StringEditor Next(Predicate<string> predicate)
