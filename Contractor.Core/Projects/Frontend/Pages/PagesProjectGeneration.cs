@@ -32,7 +32,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPageTsGeneration>();
             serviceCollection.AddSingleton<EntitiesPageHtmlPropertyAddition>();
             serviceCollection.AddSingleton<EntitiesPageTsPropertyAddition>();
-
+            serviceCollection.AddSingleton<EntitiesPageTsToPropertyAddition>();
+            
             // Page-Create
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageHtmlGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageScssGeneration>();

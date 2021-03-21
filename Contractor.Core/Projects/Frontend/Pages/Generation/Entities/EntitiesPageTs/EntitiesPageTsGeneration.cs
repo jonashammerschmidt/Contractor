@@ -13,13 +13,16 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
         private readonly EntitiesPageTsPropertyAddition entitiesPageTsPropertyAddition;
-        
+        private readonly EntitiesPageTsToPropertyAddition entitiesPageTsToPropertyAddition;
+
         public EntitiesPageTsGeneration(
             FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
-            EntitiesPageTsPropertyAddition entitiesPageTsPropertyAddition)
+            EntitiesPageTsPropertyAddition entitiesPageTsPropertyAddition,
+            EntitiesPageTsToPropertyAddition entitiesPageTsToPropertyAddition)
         {
             this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
             this.entitiesPageTsPropertyAddition = entitiesPageTsPropertyAddition;
+            this.entitiesPageTsToPropertyAddition = entitiesPageTsToPropertyAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -38,6 +41,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            this.entitiesPageTsToPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }
