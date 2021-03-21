@@ -50,6 +50,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdatePageTsGeneration>();
             serviceCollection.AddSingleton<EntityUpdatePageHtmlPropertyAddition>();
             serviceCollection.AddSingleton<EntityDetailPageHtmlFromPropertyAddition>();
+            serviceCollection.AddSingleton<EntityDetailPageHtmlToPropertyAddition>();
             serviceCollection.AddSingleton<EntityDetailPageTsFromPropertyAddition>();
         }
     }

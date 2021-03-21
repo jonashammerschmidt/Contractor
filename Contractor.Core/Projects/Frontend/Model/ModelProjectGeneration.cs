@@ -20,6 +20,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             serviceCollection.AddSingleton<ClassGeneration, IEntityCreateGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntityDetailGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntityUpdateGeneration>();
+            serviceCollection.AddSingleton<IEntityUpdateMethodAddition>();
 
             // dtos/api
             serviceCollection.AddSingleton<ClassGeneration, ApiEntityGeneration>();

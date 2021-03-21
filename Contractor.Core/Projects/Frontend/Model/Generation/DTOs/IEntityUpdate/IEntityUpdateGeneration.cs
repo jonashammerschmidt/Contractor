@@ -14,15 +14,18 @@ namespace Contractor.Core.Projects.Frontend.Model
         private readonly FrontendDtoAddition frontendDtoAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
+        private readonly IEntityUpdateMethodAddition entityUpdateMethodAddition;
 
         public IEntityUpdateGeneration(
             FrontendDtoAddition frontendDtoAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition,
-            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition)
+            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
+            IEntityUpdateMethodAddition entityUpdateMethodAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
+            this.entityUpdateMethodAddition = entityUpdateMethodAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -51,7 +54,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
             this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(toOptions, "toApiEntityUpdate", "entityUpdate", ModelProjectGeneration.DomainFolder, FileName);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(toOptions, "fromEntityDetail", "entityDetail", ModelProjectGeneration.DomainFolder, FileName);
+            this.entityUpdateMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }
     }
 }
