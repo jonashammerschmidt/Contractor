@@ -20,7 +20,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, DomainModuleGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DomainRoutingGeneration>();
             serviceCollection.AddSingleton<DomainRoutingEntityAddition>();
-
+            serviceCollection.AddSingleton<EntitiesPagesModuleToRelationAddition>();
+            
             // Entity Core
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPagesModuleGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPagesRoutingGeneration>();
