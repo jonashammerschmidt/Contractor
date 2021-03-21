@@ -17,7 +17,7 @@ export class EntitiesPage implements OnInit, AfterViewInit {
   filterComparators: ((value: any) => boolean)[] = [];
   filterValues: any[][] = [];
   filterTerm = '';
-  
+
   entities: IEntity[];
   public entitiesTableDataSource = new MatTableDataSource<IEntity>([]);
   public entitiesGridColumns: string[] = [

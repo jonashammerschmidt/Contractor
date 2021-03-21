@@ -89,7 +89,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                  "\n"+
                 $"    this.filterComparators.push(({options.EntityNameLowerTo}) => {{\n"+
                  "      return this.filterValues[filterValuesIndex].length < 1 ||\n"+
-                $"        this.filterValues[filterValuesIndex].includes({options.EntityNameLowerTo}.{options.EntityNameLowerFrom}Id)\n" +
+                $"        this.filterValues[filterValuesIndex].includes({options.EntityNameLowerTo}.{options.EntityNameLowerFrom}Id);\n" +
                  "    });\n"+
                  "  }";
         }
