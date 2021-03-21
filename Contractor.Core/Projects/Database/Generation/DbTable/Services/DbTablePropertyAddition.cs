@@ -47,30 +47,36 @@ namespace Contractor.Core.Projects.Database
 
         private static string GetPropertyLine(IPropertyAdditionOptions options)
         {
-            // TODO: PropertyName length determines spaces betweeen name and type
+            string spaces = " ";
+            int spaceCount = 20 - options.PropertyName.Length;
+            for (int i = 0; i < spaceCount; i++)
+            {
+                spaces += " ";
+            }
+
             if (options.PropertyType == "string")
             {
-                return $"	[{options.PropertyName}]	   NVARCHAR ({options.PropertyTypeExtra})   NOT NULL,";
+                return $"	[{options.PropertyName}]{spaces}NVARCHAR ({options.PropertyTypeExtra})   NOT NULL,";
             }
             else if (options.PropertyType == "int")
             {
-                return $"	[{options.PropertyName}]	   INT              NOT NULL,";
+                return $"	[{options.PropertyName}]{spaces}INT              NOT NULL,";
             }
             else if (options.PropertyType == "Guid")
             {
-                return $"	[{options.PropertyName}]	   UNIQUEIDENTIFIER NOT NULL,";
+                return $"	[{options.PropertyName}]{spaces}UNIQUEIDENTIFIER NOT NULL,";
             }
             else if (options.PropertyType == "Guid?")
             {
-                return $"	[{options.PropertyName}]	   UNIQUEIDENTIFIER NULL,";
+                return $"	[{options.PropertyName}]{spaces}UNIQUEIDENTIFIER NULL,";
             }
             else if (options.PropertyType == "bool")
             {
-                return $"	[{options.PropertyName}]	   BIT              NOT NULL,";
+                return $"	[{options.PropertyName}]{spaces}BIT              NOT NULL,";
             }
             else if (options.PropertyType == "DateTime")
             {
-                return $"	[{options.PropertyName}]	   DATETIME         NOT NULL,";
+                return $"	[{options.PropertyName}]{spaces}DATETIME         NOT NULL,";
             }
 
             return $"-- TODO: {options.PropertyType} {options.PropertyName}";

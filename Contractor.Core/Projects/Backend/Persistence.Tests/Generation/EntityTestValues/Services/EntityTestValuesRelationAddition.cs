@@ -48,7 +48,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdDbDefault = {options.EntityNameFrom}TestValues.IdDbDefault;");
             stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdDbDefault2 = {options.EntityNameFrom}TestValues.IdDbDefault2;");
             stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForCreate = {options.EntityNameFrom}TestValues.IdForCreate;");
-            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForUpdate = {options.EntityNameFrom}TestValues.IdDbDefault2;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForUpdate = {options.EntityNameFrom}TestValues.IdForUpdate;");
 
             return stringEditor.GetText();
         }
