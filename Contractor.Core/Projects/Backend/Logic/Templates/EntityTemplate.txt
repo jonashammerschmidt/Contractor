@@ -20,11 +20,11 @@ namespace ProjectName.Logic.Modules.Domain.Entities
             };
         }
 
-        internal static IDbEntity CreateDbEntity(Guid id, IEntityCreate entityCreate)
+        internal static IDbEntity CreateDbEntity(Guid entityId, IEntityCreate entityCreate)
         {
             return new DbEntity()
             {
-                Id = id,
+                Id = entityId,
             };
         }
     }

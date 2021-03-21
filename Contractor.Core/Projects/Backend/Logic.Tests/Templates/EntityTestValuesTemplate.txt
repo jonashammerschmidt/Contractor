@@ -6,5 +6,6 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
     {
         public static readonly Guid IdDefault = Guid.Parse("{random-guid}");
         public static readonly Guid IdForCreate = Guid.Parse("{random-guid}");
+        public static readonly Guid IdForUpdate = Guid.Parse("{random-guid}");
     }
 }

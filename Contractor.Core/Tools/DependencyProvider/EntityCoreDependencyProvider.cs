@@ -50,6 +50,12 @@ namespace Contractor.Core.Tools
             stringEditor.NextThatContains($"void Startup{options.Domain}");
             stringEditor.Next();
             stringEditor.Next(line => line.CompareTo(addScopedStatement) > 0 || line.Contains("}"));
+
+            if (!stringEditor.GetLineAtOffset(-1).Trim().Equals("{"))
+            {
+                stringEditor.InsertNewLine();
+            }
+            stringEditor.InsertLine($"            // {options.EntityNamePlural}");
             stringEditor.InsertLine(addScopedStatement);
 
             return stringEditor.GetText();

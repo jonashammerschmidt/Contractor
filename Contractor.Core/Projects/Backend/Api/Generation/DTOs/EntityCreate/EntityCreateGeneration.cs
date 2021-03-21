@@ -33,6 +33,7 @@ namespace Contractor.Core.Projects.Backend.Api
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
+            // TODO: Add annotation
             this.propertyAddition.AddPropertyToDTO(options, ApiProjectGeneration.DomainFolder, FileName);
         }
 

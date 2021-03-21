@@ -22,6 +22,11 @@ namespace Contractor.Core.Helpers
             return this.lines[lineNumber];
         }
 
+        public string GetLineAtOffset(int offset)
+        {
+            return this.lines[lineNumber + offset];
+        }
+
         public int GetLineCount()
         {
             return this.lines.Count;
