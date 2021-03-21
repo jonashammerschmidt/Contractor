@@ -26,6 +26,10 @@ namespace Contractor.Core.Projects.Frontend.Model
             serviceCollection.AddSingleton<ClassGeneration, ApiEntityCreateGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, ApiEntityDetailGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, ApiEntityUpdateGeneration>();
+
+            // Relation Addition
+            serviceCollection.AddSingleton<FrontendDtoPropertyFromMethodAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyToMethodAddition>();
         }
     }
 }

@@ -48,6 +48,13 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            IPropertyAdditionOptions toOptions =
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameLowerFrom}Id");
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName);
+
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(toOptions, "toApiEntityCreate", "entityCreate", ModelProjectGeneration.DomainFolder, FileName);
+
+            this.frontendDtoPropertyDefaultAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName);
         }
     }
 }
