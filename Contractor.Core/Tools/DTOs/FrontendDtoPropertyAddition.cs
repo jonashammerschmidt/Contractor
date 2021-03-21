@@ -21,6 +21,16 @@ namespace Contractor.Core.Tools
             TypescriptClassWriter.Write(filePath, fileData);
         }
 
+        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
+        {
+            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            string fileData = UpdateFileData(options, filePath);
+
+            fileData = ImportStatements.Add(fileData, importStatementTypes, importStatementPath);
+
+            TypescriptClassWriter.Write(filePath, fileData);
+        }
+
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontendModel(options, domainFolder);
@@ -73,7 +83,7 @@ namespace Contractor.Core.Tools
                 return $"    {options.PropertyName.LowerFirstChar()}: Date;";
             }
 
-            return $"-- TODO: {options.PropertyName.LowerFirstChar()}: {options.PropertyType};";
+            return $"    {options.PropertyName.LowerFirstChar()}: {options.PropertyType};";
         }
     }
 }

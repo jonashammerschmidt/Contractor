@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core.Helpers;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -38,6 +39,27 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            // From
+            string fromImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainTo)}" +
+                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
+                $"/dtos/api/api-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
+
+            IPropertyAdditionOptions fromOptions =
+                RelationAdditionOptions.GetPropertyForFrom(options, $"Api{options.EntityNameTo}[]", $"{options.EntityNamePluralLowerTo}");
+
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
+                $"Api{options.EntityNameTo}", fromImportStatementPath);
+
+            // To
+            string toImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
+                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
+                $"/dtos/api/api-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}";
+
+            IPropertyAdditionOptions toOptions =
+                RelationAdditionOptions.GetPropertyForTo(options, $"Api{options.EntityNameFrom}", $"{options.EntityNameLowerFrom}");
+
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
+                $"Api{options.EntityNameFrom}", toImportStatementPath);
         }
     }
 }
