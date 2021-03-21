@@ -37,21 +37,25 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageScssGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageTsGeneration>();
             serviceCollection.AddSingleton<EntityCreatePageHtmlPropertyAddition>();
+            serviceCollection.AddSingleton<EntityCreatePageHtmlToPropertyAddition>();
+            serviceCollection.AddSingleton<EntityCreatePageTsToPropertyAddition>();
 
             // Page-Detail
             serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageHtmlGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageScssGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityDetailPageTsGeneration>();
             serviceCollection.AddSingleton<EntityDetailPageHtmlPropertyAddition>();
+            serviceCollection.AddSingleton<EntityDetailPageHtmlFromPropertyAddition>();
+            serviceCollection.AddSingleton<EntityDetailPageHtmlToPropertyAddition>();
+            serviceCollection.AddSingleton<EntityDetailPageTsFromPropertyAddition>();
 
             // Page-Update
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdatePageHtmlGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdatePageScssGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdatePageTsGeneration>();
             serviceCollection.AddSingleton<EntityUpdatePageHtmlPropertyAddition>();
-            serviceCollection.AddSingleton<EntityDetailPageHtmlFromPropertyAddition>();
-            serviceCollection.AddSingleton<EntityDetailPageHtmlToPropertyAddition>();
-            serviceCollection.AddSingleton<EntityDetailPageTsFromPropertyAddition>();
+            serviceCollection.AddSingleton<EntityUpdatePageHtmlToPropertyAddition>();
+            serviceCollection.AddSingleton<EntityUpdatePageTsToPropertyAddition>();
         }
     }
 }

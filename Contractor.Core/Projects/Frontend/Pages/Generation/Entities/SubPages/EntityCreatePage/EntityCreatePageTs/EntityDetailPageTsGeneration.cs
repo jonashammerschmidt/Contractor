@@ -12,11 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private static readonly string FileName = "entity-kebab-create\\entity-kebab-create.page.ts";
 
         private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
+        private readonly EntityCreatePageTsToPropertyAddition entityCreatePageTsToPropertyAddition;
 
         public EntityCreatePageTsGeneration(
-            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition)
+            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
+            EntityCreatePageTsToPropertyAddition entityCreatePageTsToPropertyAddition)
         {
             this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
+            this.entityCreatePageTsToPropertyAddition = entityCreatePageTsToPropertyAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -34,6 +37,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            this.entityCreatePageTsToPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }
