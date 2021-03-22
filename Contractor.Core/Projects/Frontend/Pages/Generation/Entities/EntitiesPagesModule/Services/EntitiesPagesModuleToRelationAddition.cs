@@ -47,7 +47,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             stringEditor.NextThatContains($"    {options.EntityNamePluralTo}Module,");
             stringEditor.Next();
-            
+
             stringEditor.InsertLine($"    {options.EntityNamePluralFrom}Module,");
 
             return stringEditor.GetText();

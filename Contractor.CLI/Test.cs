@@ -16,8 +16,8 @@ namespace Contractor.CLI
         }
 
         private static void TestApiProjectGeneration(
-            string backendDestinationFolder, 
-            string dbDestinationFolder, 
+            string backendDestinationFolder,
+            string dbDestinationFolder,
             string frontendDestinationFolder)
         {
             var contractorOptions = new ContractorOptions()

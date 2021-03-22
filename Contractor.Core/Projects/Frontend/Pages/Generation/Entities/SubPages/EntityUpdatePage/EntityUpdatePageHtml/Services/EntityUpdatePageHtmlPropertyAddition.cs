@@ -55,7 +55,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             if (options.PropertyType == "bool")
             {
-                return 
+                return
                     $"        <mat-checkbox [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Update.{options.PropertyName.LowerFirstChar()}\">\n" +
                     $"            {options.PropertyName.ToReadable()}\n" +
                     $"        </mat-checkbox>";

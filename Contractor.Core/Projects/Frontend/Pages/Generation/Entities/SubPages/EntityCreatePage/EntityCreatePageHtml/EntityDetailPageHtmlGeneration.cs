@@ -14,7 +14,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
         private readonly EntityCreatePageHtmlPropertyAddition entityCreatePageHtmlPropertyAddition;
         private readonly EntityCreatePageHtmlToPropertyAddition entityCreatePageHtmlToPropertyAddition;
-        
+
         public EntityCreatePageHtmlGeneration(
             FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
             EntityCreatePageHtmlPropertyAddition entityCreatePageHtmlPropertyAddition,

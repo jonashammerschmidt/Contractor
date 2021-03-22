@@ -15,7 +15,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private readonly EntityDetailPageHtmlPropertyAddition entityDetailPageHtmlPropertyAddition;
         private readonly EntityDetailPageHtmlFromPropertyAddition entityDetailPageHtmlFromPropertyAddition;
         private readonly EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition;
-        
+
         public EntityDetailPageHtmlGeneration(
             FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
             EntityDetailPageHtmlPropertyAddition entityDetailPageHtmlPropertyAddition,

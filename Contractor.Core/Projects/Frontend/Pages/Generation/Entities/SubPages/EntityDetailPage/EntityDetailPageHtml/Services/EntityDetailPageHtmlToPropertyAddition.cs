@@ -61,7 +61,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string GetLine(IRelationAdditionOptions options)
         {
-            return 
+            return
                 $"        <p>\n" +
                 $"            <span style=\"font-size: 0.8em;\">{options.EntityNameFrom}:</span>\n" +
                 $"            <br>\n" +

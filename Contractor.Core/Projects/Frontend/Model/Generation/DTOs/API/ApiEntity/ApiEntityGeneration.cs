@@ -13,7 +13,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private readonly FrontendDtoAddition frontendDtoAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
-        
+
         public ApiEntityGeneration(
             FrontendDtoAddition frontendDtoAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition)

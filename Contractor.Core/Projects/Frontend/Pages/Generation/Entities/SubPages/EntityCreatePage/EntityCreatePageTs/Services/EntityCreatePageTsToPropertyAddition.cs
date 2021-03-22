@@ -62,7 +62,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();");
-            
+
             return stringEditor.GetText();
         }
     }

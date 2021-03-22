@@ -1,7 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
-using System;
 using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -76,21 +75,21 @@ namespace Contractor.Core.Projects.Frontend.Pages
             return
                 $"  private async setup{options.EntityNamePluralFrom}Filter(): Promise<void> {{\n" +
                 $"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();\n" +
-                 "\n"+
-                 "    this.filterItems.push({\n"+
-                $"      dataName: '{options.EntityNamePluralFrom}',\n"+
+                 "\n" +
+                 "    this.filterItems.push({\n" +
+                $"      dataName: '{options.EntityNamePluralFrom}',\n" +
                 $"      dataSource: this.{options.EntityNamePluralLowerFrom},\n" +
-                 "      valueExpr: 'id',\n"+
-                 "      displayExpr: 'name',\n"+
-                 "    });\n"+
-                 "\n"+
-                 "    const filterValuesIndex = this.filterValues.length;\n"+
-                 "    this.filterValues.push([]);\n"+
-                 "\n"+
-                $"    this.filterComparators.push(({options.EntityNameLowerTo}) => {{\n"+
-                 "      return this.filterValues[filterValuesIndex].length < 1 ||\n"+
+                 "      valueExpr: 'id',\n" +
+                 "      displayExpr: 'name',\n" +
+                 "    });\n" +
+                 "\n" +
+                 "    const filterValuesIndex = this.filterValues.length;\n" +
+                 "    this.filterValues.push([]);\n" +
+                 "\n" +
+                $"    this.filterComparators.push(({options.EntityNameLowerTo}) => {{\n" +
+                 "      return this.filterValues[filterValuesIndex].length < 1 ||\n" +
                 $"        this.filterValues[filterValuesIndex].includes({options.EntityNameLowerTo}.{options.EntityNameLowerFrom}Id);\n" +
-                 "    });\n"+
+                 "    });\n" +
                  "  }";
         }
     }

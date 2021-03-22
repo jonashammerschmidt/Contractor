@@ -44,8 +44,8 @@ namespace Contractor.Core.Tools
             string fileData = File.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
-            if (!stringEditor.GetLine().Contains("export interface")) 
-            { 
+            if (!stringEditor.GetLine().Contains("export interface"))
+            {
                 stringEditor.NextThatContains($"export interface");
             }
             stringEditor.NextThatContains("}");

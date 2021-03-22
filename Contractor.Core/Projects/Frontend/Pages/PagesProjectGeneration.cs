@@ -21,7 +21,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, DomainRoutingGeneration>();
             serviceCollection.AddSingleton<DomainRoutingEntityAddition>();
             serviceCollection.AddSingleton<EntitiesPagesModuleToRelationAddition>();
-            
+
             // Entity Core
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPagesModuleGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPagesRoutingGeneration>();
@@ -33,7 +33,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<EntitiesPageHtmlPropertyAddition>();
             serviceCollection.AddSingleton<EntitiesPageTsPropertyAddition>();
             serviceCollection.AddSingleton<EntitiesPageTsToPropertyAddition>();
-            
+
             // Page-Create
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageHtmlGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageScssGeneration>();

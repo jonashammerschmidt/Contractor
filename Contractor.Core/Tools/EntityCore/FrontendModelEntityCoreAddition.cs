@@ -1,8 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Options;
-using System;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {

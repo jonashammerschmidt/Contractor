@@ -21,7 +21,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string fileData = UpdateFileData(options, filePath);
 
             fileData = ImportStatements.Add(fileData, "MatTableDataSource", "@angular/material/table");
-            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameTo}", 
+            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameTo}",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainTo)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
                 $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}");
@@ -56,7 +56,6 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"    'name',");
             stringEditor.InsertLine($"    'detail',");
             stringEditor.InsertLine($"  ];");
-
 
             stringEditor.NextThatContains($"private async load{options.EntityNameFrom}(");
             stringEditor.NextThatContains("  }");

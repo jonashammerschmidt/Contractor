@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text;
 
 namespace Contractor.Core.Tools
 {
