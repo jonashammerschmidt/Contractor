@@ -52,7 +52,7 @@ export class EntitiesPage implements OnInit, AfterViewInit {
 
   updateDataSource(): void {
     this.entitiesTableDataSource.data = this.entities.slice()
-      .filter(entity => this.filterComparators.length < 1 || this.filterComparators.some(filterComparator => filterComparator(entity)))
+      .filter(entity => this.filterComparators.length < 1 || this.filterComparators.every(filterComparator => filterComparator(entity)))
       .filter(entity => entity.name.toString().toLowerCase().includes(this.filterTerm.trim().toLowerCase()));
   }
 

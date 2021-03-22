@@ -1,4 +1,4 @@
-Set-Location Contract.Architecture\Contract.Architecture.Backend
+Set-Location Contract.Architecture\Contract.Architecture.Backends\Contract.Architecture.Backend.Core
 
 contractor add domain Bankwesen
 contractor add entity Bankwesen.Bank:Banken
@@ -12,4 +12,4 @@ contractor add property DateTime Geburtstag -e Kundenstamm.Kunde:Kunden
 
 contractor add relation 1:n Bankwesen.Bank:Banken Kundenstamm.Kunde:Kunden
 
-Set-Location ..\..
+Set-Location ..\..\..

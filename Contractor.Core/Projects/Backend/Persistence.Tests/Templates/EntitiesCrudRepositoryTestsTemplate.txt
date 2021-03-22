@@ -1,5 +1,4 @@
 ﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
-using ProjectName.Persistence;
 using ProjectName.Persistence.Modules.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;

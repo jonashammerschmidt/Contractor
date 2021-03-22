@@ -20,7 +20,7 @@ namespace Contractor.Core.Tools
             string fileData = GetFileData(options, templateFilePath);
             string filePath = GetFilePath(options, domainFolder, templateFileName);
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            CsharpClassWriter.Write(filePath, fileData);
         }
 
         private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
