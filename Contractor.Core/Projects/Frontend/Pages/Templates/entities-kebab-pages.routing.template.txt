@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EntityCreatePage } from './entity-kebab-create/entity-kebab-create.page';
-import { EntityDetailPage } from './entity-kebab-detail/entity-kebab-detail.page';
-import { EntityUpdatePage } from './entity-kebab-update/entity-kebab-update.page';
+import { EntityCreatePage } from './sub-pages/entity-kebab-create/entity-kebab-create.page';
+import { EntityDetailPage } from './sub-pages/entity-kebab-detail/entity-kebab-detail.page';
+import { EntityUpdatePage } from './sub-pages/entity-kebab-update/entity-kebab-update.page';
 import { EntitiesPage } from './entities-kebab.page';
 
 const routes: Routes = [

@@ -9,7 +9,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private static readonly string TemplatePath =
             Path.Combine(PagesProjectGeneration.TemplateFolder, "entity-kebab-create.page.scss.template.txt");
 
-        private static readonly string FileName = "entity-kebab-create\\entity-kebab-create.page.scss";
+        private static readonly string FileName = "sub-pages\\entity-kebab-create\\entity-kebab-create.page.scss";
 
         private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
 

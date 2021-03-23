@@ -15,9 +15,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { UiComponentsModule } from 'src/app/components/ui/ui-components.module';
 import { EntitiesModule } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab.module';
-import { EntityCreatePage } from './entity-kebab-create/entity-kebab-create.page';
-import { EntityDetailPage } from './entity-kebab-detail/entity-kebab-detail.page';
-import { EntityUpdatePage } from './entity-kebab-update/entity-kebab-update.page';
+import { EntityCreatePage } from './sub-pages/entity-kebab-create/entity-kebab-create.page';
+import { EntityDetailPage } from './sub-pages/entity-kebab-detail/entity-kebab-detail.page';
+import { EntityUpdatePage } from './sub-pages/entity-kebab-update/entity-kebab-update.page';
 import { EntitiesPagesRouting } from './entities-kebab-pages.routing';
 import { EntitiesPage } from './entities-kebab.page';
 

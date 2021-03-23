@@ -1,8 +1,7 @@
 Main Quests:
 - Frontend Generation
-  - Create-Page: Change Name of Main DTO to createEntity
-  - Sub-Pages
   - Entities-Page (To): Generate Column for From-Entity
+
 - contractor add relation 1:n 
   - [-n Vertragsbank:Vertragskunden] Alternative Property Names
   - Endpoint: GetTosByFromId
