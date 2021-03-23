@@ -56,7 +56,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             if (options.PropertyType == "bool")
             {
                 return
-                    $"        <mat-checkbox [(ngModel)]=\"{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
+                    $"        <mat-checkbox [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
                     $"            {options.PropertyName.ToReadable()}\n" +
                     $"        </mat-checkbox>";
             }
@@ -65,7 +65,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 return
                    "        <mat-form-field appearance=\"outline\">\n" +
                   $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                  $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\" [matDatepicker]=\"picker\">\n" +
+                  $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\" [matDatepicker]=\"picker\">\n" +
                    "            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
                    "            <mat-datepicker #picker></mat-datepicker>\n" +
                    "        </mat-form-field>";
@@ -75,7 +75,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 return
                   "        <mat-form-field appearance=\"outline\">\n" +
                  $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                 $"            <input matInput maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
+                 $"            <input matInput maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
                   "        </mat-form-field>";
             }
             else
@@ -83,7 +83,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 return
                   "        <mat-form-field appearance=\"outline\">\n" +
                  $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                 $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
+                 $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
                   "        </mat-form-field>";
             }
         }

@@ -1,4 +1,4 @@
-<div class="entity-kebab-detail-page" *ngIf="entity">
+<div class="entity-kebab-detail-page" *ngIf="entityCreate">
     <mat-card>
         <div class="toolbar">
             <h1>Entity erstellen</h1>

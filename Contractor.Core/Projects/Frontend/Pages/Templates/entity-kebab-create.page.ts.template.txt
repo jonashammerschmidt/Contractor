@@ -11,7 +11,7 @@ import { entityCreateDefault, IEntityCreate } from 'src/app/model/domain-kebab/e
 })
 export class EntityCreatePage implements OnInit {
 
-  entity: IEntityCreate;
+  entityCreate: IEntityCreate;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
@@ -20,11 +20,11 @@ export class EntityCreatePage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.entity = entityCreateDefault;
+    this.entityCreate = entityCreateDefault;
   }
 
   async onCreateClicked(): Promise<void> {
-    const entityId = await this.entitiesCrudService.createEntity(this.entity);
+    const entityId = await this.entitiesCrudService.createEntity(this.entityCreate);
     await this.router.navigate(['/domain-kebab/entities-kebab/detail', entityId]);
   }
 

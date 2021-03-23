@@ -55,7 +55,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetLine(IRelationAdditionOptions options)
         {
             return
-              $"        <app-search-dropdown label=\"{options.EntityNameFrom}\" valueExpr=\"id\" [dataSource]=\"{options.EntityNamePluralLowerFrom}\" [(value)]=\"{options.EntityNameLowerTo}.{options.EntityNameLowerFrom}Id\"\n" +
+              $"        <app-search-dropdown label=\"{options.EntityNameFrom}\" valueExpr=\"id\" [dataSource]=\"{options.EntityNamePluralLowerFrom}\" [(value)]=\"{options.EntityNameLowerTo}Create.{options.EntityNameLowerFrom}Id\"\n" +
                "            displayExpr=\"name\"></app-search-dropdown>";
         }
     }

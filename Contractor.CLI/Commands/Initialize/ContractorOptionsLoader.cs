@@ -13,6 +13,7 @@ namespace Contractor.CLI
             ContractorOptions options = JsonConvert.DeserializeObject<ContractorOptions>(optionsJson);
             options.BackendDestinationFolder = Path.Combine(folder, options.BackendDestinationFolder);
             options.DbDestinationFolder = Path.Combine(folder, options.DbDestinationFolder);
+            options.FrontendDestinationFolder = Path.Combine(folder, options.FrontendDestinationFolder);
             return options;
         }
     }
