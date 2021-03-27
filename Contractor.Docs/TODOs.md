@@ -1,7 +1,4 @@
 Main Quests:
-- Frontend Generation
-  - Entities-Page (To): Generate Column for From-Entity
-
 - contractor add relation 1:n 
   - [-n Vertragsbank:Vertragskunden] Alternative Property Names
   - Endpoint: GetTosByFromId

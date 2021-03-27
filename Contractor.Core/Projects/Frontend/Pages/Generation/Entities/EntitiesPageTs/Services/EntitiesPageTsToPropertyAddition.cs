@@ -50,6 +50,10 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
+            stringEditor.NextThatContains("GridColumns: string[]");
+            stringEditor.NextThatContains("'detail'");
+            stringEditor.InsertLine($"    '{options.EntityNameLowerFrom}',");
+
             stringEditor.NextThatContains("constructor(");
             stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}: I{options.EntityNameFrom}[];");
             stringEditor.InsertNewLine();
@@ -58,16 +62,30 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
 
             stringEditor.NextThatContains("ngOnInit()");
-            stringEditor.Next();
+            int lineNumber = stringEditor.GetLineNumber();
+            stringEditor.Next(line => !line.Trim().StartsWith("await this.setup"));
             stringEditor.InsertLine($"    await this.setup{options.EntityNamePluralFrom}Filter();");
-            stringEditor.InsertNewLine();
+            if (stringEditor.GetLineNumber() - lineNumber == 2)
+            {
+                stringEditor.InsertNewLine();
+            }
 
             stringEditor.MoveToEnd();
             stringEditor.PrevThatContains("}");
             stringEditor.InsertNewLine();
+            stringEditor.InsertLine(GetNameResolutionMethod(options));
+            stringEditor.InsertNewLine();
             stringEditor.InsertLine(GetSetupMethod(options));
 
             return stringEditor.GetText();
+        }
+
+        private string GetNameResolutionMethod(IRelationAdditionOptions options)
+        {
+            return
+                $"  public get{options.EntityNameFrom}Name({options.EntityNameLowerFrom}Id: string): string {{\n" +
+                $"    return this.{options.EntityNamePluralLowerFrom}.find({options.EntityNameLowerFrom} => {options.EntityNameLowerFrom}.id === {options.EntityNameLowerFrom}Id).name;\n" +
+                 "  }";
         }
 
         private string GetSetupMethod(IRelationAdditionOptions options)
