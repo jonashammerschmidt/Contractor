@@ -1,0 +1,56 @@
+﻿using Contractor.Core.Helpers;
+using Contractor.Core.Options;
+using Contractor.Core.Tools;
+using System.IO;
+
+namespace Contractor.Core.Projects.Backend.Persistence.Tests
+{
+    internal class EntityTestValuesRelationAddition
+    {
+        public PathService pathService;
+
+        public EntityTestValuesRelationAddition(PathService pathService)
+        {
+            this.pathService = pathService;
+        }
+
+        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName)
+        {
+            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            string fileData = UpdateFileData(options, filePath);
+
+            CsharpClassWriter.Write(filePath, fileData);
+        }
+
+        private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
+        {
+            var relationAdditionOptions = RelationAdditionOptions.GetPropertyForTo(options);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForEntity(relationAdditionOptions, domainFolder);
+            string fileName = templateFileName.Replace("Entity", relationAdditionOptions.EntityName);
+            string filePath = Path.Combine(absolutePathForDTOs, fileName);
+            return filePath;
+        }
+
+        private string UpdateFileData(IRelationAdditionOptions options, string filePath)
+        {
+            string fileData = File.ReadAllText(filePath);
+
+            fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Tests.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+
+            // ----------- Asserts -----------
+            StringEditor stringEditor = new StringEditor(fileData);
+            stringEditor.MoveToEnd();
+            stringEditor.Next();
+            stringEditor.PrevThatContains("}");
+            stringEditor.PrevThatContains("}");
+
+            stringEditor.InsertNewLine();
+            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdDbDefault = {options.EntityNameFrom}TestValues.IdDbDefault;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdDbDefault2 = {options.EntityNameFrom}TestValues.IdDbDefault2;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForCreate = {options.EntityNameFrom}TestValues.IdForCreate;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForUpdate = {options.EntityNameFrom}TestValues.IdForUpdate;");
+
+            return stringEditor.GetText();
+        }
+    }
+}

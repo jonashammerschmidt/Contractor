@@ -1,0 +1,59 @@
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { TableFilterBarDropdownItem } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-item';
+import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
+import { IEntity } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab';
+
+@Component({
+  selector: 'app-entities-kebab',
+  templateUrl: './entities-kebab.page.html',
+  styleUrls: ['./entities-kebab.page.scss']
+})
+export class EntitiesPage implements OnInit, AfterViewInit {
+
+  filterItems: TableFilterBarDropdownItem[] = [];
+
+  filterComparators: ((value: any) => boolean)[] = [];
+  filterValues: any[][] = [];
+  filterTerm = '';
+
+  entities: IEntity[];
+  public entitiesTableDataSource = new MatTableDataSource<IEntity>([]);
+  public entitiesGridColumns: string[] = [
+    'detail',
+  ];
+
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(
+    private entitiesCrudService: EntitiesCrudService) { }
+
+  async ngOnInit(): Promise<void> {
+    this.entities = await this.entitiesCrudService.getEntities();
+    this.updateDataSource();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.sort) {
+      this.entitiesTableDataSource.sort = this.sort;
+    }
+  }
+
+  onFilterValuesChange(values: any[][]): void {
+    this.filterValues = values;
+    this.updateDataSource();
+  }
+
+  onFilterTermChange(filterTerm: string): void {
+    this.filterTerm = filterTerm;
+    this.updateDataSource();
+  }
+
+  updateDataSource(): void {
+    this.entitiesTableDataSource.data = this.entities.slice()
+      .filter(entity => this.filterComparators.length < 1 || this.filterComparators.every(filterComparator => filterComparator(entity)))
+      .filter(entity => entity.name.toString().toLowerCase().includes(this.filterTerm.trim().toLowerCase()));
+  }
+
+}

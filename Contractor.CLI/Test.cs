@@ -11,15 +11,20 @@ namespace Contractor.CLI
             DirectoryInfo rootFolder = GetRootFolder();
             string backendDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Backends\\Contract.Architecture.Backend.Core");
             string dbDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Databases\\Contract.Architecture.Database.Core");
-            TestApiProjectGeneration(backendDestinationFolder, dbDestinationFolder);
+            string frontendDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Frontends\\Contract.Architecture.Web.Core");
+            TestApiProjectGeneration(backendDestinationFolder, dbDestinationFolder, frontendDestinationFolder);
         }
 
-        private static void TestApiProjectGeneration(string backendDestinationFolder, string dbDestinationFolder)
+        private static void TestApiProjectGeneration(
+            string backendDestinationFolder,
+            string dbDestinationFolder,
+            string frontendDestinationFolder)
         {
             var contractorOptions = new ContractorOptions()
             {
                 BackendDestinationFolder = backendDestinationFolder,
                 DbDestinationFolder = dbDestinationFolder,
+                FrontendDestinationFolder = frontendDestinationFolder,
                 ProjectName = "Contract.Architecture.Backend.Core",
                 DbProjectName = "Contract.Architecture.Database.Core",
             };
@@ -57,6 +62,20 @@ namespace Contractor.CLI
                 PropertyTypeExtra = "256"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = "DateTime",
+                PropertyName = "EroeffnetAm"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = "bool",
+                PropertyName = "IsPleite"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
 
         private static void AddKonto(ContractorOptions contractorOptions)
@@ -74,6 +93,14 @@ namespace Contractor.CLI
 
             // Properties
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = "string",
+                PropertyName = "Name",
+                PropertyTypeExtra = "256"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = "DateTime",
                 PropertyName = "EroeffnetAm"
@@ -102,6 +129,14 @@ namespace Contractor.CLI
 
             // Properties
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = "string",
+                PropertyName = "Name",
+                PropertyTypeExtra = "256"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = "int",
                 PropertyName = "Balance"

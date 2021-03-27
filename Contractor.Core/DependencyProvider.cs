@@ -1,11 +1,13 @@
-﻿using Contractor.Core.Projects.Api;
-using Contractor.Core.Projects.Contract.Logic;
-using Contractor.Core.Projects.Contract.Persistence;
-using Contractor.Core.Projects.DB;
-using Contractor.Core.Projects.Logic;
-using Contractor.Core.Projects.Logic.Tests;
-using Contractor.Core.Projects.Persistence;
-using Contractor.Core.Projects.Persistence.Tests;
+﻿using Contractor.Core.Projects.Backend.Api;
+using Contractor.Core.Projects.Backend.Contract.Logic;
+using Contractor.Core.Projects.Backend.Contract.Persistence;
+using Contractor.Core.Projects.Backend.Logic;
+using Contractor.Core.Projects.Backend.Logic.Tests;
+using Contractor.Core.Projects.Backend.Persistence;
+using Contractor.Core.Projects.Backend.Persistence.Tests;
+using Contractor.Core.Projects.Database;
+using Contractor.Core.Projects.Frontend.Model;
+using Contractor.Core.Projects.Frontend.Pages;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,11 +29,15 @@ namespace Contractor.Core
             ApiProjectGeneration.ConfigureServices(serviceCollection);
             ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
             ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);
-            DBProjectGeneration.ConfigureServices(serviceCollection);
             LogicProjectGeneration.ConfigureServices(serviceCollection);
             LogicTestsProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceTestsProjectGeneration.ConfigureServices(serviceCollection);
+
+            DBProjectGeneration.ConfigureServices(serviceCollection);
+
+            ModelProjectGeneration.ConfigureServices(serviceCollection);
+            PagesProjectGeneration.ConfigureServices(serviceCollection);
         }
 
         private static void ConfigureTools(IServiceCollection serviceCollection)
@@ -42,6 +48,17 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoAddition>();
             serviceCollection.AddSingleton<DtoPropertyAddition>();
             serviceCollection.AddSingleton<EntityCoreAddition>();
+
+            serviceCollection.AddSingleton<FrontendPagesDomainCoreAddition>();
+            serviceCollection.AddSingleton<FrontendModelEntityCoreAddition>();
+            serviceCollection.AddSingleton<FrontendPagesEntityCoreAddition>();
+            serviceCollection.AddSingleton<FrontendDtoAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyDefaultAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyMethodAddition>();
+
+            serviceCollection.AddSingleton<EntitiesPageHtmlPropertyAddition>();
+            serviceCollection.AddSingleton<EntitiesPageTsPropertyAddition>();
 
             serviceCollection.AddSingleton<PathService>();
         }

@@ -1,0 +1,50 @@
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
+import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-detail';
+
+@Component({
+  selector: 'app-entity-detail',
+  templateUrl: './entity-detail.page.html',
+  styleUrls: ['./entity-detail.page.scss']
+})
+export class EntityDetailPage implements OnInit {
+
+  entity: IEntityDetail;
+
+  constructor(
+    private entitiesCrudService: EntitiesCrudService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location,
+    private router: Router) {
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params.id) {
+        this.loadEntity(params.id).then().catch((error) => {
+          console.error(error);
+        });
+      }
+    });
+  }
+
+  async onCancelClicked(): Promise<void> {
+    this.location.back();
+  }
+
+  async onUpdateClicked(): Promise<void> {
+    await this.router.navigate(['/domain-kebab/entities-kebab/update', this.entity.id]);
+  }
+
+  async onDeleteClicked(): Promise<void> {
+    await this.entitiesCrudService.deleteEntity(this.entity.id);
+    await this.router.navigate(['/domain-kebab/entities-kebab']);
+  }
+
+  private async loadEntity(entityId: string): Promise<void> {
+    this.entity = await this.entitiesCrudService.getEntityDetail(entityId);
+  }
+
+}

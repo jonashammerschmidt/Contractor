@@ -1,0 +1,12 @@
+import { ApiEntityCreate } from './api/api-entity-kebab-create';
+
+export interface IEntityCreate {
+}
+
+export function toApiEntityCreate(entityCreate: IEntityCreate): ApiEntityCreate {
+    return {
+    };
+}
+
+export const entityCreateDefault: IEntityCreate = {
+};

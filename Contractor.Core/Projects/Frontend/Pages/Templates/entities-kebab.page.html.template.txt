@@ -1,0 +1,33 @@
+<div class="entities-kebab-page">
+
+    <div class="toolbar">
+        <h1>Entities</h1>
+        <button mat-flat-button color="primary" [routerLink]="['/domain-kebab/entities-kebab/create']">
+            <mat-icon class="mat-icon-button-fix">add</mat-icon>
+            Entity erstellen
+        </button>
+    </div>
+
+    <app-table-filter-bar [filterItems]="filterItems" [filterItemsValues]="filterValues"
+        (filterItemsValuesChange)="onFilterValuesChange($event)" (filterTermChange)="onFilterTermChange($event)">
+    </app-table-filter-bar>
+
+    <br>
+
+    <div class="table-container">
+        <table mat-table [dataSource]="entitiesTableDataSource" matSort matSortActive="name"
+            matSortDirection="asc">
+
+            <ng-container matColumnDef="detail">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element" width="10%">
+                    <button mat-button role="link">Detail</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="entitiesGridColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: entitiesGridColumns;"
+                [routerLink]="['/domain-kebab/entities-kebab/detail', row.id]"></tr>
+        </table>
+    </div>
+</div>

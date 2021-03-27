@@ -1,0 +1,14 @@
+<div class="entity-kebab-detail-page" *ngIf="entityCreate">
+    <mat-card>
+        <div class="toolbar">
+            <h1>Entity erstellen</h1>
+            <button mat-flat-button (click)="onCancelClicked()">
+                Abbrechen
+            </button>
+            <button mat-flat-button color="primary" (click)="onCreateClicked()">
+                <mat-icon class="mat-icon-button-fix">add</mat-icon>
+                Erstellen
+            </button>
+        </div>
+    </mat-card>
+</div>

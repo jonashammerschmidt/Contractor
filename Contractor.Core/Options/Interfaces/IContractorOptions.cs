@@ -6,6 +6,8 @@
 
         string DbDestinationFolder { get; set; }
 
+        string FrontendDestinationFolder { get; set; }
+
         string ProjectName { get; set; }
 
         string DbProjectName { get; set; }

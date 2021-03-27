@@ -1,0 +1,18 @@
+﻿using ProjectName.Contract.Logic.Modules.Domain.Entities;
+using System;
+
+namespace ProjectName.Logic.Tests.Modules.Domain.Entities
+{
+    internal class EntityUpdateTest : IEntityUpdate
+    {
+        public Guid Id { get; set; }
+
+        public static IEntityUpdate ForUpdate()
+        {
+            return new EntityUpdateTest()
+            {
+                Id = EntityTestValues.IdDefault,
+            };
+        }
+    }
+}

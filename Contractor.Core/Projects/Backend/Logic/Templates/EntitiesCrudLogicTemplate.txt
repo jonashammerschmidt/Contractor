@@ -1,0 +1,103 @@
+using Microsoft.Extensions.Logging;
+using ProjectName.Contract.Logic.LogicResults;
+using ProjectName.Contract.Logic.Modules.Domain.Entities;
+using ProjectName.Contract.Logic.Tools.Identifier;
+using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Logic.LogicResults;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ProjectName.Logic.Modules.Domain.Entities
+{
+    internal class EntitiesCrudLogic : IEntitiesCrudLogic
+    {
+        private readonly IEntitiesCrudRepository entitiesCrudRepository;
+
+        private readonly IGuidGenerator guidGenerator;
+        private readonly ILogger<EntitiesCrudLogic> logger;
+
+        public EntitiesCrudLogic(
+            IEntitiesCrudRepository entitiesCrudRepository,
+            IGuidGenerator guidGenerator,
+            ILogger<EntitiesCrudLogic> logger)
+        {
+            this.entitiesCrudRepository = entitiesCrudRepository;
+
+            this.guidGenerator = guidGenerator;
+            this.logger = logger;
+        }
+
+        public ILogicResult<Guid> CreateEntity(IEntityCreate entityCreate)
+        {
+            Guid newEntityId = this.guidGenerator.NewGuid();
+            IDbEntity dbEntityToCreate = Entity.CreateDbEntity(newEntityId, entityCreate);
+            this.entitiesCrudRepository.CreateEntity(dbEntityToCreate);
+
+            this.logger.LogInformation($"Entity ({newEntityId}) angelegt");
+            return LogicResult<Guid>.Ok(newEntityId);
+        }
+
+        public ILogicResult DeleteEntity(Guid entityId)
+        {
+            if (!this.entitiesCrudRepository.DoesEntityExist(entityId))
+            {
+                this.logger.LogDebug($"Entity ({entityId}) konnte nicht gefunden werden.");
+                return LogicResult.NotFound($"Entity ({entityId}) konnte nicht gefunden werden.");
+            }
+
+            // TODO: If relations are implemented, resolve conflict with the FOREIGN KEY constraint
+            try
+            {
+                this.entitiesCrudRepository.DeleteEntity(entityId);
+            }
+            catch
+            {
+                this.logger.LogDebug($"Entity ({entityId}) konnte nicht gelöscht werden.");
+                return LogicResult.Conflict($"Entity ({entityId}) konnte nicht gelöscht werden.");
+            }
+
+            this.logger.LogInformation($"Entity ({entityId}) gelöscht");
+            return LogicResult.Ok();
+        }
+
+        public ILogicResult<IEntityDetail> GetEntityDetail(Guid entityId)
+        {
+            IDbEntityDetail dbEntityDetail = this.entitiesCrudRepository.GetEntityDetail(entityId);
+            if (dbEntityDetail == null)
+            {
+                this.logger.LogDebug($"Entity ({entityId}) konnte nicht gefunden werden.");
+                return LogicResult<IEntityDetail>.NotFound($"Entity ({entityId}) konnte nicht gefunden werden.");
+            }
+
+            this.logger.LogDebug($"Details für Entity ({entityId}) wurde geladen");
+            return LogicResult<IEntityDetail>.Ok(EntityDetail.FromDbEntityDetail(dbEntityDetail));
+        }
+
+        public ILogicResult<IEnumerable<IEntity>> GetEntities()
+        {
+            IEnumerable<IEntity> entities = this.entitiesCrudRepository.GetEntities()
+                .Select(entity => Entity.FromDbEntity(entity));
+
+            this.logger.LogDebug("Entities wurden geladen");
+            return LogicResult<IEnumerable<IEntity>>.Ok(entities);
+        }
+
+        public ILogicResult UpdateEntity(IEntityUpdate entityUpdate)
+        {
+            IDbEntity dbEntityToUpdate = this.entitiesCrudRepository.GetEntity(entityUpdate.Id);
+            if (dbEntityToUpdate == null)
+            {
+                this.logger.LogDebug($"Entity ({entityUpdate.Id}) konnte nicht gefunden werden.");
+                return LogicResult.NotFound($"Entity ({entityUpdate.Id}) konnte nicht gefunden werden.");
+            }
+
+            Entity.UpdateDbEntity(dbEntityToUpdate, entityUpdate);
+
+            this.entitiesCrudRepository.UpdateEntity(dbEntityToUpdate);
+
+            this.logger.LogInformation($"Entity ({entityUpdate.Id}) aktualisiert");
+            return LogicResult.Ok();
+        }
+    }
+}

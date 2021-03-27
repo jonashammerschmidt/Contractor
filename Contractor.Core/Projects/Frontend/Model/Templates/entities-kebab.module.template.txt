@@ -1,0 +1,13 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { EntitiesCrudService } from './entities-kebab-crud.service';
+
+@NgModule({
+  imports: [
+    CommonModule
+  ],
+  providers: [
+    EntitiesCrudService
+  ]
+})
+export class EntitiesModule { }
