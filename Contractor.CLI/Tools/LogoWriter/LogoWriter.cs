@@ -11,6 +11,12 @@ namespace Contractor.CLI.Tools
         {
             string FontPath = Path.Combine(Folder.Executable, "Tools", "LogoWriter", "speed.flf");
             Console.WriteAscii("Contractor", FigletFont.Load(FontPath), Color.FromArgb(88, 116, 255));
+            System.Console.WriteLine("Version: " + GetAppVersion());
+        }
+
+        private static string GetAppVersion()
+        {
+            return typeof(LogoWriter).Assembly.GetName().Version.ToString();
         }
     }
 }
