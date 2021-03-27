@@ -1,0 +1,37 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Publish
+      run: dotnet publish -p:PublishProfile=FolderProfile
+    - name: Rename Artifact
+      run: mv Contractor.CLI/bin/Release/netcoreapp3.1/publish/Contractor.CLI.exe Contractor.CLI/bin/Release/netcoreapp3.1/publish/contractor.exe
+    - name: Release
+      # You may pin to the exact commit or the version.
+      # uses: fnkr/github-action-ghr@96b1448dc6162f370067e1de51e856e733a76b4f
+      uses: fnkr/github-action-ghr@v1.3
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        GHR_COMPRESS: zip
+        GHR_PATH: Contractor.CLI/bin/Release/netcoreapp3.1/publish/contractor.exe
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
