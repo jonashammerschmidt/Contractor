@@ -60,7 +60,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string GetLine(IPropertyAdditionOptions options)
         {
-            if (options.PropertyType == "bool")
+            if (options.PropertyType == PropertyTypes.Boolean)
             {
                 return
                   $"        <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + ({options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}) ? 'aktiv' : 'inaktiv' \">\n" +
@@ -74,7 +74,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                   $"            </mat-icon>\n" +
                    "        </p>";
             }
-            else if (options.PropertyType == "DateTime")
+            else if (options.PropertyType == PropertyTypes.DateTime)
             {
                 return
                      $"        <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + {options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +

@@ -53,14 +53,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string GetLine(IPropertyAdditionOptions options)
         {
-            if (options.PropertyType == "bool")
+            if (options.PropertyType == PropertyTypes.Boolean)
             {
                 return
                     $"        <mat-checkbox [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Update.{options.PropertyName.LowerFirstChar()}\">\n" +
                     $"            {options.PropertyName.ToReadable()}\n" +
                     $"        </mat-checkbox>";
             }
-            else if (options.PropertyType == "DateTime")
+            else if (options.PropertyType == PropertyTypes.DateTime)
             {
                 return
                    "        <mat-form-field appearance=\"outline\">\n" +
@@ -70,7 +70,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                    "            <mat-datepicker #picker></mat-datepicker>\n" +
                    "        </mat-form-field>";
             }
-            else if (options.PropertyType == "string" && string.IsNullOrEmpty(options.PropertyTypeExtra))
+            else if (options.PropertyType == PropertyTypes.String && string.IsNullOrEmpty(options.PropertyTypeExtra))
             {
                 return
                   "        <mat-form-field appearance=\"outline\">\n" +

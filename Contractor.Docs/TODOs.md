@@ -1,12 +1,9 @@
 Main Quests:
 - contractor add relation 1:n 
   - [-n Vertragsbank:Vertragskunden] Alternative Property Names
-  - Endpoint: GetTosByFromId
 
 Side Quests:
 - Solve TODOs
-- ..CrudLogic / ..CrudRepository (Replace with "([^Crud])Logic")
-- Improve Project Structure of Contractor.Core
 
 Ideas: 
 - contractor add relation n:m UserManagement.User:Users UserManagement.Group:Groups UserGroupMembership

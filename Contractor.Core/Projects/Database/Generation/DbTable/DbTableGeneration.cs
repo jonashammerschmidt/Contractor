@@ -43,9 +43,11 @@ namespace Contractor.Core.Projects.Database
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // To
-            IPropertyAdditionOptions optionsTo =
+            IRelationSideAdditionOptions relationSideAdditionOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
-            this.dbTablePropertyAddition.AddProperty(optionsTo, DBProjectGeneration.DomainFolder, FileName);
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
+
+            this.dbTablePropertyAddition.AddProperty(propertyAdditionOptions, DBProjectGeneration.DomainFolder, FileName);
             this.dbTableRelationContraintAddition.AddContraint(options, DBProjectGeneration.DomainFolder, FileName);
         }
     }

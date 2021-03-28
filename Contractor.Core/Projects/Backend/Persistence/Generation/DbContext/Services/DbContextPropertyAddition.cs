@@ -16,7 +16,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         public void Add(IPropertyAdditionOptions options)
         {
-            if (this.GetEntityDbModel(options) == null)
+            if (DatabaseDbContextPropertyLine.GetPropertyLine(options) == null)
             {
                 return;
             }
@@ -38,25 +38,9 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.NextThatContains("});");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine(GetEntityDbModel(options));
+            stringEditor.InsertLine(DatabaseDbContextPropertyLine.GetPropertyLine(options));
 
             return stringEditor.GetText();
-        }
-
-        private string GetEntityDbModel(IPropertyAdditionOptions options)
-        {
-            if (options.PropertyType.Contains("string"))
-            {
-                return $"                entity.Property(e => e.{options.PropertyName})\n" +
-                        "                    .IsRequired()\n" +
-                       $"                    .HasMaxLength({options.PropertyTypeExtra});";
-            }
-            else if (options.PropertyType.Contains("DateTime"))
-            {
-                return $"                entity.Property(e => e.{options.PropertyName}).HasColumnType(\"datetime\");";
-            }
-
-            return null;
         }
     }
 }

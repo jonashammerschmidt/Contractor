@@ -50,7 +50,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string GetAppRoutingLine(IPropertyAdditionOptions options)
         {
-            if (options.PropertyType == "bool")
+            if (options.PropertyType == PropertyTypes.Boolean)
             {
                 return
                   $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
@@ -65,7 +65,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                   $"                </td>\n" +
                   $"            </ng-container>\n";
             }
-            else if (options.PropertyType == "DateTime")
+            else if (options.PropertyType == PropertyTypes.DateTime)
             {
                 return
                  $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +

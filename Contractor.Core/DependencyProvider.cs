@@ -47,6 +47,7 @@ namespace Contractor.Core
 
             serviceCollection.AddSingleton<DtoAddition>();
             serviceCollection.AddSingleton<DtoPropertyAddition>();
+            serviceCollection.AddSingleton<DtoRelationAddition>();
             serviceCollection.AddSingleton<EntityCoreAddition>();
 
             serviceCollection.AddSingleton<FrontendPagesDomainCoreAddition>();
@@ -54,6 +55,7 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<FrontendPagesEntityCoreAddition>();
             serviceCollection.AddSingleton<FrontendDtoAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyAddition>();
+            serviceCollection.AddSingleton<FrontendDtoRelationAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyDefaultAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyMethodAddition>();
 

@@ -43,8 +43,11 @@ namespace Contractor.Core.Projects.Backend.Logic
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // To
-            IPropertyAdditionOptions propertyAdditionOptions = RelationAdditionOptions.
+            IRelationSideAdditionOptions relationSideAdditionOptions = RelationAdditionOptions.
                 GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
+
             this.dtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, LogicProjectGeneration.DomainFolder, FileName);
             this.dtoMethodsAddition.Add(propertyAdditionOptions, LogicProjectGeneration.DomainFolder, FileName);
         }

@@ -16,19 +16,22 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         private readonly DbEntityDetailTestToAssertAddition dbDtoDetailTestToAssertAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
+        private readonly DtoRelationAddition relationAddition;
 
         public DbEntityDetailTestGeneration(
             DbEntityDetailTestMethodsAddition dbDtoDetailTestMethodsAddition,
             DbEntityDetailTestFromAssertAddition dbDtoDetailTestFromAssertAddition,
             DbEntityDetailTestToAssertAddition dbDtoDetailTestToAssertAddition,
             DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition)
+            DtoPropertyAddition propertyAddition,
+            DtoRelationAddition relationAddition)
         {
             this.dbDtoDetailTestMethodsAddition = dbDtoDetailTestMethodsAddition;
             this.dbDtoDetailTestFromAssertAddition = dbDtoDetailTestFromAssertAddition;
             this.dbDtoDetailTestToAssertAddition = dbDtoDetailTestToAssertAddition;
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
+            this.relationAddition = relationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -49,15 +52,15 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // From
-            IPropertyAdditionOptions dbFromOptions =
+            IRelationSideAdditionOptions dbFromOptions =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
-            this.propertyAddition.AddPropertyToDTO(dbFromOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
+            this.relationAddition.AddRelationToDTO(dbFromOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbDtoDetailTestFromAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
 
             // To
-            IPropertyAdditionOptions dbToOptions =
+            IRelationSideAdditionOptions dbToOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", $"{options.EntityNameFrom}");
-            this.propertyAddition.AddPropertyToDTO(dbToOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
+            this.relationAddition.AddRelationToDTO(dbToOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbDtoDetailTestToAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
     }

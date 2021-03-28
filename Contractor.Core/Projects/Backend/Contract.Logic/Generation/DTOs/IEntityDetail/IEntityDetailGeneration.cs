@@ -13,13 +13,16 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
 
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
+        private readonly DtoRelationAddition relationAddition;
 
         public IEntityDetailGeneration(
             DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition)
+            DtoPropertyAddition propertyAddition,
+            DtoRelationAddition relationAddition)
         {
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
+            this.relationAddition = relationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -39,15 +42,15 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // From
-            IPropertyAdditionOptions optionsFrom =
+            IRelationSideAdditionOptions optionsFrom =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
-            this.propertyAddition.AddPropertyToDTO(optionsFrom, ContractLogicProjectGeneration.DomainFolder, FileName, true,
+            this.relationAddition.AddRelationToDTO(optionsFrom, ContractLogicProjectGeneration.DomainFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
-            IPropertyAdditionOptions optionsTo =
+            IRelationSideAdditionOptions optionsTo =
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", options.EntityNameFrom);
-            this.propertyAddition.AddPropertyToDTO(optionsTo, ContractLogicProjectGeneration.DomainFolder, FileName, true,
+            this.relationAddition.AddRelationToDTO(optionsTo, ContractLogicProjectGeneration.DomainFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
     }

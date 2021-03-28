@@ -4,16 +4,16 @@ using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    internal class FrontendDtoPropertyAddition
+    internal class FrontendDtoRelationAddition
     {
         public PathService pathService;
 
-        public FrontendDtoPropertyAddition(PathService pathService)
+        public FrontendDtoRelationAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        public void AddPropertyToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
@@ -21,7 +21,7 @@ namespace Contractor.Core.Tools
             TypescriptClassWriter.Write(filePath, fileData);
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
+        public void AddPropertyToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
@@ -31,7 +31,7 @@ namespace Contractor.Core.Tools
             TypescriptClassWriter.Write(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
         {
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontendModel(options, domainFolder);
             string fileName = templateFileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
@@ -39,7 +39,7 @@ namespace Contractor.Core.Tools
             return filePath;
         }
 
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
+        private string UpdateFileData(IRelationSideAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
 
@@ -50,7 +50,7 @@ namespace Contractor.Core.Tools
             }
             stringEditor.NextThatContains("}");
 
-            stringEditor.InsertLine(FrontendDtoPropertyLine.GetPropertyLine(options));
+            stringEditor.InsertLine($"    {options.PropertyName.LowerFirstChar()}: {options.PropertyType};");
 
             return stringEditor.GetText();
         }

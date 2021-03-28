@@ -13,13 +13,16 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
 
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
+        private readonly DtoRelationAddition relationAddition;
 
         public IDbEntityGeneration(
             DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition)
+            DtoPropertyAddition propertyAddition,
+            DtoRelationAddition relationAddition)
         {
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
+            this.relationAddition = relationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -38,7 +41,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            this.propertyAddition.AddPropertyToDTO(
+            this.relationAddition.AddRelationToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
                 ContractPersistenceProjectGeneration.DomainFolder, FileName, true);
         }

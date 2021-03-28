@@ -48,11 +48,13 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            IPropertyAdditionOptions toOptions =
+            IRelationSideAdditionOptions toOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameLowerFrom}Id");
-            this.frontendDtoPropertyAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName);
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(toOptions);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(toOptions, "toApiEntityUpdate", "entityUpdate", ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);
+
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "toApiEntityUpdate", "entityUpdate", ModelProjectGeneration.DomainFolder, FileName);
 
             this.entityUpdateMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }

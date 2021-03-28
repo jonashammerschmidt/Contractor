@@ -13,13 +13,16 @@ namespace Contractor.Core.Projects.Backend.Api
 
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
+        private readonly DtoRelationAddition relationAddition;
 
         public EntityUpdateGeneration(
             DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition)
+            DtoPropertyAddition propertyAddition,
+            DtoRelationAddition relationAddition)
         {
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
+            this.relationAddition = relationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -38,9 +41,9 @@ namespace Contractor.Core.Projects.Backend.Api
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            IPropertyAdditionOptions propertyAdditionOptions =
+            IRelationSideAdditionOptions relationSideAdditionOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
-            this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, ApiProjectGeneration.DomainFolder, FileName);
+            this.relationAddition.AddRelationToDTO(relationSideAdditionOptions, ApiProjectGeneration.DomainFolder, FileName);
         }
     }
 }

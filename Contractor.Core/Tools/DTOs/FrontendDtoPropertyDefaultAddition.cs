@@ -37,40 +37,9 @@ namespace Contractor.Core.Tools
             stringEditor.NextThatContains($"export const {options.EntityNameLower}CreateDefault");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine(GetPropertyLine(options));
+            stringEditor.InsertLine(FrontendDtoDefaultPropertyLine.GetPropertyLine(options));
 
             return stringEditor.GetText();
-        }
-
-        private static string GetPropertyLine(IPropertyAdditionOptions options)
-        {
-            // TODO: PropertyName length determines spaces betweeen name and type
-            if (options.PropertyType == "string")
-            {
-                return $"    {options.PropertyName.LowerFirstChar()}: '',";
-            }
-            else if (options.PropertyType == "int")
-            {
-                return $"    {options.PropertyName.LowerFirstChar()}: 0,";
-            }
-            else if (options.PropertyType == "Guid")
-            {
-                return $"    {options.PropertyName.LowerFirstChar()}: null,";
-            }
-            else if (options.PropertyType == "Guid?")
-            {
-                return $"    {options.PropertyName.LowerFirstChar()}?: null,";
-            }
-            else if (options.PropertyType == "bool")
-            {
-                return $"    {options.PropertyName.LowerFirstChar()}: false,";
-            }
-            else if (options.PropertyType == "DateTime")
-            {
-                return $"    {options.PropertyName.LowerFirstChar()}: new Date(),";
-            }
-
-            return $"    {options.PropertyName.LowerFirstChar()}: null,";
         }
     }
 }

@@ -14,13 +14,16 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private readonly FrontendDtoAddition frontendDtoAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
-
+        private readonly FrontendDtoRelationAddition frontendDtoRelationAddition;
+        
         public ApiEntityDetailGeneration(
             FrontendDtoAddition frontendDtoAddition,
-            FrontendDtoPropertyAddition frontendDtoPropertyAddition)
+            FrontendDtoPropertyAddition frontendDtoPropertyAddition,
+            FrontendDtoRelationAddition frontendDtoRelationAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
+            this.frontendDtoRelationAddition = frontendDtoRelationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -44,10 +47,10 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
                 $"/dtos/api/api-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
 
-            IPropertyAdditionOptions fromOptions =
+            IRelationSideAdditionOptions fromOptions =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"Api{options.EntityNameTo}[]", $"{options.EntityNamePluralLowerTo}");
 
-            this.frontendDtoPropertyAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"Api{options.EntityNameTo}", fromImportStatementPath);
 
             // To
@@ -55,10 +58,10 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/dtos/api/api-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}";
 
-            IPropertyAdditionOptions toOptions =
+            IRelationSideAdditionOptions toOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, $"Api{options.EntityNameFrom}", $"{options.EntityNameLowerFrom}");
 
-            this.frontendDtoPropertyAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"Api{options.EntityNameFrom}", toImportStatementPath);
         }
     }
