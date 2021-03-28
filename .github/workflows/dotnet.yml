@@ -2,15 +2,13 @@ name: .NET
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags: 
+     - 1.*
 
 jobs:
   build:
-
+    name: 'Build Contractor'
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -25,11 +23,27 @@ jobs:
       run: dotnet publish -p:PublishProfile=FolderProfile
     - name: Rename Artifact
       run: mv Contractor.CLI/bin/Release/netcoreapp3.1/publish/Contractor.CLI.exe Contractor.CLI/bin/Release/netcoreapp3.1/publish/contractor.exe
-    - name: Release
-      uses: fnkr/github-action-ghr@v1.3
-      if: startsWith(github.ref, 'refs/tags/')
-      env:
-        GHR_COMPRESS: zip
-        GHR_PATH: Contractor.CLI/bin/Release/netcoreapp3.1/publish/contractor.exe
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v2
+      with:
+        name: contractor
+        path: ./Contractor.CLI/bin/Release/netcoreapp3.1/publish/contractor.exe
+        
+  release:
+    name: 'Create GitHub Release for Contractor'
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+    steps:      
+      - name: 'Download Artifact'
+        uses: actions/download-artifact@v2
+        with:
+          name: contractor
+      - name: 'Create GitHub Release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./Contractor.CLI/bin/Release/netcoreapp3.1/publish/contractor.exe
+          tag_name: ${{ github.ref }}
+          name: Release ${{ github.ref }}
 
