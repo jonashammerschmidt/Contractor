@@ -43,40 +43,14 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor.PrevThatContains("}");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}Default = {GetValueForProperty(options, "Default")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = {GetValueForProperty(options, "ForCreate")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = {GetValueForProperty(options, "ForUpdate")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}Default = " +
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "Default")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = " +
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = " +
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForUpdate")};");
 
             return stringEditor.GetText();
-        }
-
-        private string GetValueForProperty(IPropertyAdditionOptions options, string scope)
-        {
-            if (options.PropertyType == "string")
-            {
-                return "\"" + options.PropertyName + scope + "\"";
-            }
-            else if (options.PropertyType == "int")
-            {
-                return new Random().Next(100, 999).ToString();
-            }
-            else if (options.PropertyType == "Guid")
-            {
-                return $"Guid.Parse(\"{Guid.NewGuid()}\")";
-            }
-            else if (options.PropertyType == "bool")
-            {
-                return scope.Equals("Default").ToString().ToLower();
-            }
-            else if (options.PropertyType == "DateTime")
-            {
-                Random gen = new Random();
-                int range = 10 * 365; // 10 years
-                var randomDate = DateTime.Today.AddDays(-gen.Next(range));
-                return $"new DateTime({randomDate.Year}, {randomDate.Month}, {randomDate.Day})";
-            }
-
-            return $"// TODO: {options.PropertyType} {options.PropertyName}";
         }
     }
 }

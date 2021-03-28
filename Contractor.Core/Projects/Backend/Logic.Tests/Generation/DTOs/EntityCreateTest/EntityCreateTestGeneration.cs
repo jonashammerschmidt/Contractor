@@ -13,15 +13,18 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
+        private readonly DtoRelationAddition relationAddition;
         private readonly EntityCreateTestMethodsAddition logicDtoCreateTestMethodsAddition;
 
         public EntityCreateTestGeneration(
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition,
+            DtoRelationAddition relationAddition,
             EntityCreateTestMethodsAddition logicDtoCreateTestMethodsAddition)
         {
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
+            this.relationAddition = relationAddition;
             this.logicDtoCreateTestMethodsAddition = logicDtoCreateTestMethodsAddition;
         }
 
@@ -42,10 +45,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            IPropertyAdditionOptions guidPropertyOptions =
+            IRelationSideAdditionOptions relationAdditionOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
-            this.propertyAddition.AddPropertyToDTO(guidPropertyOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
-            this.logicDtoCreateTestMethodsAddition.Add(guidPropertyOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.relationAddition.AddRelationToDTO(relationAdditionOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
+
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationAdditionOptions);
+            this.logicDtoCreateTestMethodsAddition.Add(propertyAdditionOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
         }
     }
 }

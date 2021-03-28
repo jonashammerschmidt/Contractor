@@ -40,46 +40,9 @@ namespace Contractor.Core.Projects.Database
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("PRIMARY KEY CLUSTERED");
 
-            stringEditor.InsertLine(GetPropertyLine(options));
+            stringEditor.InsertLine(DatabaseTablePropertyLine.GetPropertyLine(options));
 
             return stringEditor.GetText();
-        }
-
-        private static string GetPropertyLine(IPropertyAdditionOptions options)
-        {
-            string spaces = " ";
-            int spaceCount = 20 - options.PropertyName.Length;
-            for (int i = 0; i < spaceCount; i++)
-            {
-                spaces += " ";
-            }
-
-            if (options.PropertyType == "string")
-            {
-                return $"	[{options.PropertyName}]{spaces}NVARCHAR ({options.PropertyTypeExtra})   NOT NULL,";
-            }
-            else if (options.PropertyType == "int")
-            {
-                return $"	[{options.PropertyName}]{spaces}INT              NOT NULL,";
-            }
-            else if (options.PropertyType == "Guid")
-            {
-                return $"	[{options.PropertyName}]{spaces}UNIQUEIDENTIFIER NOT NULL,";
-            }
-            else if (options.PropertyType == "Guid?")
-            {
-                return $"	[{options.PropertyName}]{spaces}UNIQUEIDENTIFIER NULL,";
-            }
-            else if (options.PropertyType == "bool")
-            {
-                return $"	[{options.PropertyName}]{spaces}BIT              NOT NULL,";
-            }
-            else if (options.PropertyType == "DateTime")
-            {
-                return $"	[{options.PropertyName}]{spaces}DATETIME         NOT NULL,";
-            }
-
-            return $"-- TODO: {options.PropertyType} {options.PropertyName}";
         }
     }
 }

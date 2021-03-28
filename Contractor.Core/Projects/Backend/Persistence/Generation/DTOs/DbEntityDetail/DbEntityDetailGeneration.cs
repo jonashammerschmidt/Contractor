@@ -16,19 +16,22 @@ namespace Contractor.Core.Projects.Backend.Persistence
         private readonly DbEntityDetailToMethodsAddition dbDtoDetailToMethodsAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
+        private readonly DtoRelationAddition relationAddition;
 
         public DbEntityDetailGeneration(
             DbEntityDetailMethodsAddition dbDtoDetailMethodsAddition,
             DbEntityDetailFromMethodsAddition dbDtoDetailFromMethodsAddition,
             DbEntityDetailToMethodsAddition dbDtoDetailToMethodsAddition,
             DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition)
+            DtoPropertyAddition propertyAddition,
+            DtoRelationAddition relationAddition)
         {
             this.dbDtoDetailMethodsAddition = dbDtoDetailMethodsAddition;
             this.dbDtoDetailFromMethodsAddition = dbDtoDetailFromMethodsAddition;
             this.dbDtoDetailToMethodsAddition = dbDtoDetailToMethodsAddition;
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
+            this.relationAddition = relationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -49,18 +52,18 @@ namespace Contractor.Core.Projects.Backend.Persistence
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // From
-            IPropertyAdditionOptions optionsFrom =
+            IRelationSideAdditionOptions optionsFrom =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", options.EntityNamePluralTo);
-            this.propertyAddition.AddPropertyToDTO(optionsFrom, PersistenceProjectGeneration.DomainFolder, FileName,
+            this.relationAddition.AddRelationToDTO(optionsFrom, PersistenceProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             this.dbDtoDetailFromMethodsAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
-            IPropertyAdditionOptions optionsTo =
+            IRelationSideAdditionOptions optionsTo =
                 RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", options.EntityNameFrom);
-            this.propertyAddition.AddPropertyToDTO(optionsTo, PersistenceProjectGeneration.DomainFolder, FileName,
+            this.relationAddition.AddRelationToDTO(optionsTo, PersistenceProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
             this.dbDtoDetailToMethodsAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName,

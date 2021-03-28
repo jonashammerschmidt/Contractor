@@ -14,6 +14,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private readonly FrontendDtoAddition frontendDtoAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
+        private readonly FrontendDtoRelationAddition frontendDtoRelationAddition;
         private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
         private readonly FrontendDtoPropertyFromMethodAddition frontendDtoPropertyFromMethodAddition;
         private readonly FrontendDtoPropertyToMethodAddition frontendDtoPropertyToMethodAddition;
@@ -21,12 +22,14 @@ namespace Contractor.Core.Projects.Frontend.Model
         public IEntityDetailGeneration(
             FrontendDtoAddition frontendDtoAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition,
+            FrontendDtoRelationAddition frontendDtoRelationAddition,
             FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
             FrontendDtoPropertyFromMethodAddition frontendDtoPropertyFromMethodAddition,
             FrontendDtoPropertyToMethodAddition frontendDtoPropertyToMethodAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
+            this.frontendDtoRelationAddition = frontendDtoRelationAddition;
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
             this.frontendDtoPropertyFromMethodAddition = frontendDtoPropertyFromMethodAddition;
             this.frontendDtoPropertyToMethodAddition = frontendDtoPropertyToMethodAddition;
@@ -55,10 +58,10 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
                 $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
 
-            IPropertyAdditionOptions fromOptions =
+            IRelationSideAdditionOptions fromOptions =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}[]", $"{options.EntityNamePluralLowerTo}");
 
-            this.frontendDtoPropertyAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"fromApi{options.EntityNameTo}, I{options.EntityNameTo}", fromImportStatementPath);
 
             frontendDtoPropertyFromMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
@@ -68,10 +71,10 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}";
 
-            IPropertyAdditionOptions toOptions =
+            IRelationSideAdditionOptions toOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", $"{options.EntityNameLowerFrom}");
 
-            this.frontendDtoPropertyAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"fromApi{options.EntityNameFrom}, I{options.EntityNameFrom}", toImportStatementPath);
 
             frontendDtoPropertyToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);

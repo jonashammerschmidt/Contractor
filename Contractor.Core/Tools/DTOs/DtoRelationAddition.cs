@@ -5,29 +5,44 @@ using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
-    internal class DtoPropertyAddition
+    internal class DtoRelationAddition
     {
         public PathService pathService;
 
-        public DtoPropertyAddition(PathService pathService)
+        public DtoRelationAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
         {
-            AddPropertyToDTO(options, domainFolder, templateFileName, false);
+            AddRelationToDTO(options, domainFolder, templateFileName, false);
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface)
+        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd)
+        {
+            AddRelationToDTO(options, domainFolder, templateFileName, false, namespaceToAdd);
+        }
+
+        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface)
+        {
+            AddRelationToDTO(options, domainFolder, templateFileName, forInterface, null);
+        }
+
+        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, string namespaceToAdd)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath, forInterface);
 
+            if (namespaceToAdd != null)
+            {
+                fileData = UsingStatements.Add(fileData, namespaceToAdd);
+            }
+
             CsharpClassWriter.Write(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
         {
             string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(options, domainFolder);
             string fileName = templateFileName.Replace("Entity", options.EntityName);
@@ -35,7 +50,7 @@ namespace Contractor.Core.Tools
             return filePath;
         }
 
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath, bool forInterface)
+        private string UpdateFileData(IRelationSideAdditionOptions options, string filePath, bool forInterface)
         {
             string fileData = File.ReadAllText(filePath);
 
@@ -45,17 +60,22 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddUsingStatements(IPropertyAdditionOptions options, string fileData)
+        private string AddUsingStatements(IRelationSideAdditionOptions options, string fileData)
         {
-            if (options.PropertyType == PropertyTypes.Guid || options.PropertyType == PropertyTypes.DateTime)
+            if (options.PropertyType == "Guid")
             {
                 fileData = UsingStatements.Add(fileData, "System");
+            }
+
+            if (options.PropertyType.Contains("Enumerable"))
+            {
+                fileData = UsingStatements.Add(fileData, "System.Collections.Generic");
             }
 
             return fileData;
         }
 
-        private string AddProperty(string file, IPropertyAdditionOptions options, bool forInterface)
+        private string AddProperty(string file, IRelationSideAdditionOptions options, bool forInterface)
         {
             StringEditor stringEditor = new StringEditor(file);
             FindStartingLineForNewProperty(file, options, stringEditor);
@@ -71,14 +91,14 @@ namespace Contractor.Core.Tools
             }
 
             if (forInterface)
-                stringEditor.InsertLine(BackendDtoInterfacePropertyLine.GetPropertyLine(options));
+                stringEditor.InsertLine($"        {options.PropertyType} {options.PropertyName} {{ get; set; }}");
             else
-                stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(options));
+                stringEditor.InsertLine($"        public {options.PropertyType} {options.PropertyName} {{ get; set; }}");
 
             return stringEditor.GetText();
         }
 
-        private void FindStartingLineForNewProperty(string file, IPropertyAdditionOptions options, StringEditor stringEditor)
+        private void FindStartingLineForNewProperty(string file, IRelationSideAdditionOptions options, StringEditor stringEditor)
         {
             bool hasConstructor = Regex.IsMatch(file, $"public .*{options.EntityName}.*\\(");
             bool hasProperty = file.Contains("{ get; set; }");

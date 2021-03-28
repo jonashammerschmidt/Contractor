@@ -4,7 +4,7 @@ namespace Contractor.Core.Options
 {
     public class PropertyAdditionOptions : EntityAdditionOptions, IPropertyAdditionOptions
     {
-        public string PropertyType { get; set; }
+        public PropertyTypes PropertyType { get; set; }
 
         public string PropertyName { get; set; }
 
@@ -33,11 +33,21 @@ namespace Contractor.Core.Options
             this.PropertyTypeExtra = options.PropertyTypeExtra;
         }
 
+        internal PropertyAdditionOptions(IRelationSideAdditionOptions options) : base(options)
+        {
+            this.PropertyName = options.PropertyName;
+            switch(options.PropertyType)
+            {
+                case "Guid":
+                    this.PropertyType = PropertyTypes.Guid;
+                    break;
+            };
+        }
+
         public static bool Validate(IPropertyAdditionOptions options)
         {
             if (!EntityAdditionOptions.Validate(options) ||
                string.IsNullOrEmpty(options.PropertyName) ||
-               string.IsNullOrEmpty(options.PropertyType) ||
                !options.PropertyName.IsAlpha())
             {
                 return false;

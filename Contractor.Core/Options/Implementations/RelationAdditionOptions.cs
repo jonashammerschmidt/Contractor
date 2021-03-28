@@ -71,9 +71,9 @@ namespace Contractor.Core.Options
             };
         }
 
-        public static IPropertyAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options, string propertyType, string propertyName)
+        internal static IRelationSideAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options, string propertyType, string propertyName)
         {
-            return new PropertyAdditionOptions(options)
+            return new RelationSideAdditionOptions(options)
             {
                 Domain = options.DomainFrom,
                 EntityName = options.EntityNameFrom,
@@ -93,9 +93,9 @@ namespace Contractor.Core.Options
             };
         }
 
-        public static IPropertyAdditionOptions GetPropertyForTo(IRelationAdditionOptions options, string propertyType, string propertyName)
+        internal static IRelationSideAdditionOptions GetPropertyForTo(IRelationAdditionOptions options, string propertyType, string propertyName)
         {
-            return new PropertyAdditionOptions(options)
+            return new RelationSideAdditionOptions(options)
             {
                 Domain = options.DomainTo,
                 EntityName = options.EntityNameTo,

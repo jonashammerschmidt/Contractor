@@ -43,41 +43,16 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             stringEditor.PrevThatContains("}");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault = {GetValueForProperty(options, "DbDefault")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault2 = {GetValueForProperty(options, "DbDefault2")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = {GetValueForProperty(options, "ForCreate")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = {GetValueForProperty(options, "ForUpdate")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault = " +
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "DbDefault")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault2 = " +
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "DbDefault2")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = " +
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate")};");
+            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = " +
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForUpdate")};");
 
             return stringEditor.GetText();
-        }
-
-        private string GetValueForProperty(IPropertyAdditionOptions options, string scope)
-        {
-            if (options.PropertyType == "string")
-            {
-                return "\"" + options.PropertyName + scope + "\"";
-            }
-            else if (options.PropertyType == "int")
-            {
-                return new Random().Next(100, 999).ToString();
-            }
-            else if (options.PropertyType == "Guid")
-            {
-                return $"Guid.Parse(\"{Guid.NewGuid()}\")";
-            }
-            else if (options.PropertyType == "bool")
-            {
-                return scope.Equals("DbDefault").ToString().ToLower();
-            }
-            else if (options.PropertyType == "DateTime")
-            {
-                Random gen = new Random();
-                int range = 10 * 365; // 10 years
-                var randomDate = DateTime.Today.AddDays(-gen.Next(range));
-                return $"new DateTime({randomDate.Year}, {randomDate.Month}, {randomDate.Day})";
-            }
-
-            return $"// TODO: {options.PropertyType} {options.PropertyName}";
         }
     }
 }

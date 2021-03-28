@@ -57,7 +57,7 @@ namespace Contractor.CLI
             // Properties
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = "string",
+                PropertyType = PropertyTypes.String,
                 PropertyName = "Name",
                 PropertyTypeExtra = "256"
             };
@@ -65,14 +65,14 @@ namespace Contractor.CLI
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = "DateTime",
+                PropertyType = PropertyTypes.DateTime,
                 PropertyName = "EroeffnetAm"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = "bool",
+                PropertyType = PropertyTypes.Boolean,
                 PropertyName = "IsPleite"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
@@ -94,7 +94,7 @@ namespace Contractor.CLI
             // Properties
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = "string",
+                PropertyType = PropertyTypes.String,
                 PropertyName = "Name",
                 PropertyTypeExtra = "256"
             };
@@ -102,7 +102,7 @@ namespace Contractor.CLI
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = "DateTime",
+                PropertyType = PropertyTypes.DateTime,
                 PropertyName = "EroeffnetAm"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
@@ -130,7 +130,7 @@ namespace Contractor.CLI
             // Properties
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = "string",
+                PropertyType = PropertyTypes.String,
                 PropertyName = "Name",
                 PropertyTypeExtra = "256"
             };
@@ -138,7 +138,7 @@ namespace Contractor.CLI
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = "int",
+                PropertyType = PropertyTypes.Integer,
                 PropertyName = "Balance"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
