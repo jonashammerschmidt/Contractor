@@ -40,10 +40,13 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: contractor
+      - name: Get Tag Name
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
       - name: 'Create GitHub Release'
         uses: softprops/action-gh-release@v1
         with:
-          files: ./Contractor.CLI/bin/Release/netcoreapp3.1/publish/contractor.exe
-          tag_name: ${{ github.ref }}
-          name: Release ${{ github.ref }}
+          files: ./contractor.exe
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          name: Release ${{ steps.get_version.outputs.VERSION }}
 
