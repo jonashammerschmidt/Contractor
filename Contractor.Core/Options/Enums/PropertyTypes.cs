@@ -4,9 +4,9 @@
     {
         String,
         Integer,
-        Decimal,
+        Float,
         DateTime,
         Boolean,
-        Guid,
+        Guid
     }
 }

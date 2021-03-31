@@ -43,13 +43,13 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             stringEditor.PrevThatContains("}");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault = " +
+            stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}DbDefault = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "DbDefault")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}DbDefault2 = " +
+            stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}DbDefault2 = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "DbDefault2")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = " +
+            stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForCreate = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = " +
+            stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForUpdate = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForUpdate")};");
 
             return stringEditor.GetText();

@@ -43,44 +43,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("<table mat-table");
             stringEditor.NextThatContains("<ng-container matColumnDef=\"detail\">");
 
-            stringEditor.InsertLine(GetAppRoutingLine(options));
+            stringEditor.InsertLine(FrontendPageEntitiesPropertyLine.GetPropertyLine(options));
 
             return stringEditor.GetText();
-        }
-
-        private string GetAppRoutingLine(IPropertyAdditionOptions options)
-        {
-            if (options.PropertyType == PropertyTypes.Boolean)
-            {
-                return
-                  $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
-                  $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyName.ToReadable()} </th>\n" +
-                  $"                <td mat-cell *matCellDef=\"let element\">\n" +
-                  $"                    <mat-icon color=\"accent\" *ngIf=\"element.{options.PropertyName.LowerFirstChar()}\" >\n" +
-                  $"                        check_box\n" +
-                  $"                    </mat-icon>\n" +
-                  $"                    <mat-icon style=\"color: gray\" *ngIf=\"!element.{options.PropertyName.LowerFirstChar()}\">\n" +
-                  $"                        check_box_outline_blank\n" +
-                  $"                    </mat-icon>\n" +
-                  $"                </td>\n" +
-                  $"            </ng-container>\n";
-            }
-            else if (options.PropertyType == PropertyTypes.DateTime)
-            {
-                return
-                 $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
-                 $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyName.ToReadable()} </th>\n" +
-                 $"                <td mat-cell *matCellDef=\"let element\"> {{{{element.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}} </td>\n" +
-                  "            </ng-container>\n";
-            }
-            else
-            {
-                return
-                 $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
-                 $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyName.ToReadable()} </th>\n" +
-                 $"                <td mat-cell *matCellDef=\"let element\" > {{{{element.{options.PropertyName.LowerFirstChar()}}}}} </td>\n" +
-                  "            </ng-container>\n";
-            }
         }
     }
 }

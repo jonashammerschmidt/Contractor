@@ -46,46 +46,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine("        <br>");
             stringEditor.InsertNewLine();
 
-            stringEditor.InsertLine(GetLine(options));
+            stringEditor.InsertLine(FrontendPageCreatePropertyLine.GetPropertyLine(options));
 
             return stringEditor.GetText();
-        }
-
-        private string GetLine(IPropertyAdditionOptions options)
-        {
-            if (options.PropertyType == PropertyTypes.Boolean)
-            {
-                return
-                    $"        <mat-checkbox [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
-                    $"            {options.PropertyName.ToReadable()}\n" +
-                    $"        </mat-checkbox>";
-            }
-            else if (options.PropertyType == PropertyTypes.DateTime)
-            {
-                return
-                   "        <mat-form-field appearance=\"outline\">\n" +
-                  $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                  $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\" [matDatepicker]=\"picker\">\n" +
-                   "            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
-                   "            <mat-datepicker #picker></mat-datepicker>\n" +
-                   "        </mat-form-field>";
-            }
-            else if (options.PropertyType == PropertyTypes.String && string.IsNullOrEmpty(options.PropertyTypeExtra))
-            {
-                return
-                  "        <mat-form-field appearance=\"outline\">\n" +
-                 $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                 $"            <input matInput maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
-                  "        </mat-form-field>";
-            }
-            else
-            {
-                return
-                  "        <mat-form-field appearance=\"outline\">\n" +
-                 $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                 $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
-                  "        </mat-form-field>";
-            }
         }
     }
 }

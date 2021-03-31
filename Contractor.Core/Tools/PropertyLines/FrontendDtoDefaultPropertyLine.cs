@@ -15,6 +15,9 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.Integer:
                     return $"    {options.PropertyName.LowerFirstChar()}: 0,";
 
+                case PropertyTypes.Float:
+                    return $"    {options.PropertyName.LowerFirstChar()}: 0,";
+
                 case PropertyTypes.DateTime:
                     return $"    {options.PropertyName.LowerFirstChar()}: new Date(),";
 

@@ -11,6 +11,9 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.String:
                     return $"        public string {options.PropertyName} {{ get; set; }}";
 
+                case PropertyTypes.Float:
+                    return $"        public float {options.PropertyName} {{ get; set; }}";
+
                 case PropertyTypes.Integer:
                     return $"        public int {options.PropertyName} {{ get; set; }}";
 
