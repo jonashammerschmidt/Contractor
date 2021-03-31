@@ -74,7 +74,7 @@ namespace Contractor.CLI
                 case "decimal":
                 case "double":
                 case "float":
-                    return PropertyTypes.Decimal;
+                    return PropertyTypes.Float;
                 case "guid":
                     return PropertyTypes.Guid;
                 default:

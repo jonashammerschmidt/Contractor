@@ -43,11 +43,11 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor.PrevThatContains("}");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}Default = " +
+            stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}Default = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "Default")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForCreate = " +
+            stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForCreate = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate")};");
-            stringEditor.InsertLine($"        public static readonly {options.PropertyType} {options.PropertyName}ForUpdate = " +
+            stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForUpdate = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForUpdate")};");
 
             return stringEditor.GetText();
