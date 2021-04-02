@@ -32,9 +32,6 @@ namespace Contractor.Core.Tools
 
                 case PropertyTypes.DateTime:
                     return $"	[{options.PropertyName}]{spaces}DATETIME         NOT NULL,";
-
-                default:
-                    return $"-- TODO: {options.PropertyType} {options.PropertyName}";
             }
         }
     }
