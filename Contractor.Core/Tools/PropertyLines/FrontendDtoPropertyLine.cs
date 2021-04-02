@@ -13,10 +13,8 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.Guid:
                     return $"    {options.PropertyName.LowerFirstChar()}: string;";
 
+                case PropertyTypes.Double:
                 case PropertyTypes.Integer:
-                    return $"    {options.PropertyName.LowerFirstChar()}: number;";
-
-                case PropertyTypes.Float:
                     return $"    {options.PropertyName.LowerFirstChar()}: number;";
 
                 case PropertyTypes.DateTime:

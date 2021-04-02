@@ -11,14 +11,15 @@ namespace Contractor.Core.Tools
             {
                 case PropertyTypes.Boolean:
                     return
-                        $"        <mat-checkbox [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
+                        $"        <mat-checkbox [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Update.{options.PropertyName.LowerFirstChar()}\">\n" +
                         $"            {options.PropertyName.ToReadable()}\n" +
-                        $"        </mat-checkbox>";
+                        $"        </mat-checkbox>\n" +
+                        $"        <br>";
                 case PropertyTypes.DateTime:
                     return
                         "        <mat-form-field appearance=\"outline\">\n" +
                         $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                        $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\" [matDatepicker]=\"picker\">\n" +
+                        $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Update.{options.PropertyName.LowerFirstChar()}\" [matDatepicker]=\"picker\">\n" +
                         "            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
                         "            <mat-datepicker #picker></mat-datepicker>\n" +
                         "        </mat-form-field>";
@@ -26,20 +27,20 @@ namespace Contractor.Core.Tools
                     return
                         "        <mat-form-field appearance=\"outline\">\n" +
                         $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                        $"            <input matInput maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
+                        $"            <input matInput maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Update.{options.PropertyName.LowerFirstChar()}\">\n" +
                         "        </mat-form-field>";
-                case PropertyTypes.Float:
+                case PropertyTypes.Double:
                 case PropertyTypes.Integer:
                     return
                           "        <mat-form-field appearance=\"outline\">\n" +
                          $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                         $"            <input matInput type=\"number\" placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
+                         $"            <input matInput type=\"number\" placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Update.{options.PropertyName.LowerFirstChar()}\">\n" +
                           "        </mat-form-field>";
                 default:
                     return
                           "        <mat-form-field appearance=\"outline\">\n" +
                          $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                         $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
+                         $"            <input matInput placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Update.{options.PropertyName.LowerFirstChar()}\">\n" +
                           "        </mat-form-field>";
             }
         }

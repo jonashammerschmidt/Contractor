@@ -18,7 +18,7 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.String:
                     return $"	[{options.PropertyName}]{spaces}NVARCHAR ({options.PropertyTypeExtra})   NOT NULL,";
 
-                case PropertyTypes.Float:
+                case PropertyTypes.Double:
                     return $"	[{options.PropertyName}]{spaces}FLOAT            NOT NULL,";
 
                 case PropertyTypes.Integer:
