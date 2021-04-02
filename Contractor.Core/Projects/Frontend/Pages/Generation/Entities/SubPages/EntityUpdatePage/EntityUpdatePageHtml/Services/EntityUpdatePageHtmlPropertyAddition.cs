@@ -46,7 +46,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine("        <br>");
             stringEditor.InsertNewLine();
 
-            stringEditor.InsertLine(FrontendPageCreatePropertyLine.GetPropertyLine(options));
+            stringEditor.InsertLine(FrontendPageUpdatePropertyLine.GetPropertyLine(options));
 
             return stringEditor.GetText();
         }

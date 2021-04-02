@@ -15,7 +15,7 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.Integer:
                     return new Random().Next(100, 999).ToString();
 
-                case PropertyTypes.Float:
+                case PropertyTypes.Double:
                     return new Random().Next(10, 99).ToString() + "." + new Random().Next(0, 99999).ToString();
 
                 case PropertyTypes.Guid:

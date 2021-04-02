@@ -134,12 +134,40 @@ namespace Contractor.CLI
                 PropertyName = "Name",
                 PropertyTypeExtra = "256"
             };
+            contractorCoreApi.AddProperty(propertyAdditionOptions); 
+            
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.Boolean,
+                PropertyName = "Boolean"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.DateTime,
+                PropertyName = "DateTime"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.Double,
+                PropertyName = "Double"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.Guid,
+                PropertyName = "Guid"
+            };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Integer,
-                PropertyName = "Balance"
+                PropertyName = "Integer"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
         }

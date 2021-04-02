@@ -10,9 +10,9 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.String:
                     return "string";
                 case PropertyTypes.Integer:
-                    return "integer";
-                case PropertyTypes.Float:
-                    return "float";
+                    return "int";
+                case PropertyTypes.Double:
+                    return "double";
                 case PropertyTypes.DateTime:
                     return "DateTime";
                 case PropertyTypes.Boolean:

@@ -57,24 +57,24 @@ namespace Contractor.CLI
                 case "varchar":
                 case "nvarchar":
                     return PropertyTypes.String;
+                case "short":
                 case "int":
                 case "integer":
-                case "short":
                 case "long":
-                case "number":
                     return PropertyTypes.Integer;
                 case "datetime":
                 case "date":
                 case "time":
                     return PropertyTypes.DateTime;
+                case "bit":
                 case "bool":
                 case "boolean":
-                case "bit":
                     return PropertyTypes.Boolean;
-                case "decimal":
                 case "double":
                 case "float":
-                    return PropertyTypes.Float;
+                case "number":
+                case "decimal":
+                    return PropertyTypes.Double;
                 case "guid":
                     return PropertyTypes.Guid;
                 default:

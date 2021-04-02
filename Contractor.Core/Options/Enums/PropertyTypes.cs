@@ -4,7 +4,7 @@
     {
         String,
         Integer,
-        Float,
+        Double,
         DateTime,
         Boolean,
         Guid
