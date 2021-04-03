@@ -1,9 +1,7 @@
 Main Quests:
+- Optional Properties
 - contractor add relation 1:n 
   - [-n Vertragsbank:Vertragskunden] Alternative Property Names
-
-Side Quests:
-- Solve TODOs
 
 Ideas: 
 - contractor add relation n:m UserManagement.User:Users UserManagement.Group:Groups UserGroupMembership
