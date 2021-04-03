@@ -12,17 +12,14 @@ namespace Contractor.Core.Projects.Backend.Api
         private static readonly string FileName = "EntityUpdate.cs";
 
         private readonly DtoAddition dtoAddition;
-        private readonly DtoPropertyAddition propertyAddition;
-        private readonly DtoRelationAddition relationAddition;
+        private readonly ApiDtoPropertyAddition apiPropertyAddition;
 
         public EntityUpdateGeneration(
             DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition,
-            DtoRelationAddition relationAddition)
+            ApiDtoPropertyAddition apiPropertyAddition)
         {
             this.dtoAddition = dtoAddition;
-            this.propertyAddition = propertyAddition;
-            this.relationAddition = relationAddition;
+            this.apiPropertyAddition = apiPropertyAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -36,14 +33,16 @@ namespace Contractor.Core.Projects.Backend.Api
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.propertyAddition.AddPropertyToDTO(options, ApiProjectGeneration.DomainFolder, FileName);
+            this.apiPropertyAddition.AddPropertyToDTO(options, ApiProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            IRelationSideAdditionOptions relationSideAdditionOptions =
+            IRelationSideAdditionOptions relationAdditionOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
-            this.relationAddition.AddRelationToDTO(relationSideAdditionOptions, ApiProjectGeneration.DomainFolder, FileName);
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationAdditionOptions);
+
+            this.apiPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ApiProjectGeneration.DomainFolder, FileName);
         }
     }
 }

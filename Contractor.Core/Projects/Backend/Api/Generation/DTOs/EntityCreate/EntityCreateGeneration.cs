@@ -12,14 +12,14 @@ namespace Contractor.Core.Projects.Backend.Api
         private static readonly string FileName = "EntityCreate.cs";
 
         private readonly DtoAddition dtoAddition;
-        private readonly DtoPropertyAddition propertyAddition;
+        private readonly ApiDtoPropertyAddition apiPropertyAddition;
 
         public EntityCreateGeneration(
             DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition)
+            ApiDtoPropertyAddition apiPropertyAddition)
         {
             this.dtoAddition = dtoAddition;
-            this.propertyAddition = propertyAddition;
+            this.apiPropertyAddition = apiPropertyAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -33,8 +33,7 @@ namespace Contractor.Core.Projects.Backend.Api
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            // TODO: Add annotation
-            this.propertyAddition.AddPropertyToDTO(options, ApiProjectGeneration.DomainFolder, FileName);
+            this.apiPropertyAddition.AddPropertyToDTO(options, ApiProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -43,7 +42,7 @@ namespace Contractor.Core.Projects.Backend.Api
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationAdditionOptions);
 
-            this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, ApiProjectGeneration.DomainFolder, FileName);
+            this.apiPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ApiProjectGeneration.DomainFolder, FileName);
         }
     }
 }

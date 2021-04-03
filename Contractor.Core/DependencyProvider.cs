@@ -45,6 +45,7 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DomainDependencyProvider>();
             serviceCollection.AddSingleton<EntityCoreDependencyProvider>();
 
+            serviceCollection.AddSingleton<ApiDtoPropertyAddition>();
             serviceCollection.AddSingleton<DtoAddition>();
             serviceCollection.AddSingleton<DtoPropertyAddition>();
             serviceCollection.AddSingleton<DtoRelationAddition>();
