@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Options;
+using System;
 
 namespace Contractor.Core.Tools
 {
@@ -32,6 +33,8 @@ namespace Contractor.Core.Tools
 
                 case PropertyTypes.DateTime:
                     return $"	[{options.PropertyName}]{spaces}DATETIME         NOT NULL,";
+                default:
+                    throw new NotImplementedException();
             }
         }
     }
