@@ -34,7 +34,7 @@ namespace Contractor.Core.Tools
             string fileData = File.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"export const {options.EntityNameLower}CreateDefault");
+            stringEditor.NextThatContains($"export function get{options.EntityName}CreateDefault()");
             stringEditor.NextThatContains("};");
 
             stringEditor.InsertLine(FrontendDtoDefaultPropertyLine.GetPropertyLine(options));

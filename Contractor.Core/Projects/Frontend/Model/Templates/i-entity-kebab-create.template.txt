@@ -8,5 +8,7 @@ export function toApiEntityCreate(entityCreate: IEntityCreate): ApiEntityCreate 
     };
 }
 
-export const entityCreateDefault: IEntityCreate = {
+export function getEntityCreateDefault(): IEntityCreate {
+    return {
+    };
 };

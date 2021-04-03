@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
-import { entityCreateDefault, IEntityCreate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-create';
+import { getEntityCreateDefault, IEntityCreate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-create';
 
 @Component({
   selector: 'app-entity-kebab-create',
@@ -20,7 +20,7 @@ export class EntityCreatePage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.entityCreate = entityCreateDefault;
+    this.entityCreate = getEntityCreateDefault();
   }
 
   async onCreateClicked(): Promise<void> {
