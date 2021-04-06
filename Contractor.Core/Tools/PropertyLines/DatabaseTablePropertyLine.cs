@@ -14,25 +14,27 @@ namespace Contractor.Core.Tools
                 spaces += " ";
             }
 
+            string nullableText = (options.IsOptional) ? "NULL" : "NOT NULL";
             switch (options.PropertyType)
             {
                 case PropertyTypes.String:
-                    return $"	[{options.PropertyName}]{spaces}NVARCHAR ({options.PropertyTypeExtra})   NOT NULL,";
+                    return $"	[{options.PropertyName}]{spaces}NVARCHAR ({options.PropertyTypeExtra})   {nullableText},";
 
                 case PropertyTypes.Double:
-                    return $"	[{options.PropertyName}]{spaces}FLOAT            NOT NULL,";
+                    return $"	[{options.PropertyName}]{spaces}FLOAT            {nullableText},";
 
                 case PropertyTypes.Integer:
-                    return $"	[{options.PropertyName}]{spaces}INT              NOT NULL,";
+                    return $"	[{options.PropertyName}]{spaces}INT              {nullableText},";
 
                 case PropertyTypes.Guid:
-                    return $"	[{options.PropertyName}]{spaces}UNIQUEIDENTIFIER NOT NULL,";
+                    return $"	[{options.PropertyName}]{spaces}UNIQUEIDENTIFIER {nullableText},";
 
                 case PropertyTypes.Boolean:
-                    return $"	[{options.PropertyName}]{spaces}BIT              NOT NULL,";
+                    return $"	[{options.PropertyName}]{spaces}BIT              {nullableText},";
 
                 case PropertyTypes.DateTime:
-                    return $"	[{options.PropertyName}]{spaces}DATETIME         NOT NULL,";
+                    return $"	[{options.PropertyName}]{spaces}DATETIME         {nullableText},";
+
                 default:
                     throw new NotImplementedException();
             }

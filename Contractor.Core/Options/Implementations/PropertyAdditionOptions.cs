@@ -10,6 +10,8 @@ namespace Contractor.Core.Options
 
         public string PropertyTypeExtra { get; set; }
 
+        public bool IsOptional { get; set; } = false;
+
         public PropertyAdditionOptions()
         {
         }
@@ -31,12 +33,14 @@ namespace Contractor.Core.Options
             this.PropertyType = options.PropertyType;
             this.PropertyName = options.PropertyName;
             this.PropertyTypeExtra = options.PropertyTypeExtra;
+            this.IsOptional = options.IsOptional;
         }
 
         internal PropertyAdditionOptions(IRelationSideAdditionOptions options) : base(options)
         {
             this.PropertyName = options.PropertyName;
-            switch(options.PropertyType)
+            this.IsOptional = options.IsOptional;
+            switch (options.PropertyType)
             {
                 case "Guid":
                     this.PropertyType = PropertyTypes.Guid;
