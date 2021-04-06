@@ -6,6 +6,8 @@
 
         public string PropertyName { get; set; }
 
+        public bool IsOptional { get; set; } = false;
+
         public RelationSideAdditionOptions()
         {
         }

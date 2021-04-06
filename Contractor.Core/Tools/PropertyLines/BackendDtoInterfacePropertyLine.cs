@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Options;
+using System;
 
 namespace Contractor.Core.Tools
 {
@@ -6,28 +7,29 @@ namespace Contractor.Core.Tools
     {
         public static string GetPropertyLine(IPropertyAdditionOptions options)
         {
+            string optionalText = (options.IsOptional) ? "?" : "";
             switch (options.PropertyType)
             {
                 case PropertyTypes.String:
-                    return $"        string {options.PropertyName} {{ get; set; }}";
+                    return $"        string{optionalText} {options.PropertyName} {{ get; set; }}";
 
                 case PropertyTypes.Integer:
-                    return $"        int {options.PropertyName} {{ get; set; }}";
+                    return $"        int{optionalText} {options.PropertyName} {{ get; set; }}";
 
                 case PropertyTypes.Double:
-                    return $"        double {options.PropertyName} {{ get; set; }}";
+                    return $"        double{optionalText} {options.PropertyName} {{ get; set; }}";
 
                 case PropertyTypes.DateTime:
-                    return $"        DateTime {options.PropertyName} {{ get; set; }}";
+                    return $"        DateTime{optionalText} {options.PropertyName} {{ get; set; }}";
 
                 case PropertyTypes.Boolean:
-                    return $"        bool {options.PropertyName} {{ get; set; }}";
+                    return $"        bool{optionalText} {options.PropertyName} {{ get; set; }}";
 
                 case PropertyTypes.Guid:
-                    return $"        Guid {options.PropertyName} {{ get; set; }}";
+                    return $"        Guid{optionalText} {options.PropertyName} {{ get; set; }}";
 
                 default:
-                    return $"        object {options.PropertyName} {{ get; set; }}";
+                    throw new NotImplementedException();
             }
         }
     }

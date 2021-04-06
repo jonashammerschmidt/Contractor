@@ -10,9 +10,9 @@ namespace Contractor.Core.Tools
             {
                 case PropertyTypes.String:
                     return 
-                       $"                entity.Property(e => e.{options.PropertyName})\n" +
-                        "                    .IsRequired()\n" +
-                       $"                    .HasMaxLength({options.PropertyTypeExtra});";
+                        $"                entity.Property(e => e.{options.PropertyName})\n" +
+                        (options.IsOptional ? "" : "                    .IsRequired()\n") +
+                        $"                    .HasMaxLength({options.PropertyTypeExtra});";
 
                 case PropertyTypes.DateTime:
                     return $"                entity.Property(e => e.{options.PropertyName}).HasColumnType(\"datetime\");";

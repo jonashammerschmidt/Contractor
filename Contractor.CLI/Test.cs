@@ -29,13 +29,12 @@ namespace Contractor.CLI
                 DbProjectName = "Contract.Architecture.Database.Core",
             };
 
-            AddBankwesen(contractorOptions);
-            AddKonto(contractorOptions);
-            AddKundenstamm(contractorOptions);
+            AddBanken(contractorOptions);
+            AddKunden(contractorOptions);
             AddRelation(contractorOptions);
         }
 
-        private static void AddBankwesen(ContractorOptions contractorOptions)
+        private static void AddBanken(ContractorOptions contractorOptions)
         {
             ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
 
@@ -65,50 +64,41 @@ namespace Contractor.CLI
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
-                PropertyType = PropertyTypes.DateTime,
-                PropertyName = "EroeffnetAm"
-            };
-            contractorCoreApi.AddProperty(propertyAdditionOptions);
-
-            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
-            {
                 PropertyType = PropertyTypes.Boolean,
-                PropertyName = "IsPleite"
-            };
-            contractorCoreApi.AddProperty(propertyAdditionOptions);
-        }
-
-        private static void AddKonto(ContractorOptions contractorOptions)
-        {
-            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-
-            // Entities
-            EntityAdditionOptions entityAdditionOptions = new EntityAdditionOptions(contractorOptions)
-            {
-                Domain = "Bankwesen",
-                EntityName = "Konto",
-                EntityNamePlural = "Konten"
-            };
-            contractorCoreApi.AddEntity(entityAdditionOptions);
-
-            // Properties
-            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
-            {
-                PropertyType = PropertyTypes.String,
-                PropertyName = "Name",
-                PropertyTypeExtra = "256"
+                PropertyName = "Boolean"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.DateTime,
-                PropertyName = "EroeffnetAm"
+                PropertyName = "DateTime",
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.Double,
+                PropertyName = "Double"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.Guid,
+                PropertyName = "Guid",
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.Integer,
+                PropertyName = "Integer"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
 
-        private static void AddKundenstamm(ContractorOptions contractorOptions)
+        private static void AddKunden(ContractorOptions contractorOptions)
         {
             ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
 
@@ -132,42 +122,48 @@ namespace Contractor.CLI
             {
                 PropertyType = PropertyTypes.String,
                 PropertyName = "Name",
-                PropertyTypeExtra = "256"
+                PropertyTypeExtra = "256",
+                IsOptional = true,
             };
-            contractorCoreApi.AddProperty(propertyAdditionOptions); 
-            
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Boolean,
-                PropertyName = "Boolean"
+                PropertyName = "Boolean",
+                IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.DateTime,
-                PropertyName = "DateTime"
+                PropertyName = "DateTime",
+                IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Double,
-                PropertyName = "Double"
+                PropertyName = "Double",
+                IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Guid,
-                PropertyName = "Guid"
+                PropertyName = "Guid",
+                IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Integer,
-                PropertyName = "Integer"
+                PropertyName = "Integer",
+                IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
@@ -182,17 +178,6 @@ namespace Contractor.CLI
                 DomainTo = "Kundenstamm",
                 EntityNameFrom = "Bank",
                 EntityNamePluralFrom = "Banken",
-                EntityNameTo = "Kunde",
-                EntityNamePluralTo = "Kunden",
-            };
-            contractorCoreApi.Add1ToNRelation(relationOptions);
-
-            relationOptions = new RelationAdditionOptions(contractorOptions)
-            {
-                DomainFrom = "Bankwesen",
-                DomainTo = "Kundenstamm",
-                EntityNameFrom = "Konto",
-                EntityNamePluralFrom = "Konten",
                 EntityNameTo = "Kunde",
                 EntityNamePluralTo = "Kunden",
             };

@@ -5,5 +5,7 @@
         string PropertyType { get; set; }
 
         string PropertyName { get; set; }
+
+        bool IsOptional { get; set; }
     }
 }
