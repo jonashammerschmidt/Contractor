@@ -14,18 +14,15 @@ namespace Contractor.Core.Projects.Frontend.Model
         private readonly FrontendDtoAddition frontendDtoAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
-        private readonly FrontendDtoPropertyDefaultAddition frontendDtoPropertyDefaultAddition;
 
         public IEntityCreateGeneration(
             FrontendDtoAddition frontendDtoAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition,
-            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
-            FrontendDtoPropertyDefaultAddition frontendDtoPropertyDefaultAddition)
+            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
-            this.frontendDtoPropertyDefaultAddition = frontendDtoPropertyDefaultAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -41,9 +38,7 @@ namespace Contractor.Core.Projects.Frontend.Model
         {
             this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityCreate", "entityCreate", ModelProjectGeneration.DomainFolder, FileName);
-
-            this.frontendDtoPropertyDefaultAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityCreate", "iEntityCreate", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -54,9 +49,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
             this.frontendDtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "toApiEntityCreate", "entityCreate", ModelProjectGeneration.DomainFolder, FileName);
-
-            this.frontendDtoPropertyDefaultAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "toApiEntityCreate", "iEntityCreate", ModelProjectGeneration.DomainFolder, FileName);
         }
     }
 }

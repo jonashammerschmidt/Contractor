@@ -41,9 +41,9 @@ namespace Contractor.Core.Projects.Frontend.Model
         {
             this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityUpdate", "entityUpdate", ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityUpdate", "iEntityUpdate", ModelProjectGeneration.DomainFolder, FileName);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "fromEntityDetail", "entityDetail", ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "fromEntityDetail", "iEntityDetail", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -54,7 +54,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
             this.frontendDtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "toApiEntityUpdate", "entityUpdate", ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "toApiEntityUpdate", "iEntityUpdate", ModelProjectGeneration.DomainFolder, FileName);
 
             this.entityUpdateMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }

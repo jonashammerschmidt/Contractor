@@ -15,9 +15,11 @@
 
         mat-form-field {
             width: 100%;
+            padding: 8px 0;
         }
 
         mat-checkbox {
+            display: block;
             margin-left: 6px;
         }
     }

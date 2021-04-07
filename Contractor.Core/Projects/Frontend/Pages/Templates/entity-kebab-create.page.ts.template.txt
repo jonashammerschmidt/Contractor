@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { guidRegex, integerRegex } from 'src/app/helpers/regex.helper';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
-import { getEntityCreateDefault, IEntityCreate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-create';
 
 @Component({
   selector: 'app-entity-kebab-create',
@@ -11,20 +12,27 @@ import { getEntityCreateDefault, IEntityCreate } from 'src/app/model/domain-keba
 })
 export class EntityCreatePage implements OnInit {
 
-  entityCreate: IEntityCreate;
+  entityCreateForm: FormGroup;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
+    private formBuilder: FormBuilder,
     private router: Router,
     private location: Location) {
   }
 
   async ngOnInit(): Promise<void> {
-    this.entityCreate = getEntityCreateDefault();
+    this.entityCreateForm = this.formBuilder.group({
+    });
   }
 
   async onCreateClicked(): Promise<void> {
-    const entityId = await this.entitiesCrudService.createEntity(this.entityCreate);
+    this.entityCreateForm.markAllAsTouched();
+    if (!this.entityCreateForm.valid) {
+      return;
+    }
+
+    const entityId = await this.entitiesCrudService.createEntity(this.entityCreateForm.getRawValue());
     await this.router.navigate(['/domain-kebab/entities-kebab/detail', entityId]);
   }
 

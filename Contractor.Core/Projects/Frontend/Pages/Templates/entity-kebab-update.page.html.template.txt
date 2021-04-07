@@ -1,5 +1,5 @@
-<div class="entity-kebab-update-page" *ngIf="entityUpdate">
-    <mat-card>
+<div class="entity-kebab-update-page">
+    <mat-card *ngIf="entityUpdateForm">
         <div class="toolbar">
             <h1>Entity ändern</h1>
             <button mat-flat-button (click)="onCancelClicked()">
@@ -12,10 +12,12 @@
         </div>
 
         <br>
-
-        <mat-form-field appearance="outline">
-            <mat-label>ID</mat-label>
-            <input matInput disabled placeholder="ID" [ngModel]="entityUpdate.id">
-        </mat-form-field>
+        
+        <form [formGroup]="entityUpdateForm">
+            <mat-form-field appearance="outline">
+                <mat-label>ID</mat-label>
+                <input matInput formControlName="id" placeholder="ID">
+            </mat-form-field>
+        </form>
     </mat-card>
 </div>

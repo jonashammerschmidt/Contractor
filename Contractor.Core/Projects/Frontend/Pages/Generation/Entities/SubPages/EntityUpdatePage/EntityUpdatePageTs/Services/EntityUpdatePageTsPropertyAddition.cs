@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
-    internal class EntityUpdatePageHtmlPropertyAddition
+    internal class EntityUpdatePageTsPropertyAddition
     {
         public PathService pathService;
 
-        public EntityUpdatePageHtmlPropertyAddition(
+        public EntityUpdatePageTsPropertyAddition(
             PathService pathService)
         {
             this.pathService = pathService;
@@ -39,12 +39,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            // ----------- DbSet -----------
-            stringEditor.NextThatContains("</form>");
-
-            stringEditor.InsertNewLine();
-
-            stringEditor.InsertLine(FrontendPageUpdatePropertyLine.GetPropertyLine(options));
+            stringEditor.NextThatContains("this.formBuilder.group({");
+            stringEditor.NextThatContains("});");
+            stringEditor.InsertLine(FrontendFormBuilderPropertyLine.GetPropertyLine(options));
 
             return stringEditor.GetText();
         }

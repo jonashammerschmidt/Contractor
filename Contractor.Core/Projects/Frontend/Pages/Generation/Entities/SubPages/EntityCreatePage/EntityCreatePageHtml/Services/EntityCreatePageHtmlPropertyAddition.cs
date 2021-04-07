@@ -40,10 +40,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             // ----------- DbSet -----------
-            stringEditor.NextThatContains("</mat-card>");
+            stringEditor.NextThatContains("</form>");
 
-            stringEditor.InsertNewLine();
-            stringEditor.InsertLine("        <br>");
             stringEditor.InsertNewLine();
 
             stringEditor.InsertLine(FrontendPageCreatePropertyLine.GetPropertyLine(options));

@@ -40,11 +40,11 @@ namespace Contractor.Core.Tools
             string fileData = File.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"export function " + functionName);
+            stringEditor.NextThatContains($"public static " + functionName);
             stringEditor.NextThatContains("return {");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine($"        {options.PropertyName.LowerFirstChar()}: {variableName}.{options.PropertyName.LowerFirstChar()},");
+            stringEditor.InsertLine($"            {options.PropertyName.LowerFirstChar()}: {variableName}.{options.PropertyName.LowerFirstChar()},");
 
             return stringEditor.GetText();
         }

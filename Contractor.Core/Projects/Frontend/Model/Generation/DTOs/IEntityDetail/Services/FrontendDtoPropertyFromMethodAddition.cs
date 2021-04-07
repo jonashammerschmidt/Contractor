@@ -36,11 +36,11 @@ namespace Contractor.Core.Projects.Frontend.Model
             string fileData = File.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"export function fromApi{options.EntityNameFrom}Detail");
+            stringEditor.NextThatContains($"public static fromApi{options.EntityNameFrom}Detail");
             stringEditor.NextThatContains("return {");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine($"        {options.EntityNamePluralLowerTo}: api{options.EntityNameFrom}Detail.{options.EntityNamePluralLowerTo}.map(api{options.EntityNameTo} => fromApi{options.EntityNameTo}(api{options.EntityNameTo})),");
+            stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}: api{options.EntityNameFrom}Detail.{options.EntityNamePluralLowerTo}.map(api{options.EntityNameTo} => {options.EntityNameTo}.fromApi{options.EntityNameTo}(api{options.EntityNameTo})),");
 
             return stringEditor.GetText();
         }

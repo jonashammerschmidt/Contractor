@@ -1,5 +1,5 @@
-<div class="entity-kebab-detail-page" *ngIf="entityCreate">
-    <mat-card>
+<div class="entity-kebab-detail-page">
+    <mat-card *ngIf="entityCreateForm">
         <div class="toolbar">
             <h1>Entity erstellen</h1>
             <button mat-flat-button (click)="onCancelClicked()">
@@ -10,5 +10,10 @@
                 Erstellen
             </button>
         </div>
+
+        <br>
+
+        <form [formGroup]="entityCreateForm">
+        </form>
     </mat-card>
 </div>
