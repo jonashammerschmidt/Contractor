@@ -12,13 +12,16 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private static readonly string FileName = "sub-pages\\entity-kebab-update\\entity-kebab-update.page.ts";
 
         private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
+        private readonly EntityUpdatePageTsPropertyAddition entityUpdatePageTsPropertyAddition;
         private readonly EntityUpdatePageTsToPropertyAddition entityUpdatePageTsToPropertyAddition;
 
         public EntityUpdatePageTsGeneration(
             FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
+            EntityUpdatePageTsPropertyAddition entityUpdatePageTsPropertyAddition,
             EntityUpdatePageTsToPropertyAddition entityUpdatePageTsToPropertyAddition)
         {
             this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
+            this.entityUpdatePageTsPropertyAddition = entityUpdatePageTsPropertyAddition;
             this.entityUpdatePageTsToPropertyAddition = entityUpdatePageTsToPropertyAddition;
         }
 
@@ -33,6 +36,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
+            this.entityUpdatePageTsPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)

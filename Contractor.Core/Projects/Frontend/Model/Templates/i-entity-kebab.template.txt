@@ -4,8 +4,10 @@ export interface IEntity {
     id: string;
 }
 
-export function fromApiEntity(apiEntity: ApiEntity): IEntity {
-    return {
-        id: apiEntity.id,
-    };
+export class Entity {
+    public static fromApiEntity(apiEntity: ApiEntity): IEntity {
+        return {
+            id: apiEntity.id,
+        };
+    }
 }

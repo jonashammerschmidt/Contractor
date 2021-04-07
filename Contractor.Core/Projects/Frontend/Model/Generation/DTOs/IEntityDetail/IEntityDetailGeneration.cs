@@ -62,7 +62,7 @@ namespace Contractor.Core.Projects.Frontend.Model
                 RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}[]", $"{options.EntityNamePluralLowerTo}");
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
-                $"fromApi{options.EntityNameTo}, I{options.EntityNameTo}", fromImportStatementPath);
+                $"{options.EntityNameTo}, I{options.EntityNameTo}", fromImportStatementPath);
 
             frontendDtoPropertyFromMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
 
@@ -75,7 +75,7 @@ namespace Contractor.Core.Projects.Frontend.Model
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", $"{options.EntityNameLowerFrom}");
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
-                $"fromApi{options.EntityNameFrom}, I{options.EntityNameFrom}", toImportStatementPath);
+                $"{options.EntityNameFrom}, I{options.EntityNameFrom}", toImportStatementPath);
 
             frontendDtoPropertyToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }

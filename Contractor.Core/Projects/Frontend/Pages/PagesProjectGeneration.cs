@@ -41,6 +41,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, EntityCreatePageTsGeneration>();
             serviceCollection.AddSingleton<EntityCreatePageHtmlPropertyAddition>();
             serviceCollection.AddSingleton<EntityCreatePageHtmlToPropertyAddition>();
+            serviceCollection.AddSingleton<EntityCreatePageTsPropertyAddition>();
             serviceCollection.AddSingleton<EntityCreatePageTsToPropertyAddition>();
 
             // Page-Detail
@@ -58,6 +59,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdatePageTsGeneration>();
             serviceCollection.AddSingleton<EntityUpdatePageHtmlPropertyAddition>();
             serviceCollection.AddSingleton<EntityUpdatePageHtmlToPropertyAddition>();
+            serviceCollection.AddSingleton<EntityUpdatePageTsPropertyAddition>();
             serviceCollection.AddSingleton<EntityUpdatePageTsToPropertyAddition>();
         }
     }

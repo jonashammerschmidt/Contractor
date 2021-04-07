@@ -4,8 +4,10 @@ export interface IEntityDetail {
     id: string;
 }
 
-export function fromApiEntityDetail(apiEntityDetail: ApiEntityDetail): IEntityDetail {
-    return {
-        id: apiEntityDetail.id,
-    };
+export abstract class EntityDetail {
+    public static fromApiEntityDetail(apiEntityDetail: ApiEntityDetail): IEntityDetail {
+        return {
+            id: apiEntityDetail.id,
+        };
+    }
 }

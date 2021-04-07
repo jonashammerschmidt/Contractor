@@ -5,14 +5,16 @@ export interface IEntityUpdate {
     id: string;
 }
 
-export function toApiEntityUpdate(entityUpdate: IEntityUpdate): ApiEntityUpdate {
-    return {
-        id: entityUpdate.id,
-    };
-}
+export abstract class EntityUpdate {
+    public static toApiEntityUpdate(iEntityUpdate: IEntityUpdate): ApiEntityUpdate {
+        return {
+            id: iEntityUpdate.id,
+        };
+    }
 
-export function fromEntityDetail(entityDetail: IEntityDetail): IEntityUpdate {
-    return {
-        id: entityDetail.id,
-    };
+    public static fromEntityDetail(iEntityDetail: IEntityDetail): IEntityUpdate {
+        return {
+            id: iEntityDetail.id,
+        };
+    }
 }

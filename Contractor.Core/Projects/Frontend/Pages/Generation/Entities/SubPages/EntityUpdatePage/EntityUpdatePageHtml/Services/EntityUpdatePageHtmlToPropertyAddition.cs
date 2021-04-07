@@ -41,10 +41,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             // ----------- DbSet -----------
-            stringEditor.NextThatContains("</mat-card>");
+            stringEditor.NextThatContains("</form>");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine("        <br>");
             stringEditor.InsertNewLine();
 
             stringEditor.InsertLine(GetLine(options));
@@ -55,7 +54,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetLine(IRelationAdditionOptions options)
         {
             return
-              $"        <app-search-dropdown label=\"{options.EntityNameFrom}\" valueExpr=\"id\" [dataSource]=\"{options.EntityNamePluralLowerFrom}\" [(value)]=\"{options.EntityNameLowerTo}Update.{options.EntityNameLowerFrom}Id\"\n" +
+              $"        <app-search-dropdown label=\"{options.EntityNameFrom}\" valueExpr=\"id\" [dataSource]=\"{options.EntityNamePluralLowerFrom}\"" +
                "            displayExpr=\"name\"></app-search-dropdown>";
         }
     }

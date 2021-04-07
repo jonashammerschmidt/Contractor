@@ -36,11 +36,11 @@ namespace Contractor.Core.Projects.Frontend.Model
             string fileData = File.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"export function from{options.EntityNameTo}Detail");
+            stringEditor.NextThatContains($"public static from{options.EntityNameTo}Detail");
             stringEditor.NextThatContains("return {");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine($"        {options.EntityNameLowerFrom}Id: {options.EntityNameLowerTo}Detail.{options.EntityNameLowerFrom}.id,");
+            stringEditor.InsertLine($"            {options.EntityNameLowerFrom}Id: i{options.EntityNameTo}Detail.{options.EntityNameLowerFrom}.id,");
 
             return stringEditor.GetText();
         }

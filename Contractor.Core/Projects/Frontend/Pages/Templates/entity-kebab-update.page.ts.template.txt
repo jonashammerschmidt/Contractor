@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { fromEntityDetail, IEntityUpdate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-update';
+import { guidRegex, integerRegex } from 'src/app/helpers/regex.helper';
+import { EntityUpdate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-update';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 
 @Component({
@@ -11,16 +13,21 @@ import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/e
 })
 export class EntityUpdatePage implements OnInit {
 
-  entityUpdate: IEntityUpdate;
+  entityUpdateForm: FormGroup;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
+    private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location) {
   }
 
   async ngOnInit(): Promise<void> {
+    this.entityUpdateForm = this.formBuilder.group({
+      id: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    });
+
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         this.loadEntity(params.id).then().catch((error) => {
@@ -31,8 +38,14 @@ export class EntityUpdatePage implements OnInit {
   }
 
   async onUpdateClicked(): Promise<void> {
-    await this.entitiesCrudService.updateEntity(this.entityUpdate);
-    await this.router.navigate(['/domain-kebab/entities-kebab/detail', this.entityUpdate.id]);
+    this.entityUpdateForm.markAllAsTouched();
+    if (!this.entityUpdateForm.valid) {
+      return;
+    }
+
+    const entityUpdate = this.entityUpdateForm.getRawValue();
+    await this.entitiesCrudService.updateEntity(entityUpdate);
+    await this.router.navigate(['/domain-kebab/entities-kebab/detail', entityUpdate.id]);
   }
 
   async onCancelClicked(): Promise<void> {
@@ -41,7 +54,7 @@ export class EntityUpdatePage implements OnInit {
 
   private async loadEntity(entityId: string): Promise<void> {
     const entityDetail = await this.entitiesCrudService.getEntityDetail(entityId);
-    this.entityUpdate = fromEntityDetail(entityDetail);
+    this.entityUpdateForm.patchValue(EntityUpdate.fromEntityDetail(entityDetail));
   }
 
 }

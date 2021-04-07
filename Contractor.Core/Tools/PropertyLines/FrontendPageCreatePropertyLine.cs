@@ -13,43 +13,67 @@ namespace Contractor.Core.Tools
             {
                 case PropertyTypes.Boolean:
                     return
-                        $"        <mat-checkbox [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
-                        $"            {options.PropertyName.ToReadable()}\n" +
-                        $"        </mat-checkbox>\n" +
-                        $"        <br>";
+                        $"            <mat-checkbox formControlName=\"{options.PropertyName.LowerFirstChar()}\">\n" +
+                        $"                {options.PropertyName.ToReadable()}\n" +
+                        $"            </mat-checkbox>" +
+                        $"" +
+                        $"            <br>";
 
                 case PropertyTypes.DateTime:
                     return
-                        "        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
-                        $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                        $"            <input matInput {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\" [matDatepicker]=\"picker\">\n" +
-                        "            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
-                        "            <mat-datepicker #picker></mat-datepicker>\n" +
-                        "        </mat-form-field>";
+                         "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
+                        $"                <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
+                        $"                <input matInput formControlName=\"dateTime\" {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\" [matDatepicker]=\"picker\">\n" +
+                         "                <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
+                         "                <mat-datepicker #picker></mat-datepicker>\n" +
+                        $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">Dieses Feld ist erfolderlich.</span>\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">Dieses Feld ist ungültig.</span>\n" +
+                         "                </mat-error>\n" +
+                         "            </mat-form-field>";
 
                 case PropertyTypes.Integer:
                 case PropertyTypes.Double:
                     return
-                        "        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
-                        $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                        $"            <input matInput type=\"number\" {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
-                        "        </mat-form-field>";
+                         "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
+                        $"                <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
+                        $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" type=\"number\" {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\">\n" +
+                        $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
+                        $"                        Dieses Feld ist erfolderlich.\n" +
+                        $"                    </span>\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
+                        $"                        Dieses Feld ist ungültig.\n" +
+                        $"                    </span>\n" +
+                         "                </mat-error>\n" +
+                         "            </mat-form-field>";
 
                 case PropertyTypes.String:
                     return
-                        "        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
-                        $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                        $"            <input matInput {requiredLine} maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
-                        $"            <mat-hint [align]=\"'end'\">{{{{{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}.length}}}} / {options.PropertyTypeExtra}</mat-hint>\n" +
-                        "        </mat-form-field>";
+                         "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
+                        $"                <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
+                        $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\">\n" +
+                        $"                <mat-hint [align]=\"'end'\">{{{{{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.value.length}}}} / 256</mat-hint>\n" +
+                        $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">Dieses Feld ist erfolderlich.</span>\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">Dieses Feld ist ungültig.</span>\n" +
+                         "                </mat-error>\n" +
+                         "            </mat-form-field>";
 
                 case PropertyTypes.Guid:
-                    string guidPattern = "pattern = \"^([0-9A-Fa-f]{8}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{12})$\"";
                     return
-                        "        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
-                        $"            <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                        $"            <input matInput {requiredLine} {guidPattern} placeholder=\"e.g. 00000000-0000-0000-0000-000000000000\" [(ngModel)]=\"{options.EntityName.LowerFirstChar()}Create.{options.PropertyName.LowerFirstChar()}\">\n" +
-                        "        </mat-form-field>";
+                         "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
+                        $"                <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
+                        $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} placeholder=\"z.B. 00000000-0000-0000-0000-000000000000\">\n" +
+                        $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
+                        $"                        Dieses Feld ist erfolderlich.\n" +
+                        $"                    </span>\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
+                        $"                        Dieses Feld ist ungültig. Beispiel: 00000000-0000-0000-0000-000000000000.\n" +
+                        $"                    </span>\n" +
+                         "                </mat-error>\n" +
+                         "            </mat-form-field>";
 
                 default:
                     throw new NotImplementedException();

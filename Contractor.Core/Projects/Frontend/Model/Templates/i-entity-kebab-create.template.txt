@@ -3,12 +3,9 @@ import { ApiEntityCreate } from './api/api-entity-kebab-create';
 export interface IEntityCreate {
 }
 
-export function toApiEntityCreate(entityCreate: IEntityCreate): ApiEntityCreate {
-    return {
-    };
-}
-
-export function getEntityCreateDefault(): IEntityCreate {
-    return {
-    };
+export abstract class EntityCreate {
+    public static toApiEntityCreate(iEntityCreate: IEntityCreate): ApiEntityCreate {
+        return {
+        };
+    }
 }
