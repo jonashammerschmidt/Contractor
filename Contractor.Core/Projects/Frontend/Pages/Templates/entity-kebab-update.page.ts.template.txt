@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,14 +12,14 @@ import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/e
 })
 export class EntityUpdatePage implements OnInit {
 
+  entityId: string;
   entityUpdateForm: FormGroup;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private location: Location) {
+    private router: Router) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -30,7 +29,8 @@ export class EntityUpdatePage implements OnInit {
 
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
-        this.loadEntity(params.id).then().catch((error) => {
+        this.entityId = params.id;
+        this.loadEntity(this.entityId).then().catch((error) => {
           console.error(error);
         });
       }
@@ -45,11 +45,11 @@ export class EntityUpdatePage implements OnInit {
 
     const entityUpdate = this.entityUpdateForm.getRawValue();
     await this.entitiesCrudService.updateEntity(entityUpdate);
-    await this.router.navigate(['/domain-kebab/entities-kebab/detail', entityUpdate.id]);
+    await this.router.navigate(['/domain-kebab/entities-kebab/detail', this.entityId]);
   }
 
   async onCancelClicked(): Promise<void> {
-    this.location.back();
+    await this.router.navigate(['/domain-kebab/entities-kebab/detail', this.entityId]);
   }
 
   private async loadEntity(entityId: string): Promise<void> {

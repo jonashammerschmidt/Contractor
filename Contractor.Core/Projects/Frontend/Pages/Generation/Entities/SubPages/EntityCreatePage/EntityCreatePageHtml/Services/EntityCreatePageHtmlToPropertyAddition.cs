@@ -53,8 +53,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetLine(IRelationAdditionOptions options)
         {
             return
-              $"        <app-search-dropdown label=\"{options.EntityNameFrom}\" valueExpr=\"id\" [dataSource]=\"{options.EntityNamePluralLowerFrom}\"" +
-               "            displayExpr=\"name\"></app-search-dropdown>";
+              $"            <app-search-dropdown-form [formGroupInstance]=\"{options.EntityNameLowerTo}CreateForm\" [formControlNameInstance]=\"'{options.EntityNameLowerFrom}Id'\"\n" +
+              $"                label=\"{options.EntityNameFrom}\" idExpr=\"id\" displayExpr=\"name\" [dataSource]=\"{options.EntityNamePluralLowerFrom}\"></app-search-dropdown-form>";
         }
     }
 }

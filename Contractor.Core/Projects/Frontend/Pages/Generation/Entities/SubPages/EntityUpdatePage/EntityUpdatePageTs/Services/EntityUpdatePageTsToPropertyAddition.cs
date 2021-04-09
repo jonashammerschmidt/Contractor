@@ -57,9 +57,13 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("private router: Router");
             stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
 
+            stringEditor.NextThatContains("this.formBuilder.group({");
+            stringEditor.NextThatContains("});");
+            stringEditor.InsertLine($"      {options.EntityNameLowerFrom}Id: new FormControl(null, [Validators.required]),");
+
+            stringEditor.MoveToStart();
             stringEditor.NextThatContains("ngOnInit()");
             stringEditor.NextThatStartsWith("  }");
-
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();");
 

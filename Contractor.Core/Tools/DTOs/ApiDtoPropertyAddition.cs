@@ -67,9 +67,13 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertNewLine();
             }
 
-            stringEditor.InsertLine("        [Required]");
+            if (!options.IsOptional)
+            {
+                stringEditor.InsertLine("        [Required]");
+            }
 
-            if (options.PropertyType == PropertyTypes.String && options.PropertyTypeExtra != null) {
+            if (options.PropertyType == PropertyTypes.String && options.PropertyTypeExtra != null)
+            {
                 stringEditor.InsertLine($"        [StringLength({options.PropertyTypeExtra})]");
             }
 
