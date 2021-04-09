@@ -53,7 +53,9 @@ namespace Contractor.Core.Tools
                          "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
                         $"                <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
                         $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\">\n" +
-                        $"                <mat-hint [align]=\"'end'\">{{{{{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.value.length}}}} / 256</mat-hint>\n" +
+                        $"                <mat-hint *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.value\" [align]=\"'end'\">\n" +
+                        $"                    {{{{{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.value.length}}}} / 256\n" +
+                        $"                </mat-hint>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">Dieses Feld ist erfolderlich.</span>\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">Dieses Feld ist ungültig.</span>\n" +
