@@ -23,7 +23,7 @@ namespace Contractor.Core.Tools
                     return
                          "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
                         $"                <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                        $"                <input matInput formControlName=\"dateTime\" {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\" [matDatepicker]=\"picker\">\n" +
+                        $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\" [matDatepicker]=\"picker\">\n" +
                          "                <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
                          "                <mat-datepicker #picker></mat-datepicker>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
