@@ -24,12 +24,13 @@ jobs:
     - name: Rename Artifact
       run: mv Contractor.CLI/bin/Publish/Contractor.CLI.exe Contractor.CLI/bin/Publish/contractor.exe
     - name: Zip Artifact
-      run: zip -r ./contractor.zip ./Contractor.CLI/bin/Publish
+      run: zip -r ./contractor.zip .
+      working-directory: ./Contractor.CLI/bin/Publish
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v2
       with:
         name: contractor
-        path: ./contractor.zip
+        path: ./Contractor.CLI/bin/Publish/contractor.zip
         
   release:
     name: 'Create GitHub Release for Contractor'
