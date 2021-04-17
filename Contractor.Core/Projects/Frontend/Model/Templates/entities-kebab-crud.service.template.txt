@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { BackendCoreService } from 'src/app/services/rest/backend-core.service';
+import { BackendCoreService } from 'src/app/services/backend/backend-core.service';
 import { ApiEntity } from './dtos/api/api-entity-kebab';
 import { ApiEntityDetail } from './dtos/api/api-entity-kebab-detail';
 import { Entity, IEntity } from './dtos/i-entity-kebab';
