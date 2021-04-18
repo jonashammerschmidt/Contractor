@@ -2,7 +2,7 @@
     <mat-card *ngIf="entityCreateForm">
         <div class="toolbar">
             <h1>Entity erstellen</h1>
-            <button mat-flat-button (click)="onCancelClicked()">
+            <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
                 Abbrechen
             </button>
             <button mat-flat-button color="primary" (click)="onCreateClicked()">

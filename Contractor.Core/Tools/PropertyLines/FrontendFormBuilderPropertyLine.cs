@@ -12,7 +12,6 @@ namespace Contractor.Core.Tools
             {
                 switch (options.PropertyType)
                 {
-                    case PropertyTypes.Boolean:
                     case PropertyTypes.DateTime:
                     case PropertyTypes.Double:
                         return $"      {options.PropertyName.LowerFirstChar()}: new FormControl(null, []),";
@@ -25,13 +24,15 @@ namespace Contractor.Core.Tools
 
                     case PropertyTypes.String:
                         return $"      {options.PropertyName.LowerFirstChar()}: new FormControl('', [Validators.maxLength({options.PropertyTypeExtra})]),";
+
+                    case PropertyTypes.Boolean:
+                        return $"      {options.PropertyName.LowerFirstChar()}: new FormControl(false, []),";
                 }
             }
             else
             {
                 switch (options.PropertyType)
                 {
-                    case PropertyTypes.Boolean:
                     case PropertyTypes.DateTime:
                     case PropertyTypes.Double:
                         return $"      {options.PropertyName.LowerFirstChar()}: new FormControl(null, [Validators.required]),";
@@ -44,6 +45,9 @@ namespace Contractor.Core.Tools
 
                     case PropertyTypes.String:
                         return $"      {options.PropertyName.LowerFirstChar()}: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength({options.PropertyTypeExtra})]),";
+
+                    case PropertyTypes.Boolean:
+                        return $"      {options.PropertyName.LowerFirstChar()}: new FormControl(false, [Validators.required]),";
                 }
             }
 

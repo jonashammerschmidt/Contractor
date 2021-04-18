@@ -30,10 +30,6 @@ export class EntityDetailPage implements OnInit {
     });
   }
 
-  async onCancelClicked(): Promise<void> {
-    this.location.back();
-  }
-
   async onUpdateClicked(): Promise<void> {
     await this.router.navigate(['/domain-kebab/entities-kebab/update', this.entity.id]);
   }

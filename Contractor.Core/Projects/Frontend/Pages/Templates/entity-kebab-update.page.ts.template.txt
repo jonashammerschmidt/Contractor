@@ -48,10 +48,6 @@ export class EntityUpdatePage implements OnInit {
     await this.router.navigate(['/domain-kebab/entities-kebab/detail', this.entityId]);
   }
 
-  async onCancelClicked(): Promise<void> {
-    await this.router.navigate(['/domain-kebab/entities-kebab/detail', this.entityId]);
-  }
-
   private async loadEntity(entityId: string): Promise<void> {
     const entityDetail = await this.entitiesCrudService.getEntityDetail(entityId);
     this.entityUpdateForm.patchValue(EntityUpdate.fromEntityDetail(entityDetail));
