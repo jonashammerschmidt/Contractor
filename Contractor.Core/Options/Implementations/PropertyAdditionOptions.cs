@@ -4,9 +4,15 @@ namespace Contractor.Core.Options
 {
     public class PropertyAdditionOptions : EntityAdditionOptions, IPropertyAdditionOptions
     {
+        private string propertyName;
+
         public PropertyTypes PropertyType { get; set; }
 
-        public string PropertyName { get; set; }
+        public string PropertyName
+        {
+            get { return propertyName; }
+            set { propertyName = value.ToVariableName(); }
+        }
 
         public string PropertyTypeExtra { get; set; }
 

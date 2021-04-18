@@ -33,10 +33,10 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.NextThatContains("});");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"                entity.HasOne(d => d.{options.EntityNameFrom})\n" +
-                    $"                    .WithMany(p => p.{options.EntityNamePluralTo})\n" +
-                    $"                    .HasForeignKey(d => d.{options.EntityNameFrom}Id)\n" +
-                    $"                    .HasConstraintName(\"FK_{options.EntityNamePluralTo}_{options.EntityNameFrom}Id\");");
+            stringEditor.InsertLine($"                entity.HasOne(d => d.{options.PropertyNameFrom})\n" +
+                    $"                    .WithMany(p => p.{options.PropertyNameTo})\n" +
+                    $"                    .HasForeignKey(d => d.{options.PropertyNameFrom}Id)\n" +
+                    $"                    .HasConstraintName(\"FK_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id\");");
 
             return stringEditor.GetText();
         }

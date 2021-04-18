@@ -42,7 +42,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             this.relationAddition.AddRelationToDTO(
-                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id"),
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid"),
                 ContractLogicProjectGeneration.DomainFolder, FileName, true);
         }
     }

@@ -44,7 +44,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             IRelationSideAdditionOptions relationSideAdditionOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid");
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
 
             this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, PersistenceProjectGeneration.DomainFolder, FileName);

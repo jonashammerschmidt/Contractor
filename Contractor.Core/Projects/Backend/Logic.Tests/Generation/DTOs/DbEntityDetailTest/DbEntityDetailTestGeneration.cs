@@ -52,12 +52,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // From
-            IRelationSideAdditionOptions dbFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
+            IRelationSideAdditionOptions dbFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>");
             this.relationAddition.AddRelationToDTO(dbFromOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
             this.logicDbDtoDetailTestFromAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
 
             // To
-            IRelationSideAdditionOptions dbToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", $"{options.EntityNameFrom}");
+            IRelationSideAdditionOptions dbToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
             this.relationAddition.AddRelationToDTO(dbToOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
             this.logicDbDtoDetailTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
         }

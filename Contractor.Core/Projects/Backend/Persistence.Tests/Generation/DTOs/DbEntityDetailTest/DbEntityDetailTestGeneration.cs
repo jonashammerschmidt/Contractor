@@ -53,13 +53,13 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         {
             // From
             IRelationSideAdditionOptions dbFromOptions =
-                RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
+                RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>");
             this.relationAddition.AddRelationToDTO(dbFromOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbDtoDetailTestFromAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
 
             // To
             IRelationSideAdditionOptions dbToOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", $"{options.EntityNameFrom}");
+                RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
             this.relationAddition.AddRelationToDTO(dbToOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbDtoDetailTestToAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }

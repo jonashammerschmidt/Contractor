@@ -61,10 +61,10 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor.NextThatContains("{");
             stringEditor.Next();
 
-            stringEditor.InsertLine($"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.EntityNameFrom}Id))\n" +
+            stringEditor.InsertLine($"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
                 "            {\n" +
-                $"                this.logger.LogDebug(\"{options.EntityNameFrom} konnte nicht gefunden werden.\");\n" +
-                $"                return LogicResult<Guid>.NotFound(\"{options.EntityNameFrom} konnte nicht gefunden werden.\");\n" +
+                $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
+                $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 "            }\n");
 
             // ----------- Update Method -----------
@@ -72,10 +72,10 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor.NextThatContains("{");
             stringEditor.Next();
 
-            stringEditor.InsertLine($"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.EntityNameFrom}Id))\n" +
+            stringEditor.InsertLine($"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
                 "            {\n" +
-                $"                this.logger.LogDebug(\"{options.EntityNameFrom} konnte nicht gefunden werden.\");\n" +
-                $"                return LogicResult.NotFound(\"{options.EntityNameFrom} konnte nicht gefunden werden.\");\n" +
+                $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
+                $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 "            }\n");
 
             return stringEditor.GetText();

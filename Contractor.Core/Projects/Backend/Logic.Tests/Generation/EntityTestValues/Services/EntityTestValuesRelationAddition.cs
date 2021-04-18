@@ -45,9 +45,9 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor.PrevThatContains("}");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdDefault = {options.EntityNameFrom}TestValues.IdDefault;");
-            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForCreate = {options.EntityNameFrom}TestValues.IdForCreate;");
-            stringEditor.InsertLine($"        public static readonly Guid {options.EntityNameFrom}IdForUpdate = {options.EntityNameFrom}TestValues.IdForUpdate;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdDefault = {options.EntityNameFrom}TestValues.IdDefault;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdForCreate = {options.EntityNameFrom}TestValues.IdForCreate;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdForUpdate = {options.EntityNameFrom}TestValues.IdForUpdate;");
 
             return stringEditor.GetText();
         }

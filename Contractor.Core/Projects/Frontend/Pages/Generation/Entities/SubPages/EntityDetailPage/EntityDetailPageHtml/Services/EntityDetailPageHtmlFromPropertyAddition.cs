@@ -73,9 +73,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.MoveToStart();
             stringEditor.NextThatContains("        </mat-tab-group>");
 
-            stringEditor.InsertLine($"            <mat-tab label=\"{options.EntityNamePluralTo}\">");
+            stringEditor.InsertLine($"            <mat-tab label=\"{options.PropertyNameTo.ToReadable()}\">");
             stringEditor.InsertLine($"                <div class=\"tab-content\">");
-            stringEditor.InsertLine($"                    <h2>{options.EntityNamePluralTo}</h2>");
+            stringEditor.InsertLine($"                    <h2>{options.PropertyNameTo.ToReadable()}</h2>");
             stringEditor.InsertLine($"                    <div class=\"table-container\">");
             stringEditor.InsertLine($"                        <table mat-table [dataSource]=\"{options.EntityNamePluralLowerTo}TableDataSource\">");
             stringEditor.InsertLine($"");

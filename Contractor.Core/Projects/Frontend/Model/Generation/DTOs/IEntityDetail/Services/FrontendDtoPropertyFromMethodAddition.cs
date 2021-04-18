@@ -40,7 +40,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             stringEditor.NextThatContains("return {");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}: api{options.EntityNameFrom}Detail.{options.EntityNamePluralLowerTo}.map(api{options.EntityNameTo} => {options.EntityNameTo}.fromApi{options.EntityNameTo}(api{options.EntityNameTo})),");
+            stringEditor.InsertLine($"            {options.PropertyNameTo.LowerFirstChar()}: api{options.EntityNameFrom}Detail.{options.PropertyNameTo.LowerFirstChar()}.map(api{options.EntityNameTo} => {options.EntityNameTo}.fromApi{options.EntityNameTo}(api{options.EntityNameTo})),");
 
             return stringEditor.GetText();
         }

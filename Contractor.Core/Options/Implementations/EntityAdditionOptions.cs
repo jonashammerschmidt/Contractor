@@ -4,28 +4,19 @@ namespace Contractor.Core.Options
 {
     public class EntityAdditionOptions : DomainAdditionOptions, IEntityAdditionOptions
     {
-        public string EntityName { get; set; }
 
-        public string EntityNamePlural { get; set; }
+        private string entityName;
 
-        public bool HasRequestScope
+        private string entityNamePlural;
+
+        private string requestScopeName;
+
+        private string requestScopeNamePlural;
+
+        public string EntityName
         {
-            get
-            {
-                return !string.IsNullOrEmpty(RequestScopeName) && !string.IsNullOrEmpty(RequestScopeNamePlural);
-            }
-        }
-
-        public string RequestScopeName { get; set; }
-
-        public string RequestScopeNamePlural { get; set; }
-
-        public string RequestScopeNameLower
-        {
-            get
-            {
-                return char.ToLower(RequestScopeName[0]) + RequestScopeName.Substring(1);
-            }
+            get { return entityName; }
+            set { entityName = value.ToVariableName(); }
         }
 
         public string EntityNameLower
@@ -36,12 +27,46 @@ namespace Contractor.Core.Options
             }
         }
 
+        public string EntityNamePlural
+        {
+            get { return entityNamePlural; }
+            set { entityNamePlural = value.ToVariableName(); }
+        }
+
         public string EntityNamePluralLower
         {
             get
             {
                 return char.ToLower(EntityNamePlural[0]) + EntityNamePlural.Substring(1);
             }
+        }
+
+        public bool HasRequestScope
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(RequestScopeName) && !string.IsNullOrEmpty(RequestScopeNamePlural);
+            }
+        }
+
+        public string RequestScopeName
+        {
+            get { return requestScopeName; }
+            set { requestScopeName = value?.ToVariableName(); }
+        }
+
+        public string RequestScopeNameLower
+        {
+            get
+            {
+                return char.ToLower(RequestScopeName[0]) + RequestScopeName.Substring(1);
+            }
+        }
+
+        public string RequestScopeNamePlural
+        {
+            get { return requestScopeNamePlural; }
+            set { requestScopeNamePlural = value?.ToVariableName(); }
         }
 
         public EntityAdditionOptions()

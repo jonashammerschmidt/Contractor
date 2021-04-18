@@ -34,8 +34,4 @@ export class EntityCreatePage implements OnInit {
     await this.router.navigate(['/domain-kebab/entities-kebab/detail', entityId]);
   }
 
-  async onCancelClicked(): Promise<void> {
-    await this.router.navigate(['/domain-kebab/entities-kebab']);
-  }
-
 }

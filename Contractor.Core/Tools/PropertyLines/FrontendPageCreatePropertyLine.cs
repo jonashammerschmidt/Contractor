@@ -15,8 +15,8 @@ namespace Contractor.Core.Tools
                     return
                         $"            <mat-checkbox formControlName=\"{options.PropertyName.LowerFirstChar()}\">\n" +
                         $"                {options.PropertyName.ToReadable()}\n" +
-                        $"            </mat-checkbox>" +
-                        $"" +
+                        $"            </mat-checkbox>\n" +
+                        $"\n" +
                         $"            <br>";
 
                 case PropertyTypes.DateTime:

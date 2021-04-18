@@ -53,7 +53,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
             // From
             IRelationSideAdditionOptions optionsFrom =
-                RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>", options.EntityNamePluralTo);
+                RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>");
             this.relationAddition.AddRelationToDTO(optionsFrom, PersistenceProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
@@ -62,7 +62,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             // To
             IRelationSideAdditionOptions optionsTo =
-                RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}", options.EntityNameFrom);
+                RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
             this.relationAddition.AddRelationToDTO(optionsTo, PersistenceProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 

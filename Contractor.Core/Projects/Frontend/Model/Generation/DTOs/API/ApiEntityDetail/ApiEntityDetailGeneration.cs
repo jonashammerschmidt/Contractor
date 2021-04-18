@@ -48,7 +48,7 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"/dtos/api/api-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
 
             IRelationSideAdditionOptions fromOptions =
-                RelationAdditionOptions.GetPropertyForFrom(options, $"Api{options.EntityNameTo}[]", $"{options.EntityNamePluralLowerTo}");
+                RelationAdditionOptions.GetPropertyForFrom(options, $"Api{options.EntityNameTo}[]");
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"Api{options.EntityNameTo}", fromImportStatementPath);
@@ -59,7 +59,7 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"/dtos/api/api-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}";
 
             IRelationSideAdditionOptions toOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, $"Api{options.EntityNameFrom}", $"{options.EntityNameLowerFrom}");
+                RelationAdditionOptions.GetPropertyForTo(options, $"Api{options.EntityNameFrom}");
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"Api{options.EntityNameFrom}", toImportStatementPath);

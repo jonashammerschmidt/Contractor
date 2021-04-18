@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
             // To
             IRelationSideAdditionOptions optionsTo = RelationAdditionOptions
-                .GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+                .GetPropertyForTo(options, "Guid");
             this.relationAddition.AddRelationToDTO(optionsTo, LogicProjectGeneration.DomainFolder, FileName);
         }
     }

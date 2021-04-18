@@ -43,13 +43,13 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
         {
             // From
             IRelationSideAdditionOptions optionsFrom =
-                RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>", $"{options.EntityNamePluralTo}");
+                RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>");
             this.relationAddition.AddRelationToDTO(optionsFrom, ContractLogicProjectGeneration.DomainFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
             IRelationSideAdditionOptions optionsTo =
-                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}", options.EntityNameFrom);
+                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
             this.relationAddition.AddRelationToDTO(optionsTo, ContractLogicProjectGeneration.DomainFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }

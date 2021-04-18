@@ -46,7 +46,7 @@ namespace Contractor.Core.Projects.Database
 
         private static string GetPropertyLine(IRelationAdditionOptions options)
         {
-            return $"    CONSTRAINT [FK_{options.EntityNamePluralTo}_{options.EntityNameFrom}Id] FOREIGN KEY ([{options.EntityNameFrom}Id]) REFERENCES [dbo].[{options.EntityNamePluralFrom}] ([Id]),";
+            return $"    CONSTRAINT [FK_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id] FOREIGN KEY ([{options.PropertyNameFrom}Id]) REFERENCES [dbo].[{options.EntityNamePluralFrom}] ([Id]),";
         }
     }
 }
