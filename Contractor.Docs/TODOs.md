@@ -1,6 +1,4 @@
 Main Quests:
-- Optional Properties
-  - Frontend Validation
 - contractor add relation 1:n 
   - [-n Vertragsbank:Vertragskunden] Alternative Property Names
 

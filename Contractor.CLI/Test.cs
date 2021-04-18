@@ -175,11 +175,13 @@ namespace Contractor.CLI
             RelationAdditionOptions relationOptions = new RelationAdditionOptions(contractorOptions)
             {
                 DomainFrom = "Bankwesen",
-                DomainTo = "Kundenstamm",
                 EntityNameFrom = "Bank",
                 EntityNamePluralFrom = "Banken",
+                PropertyNameFrom = "Vertragsbank",
+                DomainTo = "Kundenstamm",
                 EntityNameTo = "Kunde",
                 EntityNamePluralTo = "Kunden",
+                PropertyNameTo = "Vertragskunden",
             };
             contractorCoreApi.Add1ToNRelation(relationOptions);
         }
