@@ -12,7 +12,7 @@ namespace Contractor.CLI
         {
             if (args.Length < 6)
             {
-                Console.WriteLine("Bitte geben sie einen Domain Name an: contractor add property string:256 Name -e Bankwesen.Bank:Banken");
+                Console.WriteLine("Bitte geben sie einen Domain Name an: contractor add property string:256 Name -e Bankwesen.Bank:Banken [-o | --optional]");
                 return;
             }
 
@@ -46,6 +46,8 @@ namespace Contractor.CLI
             options.Domain = entityName.Split('.')[0];
             options.EntityName = entityName.Split('.')[1].Split(':')[0];
             options.EntityNamePlural = entityName.Split(':')[1];
+
+            options.IsOptional = ArgumentParser.HasArgument(args, "-o", "--optional");
         }
 
         private static PropertyTypes ParsePropertyType(string[] args)

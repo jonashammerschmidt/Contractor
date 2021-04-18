@@ -12,8 +12,8 @@ namespace Contractor.CLI
 contractor init [-y]
 contractor add domain Bankwesen
 contractor add entity Bankwesen.Bank:Banken [-s|--scope Mandant:Mandanten]
-contractor add property string:256 Name -e Bankwesen.Bank:Banken
-contractor add relation 1:n Bankwesen.Bank:Banken Kundenstamm.Kunde:Kunden
+contractor add property string:256 Name -e Bankwesen.Bank:Banken [-o|--optional]
+contractor add relation 1:n Bankwesen.Bank:Banken Kundenstamm.Kunde:Kunden [-n|--alternative-property-names Vertragsbank:Vertragskunden]
             ");
         }
     }
