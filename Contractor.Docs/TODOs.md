@@ -4,6 +4,7 @@ Main Quests:
 
 Try:
   - Frontend-DTOs as Classes
+  - Frontend: Check properties and relations with 2 words
 
 Ideas: 
 - contractor add relation n:m UserManagement.User:Users UserManagement.Group:Groups UserGroupMembership

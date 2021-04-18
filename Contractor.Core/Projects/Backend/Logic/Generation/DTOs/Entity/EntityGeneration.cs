@@ -44,7 +44,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
             // To
             IRelationSideAdditionOptions relationSideAdditionOptions = RelationAdditionOptions.
-                GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+                GetPropertyForTo(options, "Guid");
 
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
 

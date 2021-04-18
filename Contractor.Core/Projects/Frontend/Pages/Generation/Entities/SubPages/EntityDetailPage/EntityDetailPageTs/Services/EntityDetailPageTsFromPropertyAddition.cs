@@ -61,7 +61,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("  }");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerTo}TableDataSource.data = this.{options.EntityNameLowerFrom}.{options.EntityNamePluralLowerTo};");
+            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerTo}TableDataSource.data = this.{options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()};");
 
             return stringEditor.GetText();
         }

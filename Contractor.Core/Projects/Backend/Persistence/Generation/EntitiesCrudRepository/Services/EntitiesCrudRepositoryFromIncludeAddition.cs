@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralFrom}");
             stringEditor.Next(line => !line.Contains("Include("));
 
-            stringEditor.InsertLine($"                .Include(ef{options.EntityNameFrom} => ef{options.EntityNameFrom}.{options.EntityNamePluralTo})");
+            stringEditor.InsertLine($"                .Include(ef{options.EntityNameFrom} => ef{options.EntityNameFrom}.{options.PropertyNameTo})");
 
             return stringEditor.GetText();
         }

@@ -52,9 +52,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetAppRoutingLine(IRelationAdditionOptions options)
         {
             return
-             $"            <ng-container matColumnDef=\"{options.EntityNameLowerFrom}\">\n" +
-             $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.EntityNameFrom} </th>\n" +
-             $"                <td mat-cell *matCellDef=\"let element\" > {{{{get{options.EntityNameFrom}Name(element.{options.EntityNameLowerFrom}Id)}}}} </td>\n" +
+             $"            <ng-container matColumnDef=\"{options.PropertyNameFrom.LowerFirstChar()}\">\n" +
+             $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyNameFrom.ToReadable()} </th>\n" +
+             $"                <td mat-cell *matCellDef=\"let element\" > {{{{get{options.EntityNameFrom}Name(element.{options.PropertyNameFrom.LowerFirstChar()}Id)}}}} </td>\n" +
               "            </ng-container>\n";
         }
     }

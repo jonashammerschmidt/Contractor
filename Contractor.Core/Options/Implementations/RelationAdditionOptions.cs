@@ -75,7 +75,7 @@ namespace Contractor.Core.Options
             };
         }
 
-        internal static IRelationSideAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options, string propertyType, string propertyName)
+        internal static IRelationSideAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options, string propertyType)
         {
             return new RelationSideAdditionOptions(options)
             {

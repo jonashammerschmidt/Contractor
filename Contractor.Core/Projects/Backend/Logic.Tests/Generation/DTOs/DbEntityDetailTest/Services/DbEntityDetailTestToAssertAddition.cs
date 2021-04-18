@@ -42,7 +42,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"public static IDb{options.EntityNameTo}Detail Default()");
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.EntityNameFrom} = Db{options.EntityNameFrom}Test.Default(),");
+            stringEditor.InsertLine($"                {options.PropertyNameFrom} = Db{options.EntityNameFrom}Test.Default(),");
 
             fileData = stringEditor.GetText();
 
@@ -50,7 +50,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("AssertDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
-            stringEditor.InsertLine($"            Db{options.EntityNameFrom}Test.AssertDefault(db{options.EntityNameTo}Detail.{options.EntityNameFrom});");
+            stringEditor.InsertLine($"            Db{options.EntityNameFrom}Test.AssertDefault(db{options.EntityNameTo}Detail.{options.PropertyNameFrom});");
 
             return stringEditor.GetText();
         }

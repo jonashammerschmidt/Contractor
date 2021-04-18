@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.NextThatContains("FromEf" + options.EntityNameFrom);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = ef{options.EntityNameFrom}.{options.EntityNamePluralTo}" +
+            stringEditor.InsertLine($"                {options.PropertyNameTo} = ef{options.EntityNameFrom}.{options.PropertyNameTo}" +
                 $".Select(ef{options.EntityNameTo} => Db{options.EntityNameTo}.FromEf{options.EntityNameTo}(ef{options.EntityNameTo})),");
 
             return stringEditor.GetText();

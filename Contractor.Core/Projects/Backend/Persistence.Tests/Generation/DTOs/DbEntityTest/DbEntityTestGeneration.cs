@@ -51,7 +51,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         {
             // To
             IRelationSideAdditionOptions guidPropertyOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid");
             this.relationAddition.AddRelationToDTO(guidPropertyOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
 
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(guidPropertyOptions);

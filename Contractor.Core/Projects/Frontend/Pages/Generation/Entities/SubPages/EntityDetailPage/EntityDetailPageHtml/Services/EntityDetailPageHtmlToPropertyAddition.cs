@@ -63,10 +63,10 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             return
                 $"        <p>\n" +
-                $"            <span style=\"font-size: 0.8em;\">{options.EntityNameFrom}:</span>\n" +
+                $"            <span style=\"font-size: 0.8em;\">{options.PropertyNameFrom.ToReadable()}:</span>\n" +
                 $"            <br>\n" +
-                $"            <a [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainFrom)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}/detail', {options.EntityNameLowerTo}.{options.EntityNameLowerFrom}.id]\" >\n" +
-                $"                {{{{{options.EntityNameLowerTo}.{options.EntityNameLowerFrom}.name}}}}\n" +
+                $"            <a [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainFrom)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}/detail', {options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.id]\" >\n" +
+                $"                {{{{{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.name}}}}\n" +
                 $"                <mat-icon style=\"font-size: 1em;\">open_in_new</mat-icon>\n" +
                 $"            </a>\n" +
                 $"        </p>\n";

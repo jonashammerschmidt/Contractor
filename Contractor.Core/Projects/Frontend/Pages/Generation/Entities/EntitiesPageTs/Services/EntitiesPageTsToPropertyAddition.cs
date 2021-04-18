@@ -52,7 +52,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             stringEditor.NextThatContains("GridColumns: string[]");
             stringEditor.NextThatContains("'detail'");
-            stringEditor.InsertLine($"    '{options.EntityNameLowerFrom}',");
+            stringEditor.InsertLine($"    '{options.PropertyNameFrom.LowerFirstChar()}',");
 
             stringEditor.NextThatContains("constructor(");
             stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}: I{options.EntityNameFrom}[];");
@@ -95,7 +95,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();\n" +
                  "\n" +
                  "    this.filterItems.push({\n" +
-                $"      dataName: '{options.EntityNamePluralFrom}',\n" +
+                $"      dataName: '{options.PropertyNameFrom.LowerFirstChar()}',\n" +
                 $"      dataSource: this.{options.EntityNamePluralLowerFrom},\n" +
                  "      valueExpr: 'id',\n" +
                  "      displayExpr: 'name',\n" +
@@ -106,7 +106,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                  "\n" +
                 $"    this.filterComparators.push(({options.EntityNameLowerTo}) => {{\n" +
                  "      return this.filterValues[filterValuesIndex].length < 1 ||\n" +
-                $"        this.filterValues[filterValuesIndex].includes({options.EntityNameLowerTo}.{options.EntityNameLowerFrom}Id);\n" +
+                $"        this.filterValues[filterValuesIndex].includes({options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}Id);\n" +
                  "    });\n" +
                  "  }";
         }

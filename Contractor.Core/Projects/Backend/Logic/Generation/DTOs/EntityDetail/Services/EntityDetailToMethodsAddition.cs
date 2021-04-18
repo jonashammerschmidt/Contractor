@@ -40,8 +40,8 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor.NextThatContains("FromDb" + options.EntityNameTo);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.EntityNameFrom} = {options.DomainFrom}.{options.EntityNamePluralFrom}.{options.EntityNameFrom}" +
-                $".FromDb{options.EntityNameFrom}(db{options.EntityNameTo}Detail.{options.EntityNameFrom}),");
+            stringEditor.InsertLine($"                {options.PropertyNameFrom} = {options.DomainFrom}.{options.EntityNamePluralFrom}.{options.EntityNameFrom}" +
+                $".FromDb{options.EntityNameFrom}(db{options.EntityNameTo}Detail.{options.PropertyNameFrom}),");
 
             return stringEditor.GetText();
         }

@@ -44,7 +44,7 @@ namespace Contractor.Core.Projects.Database
         {
             // To
             IRelationSideAdditionOptions relationSideAdditionOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid");
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
 
             this.dbTablePropertyAddition.AddProperty(propertyAdditionOptions, DBProjectGeneration.DomainFolder, FileName);

@@ -42,7 +42,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.NextThatContains("FromEf" + options.EntityNameTo);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.EntityNameFrom} = Db{options.EntityNameFrom}.FromEf{options.EntityNameFrom}(ef{options.EntityNameTo}.{options.EntityNameFrom}),");
+            stringEditor.InsertLine($"                {options.PropertyNameFrom} = Db{options.EntityNameFrom}.FromEf{options.EntityNameFrom}(ef{options.EntityNameTo}.{options.PropertyNameFrom}),");
 
             return stringEditor.GetText();
         }

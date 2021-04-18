@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             stringEditor.NextThatContains("AssertDbDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"            Db{options.EntityNameFrom}Test.AssertDbDefault(db{options.EntityNameTo}Detail.{options.EntityNameFrom});");
+            stringEditor.InsertLine($"            Db{options.EntityNameFrom}Test.AssertDbDefault(db{options.EntityNameTo}Detail.{options.PropertyNameFrom});");
 
             return stringEditor.GetText();
         }

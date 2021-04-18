@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor.NextThatContains("FromDb" + options.EntityNameFrom);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = db{options.EntityNameFrom}Detail.{options.EntityNamePluralTo}" +
+            stringEditor.InsertLine($"                {options.PropertyNameTo} = db{options.EntityNameFrom}Detail.{options.PropertyNameTo}" +
                 $".Select(db{options.EntityNameTo} => {options.EntityNameTo}.FromDb{options.EntityNameTo}(db{options.EntityNameTo})),");
 
             return stringEditor.GetText();

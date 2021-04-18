@@ -42,7 +42,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            IRelationSideAdditionOptions guidPropertyOptions = RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameFrom}Id");
+            IRelationSideAdditionOptions guidPropertyOptions = RelationAdditionOptions.GetPropertyForTo(options, "Guid");
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(guidPropertyOptions);
 
             this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, LogicTestsProjectGeneration.DomainFolder, FileName);

@@ -39,7 +39,7 @@ namespace Contractor.Core.Projects.Frontend.Model
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             IRelationSideAdditionOptions toOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, "Guid", $"{options.EntityNameLowerFrom}Id");
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid");
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(toOptions);
 
             this.frontendDtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);

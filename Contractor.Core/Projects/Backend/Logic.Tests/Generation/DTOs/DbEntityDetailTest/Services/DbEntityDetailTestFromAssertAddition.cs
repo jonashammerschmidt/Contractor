@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"public static IDb{options.EntityNameFrom}Detail Default()");
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.EntityNamePluralTo} = new List<IDb{options.EntityNameTo}> " + "{" + $" Db{options.EntityNameTo}Test.Default() " + "},");
+            stringEditor.InsertLine($"                {options.PropertyNameTo} = new List<IDb{options.EntityNameTo}> " + "{" + $" Db{options.EntityNameTo}Test.Default() " + "},");
 
             fileData = stringEditor.GetText();
 
@@ -51,7 +51,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("AssertDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
-            stringEditor.InsertLine($"            Db{options.EntityNameTo}Test.AssertDefault(db{options.EntityNameFrom}Detail.{options.EntityNamePluralTo}.ToArray()[0]);");
+            stringEditor.InsertLine($"            Db{options.EntityNameTo}Test.AssertDefault(db{options.EntityNameFrom}Detail.{options.PropertyNameTo}.ToArray()[0]);");
 
             return stringEditor.GetText();
         }

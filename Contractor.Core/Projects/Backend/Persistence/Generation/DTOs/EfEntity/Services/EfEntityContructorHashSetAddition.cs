@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.NextThatContains($"public Ef{options.EntityNameFrom}()");
             stringEditor.Next(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"            this.{options.EntityNamePluralTo} = new HashSet<Ef{options.EntityNameTo}>();");
+            stringEditor.InsertLine($"            this.{options.PropertyNameTo} = new HashSet<Ef{options.EntityNameTo}>();");
 
             return stringEditor.GetText();
         }
