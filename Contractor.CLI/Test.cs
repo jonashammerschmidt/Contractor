@@ -41,15 +41,15 @@ namespace Contractor.CLI
             // Domain
             var domainAdditionOptions = new DomainAdditionOptions(contractorOptions)
             {
-                Domain = "Bankwesen"
+                Domain = "GegönntesBankwesen"
             };
             contractorCoreApi.AddDomain(domainAdditionOptions);
 
             // Entities
             EntityAdditionOptions entityAdditionOptions = new EntityAdditionOptions(domainAdditionOptions)
             {
-                EntityName = "Bank",
-                EntityNamePlural = "Banken"
+                EntityName = "GegönnteBank",
+                EntityNamePlural = "GegönnteBanken"
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
@@ -64,36 +64,44 @@ namespace Contractor.CLI
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
+                PropertyType = PropertyTypes.String,
+                PropertyName = "GegönnterName",
+                PropertyTypeExtra = "256"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
                 PropertyType = PropertyTypes.Boolean,
-                PropertyName = "Boolean"
+                PropertyName = "GegönnterBoolean"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.DateTime,
-                PropertyName = "DateTime",
+                PropertyName = "GegönntesDateTime",
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Double,
-                PropertyName = "Double"
+                PropertyName = "GegönnterDouble"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Guid,
-                PropertyName = "Guid",
+                PropertyName = "GegönnteGuid",
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Integer,
-                PropertyName = "Integer"
+                PropertyName = "GegönnterInteger"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
@@ -105,15 +113,15 @@ namespace Contractor.CLI
             // Domain
             var domainAdditionOptions = new DomainAdditionOptions(contractorOptions)
             {
-                Domain = "Kundenstamm"
+                Domain = "GegönnterKundenstamm"
             };
             contractorCoreApi.AddDomain(domainAdditionOptions);
 
             // Entities
             EntityAdditionOptions entityAdditionOptions = new EntityAdditionOptions(domainAdditionOptions)
             {
-                EntityName = "Kunde",
-                EntityNamePlural = "Kunden"
+                EntityName = "GegönnterKunde",
+                EntityNamePlural = "GegönnteKunden"
             };
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
@@ -122,15 +130,22 @@ namespace Contractor.CLI
             {
                 PropertyType = PropertyTypes.String,
                 PropertyName = "Name",
-                PropertyTypeExtra = "256",
-                IsOptional = true,
+                PropertyTypeExtra = "256"
+            };
+            contractorCoreApi.AddProperty(propertyAdditionOptions);
+
+            propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.String,
+                PropertyName = "GegönnterName",
+                PropertyTypeExtra = "256"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
 
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Boolean,
-                PropertyName = "Boolean",
+                PropertyName = "GegönnterBoolean",
                 IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
@@ -138,7 +153,7 @@ namespace Contractor.CLI
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.DateTime,
-                PropertyName = "DateTime",
+                PropertyName = "GegönnterDateTime",
                 IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
@@ -146,7 +161,7 @@ namespace Contractor.CLI
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Double,
-                PropertyName = "Double",
+                PropertyName = "GegönnterDouble",
                 IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
@@ -154,7 +169,7 @@ namespace Contractor.CLI
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Guid,
-                PropertyName = "Guid",
+                PropertyName = "GegönnterGuid",
                 IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
@@ -162,7 +177,7 @@ namespace Contractor.CLI
             propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Integer,
-                PropertyName = "Integer",
+                PropertyName = "GegönnterInteger",
                 IsOptional = true,
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
@@ -174,14 +189,14 @@ namespace Contractor.CLI
 
             RelationAdditionOptions relationOptions = new RelationAdditionOptions(contractorOptions)
             {
-                DomainFrom = "Bankwesen",
-                EntityNameFrom = "Bank",
-                EntityNamePluralFrom = "Banken",
-                PropertyNameFrom = "Vertragsbank",
-                DomainTo = "Kundenstamm",
-                EntityNameTo = "Kunde",
-                EntityNamePluralTo = "Kunden",
-                PropertyNameTo = "Vertragskunden",
+                DomainFrom = "GegönntesBankwesen",
+                EntityNameFrom = "GegönnteBank",
+                EntityNamePluralFrom = "GegönnteBanken",
+                PropertyNameFrom = "GegönnteVertragsbank",
+                DomainTo = "GegönnterKundenstamm",
+                EntityNameTo = "GegönnterKunde",
+                EntityNamePluralTo = "GegönnteKunden",
+                PropertyNameTo = "GegönnteVertragskunden",
             };
             contractorCoreApi.Add1ToNRelation(relationOptions);
         }

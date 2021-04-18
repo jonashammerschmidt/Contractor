@@ -1,10 +1,10 @@
 <div class="entities-kebab-page">
 
     <div class="toolbar">
-        <h1>Entities</h1>
+        <h1>EntitiesReadable</h1>
         <button mat-flat-button color="primary" [routerLink]="['/domain-kebab/entities-kebab/create']">
             <mat-icon class="mat-icon-button-fix">add</mat-icon>
-            Entity erstellen
+            EntityReadable erstellen
         </button>
     </div>
 

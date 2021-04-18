@@ -2,12 +2,12 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
-import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-detail';
+import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-detail';
 
 @Component({
-  selector: 'app-entity-detail',
-  templateUrl: './entity-detail.page.html',
-  styleUrls: ['./entity-detail.page.scss']
+  selector: 'app-entity-kebab-detail',
+  templateUrl: './entity-kebab-detail.page.html',
+  styleUrls: ['./entity-kebab-detail.page.scss']
 })
 export class EntityDetailPage implements OnInit {
 

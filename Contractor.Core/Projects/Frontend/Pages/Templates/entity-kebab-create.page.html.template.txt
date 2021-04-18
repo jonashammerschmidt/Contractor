@@ -1,7 +1,7 @@
 <div class="entity-kebab-detail-page">
     <mat-card *ngIf="entityCreateForm">
         <div class="toolbar">
-            <h1>Entity erstellen</h1>
+            <h1>EntityReadable erstellen</h1>
             <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
                 Abbrechen
             </button>

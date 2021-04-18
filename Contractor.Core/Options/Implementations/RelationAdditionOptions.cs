@@ -4,12 +4,33 @@ namespace Contractor.Core.Options
 {
     public class RelationAdditionOptions : ContractorOptions, IRelationAdditionOptions
     {
-        public string DomainFrom { get; set; }
+        private string domainFrom;
+        private string entityNameFrom;
+        private string entityNamePluralFrom;
+        private string propertyNameFrom;
 
-        public string EntityNameFrom { get; set; }
+        private string domainTo;
+        private string entityNameTo;
+        private string entityNamePluralTo;
+        private string propertyNameTo;
 
-        public string EntityNamePluralFrom { get; set; }
+        public string DomainFrom
+        {
+            get { return domainFrom; }
+            set { domainFrom = value.ToVariableName(); }
+        }
 
+        public string EntityNameFrom
+        {
+            get { return entityNameFrom; }
+            set { entityNameFrom = value.ToVariableName(); }
+        }
+
+        public string EntityNamePluralFrom
+        {
+            get { return entityNamePluralFrom; }
+            set { entityNamePluralFrom = value.ToVariableName(); }
+        }
         public string EntityNameLowerFrom
         {
             get
@@ -26,13 +47,35 @@ namespace Contractor.Core.Options
             }
         }
 
-        public string PropertyNameFrom { get; set; }
+        public string PropertyNameFrom
+        {
+            get { return propertyNameFrom; }
+            set { propertyNameFrom = value.ToVariableName(); }
+        }
 
-        public string DomainTo { get; set; }
+        public string DomainTo
+        {
+            get { return domainTo; }
+            set { domainTo = value.ToVariableName(); }
+        }
 
-        public string EntityNameTo { get; set; }
+        public string EntityNameTo
+        {
+            get { return entityNameTo; }
+            set { entityNameTo = value.ToVariableName(); }
+        }
 
-        public string EntityNamePluralTo { get; set; }
+        public string EntityNamePluralTo
+        {
+            get { return entityNamePluralTo; }
+            set { entityNamePluralTo = value.ToVariableName(); }
+        }
+
+        public string PropertyNameTo
+        {
+            get { return propertyNameTo; }
+            set { propertyNameTo = value.ToVariableName(); }
+        }
 
         public string EntityNameLowerTo
         {
@@ -49,8 +92,6 @@ namespace Contractor.Core.Options
                 return char.ToLower(EntityNamePluralTo[0]) + EntityNamePluralTo.Substring(1);
             }
         }
-
-        public string PropertyNameTo { get; set; }
 
         public RelationAdditionOptions()
         {

@@ -95,7 +95,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();\n" +
                  "\n" +
                  "    this.filterItems.push({\n" +
-                $"      dataName: '{options.PropertyNameFrom.LowerFirstChar()}',\n" +
+                $"      dataName: '{options.PropertyNameFrom.ToReadable()}',\n" +
                 $"      dataSource: this.{options.EntityNamePluralLowerFrom},\n" +
                  "      valueExpr: 'id',\n" +
                  "      displayExpr: 'name',\n" +
