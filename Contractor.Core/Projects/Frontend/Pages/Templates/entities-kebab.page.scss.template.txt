@@ -32,5 +32,12 @@
                 background-color: #ebebeb;
             }
         }
+
+        .loading {
+            width: var(--content-width);
+            display: grid;
+            justify-content: center;
+            margin: 16px 0;
+        }
     }
 }

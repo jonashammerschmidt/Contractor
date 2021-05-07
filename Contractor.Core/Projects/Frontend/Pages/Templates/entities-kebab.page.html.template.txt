@@ -2,7 +2,7 @@
 
     <div class="toolbar">
         <h1>EntitiesReadable</h1>
-        <button mat-flat-button color="primary" [routerLink]="['/domain-kebab/entities-kebab/create']">
+        <button mat-flat-button color="primary" (click)="openCreateDialog()">
             <mat-icon class="mat-icon-button-fix">add</mat-icon>
             EntityReadable erstellen
         </button>
@@ -29,5 +29,8 @@
             <tr mat-row *matRowDef="let row; columns: entitiesGridColumns;"
                 [routerLink]="['/domain-kebab/entities-kebab/detail', row.id]"></tr>
         </table>
+        <div *ngIf="!entities" class="loading">
+            <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+        </div>
     </div>
 </div>

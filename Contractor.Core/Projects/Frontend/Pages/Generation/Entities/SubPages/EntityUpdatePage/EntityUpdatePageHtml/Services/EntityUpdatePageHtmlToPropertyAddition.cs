@@ -41,12 +41,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             // ----------- DbSet -----------
-            stringEditor.NextThatContains("</form>");
-
-            stringEditor.InsertNewLine();
-            stringEditor.InsertNewLine();
+            stringEditor.NextThatContains("<div class=\"buttons\">");
 
             stringEditor.InsertLine(GetLine(options));
+
+            stringEditor.InsertNewLine();
 
             return stringEditor.GetText();
         }

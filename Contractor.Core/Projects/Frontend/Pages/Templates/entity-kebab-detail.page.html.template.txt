@@ -1,18 +1,20 @@
 <div class="entity-kebab-detail-page" *ngIf="entity">
-    <mat-card>
-        <div class="toolbar">
-            <h1>EntityReadable: {{entity.name}}</h1>
-            <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
-                Schließen
-            </button>
-            <button mat-flat-button color="primary" class="save-button" (click)="onUpdateClicked()">
-                <mat-icon class="mat-icon-button-fix">edit</mat-icon>
-                Ändern
-            </button>
-            <button mat-flat-button color="warn" class="save-button" (click)="onDeleteClicked()">
-                <mat-icon class="mat-icon-button-fix">delete</mat-icon>
-                Löschen
-            </button>
-        </div>
-    </mat-card>
+    <div class="toolbar">
+        <h1>EntityReadable: {{entity.name}}</h1>
+        <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
+            Schließen
+        </button>
+        <button mat-flat-button color="primary" class="save-button" (click)="onUpdateClicked()">
+            <mat-icon class="mat-icon-button-fix">edit</mat-icon>
+            Ändern
+        </button>
+        <button mat-flat-button color="warn" class="save-button" (click)="onDeleteClicked()">
+            <mat-icon class="mat-icon-button-fix">delete</mat-icon>
+            Löschen
+        </button>
+    </div>
+</div>
+
+<div *ngIf="!entity" class="loading">
+    <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
 </div>

@@ -52,18 +52,18 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private void AddTabs(StringEditor stringEditor)
         {
-            stringEditor.NextThatContains("        <div class=\"toolbar\">");
-            stringEditor.NextThatContains("        </div>");
+            stringEditor.NextThatStartsWith("    <div class=\"toolbar\">");
+            stringEditor.NextThatStartsWith("    </div>");
             stringEditor.Next();
             stringEditor.Next();
 
-            stringEditor.InsertLine("        <mat-tab-group mat-align-tabs=\"start\">");
-            stringEditor.InsertLine("            <mat-tab label=\"Stammdaten\">");
+            stringEditor.InsertLine("    <mat-tab-group mat-align-tabs=\"start\">");
+            stringEditor.InsertLine("        <mat-tab label=\"Stammdaten\">");
 
-            stringEditor.NextThatContains("</mat-card>");
+            stringEditor.NextThatStartsWith("</div>");
 
-            stringEditor.InsertLine("            </mat-tab>");
-            stringEditor.InsertLine("        </mat-tab-group>");
+            stringEditor.InsertLine("        </mat-tab>");
+            stringEditor.InsertLine("    </mat-tab-group>");
 
             stringEditor.AddPrefixBetweenLinesThatContain("        ", "<mat-tab label=\"Stammdaten\">", " </mat-tab>");
         }
@@ -71,33 +71,31 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private void AddTab(IRelationAdditionOptions options, StringEditor stringEditor)
         {
             stringEditor.MoveToStart();
-            stringEditor.NextThatContains("        </mat-tab-group>");
+            stringEditor.NextThatContains("    </mat-tab-group>");
 
-            stringEditor.InsertLine($"            <mat-tab label=\"{options.PropertyNameTo.ToReadable()}\">");
-            stringEditor.InsertLine($"                <div class=\"tab-content\">");
-            stringEditor.InsertLine($"                    <h2>{options.PropertyNameTo.ToReadable()}</h2>");
-            stringEditor.InsertLine($"                    <div class=\"table-container\">");
-            stringEditor.InsertLine($"                        <table mat-table [dataSource]=\"{options.EntityNamePluralLowerTo}TableDataSource\">");
+            stringEditor.InsertLine($"        <mat-tab label=\"{options.PropertyNameTo.ToReadable()}\">");
+            stringEditor.InsertLine($"            <h2>{options.PropertyNameTo.ToReadable()}</h2>");
+            stringEditor.InsertLine($"            <div class=\"table-container\">");
+            stringEditor.InsertLine($"                <table mat-table [dataSource]=\"{options.EntityNamePluralLowerTo}TableDataSource\">");
             stringEditor.InsertLine($"");
-            stringEditor.InsertLine($"                            <ng-container matColumnDef=\"name\">");
-            stringEditor.InsertLine($"                                <th mat-header-cell *matHeaderCellDef> Name </th>");
-            stringEditor.InsertLine($"                                <td mat-cell *matCellDef=\"let element\"> {{{{element.name}}}} </td>");
-            stringEditor.InsertLine($"                            </ng-container>");
+            stringEditor.InsertLine($"                    <ng-container matColumnDef=\"name\">");
+            stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> Name </th>");
+            stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\"> {{{{element.name}}}} </td>");
+            stringEditor.InsertLine($"                    </ng-container>");
             stringEditor.InsertLine($"");
-            stringEditor.InsertLine($"                            <ng-container matColumnDef=\"detail\">");
-            stringEditor.InsertLine($"                                <th mat-header-cell *matHeaderCellDef></th>");
-            stringEditor.InsertLine($"                                <td mat-cell *matCellDef=\"let element\" width=\"10%\">");
-            stringEditor.InsertLine($"                                    <button mat-button role=\"link\">Detail</button>");
-            stringEditor.InsertLine($"                                </td>");
-            stringEditor.InsertLine($"                            </ng-container>");
+            stringEditor.InsertLine($"                    <ng-container matColumnDef=\"detail\">");
+            stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef></th>");
+            stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\" width=\"10%\">");
+            stringEditor.InsertLine($"                            <button mat-button role=\"link\">Detail</button>");
+            stringEditor.InsertLine($"                        </td>");
+            stringEditor.InsertLine($"                    </ng-container>");
             stringEditor.InsertLine($"");
-            stringEditor.InsertLine($"                            <tr mat-header-row *matHeaderRowDef=\"{options.EntityNamePluralLowerTo}GridColumns; sticky: true\"></tr>");
-            stringEditor.InsertLine($"                            <tr mat-row *matRowDef=\"let row; columns: {options.EntityNamePluralLowerTo}GridColumns;\"");
-            stringEditor.InsertLine($"                                [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainTo)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}/detail', row.id]\"></tr>");
-            stringEditor.InsertLine($"                        </table>");
-            stringEditor.InsertLine($"                    </div>");
-            stringEditor.InsertLine($"                </div>");
-            stringEditor.InsertLine($"            </mat-tab>");
+            stringEditor.InsertLine($"                    <tr mat-header-row *matHeaderRowDef=\"{options.EntityNamePluralLowerTo}GridColumns; sticky: true\"></tr>");
+            stringEditor.InsertLine($"                    <tr mat-row *matRowDef=\"let row; columns: {options.EntityNamePluralLowerTo}GridColumns;\"");
+            stringEditor.InsertLine($"                        [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainTo)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}/detail', row.id]\"></tr>");
+            stringEditor.InsertLine($"                </table>");
+            stringEditor.InsertLine($"            </div>");
+            stringEditor.InsertLine($"        </mat-tab>");
         }
     }
 }

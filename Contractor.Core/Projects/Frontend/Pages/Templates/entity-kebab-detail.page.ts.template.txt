@@ -1,8 +1,9 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-detail';
+import { EntityUpdatePage } from '../entity-kebab-update/entity-kebab-update.page';
 
 @Component({
   selector: 'app-entity-kebab-detail',
@@ -11,19 +12,21 @@ import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-
 })
 export class EntityDetailPage implements OnInit {
 
+  entityId: string;
   entity: IEntityDetail;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
-    private router: Router) {
+    private router: Router,
+    private matDialog: MatDialog) {
   }
 
   async ngOnInit(): Promise<void> {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
-        this.loadEntity(params.id).then().catch((error) => {
+        this.entityId = params.id;
+        this.loadEntity().then().catch((error) => {
           console.error(error);
         });
       }
@@ -31,7 +34,10 @@ export class EntityDetailPage implements OnInit {
   }
 
   async onUpdateClicked(): Promise<void> {
-    await this.router.navigate(['/domain-kebab/entities-kebab/update', this.entity.id]);
+    const dialog = await this.matDialog.open(EntityUpdatePage, { data: this.entityId });
+    if (await dialog.afterClosed().toPromise()) {
+      await this.loadEntity();
+    }
   }
 
   async onDeleteClicked(): Promise<void> {
@@ -39,8 +45,9 @@ export class EntityDetailPage implements OnInit {
     await this.router.navigate(['/domain-kebab/entities-kebab']);
   }
 
-  private async loadEntity(entityId: string): Promise<void> {
-    this.entity = await this.entitiesCrudService.getEntityDetail(entityId);
+  private async loadEntity(): Promise<void> {
+    this.entity = null;
+    this.entity = await this.entitiesCrudService.getEntityDetail(this.entityId);
   }
 
 }

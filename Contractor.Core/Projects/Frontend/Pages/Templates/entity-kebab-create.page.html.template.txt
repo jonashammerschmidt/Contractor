@@ -1,19 +1,20 @@
-<div class="entity-kebab-detail-page">
-    <mat-card *ngIf="entityCreateForm">
-        <div class="toolbar">
-            <h1>EntityReadable erstellen</h1>
-            <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
-                Abbrechen
-            </button>
-            <button mat-flat-button color="primary" (click)="onCreateClicked()">
+<div class="entity-kebab-detail-page" *ngIf="entityCreateForm">
+    <div class="toolbar">
+        <h1>EntityReadable erstellen</h1>
+    </div>
+
+    <br>
+
+    <form [formGroup]="entityCreateForm">
+        <div class="buttons">
+            <button mat-flat-button mat-dialog-close color="primary" (click)="onCreateClicked()">
                 <mat-icon class="mat-icon-button-fix">add</mat-icon>
                 Erstellen
             </button>
+            
+            <button mat-flat-button mat-dialog-close>
+                Abbrechen
+            </button>
         </div>
-
-        <br>
-
-        <form [formGroup]="entityCreateForm">
-        </form>
-    </mat-card>
+    </form>
 </div>

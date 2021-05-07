@@ -54,7 +54,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}: I{options.EntityNameFrom}[];");
             stringEditor.InsertNewLine();
 
-            stringEditor.NextThatContains("private router: Router");
+            stringEditor.NextThatContains("MAT_DIALOG_DATA");
             stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
 
             stringEditor.NextThatContains("this.formBuilder.group({");

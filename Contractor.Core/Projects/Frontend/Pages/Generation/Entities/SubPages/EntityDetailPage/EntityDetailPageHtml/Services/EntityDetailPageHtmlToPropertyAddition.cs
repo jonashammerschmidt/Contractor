@@ -49,7 +49,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             }
             else
             {
-                stringEditor.NextThatContains("</mat-card>");
+                stringEditor.NextThatStartsWith("</div>");
             }
 
             stringEditor.InsertNewLine();
@@ -62,14 +62,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetLine(IRelationAdditionOptions options)
         {
             return
-                $"        <p>\n" +
-                $"            <span style=\"font-size: 0.8em;\">{options.PropertyNameFrom.ToReadable()}:</span>\n" +
-                $"            <br>\n" +
-                $"            <a [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainFrom)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}/detail', {options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.id]\" >\n" +
-                $"                {{{{{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.name}}}}\n" +
-                $"                <mat-icon style=\"font-size: 1em;\">open_in_new</mat-icon>\n" +
-                $"            </a>\n" +
-                $"        </p>\n";
+                $"    <p>\n" +
+                $"        <span style=\"font-size: 0.8em;\">{options.PropertyNameFrom.ToReadable()}:</span>\n" +
+                $"        <br>\n" +
+                $"        <a [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainFrom)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}/detail', {options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.id]\" >\n" +
+                $"            {{{{{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.name}}}}\n" +
+                $"            <mat-icon style=\"font-size: 1em;\">open_in_new</mat-icon>\n" +
+                $"        </a>\n" +
+                $"    </p>\n";
         }
     }
 }

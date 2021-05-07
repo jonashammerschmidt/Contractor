@@ -48,7 +48,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             }
             else
             {
-                stringEditor.NextThatContains("</mat-card>");
+                stringEditor.NextThatStartsWith("</div>");
             }
 
             stringEditor.InsertNewLine();
