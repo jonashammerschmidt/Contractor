@@ -16,9 +16,22 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             };
         }
 
+        public static IEntity Default2()
+        {
+            return new EntityTest()
+            {
+                Id = EntityTestValues.IdDefault2,
+            };
+        }
+
         public static void AssertDefault(IEntity entity)
         {
             Assert.AreEqual(EntityTestValues.IdDefault, entity.Id);
+        }
+
+        public static void AssertDefault2(IEntity entity)
+        {
+            Assert.AreEqual(EntityTestValues.IdDefault2, entity.Id);
         }
     }
 }

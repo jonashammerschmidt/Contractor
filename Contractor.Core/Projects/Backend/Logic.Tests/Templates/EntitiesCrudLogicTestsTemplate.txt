@@ -153,8 +153,9 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             // Assert
             Assert.AreEqual(LogicResultState.Ok, result.State);
             IEntity[] entityResults = result.Data.ToArray();
-            Assert.AreEqual(1, entityResults.Length);
+            Assert.AreEqual(2, entityResults.Length);
             EntityTest.AssertDefault(entityResults[0]);
+            EntityTest.AssertDefault2(entityResults[1]);
         }
 
         [TestMethod]
@@ -201,14 +202,18 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
         {
             var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
             entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(true);
+            entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault2)).Returns(true);
             entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault)).Returns(DbEntityTest.Default());
+            entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault2)).Returns(DbEntityTest.Default2());
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault)).Returns(DbEntityDetailTest.Default());
-            entitiesCrudRepository.Setup(repository => repository.GetEntities()).Returns(new List<IDbEntity> { DbEntityTest.Default() });
+            entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault2)).Returns(DbEntityDetailTest.Default2());
+            entitiesCrudRepository.Setup(repository => repository.GetEntities()).Returns(new List<IDbEntity> { DbEntityTest.Default(), DbEntityTest.Default2() });
             entitiesCrudRepository.Setup(repository => repository.UpdateEntity(It.IsAny<IDbEntity>())).Callback((IDbEntity dbEntity) =>
             {
                 DbEntityTest.AssertUpdated(dbEntity);
             });
             entitiesCrudRepository.Setup(repository => repository.DeleteEntity(EntityTestValues.IdDefault));
+            entitiesCrudRepository.Setup(repository => repository.DeleteEntity(EntityTestValues.IdDefault2));
             return entitiesCrudRepository;
         }
 
@@ -216,8 +221,11 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
         {
             var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
             entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(false);
+            entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault2)).Returns(false);
             entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault)).Returns(() => null);
+            entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault2)).Returns(() => null);
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault)).Returns(() => null);
+            entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault2)).Returns(() => null);
             entitiesCrudRepository.Setup(repository => repository.CreateEntity(It.IsAny<IDbEntity>())).Callback((IDbEntity dbEntity) =>
             {
                 DbEntityTest.AssertCreated(dbEntity);
@@ -230,7 +238,9 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             // Arrange
             var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
             entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(true);
+            entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault2)).Returns(true);
             entitiesCrudRepository.Setup(repository => repository.DeleteEntity(EntityTestValues.IdDefault)).Throws(new Exception());
+            entitiesCrudRepository.Setup(repository => repository.DeleteEntity(EntityTestValues.IdDefault2)).Throws(new Exception());
             return entitiesCrudRepository;
         }
 
