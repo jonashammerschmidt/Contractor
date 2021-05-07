@@ -7,7 +7,6 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         public static readonly Guid IdDbDefault = Guid.Parse("{random-guid}");
         public static readonly Guid IdDbDefault2 = Guid.Parse("{random-guid}");
         public static readonly Guid IdForCreate = Guid.Parse("{random-guid}");
-        public static readonly Guid IdForUpdate = Guid.Parse("{random-guid}");
 
         public static readonly Guid RequestScopeIdDbDefault = Guid.Parse("{random-guid}");
     }
