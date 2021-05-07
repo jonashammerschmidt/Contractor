@@ -44,6 +44,8 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
                 stringEditor.InsertLine($"            persistenceDbContext.{options.EntityNamePlural}.Add(Db{options.EntityName}.ToEf{options.EntityName}(Db{options.EntityName}Test.DbDefault2()));");
             }
 
+            stringEditor.InsertNewLine();
+
             return stringEditor.GetText();
         }
     }
