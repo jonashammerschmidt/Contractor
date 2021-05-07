@@ -1,23 +1,11 @@
 <div class="entity-kebab-update-page" *ngIf="entityUpdateForm">
     <div class="toolbar">
         <h1>Entity ändern</h1>
-        <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab/detail', entityId]">
-            Abbrechen
-        </button>
-        <button mat-flat-button color="primary" (click)="onUpdateClicked()">
-            <mat-icon class="mat-icon-button-fix">save</mat-icon>
-            Speichern
-        </button>
     </div>
 
     <br>
         
     <form [formGroup]="entityUpdateForm">
-        <mat-form-field appearance="outline">
-            <mat-label>ID</mat-label>
-            <input matInput formControlName="id" placeholder="ID">
-        </mat-form-field>
-
         <div class="buttons">
             <button mat-flat-button [mat-dialog-close]="true" color="primary" (click)="onUpdateClicked()">
                 <mat-icon class="mat-icon-button-fix">save</mat-icon>
