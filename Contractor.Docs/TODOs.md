@@ -1,7 +1,4 @@
 Fixes:
-- Remove IdForUpdate
-- Relate for BankIdForUpdate to BankTestValues.BankIdDbDefault2
-- Fix Lambda Logic.GetBanken
 - 2 Relations between Bank and Kunde: Side Effects of generation
 - Improve mat-tab-group height calculation 
 
