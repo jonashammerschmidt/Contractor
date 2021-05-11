@@ -1,15 +1,23 @@
-.entity-kebab-update-page {
-    .toolbar {
-        display: grid;
-        grid-template-columns: auto min-content min-content;
-        grid-gap: 8px;
-        align-items: center;
+.toolbar {
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding-bottom: 12px;
+    align-items: center;
 
-        h1 {
-            font-size: 1.2em;
-        }
+    h1 {
+        font-size: 1.2em;
+        margin: 0;
     }
+}
 
+.loading {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.entity-kebab-update-dialog {
     mat-form-field {
         width: 100%;
         padding: 8px 0;
@@ -19,12 +27,13 @@
         display: block;
         margin-left: 6px;
     }
+}
 
-    .buttons {
-        text-align: right;
+.buttons {
+    text-align: right;
+    background-color: white;
 
-        button {
-            margin-left: 12px;
-        }
+    button {
+        margin-left: 12px;
     }
 }

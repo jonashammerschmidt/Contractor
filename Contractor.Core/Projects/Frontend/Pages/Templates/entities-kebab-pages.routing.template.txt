@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EntityCreatePage } from './sub-pages/entity-kebab-create/entity-kebab-create.page';
 import { EntityDetailPage } from './sub-pages/entity-kebab-detail/entity-kebab-detail.page';
-import { EntityUpdatePage } from './sub-pages/entity-kebab-update/entity-kebab-update.page';
 import { EntitiesPage } from './entities-kebab.page';
 
 const routes: Routes = [
   { path: '', component: EntitiesPage },
-  { path: 'create', component: EntityCreatePage },
   { path: 'detail/:id', component: EntityDetailPage },
-  { path: 'update/:id', component: EntityUpdatePage },
   { path: '**', redirectTo: ''}
 ];
 

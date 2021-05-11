@@ -44,3 +44,11 @@
         }
     }
 }
+
+.loading {
+    width: calc(var(--content-width));
+    height: calc(var(--content-height));
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}

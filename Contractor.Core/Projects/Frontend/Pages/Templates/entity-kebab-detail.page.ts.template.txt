@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-detail';
-import { EntityUpdatePage } from '../entity-kebab-update/entity-kebab-update.page';
+import { EntityUpdateDialog } from '../../dialogs/entity-kebab-update/entity-kebab-update.dialog';
 
 @Component({
   selector: 'app-entity-kebab-detail',
@@ -34,7 +34,11 @@ export class EntityDetailPage implements OnInit {
   }
 
   async onUpdateClicked(): Promise<void> {
-    const dialog = await this.matDialog.open(EntityUpdatePage, { data: this.entityId });
+    const dialog = await this.matDialog.open(EntityUpdateDialog, {
+        data: this.entityId,
+        minWidth: '320px',
+    });
+
     if (await dialog.afterClosed().toPromise()) {
       await this.loadEntity();
     }

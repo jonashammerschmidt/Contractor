@@ -40,7 +40,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             // ----------- DbSet -----------
-            stringEditor.NextThatContains("<div class=\"buttons\">");
+            stringEditor.NextThatContains("</form>");
 
             stringEditor.InsertLine(FrontendPageUpdatePropertyLine.GetPropertyLine(options));
 

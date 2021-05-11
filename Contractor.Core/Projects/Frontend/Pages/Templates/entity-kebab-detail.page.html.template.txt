@@ -1,3 +1,7 @@
+<div class="loading" *ngIf="!entity">
+    <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+</div>
+
 <div class="entity-kebab-detail-page" *ngIf="entity">
     <div class="toolbar">
         <h1>EntityReadable: {{entity.name}}</h1>
@@ -13,8 +17,4 @@
             Löschen
         </button>
     </div>
-</div>
-
-<div *ngIf="!entity" class="loading">
-    <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
 </div>

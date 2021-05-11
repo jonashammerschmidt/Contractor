@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TableFilterBarDropdownItem } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-item';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntity } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab';
-import { EntityCreatePage } from './sub-pages/entity-kebab-create/entity-kebab-create.page';
+import { EntityCreateDialog } from './dialogs/entity-kebab-create/entity-kebab-create.dialog';
 
 @Component({
   selector: 'app-entities-kebab',
@@ -60,7 +60,9 @@ export class EntitiesPage implements OnInit, AfterViewInit {
   }
 
   async openCreateDialog(): Promise<void> {
-    await this.matDialog.open(EntityCreatePage);
+    await this.matDialog.open(EntityCreateDialog, {
+      maxHeight: '90vh'
+    });
   }
 
 }
