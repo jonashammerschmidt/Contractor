@@ -49,7 +49,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             }
             else
             {
-                stringEditor.NextThatStartsWith("</div>");
+                stringEditor.NextThatStartsWith($"<div class=\"{options.EntityNameTo.ToKebab()}-detail-page\"");
+                stringEditor.NextThatStartsWith($"</div>");
             }
 
             stringEditor.InsertNewLine();

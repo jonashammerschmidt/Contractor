@@ -1,4 +1,5 @@
 Fixes:
+- DateTime Fix
 - 2 Relations between Bank and Kunde: Side Effects of generation
 - Improve mat-tab-group height calculation 
 
