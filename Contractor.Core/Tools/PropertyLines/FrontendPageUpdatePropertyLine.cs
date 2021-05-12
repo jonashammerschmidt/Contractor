@@ -54,7 +54,7 @@ namespace Contractor.Core.Tools
                         $"                <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
                         $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\">\n" +
                         $"                <mat-hint *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.value\" [align]=\"'end'\">\n" +
-                        $"                    {{{{{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.value.length}}}} / 256\n" +
+                        $"                    {{{{{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.value.length}}}} / {options.PropertyTypeExtra}\n" +
                         $"                </mat-hint>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">Dieses Feld ist erfolderlich.</span>\n" +
