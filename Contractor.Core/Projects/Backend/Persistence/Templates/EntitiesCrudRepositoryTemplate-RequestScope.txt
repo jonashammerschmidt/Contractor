@@ -75,8 +75,8 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
                 .FirstOrDefault();
 
             DbEntity.UpdateEfEntity(efEntity, dbEntity);
-            this.dbContext.Entities.Update(efEntity);
 
+            this.dbContext.Entities.Update(efEntity);
             this.dbContext.SaveChanges();
         }
     }

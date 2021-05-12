@@ -34,6 +34,7 @@ namespace Contractor.Core.Tools
             fileData = fileData.Replace("ProjectName", options.ProjectName);
             if (options.HasRequestScope)
             {
+                fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);
                 fileData = fileData.Replace("RequestScope", options.RequestScopeName);
                 fileData = fileData.Replace("requestScope", options.RequestScopeNameLower);
             }

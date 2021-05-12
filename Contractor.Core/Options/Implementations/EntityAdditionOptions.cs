@@ -8,6 +8,8 @@ namespace Contractor.Core.Options
         private string entityName;
 
         private string entityNamePlural;
+        
+        private string requestScopeDomain;
 
         private string requestScopeName;
 
@@ -49,6 +51,12 @@ namespace Contractor.Core.Options
             }
         }
 
+        public string RequestScopeDomain
+        {
+            get { return requestScopeDomain; }
+            set { requestScopeDomain = value?.ToVariableName(); }
+        }
+
         public string RequestScopeName
         {
             get { return requestScopeName; }
@@ -85,6 +93,7 @@ namespace Contractor.Core.Options
         {
             this.EntityName = options.EntityName;
             this.EntityNamePlural = options.EntityNamePlural;
+            this.RequestScopeDomain = options.RequestScopeDomain;
             this.RequestScopeName = options.RequestScopeName;
             this.RequestScopeNamePlural = options.RequestScopeNamePlural;
         }

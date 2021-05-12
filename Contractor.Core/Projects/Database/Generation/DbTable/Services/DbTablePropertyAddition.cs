@@ -34,6 +34,7 @@ namespace Contractor.Core.Projects.Database
         {
             string fileData = File.ReadAllText(filePath);
 
+            fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);
             fileData = fileData.Replace("RequestScopes", options.RequestScopeNamePlural);
             fileData = fileData.Replace("RequestScope", options.RequestScopeName);
 
