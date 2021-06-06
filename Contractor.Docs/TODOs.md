@@ -1,4 +1,6 @@
 Fixes:
+- Caching
+- Pagination
 - InMemoryDbContext (Methoden umbenennnen)
   - CreatePersistenceDbContextEmpty
   - CreatePersistenceDbContextWithDbDefaults
