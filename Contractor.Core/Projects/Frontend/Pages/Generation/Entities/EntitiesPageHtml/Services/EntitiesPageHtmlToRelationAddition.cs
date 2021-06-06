@@ -53,8 +53,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             return
              $"            <ng-container matColumnDef=\"{options.PropertyNameFrom.LowerFirstChar()}\">\n" +
-             $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyNameFrom.ToReadable()} </th>\n" +
-             $"                <td mat-cell *matCellDef=\"let element\" > {{{{get{options.EntityNameFrom}Name(element.{options.PropertyNameFrom.LowerFirstChar()}Id)}}}} </td>\n" +
+             $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyNameFrom.ToReadable()} </th>\n" +
+             $"                <td mat-cell *matCellDef=\"let element\"> {{{{get{options.EntityNameFrom}Name(element.{options.PropertyNameFrom.LowerFirstChar()}Id)}}}} </td>\n" +
               "            </ng-container>\n";
         }
     }

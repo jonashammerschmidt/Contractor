@@ -1,6 +1,7 @@
 ﻿using ProjectName.Contract.Logic.LogicResults;
 using ProjectName.Contract.Logic.Modules.Domain.Entities;
 using ProjectName.Contract.Logic.Tools.Identifier;
+using ProjectName.Contract.Logic.Tools.Pagination;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using ProjectName.Logic.Modules.Domain.Entities;
 using Microsoft.Extensions.Logging;
@@ -148,11 +149,11 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
                 logger);
 
             // Act
-            ILogicResult<IEnumerable<IEntity>> result = entitiesCrudLogic.GetEntities();
+            ILogicResult<IPagedResult<IEntity>> result = entitiesCrudLogic.GetEntities();
 
             // Assert
             Assert.AreEqual(LogicResultState.Ok, result.State);
-            IEntity[] entityResults = result.Data.ToArray();
+            IEntity[] entityResults = result.Data.Data.ToArray();
             Assert.AreEqual(2, entityResults.Length);
             EntityTest.AssertDefault(entityResults[0]);
             EntityTest.AssertDefault2(entityResults[1]);
@@ -207,7 +208,7 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault2)).Returns(DbEntityTest.Default2());
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault)).Returns(DbEntityDetailTest.Default());
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault2)).Returns(DbEntityDetailTest.Default2());
-            entitiesCrudRepository.Setup(repository => repository.GetEntities()).Returns(new List<IDbEntity> { DbEntityTest.Default(), DbEntityTest.Default2() });
+            entitiesCrudRepository.Setup(repository => repository.GetEntities()).Returns(DbEntityTest.ForPaged());
             entitiesCrudRepository.Setup(repository => repository.UpdateEntity(It.IsAny<IDbEntity>())).Callback((IDbEntity dbEntity) =>
             {
                 DbEntityTest.AssertUpdated(dbEntity);

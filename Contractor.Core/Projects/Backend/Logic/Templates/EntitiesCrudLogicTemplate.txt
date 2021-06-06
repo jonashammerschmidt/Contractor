@@ -2,11 +2,12 @@ using Microsoft.Extensions.Logging;
 using ProjectName.Contract.Logic.LogicResults;
 using ProjectName.Contract.Logic.Modules.Domain.Entities;
 using ProjectName.Contract.Logic.Tools.Identifier;
+using ProjectName.Contract.Logic.Tools.Pagination;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Contract.Persistence.Tools.Pagination;
 using ProjectName.Logic.LogicResults;
+using ProjectName.Logic.Tools.Pagination;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ProjectName.Logic.Modules.Domain.Entities
 {
@@ -74,13 +75,18 @@ namespace ProjectName.Logic.Modules.Domain.Entities
             return LogicResult<IEntityDetail>.Ok(EntityDetail.FromDbEntityDetail(dbEntityDetail));
         }
 
-        public ILogicResult<IEnumerable<IEntity>> GetEntities()
+        public ILogicResult<IPagedResult<IEntity>> GetEntities()
         {
-            IEnumerable<IEntity> entities = this.entitiesCrudRepository.GetEntities()
-                .Select(dbEntity => Entity.FromDbEntity(dbEntity));
+            IDbPagedResult<IDbEntity> dbEntitiesPagedResult = 
+                this.entitiesCrudRepository.GetEntities();
+            
+            IPagedResult<IEntity> entitiesPagedResult =
+                PagedResult.FromDbPagedResult(
+                    dbEntitiesPagedResult,
+                    (dbEntity) => Entity.FromDbEntity(dbEntity));
 
             this.logger.LogDebug("Entities wurden geladen");
-            return LogicResult<IEnumerable<IEntity>>.Ok(entities);
+            return LogicResult<IPagedResult<IEntity>>.Ok(entitiesPagedResult);
         }
 
         public ILogicResult UpdateEntity(IEntityUpdate entityUpdate)

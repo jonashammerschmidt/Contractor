@@ -1,10 +1,13 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { TableFilterBarComponent } from 'src/app/components/ui/table-filter-bar/table-filter-bar.component';
+import { MultiDataSource } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-multi/multi-data-source';
 import { TableFilterBarDropdownItem } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-item';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntity } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab';
+import { PaginationDataSource } from 'src/app/services/backend/pagination.data-source';
 import { EntityCreateDialog } from './dialogs/entity-kebab-create/entity-kebab-create.dialog';
 
 @Component({
@@ -12,51 +15,37 @@ import { EntityCreateDialog } from './dialogs/entity-kebab-create/entity-kebab-c
   templateUrl: './entities-kebab.page.html',
   styleUrls: ['./entities-kebab.page.scss']
 })
-export class EntitiesPage implements OnInit, AfterViewInit {
+export class EntitiesPage implements AfterViewInit {
 
+  // FilterBar
+  @ViewChild(TableFilterBarComponent) tableFilterBarComponent: TableFilterBarComponent;
   filterItems: TableFilterBarDropdownItem[] = [];
-
-  filterComparators: ((value: any) => boolean)[] = [];
   filterValues: any[][] = [];
-  filterTerm = '';
 
-  entities: IEntity[];
-  public entitiesTableDataSource = new MatTableDataSource<IEntity>([]);
+  // Table
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  public entitiesDataSource: PaginationDataSource<IEntity>;
   public entitiesGridColumns: string[] = [
     'detail',
   ];
-
-  @ViewChild(MatSort) sort: MatSort;
-
+  
   constructor(
     private entitiesCrudService: EntitiesCrudService,
-    private matDialog: MatDialog) { }
-
-  async ngOnInit(): Promise<void> {
-    this.entities = await this.entitiesCrudService.getEntities();
-    this.updateDataSource();
+    private matDialog: MatDialog) {
+    
+    this.entitiesDataSource = new PaginationDataSource<IEntity>(
+      (options) => this.entitiesCrudService.getEntities(options),
+      () => [
+        {
+          filterField: 'name',
+          containsFilters: [this.tableFilterBarComponent.currentFilterTerm]
+        },
+      ]);
   }
-
-  ngAfterViewInit(): void {
-    if (this.sort) {
-      this.entitiesTableDataSource.sort = this.sort;
-    }
-  }
-
-  onFilterValuesChange(values: any[][]): void {
-    this.filterValues = values;
-    this.updateDataSource();
-  }
-
-  onFilterTermChange(filterTerm: string): void {
-    this.filterTerm = filterTerm;
-    this.updateDataSource();
-  }
-
-  updateDataSource(): void {
-    this.entitiesTableDataSource.data = this.entities.slice()
-      .filter(entity => this.filterComparators.length < 1 || this.filterComparators.every(filterComparator => filterComparator(entity)))
-      .filter(entity => entity.name.toString().toLowerCase().includes(this.filterTerm.trim().toLowerCase()));
+  
+  async ngAfterViewInit(): Promise<void> {
+    this.entitiesDataSource.initialize(this.tableFilterBarComponent, this.paginator, this.sort);
   }
 
   openCreateDialog(): void {

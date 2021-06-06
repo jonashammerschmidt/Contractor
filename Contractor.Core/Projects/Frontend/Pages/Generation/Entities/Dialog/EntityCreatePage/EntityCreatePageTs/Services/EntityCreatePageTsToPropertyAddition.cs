@@ -54,7 +54,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}: I{options.EntityNameFrom}[];");
             stringEditor.InsertNewLine();
 
-            stringEditor.NextThatContains("private router: Router");
+            stringEditor.NextThatContains("private formBuilder: FormBuilder");
             stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
 
             stringEditor.NextThatContains("this.formBuilder.group({");
@@ -65,7 +65,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("ngOnInit()");
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();");
+            stringEditor.InsertLine($"    const {options.EntityNamePluralLowerFrom}Result = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}({{ limit: 500, offset: 0 }});");
+            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom} = {options.EntityNamePluralLowerFrom}Result.data;");
 
             return stringEditor.GetText();
         }

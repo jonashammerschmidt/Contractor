@@ -9,11 +9,18 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
     internal class EntitiesCrudRepository : IEntitiesCrudRepository
     {
         private readonly ISessionContext sessionContext;
+        private readonly IPaginationContext paginationContext;
+
         private readonly PersistenceDbContext dbContext;
 
-        public EntitiesCrudRepository(ISessionContext sessionContext, PersistenceDbContext dbContext)
+        public EntitiesCrudRepository(
+            ISessionContext sessionContext, 
+            IPaginationContext paginationContext,
+            PersistenceDbContext dbContext)
         {
             this.sessionContext = sessionContext;
+            this.paginationContext = paginationContext;
+
             this.dbContext = dbContext;
         }
 
@@ -60,7 +67,18 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             return DbEntityDetail.FromEfEntity(efEntity);
         }
 
-        public IEnumerable<IDbEntity> GetEntities()
+        public IDbPagedResult<IDbEntity> GetEntities()
+        {
+            var efEntities = this.dbContext.Entities
+                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId);
+
+            return Pagination.Filter(
+                efEntities,
+                this.paginationContext,
+                efEntity => DbEntity.FromEfEntity(efEntity));
+        }
+
+        public IEnumerable<IDbEntity> GetAllEntities()
         {
             return this.dbContext.Entities
                 .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)

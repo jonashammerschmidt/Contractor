@@ -1,6 +1,8 @@
-﻿using ProjectName.API.Security.Authorization;
+﻿using ProjectName.API.Contexts.Pagination;
+using ProjectName.API.Security.Authorization;
 using ProjectName.Contract.Logic.LogicResults;
 using ProjectName.Contract.Logic.Modules.Domain.Entities;
+using ProjectName.Contract.Logic.Tools.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,10 +22,11 @@ namespace ProjectName.API.Modules.Domain.Entities
 
         [HttpGet]
         [Authorized]
-        public ActionResult<IEnumerable<IEntity>> GetEntities()
+        [Pagination(FilterFields = new[] { "Name" })]
+        public ActionResult<IPagedResult<IEntity>> GetEntities()
         {
-            var getEntitiesResult = this.entitiesCrudLogic.GetEntities();
-            return this.FromLogicResult(getEntitiesResult);
+            var getEntitiesPagedResult = this.entitiesCrudLogic.GetEntities();
+            return this.FromLogicResult(getEntitiesPagedResult);
         }
 
         [HttpGet]

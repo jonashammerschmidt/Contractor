@@ -61,7 +61,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.Next();
             stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
 
-            stringEditor.NextThatContains("ngOnInit()");
+            stringEditor.NextThatContains("ngAfterViewInit()");
             int lineNumber = stringEditor.GetLineNumber();
             stringEditor.Next(line => !line.Trim().StartsWith("await this.setup"));
             stringEditor.InsertLine($"    await this.setup{options.EntityNamePluralFrom}Filter();");
@@ -92,22 +92,28 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             return
                 $"  private async setup{options.EntityNamePluralFrom}Filter(): Promise<void> {{\n" +
-                $"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();\n" +
+                $"    const {options.EntityNamePluralLowerFrom}Result = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}({{ limit: 500, offset: 0 }});\n" +
+                $"    this.{options.EntityNamePluralLowerFrom} = {options.EntityNamePluralLowerFrom}Result.data;\n" +
                  "\n" +
                  "    this.filterItems.push({\n" +
                 $"      dataName: '{options.PropertyNameFrom.ToReadable()}',\n" +
-                $"      dataSource: this.{options.EntityNamePluralLowerFrom},\n" +
+                 "      dataSource: new MultiDataSource((pageSize: number, pageIndex: number, filterTerm: string) => {\n" +
+                $"        return this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}({{\n" +
+                 "          limit: pageSize,\n" +
+                 "          offset: pageSize* pageIndex,\n" +
+                 "          filters: [\n" +
+                 "            {\n" +
+                 "                filterField: 'name',\n" +
+                 "                containsFilters: [filterTerm]\n" +
+                 "            }\n" +
+                 "          ]\n" +
+                 "        });\n" +
+                 "      }),\n" +
                  "      valueExpr: 'id',\n" +
                  "      displayExpr: 'name',\n" +
                  "    });\n" +
                  "\n" +
-                 "    const filterValuesIndex = this.filterValues.length;\n" +
                  "    this.filterValues.push([]);\n" +
-                 "\n" +
-                $"    this.filterComparators.push(({options.EntityNameLowerTo}) => {{\n" +
-                 "      return this.filterValues[filterValuesIndex].length < 1 ||\n" +
-                $"        this.filterValues[filterValuesIndex].includes({options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}Id);\n" +
-                 "    });\n" +
                  "  }";
         }
     }

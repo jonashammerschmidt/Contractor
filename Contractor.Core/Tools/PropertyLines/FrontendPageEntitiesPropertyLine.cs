@@ -12,7 +12,7 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.Boolean:
                     return
                         $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
-                        $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyName.ToReadable()} </th>\n" +
+                        $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyName.ToReadable()} </th>\n" +
                         $"                <td mat-cell *matCellDef=\"let element\">\n" +
                         $"                    <mat-icon color=\"accent\" *ngIf=\"element.{options.PropertyName.LowerFirstChar()}\" >\n" +
                         $"                        check_box\n" +
@@ -25,14 +25,14 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.DateTime:
                     return
                         $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
-                        $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyName.ToReadable()} </th>\n" +
+                        $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyName.ToReadable()} </th>\n" +
                         $"                <td mat-cell *matCellDef=\"let element\"> {{{{element.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}} </td>\n" +
                         "            </ng-container>\n";
                 default:
                     return
                          $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
-                         $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyName.ToReadable()} </th>\n" +
-                         $"                <td mat-cell *matCellDef=\"let element\" > {{{{element.{options.PropertyName.LowerFirstChar()}}}}} </td>\n" +
+                         $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyName.ToReadable()} </th>\n" +
+                         $"                <td mat-cell *matCellDef=\"let element\"> {{{{element.{options.PropertyName.LowerFirstChar()}}}}} </td>\n" +
                           "            </ng-container>\n";
             }
         }

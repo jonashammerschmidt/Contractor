@@ -102,6 +102,21 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
             // Assert
             Assert.IsNull(dbEntityDetail);
         }
+        
+        [TestMethod]
+        public void GetAllEntitiesDefaultTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
+
+            // Act
+            IDbEntity[] dbEntities = entitiesCrudRepository.GetAllEntities().ToArray();
+
+            // Assert
+            Assert.AreEqual(2, entities.Length);
+            DbEntityTest.AssertDbDefault(dbEntities[0]);
+            DbEntityTest.AssertDbDefault2(dbEntities[1]);
+        }
 
         [TestMethod]
         public void GetEntitiesDefaultTest()
@@ -110,12 +125,14 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            IDbEntity[] entities = entitiesCrudRepository.GetEntities().ToArray();
+            IDbPagedResult<IDbEntity> dbEntitiesPagedResult =
+                entitiesCrudRepository.GetEntities();
 
             // Assert
-            Assert.AreEqual(2, entities.Length);
-            DbEntityTest.AssertDbDefault(entities[0]);
-            DbEntityTest.AssertDbDefault2(entities[1]);
+            IDbEntity[] dbEntities = dbEntitiesPagedResult.Data.ToArray();
+            Assert.AreEqual(2, dbEntities.Length);
+            DbEntityTest.AssertDbDefault(dbEntities[0]);
+            DbEntityTest.AssertDbDefault2(dbEntities[1]);
         }
 
         [TestMethod]
@@ -147,28 +164,36 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryDefault()
         {
-            Mock<ISessionContext> sessionContext = this.SetupSessionContextDefault();
-
             return new EntitiesCrudRepository(
-                sessionContext.Object,
+                this.GetSessionContext(),
+                this.GetPaginationContext(),
                 InMemoryDbContext.CreatePersistenceDbContextWithDefault());
         }
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryEmpty()
         {
-            Mock<ISessionContext> sessionContext = this.SetupSessionContextDefault();
-
             return new EntitiesCrudRepository(
-                sessionContext.Object,
+                this.GetSessionContext(),
+                this.GetPaginationContext(),
                 InMemoryDbContext.CreatePersistenceDbContext());
         }
 
-        private Mock<ISessionContext> SetupSessionContextDefault()
+        private ISessionContext GetSessionContext()
         {
             Mock<ISessionContext> sessionContext = new Mock<ISessionContext>(MockBehavior.Strict);
             sessionContext.Setup(sessionContext => sessionContext.RequestScopeId)
                 .Returns(EntityTestValues.RequestScopeIdDbDefault);
-            return sessionContext;
+            return sessionContext.Object;
+        }
+
+        private IPaginationContext GetPaginationContext()
+        {
+            Mock<IPaginationContext> paginationContext = new Mock<IPaginationContext>();
+            paginationContext.Setup(context => context.Limit).Returns(10);
+            paginationContext.Setup(context => context.Offset).Returns(0);
+            paginationContext.Setup(context => context.Sort).Returns(Array.Empty<IPaginationSortItem>());
+            paginationContext.Setup(context => context.Filter).Returns(Array.Empty<IPaginationFilterItem>());
+            return paginationContext.Object;
         }
     }
 }
