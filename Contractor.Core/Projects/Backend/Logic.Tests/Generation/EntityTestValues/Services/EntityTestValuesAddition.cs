@@ -45,6 +45,8 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}Default = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "Default")};");
+            stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}Default2 = " +
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "Default2")};");
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForCreate = " +
                 $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate")};");
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForUpdate = " +

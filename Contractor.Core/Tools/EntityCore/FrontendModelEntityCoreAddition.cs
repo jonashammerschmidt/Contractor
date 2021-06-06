@@ -37,6 +37,8 @@ namespace Contractor.Core.Tools
             fileData = fileData.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
             fileData = fileData.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
             fileData = fileData.Replace("entities-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
+            fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);
+            fileData = fileData.Replace("RequestScopes", options.RequestScopeNamePlural);
             fileData = fileData.Replace("RequestScope", options.RequestScopeName);
             fileData = fileData.Replace("Domain", options.Domain);
             fileData = fileData.Replace("Entities", options.EntityNamePlural);

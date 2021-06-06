@@ -192,11 +192,11 @@ namespace Contractor.CLI
                 DomainFrom = "GegönntesBankwesen",
                 EntityNameFrom = "GegönnteBank",
                 EntityNamePluralFrom = "GegönnteBanken",
-                PropertyNameFrom = "GegönnteVertragsbank",
+                PropertyNameFrom = "BesteBank",
                 DomainTo = "GegönnterKundenstamm",
                 EntityNameTo = "GegönnterKunde",
                 EntityNamePluralTo = "GegönnteKunden",
-                PropertyNameTo = "GegönnteVertragskunden",
+                PropertyNameTo = "BesteKunden",
             };
             contractorCoreApi.Add1ToNRelation(relationOptions);
         }

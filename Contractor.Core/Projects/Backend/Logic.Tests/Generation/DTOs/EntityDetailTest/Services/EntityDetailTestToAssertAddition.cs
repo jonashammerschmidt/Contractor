@@ -42,8 +42,14 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("AssertDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
-
             stringEditor.InsertLine($"            {options.EntityNameFrom}Test.AssertDefault({options.EntityNameLowerTo}Detail.{options.PropertyNameFrom});");
+            fileData = stringEditor.GetText();
+
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("AssertDefault2(");
+            stringEditor.Next(line => line.Trim().Equals("}"));
+            stringEditor.InsertLine($"            {options.EntityNameFrom}Test.AssertDefault2({options.EntityNameLowerTo}Detail.{options.PropertyNameFrom});");
+            fileData = stringEditor.GetText();
 
             return stringEditor.GetText();
         }

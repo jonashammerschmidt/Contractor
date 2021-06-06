@@ -1,8 +1,10 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationDialogService } from 'src/app/components/ui/confirmation-dialog/confirmation-dialog.service';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-detail';
+import { EntityUpdateDialog } from '../../dialogs/entity-kebab-update/entity-kebab-update.dialog';
 
 @Component({
   selector: 'app-entity-kebab-detail',
@@ -11,19 +13,22 @@ import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-
 })
 export class EntityDetailPage implements OnInit {
 
+  entityId: string;
   entity: IEntityDetail;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
-    private router: Router) {
+    private router: Router,
+    private matDialog: MatDialog,
+    private confirmationDialogService: ConfirmationDialogService) {
   }
 
   async ngOnInit(): Promise<void> {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
-        this.loadEntity(params.id).then().catch((error) => {
+        this.entityId = params.id;
+        this.loadEntity().then().catch((error) => {
           console.error(error);
         });
       }
@@ -31,16 +36,26 @@ export class EntityDetailPage implements OnInit {
   }
 
   async onUpdateClicked(): Promise<void> {
-    await this.router.navigate(['/domain-kebab/entities-kebab/update', this.entity.id]);
+    const dialog = this.matDialog.open(EntityUpdateDialog, {
+        data: this.entityId,
+        minWidth: '320px',
+    });
+
+    if (await dialog.afterClosed().toPromise()) {
+      await this.loadEntity();
+    }
   }
 
   async onDeleteClicked(): Promise<void> {
-    await this.entitiesCrudService.deleteEntity(this.entity.id);
-    await this.router.navigate(['/domain-kebab/entities-kebab']);
+    if (await this.confirmationDialogService.askForConfirmation('Wollen Sie wirklich EntityReadable \'' + this.entity.name + '\' löschen?')) {
+        await this.entitiesCrudService.deleteEntity(this.entity.id);
+        await this.router.navigate(['/domain-kebab/entities-kebab']);
+    }
   }
 
-  private async loadEntity(entityId: string): Promise<void> {
-    this.entity = await this.entitiesCrudService.getEntityDetail(entityId);
+  private async loadEntity(): Promise<void> {
+    this.entity = null;
+    this.entity = await this.entitiesCrudService.getEntityDetail(this.entityId);
   }
 
 }

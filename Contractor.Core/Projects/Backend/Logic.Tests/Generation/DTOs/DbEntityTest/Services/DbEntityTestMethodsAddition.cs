@@ -34,11 +34,17 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         {
             string fileData = File.ReadAllText(filePath);
 
-            // ----------- Asserts -----------
+            // ----------- Creators -----------
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"public static IDb{options.EntityName} Default()");
             stringEditor.Next(line => line.Trim().Equals("};"));
             stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}Default,");
+            fileData = stringEditor.GetText();
+
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains($"public static IDb{options.EntityName} Default2()");
+            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}Default2,");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
@@ -52,6 +58,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor.NextThatContains("AssertDefault");
             stringEditor.Next(line => line.Trim().Equals("}"));
             stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}Default, db{options.EntityName}.{options.PropertyName});");
+            fileData = stringEditor.GetText();
+
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("AssertDefault2");
+            stringEditor.Next(line => line.Trim().Equals("}"));
+            stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}Default2, db{options.EntityName}.{options.PropertyName});");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);

@@ -1,26 +1,32 @@
-.entity-kebab-detail-page {
-    mat-card {
-        padding-bottom: 18px;
+.toolbar {
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding-bottom: 12px;
+    align-items: center;
 
-        .toolbar {
-            display: grid;
-            grid-template-columns: auto min-content min-content;
-            grid-gap: 8px;
-            align-items: center;
+    h1 {
+        font-size: 1.2em;
+        margin: 0;
+    }
+}
 
-            h1 {
-                font-size: 1.2em;
-            }
-        }
+.entity-kebab-create-dialog {
+    mat-form-field {
+        width: 100%;
+        padding: 8px 0;
+    }
 
-        mat-form-field {
-            width: 100%;
-            padding: 8px 0;
-        }
+    mat-checkbox {
+        display: block;
+        margin-left: 6px;
+    }
+}
 
-        mat-checkbox {
-            display: block;
-            margin-left: 6px;
-        }
+.buttons {
+    text-align: right;
+    background-color: white;
+
+    button {
+        margin-left: 12px;
     }
 }

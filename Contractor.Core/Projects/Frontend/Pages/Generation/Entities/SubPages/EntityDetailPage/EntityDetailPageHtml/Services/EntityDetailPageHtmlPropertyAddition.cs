@@ -48,7 +48,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             }
             else
             {
-                stringEditor.NextThatContains("</mat-card>");
+                stringEditor.NextThatStartsWith($"<div class=\"{options.EntityName.ToKebab()}-detail-page\"");
+                stringEditor.NextThatStartsWith($"</div>");
             }
 
             stringEditor.InsertNewLine();

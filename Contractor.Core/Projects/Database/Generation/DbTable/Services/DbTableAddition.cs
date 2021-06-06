@@ -32,6 +32,7 @@ namespace Contractor.Core.Projects.Database
         private string GetFileData(IEntityAdditionOptions options, string templateFilePath)
         {
             string fileData = File.ReadAllText(templateFilePath);
+            fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);
             fileData = fileData.Replace("RequestScopes", options.RequestScopeNamePlural);
             fileData = fileData.Replace("RequestScope", options.RequestScopeName);
             fileData = fileData.Replace("Entities", options.EntityNamePlural);

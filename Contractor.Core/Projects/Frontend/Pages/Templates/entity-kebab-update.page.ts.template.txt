@@ -1,56 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { guidRegex, integerRegex } from 'src/app/helpers/regex.helper';
 import { EntityUpdate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-update';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 
 @Component({
   selector: 'app-entity-kebab-update',
-  templateUrl: './entity-kebab-update.page.html',
-  styleUrls: ['./entity-kebab-update.page.scss']
+  templateUrl: './entity-kebab-update.dialog.html',
+  styleUrls: ['./entity-kebab-update.dialog.scss']
 })
-export class EntityUpdatePage implements OnInit {
+export class EntityUpdateDialog implements OnInit {
 
-  entityId: string;
   entityUpdateForm: FormGroup;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private router: Router) {
+    private dialogRef: MatDialogRef<EntityUpdateDialog>,
+    @Inject(MAT_DIALOG_DATA) public entityId: string) {
   }
 
   async ngOnInit(): Promise<void> {
+    const entityDetail = await this.entitiesCrudService.getEntityDetail(this.entityId);
+
     this.entityUpdateForm = this.formBuilder.group({
       id: new FormControl({ value: '', disabled: true }, [Validators.required]),
     });
 
-    this.activatedRoute.params.subscribe((params) => {
-      if (params.id) {
-        this.entityId = params.id;
-        this.loadEntity(this.entityId).then().catch((error) => {
-          console.error(error);
-        });
-      }
-    });
+    this.entityUpdateForm.patchValue(EntityUpdate.fromEntityDetail(entityDetail));
   }
 
   async onUpdateClicked(): Promise<void> {
     this.entityUpdateForm.markAllAsTouched();
     if (!this.entityUpdateForm.valid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
 
     const entityUpdate = this.entityUpdateForm.getRawValue();
     await this.entitiesCrudService.updateEntity(entityUpdate);
-    await this.router.navigate(['/domain-kebab/entities-kebab/detail', this.entityId]);
+    this.dialogRef.close(true);
   }
 
-  private async loadEntity(entityId: string): Promise<void> {
-    const entityDetail = await this.entitiesCrudService.getEntityDetail(entityId);
-    this.entityUpdateForm.patchValue(EntityUpdate.fromEntityDetail(entityDetail));
+  scrollToFirstInvalidControl(): void {
+    const firstElementWithError = document.querySelector('.mat-form-field.ng-invalid');
+    if (firstElementWithError) {
+      firstElementWithError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
 }

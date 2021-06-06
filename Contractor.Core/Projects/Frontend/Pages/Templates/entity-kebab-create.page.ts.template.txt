@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { guidRegex, integerRegex } from 'src/app/helpers/regex.helper';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 
 @Component({
   selector: 'app-entity-kebab-create',
-  templateUrl: './entity-kebab-create.page.html',
-  styleUrls: ['./entity-kebab-create.page.scss']
+  templateUrl: './entity-kebab-create.dialog.html',
+  styleUrls: ['./entity-kebab-create.dialog.scss']
 })
-export class EntityCreatePage implements OnInit {
+export class EntityCreateDialog implements OnInit {
 
   entityCreateForm: FormGroup;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
     private formBuilder: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private dialogRef: MatDialogRef<EntityCreateDialog>) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -27,11 +29,20 @@ export class EntityCreatePage implements OnInit {
   async onCreateClicked(): Promise<void> {
     this.entityCreateForm.markAllAsTouched();
     if (!this.entityCreateForm.valid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
 
     const entityId = await this.entitiesCrudService.createEntity(this.entityCreateForm.getRawValue());
+    this.dialogRef.close();
     await this.router.navigate(['/domain-kebab/entities-kebab/detail', entityId]);
+  }
+
+  scrollToFirstInvalidControl(): void {
+    const firstElementWithError = document.querySelector('.mat-form-field.ng-invalid');
+    if (firstElementWithError) {
+      firstElementWithError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
 }

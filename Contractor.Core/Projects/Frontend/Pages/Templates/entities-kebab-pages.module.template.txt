@@ -6,27 +6,29 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { UiComponentsModule } from 'src/app/components/ui/ui-components.module';
 import { EntitiesModule } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab.module';
-import { EntityCreatePage } from './sub-pages/entity-kebab-create/entity-kebab-create.page';
+import { EntityCreateDialog } from './dialogs/entity-kebab-create/entity-kebab-create.dialog';
 import { EntityDetailPage } from './sub-pages/entity-kebab-detail/entity-kebab-detail.page';
-import { EntityUpdatePage } from './sub-pages/entity-kebab-update/entity-kebab-update.page';
+import { EntityUpdateDialog } from './dialogs/entity-kebab-update/entity-kebab-update.dialog';
 import { EntitiesPagesRouting } from './entities-kebab-pages.routing';
 import { EntitiesPage } from './entities-kebab.page';
 
 @NgModule({
   declarations: [
     EntitiesPage,
-    EntityCreatePage,
+    EntityCreateDialog,
     EntityDetailPage,
-    EntityUpdatePage,
+    EntityUpdateDialog,
   ],
   imports: [
     // Routing Modules
@@ -43,10 +45,12 @@ import { EntitiesPage } from './entities-kebab.page';
     MatCardModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatNativeDateModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     MatSortModule,
     MatTableModule,

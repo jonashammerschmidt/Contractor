@@ -77,7 +77,7 @@ namespace ProjectName.Logic.Modules.Domain.Entities
         public ILogicResult<IEnumerable<IEntity>> GetEntities()
         {
             IEnumerable<IEntity> entities = this.entitiesCrudRepository.GetEntities()
-                .Select(entity => Entity.FromDbEntity(entity));
+                .Select(dbEntity => Entity.FromDbEntity(dbEntity));
 
             this.logger.LogDebug("Entities wurden geladen");
             return LogicResult<IEnumerable<IEntity>>.Ok(entities);

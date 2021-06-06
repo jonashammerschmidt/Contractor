@@ -49,7 +49,7 @@ namespace Contractor.Core.Tools
             string addScopedStatement = GetAddScopedStatement(options.EntityNamePlural, projectFolder);
             stringEditor.NextThatContains($"void Startup{options.Domain}");
             stringEditor.Next();
-            stringEditor.Next(line => line.CompareTo(addScopedStatement) > 0 || line.Contains("}"));
+            stringEditor.NextThatContains("}");
 
             if (!stringEditor.GetLineAtOffset(-1).Trim().Equals("{"))
             {

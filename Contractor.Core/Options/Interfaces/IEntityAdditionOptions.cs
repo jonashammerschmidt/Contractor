@@ -8,6 +8,8 @@
 
         bool HasRequestScope { get; }
 
+        string RequestScopeDomain { get; set; }
+
         string RequestScopeName { get; set; }
 
         string RequestScopeNamePlural { get; set; }

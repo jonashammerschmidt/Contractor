@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Helpers;
+﻿
+using Contractor.Core.Helpers;
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
@@ -46,8 +47,9 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdDefault = {options.EntityNameFrom}TestValues.IdDefault;");
-            stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdForCreate = {options.EntityNameFrom}TestValues.IdForCreate;");
-            stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdForUpdate = {options.EntityNameFrom}TestValues.IdForUpdate;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdDefault2 = {options.EntityNameFrom}TestValues.IdDefault2;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdForCreate = {options.EntityNameFrom}TestValues.IdDefault;");
+            stringEditor.InsertLine($"        public static readonly Guid {options.PropertyNameFrom}IdForUpdate = {options.EntityNameFrom}TestValues.IdDefault2;");
 
             return stringEditor.GetText();
         }
