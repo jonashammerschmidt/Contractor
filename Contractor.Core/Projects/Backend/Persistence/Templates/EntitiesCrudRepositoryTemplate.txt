@@ -62,14 +62,14 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             return DbEntityDetail.FromEfEntity(efEntity);
         }
 
-        public IDbPagedResult<IDbEntity> GetEntities()
+        public IDbPagedResult<IDbEntityListItem> GetPagedEntities()
         {
             var efEntities = this.dbContext.Entities;
 
             return Pagination.Filter(
                 efEntities,
                 this.paginationContext,
-                efEntity => DbEntity.FromEfEntity(efEntity));
+                efEntity => DbEntityListItem.FromEfEntity(efEntity));
         }
 
         public IEnumerable<IDbEntity> GetAllEntities()

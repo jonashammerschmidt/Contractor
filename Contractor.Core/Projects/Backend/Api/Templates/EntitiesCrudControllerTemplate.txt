@@ -22,11 +22,11 @@ namespace ProjectName.API.Modules.Domain.Entities
 
         [HttpGet]
         [Authorized]
-        [Pagination(FilterFields = new[] { "Name" })]
-        public ActionResult<IPagedResult<IEntity>> GetEntities()
+        [Pagination]
+        public ActionResult<IPagedResult<IEntityListItem>> GetPagedEntities()
         {
-            var getEntitiesPagedResult = this.entitiesCrudLogic.GetEntities();
-            return this.FromLogicResult(getEntitiesPagedResult);
+            var pagedEntitiesPagedResult = this.entitiesCrudLogic.GetPagedEntities();
+            return this.FromLogicResult(pagedEntitiesPagedResult);
         }
 
         [HttpGet]

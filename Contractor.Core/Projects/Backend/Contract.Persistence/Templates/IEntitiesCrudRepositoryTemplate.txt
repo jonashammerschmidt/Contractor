@@ -16,7 +16,7 @@ namespace ProjectName.Contract.Persistence.Modules.Domain.Entities
 
         IDbEntityDetail GetEntityDetail(Guid entityId);
 
-        IDbPagedResult<IDbEntity> GetEntities();
+        IDbPagedResult<IDbEntityListItem> GetPagedEntities();
 
         IEnumerable<IDbEntity> GetAllEntities();
 

@@ -121,20 +121,20 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         }
 
         [TestMethod]
-        public void GetEntitiesDefaultTest()
+        public void GetPagedEntitiesDefaultTest()
         {
             // Arrange
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            IDbPagedResult<IDbEntity> dbEntitiesPagedResult =
-                entitiesCrudRepository.GetEntities();
+            IDbPagedResult<IDbEntityListItem> dbEntitiesPagedResult =
+                entitiesCrudRepository.GetPagedEntities();
 
             // Assert
-            IDbEntity[] dbEntities = dbEntitiesPagedResult.Data.ToArray();
+            IDbEntityListItem[] dbEntities = dbEntitiesPagedResult.Data.ToArray();
             Assert.AreEqual(2, dbEntities.Length);
-            DbEntityTest.AssertDbDefault(dbEntities[0]);
-            DbEntityTest.AssertDbDefault2(dbEntities[1]);
+            DbEntityListItemTest.AssertDbDefault(dbEntities[0]);
+            DbEntityListItemTest.AssertDbDefault2(dbEntities[1]);
         }
 
         [TestMethod]

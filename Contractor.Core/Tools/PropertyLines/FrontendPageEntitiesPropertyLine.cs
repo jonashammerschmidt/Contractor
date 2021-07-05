@@ -14,7 +14,7 @@ namespace Contractor.Core.Tools
                         $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
                         $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyName.ToReadable()} </th>\n" +
                         $"                <td mat-cell *matCellDef=\"let element\">\n" +
-                        $"                    <mat-icon color=\"accent\" *ngIf=\"element.{options.PropertyName.LowerFirstChar()}\" >\n" +
+                        $"                    <mat-icon color=\"accent\" *ngIf=\"element.{options.PropertyName.LowerFirstChar()}\">\n" +
                         $"                        check_box\n" +
                         $"                    </mat-icon>\n" +
                         $"                    <mat-icon style=\"color: gray\" *ngIf=\"!element.{options.PropertyName.LowerFirstChar()}\">\n" +
@@ -26,13 +26,17 @@ namespace Contractor.Core.Tools
                     return
                         $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
                         $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyName.ToReadable()} </th>\n" +
-                        $"                <td mat-cell *matCellDef=\"let element\"> {{{{element.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}} </td>\n" +
+                        $"                <td mat-cell *matCellDef=\"let element\">\n" +
+                        $"                    {{{{element.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}}\n" +
+                        $"                </td>\n" +
                         "            </ng-container>\n";
                 default:
                     return
                          $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
                          $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyName.ToReadable()} </th>\n" +
-                         $"                <td mat-cell *matCellDef=\"let element\"> {{{{element.{options.PropertyName.LowerFirstChar()}}}}} </td>\n" +
+                         $"                <td mat-cell *matCellDef=\"let element\">\n" +
+                         $"                    {{{{element.{options.PropertyName.LowerFirstChar()}}}}}\n" +
+                         $"                </td>\n" +
                           "            </ng-container>\n";
             }
         }

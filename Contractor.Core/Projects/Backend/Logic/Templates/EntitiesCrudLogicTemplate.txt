@@ -75,18 +75,18 @@ namespace ProjectName.Logic.Modules.Domain.Entities
             return LogicResult<IEntityDetail>.Ok(EntityDetail.FromDbEntityDetail(dbEntityDetail));
         }
 
-        public ILogicResult<IPagedResult<IEntity>> GetEntities()
+        public ILogicResult<IPagedResult<IEntityListItem>> GetPagedEntities()
         {
-            IDbPagedResult<IDbEntity> dbEntitiesPagedResult = 
+            IDbPagedResult<IDbEntityListItem> dbEntitiesPagedResult = 
                 this.entitiesCrudRepository.GetEntities();
             
-            IPagedResult<IEntity> entitiesPagedResult =
+            IPagedResult<IEntityListItem> entitiesPagedResult =
                 PagedResult.FromDbPagedResult(
                     dbEntitiesPagedResult,
-                    (dbEntity) => Entity.FromDbEntity(dbEntity));
+                    (dbEntity) => EntityListItem.FromDbEntityListItem(dbEntity));
 
             this.logger.LogDebug("Entities wurden geladen");
-            return LogicResult<IPagedResult<IEntity>>.Ok(entitiesPagedResult);
+            return LogicResult<IPagedResult<IEntityListItem>>.Ok(entitiesPagedResult);
         }
 
         public ILogicResult UpdateEntity(IEntityUpdate entityUpdate)

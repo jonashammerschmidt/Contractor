@@ -16,6 +16,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             serviceCollection.AddSingleton<ClassGeneration, DependencyProviderGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DbEntityGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DbEntityDetailGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, DbEntityListItemGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EfEntityGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudRepositoryGeneration>();
 

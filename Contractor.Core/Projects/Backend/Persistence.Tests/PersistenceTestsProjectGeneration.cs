@@ -12,6 +12,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, DbEntityDetailTestGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, DbEntityListItemTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DbEntityTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudRepositoryTestsGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityTestValuesGeneration>();

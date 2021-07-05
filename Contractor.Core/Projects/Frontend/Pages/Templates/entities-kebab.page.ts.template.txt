@@ -25,7 +25,7 @@ export class EntitiesPage implements AfterViewInit {
   // Table
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  public entitiesDataSource: PaginationDataSource<IEntity>;
+  public entitiesDataSource: PaginationDataSource<IEntityListItem>;
   public entitiesGridColumns: string[] = [
     'detail',
   ];
@@ -34,8 +34,8 @@ export class EntitiesPage implements AfterViewInit {
     private entitiesCrudService: EntitiesCrudService,
     private matDialog: MatDialog) {
     
-    this.entitiesDataSource = new PaginationDataSource<IEntity>(
-      (options) => this.entitiesCrudService.getEntities(options),
+    this.entitiesDataSource = new PaginationDataSource<IEntityListItem>(
+      (options) => this.entitiesCrudService.getPagedEntities(options),
       () => [
         {
           filterField: 'name',
@@ -43,7 +43,7 @@ export class EntitiesPage implements AfterViewInit {
         },
       ]);
   }
-  
+
   async ngAfterViewInit(): Promise<void> {
     this.entitiesDataSource.initialize(this.tableFilterBarComponent, this.paginator, this.sort);
   }

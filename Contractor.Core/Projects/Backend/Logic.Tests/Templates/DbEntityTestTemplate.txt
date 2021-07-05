@@ -35,22 +35,6 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             };
         }
 
-        public static IDbPagedResult<IDbEntity> ForPaged()
-        {
-            return new DbPagedResult<IDbEntity>()
-            {
-                Data = new List<IDbEntity>()
-                {
-                    DbEntityTest.Default(),
-                    DbEntityTest.Default2()
-                },
-                TotalCount = 2,
-                Count = 2,
-                Limit = 10,
-                Offset = 0
-            };
-        }
-
         public static void AssertDefault(IDbEntity dbEntity)
         {
             Assert.AreEqual(EntityTestValues.IdDefault, dbEntity.Id);

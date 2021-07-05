@@ -51,7 +51,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}: I{options.EntityNameFrom}[];");
+            stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}DataSource: MultiDataSource<I{options.EntityNameFrom}>;");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("private formBuilder: FormBuilder");
@@ -65,8 +65,19 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("ngOnInit()");
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    const {options.EntityNamePluralLowerFrom}Result = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}({{ limit: 500, offset: 0 }});");
-            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom} = {options.EntityNamePluralLowerFrom}Result.data;");
+            stringEditor.InsertLine("    this.entitiesDataSource = new MultiDataSource(");
+            stringEditor.InsertLine("    (pageSize: number, pageIndex: number, filterTerm: string) => {");
+            stringEditor.InsertLine("        return this.entitiesCrudService.getPagedEntities({");
+            stringEditor.InsertLine("        limit: pageSize,");
+            stringEditor.InsertLine("        offset: pageSize * pageIndex,");
+            stringEditor.InsertLine("        filters: [");
+            stringEditor.InsertLine("            {");
+            stringEditor.InsertLine("            filterField: 'name',");
+            stringEditor.InsertLine("            containsFilters: [filterTerm]");
+            stringEditor.InsertLine("            }");
+            stringEditor.InsertLine("        ]");
+            stringEditor.InsertLine("        });");
+            stringEditor.InsertLine("    });");
 
             return stringEditor.GetText();
         }

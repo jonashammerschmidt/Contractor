@@ -14,12 +14,12 @@ export class EntitiesCrudService {
 
     constructor(private backendCoreService: BackendCoreService) { }
 
-    public async getEntities(paginationOptions: IPaginationOptions): Promise<IPagedResult<IEntity>> {
+    public async getPagedEntities(paginationOptions: IPaginationOptions): Promise<IPagedResult<IEntityListItem>> {
         const url = '/api/domain-kebab/entities-kebab?' + toPaginationParams(paginationOptions);
-        const entitiesResult = await this.backendCoreService.get<IPagedResult<ApiEntity>>(url);
+        const entitiesResult = await this.backendCoreService.get<IPagedResult<ApiEntityListItem>>(url);
 
         entitiesResult.data = entitiesResult.data
-            .map(apiEntity => Entity.fromApiEntity(apiEntity));
+            .map(apiEntityListItem => EntityListItem.fromApiEntityListItem(apiEntityListItem));
         return entitiesResult;
     }
 

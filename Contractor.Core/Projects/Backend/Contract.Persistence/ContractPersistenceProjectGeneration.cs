@@ -14,6 +14,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
             serviceCollection.AddSingleton<ClassGeneration, IEntitiesCrudRepositoryGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IDbEntityGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IDbEntityDetailGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, IDbEntityListItemGeneration>();
         }
     }
 }

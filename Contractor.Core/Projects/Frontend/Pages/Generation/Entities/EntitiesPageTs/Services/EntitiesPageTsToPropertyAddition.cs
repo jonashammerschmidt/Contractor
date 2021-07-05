@@ -73,38 +73,25 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.MoveToEnd();
             stringEditor.PrevThatContains("}");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine(GetNameResolutionMethod(options));
-            stringEditor.InsertNewLine();
             stringEditor.InsertLine(GetSetupMethod(options));
 
             return stringEditor.GetText();
-        }
-
-        private string GetNameResolutionMethod(IRelationAdditionOptions options)
-        {
-            return
-                $"  public get{options.EntityNameFrom}Name({options.EntityNameLowerFrom}Id: string): string {{\n" +
-                $"    return this.{options.EntityNamePluralLowerFrom}.find({options.EntityNameLowerFrom} => {options.EntityNameLowerFrom}.id === {options.EntityNameLowerFrom}Id).name;\n" +
-                 "  }";
         }
 
         private string GetSetupMethod(IRelationAdditionOptions options)
         {
             return
                 $"  private async setup{options.EntityNamePluralFrom}Filter(): Promise<void> {{\n" +
-                $"    const {options.EntityNamePluralLowerFrom}Result = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}({{ limit: 500, offset: 0 }});\n" +
-                $"    this.{options.EntityNamePluralLowerFrom} = {options.EntityNamePluralLowerFrom}Result.data;\n" +
-                 "\n" +
                  "    this.filterItems.push({\n" +
                 $"      dataName: '{options.PropertyNameFrom.ToReadable()}',\n" +
                  "      dataSource: new MultiDataSource((pageSize: number, pageIndex: number, filterTerm: string) => {\n" +
                 $"        return this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}({{\n" +
                  "          limit: pageSize,\n" +
-                 "          offset: pageSize* pageIndex,\n" +
+                 "          offset: pageSize * pageIndex,\n" +
                  "          filters: [\n" +
                  "            {\n" +
-                 "                filterField: 'name',\n" +
-                 "                containsFilters: [filterTerm]\n" +
+                 "              filterField: 'name',\n" +
+                 "              containsFilters: [filterTerm]\n" +
                  "            }\n" +
                  "          ]\n" +
                  "        });\n" +

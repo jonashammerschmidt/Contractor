@@ -12,9 +12,11 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, DbEntityDetailTestGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, DbEntityListItemTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DbEntityTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityCreateTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityDetailTestGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntityListItemTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdateTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudLogicTestsGeneration>();

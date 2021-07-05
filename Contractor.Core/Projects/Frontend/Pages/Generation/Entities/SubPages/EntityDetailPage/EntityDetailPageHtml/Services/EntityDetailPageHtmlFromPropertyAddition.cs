@@ -79,7 +79,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"");
             stringEditor.InsertLine($"                    <ng-container matColumnDef=\"name\">");
             stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> Name </th>");
-            stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\"> {{{{element.name}}}} </td>");
+            stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\">");
+            stringEditor.InsertLine($"                            {{{{element.name}}}}");
+            stringEditor.InsertLine($"                        </td>");
             stringEditor.InsertLine($"                    </ng-container>");
             stringEditor.InsertLine($"");
             stringEditor.InsertLine($"                    <ng-container matColumnDef=\"detail\">");

@@ -1,0 +1,19 @@
+﻿using ProjectName.Contract.Logic.Modules.Domain.Entities;
+using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using System;
+
+namespace ProjectName.Logic.Modules.Domain.Entities
+{
+    internal class EntityListItem : IEntityListItem
+    {
+        public Guid Id { get; set; }
+
+        internal static EntityListItem FromDbEntityListItem(IDbEntityListItem dbEntityListItem)
+        {
+            return new EntityListItem()
+            {
+                Id = dbEntityListItem.Id,
+            };
+        }
+    }
+}
