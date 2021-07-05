@@ -77,9 +77,9 @@ namespace ProjectName.Logic.Modules.Domain.Entities
 
         public ILogicResult<IPagedResult<IEntityListItem>> GetPagedEntities()
         {
-            IDbPagedResult<IDbEntityListItem> dbEntitiesPagedResult = 
-                this.entitiesCrudRepository.GetEntities();
-            
+            IDbPagedResult<IDbEntityListItem> dbEntitiesPagedResult =
+                this.entitiesCrudRepository.GetPagedEntities();
+
             IPagedResult<IEntityListItem> entitiesPagedResult =
                 PagedResult.FromDbPagedResult(
                     dbEntitiesPagedResult,

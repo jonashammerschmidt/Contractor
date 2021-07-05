@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Model
 {
-    internal class IEntityDetailGeneration : ClassGeneration
+    internal class IEntityListItemGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-list-item.template.txt");
@@ -16,20 +16,20 @@ namespace Contractor.Core.Projects.Frontend.Model
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendDtoRelationAddition frontendDtoRelationAddition;
         private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
-        private readonly FrontendDtoPropertyToMethodAddition frontendDtoPropertyToMethodAddition;
+        private readonly FrontendDtoPropertyListItemToMethodAddition frontendDtoPropertyListItemToMethodAddition;
 
-        public IEntityDetailGeneration(
+        public IEntityListItemGeneration(
             FrontendDtoAddition frontendDtoAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition,
             FrontendDtoRelationAddition frontendDtoRelationAddition,
             FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
-            FrontendDtoPropertyToMethodAddition frontendDtoPropertyToMethodAddition)
+            FrontendDtoPropertyListItemToMethodAddition frontendDtoPropertyListItemToMethodAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.frontendDtoRelationAddition = frontendDtoRelationAddition;
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
-            this.frontendDtoPropertyToMethodAddition = frontendDtoPropertyToMethodAddition;
+            this.frontendDtoPropertyListItemToMethodAddition = frontendDtoPropertyListItemToMethodAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -45,7 +45,7 @@ namespace Contractor.Core.Projects.Frontend.Model
         {
             this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "fromApiEntityDetail", "apiEntityDetail", ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "fromApiEntityListItem", "apiEntityListItem", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -61,7 +61,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"{options.EntityNameFrom}, I{options.EntityNameFrom}", toImportStatementPath);
 
-            frontendDtoPropertyToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+            frontendDtoPropertyListItemToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }
     }
 }

@@ -22,6 +22,8 @@ namespace Contractor.Core.Projects.Backend.Logic
             serviceCollection.AddSingleton<EntityDetailFromMethodsAddition>();
             serviceCollection.AddSingleton<EntityDetailMethodsAddition>();
             serviceCollection.AddSingleton<EntityDetailToMethodsAddition>();
+            serviceCollection.AddSingleton<EntityListItemMethodsAddition>();
+            serviceCollection.AddSingleton<EntityListItemToMethodsAddition>();
             serviceCollection.AddSingleton<EntityMethodsAddition>();
         }
     }

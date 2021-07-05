@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Model
 {
-    internal class FrontendDtoPropertyToMethodAddition
+    internal class FrontendDtoPropertyListItemToMethodAddition
     {
         public PathService pathService;
 
-        public FrontendDtoPropertyToMethodAddition(PathService pathService)
+        public FrontendDtoPropertyListItemToMethodAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -36,11 +36,11 @@ namespace Contractor.Core.Projects.Frontend.Model
             string fileData = File.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"public static fromApi{options.EntityNameTo}Detail");
+            stringEditor.NextThatContains($"public static fromApi{options.EntityNameTo}ListItem");
             stringEditor.NextThatContains("return {");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine($"            {options.PropertyNameFrom.LowerFirstChar()}: {options.EntityNameFrom}.fromApi{options.EntityNameFrom}(api{options.EntityNameTo}Detail.{options.PropertyNameFrom.LowerFirstChar()}),");
+            stringEditor.InsertLine($"            {options.PropertyNameFrom.LowerFirstChar()}: {options.EntityNameFrom}.fromApi{options.EntityNameFrom}(api{options.EntityNameTo}ListItem.{options.PropertyNameFrom.LowerFirstChar()}),");
 
             return stringEditor.GetText();
         }

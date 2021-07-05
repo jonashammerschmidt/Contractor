@@ -12,5 +12,10 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         {
             Assert.AreEqual(EntityTestValues.IdDbDefault, dbEntityListItem.Id);
         }
+
+        public static void AssertDbDefault2(IDbEntityListItem dbEntityListItem)
+        {
+            Assert.AreEqual(EntityTestValues.IdDbDefault2, dbEntityListItem.Id);
+        }
     }
 }

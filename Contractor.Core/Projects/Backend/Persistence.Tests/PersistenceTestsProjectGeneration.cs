@@ -21,10 +21,12 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             serviceCollection.AddSingleton<InMemoryDbContextEntityAddition>();
             serviceCollection.AddSingleton<DbEntityTestMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityDetailTestMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityListItemTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityTestValuesAddition>();
             serviceCollection.AddSingleton<EntityTestValuesRelationAddition>();
             serviceCollection.AddSingleton<DbEntityDetailTestFromAssertAddition>();
             serviceCollection.AddSingleton<DbEntityDetailTestToAssertAddition>();
+            serviceCollection.AddSingleton<DbEntityListItemTestToAssertAddition>();
         }
     }
 }

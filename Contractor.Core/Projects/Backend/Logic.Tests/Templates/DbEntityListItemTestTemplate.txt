@@ -1,6 +1,9 @@
 ﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Contract.Persistence.Tools.Pagination;
+using ProjectName.Logic.Tests.Tools.Pagination;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace ProjectName.Logic.Tests.Modules.Domain.Entities
 {
@@ -20,18 +23,18 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
         {
             return new DbEntityListItemTest()
             {
-                Id = EntityTestValues.IdDefault,
+                Id = EntityTestValues.IdDefault2,
             };
         }
 
-        public static IDbPagedResult<IDbEntity> ForPaged()
+        public static IDbPagedResult<IDbEntityListItem> ForPaged()
         {
-            return new DbPagedResult<IDbEntity>()
+            return new DbPagedResult<IDbEntityListItem>()
             {
-                Data = new List<IDbEntity>()
+                Data = new List<IDbEntityListItem>()
                 {
-                    DbEntityTest.Default(),
-                    DbEntityTest.Default2()
+                    Default(),
+                    Default2()
                 },
                 TotalCount = 2,
                 Count = 2,

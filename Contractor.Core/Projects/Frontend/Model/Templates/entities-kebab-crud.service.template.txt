@@ -2,11 +2,11 @@
 import { BackendCoreService } from 'src/app/services/backend/backend-core.service';
 import { IPagedResult } from 'src/app/services/backend/i-paged-result';
 import { IPaginationOptions, toPaginationParams } from 'src/app/services/backend/i-pagionation-options';
-import { ApiEntity } from './dtos/api/api-entity-kebab';
 import { ApiEntityDetail } from './dtos/api/api-entity-kebab-detail';
-import { Entity, IEntity } from './dtos/i-entity-kebab';
+import { ApiGegoennteBankListItem } from './dtos/api/api-gegoennte-bank-list-item';
 import { EntityCreate, IEntityCreate } from './dtos/i-entity-kebab-create';
 import { EntityDetail, IEntityDetail } from './dtos/i-entity-kebab-detail';
+import { EntityListItem, IEntityListItem } from './dtos/i-entity-kebab-list-item';
 import { EntityUpdate, IEntityUpdate } from './dtos/i-entity-kebab-update';
 
 @Injectable()

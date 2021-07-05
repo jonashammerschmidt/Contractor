@@ -8,7 +8,7 @@ namespace ProjectName.Logic.Modules.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        internal static EntityListItem FromDbEntityListItem(IDbEntityListItem dbEntityListItem)
+        internal static IEntityListItem FromDbEntityListItem(IDbEntityListItem dbEntityListItem)
         {
             return new EntityListItem()
             {

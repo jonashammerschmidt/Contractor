@@ -85,7 +85,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                  "    this.filterItems.push({\n" +
                 $"      dataName: '{options.PropertyNameFrom.ToReadable()}',\n" +
                  "      dataSource: new MultiDataSource((pageSize: number, pageIndex: number, filterTerm: string) => {\n" +
-                $"        return this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}({{\n" +
+                $"        return this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}({{\n" +
                  "          limit: pageSize,\n" +
                  "          offset: pageSize * pageIndex,\n" +
                  "          filters: [\n" +

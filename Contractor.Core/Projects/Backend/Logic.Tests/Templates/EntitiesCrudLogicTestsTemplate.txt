@@ -152,7 +152,7 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             ILogicResult<IPagedResult<IEntityListItem>> entitiesPagedResult = entitiesCrudLogic.GetPagedEntities();
 
             // Assert
-            Assert.AreEqual(LogicResultState.Ok, result.State);
+            Assert.AreEqual(LogicResultState.Ok, entitiesPagedResult.State);
             IEntityListItem[] entityResults = entitiesPagedResult.Data.Data.ToArray();
             Assert.AreEqual(2, entityResults.Length);
             EntityListItemTest.AssertDefault(entityResults[0]);
@@ -208,7 +208,7 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             entitiesCrudRepository.Setup(repository => repository.GetEntity(EntityTestValues.IdDefault2)).Returns(DbEntityTest.Default2());
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault)).Returns(DbEntityDetailTest.Default());
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault2)).Returns(DbEntityDetailTest.Default2());
-            entitiesCrudRepository.Setup(repository => repository.GetEntities()).Returns(DbEntityListItemTest.ForPaged());
+            entitiesCrudRepository.Setup(repository => repository.GetPagedEntities()).Returns(DbEntityListItemTest.ForPaged());
             entitiesCrudRepository.Setup(repository => repository.UpdateEntity(It.IsAny<IDbEntity>())).Callback((IDbEntity dbEntity) =>
             {
                 DbEntityTest.AssertUpdated(dbEntity);
