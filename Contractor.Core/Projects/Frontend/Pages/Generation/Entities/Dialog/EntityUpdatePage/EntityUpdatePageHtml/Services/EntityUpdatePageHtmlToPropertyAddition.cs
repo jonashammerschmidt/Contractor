@@ -52,9 +52,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string GetLine(IRelationAdditionOptions options)
         {
-            return
-              $"            <app-search-dropdown-form [formGroupInstance]=\"{options.EntityNameLowerTo}UpdateForm\" [formControlNameInstance]=\"'{options.PropertyNameFrom.LowerFirstChar()}Id'\"\n" +
-              $"                label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"name\" required=\"true\" [dataSource]=\"{options.EntityNamePluralLowerFrom}DataSource\"></app-search-dropdown-form>";
+            return 
+                $"            <app-search-dropdown-form [formGroupInstance]=\"{options.EntityNameLowerTo}UpdateForm\"" +
+                $"                [formControlNameInstance]=\"'{options.PropertyNameFrom.LowerFirstChar()}Id'\" label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"name\"" +
+                $"                required=\"true\" [dataSource]=\"{options.EntityNamePluralLowerFrom}DataSource\" [initialItem]=\"selected{options.PropertyNameFrom}\">" +
+                $"            </app-search-dropdown-form>";
         }
     }
 }
