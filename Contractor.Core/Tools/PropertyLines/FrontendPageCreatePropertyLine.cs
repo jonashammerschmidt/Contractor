@@ -27,11 +27,11 @@ namespace Contractor.Core.Tools
                          "                <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
                          "                <mat-datepicker #picker></mat-datepicker>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
-                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">" +
-                         "                        Dieses Feld ist erfolderlich." +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
+                         "                        Dieses Feld ist erfolderlich.\n" +
                          "                    </span>\n" +
-                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">" +
-                         "                        Dieses Feld ist ungültig." + 
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
+                         "                        Dieses Feld ist ungültig.\n" + 
                          "                    </span>\n" +
                          "                </mat-error>\n" +
                          "            </mat-form-field>";
@@ -59,11 +59,11 @@ namespace Contractor.Core.Tools
                         $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} maxlength=\"{options.PropertyTypeExtra}\" placeholder=\"{options.PropertyName.ToReadable()}\">\n" +
                         $"                <mat-hint [align]=\"'end'\">{{{{{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.value.length}}}} / {options.PropertyTypeExtra}</mat-hint>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
-                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">" +
-                         "                        Dieses Feld ist erfolderlich." +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
+                         "                        Dieses Feld ist erfolderlich.\n" +
                          "                    </span>\n" +
-                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">" +
-                         "                        Dieses Feld ist ungültig." + 
+                        $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
+                         "                        Dieses Feld ist ungültig.\n" + 
                          "                    </span>\n" +
                          "                </mat-error>\n" +
                          "            </mat-form-field>";

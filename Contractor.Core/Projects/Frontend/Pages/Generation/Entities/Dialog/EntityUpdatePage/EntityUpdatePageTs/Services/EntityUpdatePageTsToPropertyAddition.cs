@@ -66,10 +66,10 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("ngOnInit()");
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    this.selected{options.PropertyNameFrom} = {options.EntityNamePluralLowerFrom}Detail.{options.PropertyNameFrom.LowerFirstChar()};");
-            stringEditor.InsertLine("    this.entitiesDataSource = new MultiDataSource(");
+            stringEditor.InsertLine($"    this.selected{options.PropertyNameFrom} = {options.EntityNameLowerTo}Detail.{options.PropertyNameFrom.LowerFirstChar()};");
+            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom}DataSource = new MultiDataSource(");
             stringEditor.InsertLine("    (pageSize: number, pageIndex: number, filterTerm: string) => {");
-            stringEditor.InsertLine("        return this.entitiesCrudService.getPagedEntities({");
+            stringEditor.InsertLine($"        return this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}({{");
             stringEditor.InsertLine("        limit: pageSize,");
             stringEditor.InsertLine("        offset: pageSize * pageIndex,");
             stringEditor.InsertLine("        filters: [");

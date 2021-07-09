@@ -6,7 +6,7 @@ import { TableFilterBarComponent } from 'src/app/components/ui/table-filter-bar/
 import { MultiDataSource } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-multi/multi-data-source';
 import { TableFilterBarDropdownItem } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-item';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
-import { IEntity } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab';
+import { IEntityListItem } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-list-item';
 import { PaginationDataSource } from 'src/app/services/backend/pagination.data-source';
 import { EntityCreateDialog } from './dialogs/entity-kebab-create/entity-kebab-create.dialog';
 
@@ -29,7 +29,7 @@ export class EntitiesPage implements AfterViewInit {
   public entitiesGridColumns: string[] = [
     'detail',
   ];
-  
+
   constructor(
     private entitiesCrudService: EntitiesCrudService,
     private matDialog: MatDialog) {

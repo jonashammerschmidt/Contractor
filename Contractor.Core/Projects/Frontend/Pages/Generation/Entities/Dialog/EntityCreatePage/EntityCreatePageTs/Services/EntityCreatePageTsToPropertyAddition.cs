@@ -65,19 +65,19 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("ngOnInit()");
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine("    this.entitiesDataSource = new MultiDataSource(");
-            stringEditor.InsertLine("    (pageSize: number, pageIndex: number, filterTerm: string) => {");
-            stringEditor.InsertLine("        return this.entitiesCrudService.getPagedEntities({");
-            stringEditor.InsertLine("        limit: pageSize,");
-            stringEditor.InsertLine("        offset: pageSize * pageIndex,");
-            stringEditor.InsertLine("        filters: [");
+            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom}DataSource = new MultiDataSource(");
+            stringEditor.InsertLine("      (pageSize: number, pageIndex: number, filterTerm: string) => {");
+            stringEditor.InsertLine($"        return this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}({{");
+            stringEditor.InsertLine("          limit: pageSize,");
+            stringEditor.InsertLine("          offset: pageSize * pageIndex,");
+            stringEditor.InsertLine("          filters: [");
             stringEditor.InsertLine("            {");
-            stringEditor.InsertLine("            filterField: 'name',");
-            stringEditor.InsertLine("            containsFilters: [filterTerm]");
+            stringEditor.InsertLine("              filterField: 'name',");
+            stringEditor.InsertLine("              containsFilters: [filterTerm]");
             stringEditor.InsertLine("            }");
-            stringEditor.InsertLine("        ]");
+            stringEditor.InsertLine("          ]");
             stringEditor.InsertLine("        });");
-            stringEditor.InsertLine("    });");
+            stringEditor.InsertLine("      });");
 
             return stringEditor.GetText();
         }

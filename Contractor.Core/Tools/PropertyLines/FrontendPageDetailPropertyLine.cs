@@ -23,7 +23,7 @@ namespace Contractor.Core.Tools
                          "    </p>";
                 case PropertyTypes.DateTime:
                     return
-                        $"    <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + {options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}.toLocaleString()\">\n" +
+                        $"    <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + {options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}{(options.IsOptional ? "?" : "")}.toLocaleString()\">\n" +
                         $"        <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{options.PropertyName.ToReadable()}:</span>\n" +
                         $"        <br>\n" +
                         $"        <span aria-hidden=\"true\">{{{{{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}}</span>\n" +

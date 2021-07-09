@@ -155,5 +155,10 @@ namespace Contractor.Core.Helpers
 
             return this;
         }
+
+        public void SetLine(string line)
+        {
+            this.lines[lineNumber] = line;
+        }
     }
 }

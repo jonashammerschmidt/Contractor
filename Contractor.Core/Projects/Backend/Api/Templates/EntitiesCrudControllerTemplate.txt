@@ -22,7 +22,7 @@ namespace ProjectName.API.Modules.Domain.Entities
 
         [HttpGet]
         [Authorized]
-        [Pagination]
+        [Pagination(FilterFields = new[] { "Name" }, SortFields = new[] { "Name" })]
         public ActionResult<IPagedResult<IEntityListItem>> GetPagedEntities()
         {
             var pagedEntitiesPagedResult = this.entitiesCrudLogic.GetPagedEntities();
