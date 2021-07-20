@@ -59,7 +59,7 @@ namespace Contractor.Core.Projects.Frontend.Model
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
-                $"{options.EntityNameFrom}Detail, I{options.EntityNameFrom}Detail", toImportStatementPath);
+                $"{options.EntityNameFrom}, I{options.EntityNameFrom}", toImportStatementPath);
 
             frontendDtoPropertyListItemToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }
