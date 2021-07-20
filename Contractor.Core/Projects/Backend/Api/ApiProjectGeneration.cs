@@ -12,8 +12,11 @@ namespace Contractor.Core.Projects.Backend.Api
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudController>();
+            serviceCollection.AddSingleton<EntitiesCrudControllerRelationAddition>();
+
             serviceCollection.AddSingleton<ClassGeneration, EntityCreateGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdateGeneration>();
+
         }
     }
 }

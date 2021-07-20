@@ -54,12 +54,17 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}DataSource: MultiDataSource<I{options.EntityNameFrom}ListItem>;");
+            stringEditor.InsertLine($"  {options.PropertyNameFrom.LowerFirstChar()}DataSource: MultiDataSource<I{options.EntityNameFrom}ListItem>;");
             stringEditor.InsertLine($"  selected{options.PropertyNameFrom}: I{options.EntityNameFrom}ListItem;");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("private formBuilder: FormBuilder");
-            stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
+
+            string constructorLine = $"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,";
+            if (!fileData.Contains(constructorLine))
+            {
+                stringEditor.InsertLine(constructorLine);
+            }
 
             stringEditor.NextThatContains("this.formBuilder.group({");
             stringEditor.NextThatContains("});");
@@ -70,7 +75,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"    this.selected{options.PropertyNameFrom} = {options.EntityNameLowerTo}Detail.{options.PropertyNameFrom.LowerFirstChar()};");
-            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom}DataSource = new MultiDataSource(");
+            stringEditor.InsertLine($"    this.{options.PropertyNameFrom.LowerFirstChar()}DataSource = new MultiDataSource(");
             stringEditor.InsertLine("    (pageSize: number, pageIndex: number, filterTerm: string) => {");
             stringEditor.InsertLine($"        return this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}({{");
             stringEditor.InsertLine("        limit: pageSize,");

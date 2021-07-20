@@ -51,8 +51,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.Next();
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"  public {options.EntityNamePluralLowerTo}TableDataSource = new MatTableDataSource<I{options.EntityNameTo}>([]);");
-            stringEditor.InsertLine($"  public {options.EntityNamePluralLowerTo}GridColumns: string[] = [");
+            stringEditor.InsertLine($"  public {options.PropertyNameTo.LowerFirstChar()}TableDataSource = new MatTableDataSource<I{options.EntityNameTo}>([]);");
+            stringEditor.InsertLine($"  public {options.PropertyNameTo.LowerFirstChar()}GridColumns: string[] = [");
             stringEditor.InsertLine($"    'name',");
             stringEditor.InsertLine($"    'detail',");
             stringEditor.InsertLine($"  ];");
@@ -61,7 +61,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("  }");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerTo}TableDataSource.data = this.{options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()};");
+            stringEditor.InsertLine($"    this.{options.PropertyNameTo.LowerFirstChar()}TableDataSource.data = this.{options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()};");
 
             return stringEditor.GetText();
         }

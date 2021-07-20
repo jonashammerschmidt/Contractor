@@ -2,6 +2,7 @@
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
@@ -52,14 +53,27 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("'detail'");
             stringEditor.InsertLine($"    '{options.PropertyNameFrom.LowerFirstChar()}',");
 
+            string constructorLine = $"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,";
             stringEditor.NextThatContains("constructor(");
-            stringEditor.Next();
-            stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
+            if (!fileData.Contains(constructorLine))
+            {
+                stringEditor.Next();
+                stringEditor.InsertLine(constructorLine);
+            }
+            
+            int equalFilterCount = Regex.Matches(fileData, "equalsFilters: this\\.filterValues\\[").Count;
+            stringEditor.NextThatContains("PaginationDataSource");
+            stringEditor.NextThatContains("() => [");
+            stringEditor.NextThatContains("]);");
+            stringEditor.InsertLine( "        {");
+            stringEditor.InsertLine($"          filterField: '" + options.PropertyNameFrom.LowerFirstChar() + "Id',");
+            stringEditor.InsertLine($"          equalsFilters: this.filterValues[" + equalFilterCount + "]");
+            stringEditor.InsertLine( "        },");
 
             stringEditor.NextThatContains("ngAfterViewInit()");
             int lineNumber = stringEditor.GetLineNumber();
             stringEditor.Next(line => !line.Trim().StartsWith("await this.setup"));
-            stringEditor.InsertLine($"    await this.setup{options.EntityNamePluralFrom}Filter();");
+            stringEditor.InsertLine($"    await this.setup{options.PropertyNameFrom}Filter();");
             if (stringEditor.GetLineNumber() - lineNumber == 2)
             {
                 stringEditor.InsertNewLine();
@@ -76,7 +90,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetSetupMethod(IRelationAdditionOptions options)
         {
             return
-                $"  private async setup{options.EntityNamePluralFrom}Filter(): Promise<void> {{\n" +
+                $"  private async setup{options.PropertyNameFrom}Filter(): Promise<void> {{\n" +
                  "    this.filterItems.push({\n" +
                 $"      dataName: '{options.PropertyNameFrom.ToReadable()}',\n" +
                  "      dataSource: new MultiDataSource((pageSize: number, pageIndex: number, filterTerm: string) => {\n" +

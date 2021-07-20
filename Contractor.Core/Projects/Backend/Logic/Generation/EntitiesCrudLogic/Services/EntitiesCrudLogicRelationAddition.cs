@@ -36,25 +36,27 @@ namespace Contractor.Core.Projects.Backend.Logic
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
-
-            // ----------- Property -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"private readonly I{options.EntityNamePluralTo}CrudRepository");
-            stringEditor.Next(line => !line.Contains("CrudRepository"));
 
-            stringEditor.InsertLine($"        private readonly I{options.EntityNamePluralFrom}CrudRepository {options.EntityNamePluralLowerFrom}CrudRepository;");
+            string relationsPropertyLine = $"        private readonly I{options.EntityNamePluralFrom}CrudRepository {options.EntityNamePluralLowerFrom}CrudRepository;";
 
-            // ----------- Contructor Parameter -----------
-            stringEditor.NextThatContains($"I{options.EntityNamePluralTo}CrudRepository {options.EntityNamePluralLowerTo}CrudRepository,");
-            stringEditor.Next(line => !line.Contains("CrudRepository"));
+            if (!fileData.Contains(relationsPropertyLine))
+            {
+                // ----------- Property -----------
+                stringEditor.NextThatContains($"private readonly I{options.EntityNamePluralTo}CrudRepository");
+                stringEditor.Next(line => !line.Contains("CrudRepository"));
+                stringEditor.InsertLine(relationsPropertyLine);
 
-            stringEditor.InsertLine($"            I{options.EntityNamePluralFrom}CrudRepository {options.EntityNamePluralLowerFrom}CrudRepository,");
+                // ----------- Contructor Parameter -----------
+                stringEditor.NextThatContains($"I{options.EntityNamePluralTo}CrudRepository {options.EntityNamePluralLowerTo}CrudRepository,");
+                stringEditor.Next(line => !line.Contains("CrudRepository"));
+                stringEditor.InsertLine($"            I{options.EntityNamePluralFrom}CrudRepository {options.EntityNamePluralLowerFrom}CrudRepository,");
 
-            // ----------- Contructor Assignment -----------
-            stringEditor.NextThatContains($"this.{options.EntityNamePluralLowerTo}CrudRepository =");
-            stringEditor.Next(line => !line.Contains("CrudRepository"));
-
-            stringEditor.InsertLine($"            this.{options.EntityNamePluralLowerFrom}CrudRepository = {options.EntityNamePluralLowerFrom}CrudRepository;");
+                // ----------- Contructor Assignment -----------
+                stringEditor.NextThatContains($"this.{options.EntityNamePluralLowerTo}CrudRepository =");
+                stringEditor.Next(line => !line.Contains("CrudRepository"));
+                stringEditor.InsertLine($"            this.{options.EntityNamePluralLowerFrom}CrudRepository = {options.EntityNamePluralLowerFrom}CrudRepository;");
+            }
 
             // ----------- Create Method -----------
             stringEditor.NextThatContains($"Create{options.EntityNameTo}(");
