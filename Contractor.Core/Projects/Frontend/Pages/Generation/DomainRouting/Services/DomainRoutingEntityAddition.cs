@@ -53,7 +53,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             return
               "  {\n" +
              $"    path: '{options.EntityNamePlural.ToKebab()}',\n" +
-             $"    loadChildren: () => import('./{options.EntityNamePlural.ToKebab()}/{options.EntityNamePlural.ToKebab()}-pages.module').then(m => m.{options.EntityNamePlural}PagesModule)\n" +
+             $"    loadChildren: () => import('./{options.EntityNamePlural.ToKebab()}/{options.EntityNamePlural.ToKebab()}-pages.module')\n"+
+             $"      .then(m => m.{options.EntityNamePlural}PagesModule)\n" +
               "  },";
         }
     }

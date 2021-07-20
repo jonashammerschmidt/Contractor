@@ -20,15 +20,18 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
+            fileData = ImportStatements.Add(fileData, "MultiDataSource", 
+                "src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-multi/multi-data-source");
+
             fileData = ImportStatements.Add(fileData, $"{options.EntityNamePluralFrom}CrudService",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}-crud.service");
 
-            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}",
+            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}ListItem",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}");
+                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}-list-item");
 
             TypescriptClassWriter.Write(filePath, fileData);
         }
@@ -51,8 +54,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}DataSource: MultiDataSource<I{options.EntityNameFrom}>;");
-            stringEditor.InsertLine($"  selected{options.PropertyNameFrom}: I{options.EntityNameFrom};");
+            stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}DataSource: MultiDataSource<I{options.EntityNameFrom}ListItem>;");
+            stringEditor.InsertLine($"  selected{options.PropertyNameFrom}: I{options.EntityNameFrom}ListItem;");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("private formBuilder: FormBuilder");

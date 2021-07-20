@@ -167,7 +167,7 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
             return new EntitiesCrudRepository(
                 this.GetSessionContext(),
                 this.GetPaginationContext(),
-                InMemoryDbContext.CreatePersistenceDbContextWithDefault());
+                InMemoryDbContext.CreatePersistenceDbContextWithDbDefault());
         }
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryEmpty()
@@ -175,7 +175,7 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
             return new EntitiesCrudRepository(
                 this.GetSessionContext(),
                 this.GetPaginationContext(),
-                InMemoryDbContext.CreatePersistenceDbContext());
+                InMemoryDbContext.CreatePersistenceDbContextEmpty());
         }
 
         private ISessionContext GetSessionContext()

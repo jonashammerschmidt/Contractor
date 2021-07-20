@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { TableFilterBarComponent } from 'src/app/components/ui/table-filter-bar/table-filter-bar.component';
-import { MultiDataSource } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-multi/multi-data-source';
 import { TableFilterBarDropdownItem } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-item';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityListItem } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-list-item';
@@ -33,7 +32,7 @@ export class EntitiesPage implements AfterViewInit {
   constructor(
     private entitiesCrudService: EntitiesCrudService,
     private matDialog: MatDialog) {
-    
+
     this.entitiesDataSource = new PaginationDataSource<IEntityListItem>(
       (options) => this.entitiesCrudService.getPagedEntities(options),
       () => [

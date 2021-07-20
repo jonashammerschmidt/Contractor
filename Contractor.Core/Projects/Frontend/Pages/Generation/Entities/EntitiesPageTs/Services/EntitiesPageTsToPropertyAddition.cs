@@ -20,15 +20,13 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
+            fileData = ImportStatements.Add(fileData, "MultiDataSource",
+                "src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-multi/multi-data-source");
+
             fileData = ImportStatements.Add(fileData, $"{options.EntityNamePluralFrom}CrudService",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}-crud.service");
-
-            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}",
-                $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}");
 
             TypescriptClassWriter.Write(filePath, fileData);
         }
@@ -55,9 +53,6 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"    '{options.PropertyNameFrom.LowerFirstChar()}',");
 
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}: I{options.EntityNameFrom}[];");
-            stringEditor.InsertNewLine();
-
             stringEditor.Next();
             stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
 

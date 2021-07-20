@@ -168,14 +168,14 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         {
             return new EntitiesCrudRepository(
                 this.GetPaginationContext(),
-                InMemoryDbContext.CreatePersistenceDbContextWithDefault());
+                InMemoryDbContext.CreatePersistenceDbContextWithDbDefault());
         }
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryEmpty()
         {
             return new EntitiesCrudRepository(
                 this.GetPaginationContext(),
-                InMemoryDbContext.CreatePersistenceDbContext());
+                InMemoryDbContext.CreatePersistenceDbContextEmpty());
         }
 
         private IPaginationContext GetPaginationContext()

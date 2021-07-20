@@ -43,7 +43,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             return
               "  {\n" +
              $"    path: '{options.Domain.ToKebab()}',\n" +
-             $"    loadChildren: () => import('./pages/{options.Domain.ToKebab()}/{options.Domain.ToKebab()}-pages.module').then(m => m.{options.Domain}PagesModule)\n" +
+             $"    loadChildren: () => import('./pages/{options.Domain.ToKebab()}/{options.Domain.ToKebab()}-pages.module')\n" +
+             $"      .then(m => m.{options.Domain}PagesModule)\n" +
               "  },";
         }
     }
