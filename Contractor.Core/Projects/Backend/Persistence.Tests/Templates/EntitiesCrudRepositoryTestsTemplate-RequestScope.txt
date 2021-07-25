@@ -1,8 +1,10 @@
 ﻿using ProjectName.Contract.Contexts;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Contract.Persistence.Tools.Pagination;
 using ProjectName.Persistence.Modules.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Linq;
 
 namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
@@ -102,7 +104,7 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
             // Assert
             Assert.IsNull(dbEntityDetail);
         }
-        
+
         [TestMethod]
         public void GetAllEntitiesDefaultTest()
         {
@@ -113,7 +115,7 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
             IDbEntity[] dbEntities = entitiesCrudRepository.GetAllEntities().ToArray();
 
             // Assert
-            Assert.AreEqual(2, entities.Length);
+            Assert.AreEqual(2, dbEntities.Length);
             DbEntityTest.AssertDbDefault(dbEntities[0]);
             DbEntityTest.AssertDbDefault2(dbEntities[1]);
         }

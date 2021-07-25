@@ -45,6 +45,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.InsertLine($"                .Include(ef{options.EntityNameTo} => ef{options.EntityNameTo}.{options.PropertyNameFrom})");
             stringEditor.MoveToStart();
 
+            string includeLine = $"                .Include(ef{options.EntityNameTo} => ef{options.EntityNameTo}.{options.PropertyNameFrom})";
             stringEditor.NextThatContains($"GetPaged{options.EntityNamePluralTo}(");
             stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralTo}");
             stringEditor.Next(line => !line.Contains("Include("));
@@ -54,8 +55,13 @@ namespace Contractor.Core.Projects.Backend.Persistence
                 stringEditor.SetLine(stringEditor.GetLine().Replace(";", ""));
             }
             stringEditor.Next();
-            stringEditor.InsertLine($"                .Include(ef{options.EntityNameTo} => ef{options.EntityNameTo}.{options.PropertyNameFrom});");
-            
+
+            if (!stringEditor.GetLine().Trim().StartsWith("."))
+            {
+                includeLine += ";";
+            }
+            stringEditor.InsertLine(includeLine);
+
             return stringEditor.GetText();
         }
     }
