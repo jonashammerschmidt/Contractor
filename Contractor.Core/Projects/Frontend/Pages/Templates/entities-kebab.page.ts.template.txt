@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityListItem } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-list-item';
-import { PaginationDataSource } from 'src/app/services/backend/pagination.data-source';
+import { PaginationDataSource } from 'src/app/services/backend/pagination/pagination.data-source';
 import { EntityCreateDialog } from './dialogs/entity-kebab-create/entity-kebab-create.dialog';
 
 @Component({

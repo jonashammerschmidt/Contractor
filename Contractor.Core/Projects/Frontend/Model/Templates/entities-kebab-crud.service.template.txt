@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { BackendCoreService } from 'src/app/services/backend/backend-core.service';
-import { IPagedResult } from 'src/app/services/backend/i-paged-result';
-import { IPaginationOptions, toPaginationParams } from 'src/app/services/backend/i-pagionation-options';
+import { IPagedResult } from 'src/app/services/backend/pagination/i-paged-result';
+import { IPaginationOptions, toPaginationParams } from 'src/app/services/backend/pagination/i-pagination-options';
 import { ApiEntityDetail } from './dtos/api/api-entity-kebab-detail';
 import { ApiEntityListItem } from './dtos/api/api-entity-kebab-list-item';
 import { EntityCreate, IEntityCreate } from './dtos/i-entity-kebab-create';
