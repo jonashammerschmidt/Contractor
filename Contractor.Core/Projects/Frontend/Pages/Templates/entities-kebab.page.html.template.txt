@@ -8,7 +8,13 @@
         </button>
     </div>
 
-    <app-table-filter-bar [filterItems]="filterItems" [filterItemsValues]="filterValues">
+    <app-table-filter-bar>
+        <!-- Left -->
+        <app-table-filter-bar-icon>search</app-table-filter-bar-icon>
+
+        <app-table-filter-bar-input placeholder="Suchen..." [(value)]="filterTerm"></app-table-filter-bar-input>
+        
+        <!-- Right -->
     </app-table-filter-bar>
 
     <br>

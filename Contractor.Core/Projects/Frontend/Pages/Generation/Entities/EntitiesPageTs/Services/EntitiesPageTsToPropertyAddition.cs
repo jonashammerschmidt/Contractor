@@ -21,8 +21,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            fileData = ImportStatements.Add(fileData, "MultiDataSource",
-                "src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-multi/multi-data-source");
+            fileData = ImportStatements.Add(fileData, "TableFilterBarDropdownDataSource",
+                "src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-multiple/table-filter-bar-dropdown-data-source");
 
             fileData = ImportStatements.Add(fileData, $"{options.EntityNamePluralFrom}CrudService",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
@@ -49,6 +49,10 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
+            stringEditor.NextThatContains("// Table");
+            stringEditor.InsertLine(GetDataSourceLine(options));
+            stringEditor.InsertNewLine();
+
             stringEditor.NextThatContains("GridColumns: string[]");
             stringEditor.NextThatContains("'detail'");
             stringEditor.InsertLine($"    '{options.PropertyNameFrom.LowerFirstChar()}',");
@@ -60,57 +64,35 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 stringEditor.Next();
                 stringEditor.InsertLine(constructorLine);
             }
-            
-            int equalFilterCount = Regex.Matches(fileData, "equalsFilters: this\\.filterValues\\[").Count;
+
             stringEditor.NextThatContains("PaginationDataSource");
             stringEditor.NextThatContains("() => [");
             stringEditor.NextThatContains("]);");
-            stringEditor.InsertLine( "        {");
+            stringEditor.InsertLine("        {");
             stringEditor.InsertLine($"          filterField: '" + options.PropertyNameFrom.LowerFirstChar() + "Id',");
-            stringEditor.InsertLine($"          equalsFilters: this.filterValues[" + equalFilterCount + "]");
-            stringEditor.InsertLine( "        },");
-
-            stringEditor.NextThatContains("ngAfterViewInit()");
-            int lineNumber = stringEditor.GetLineNumber();
-            stringEditor.Next(line => !line.Trim().StartsWith("await this.setup"));
-            stringEditor.InsertLine($"    await this.setup{options.PropertyNameFrom}Filter();");
-            if (stringEditor.GetLineNumber() - lineNumber == 2)
-            {
-                stringEditor.InsertNewLine();
-            }
-
-            stringEditor.MoveToEnd();
-            stringEditor.PrevThatContains("}");
-            stringEditor.InsertNewLine();
-            stringEditor.InsertLine(GetSetupMethod(options));
+            stringEditor.InsertLine($"          equalsFilters: this.{options.PropertyNameFrom.LowerFirstChar()}SelectedValues");
+            stringEditor.InsertLine("        },");
 
             return stringEditor.GetText();
         }
 
-        private string GetSetupMethod(IRelationAdditionOptions options)
+        private static string GetDataSourceLine(IRelationAdditionOptions options)
         {
-            return
-                $"  private async setup{options.PropertyNameFrom}Filter(): Promise<void> {{\n" +
-                 "    this.filterItems.push({\n" +
-                $"      dataName: '{options.PropertyNameFrom.ToReadable()}',\n" +
-                 "      dataSource: new MultiDataSource((pageSize: number, pageIndex: number, filterTerm: string) => {\n" +
-                $"        return this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}({{\n" +
-                 "          limit: pageSize,\n" +
-                 "          offset: pageSize * pageIndex,\n" +
-                 "          filters: [\n" +
-                 "            {\n" +
-                 "              filterField: 'name',\n" +
-                 "              containsFilters: [filterTerm]\n" +
-                 "            }\n" +
-                 "          ]\n" +
-                 "        });\n" +
-                 "      }),\n" +
-                 "      valueExpr: 'id',\n" +
-                 "      displayExpr: 'name',\n" +
-                 "    });\n" +
-                 "\n" +
-                 "    this.filterValues.push([]);\n" +
-                 "  }";
+            return 
+                $"  {options.PropertyNameFrom.LowerFirstChar()}SelectedValues = [];\n" +
+                $"  {options.PropertyNameFrom.LowerFirstChar()}DataSource = new TableFilterBarDropdownDataSource((pageSize: number, pageIndex: number, filterTerm: string) => {{\n" +
+                $"    return this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}({{\n" +
+                "      limit: pageSize,\n" +
+                "      offset: pageSize * pageIndex,\n" +
+                "      filters: [\n" +
+                "        {\n" +
+                "          filterField: 'name',\n" +
+                "          containsFilters: [filterTerm]\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    });\n" +
+                "  });\n";
         }
+
     }
 }

@@ -2,8 +2,6 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { TableFilterBarComponent } from 'src/app/components/ui/table-filter-bar/table-filter-bar.component';
-import { TableFilterBarDropdownItem } from 'src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-item';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityListItem } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-list-item';
 import { PaginationDataSource } from 'src/app/services/backend/pagination.data-source';
@@ -17,9 +15,7 @@ import { EntityCreateDialog } from './dialogs/entity-kebab-create/entity-kebab-c
 export class EntitiesPage implements AfterViewInit {
 
   // FilterBar
-  @ViewChild(TableFilterBarComponent) tableFilterBarComponent: TableFilterBarComponent;
-  filterItems: TableFilterBarDropdownItem[] = [];
-  filterValues: any[][] = [];
+  filterTerm = '';
 
   // Table
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,13 +34,13 @@ export class EntitiesPage implements AfterViewInit {
       () => [
         {
           filterField: 'name',
-          containsFilters: [this.tableFilterBarComponent.currentFilterTerm]
+          containsFilters: [this.filterTerm]
         },
       ]);
   }
 
   async ngAfterViewInit(): Promise<void> {
-    this.entitiesDataSource.initialize(this.tableFilterBarComponent, this.paginator, this.sort);
+    this.entitiesDataSource.initialize(this.paginator, this.sort);
   }
 
   openCreateDialog(): void {
