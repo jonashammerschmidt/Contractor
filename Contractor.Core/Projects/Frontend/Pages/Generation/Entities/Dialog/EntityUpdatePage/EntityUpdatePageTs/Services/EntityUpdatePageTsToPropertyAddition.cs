@@ -20,8 +20,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            fileData = ImportStatements.Add(fileData, "SearchDropdownFormDataSource",
-                "src/app/components/ui/search-dropdown-form/search-dropdown-form-data-source");
+            fileData = ImportStatements.Add(fileData, "DropdownPaginationDataSource",
+                "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
 
             fileData = ImportStatements.Add(fileData, $"{options.EntityNamePluralFrom}CrudService",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
@@ -54,7 +54,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {options.PropertyNameFrom.LowerFirstChar()}DataSource: SearchDropdownFormDataSource<I{options.EntityNameFrom}ListItem>;");
+            stringEditor.InsertLine($"  {options.PropertyNameFrom.LowerFirstChar()}DataSource: DropdownPaginationDataSource<I{options.EntityNameFrom}ListItem>;");
             stringEditor.InsertLine($"  selected{options.PropertyNameFrom}: I{options.EntityNameFrom}ListItem;");
             stringEditor.InsertNewLine();
 
@@ -75,19 +75,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"    this.selected{options.PropertyNameFrom} = {options.EntityNameLowerTo}Detail.{options.PropertyNameFrom.LowerFirstChar()};");
-            stringEditor.InsertLine($"    this.{options.PropertyNameFrom.LowerFirstChar()}DataSource = new SearchDropdownFormDataSource(");
-            stringEditor.InsertLine("    (pageSize: number, pageIndex: number, filterTerm: string) => {");
-            stringEditor.InsertLine($"        return this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}({{");
-            stringEditor.InsertLine("        limit: pageSize,");
-            stringEditor.InsertLine("        offset: pageSize * pageIndex,");
-            stringEditor.InsertLine("        filters: [");
-            stringEditor.InsertLine("            {");
-            stringEditor.InsertLine("            filterField: 'name',");
-            stringEditor.InsertLine("            containsFilters: [filterTerm]");
-            stringEditor.InsertLine("            }");
-            stringEditor.InsertLine("        ]");
-            stringEditor.InsertLine("        });");
-            stringEditor.InsertLine("    });");
+            stringEditor.InsertLine($"    this.{options.PropertyNameFrom.LowerFirstChar()}DataSource = new DropdownPaginationDataSource(");
+            stringEditor.InsertLine($"      (options) => this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}(options),");
+            stringEditor.InsertLine( "      'name');");
 
             return stringEditor.GetText();
         }

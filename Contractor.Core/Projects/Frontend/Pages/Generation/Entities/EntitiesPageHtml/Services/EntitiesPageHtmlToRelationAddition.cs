@@ -45,9 +45,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.PrevThatContains("<!-- Right -->");
             stringEditor.Next();
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        <app-table-filter-bar-dropdown-multiple appRight [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" valueExpr=\"id\" displayExpr=\"name\"");
+            stringEditor.InsertLine($"        <app-table-filter-bar-dropdown [floatingRight]=\"true\" [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" idExpr=\"id\" displayExpr=\"name\"");
             stringEditor.InsertLine($"            label=\"{options.PropertyNameFrom.ToReadable()}\" [(values)]=\"{options.PropertyNameFrom.LowerFirstChar()}SelectedValues\" (valuesChange)=\"{options.EntityNamePluralLowerTo}DataSource.triggerUpdate()\">");
-            stringEditor.InsertLine("        </app-table-filter-bar-dropdown-multiple>");
+            stringEditor.InsertLine("        </app-table-filter-bar-dropdown>");
 
             stringEditor.NextThatContains("<table mat-table");
             stringEditor.NextThatContains("<ng-container matColumnDef=\"detail\">");

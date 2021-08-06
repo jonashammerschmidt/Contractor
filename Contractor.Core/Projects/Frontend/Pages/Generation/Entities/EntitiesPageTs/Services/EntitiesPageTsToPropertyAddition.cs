@@ -21,8 +21,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            fileData = ImportStatements.Add(fileData, "TableFilterBarDropdownDataSource",
-                "src/app/components/ui/table-filter-bar/table-filter-bar-dropdown-multiple/table-filter-bar-dropdown-data-source");
+            fileData = ImportStatements.Add(fileData, "DropdownPaginationDataSource",
+                "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
 
             fileData = ImportStatements.Add(fileData, $"{options.EntityNamePluralFrom}CrudService",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
@@ -80,18 +80,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             return 
                 $"  {options.PropertyNameFrom.LowerFirstChar()}SelectedValues = [];\n" +
-                $"  {options.PropertyNameFrom.LowerFirstChar()}DataSource = new TableFilterBarDropdownDataSource((pageSize: number, pageIndex: number, filterTerm: string) => {{\n" +
-                $"    return this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}({{\n" +
-                "      limit: pageSize,\n" +
-                "      offset: pageSize * pageIndex,\n" +
-                "      filters: [\n" +
-                "        {\n" +
-                "          filterField: 'name',\n" +
-                "          containsFilters: [filterTerm]\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    });\n" +
-                "  });\n";
+                $"  {options.PropertyNameFrom.LowerFirstChar()}DataSource = new DropdownPaginationDataSource(\n" +
+                $"    (options) => this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}(options),\n" +
+                 "    'name');";
         }
 
     }
