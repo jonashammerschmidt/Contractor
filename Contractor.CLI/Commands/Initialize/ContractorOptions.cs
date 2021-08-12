@@ -13,5 +13,7 @@ namespace Contractor.CLI
         public string ProjectName { get; set; }
 
         public string DbProjectName { get; set; }
+
+        public bool IsVerbose { get; set; }
     }
 }

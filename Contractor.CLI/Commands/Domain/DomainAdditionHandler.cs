@@ -1,4 +1,5 @@
-﻿using Contractor.Core;
+﻿using Contractor.CLI.Tools;
+using Contractor.Core;
 using Contractor.Core.Helpers;
 using Contractor.Core.Options;
 using System;
@@ -23,11 +24,12 @@ namespace Contractor.CLI
         private static DomainAdditionOptions GetOptions(string[] args)
         {
             var options = ContractorOptionsLoader.Load(Directory.GetCurrentDirectory());
-            var domainOptions = new DomainAdditionOptions(options)
-            {
-                Domain = args[2]
-            };
-            domainOptions.Domain = domainOptions.Domain.UpperFirstChar();
+            var domainOptions = new DomainAdditionOptions(options);
+
+            domainOptions.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
+            
+            domainOptions.Domain = args[2].UpperFirstChar();
+
             return domainOptions;
         }
 

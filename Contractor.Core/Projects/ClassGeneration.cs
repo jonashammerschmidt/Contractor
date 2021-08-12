@@ -18,10 +18,18 @@ namespace Contractor.Core.Projects
             try
             {
                 this.AddDomain(options);
+                if (options.IsVerbose) 
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Domain-Generierung: " + e.Message);
+                if (options.IsVerbose) 
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -30,6 +38,10 @@ namespace Contractor.Core.Projects
             try
             {
                 this.AddEntity(options);
+                if (options.IsVerbose) 
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
@@ -42,6 +54,10 @@ namespace Contractor.Core.Projects
             try
             {
                 this.AddProperty(options);
+                if (options.IsVerbose) 
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
@@ -54,6 +70,10 @@ namespace Contractor.Core.Projects
             try
             {
                 this.Add1ToNRelation(options);
+                if (options.IsVerbose) 
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {

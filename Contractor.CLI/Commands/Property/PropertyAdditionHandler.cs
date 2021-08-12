@@ -34,6 +34,8 @@ namespace Contractor.CLI
 
         private static void ParseOptions(IPropertyAdditionOptions options, string[] args)
         {
+            options.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
+            
             options.PropertyType = ParsePropertyType(args);
             if (args[2].Contains(':'))
             {

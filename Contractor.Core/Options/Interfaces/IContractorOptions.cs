@@ -11,5 +11,7 @@
         string ProjectName { get; set; }
 
         string DbProjectName { get; set; }
+
+        bool IsVerbose { get; set; }
     }
 }
