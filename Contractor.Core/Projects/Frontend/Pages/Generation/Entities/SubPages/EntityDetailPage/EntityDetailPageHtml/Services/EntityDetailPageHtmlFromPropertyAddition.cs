@@ -55,7 +55,6 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatStartsWith("    <div class=\"toolbar\">");
             stringEditor.NextThatStartsWith("    </div>");
             stringEditor.Next();
-            stringEditor.Next();
 
             stringEditor.InsertLine("    <mat-tab-group mat-align-tabs=\"start\">");
             stringEditor.InsertLine("        <mat-tab label=\"Stammdaten\">");

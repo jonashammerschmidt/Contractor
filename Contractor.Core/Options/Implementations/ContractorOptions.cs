@@ -12,6 +12,8 @@
 
         public string DbProjectName { get; set; }
 
+        public bool IsVerbose { get; set; }
+
         public ContractorOptions()
         {
         }
@@ -23,6 +25,7 @@
             this.DbDestinationFolder = options.DbDestinationFolder;
             this.ProjectName = options.ProjectName;
             this.DbProjectName = options.DbProjectName;
+            this.IsVerbose = options.IsVerbose;
         }
     }
 }

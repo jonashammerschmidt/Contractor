@@ -34,6 +34,8 @@ namespace Contractor.CLI
 
         private static void ParseOptions(IEntityAdditionOptions options, string[] args)
         {
+            options.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
+            
             string entityName = args[2];
             options.Domain = entityName.Split('.')[0];
             options.EntityName = entityName.Split('.')[1].Split(':')[0];
