@@ -46,6 +46,10 @@ namespace Contractor.Core.Projects
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Entity-Generierung: " + e.Message);
+                if (options.IsVerbose) 
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -62,6 +66,10 @@ namespace Contractor.Core.Projects
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Property-Generierung: " + e.Message);
+                if (options.IsVerbose) 
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -78,6 +86,10 @@ namespace Contractor.Core.Projects
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
+                if (options.IsVerbose) 
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
     }
