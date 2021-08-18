@@ -1,3 +1,4 @@
+using ProjectName.Contract.Persistence.Tools.Pagination;
 using System;
 using System.Collections.Generic;
 
@@ -15,7 +16,9 @@ namespace ProjectName.Contract.Persistence.Modules.Domain.Entities
 
         IDbEntityDetail GetEntityDetail(Guid entityId);
 
-        IEnumerable<IDbEntity> GetEntities();
+        IDbPagedResult<IDbEntityListItem> GetPagedEntities();
+
+        IEnumerable<IDbEntity> GetAllEntities();
 
         void UpdateEntity(IDbEntity entity);
     }

@@ -1,0 +1,13 @@
+import { ApiEntityListItem } from './api/api-entity-kebab-list-item';
+
+export interface IEntityListItem {
+    id: string;
+}
+
+export abstract class EntityListItem {
+    public static fromApiEntityListItem(apiEntityListItem: ApiEntityListItem): IEntityListItem {
+        return {
+            id: apiEntityListItem.id,
+        };
+    }
+}

@@ -12,11 +12,14 @@ namespace Contractor.Core.Projects.Backend.Api
         private static readonly string FileName = "EntitiesCrudController.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
+        private readonly EntitiesCrudControllerRelationAddition controllerRelationAddition;
 
         public EntitiesCrudController(
-            EntityCoreAddition entityCoreAddition)
+            EntityCoreAddition entityCoreAddition,
+            EntitiesCrudControllerRelationAddition controllerRelationAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
+            this.controllerRelationAddition = controllerRelationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -34,6 +37,8 @@ namespace Contractor.Core.Projects.Backend.Api
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            // To
+            this.controllerRelationAddition.Add(options, ApiProjectGeneration.DomainFolder, FileName);
         }
     }
 }

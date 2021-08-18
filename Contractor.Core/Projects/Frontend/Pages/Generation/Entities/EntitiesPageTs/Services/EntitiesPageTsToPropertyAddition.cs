@@ -2,6 +2,7 @@
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
@@ -20,15 +21,13 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
+            fileData = ImportStatements.Add(fileData, "DropdownPaginationDataSource",
+                "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
+
             fileData = ImportStatements.Add(fileData, $"{options.EntityNamePluralFrom}CrudService",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}-crud.service");
-
-            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}",
-                $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}");
 
             TypescriptClassWriter.Write(filePath, fileData);
         }
@@ -50,65 +49,41 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
+            stringEditor.NextThatContains("// Table");
+            stringEditor.InsertLine(GetDataSourceLine(options));
+            stringEditor.InsertNewLine();
+
             stringEditor.NextThatContains("GridColumns: string[]");
             stringEditor.NextThatContains("'detail'");
             stringEditor.InsertLine($"    '{options.PropertyNameFrom.LowerFirstChar()}',");
 
+            string constructorLine = $"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,";
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}: I{options.EntityNameFrom}[];");
-            stringEditor.InsertNewLine();
-
-            stringEditor.Next();
-            stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
-
-            stringEditor.NextThatContains("ngOnInit()");
-            int lineNumber = stringEditor.GetLineNumber();
-            stringEditor.Next(line => !line.Trim().StartsWith("await this.setup"));
-            stringEditor.InsertLine($"    await this.setup{options.EntityNamePluralFrom}Filter();");
-            if (stringEditor.GetLineNumber() - lineNumber == 2)
+            if (!fileData.Contains(constructorLine))
             {
-                stringEditor.InsertNewLine();
+                stringEditor.Next();
+                stringEditor.InsertLine(constructorLine);
             }
 
-            stringEditor.MoveToEnd();
-            stringEditor.PrevThatContains("}");
-            stringEditor.InsertNewLine();
-            stringEditor.InsertLine(GetNameResolutionMethod(options));
-            stringEditor.InsertNewLine();
-            stringEditor.InsertLine(GetSetupMethod(options));
+            stringEditor.NextThatContains("PaginationDataSource");
+            stringEditor.NextThatContains("() => [");
+            stringEditor.NextThatContains("]);");
+            stringEditor.InsertLine("        {");
+            stringEditor.InsertLine($"          filterField: '" + options.PropertyNameFrom.LowerFirstChar() + "Id',");
+            stringEditor.InsertLine($"          equalsFilters: this.{options.PropertyNameFrom.LowerFirstChar()}SelectedValues");
+            stringEditor.InsertLine("        },");
 
             return stringEditor.GetText();
         }
 
-        private string GetNameResolutionMethod(IRelationAdditionOptions options)
+        private static string GetDataSourceLine(IRelationAdditionOptions options)
         {
-            return
-                $"  public get{options.EntityNameFrom}Name({options.EntityNameLowerFrom}Id: string): string {{\n" +
-                $"    return this.{options.EntityNamePluralLowerFrom}.find({options.EntityNameLowerFrom} => {options.EntityNameLowerFrom}.id === {options.EntityNameLowerFrom}Id).name;\n" +
-                 "  }";
+            return 
+                $"  {options.PropertyNameFrom.LowerFirstChar()}SelectedValues = [];\n" +
+                $"  {options.PropertyNameFrom.LowerFirstChar()}DataSource = new DropdownPaginationDataSource(\n" +
+                $"    (options) => this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}(options),\n" +
+                 "    'name');";
         }
 
-        private string GetSetupMethod(IRelationAdditionOptions options)
-        {
-            return
-                $"  private async setup{options.EntityNamePluralFrom}Filter(): Promise<void> {{\n" +
-                $"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();\n" +
-                 "\n" +
-                 "    this.filterItems.push({\n" +
-                $"      dataName: '{options.PropertyNameFrom.ToReadable()}',\n" +
-                $"      dataSource: this.{options.EntityNamePluralLowerFrom},\n" +
-                 "      valueExpr: 'id',\n" +
-                 "      displayExpr: 'name',\n" +
-                 "    });\n" +
-                 "\n" +
-                 "    const filterValuesIndex = this.filterValues.length;\n" +
-                 "    this.filterValues.push([]);\n" +
-                 "\n" +
-                $"    this.filterComparators.push(({options.EntityNameLowerTo}) => {{\n" +
-                 "      return this.filterValues[filterValuesIndex].length < 1 ||\n" +
-                $"        this.filterValues[filterValuesIndex].includes({options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}Id);\n" +
-                 "    });\n" +
-                 "  }";
-        }
     }
 }

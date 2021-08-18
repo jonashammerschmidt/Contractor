@@ -37,6 +37,9 @@
     <None Update="Projects\Backend\Contract.Logic\Templates\IEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Backend\Contract.Logic\Templates\IEntityListItemTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Backend\Contract.Logic\Templates\IEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -49,10 +52,28 @@
     <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityListItemTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Backend\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Backend\Logic.Tests\Templates\DbEntityListItemTestTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Backend\Logic.Tests\Templates\EntityListItemTestTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Backend\Logic\Templates\EntityListItemTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Backend\Persistence.Tests\Templates\DbEntityListItemTestTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Backend\Persistence\Templates\DbEntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Database\Templates\EntitiesTableTemplate-RequestScope.txt">
@@ -142,6 +163,9 @@
     <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-detail.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-list-item.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-update.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -158,6 +182,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-detail.template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-list-item.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-update.template.txt">

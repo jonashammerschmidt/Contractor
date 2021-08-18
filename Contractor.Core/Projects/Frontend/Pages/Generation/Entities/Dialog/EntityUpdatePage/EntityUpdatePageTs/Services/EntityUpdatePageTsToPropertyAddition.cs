@@ -20,15 +20,18 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
+            fileData = ImportStatements.Add(fileData, "DropdownPaginationDataSource",
+                "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
+
             fileData = ImportStatements.Add(fileData, $"{options.EntityNamePluralFrom}CrudService",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}-crud.service");
 
-            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}",
+            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}ListItem",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}");
+                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}-list-item");
 
             TypescriptClassWriter.Write(filePath, fileData);
         }
@@ -51,11 +54,17 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {options.EntityNamePluralLowerFrom}: I{options.EntityNameFrom}[];");
+            stringEditor.InsertLine($"  {options.PropertyNameFrom.LowerFirstChar()}DataSource: DropdownPaginationDataSource<I{options.EntityNameFrom}ListItem>;");
+            stringEditor.InsertLine($"  selected{options.PropertyNameFrom}: I{options.EntityNameFrom}ListItem;");
             stringEditor.InsertNewLine();
 
-            stringEditor.NextThatContains("MAT_DIALOG_DATA");
-            stringEditor.InsertLine($"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,");
+            stringEditor.NextThatContains("private formBuilder: FormBuilder");
+
+            string constructorLine = $"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,";
+            if (!fileData.Contains(constructorLine))
+            {
+                stringEditor.InsertLine(constructorLine);
+            }
 
             stringEditor.NextThatContains("this.formBuilder.group({");
             stringEditor.NextThatContains("});");
@@ -65,7 +74,10 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("ngOnInit()");
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    this.{options.EntityNamePluralLowerFrom} = await this.{options.EntityNamePluralLowerFrom}CrudService.get{options.EntityNamePluralFrom}();");
+            stringEditor.InsertLine($"    this.selected{options.PropertyNameFrom} = {options.EntityNameLowerTo}Detail.{options.PropertyNameFrom.LowerFirstChar()};");
+            stringEditor.InsertLine($"    this.{options.PropertyNameFrom.LowerFirstChar()}DataSource = new DropdownPaginationDataSource(");
+            stringEditor.InsertLine($"      (options) => this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}(options),");
+            stringEditor.InsertLine( "      'name');");
 
             return stringEditor.GetText();
         }

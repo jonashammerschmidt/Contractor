@@ -1,0 +1,46 @@
+﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Contract.Persistence.Tools.Pagination;
+using ProjectName.Logic.Tests.Tools.Pagination;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+
+namespace ProjectName.Logic.Tests.Modules.Domain.Entities
+{
+    internal class DbEntityListItemTest : IDbEntityListItem
+    {
+        public Guid Id { get; set; }
+
+        public static IDbEntityListItem Default()
+        {
+            return new DbEntityListItemTest()
+            {
+                Id = EntityTestValues.IdDefault,
+            };
+        }
+
+        public static IDbEntityListItem Default2()
+        {
+            return new DbEntityListItemTest()
+            {
+                Id = EntityTestValues.IdDefault2,
+            };
+        }
+
+        public static IDbPagedResult<IDbEntityListItem> ForPaged()
+        {
+            return new DbPagedResult<IDbEntityListItem>()
+            {
+                Data = new List<IDbEntityListItem>()
+                {
+                    Default(),
+                    Default2()
+                },
+                TotalCount = 2,
+                Count = 2,
+                Limit = 10,
+                Offset = 0
+            };
+        }
+    }
+}

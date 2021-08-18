@@ -1,6 +1,6 @@
 ﻿using ProjectName.Contract.Logic.LogicResults;
+using ProjectName.Contract.Logic.Tools.Pagination;
 using System;
-using System.Collections.Generic;
 
 namespace ProjectName.Contract.Logic.Modules.Domain.Entities
 {
@@ -12,7 +12,7 @@ namespace ProjectName.Contract.Logic.Modules.Domain.Entities
 
         ILogicResult<IEntityDetail> GetEntityDetail(Guid entityId);
 
-        ILogicResult<IEnumerable<IEntity>> GetEntities();
+        ILogicResult<IPagedResult<IEntityListItem>> GetPagedEntities();
 
         ILogicResult UpdateEntity(IEntityUpdate entityUpdate);
     }

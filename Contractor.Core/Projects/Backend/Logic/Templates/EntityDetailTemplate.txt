@@ -8,7 +8,7 @@ namespace ProjectName.Logic.Modules.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        internal static EntityDetail FromDbEntityDetail(IDbEntityDetail dbEntityDetail)
+        internal static IEntityDetail FromDbEntityDetail(IDbEntityDetail dbEntityDetail)
         {
             return new EntityDetail()
             {

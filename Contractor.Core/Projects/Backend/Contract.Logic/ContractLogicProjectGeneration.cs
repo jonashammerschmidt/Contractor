@@ -14,6 +14,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
             serviceCollection.AddSingleton<ClassGeneration, IEntitiesCrudLogicGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntityGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntityDetailGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, IEntityListItemGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntityCreateGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntityUpdateGeneration>();
         }

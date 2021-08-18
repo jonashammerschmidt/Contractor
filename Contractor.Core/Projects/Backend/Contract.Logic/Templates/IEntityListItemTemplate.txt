@@ -1,0 +1,9 @@
+﻿using System;
+
+namespace ProjectName.Contract.Logic.Modules.Domain.Entities
+{
+    public interface IEntityListItem
+    {
+        Guid Id { get; set; }
+    }
+}

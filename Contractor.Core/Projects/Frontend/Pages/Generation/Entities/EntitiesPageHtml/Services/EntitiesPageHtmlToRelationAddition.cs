@@ -41,9 +41,16 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             // ----------- DbSet -----------
+            stringEditor.NextThatContains("</app-table-filter-bar>");
+            stringEditor.PrevThatContains("<!-- Right -->");
+            stringEditor.Next();
+            stringEditor.InsertNewLine();
+            stringEditor.InsertLine($"        <app-table-filter-bar-dropdown [floatingRight]=\"true\" [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" idExpr=\"id\" displayExpr=\"name\"");
+            stringEditor.InsertLine($"            label=\"{options.PropertyNameFrom.ToReadable()}\" [(values)]=\"{options.PropertyNameFrom.LowerFirstChar()}SelectedValues\" (valuesChange)=\"{options.EntityNamePluralLowerTo}DataSource.triggerUpdate()\">");
+            stringEditor.InsertLine("        </app-table-filter-bar-dropdown>");
+
             stringEditor.NextThatContains("<table mat-table");
             stringEditor.NextThatContains("<ng-container matColumnDef=\"detail\">");
-
             stringEditor.InsertLine(GetAppRoutingLine(options));
 
             return stringEditor.GetText();
@@ -53,8 +60,10 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             return
              $"            <ng-container matColumnDef=\"{options.PropertyNameFrom.LowerFirstChar()}\">\n" +
-             $"                <th mat-header-cell *matHeaderCellDef mat-sort-header> {options.PropertyNameFrom.ToReadable()} </th>\n" +
-             $"                <td mat-cell *matCellDef=\"let element\" > {{{{get{options.EntityNameFrom}Name(element.{options.PropertyNameFrom.LowerFirstChar()}Id)}}}} </td>\n" +
+             $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyNameFrom.ToReadable()} </th>\n" +
+              "                <td mat-cell *matCellDef=\"let element\">\n" +
+             $"                    {{{{element.{options.PropertyNameFrom.LowerFirstChar()}.name}}}}\n" +
+              "                </td>\n" +
               "            </ng-container>\n";
         }
     }

@@ -1,10 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
 import { BackendCoreService } from 'src/app/services/backend/backend-core.service';
-import { ApiEntity } from './dtos/api/api-entity-kebab';
+import { IPagedResult } from 'src/app/services/backend/pagination/i-paged-result';
+import { IPaginationOptions, toPaginationParams } from 'src/app/services/backend/pagination/i-pagination-options';
 import { ApiEntityDetail } from './dtos/api/api-entity-kebab-detail';
-import { Entity, IEntity } from './dtos/i-entity-kebab';
+import { ApiEntityListItem } from './dtos/api/api-entity-kebab-list-item';
 import { EntityCreate, IEntityCreate } from './dtos/i-entity-kebab-create';
 import { EntityDetail, IEntityDetail } from './dtos/i-entity-kebab-detail';
+import { EntityListItem, IEntityListItem } from './dtos/i-entity-kebab-list-item';
 import { EntityUpdate, IEntityUpdate } from './dtos/i-entity-kebab-update';
 
 @Injectable()
@@ -12,11 +14,13 @@ export class EntitiesCrudService {
 
     constructor(private backendCoreService: BackendCoreService) { }
 
-    public async getEntities(): Promise<IEntity[]> {
-        const apiEntities = await this.backendCoreService.get<ApiEntity[]>('/api/domain-kebab/entities-kebab');
+    public async getPagedEntities(paginationOptions: IPaginationOptions): Promise<IPagedResult<IEntityListItem>> {
+        const url = '/api/domain-kebab/entities-kebab?' + toPaginationParams(paginationOptions);
+        const entitiesResult = await this.backendCoreService.get<IPagedResult<ApiEntityListItem>>(url);
 
-        const entities = apiEntities.map(apiEntity => Entity.fromApiEntity(apiEntity));
-        return entities;
+        entitiesResult.data = entitiesResult.data
+            .map(apiEntityListItem => EntityListItem.fromApiEntityListItem(apiEntityListItem));
+        return entitiesResult;
     }
 
     public async getEntityDetail(entityId: string): Promise<IEntityDetail> {

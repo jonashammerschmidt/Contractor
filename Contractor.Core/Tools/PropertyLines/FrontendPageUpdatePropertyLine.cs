@@ -27,8 +27,12 @@ namespace Contractor.Core.Tools
                          "                <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
                          "                <mat-datepicker #picker></mat-datepicker>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
-                        $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">Dieses Feld ist erfolderlich.</span>\n" +
-                        $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">Dieses Feld ist ungültig.</span>\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
+                        $"                        Dieses Feld ist erfolderlich.\n" +
+                        $"                    </span>\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
+                        $"                        Dieses Feld ist ungültig.\n" +
+                        $"                    </span>\n" +
                          "                </mat-error>\n" +
                          "            </mat-form-field>";
 
@@ -57,8 +61,12 @@ namespace Contractor.Core.Tools
                         $"                    {{{{{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.value.length}}}} / {options.PropertyTypeExtra}\n" +
                         $"                </mat-hint>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
-                        $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">Dieses Feld ist erfolderlich.</span>\n" +
-                        $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">Dieses Feld ist ungültig.</span>\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
+                        $"                        Dieses Feld ist erfolderlich.\n" +
+                        $"                    </span>\n" +
+                        $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
+                        $"                        Dieses Feld ist ungültig.\n" +
+                        $"                    </span>\n" +
                          "                </mat-error>\n" +
                          "            </mat-form-field>";
 

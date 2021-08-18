@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Full Build",
+            "dependsOn": [
+                "Backends Builds",
+                "Frontends Builds"
+            ]
+        },
+        {
+            "label": "Contract.Architecture.Backend.Core Start",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--project",
+                "API"
+            ],
+            "options": {
+                "cwd": "Contract.Architecture\\Contract.Architecture.Backends\\Contract.Architecture.Backend.Core"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Contract.Architecture.Web.Core Start",
+            "type": "shell",
+            "command": "npm start",
+            "options": {
+                "cwd": "Contract.Architecture\\Contract.Architecture.Frontends\\Contract.Architecture.Web.Core"
+            }
+        }
+    ]
+}

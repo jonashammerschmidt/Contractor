@@ -1,5 +1,7 @@
 ﻿using ProjectName.Contract.Contexts;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Contract.Persistence.Tools.Pagination;
+using ProjectName.Persistence.Tools.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,18 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
     internal class EntitiesCrudRepository : IEntitiesCrudRepository
     {
         private readonly ISessionContext sessionContext;
+        private readonly IPaginationContext paginationContext;
+
         private readonly PersistenceDbContext dbContext;
 
-        public EntitiesCrudRepository(ISessionContext sessionContext, PersistenceDbContext dbContext)
+        public EntitiesCrudRepository(
+            ISessionContext sessionContext,
+            IPaginationContext paginationContext,
+            PersistenceDbContext dbContext)
         {
             this.sessionContext = sessionContext;
+            this.paginationContext = paginationContext;
+
             this.dbContext = dbContext;
         }
 
@@ -60,7 +69,18 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             return DbEntityDetail.FromEfEntity(efEntity);
         }
 
-        public IEnumerable<IDbEntity> GetEntities()
+        public IDbPagedResult<IDbEntityListItem> GetPagedEntities()
+        {
+            var efEntities = this.dbContext.Entities
+                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId);
+
+            return Pagination.Filter(
+                efEntities,
+                this.paginationContext,
+                efEntity => DbEntityListItem.FromEfEntity(efEntity));
+        }
+
+        public IEnumerable<IDbEntity> GetAllEntities()
         {
             return this.dbContext.Entities
                 .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)

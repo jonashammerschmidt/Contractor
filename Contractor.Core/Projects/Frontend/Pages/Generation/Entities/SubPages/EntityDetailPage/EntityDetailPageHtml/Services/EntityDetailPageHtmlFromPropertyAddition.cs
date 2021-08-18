@@ -75,11 +75,13 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"        <mat-tab label=\"{options.PropertyNameTo.ToReadable()}\">");
             stringEditor.InsertLine($"            <h2>{options.PropertyNameTo.ToReadable()}</h2>");
             stringEditor.InsertLine($"            <div class=\"table-container\">");
-            stringEditor.InsertLine($"                <table mat-table [dataSource]=\"{options.EntityNamePluralLowerTo}TableDataSource\">");
+            stringEditor.InsertLine($"                <table mat-table [dataSource]=\"{options.PropertyNameTo.LowerFirstChar()}TableDataSource\">");
             stringEditor.InsertLine($"");
             stringEditor.InsertLine($"                    <ng-container matColumnDef=\"name\">");
             stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> Name </th>");
-            stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\"> {{{{element.name}}}} </td>");
+            stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\">");
+            stringEditor.InsertLine($"                            {{{{element.name}}}}");
+            stringEditor.InsertLine($"                        </td>");
             stringEditor.InsertLine($"                    </ng-container>");
             stringEditor.InsertLine($"");
             stringEditor.InsertLine($"                    <ng-container matColumnDef=\"detail\">");
@@ -89,8 +91,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"                        </td>");
             stringEditor.InsertLine($"                    </ng-container>");
             stringEditor.InsertLine($"");
-            stringEditor.InsertLine($"                    <tr mat-header-row *matHeaderRowDef=\"{options.EntityNamePluralLowerTo}GridColumns; sticky: true\"></tr>");
-            stringEditor.InsertLine($"                    <tr mat-row *matRowDef=\"let row; columns: {options.EntityNamePluralLowerTo}GridColumns;\"");
+            stringEditor.InsertLine($"                    <tr mat-header-row *matHeaderRowDef=\"{options.PropertyNameTo.LowerFirstChar()}GridColumns; sticky: true\"></tr>");
+            stringEditor.InsertLine($"                    <tr mat-row *matRowDef=\"let row; columns: {options.PropertyNameTo.LowerFirstChar()}GridColumns;\"");
             stringEditor.InsertLine($"                        [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainTo)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}/detail', row.id]\"></tr>");
             stringEditor.InsertLine($"                </table>");
             stringEditor.InsertLine($"            </div>");

@@ -1,6 +1,10 @@
-﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+﻿using ProjectName.Contract.Contexts;
+using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Contract.Persistence.Tools.Pagination;
 using ProjectName.Persistence.Modules.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System;
 using System.Linq;
 
 namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
@@ -102,18 +106,35 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         }
 
         [TestMethod]
-        public void GetEntitiesDefaultTest()
+        public void GetAllEntitiesDefaultTest()
         {
             // Arrange
             EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
 
             // Act
-            IDbEntity[] entities = entitiesCrudRepository.GetEntities().ToArray();
+            IDbEntity[] dbEntities = entitiesCrudRepository.GetAllEntities().ToArray();
 
             // Assert
-            Assert.AreEqual(2, entities.Length);
-            DbEntityTest.AssertDbDefault(entities[0]);
-            DbEntityTest.AssertDbDefault2(entities[1]);
+            Assert.AreEqual(2, dbEntities.Length);
+            DbEntityTest.AssertDbDefault(dbEntities[0]);
+            DbEntityTest.AssertDbDefault2(dbEntities[1]);
+        }
+
+        [TestMethod]
+        public void GetPagedEntitiesDefaultTest()
+        {
+            // Arrange
+            EntitiesCrudRepository entitiesCrudRepository = this.GetEntitiesCrudRepositoryDefault();
+
+            // Act
+            IDbPagedResult<IDbEntityListItem> dbEntitiesPagedResult =
+                entitiesCrudRepository.GetPagedEntities();
+
+            // Assert
+            IDbEntityListItem[] dbEntities = dbEntitiesPagedResult.Data.ToArray();
+            Assert.AreEqual(2, dbEntities.Length);
+            DbEntityListItemTest.AssertDbDefault(dbEntities[0]);
+            DbEntityListItemTest.AssertDbDefault2(dbEntities[1]);
         }
 
         [TestMethod]
@@ -145,12 +166,26 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryDefault()
         {
-            return new EntitiesCrudRepository(InMemoryDbContext.CreatePersistenceDbContextWithDefault());
+            return new EntitiesCrudRepository(
+                this.GetPaginationContext(),
+                InMemoryDbContext.CreatePersistenceDbContextWithDbDefault());
         }
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryEmpty()
         {
-            return new EntitiesCrudRepository(InMemoryDbContext.CreatePersistenceDbContext());
+            return new EntitiesCrudRepository(
+                this.GetPaginationContext(),
+                InMemoryDbContext.CreatePersistenceDbContextEmpty());
+        }
+
+        private IPaginationContext GetPaginationContext()
+        {
+            Mock<IPaginationContext> paginationContext = new Mock<IPaginationContext>();
+            paginationContext.Setup(context => context.Limit).Returns(10);
+            paginationContext.Setup(context => context.Offset).Returns(0);
+            paginationContext.Setup(context => context.Sort).Returns(Array.Empty<IPaginationSortItem>());
+            paginationContext.Setup(context => context.Filter).Returns(Array.Empty<IPaginationFilterItem>());
+            return paginationContext.Object;
         }
     }
 }
