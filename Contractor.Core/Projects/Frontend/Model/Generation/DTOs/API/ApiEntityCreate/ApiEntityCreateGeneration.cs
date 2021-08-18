@@ -44,5 +44,10 @@ namespace Contractor.Core.Projects.Frontend.Model
 
             this.frontendDtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

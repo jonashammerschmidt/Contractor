@@ -51,5 +51,10 @@ namespace Contractor.Core.Projects.Frontend.Model
 
             this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "toApiEntityCreate", "iEntityCreate", ModelProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

@@ -41,5 +41,10 @@ namespace Contractor.Core.Projects.Backend.Logic
             string usingStatement = $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}";
             this.logicRelationAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName, usingStatement);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

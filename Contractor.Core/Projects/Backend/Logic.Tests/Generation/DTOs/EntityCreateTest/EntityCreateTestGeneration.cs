@@ -52,5 +52,10 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationAdditionOptions);
             this.logicDtoCreateTestMethodsAddition.Add(propertyAdditionOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

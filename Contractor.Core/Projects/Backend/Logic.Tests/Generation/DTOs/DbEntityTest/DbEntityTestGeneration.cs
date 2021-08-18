@@ -48,5 +48,10 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
             this.logicDbDtoTestMethodsAddition.Add(propertyAdditionOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

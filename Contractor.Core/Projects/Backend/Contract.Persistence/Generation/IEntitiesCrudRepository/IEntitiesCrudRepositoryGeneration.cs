@@ -35,5 +35,9 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+        }
     }
 }

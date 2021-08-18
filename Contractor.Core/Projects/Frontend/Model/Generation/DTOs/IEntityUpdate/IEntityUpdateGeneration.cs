@@ -58,5 +58,10 @@ namespace Contractor.Core.Projects.Frontend.Model
 
             this.entityUpdateMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

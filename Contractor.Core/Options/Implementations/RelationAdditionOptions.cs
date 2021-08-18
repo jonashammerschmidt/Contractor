@@ -116,6 +116,16 @@ namespace Contractor.Core.Options
             };
         }
 
+        public static IEntityAdditionOptions GetPropertyForTo(IRelationAdditionOptions options)
+        {
+            return new EntityAdditionOptions(options)
+            {
+                Domain = options.DomainTo,
+                EntityName = options.EntityNameTo,
+                EntityNamePlural = options.EntityNamePluralTo,
+            };
+        }
+
         internal static IRelationSideAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options, string propertyType)
         {
             return new RelationSideAdditionOptions(options)
@@ -125,16 +135,6 @@ namespace Contractor.Core.Options
                 EntityNamePlural = options.EntityNamePluralFrom,
                 PropertyType = propertyType,
                 PropertyName = options.PropertyNameTo,
-            };
-        }
-
-        public static IEntityAdditionOptions GetPropertyForTo(IRelationAdditionOptions options)
-        {
-            return new EntityAdditionOptions(options)
-            {
-                Domain = options.DomainTo,
-                EntityName = options.EntityNameTo,
-                EntityNamePlural = options.EntityNamePluralTo,
             };
         }
 

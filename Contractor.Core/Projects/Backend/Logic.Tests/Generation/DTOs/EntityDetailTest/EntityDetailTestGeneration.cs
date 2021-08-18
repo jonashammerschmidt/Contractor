@@ -12,6 +12,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         private static readonly string FileName = "EntityDetailTest.cs";
 
         private readonly EntityDetailTestFromAssertAddition logicDtoDetailTestFromAssertAddition;
+        private readonly EntityDetailTestFromOneToOneAssertAddition entityDetailTestFromOneToOneAssertAddition;
         private readonly EntityDetailTestMethodsAddition logicDtoDetailTestMethodsAddition;
         private readonly EntityDetailTestToAssertAddition logicDtoDetailTestToAssertAddition;
         private readonly DtoAddition dtoAddition;
@@ -20,6 +21,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
         public EntityDetailTestGeneration(
             EntityDetailTestFromAssertAddition logicDtoDetailTestFromAssertAddition,
+            EntityDetailTestFromOneToOneAssertAddition entityDetailTestFromOneToOneAssertAddition,
             EntityDetailTestMethodsAddition logicDtoDetailTestMethodsAddition,
             EntityDetailTestToAssertAddition logicDtoDetailTestToAssertAddition,
             DtoAddition dtoAddition,
@@ -27,6 +29,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             DtoRelationAddition relationAddition)
         {
             this.logicDtoDetailTestFromAssertAddition = logicDtoDetailTestFromAssertAddition;
+            this.entityDetailTestFromOneToOneAssertAddition = entityDetailTestFromOneToOneAssertAddition;
             this.logicDtoDetailTestToAssertAddition = logicDtoDetailTestToAssertAddition;
             this.logicDtoDetailTestMethodsAddition = logicDtoDetailTestMethodsAddition;
             this.dtoAddition = dtoAddition;
@@ -55,6 +58,19 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             IRelationSideAdditionOptions dtoFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<I{options.EntityNameTo}>");
             this.relationAddition.AddRelationToDTO(dtoFromOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
             this.logicDtoDetailTestFromAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+
+            // To
+            IRelationSideAdditionOptions dtoToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
+            this.relationAddition.AddRelationToDTO(dtoToOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.logicDtoDetailTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            IRelationSideAdditionOptions dtoFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}");
+            this.relationAddition.AddRelationToDTO(dtoFromOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.entityDetailTestFromOneToOneAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
 
             // To
             IRelationSideAdditionOptions dtoToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");

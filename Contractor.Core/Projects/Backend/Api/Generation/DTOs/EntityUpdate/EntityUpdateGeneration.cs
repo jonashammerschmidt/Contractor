@@ -44,5 +44,10 @@ namespace Contractor.Core.Projects.Backend.Api
 
             this.apiPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ApiProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

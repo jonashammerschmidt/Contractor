@@ -14,10 +14,10 @@ namespace Contractor.Core.Projects.Database
             this.pathService = pathService;
         }
 
-        public void AddContraint(IRelationAdditionOptions options, string domainFolder, string templateFileName)
+        public void AddContraint(IRelationAdditionOptions options, string domainFolder, string templateFileName, bool addUnique)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = GetFileData(options, filePath);
+            string fileData = GetFileData(options, filePath, addUnique);
 
             File.WriteAllText(filePath, fileData);
         }
@@ -31,7 +31,7 @@ namespace Contractor.Core.Projects.Database
             return filePath;
         }
 
-        private string GetFileData(IRelationAdditionOptions options, string filePath)
+        private string GetFileData(IRelationAdditionOptions options, string filePath, bool addUnique)
         {
             string fileData = File.ReadAllText(filePath);
 
@@ -40,6 +40,10 @@ namespace Contractor.Core.Projects.Database
             stringEditor.Next(line => !line.Contains("CONSTRAINT [FK_"));
 
             stringEditor.InsertLine(GetPropertyLine(options));
+            if (addUnique)
+            {
+                stringEditor.InsertLine(GetUniqueLine(options));
+            }
 
             return stringEditor.GetText();
         }
@@ -47,6 +51,11 @@ namespace Contractor.Core.Projects.Database
         private static string GetPropertyLine(IRelationAdditionOptions options)
         {
             return $"    CONSTRAINT [FK_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id] FOREIGN KEY ([{options.PropertyNameFrom}Id]) REFERENCES [dbo].[{options.EntityNamePluralFrom}] ([Id]),";
+        }
+
+        private static string GetUniqueLine(IRelationAdditionOptions options)
+        {
+            return $"    CONSTRAINT [UNIQUE_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id] UNIQUE ({options.PropertyNameFrom}Id),";
         }
     }
 }

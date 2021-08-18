@@ -53,5 +53,18 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             this.relationAddition.AddRelationToDTO(dbToOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
             this.logicDbDtoListItemTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            IRelationSideAdditionOptions dbFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IDb{options.EntityNameTo}");
+            this.relationAddition.AddRelationToDTO(dbFromOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.logicDbDtoListItemTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+
+            // To
+            IRelationSideAdditionOptions dbToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
+            this.relationAddition.AddRelationToDTO(dbToOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.logicDbDtoListItemTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+        }
     }
 }

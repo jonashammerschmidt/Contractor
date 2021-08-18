@@ -14,15 +14,18 @@ namespace Contractor.Core.Projects.Backend.Persistence
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition;
         private readonly EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition;
+        private readonly EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition;
 
         public EntitiesCrudRepositoryGeneration(
             EntityCoreAddition entityCoreAddition,
             EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition,
-            EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition)
+            EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition,
+            EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.dtoFromRepositoryIncludeAddition = dtoFromRepositoryIncludeAddition;
             this.dtoToRepositoryIncludeAddition = dtoToRepositoryIncludeAddition;
+            this.entitiesCrudRepositoryFromOneToOneIncludeAddition = entitiesCrudRepositoryFromOneToOneIncludeAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -43,6 +46,15 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
             // From
             this.dtoFromRepositoryIncludeAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);
+
+            // To
+            this.dtoToRepositoryIncludeAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Add(options,PersistenceProjectGeneration.DomainFolder, FileName);
 
             // To
             this.dtoToRepositoryIncludeAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);

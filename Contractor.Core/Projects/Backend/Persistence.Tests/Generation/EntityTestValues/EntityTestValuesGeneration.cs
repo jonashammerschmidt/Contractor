@@ -45,5 +45,10 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             // To
             this.dtoTestValuesRelationAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

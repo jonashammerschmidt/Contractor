@@ -13,6 +13,8 @@ namespace Contractor.Core.Projects
 
         protected abstract void Add1ToNRelation(IRelationAdditionOptions options);
 
+        protected abstract void AddOneToOneRelation(IRelationAdditionOptions options);
+
         public void PerformAddDomainCommand(IDomainAdditionOptions options)
         {
             try
