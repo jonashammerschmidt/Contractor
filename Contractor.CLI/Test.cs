@@ -210,7 +210,7 @@ namespace Contractor.CLI
                 DomainTo = "GegönnterKundenstamm",
                 EntityNameTo = "GegönnterKunde",
                 EntityNamePluralTo = "GegönnteKunden",
-                PropertyNameTo = "LieblingsKunden",
+                PropertyNameTo = "LieblingsKunde",
             };
             contractorCoreApi.AddOneToOneRelation(relationOptions);
         }

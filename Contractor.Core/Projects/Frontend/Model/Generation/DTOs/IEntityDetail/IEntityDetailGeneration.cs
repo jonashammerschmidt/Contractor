@@ -91,7 +91,7 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
 
             IRelationSideAdditionOptions fromOptions =
-                RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}[]");
+                RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}");
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"{options.EntityNameTo}, I{options.EntityNameTo}", fromImportStatementPath);
