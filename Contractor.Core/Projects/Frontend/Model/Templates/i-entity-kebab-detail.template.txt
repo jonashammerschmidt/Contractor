@@ -6,7 +6,7 @@ export interface IEntityDetail {
 
 export abstract class EntityDetail {
     public static fromApiEntityDetail(apiEntityDetail: ApiEntityDetail): IEntityDetail {
-        if(apiEntityDetail == null) {
+        if (apiEntityDetail == null) {
             return null;
         }
 

@@ -68,37 +68,41 @@ namespace Contractor.Core.Projects.Backend.Logic
                 $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 "            }\n");
-            stringEditor.InsertNewLine();
 
             if (addUnique) {
                 stringEditor.InsertLine(
                     $"            if (this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
                     "            {\n" +
                     $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    $"                return LogicResult<Guid>.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
                     "            }\n");
             }
 
             // ----------- Update Method -----------
-            stringEditor.NextThatContains($"Update{options.EntityNameTo}(");
-            stringEditor.NextThatContains("{");
+            stringEditor.MoveToStart();
+            stringEditor.NextThatContains($"ILogicResult Update{options.EntityNameTo}(");
+            stringEditor.NextThatContains($"{options.EntityNamePluralLowerTo}CrudRepository.Get{options.EntityNameTo}(");
+            stringEditor.Next(line => line.StartsWith("            }"));
             stringEditor.Next();
 
+            stringEditor.InsertNewLine();
             stringEditor.InsertLine($"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
                 "            {\n" +
                 $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                "            }\n");
-            stringEditor.InsertNewLine();
+                "            }");
 
             if (addUnique)
             {
+                stringEditor.InsertNewLine();
                 stringEditor.InsertLine(
-                    $"            if (this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
+                    $"            bool is{options.PropertyNameFrom}IdGettingUpdated = db{options.EntityNameTo}ToUpdate.{options.PropertyNameFrom}Id != {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id;\n" +
+                    $"            if (is{options.PropertyNameFrom}IdGettingUpdated &&\n" +
+                    $"                this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
                     "            {\n" +
                     $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    "            }\n");
+                    $"                return LogicResult.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    "            }");
             }
 
             return stringEditor.GetText();

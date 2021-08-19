@@ -188,20 +188,20 @@ namespace Contractor.CLI
         {
             ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
 
-            //RelationAdditionOptions relationOptions = new RelationAdditionOptions(contractorOptions)
-            //{
-            //    DomainFrom = "GegönntesBankwesen",
-            //    EntityNameFrom = "GegönnteBank",
-            //    EntityNamePluralFrom = "GegönnteBanken",
-            //    PropertyNameFrom = "BesteBank",
-            //    DomainTo = "GegönnterKundenstamm",
-            //    EntityNameTo = "GegönnterKunde",
-            //    EntityNamePluralTo = "GegönnteKunden",
-            //    PropertyNameTo = "BesteKunden",
-            //};
-            //contractorCoreApi.Add1ToNRelation(relationOptions);
-
             RelationAdditionOptions relationOptions = new RelationAdditionOptions(contractorOptions)
+            {
+                DomainFrom = "GegönntesBankwesen",
+                EntityNameFrom = "GegönnteBank",
+                EntityNamePluralFrom = "GegönnteBanken",
+                PropertyNameFrom = "BesteBank",
+                DomainTo = "GegönnterKundenstamm",
+                EntityNameTo = "GegönnterKunde",
+                EntityNamePluralTo = "GegönnteKunden",
+                PropertyNameTo = "BesteKunden",
+            };
+            contractorCoreApi.Add1ToNRelation(relationOptions);
+
+            relationOptions = new RelationAdditionOptions(contractorOptions)
             {
                 DomainFrom = "GegönntesBankwesen",
                 EntityNameFrom = "GegönnteBank",
