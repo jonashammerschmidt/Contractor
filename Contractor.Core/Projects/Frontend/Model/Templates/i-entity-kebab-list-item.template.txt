@@ -6,6 +6,10 @@ export interface IEntityListItem {
 
 export abstract class EntityListItem {
     public static fromApiEntityListItem(apiEntityListItem: ApiEntityListItem): IEntityListItem {
+        if(apiEntityListItem == null) {
+            return null;
+        }
+
         return {
             id: apiEntityListItem.id,
         };

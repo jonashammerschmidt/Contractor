@@ -63,7 +63,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetLine(IRelationAdditionOptions options)
         {
             return
-                $"    <p>\n" +
+                $"    <p *ngIf=\"{options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()}\">\n" +
                 $"        <span style=\"font-size: 0.8em;\">{options.PropertyNameTo.ToReadable()}:</span>\n" +
                 $"        <br>\n" +
                 $"        <a [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainTo)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}/detail', {options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()}.id]\">\n" +
