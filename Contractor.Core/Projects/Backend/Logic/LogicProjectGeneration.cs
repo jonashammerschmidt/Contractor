@@ -20,9 +20,11 @@ namespace Contractor.Core.Projects.Backend.Logic
 
             serviceCollection.AddSingleton<EntitiesCrudLogicRelationAddition>();
             serviceCollection.AddSingleton<EntityDetailFromMethodsAddition>();
+            serviceCollection.AddSingleton<EntityDetailFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<EntityDetailMethodsAddition>();
             serviceCollection.AddSingleton<EntityDetailToMethodsAddition>();
             serviceCollection.AddSingleton<EntityListItemMethodsAddition>();
+            serviceCollection.AddSingleton<EntityListItemFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<EntityListItemToMethodsAddition>();
             serviceCollection.AddSingleton<EntityMethodsAddition>();
         }

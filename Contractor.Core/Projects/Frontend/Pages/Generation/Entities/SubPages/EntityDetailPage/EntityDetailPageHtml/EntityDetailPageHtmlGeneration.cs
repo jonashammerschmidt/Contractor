@@ -15,17 +15,20 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private readonly EntityDetailPageHtmlPropertyAddition entityDetailPageHtmlPropertyAddition;
         private readonly EntityDetailPageHtmlFromPropertyAddition entityDetailPageHtmlFromPropertyAddition;
         private readonly EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition;
+        private readonly EntityDetailPageHtmlFromOneToOnePropertyAddition entityDetailPageHtmlFromOneToOnePropertyAddition;
 
         public EntityDetailPageHtmlGeneration(
             FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
             EntityDetailPageHtmlPropertyAddition entityDetailPageHtmlPropertyAddition,
             EntityDetailPageHtmlFromPropertyAddition entityDetailPageHtmlFromPropertyAddition,
-            EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition)
+            EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition,
+            EntityDetailPageHtmlFromOneToOnePropertyAddition entityDetailPageHtmlFromOneToOnePropertyAddition)
         {
             this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
             this.entityDetailPageHtmlPropertyAddition = entityDetailPageHtmlPropertyAddition;
             this.entityDetailPageHtmlFromPropertyAddition = entityDetailPageHtmlFromPropertyAddition;
             this.entityDetailPageHtmlToPropertyAddition = entityDetailPageHtmlToPropertyAddition;
+            this.entityDetailPageHtmlFromOneToOnePropertyAddition = entityDetailPageHtmlFromOneToOnePropertyAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -45,6 +48,13 @@ namespace Contractor.Core.Projects.Frontend.Pages
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             this.entityDetailPageHtmlFromPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+
+            this.entityDetailPageHtmlToPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.entityDetailPageHtmlFromOneToOnePropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
 
             this.entityDetailPageHtmlToPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
         }

@@ -17,6 +17,7 @@ namespace Contractor.Core.Projects.Frontend.Model
         private readonly FrontendDtoRelationAddition frontendDtoRelationAddition;
         private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
         private readonly FrontendDtoPropertyFromMethodAddition frontendDtoPropertyFromMethodAddition;
+        private readonly FrontendDtoPropertyFromOneToOneMethodAddition frontendDtoPropertyFromOneToOneMethodAddition;
         private readonly FrontendDtoPropertyToMethodAddition frontendDtoPropertyToMethodAddition;
 
         public IEntityDetailGeneration(
@@ -25,6 +26,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             FrontendDtoRelationAddition frontendDtoRelationAddition,
             FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
             FrontendDtoPropertyFromMethodAddition frontendDtoPropertyFromMethodAddition,
+            FrontendDtoPropertyFromOneToOneMethodAddition frontendDtoPropertyFromOneToOneMethodAddition,
             FrontendDtoPropertyToMethodAddition frontendDtoPropertyToMethodAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
@@ -32,6 +34,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             this.frontendDtoRelationAddition = frontendDtoRelationAddition;
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
             this.frontendDtoPropertyFromMethodAddition = frontendDtoPropertyFromMethodAddition;
+            this.frontendDtoPropertyFromOneToOneMethodAddition = frontendDtoPropertyFromOneToOneMethodAddition;
             this.frontendDtoPropertyToMethodAddition = frontendDtoPropertyToMethodAddition;
         }
 
@@ -65,6 +68,35 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"{options.EntityNameTo}, I{options.EntityNameTo}", fromImportStatementPath);
 
             frontendDtoPropertyFromMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+
+            // To
+            string toImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
+                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
+                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}";
+
+            IRelationSideAdditionOptions toOptions =
+                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
+
+            this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
+                $"{options.EntityNameFrom}, I{options.EntityNameFrom}", toImportStatementPath);
+
+            frontendDtoPropertyToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            string fromImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainTo)}" +
+                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
+                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
+
+            IRelationSideAdditionOptions fromOptions =
+                RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}[]");
+
+            this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
+                $"{options.EntityNameTo}, I{options.EntityNameTo}", fromImportStatementPath);
+
+            frontendDtoPropertyFromOneToOneMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
 
             // To
             string toImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +

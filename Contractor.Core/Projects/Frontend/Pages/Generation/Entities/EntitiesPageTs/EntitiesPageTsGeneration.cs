@@ -14,15 +14,21 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
         private readonly EntitiesPageTsPropertyAddition entitiesPageTsPropertyAddition;
         private readonly EntitiesPageTsToPropertyAddition entitiesPageTsToPropertyAddition;
+        private readonly EntitiesPageTsFromOneToOnePropertyAddition entitiesPageTsFromOneToOnePropertyAddition;
+        private readonly EntitiesPageTsToOneToOnePropertyAddition entitiesPageTsToOneToOnePropertyAddition;
 
         public EntitiesPageTsGeneration(
             FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
             EntitiesPageTsPropertyAddition entitiesPageTsPropertyAddition,
-            EntitiesPageTsToPropertyAddition entitiesPageTsToPropertyAddition)
+            EntitiesPageTsToPropertyAddition entitiesPageTsToPropertyAddition,
+            EntitiesPageTsFromOneToOnePropertyAddition entitiesPageTsFromOneToOnePropertyAddition,
+            EntitiesPageTsToOneToOnePropertyAddition entitiesPageTsToOneToOnePropertyAddition)
         {
             this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
             this.entitiesPageTsPropertyAddition = entitiesPageTsPropertyAddition;
             this.entitiesPageTsToPropertyAddition = entitiesPageTsToPropertyAddition;
+            this.entitiesPageTsFromOneToOnePropertyAddition = entitiesPageTsFromOneToOnePropertyAddition;
+            this.entitiesPageTsToOneToOnePropertyAddition = entitiesPageTsToOneToOnePropertyAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -42,6 +48,15 @@ namespace Contractor.Core.Projects.Frontend.Pages
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             this.entitiesPageTsToPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            this.entitiesPageTsFromOneToOnePropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+
+            // To
+            this.entitiesPageTsToOneToOnePropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }

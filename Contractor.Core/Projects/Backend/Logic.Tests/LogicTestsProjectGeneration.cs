@@ -23,10 +23,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             serviceCollection.AddSingleton<ClassGeneration, EntityTestValuesGeneration>();
 
             serviceCollection.AddSingleton<DbEntityDetailTestMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailTestFromAssertOneToOneAddition>();
             serviceCollection.AddSingleton<DbEntityListItemTestMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityDetailTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityListItemTestMethodsAddition>();
+            serviceCollection.AddSingleton<EntityListItemTestFromOneToOneAssertAddition>();
             serviceCollection.AddSingleton<EntityTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityCreateTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityUpdateTestMethodsAddition>();
@@ -36,9 +38,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             serviceCollection.AddSingleton<DbEntityDetailTestToAssertAddition>();
             serviceCollection.AddSingleton<DbEntityListItemTestToAssertAddition>();
             serviceCollection.AddSingleton<EntityDetailTestFromAssertAddition>();
+            serviceCollection.AddSingleton<EntityDetailTestFromOneToOneAssertAddition>();
             serviceCollection.AddSingleton<EntityDetailTestToAssertAddition>();
             serviceCollection.AddSingleton<EntityListItemTestToAssertAddition>();
             serviceCollection.AddSingleton<EntitiesCrudLogicTestsRelationAddition>();
+
+            //serviceCollection.AddSingleton<>();
         }
     }
 }

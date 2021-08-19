@@ -23,15 +23,19 @@ namespace Contractor.Core.Projects.Backend.Persistence
             serviceCollection.AddSingleton<DbContextEntityAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();
             serviceCollection.AddSingleton<DbContextRelationToAddition>();
+            serviceCollection.AddSingleton<DbContextRelationToOneToOneAddition>();
             serviceCollection.AddSingleton<DbEntityMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityDetailMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityDetailFromMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityDetailFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityDetailToMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityListItemMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityListItemFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityListItemToMethodsAddition>();
             serviceCollection.AddSingleton<EfEntityContructorHashSetAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryFromIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToIncludeAddition>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryFromOneToOneIncludeAddition>();
         }
     }
 }

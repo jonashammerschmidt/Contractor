@@ -34,8 +34,8 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"                entity.HasOne(d => d.{options.PropertyNameFrom})\n" +
-                    $"                    .WithOne<Ef{options.EntityNameFrom}>(p => p.{options.PropertyNameTo})\n" +
-                    $"                    .HasForeignKey(d => d.{options.PropertyNameFrom}Id)\n" +
+                    $"                    .WithOne(p => p.{options.PropertyNameTo})\n" +
+                    $"                    .HasForeignKey<Ef{options.EntityNameTo}>(d => d.{options.PropertyNameFrom}Id)\n" +
                     $"                    .HasConstraintName(\"FK_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id\");");
 
             return stringEditor.GetText();

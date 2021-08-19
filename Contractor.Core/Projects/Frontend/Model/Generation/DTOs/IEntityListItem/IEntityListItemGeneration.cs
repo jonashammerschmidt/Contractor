@@ -16,20 +16,23 @@ namespace Contractor.Core.Projects.Frontend.Model
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendDtoRelationAddition frontendDtoRelationAddition;
         private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
-        private readonly FrontendDtoPropertyListItemToMethodAddition frontendDtoPropertyListItemToMethodAddition;
+        private readonly FrontendDtoPropertyListItemToMethodAddition frontendDtoListItemPropertyToMethodAddition;
+        private readonly FrontendDtoPropertyListItemFromOneToOneMethodAddition frontendDtoListItemPropertyFromOneToOneMethodAddition;
 
         public IEntityListItemGeneration(
             FrontendDtoAddition frontendDtoAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition,
             FrontendDtoRelationAddition frontendDtoRelationAddition,
             FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
-            FrontendDtoPropertyListItemToMethodAddition frontendDtoPropertyListItemToMethodAddition)
+            FrontendDtoPropertyListItemToMethodAddition frontendDtoListItemPropertyToMethodAddition,
+            FrontendDtoPropertyListItemFromOneToOneMethodAddition frontendDtoListItemPropertyFromOneToOneMethodAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.frontendDtoRelationAddition = frontendDtoRelationAddition;
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
-            this.frontendDtoPropertyListItemToMethodAddition = frontendDtoPropertyListItemToMethodAddition;
+            this.frontendDtoListItemPropertyToMethodAddition = frontendDtoListItemPropertyToMethodAddition;
+            this.frontendDtoListItemPropertyFromOneToOneMethodAddition = frontendDtoListItemPropertyFromOneToOneMethodAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -61,7 +64,36 @@ namespace Contractor.Core.Projects.Frontend.Model
             this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
                 $"{options.EntityNameFrom}, I{options.EntityNameFrom}", toImportStatementPath);
 
-            frontendDtoPropertyListItemToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+            frontendDtoListItemPropertyToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            string fromImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainTo)}" +
+                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
+                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
+
+            IRelationSideAdditionOptions fromOptions =
+                RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}");
+
+            this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
+                $"{options.EntityNameTo}, I{options.EntityNameTo}", fromImportStatementPath);
+
+            frontendDtoListItemPropertyFromOneToOneMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+
+            // To
+            string toImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
+                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
+                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}";
+
+            IRelationSideAdditionOptions toOptions =
+                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
+
+            this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
+                $"{options.EntityNameFrom}, I{options.EntityNameFrom}", toImportStatementPath);
+
+            frontendDtoListItemPropertyToMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }
     }
 }

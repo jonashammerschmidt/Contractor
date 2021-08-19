@@ -31,8 +31,12 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPageScssGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesPageTsGeneration>();
             serviceCollection.AddSingleton<EntitiesPageHtmlPropertyAddition>();
+            serviceCollection.AddSingleton<EntitiesPageHtmlFromOneToOneRelationAddition>();
             serviceCollection.AddSingleton<EntitiesPageHtmlToRelationAddition>();
             serviceCollection.AddSingleton<EntitiesPageTsPropertyAddition>();
+            serviceCollection.AddSingleton<EntitiesPageHtmlToOneToOneRelationAddition>();
+            serviceCollection.AddSingleton<EntitiesPageTsFromOneToOnePropertyAddition>();
+            serviceCollection.AddSingleton<EntitiesPageTsToOneToOnePropertyAddition>();
             serviceCollection.AddSingleton<EntitiesPageTsToPropertyAddition>();
 
             // Page-Create
@@ -51,8 +55,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<EntityDetailPageHtmlPropertyAddition>();
             serviceCollection.AddSingleton<EntityDetailPageHtmlFromPropertyAddition>();
             serviceCollection.AddSingleton<EntityDetailPageHtmlToPropertyAddition>();
-            serviceCollection.AddSingleton<EntityDetailPageTsFromPropertyAddition>();
-
+            serviceCollection.AddSingleton<EntityDetailPageHtmlFromOneToOnePropertyAddition>();
+            
             // Page-Update
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdatePageHtmlGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdatePageScssGeneration>();
@@ -60,6 +64,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<EntityUpdatePageHtmlPropertyAddition>();
             serviceCollection.AddSingleton<EntityUpdatePageHtmlToPropertyAddition>();
             serviceCollection.AddSingleton<EntityUpdatePageTsPropertyAddition>();
+            serviceCollection.AddSingleton<EntityDetailPageTsFromPropertyAddition>();
             serviceCollection.AddSingleton<EntityUpdatePageTsToPropertyAddition>();
         }
     }

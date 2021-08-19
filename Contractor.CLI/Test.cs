@@ -188,18 +188,31 @@ namespace Contractor.CLI
         {
             ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
 
+            //RelationAdditionOptions relationOptions = new RelationAdditionOptions(contractorOptions)
+            //{
+            //    DomainFrom = "GegönntesBankwesen",
+            //    EntityNameFrom = "GegönnteBank",
+            //    EntityNamePluralFrom = "GegönnteBanken",
+            //    PropertyNameFrom = "BesteBank",
+            //    DomainTo = "GegönnterKundenstamm",
+            //    EntityNameTo = "GegönnterKunde",
+            //    EntityNamePluralTo = "GegönnteKunden",
+            //    PropertyNameTo = "BesteKunden",
+            //};
+            //contractorCoreApi.Add1ToNRelation(relationOptions);
+
             RelationAdditionOptions relationOptions = new RelationAdditionOptions(contractorOptions)
             {
                 DomainFrom = "GegönntesBankwesen",
                 EntityNameFrom = "GegönnteBank",
                 EntityNamePluralFrom = "GegönnteBanken",
-                PropertyNameFrom = "BesteBank",
+                PropertyNameFrom = "LieblingsBank",
                 DomainTo = "GegönnterKundenstamm",
                 EntityNameTo = "GegönnterKunde",
                 EntityNamePluralTo = "GegönnteKunden",
-                PropertyNameTo = "BesteKunden",
+                PropertyNameTo = "LieblingsKunden",
             };
-            contractorCoreApi.Add1ToNRelation(relationOptions);
+            contractorCoreApi.AddOneToOneRelation(relationOptions);
         }
 
         private static DirectoryInfo GetRootFolder()
