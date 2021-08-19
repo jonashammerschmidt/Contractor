@@ -36,14 +36,14 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             serviceCollection.AddSingleton<EntityTestValuesRelationAddition>();
             serviceCollection.AddSingleton<DbEntityDetailTestFromAssertAddition>();
             serviceCollection.AddSingleton<DbEntityDetailTestToAssertAddition>();
+            serviceCollection.AddSingleton<DbEntityListItemTestFromAssertAddition>();
             serviceCollection.AddSingleton<DbEntityListItemTestToAssertAddition>();
             serviceCollection.AddSingleton<EntityDetailTestFromAssertAddition>();
             serviceCollection.AddSingleton<EntityDetailTestFromOneToOneAssertAddition>();
             serviceCollection.AddSingleton<EntityDetailTestToAssertAddition>();
             serviceCollection.AddSingleton<EntityListItemTestToAssertAddition>();
             serviceCollection.AddSingleton<EntitiesCrudLogicTestsRelationAddition>();
-
-            //serviceCollection.AddSingleton<>();
+            serviceCollection.AddSingleton<EntitiesCrudLogicTestsToOneToOneRelationAddition>();
         }
     }
 }

@@ -36,6 +36,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             serviceCollection.AddSingleton<EntitiesCrudRepositoryFromIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryFromOneToOneIncludeAddition>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryToOneToOneIncludeAddition>();
         }
     }
 }

@@ -15,17 +15,20 @@ namespace Contractor.Core.Projects.Backend.Persistence
         private readonly EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition;
         private readonly EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition;
         private readonly EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition;
+        private readonly EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition;
 
         public EntitiesCrudRepositoryGeneration(
             EntityCoreAddition entityCoreAddition,
             EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition,
             EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition,
-            EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition)
+            EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition,
+            EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.dtoFromRepositoryIncludeAddition = dtoFromRepositoryIncludeAddition;
             this.dtoToRepositoryIncludeAddition = dtoToRepositoryIncludeAddition;
             this.entitiesCrudRepositoryFromOneToOneIncludeAddition = entitiesCrudRepositoryFromOneToOneIncludeAddition;
+            this.entitiesCrudRepositoryToOneToOneIncludeAddition = entitiesCrudRepositoryToOneToOneIncludeAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -57,7 +60,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Add(options,PersistenceProjectGeneration.DomainFolder, FileName);
 
             // To
-            this.dtoToRepositoryIncludeAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToOneToOneIncludeAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

@@ -14,10 +14,10 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.pathService = pathService;
         }
 
-        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd)
+        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd, bool addUnique)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
+            string fileData = UpdateFileData(options, filePath, addUnique);
 
             fileData = UsingStatements.Add(fileData, namespaceToAdd);
 
@@ -33,7 +33,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             return filePath;
         }
 
-        private string UpdateFileData(IRelationAdditionOptions options, string filePath)
+        private string UpdateFileData(IRelationAdditionOptions options, string filePath, bool addUnique)
         {
             string fileData = File.ReadAllText(filePath);
             StringEditor stringEditor = new StringEditor(fileData);
@@ -68,6 +68,16 @@ namespace Contractor.Core.Projects.Backend.Logic
                 $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 "            }\n");
+            stringEditor.InsertNewLine();
+
+            if (addUnique) {
+                stringEditor.InsertLine(
+                    $"            if (this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
+                    "            {\n" +
+                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    "            }\n");
+            }
 
             // ----------- Update Method -----------
             stringEditor.NextThatContains($"Update{options.EntityNameTo}(");
@@ -79,6 +89,17 @@ namespace Contractor.Core.Projects.Backend.Logic
                 $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                 "            }\n");
+            stringEditor.InsertNewLine();
+
+            if (addUnique)
+            {
+                stringEditor.InsertLine(
+                    $"            if (this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
+                    "            {\n" +
+                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    "            }\n");
+            }
 
             return stringEditor.GetText();
         }

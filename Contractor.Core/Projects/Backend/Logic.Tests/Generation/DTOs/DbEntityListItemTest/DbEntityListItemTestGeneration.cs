@@ -14,6 +14,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
         private readonly DtoRelationAddition relationAddition;
+        private readonly DbEntityListItemTestFromAssertAddition dbEntityListItemTestFromAssertAddition;
         private readonly DbEntityListItemTestToAssertAddition logicDbDtoListItemTestToAssertAddition;
         private readonly DbEntityListItemTestMethodsAddition logicDbDtoListItemTestMethodsAddition;
 
@@ -21,12 +22,14 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition,
             DtoRelationAddition relationAddition,
+            DbEntityListItemTestFromAssertAddition dbEntityListItemTestFromAssertAddition,
             DbEntityListItemTestToAssertAddition logicDbDtoListItemTestToAssertAddition,
             DbEntityListItemTestMethodsAddition logicDbDtoListItemTestMethodsAddition)
         {
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
             this.relationAddition = relationAddition;
+            this.dbEntityListItemTestFromAssertAddition = dbEntityListItemTestFromAssertAddition;
             this.logicDbDtoListItemTestToAssertAddition = logicDbDtoListItemTestToAssertAddition;
             this.logicDbDtoListItemTestMethodsAddition = logicDbDtoListItemTestMethodsAddition;
         }
@@ -59,7 +62,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             // From
             IRelationSideAdditionOptions dbFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IDb{options.EntityNameTo}");
             this.relationAddition.AddRelationToDTO(dbFromOptions, LogicTestsProjectGeneration.DomainFolder, FileName);
-            this.logicDbDtoListItemTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.dbEntityListItemTestFromAssertAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
 
             // To
             IRelationSideAdditionOptions dbToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");

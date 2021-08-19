@@ -62,7 +62,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         {
             // From
             IRelationSideAdditionOptions dbFromOptions =
-                RelationAdditionOptions.GetPropertyForFrom(options, $"IDb{options.EntityNameFrom}");
+                RelationAdditionOptions.GetPropertyForFrom(options, $"IDb{options.EntityNameTo}");
             this.relationAddition.AddRelationToDTO(dbFromOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
             this.dbEntityListItemTestFromOneToOneAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
 

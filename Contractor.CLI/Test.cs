@@ -27,7 +27,7 @@ namespace Contractor.CLI
                 FrontendDestinationFolder = frontendDestinationFolder,
                 ProjectName = "Contract.Architecture.Backend.Core",
                 DbProjectName = "Contract.Architecture.Database.Core",
-                IsVerbose = true
+                IsVerbose = false
             };
 
             AddBanken(contractorOptions);

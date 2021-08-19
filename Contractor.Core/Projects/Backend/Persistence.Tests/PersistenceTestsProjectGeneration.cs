@@ -29,6 +29,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             serviceCollection.AddSingleton<DbEntityDetailTestToAssertAddition>();
             serviceCollection.AddSingleton<DbEntityListItemTestFromOneToOneAssertAddition>();
             serviceCollection.AddSingleton<DbEntityListItemTestToAssertAddition>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryTestsToOneToOneRelationAddition>();
         }
     }
 }

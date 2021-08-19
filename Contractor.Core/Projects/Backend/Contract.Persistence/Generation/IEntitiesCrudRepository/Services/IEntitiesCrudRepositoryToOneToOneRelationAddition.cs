@@ -3,13 +3,13 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Backend.Logic
+namespace Contractor.Core.Projects.Backend.Contract.Persistence
 {
-    internal class EntityListItemFromOneToOneMethodsAddition
+    internal class IEntitiesCrudRepositoryToOneToOneRelationAddition
     {
         public PathService pathService;
 
-        public EntityListItemFromOneToOneMethodsAddition(PathService pathService)
+        public IEntitiesCrudRepositoryToOneToOneRelationAddition(PathService pathService)
         {
             this.pathService = pathService;
         }
@@ -24,9 +24,9 @@ namespace Contractor.Core.Projects.Backend.Logic
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
-            IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(entityOptions, domainFolder);
-            string fileName = templateFileName.Replace("Entity", entityOptions.EntityName);
+            IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForEntity(entityOptions, domainFolder);
+            string fileName = templateFileName.Replace("Entities", entityOptions.EntityNamePlural);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;
         }
@@ -34,14 +34,14 @@ namespace Contractor.Core.Projects.Backend.Logic
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
-
-            // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromDb" + options.EntityNameFrom);
-            stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.PropertyNameTo} = {options.DomainTo}.{options.EntityNamePluralTo}.{options.EntityNameTo}" +
-                $".FromDb{options.EntityNameTo}(db{options.EntityNameFrom}ListItem.{options.PropertyNameTo}),");
+            // ----------- Create Method -----------
+            stringEditor.NextThatContains($"bool Does{options.EntityNameTo}Exist(");
+            stringEditor.Next();
+
+            stringEditor.InsertNewLine();
+            stringEditor.InsertLine($"        bool Is{options.PropertyNameFrom}IdInUse(Guid {options.PropertyNameFrom.LowerFirstChar()}Id);");
 
             return stringEditor.GetText();
         }
