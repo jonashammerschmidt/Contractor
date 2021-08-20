@@ -10,6 +10,11 @@ namespace ProjectName.Logic.Modules.Domain.Entities
 
         internal static IEntityListItem FromDbEntityListItem(IDbEntityListItem dbEntityListItem)
         {
+            if (dbEntityListItem == null)
+            {
+                return null;
+            }
+
             return new EntityListItem()
             {
                 Id = dbEntityListItem.Id,

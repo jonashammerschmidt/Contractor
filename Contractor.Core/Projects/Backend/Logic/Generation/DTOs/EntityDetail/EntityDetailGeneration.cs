@@ -17,6 +17,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         private readonly EntityDetailMethodsAddition dtoDetailMethodsAddition;
         private readonly EntityDetailFromMethodsAddition dtoDetailFromMethodsAddition;
         private readonly EntityDetailToMethodsAddition dtoDetailToMethodsAddition;
+        private readonly EntityDetailFromOneToOneMethodsAddition entityDetailFromOneToOneMethodsAddition;
 
         public EntityDetailGeneration(
             DtoAddition dtoAddition,
@@ -24,7 +25,8 @@ namespace Contractor.Core.Projects.Backend.Logic
             DtoRelationAddition relationAddition,
             EntityDetailMethodsAddition dtoDetailMethodsAddition,
             EntityDetailFromMethodsAddition dtoDetailFromMethodsAddition,
-            EntityDetailToMethodsAddition dtoDetailToMethodsAddition)
+            EntityDetailToMethodsAddition dtoDetailToMethodsAddition,
+            EntityDetailFromOneToOneMethodsAddition entityDetailFromOneToOneMethodsAddition)
         {
             this.dtoAddition = dtoAddition;
             this.dtoPropertyAddition = dtoPropertyAddition;
@@ -32,6 +34,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.dtoDetailMethodsAddition = dtoDetailMethodsAddition;
             this.dtoDetailFromMethodsAddition = dtoDetailFromMethodsAddition;
             this.dtoDetailToMethodsAddition = dtoDetailToMethodsAddition;
+            this.entityDetailFromOneToOneMethodsAddition = entityDetailFromOneToOneMethodsAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -58,6 +61,26 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.relationAddition.AddRelationToDTO(relationAdditionOptionsFrom, LogicProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
             this.dtoDetailFromMethodsAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+
+            // To
+            IRelationSideAdditionOptions relationAdditionOptionsTo = RelationAdditionOptions.
+                GetPropertyForTo(options, $"I{options.EntityNameFrom}");
+
+            this.relationAddition.AddRelationToDTO(relationAdditionOptionsTo, LogicProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+            this.dtoDetailToMethodsAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            IRelationSideAdditionOptions relationAdditionOptionsFrom = RelationAdditionOptions.
+                GetPropertyForFrom(options, $"I{options.EntityNameTo}");
+
+            this.relationAddition.AddRelationToDTO(relationAdditionOptionsFrom, LogicProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+            this.entityDetailFromOneToOneMethodsAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To

@@ -12,10 +12,14 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         private static readonly string FileName = "EntitiesCrudRepositoryTests.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
+        private readonly EntitiesCrudRepositoryTestsToOneToOneRelationAddition entitiesCrudRepositoryTestsToOneToOneRelationAddition;
 
-        public EntitiesCrudRepositoryTestsGeneration(EntityCoreAddition entityCoreAddition)
+        public EntitiesCrudRepositoryTestsGeneration(
+            EntityCoreAddition entityCoreAddition,
+            EntitiesCrudRepositoryTestsToOneToOneRelationAddition entitiesCrudRepositoryTestsToOneToOneRelationAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
+            this.entitiesCrudRepositoryTestsToOneToOneRelationAddition = entitiesCrudRepositoryTestsToOneToOneRelationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -34,6 +38,11 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.entitiesCrudRepositoryTestsToOneToOneRelationAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
     }
 }

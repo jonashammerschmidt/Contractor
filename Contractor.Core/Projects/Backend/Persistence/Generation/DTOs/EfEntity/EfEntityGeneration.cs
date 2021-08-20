@@ -61,5 +61,22 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(optionsTo2, PersistenceProjectGeneration.DomainFolder, FileName,
                 $"{options.ProjectName}.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            IRelationSideAdditionOptions optionsFrom =
+                RelationAdditionOptions.GetPropertyForFrom(options, $"virtual Ef{options.EntityNameTo}");
+            this.relationAddition.AddRelationToDTO(optionsFrom, PersistenceProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+
+            // To
+            IRelationSideAdditionOptions propertyAdditionOptions = RelationAdditionOptions.GetPropertyForTo(options, "Guid");
+            this.relationAddition.AddRelationToDTO(propertyAdditionOptions, PersistenceProjectGeneration.DomainFolder, FileName);
+
+            IRelationSideAdditionOptions optionsTo2 = RelationAdditionOptions.GetPropertyForTo(options, $"virtual Ef{options.EntityNameFrom}");
+            this.relationAddition.AddRelationToDTO(optionsTo2, PersistenceProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+        }
     }
 }

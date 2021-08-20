@@ -45,5 +45,10 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid"),
                 ContractLogicProjectGeneration.DomainFolder, FileName, true);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

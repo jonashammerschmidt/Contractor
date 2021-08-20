@@ -28,6 +28,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}-crud.service");
 
+            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}",
+                $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
+                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
+                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}");
+
             fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}ListItem",
                 $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
@@ -55,7 +60,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             stringEditor.NextThatContains("constructor(");
             stringEditor.InsertLine($"  {options.PropertyNameFrom.LowerFirstChar()}DataSource: DropdownPaginationDataSource<I{options.EntityNameFrom}ListItem>;");
-            stringEditor.InsertLine($"  selected{options.PropertyNameFrom}: I{options.EntityNameFrom}ListItem;");
+            stringEditor.InsertLine($"  selected{options.PropertyNameFrom}: I{options.EntityNameFrom};");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("private formBuilder: FormBuilder");

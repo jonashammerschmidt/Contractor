@@ -67,5 +67,18 @@ namespace Contractor.Core
                 classGeneration.PerformAdd1ToNRelationCommand(options);
             }
         }
+
+        public void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            if (!RelationAdditionOptions.Validate(options))
+            {
+                throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
+            }
+
+            foreach (ClassGeneration classGeneration in classGenerations)
+            {
+                classGeneration.PerformAddOneToOneRelationCommand(options);
+            }
+        }
     }
 }

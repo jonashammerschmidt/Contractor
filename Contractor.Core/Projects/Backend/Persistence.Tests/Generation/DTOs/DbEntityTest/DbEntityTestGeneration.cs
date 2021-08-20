@@ -57,5 +57,10 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(guidPropertyOptions);
             this.dbDtoTestMethodsAddition.Add(propertyAdditionOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

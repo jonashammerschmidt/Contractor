@@ -27,7 +27,7 @@ namespace Contractor.CLI
                 FrontendDestinationFolder = frontendDestinationFolder,
                 ProjectName = "Contract.Architecture.Backend.Core",
                 DbProjectName = "Contract.Architecture.Database.Core",
-                IsVerbose = true
+                IsVerbose = false
             };
 
             AddBanken(contractorOptions);
@@ -200,6 +200,19 @@ namespace Contractor.CLI
                 PropertyNameTo = "BesteKunden",
             };
             contractorCoreApi.Add1ToNRelation(relationOptions);
+
+            relationOptions = new RelationAdditionOptions(contractorOptions)
+            {
+                DomainFrom = "GegönntesBankwesen",
+                EntityNameFrom = "GegönnteBank",
+                EntityNamePluralFrom = "GegönnteBanken",
+                PropertyNameFrom = "LieblingsBank",
+                DomainTo = "GegönnterKundenstamm",
+                EntityNameTo = "GegönnterKunde",
+                EntityNamePluralTo = "GegönnteKunden",
+                PropertyNameTo = "LieblingsKunde",
+            };
+            contractorCoreApi.AddOneToOneRelation(relationOptions);
         }
 
         private static DirectoryInfo GetRootFolder()

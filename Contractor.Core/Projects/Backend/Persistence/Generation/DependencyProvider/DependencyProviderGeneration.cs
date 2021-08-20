@@ -37,5 +37,9 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+        }
     }
 }

@@ -32,8 +32,10 @@ namespace Contractor.Core.Projects.Frontend.Model
 
             // Relation Addition
             serviceCollection.AddSingleton<FrontendDtoPropertyFromMethodAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyFromOneToOneMethodAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyToMethodAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyListItemToMethodAddition>();
+            serviceCollection.AddSingleton<FrontendDtoPropertyListItemFromOneToOneMethodAddition>();
         }
     }
 }

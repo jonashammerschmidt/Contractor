@@ -13,6 +13,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         private readonly DbEntityListItemMethodsAddition dbDtoListItemMethodsAddition;
         private readonly DbEntityListItemToMethodsAddition dbDtoListItemToMethodsAddition;
+        private readonly DbEntityListItemFromOneToOneMethodsAddition dbEntityListItemFromOneToOneMethodsAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
         private readonly DtoRelationAddition relationAddition;
@@ -20,12 +21,14 @@ namespace Contractor.Core.Projects.Backend.Persistence
         public DbEntityListItemGeneration(
             DbEntityListItemMethodsAddition dbDtoListItemMethodsAddition,
             DbEntityListItemToMethodsAddition dbDtoListItemToMethodsAddition,
+            DbEntityListItemFromOneToOneMethodsAddition dbEntityListItemFromOneToOneMethodsAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition,
             DtoRelationAddition relationAddition)
         {
             this.dbDtoListItemMethodsAddition = dbDtoListItemMethodsAddition;
             this.dbDtoListItemToMethodsAddition = dbDtoListItemToMethodsAddition;
+            this.dbEntityListItemFromOneToOneMethodsAddition = dbEntityListItemFromOneToOneMethodsAddition;
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
             this.relationAddition = relationAddition;
@@ -48,6 +51,27 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            // To
+            IRelationSideAdditionOptions optionsTo =
+                RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
+            this.relationAddition.AddRelationToDTO(optionsTo, PersistenceProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+
+            this.dbDtoListItemToMethodsAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            IRelationSideAdditionOptions optionsFrom =
+                RelationAdditionOptions.GetPropertyForFrom(options, $"IDb{options.EntityNameTo}");
+            this.relationAddition.AddRelationToDTO(optionsFrom, PersistenceProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+
+            this.dbEntityListItemFromOneToOneMethodsAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName,
+                $"{options.ProjectName}.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+
             // To
             IRelationSideAdditionOptions optionsTo =
                 RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");

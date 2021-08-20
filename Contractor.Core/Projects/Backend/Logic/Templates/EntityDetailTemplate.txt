@@ -10,6 +10,11 @@ namespace ProjectName.Logic.Modules.Domain.Entities
 
         internal static IEntityDetail FromDbEntityDetail(IDbEntityDetail dbEntityDetail)
         {
+            if (dbEntityDetail == null)
+            {
+                return null;
+            }
+
             return new EntityDetail()
             {
                 Id = dbEntityDetail.Id,

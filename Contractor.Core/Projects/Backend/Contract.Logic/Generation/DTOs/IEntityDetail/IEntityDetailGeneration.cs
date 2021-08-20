@@ -53,5 +53,20 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
             this.relationAddition.AddRelationToDTO(optionsTo, ContractLogicProjectGeneration.DomainFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            IRelationSideAdditionOptions optionsFrom =
+                RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}");
+            this.relationAddition.AddRelationToDTO(optionsFrom, ContractLogicProjectGeneration.DomainFolder, FileName, true,
+                $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+
+            // To
+            IRelationSideAdditionOptions optionsTo =
+                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
+            this.relationAddition.AddRelationToDTO(optionsTo, ContractLogicProjectGeneration.DomainFolder, FileName, true,
+                $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+        }
     }
 }

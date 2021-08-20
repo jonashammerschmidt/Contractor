@@ -13,6 +13,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
         private readonly DbEntityListItemTestMethodsAddition dbDtoListItemTestMethodsAddition;
         private readonly DbEntityListItemTestToAssertAddition dbDtoListItemTestToAssertAddition;
+        private readonly DbEntityListItemTestFromOneToOneAssertAddition dbEntityListItemTestFromOneToOneAssertAddition;
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition propertyAddition;
         private readonly DtoRelationAddition relationAddition;
@@ -20,12 +21,14 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         public DbEntityListItemTestGeneration(
             DbEntityListItemTestMethodsAddition dbDtoListItemTestMethodsAddition,
             DbEntityListItemTestToAssertAddition dbDtoListItemTestToAssertAddition,
+            DbEntityListItemTestFromOneToOneAssertAddition dbEntityListItemTestFromOneToOneAssertAddition,
             DtoAddition dtoAddition,
             DtoPropertyAddition propertyAddition,
             DtoRelationAddition relationAddition)
         {
             this.dbDtoListItemTestMethodsAddition = dbDtoListItemTestMethodsAddition;
             this.dbDtoListItemTestToAssertAddition = dbDtoListItemTestToAssertAddition;
+            this.dbEntityListItemTestFromOneToOneAssertAddition = dbEntityListItemTestFromOneToOneAssertAddition;
             this.dtoAddition = dtoAddition;
             this.propertyAddition = propertyAddition;
             this.relationAddition = relationAddition;
@@ -48,6 +51,21 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            // To
+            IRelationSideAdditionOptions dbToOptions =
+                RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
+            this.relationAddition.AddRelationToDTO(dbToOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
+            this.dbDtoListItemTestToAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            IRelationSideAdditionOptions dbFromOptions =
+                RelationAdditionOptions.GetPropertyForFrom(options, $"IDb{options.EntityNameTo}");
+            this.relationAddition.AddRelationToDTO(dbFromOptions, PersistenceTestsProjectGeneration.DomainFolder, FileName);
+            this.dbEntityListItemTestFromOneToOneAssertAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
+
             // To
             IRelationSideAdditionOptions dbToOptions =
                 RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");

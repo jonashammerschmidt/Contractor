@@ -27,5 +27,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+        }
     }
 }

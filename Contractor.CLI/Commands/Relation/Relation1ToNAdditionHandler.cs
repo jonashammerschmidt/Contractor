@@ -12,7 +12,7 @@ namespace Contractor.CLI
         {
             if (args.Length < 5)
             {
-                Console.WriteLine("Bitte geben sie alle Informationen an. Beispiel: contractor add relation 1:n Bankwesen.Bank:Banken Kundenstamm.Kunde:Kunden [-n|--alternative-property-names Vertragsbank:Vertragskunden]");
+                Console.WriteLine("Bitte geben sie alle Informationen an. Beispiel: contractor add relation 1:n Bankwesen.Bank:Banken Kundenstamm.Kunde:Kunden");
                 return;
             }
 

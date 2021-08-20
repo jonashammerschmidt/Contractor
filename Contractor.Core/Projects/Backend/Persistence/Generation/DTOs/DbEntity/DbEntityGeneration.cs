@@ -50,5 +50,10 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, PersistenceProjectGeneration.DomainFolder, FileName);
             this.dbDtoMethodsAddition.Add(propertyAdditionOptions, PersistenceProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

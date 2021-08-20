@@ -13,13 +13,16 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
         public EntityCoreAddition entityCoreAddition;
         public EntitiesCrudLogicTestsRelationAddition logicTestsRelationAddition;
+        public EntitiesCrudLogicTestsToOneToOneRelationAddition entitiesCrudLogicTestsToOneToOneRelationAddition;
 
         public EntitiesCrudLogicTestsGeneration(
             EntityCoreAddition entityCoreAddition,
-            EntitiesCrudLogicTestsRelationAddition logicTestsRelationAddition)
+            EntitiesCrudLogicTestsRelationAddition logicTestsRelationAddition,
+            EntitiesCrudLogicTestsToOneToOneRelationAddition entitiesCrudLogicTestsToOneToOneRelationAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.logicTestsRelationAddition = logicTestsRelationAddition;
+            this.entitiesCrudLogicTestsToOneToOneRelationAddition = entitiesCrudLogicTestsToOneToOneRelationAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -38,6 +41,11 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             this.logicTestsRelationAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.entitiesCrudLogicTestsToOneToOneRelationAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
         }
     }
 }

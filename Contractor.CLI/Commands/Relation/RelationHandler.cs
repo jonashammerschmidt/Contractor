@@ -18,6 +18,10 @@ namespace Contractor.CLI
         {
             switch (args[2])
             {
+                case "1:1":
+                    RelationOneToOneAdditionHandler.Perform(args);
+                    break;
+
                 case "1:n":
                     Relation1ToNAdditionHandler.Perform(args);
                     break;

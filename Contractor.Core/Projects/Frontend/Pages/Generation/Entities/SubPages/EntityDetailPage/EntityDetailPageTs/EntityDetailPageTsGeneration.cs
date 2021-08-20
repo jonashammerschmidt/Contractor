@@ -39,5 +39,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             this.entityDetailPageTsFromPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+        }
     }
 }

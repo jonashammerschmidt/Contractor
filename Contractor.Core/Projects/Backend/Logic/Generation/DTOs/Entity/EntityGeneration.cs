@@ -51,5 +51,10 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.dtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, LogicProjectGeneration.DomainFolder, FileName);
             this.dtoMethodsAddition.Add(propertyAdditionOptions, LogicProjectGeneration.DomainFolder, FileName);
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            this.Add1ToNRelation(options);
+        }
     }
 }

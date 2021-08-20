@@ -46,5 +46,18 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
             this.relationAddition.AddRelationToDTO(optionsTo, ContractPersistenceProjectGeneration.DomainFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // From
+            IRelationSideAdditionOptions optionsFrom = RelationAdditionOptions.GetPropertyForFrom(options, $"IDb{options.EntityNameTo}");
+            this.relationAddition.AddRelationToDTO(optionsFrom, ContractPersistenceProjectGeneration.DomainFolder, FileName, true,
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
+
+            // To
+            IRelationSideAdditionOptions optionsTo = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
+            this.relationAddition.AddRelationToDTO(optionsTo, ContractPersistenceProjectGeneration.DomainFolder, FileName, true,
+                $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
+        }
     }
 }

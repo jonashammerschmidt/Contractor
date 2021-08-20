@@ -48,7 +48,18 @@ namespace Contractor.Core.Projects.Database
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
 
             this.dbTablePropertyAddition.AddProperty(propertyAdditionOptions, DBProjectGeneration.DomainFolder, FileName);
-            this.dbTableRelationContraintAddition.AddContraint(options, DBProjectGeneration.DomainFolder, FileName);
+            this.dbTableRelationContraintAddition.AddContraint(options, DBProjectGeneration.DomainFolder, FileName, false);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // To
+            IRelationSideAdditionOptions relationSideAdditionOptions =
+                RelationAdditionOptions.GetPropertyForTo(options, "Guid");
+            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
+
+            this.dbTablePropertyAddition.AddProperty(propertyAdditionOptions, DBProjectGeneration.DomainFolder, FileName);
+            this.dbTableRelationContraintAddition.AddContraint(options, DBProjectGeneration.DomainFolder, FileName, true);
         }
     }
 }

@@ -39,7 +39,14 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
             // To
             string usingStatement = $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}";
-            this.logicRelationAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName, usingStatement);
+            this.logicRelationAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName, usingStatement, false);
+        }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+            // To
+            string usingStatement = $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}";
+            this.logicRelationAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName, usingStatement, true);
         }
     }
 }

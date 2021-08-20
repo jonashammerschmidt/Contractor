@@ -38,5 +38,9 @@ namespace Contractor.Core.Projects.Database
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
         }
+
+        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        {
+        }
     }
 }

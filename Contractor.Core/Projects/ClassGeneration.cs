@@ -13,6 +13,8 @@ namespace Contractor.Core.Projects
 
         protected abstract void Add1ToNRelation(IRelationAdditionOptions options);
 
+        protected abstract void AddOneToOneRelation(IRelationAdditionOptions options);
+
         public void PerformAddDomainCommand(IDomainAdditionOptions options)
         {
             try
@@ -78,7 +80,7 @@ namespace Contractor.Core.Projects
             try
             {
                 this.Add1ToNRelation(options);
-                if (options.IsVerbose) 
+                if (options.IsVerbose)
                 {
                     Console.WriteLine(this.GetType().Name + " completed successfully");
                 }
@@ -86,7 +88,27 @@ namespace Contractor.Core.Projects
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
-                if (options.IsVerbose) 
+                if (options.IsVerbose)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+            }
+        }
+
+        public void PerformAddOneToOneRelationCommand(IRelationAdditionOptions options)
+        {
+            try
+            {
+                this.AddOneToOneRelation(options);
+                if (options.IsVerbose)
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
+                if (options.IsVerbose)
                 {
                     Console.WriteLine(e.StackTrace);
                 }
