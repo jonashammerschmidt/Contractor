@@ -12,7 +12,7 @@ namespace Contractor.CLI
         {
             if (args.Length < 3)
             {
-                Console.WriteLine("Bitte geben sie alle Informationen an. Beispiel: contractor add entity Bankwesen.Bank:Banken [-s|--scope MandantenTrennung.Mandant:Mandanten]");
+                Console.WriteLine("Bitte geben sie alle Informationen an. Beispiel: contractor add entity Bankwesen.Bank:Banken");
                 return;
             }
 

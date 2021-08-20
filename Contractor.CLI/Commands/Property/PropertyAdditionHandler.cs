@@ -12,7 +12,7 @@ namespace Contractor.CLI
         {
             if (args.Length < 6)
             {
-                Console.WriteLine("Bitte geben sie einen Domain Name an: contractor add property string:256 Name -e Bankwesen.Bank:Banken [-o | --optional]");
+                Console.WriteLine("Bitte geben sie einen Domain Name an: contractor add property string:256 Name -e Bankwesen.Bank:Banken");
                 return;
             }
 
