@@ -82,7 +82,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"  {options.PropertyNameFrom.LowerFirstChar()}SelectedValues = [];\n" +
                 $"  {options.PropertyNameFrom.LowerFirstChar()}DataSource = new DropdownPaginationDataSource(\n" +
                 $"    (options) => this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}(options),\n" +
-                 "    'name');";
+                 "    'bezeichnung');";
         }
 
     }

@@ -54,7 +54,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             return 
                 $"            <app-search-dropdown [formGroupInstance]=\"{options.EntityNameLowerTo}UpdateForm\"\n" +
-                $"                [formControlNameInstance]=\"'{options.PropertyNameFrom.LowerFirstChar()}Id'\" label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"name\"\n" +
+                $"                [formControlNameInstance]=\"'{options.PropertyNameFrom.LowerFirstChar()}Id'\" label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\"\n" +
                 $"                required=\"true\" [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" [initialItem]=\"selected{options.PropertyNameFrom}\">\n" +
                 $"            </app-search-dropdown>";
         }

@@ -82,7 +82,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"    this.selected{options.PropertyNameFrom} = {options.EntityNameLowerTo}Detail.{options.PropertyNameFrom.LowerFirstChar()};");
             stringEditor.InsertLine($"    this.{options.PropertyNameFrom.LowerFirstChar()}DataSource = new DropdownPaginationDataSource(");
             stringEditor.InsertLine($"      (options) => this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}(options),");
-            stringEditor.InsertLine( "      'name');");
+            stringEditor.InsertLine( "      'bezeichnung');");
 
             return stringEditor.GetText();
         }

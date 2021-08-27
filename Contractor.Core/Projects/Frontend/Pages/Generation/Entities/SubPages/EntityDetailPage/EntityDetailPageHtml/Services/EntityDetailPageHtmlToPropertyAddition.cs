@@ -67,7 +67,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"        <span style=\"font-size: 0.8em;\">{options.PropertyNameFrom.ToReadable()}:</span>\n" +
                 $"        <br>\n" +
                 $"        <a [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainFrom)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}/detail', {options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.id]\">\n" +
-                $"            {{{{{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.name}}}}\n" +
+                $"            {{{{{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.bezeichnung}}}}\n" +
                 $"            <mat-icon style=\"font-size: 1em;\">open_in_new</mat-icon>\n" +
                 $"        </a>\n" +
                 $"    </p>\n";
