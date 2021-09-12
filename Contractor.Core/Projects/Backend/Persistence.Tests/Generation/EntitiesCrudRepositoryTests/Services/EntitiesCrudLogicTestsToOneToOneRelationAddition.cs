@@ -44,10 +44,10 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             stringEditor.InsertLine($"        public void Is{options.PropertyNameFrom}IdInUseTrueTest()");
             stringEditor.InsertLine("        {");
             stringEditor.InsertLine("            // Arrange");
-            stringEditor.InsertLine($"            {options.EntityNamePluralTo}CrudRepository {options.EntityNamePluralTo}CrudRepository = this.Get{options.EntityNamePluralTo}CrudRepositoryDefault();");
+            stringEditor.InsertLine($"            {options.EntityNamePluralTo}CrudRepository {options.EntityNamePluralLowerTo}CrudRepository = this.Get{options.EntityNamePluralTo}CrudRepositoryDefault();");
             stringEditor.InsertLine("");
             stringEditor.InsertLine("            // Act");
-            stringEditor.InsertLine($"            bool is{options.PropertyNameFrom}IdInUse = {options.EntityNamePluralTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDbDefault);");
+            stringEditor.InsertLine($"            bool is{options.PropertyNameFrom}IdInUse = {options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDbDefault);");
             stringEditor.InsertLine("");
             stringEditor.InsertLine("            // Assert");
             stringEditor.InsertLine($"            Assert.IsTrue(is{options.PropertyNameFrom}IdInUse);");
@@ -57,10 +57,10 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             stringEditor.InsertLine($"        public void Is{options.PropertyNameFrom}IdInUseFalseTest()");
             stringEditor.InsertLine("        {");
             stringEditor.InsertLine("            // Arrange");
-            stringEditor.InsertLine($"            {options.EntityNamePluralTo}CrudRepository {options.EntityNamePluralTo}CrudRepository = this.Get{options.EntityNamePluralTo}CrudRepositoryDefault();");
+            stringEditor.InsertLine($"            {options.EntityNamePluralTo}CrudRepository {options.EntityNamePluralLowerTo}CrudRepository = this.Get{options.EntityNamePluralTo}CrudRepositoryDefault();");
             stringEditor.InsertLine("");
             stringEditor.InsertLine("            // Act");
-            stringEditor.InsertLine($"            bool is{options.PropertyNameFrom}IdInUse = {options.EntityNamePluralTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse(Guid.NewGuid());");
+            stringEditor.InsertLine($"            bool is{options.PropertyNameFrom}IdInUse = {options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse(Guid.NewGuid());");
             stringEditor.InsertLine("");
             stringEditor.InsertLine("            // Assert");
             stringEditor.InsertLine($"            Assert.IsFalse(is{options.PropertyNameFrom}IdInUse);");
