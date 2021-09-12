@@ -34,6 +34,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
+            Random random = new Random(IntHash.ComputeIntHash($"{options.EntityName}.{options.PropertyName}"));
 
             // ----------- Asserts -----------
             StringEditor stringEditor = new StringEditor(fileData);
@@ -44,13 +45,13 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}Default = " +
-                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "Default")};");
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "Default", random)};");
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}Default2 = " +
-                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "Default2")};");
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "Default2", random)};");
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForCreate = " +
-                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate")};");
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate", random)};");
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForUpdate = " +
-                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForUpdate")};");
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForUpdate", random)};");
 
             return stringEditor.GetText();
         }

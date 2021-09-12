@@ -3,6 +3,9 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Contractor.Core.Projects.Backend.Persistence.Tests
 {
@@ -34,6 +37,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
         {
             string fileData = File.ReadAllText(filePath);
+            Random random = new Random(IntHash.ComputeIntHash($"{options.EntityName}.{options.PropertyName}"));
 
             // ----------- Asserts -----------
             StringEditor stringEditor = new StringEditor(fileData);
@@ -44,13 +48,13 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}DbDefault = " +
-                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "DbDefault")};");
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "DbDefault", random)};");
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}DbDefault2 = " +
-                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "DbDefault2")};");
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "DbDefault2", random)};");
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForCreate = " +
-                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate")};");
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForCreate", random)};");
             stringEditor.InsertLine($"        public static readonly {CSharpProperties.ToString(options.PropertyType)} {options.PropertyName}ForUpdate = " +
-                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForUpdate")};");
+                $"{BackendEntityTestValuesPropertyLine.GetPropertyLine(options, "ForUpdate", random)};");
 
             return stringEditor.GetText();
         }
