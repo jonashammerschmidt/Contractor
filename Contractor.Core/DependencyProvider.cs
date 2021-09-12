@@ -50,6 +50,7 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoPropertyAddition>();
             serviceCollection.AddSingleton<DtoRelationAddition>();
             serviceCollection.AddSingleton<EntityCoreAddition>();
+            serviceCollection.AddSingleton<UsingStatementAddition>();
 
             serviceCollection.AddSingleton<FrontendPagesDomainCoreAddition>();
             serviceCollection.AddSingleton<FrontendModelEntityCoreAddition>();
