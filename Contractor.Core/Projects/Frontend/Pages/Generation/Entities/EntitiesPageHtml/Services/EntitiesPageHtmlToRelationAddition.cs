@@ -45,7 +45,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.PrevThatContains("<!-- Right -->");
             stringEditor.Next();
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        <app-table-filter-bar-dropdown [floatingRight]=\"true\" [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" idExpr=\"id\" displayExpr=\"name\"");
+            stringEditor.InsertLine($"        <app-table-filter-bar-dropdown [floatingRight]=\"true\" [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" idExpr=\"id\" displayExpr=\"bezeichnung\"");
             stringEditor.InsertLine($"            label=\"{options.PropertyNameFrom.ToReadable()}\" [(values)]=\"{options.PropertyNameFrom.LowerFirstChar()}SelectedValues\" (valuesChange)=\"{options.EntityNamePluralLowerTo}DataSource.triggerUpdate()\">");
             stringEditor.InsertLine("        </app-table-filter-bar-dropdown>");
 
@@ -62,7 +62,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
              $"            <ng-container matColumnDef=\"{options.PropertyNameFrom.LowerFirstChar()}\">\n" +
              $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyNameFrom.ToReadable()} </th>\n" +
               "                <td mat-cell *matCellDef=\"let element\">\n" +
-             $"                    {{{{element.{options.PropertyNameFrom.LowerFirstChar()}.name}}}}\n" +
+             $"                    {{{{element.{options.PropertyNameFrom.LowerFirstChar()}.bezeichnung}}}}\n" +
               "                </td>\n" +
               "            </ng-container>\n";
         }

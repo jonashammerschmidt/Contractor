@@ -53,7 +53,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"  public {options.PropertyNameTo.LowerFirstChar()}TableDataSource = new MatTableDataSource<I{options.EntityNameTo}>([]);");
             stringEditor.InsertLine($"  public {options.PropertyNameTo.LowerFirstChar()}GridColumns: string[] = [");
-            stringEditor.InsertLine($"    'name',");
+            stringEditor.InsertLine($"    'bezeichnung',");
             stringEditor.InsertLine($"    'detail',");
             stringEditor.InsertLine($"  ];");
 

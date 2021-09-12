@@ -58,7 +58,7 @@ namespace Contractor.CLI
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.String,
-                PropertyName = "Name",
+                PropertyName = "Bezeichnung",
                 PropertyTypeExtra = "256"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);
@@ -130,7 +130,7 @@ namespace Contractor.CLI
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.String,
-                PropertyName = "Name",
+                PropertyName = "Bezeichnung",
                 PropertyTypeExtra = "256"
             };
             contractorCoreApi.AddProperty(propertyAdditionOptions);

@@ -4,7 +4,7 @@
 
 <div class="entity-kebab-detail-page" *ngIf="entity">
     <div class="toolbar">
-        <h1>EntityReadable: {{entity.name}}</h1>
+        <h1>EntityReadable: {{entity.bezeichnung}}</h1>
         <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
             Schließen
         </button>

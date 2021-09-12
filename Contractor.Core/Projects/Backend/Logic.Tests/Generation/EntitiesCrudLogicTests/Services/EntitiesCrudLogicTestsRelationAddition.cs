@@ -40,14 +40,14 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
             // ----------- Repository Generation -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            if (!fileData.Contains($"Setup{options.EntityNamePluralFrom}RepositoryDefault()"))
+            if (!fileData.Contains($"Setup{options.EntityNamePluralFrom}CrudRepositoryDefault()"))
             {
                 stringEditor.MoveToEnd();
                 stringEditor.Next();
                 stringEditor.PrevThatContains("}");
                 stringEditor.PrevThatContains("}");
                 stringEditor.InsertLine("\n" +
-                     $"        private Mock<I{options.EntityNamePluralFrom}CrudRepository> Setup{options.EntityNamePluralFrom}RepositoryDefault()\n" +
+                     $"        private Mock<I{options.EntityNamePluralFrom}CrudRepository> Setup{options.EntityNamePluralFrom}CrudRepositoryDefault()\n" +
                       "        {\n" +
                      $"            var {options.EntityNamePluralLowerFrom}CrudRepository = new Mock<I{options.EntityNamePluralFrom}CrudRepository>(MockBehavior.Strict);\n" +
                      $"            {options.EntityNamePluralLowerFrom}CrudRepository.Setup(repository => repository.Does{options.EntityNameFrom}Exist({options.EntityNameFrom}TestValues.IdDefault)).Returns(true);\n" +
@@ -69,7 +69,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
                     {
                         stringEditor.NextThatContains($"Mock<I{options.EntityNamePluralTo}CrudRepository>");
                         stringEditor.Next(line => !line.Contains("CrudRepository>") && line.Trim().Length > 0);
-                        stringEditor.InsertLine($"            Mock<I{options.EntityNamePluralFrom}CrudRepository> {options.EntityNamePluralLowerFrom}CrudRepository = this.Setup{options.EntityNamePluralFrom}RepositoryDefault();");
+                        stringEditor.InsertLine($"            Mock<I{options.EntityNamePluralFrom}CrudRepository> {options.EntityNamePluralLowerFrom}CrudRepository = this.Setup{options.EntityNamePluralFrom}CrudRepositoryDefault();");
 
                         stringEditor.NextThatContains($"{options.EntityNamePluralTo}CrudLogic {options.EntityNamePluralLowerTo}CrudLogic = new {options.EntityNamePluralTo}CrudLogic");
                         stringEditor.Next(line => !line.Contains("CrudRepository.Object"));

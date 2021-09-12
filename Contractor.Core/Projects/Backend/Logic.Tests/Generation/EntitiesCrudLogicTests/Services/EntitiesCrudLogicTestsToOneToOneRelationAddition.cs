@@ -40,14 +40,14 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
             // ----------- Repository Generation -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            if (!fileData.Contains($"Setup{options.EntityNamePluralFrom}RepositoryDefault()"))
+            if (!fileData.Contains($"Setup{options.EntityNamePluralFrom}CrudRepositoryDefault()"))
             {
                 stringEditor.MoveToEnd();
                 stringEditor.Next();
                 stringEditor.PrevThatContains("}");
                 stringEditor.PrevThatContains("}");
                 stringEditor.InsertLine("\n" +
-                     $"        private Mock<I{options.EntityNamePluralFrom}CrudRepository> Setup{options.EntityNamePluralFrom}RepositoryDefault()\n" +
+                     $"        private Mock<I{options.EntityNamePluralFrom}CrudRepository> Setup{options.EntityNamePluralFrom}CrudRepositoryDefault()\n" +
                       "        {\n" +
                      $"            var {options.EntityNamePluralLowerFrom}CrudRepository = new Mock<I{options.EntityNamePluralFrom}CrudRepository>(MockBehavior.Strict);\n" +
                      $"            {options.EntityNamePluralLowerFrom}CrudRepository.Setup(repository => repository.Does{options.EntityNameFrom}Exist({options.EntityNameFrom}TestValues.IdDefault)).Returns(true);\n" +
@@ -55,20 +55,6 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
                      $"            {options.EntityNamePluralLowerFrom}CrudRepository.Setup(repository => repository.Does{options.EntityNameFrom}Exist({options.EntityNameFrom}TestValues.IdForCreate)).Returns(false);\n" +
                      $"            return {options.EntityNamePluralLowerFrom}CrudRepository;\n" +
                       "        }");
-
-                stringEditor.MoveToStart();
-
-                stringEditor.NextThatContains($"CrudRepository> Setup{options.EntityNamePluralTo}CrudRepositoryDefaultExists()");
-                stringEditor.NextThatContains($"return {options.EntityNamePluralLowerTo}CrudRepository;");
-                stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}CrudRepository.Setup(repository => repository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDefault)).Returns(false);");
-                stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}CrudRepository.Setup(repository => repository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDefault2)).Returns(false);");
-
-                stringEditor.MoveToStart();
-
-                stringEditor.NextThatContains($"CrudRepository> Setup{options.EntityNamePluralTo}CrudRepositoryEmpty()");
-                stringEditor.NextThatContains($"return {options.EntityNamePluralLowerTo}CrudRepository;");
-                stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}CrudRepository.Setup(repository => repository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDefault)).Returns(false);");
-                stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}CrudRepository.Setup(repository => repository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDefault2)).Returns(false);");
 
                 // ----------- TestMethods -----------
                 stringEditor.MoveToStart();
@@ -81,7 +67,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
                     {
                         stringEditor.NextThatContains($"Mock<I{options.EntityNamePluralTo}CrudRepository>");
                         stringEditor.Next(line => !line.Contains("CrudRepository>") && line.Trim().Length > 0);
-                        stringEditor.InsertLine($"            Mock<I{options.EntityNamePluralFrom}CrudRepository> {options.EntityNamePluralLowerFrom}CrudRepository = this.Setup{options.EntityNamePluralFrom}RepositoryDefault();");
+                        stringEditor.InsertLine($"            Mock<I{options.EntityNamePluralFrom}CrudRepository> {options.EntityNamePluralLowerFrom}CrudRepository = this.Setup{options.EntityNamePluralFrom}CrudRepositoryDefault();");
 
                         stringEditor.NextThatContains($"{options.EntityNamePluralTo}CrudLogic {options.EntityNamePluralLowerTo}CrudLogic = new {options.EntityNamePluralTo}CrudLogic");
                         stringEditor.Next(line => !line.Contains("CrudRepository.Object"));
@@ -95,7 +81,21 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
                     }
                     stringEditor.NextThatContains("[TestMethod]");
                 }
+
+                stringEditor.MoveToStart();
             }
+
+            stringEditor.NextThatContains($"CrudRepository> Setup{options.EntityNamePluralTo}CrudRepositoryDefaultExists()");
+            stringEditor.NextThatContains($"return {options.EntityNamePluralLowerTo}CrudRepository;");
+            stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}CrudRepository.Setup(repository => repository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDefault)).Returns(false);");
+            stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}CrudRepository.Setup(repository => repository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDefault2)).Returns(false);");
+
+            stringEditor.MoveToStart();
+
+            stringEditor.NextThatContains($"CrudRepository> Setup{options.EntityNamePluralTo}CrudRepositoryEmpty()");
+            stringEditor.NextThatContains($"return {options.EntityNamePluralLowerTo}CrudRepository;");
+            stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}CrudRepository.Setup(repository => repository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDefault)).Returns(false);");
+            stringEditor.InsertLine($"            {options.EntityNamePluralLowerTo}CrudRepository.Setup(repository => repository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameTo}TestValues.{options.PropertyNameFrom}IdDefault2)).Returns(false);");
 
             return stringEditor.GetText();
         }

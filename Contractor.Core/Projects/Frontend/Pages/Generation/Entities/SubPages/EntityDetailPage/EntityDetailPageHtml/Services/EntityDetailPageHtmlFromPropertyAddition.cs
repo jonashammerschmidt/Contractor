@@ -77,10 +77,10 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"            <div class=\"table-container\">");
             stringEditor.InsertLine($"                <table mat-table [dataSource]=\"{options.PropertyNameTo.LowerFirstChar()}TableDataSource\">");
             stringEditor.InsertLine($"");
-            stringEditor.InsertLine($"                    <ng-container matColumnDef=\"name\">");
-            stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> Name </th>");
+            stringEditor.InsertLine($"                    <ng-container matColumnDef=\"bezeichnung\">");
+            stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> Bezeichnung </th>");
             stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\">");
-            stringEditor.InsertLine($"                            {{{{element.name}}}}");
+            stringEditor.InsertLine($"                            {{{{element.bezeichnung}}}}");
             stringEditor.InsertLine($"                        </td>");
             stringEditor.InsertLine($"                    </ng-container>");
             stringEditor.InsertLine($"");

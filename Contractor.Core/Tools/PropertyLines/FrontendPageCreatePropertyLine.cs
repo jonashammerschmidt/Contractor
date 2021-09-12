@@ -28,7 +28,7 @@ namespace Contractor.Core.Tools
                          "                <mat-datepicker #picker></mat-datepicker>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
-                         "                        Dieses Feld ist erfolderlich.\n" +
+                         "                        Dieses Feld ist erforderlich.\n" +
                          "                    </span>\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
                          "                        Dieses Feld ist ungültig.\n" + 
@@ -44,7 +44,7 @@ namespace Contractor.Core.Tools
                         $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" type=\"number\" {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\">\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
-                        $"                        Dieses Feld ist erfolderlich.\n" +
+                        $"                        Dieses Feld ist erforderlich.\n" +
                         $"                    </span>\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
                         $"                        Dieses Feld ist ungültig.\n" +
@@ -60,7 +60,7 @@ namespace Contractor.Core.Tools
                         $"                <mat-hint [align]=\"'end'\">{{{{{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.value.length}}}} / {options.PropertyTypeExtra}</mat-hint>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
-                         "                        Dieses Feld ist erfolderlich.\n" +
+                         "                        Dieses Feld ist erforderlich.\n" +
                          "                    </span>\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
                          "                        Dieses Feld ist ungültig.\n" + 
@@ -75,7 +75,7 @@ namespace Contractor.Core.Tools
                         $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} placeholder=\"z.B. 00000000-0000-0000-0000-000000000000\">\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
-                        $"                        Dieses Feld ist erfolderlich.\n" +
+                        $"                        Dieses Feld ist erforderlich.\n" +
                         $"                    </span>\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}CreateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.pattern\">\n" +
                         $"                        Dieses Feld ist ungültig. Beispiel: 00000000-0000-0000-0000-000000000000.\n" +
