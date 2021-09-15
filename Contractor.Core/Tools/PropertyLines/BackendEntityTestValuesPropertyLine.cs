@@ -19,7 +19,9 @@ namespace Contractor.Core.Tools
                     return random.Next(10, 99).ToString() + "." + random.Next(0, 99999).ToString();
 
                 case PropertyTypes.Guid:
-                    return $"Guid.Parse(\"{Guid.NewGuid()}\")";
+                    var guid = new byte[16];
+                    random.NextBytes(guid);
+                    return $"Guid.Parse(\"{new Guid(guid)}\")";
 
                 case PropertyTypes.Boolean:
                     return postfix.Equals("DbDefault").ToString().ToLower();
