@@ -52,7 +52,7 @@ namespace ProjectName.Logic.Modules.Domain.Entities
             {
                 this.entitiesCrudRepository.DeleteEntity(entityId);
             }
-            catch
+            catch (DbUpdateException)
             {
                 this.logger.LogDebug($"Entity ({entityId}) konnte nicht gelöscht werden.");
                 return LogicResult.Conflict($"Entity ({entityId}) konnte nicht gelöscht werden.");

@@ -46,19 +46,22 @@ namespace Contractor.Core.Tools
             fileData = fileData.Replace("Entity", options.EntityName);
             fileData = fileData.Replace("entities", options.EntityNamePluralLower);
             fileData = fileData.Replace("entity", options.EntityNameLower);
-            fileData = ReplaceGuidPlaceholders(fileData);
+            fileData = ReplaceGuidPlaceholders(fileData, options.EntityName);
 
             return fileData;
         }
 
-        private string ReplaceGuidPlaceholders(string fileData)
+        private string ReplaceGuidPlaceholders(string fileData, string entityName)
         {
+            Random random = new Random(IntHash.ComputeIntHash($"{entityName}"));
             var regex = new Regex(Regex.Escape("{random-guid}"));
             int placeholderCount = fileData.Split(new[] { "{random-guid}" }, StringSplitOptions.None).Length - 1;
 
             for (int i = 0; i < placeholderCount; i++)
             {
-                fileData = regex.Replace(fileData, Guid.NewGuid().ToString(), 1);
+                var guid = new byte[16];
+                random.NextBytes(guid);
+                fileData = regex.Replace(fileData, new Guid(guid).ToString(), 1);
             }
 
             return fileData;
