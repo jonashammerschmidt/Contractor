@@ -40,7 +40,9 @@ export class EntitiesPage implements AfterViewInit {
   }
 
   async ngAfterViewInit(): Promise<void> {
-    this.entitiesDataSource.initialize(this.paginator, this.sort);
+    setTimeout(() => {
+      this.entitiesDataSource.initialize(this.paginator, this.sort);
+    }, 0);
   }
 
   openCreateDialog(): void {
