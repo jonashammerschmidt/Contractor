@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Backend.Logic
 {
     internal class EntityDetailToMethodsAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntityDetailToMethodsAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

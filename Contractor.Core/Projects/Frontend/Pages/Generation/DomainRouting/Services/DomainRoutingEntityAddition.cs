@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
 {
     internal class DomainRoutingEntityAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public DomainRoutingEntityAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

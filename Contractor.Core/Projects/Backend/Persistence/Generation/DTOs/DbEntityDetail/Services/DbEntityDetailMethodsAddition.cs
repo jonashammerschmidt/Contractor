@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Backend.Persistence
 {
     internal class DbEntityDetailMethodsAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public DbEntityDetailMethodsAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
 {
     internal class EntitiesPageTsToOneToOnePropertyAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntitiesPageTsToOneToOnePropertyAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

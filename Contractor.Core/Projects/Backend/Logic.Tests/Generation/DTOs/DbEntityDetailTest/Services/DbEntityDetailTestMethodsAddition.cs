@@ -8,11 +8,11 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 {
     internal class DbEntityDetailTestMethodsAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public DbEntityDetailTestMethodsAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

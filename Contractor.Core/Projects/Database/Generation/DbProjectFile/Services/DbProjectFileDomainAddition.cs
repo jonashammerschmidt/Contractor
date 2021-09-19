@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Database
 {
     internal class DbProjectFileDomainAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public DbProjectFileDomainAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

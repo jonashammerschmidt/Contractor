@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
 {
     internal class EntityUpdatePageHtmlToPropertyAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntityUpdatePageHtmlToPropertyAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

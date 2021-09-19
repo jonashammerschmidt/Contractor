@@ -7,11 +7,11 @@ namespace Contractor.Core.Tools
 {
     internal class EntityCoreDependencyProvider
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntityCoreDependencyProvider(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

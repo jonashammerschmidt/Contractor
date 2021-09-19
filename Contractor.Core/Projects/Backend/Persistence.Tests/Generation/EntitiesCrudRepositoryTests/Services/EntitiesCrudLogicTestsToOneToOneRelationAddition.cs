@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 {
     internal class EntitiesCrudRepositoryTestsToOneToOneRelationAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntitiesCrudRepositoryTestsToOneToOneRelationAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

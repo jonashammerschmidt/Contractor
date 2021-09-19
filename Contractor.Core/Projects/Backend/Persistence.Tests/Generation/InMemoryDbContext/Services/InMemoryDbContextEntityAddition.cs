@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 {
     internal class InMemoryDbContextEntityAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public InMemoryDbContextEntityAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

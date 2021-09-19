@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Backend.Persistence
 {
     internal class EntitiesCrudRepositoryFromIncludeAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntitiesCrudRepositoryFromIncludeAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

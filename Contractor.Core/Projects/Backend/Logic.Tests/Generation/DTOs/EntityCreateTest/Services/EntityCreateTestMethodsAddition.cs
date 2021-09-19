@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 {
     internal class EntityCreateTestMethodsAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntityCreateTestMethodsAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

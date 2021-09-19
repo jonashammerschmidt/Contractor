@@ -2,7 +2,7 @@
 
 namespace Contractor.Core.Tools
 {
-    internal class FileSystemClient
+    internal class FileSystemClient : IFileSystemClient
     {
         public string ReadAllText(string path)
         {
@@ -11,7 +11,8 @@ namespace Contractor.Core.Tools
 
         public void WriteAllText(string path, string contents)
         {
-            if (path.EndsWith(".cs")) {
+            if (path.EndsWith(".cs"))
+            {
                 contents = UsingStatements.Sort(contents);
             }
 

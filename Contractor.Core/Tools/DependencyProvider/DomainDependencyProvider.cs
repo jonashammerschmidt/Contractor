@@ -6,11 +6,11 @@ namespace Contractor.Core.Tools
 {
     internal class DomainDependencyProvider
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public DomainDependencyProvider(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

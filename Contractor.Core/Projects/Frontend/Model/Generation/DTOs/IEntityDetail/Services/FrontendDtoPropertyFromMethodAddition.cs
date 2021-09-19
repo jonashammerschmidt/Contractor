@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Frontend.Model
 {
     internal class FrontendDtoPropertyFromMethodAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public FrontendDtoPropertyFromMethodAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

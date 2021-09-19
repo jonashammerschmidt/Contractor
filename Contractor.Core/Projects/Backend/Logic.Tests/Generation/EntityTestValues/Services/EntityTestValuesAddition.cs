@@ -8,11 +8,11 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 {
     internal class EntityTestValuesAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntityTestValuesAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Backend.Api
 {
     internal class EntitiesCrudControllerRelationAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntitiesCrudControllerRelationAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Database
 {
     internal class DbTableRelationContraintAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public DbTableRelationContraintAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

@@ -6,11 +6,11 @@ namespace Contractor.Core.Tools
 {
     internal class FrontendPagesEntityCoreAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public FrontendPagesEntityCoreAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;

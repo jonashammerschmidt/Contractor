@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 {
     internal class EntityDetailTestFromOneToOneAssertAddition
     {
-        public FileSystemClient fileSystemClient;
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntityDetailTestFromOneToOneAssertAddition(
-            FileSystemClient fileSystemClient,
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;
