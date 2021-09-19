@@ -6,10 +6,14 @@ namespace Contractor.Core.Tools
 {
     internal class FrontendDtoPropertyMethodAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public FrontendDtoPropertyMethodAddition(PathService pathService)
+        public FrontendDtoPropertyMethodAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -24,7 +28,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(options, domainFolder, fileName);
             string fileData = UpdateFileData(options, functionName, variableName, filePath);
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string fileName)
@@ -37,7 +41,7 @@ namespace Contractor.Core.Tools
 
         private string UpdateFileData(IPropertyAdditionOptions options, string functionName, string variableName, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"public static " + functionName);

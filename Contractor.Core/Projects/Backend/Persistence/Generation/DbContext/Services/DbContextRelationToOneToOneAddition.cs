@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Backend.Persistence
 {
     internal class DbContextRelationToOneToOneAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DbContextRelationToOneToOneAddition(PathService pathService)
+        public DbContextRelationToOneToOneAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -19,12 +23,12 @@ namespace Contractor.Core.Projects.Backend.Persistence
             string filePath = this.pathService.GetAbsolutePathForDbContext(options);
             string fileData = UpdateFileData(options, filePath);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
 

@@ -8,10 +8,14 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 {
     internal class EntityTestValuesAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public EntityTestValuesAddition(PathService pathService)
+        public EntityTestValuesAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -20,7 +24,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
@@ -33,7 +37,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
         private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
             Random random = new Random(IntHash.ComputeIntHash($"{options.EntityName}.{options.PropertyName}"));
 
             // ----------- Asserts -----------

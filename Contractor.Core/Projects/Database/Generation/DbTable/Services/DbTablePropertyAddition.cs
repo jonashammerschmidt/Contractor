@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Database
 {
     internal class DbTablePropertyAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DbTablePropertyAddition(PathService pathService)
+        public DbTablePropertyAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -19,7 +23,7 @@ namespace Contractor.Core.Projects.Database
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = GetFileData(options, filePath);
 
-            File.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
@@ -32,7 +36,7 @@ namespace Contractor.Core.Projects.Database
 
         private string GetFileData(IPropertyAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);
             fileData = fileData.Replace("RequestScopes", options.RequestScopeNamePlural);

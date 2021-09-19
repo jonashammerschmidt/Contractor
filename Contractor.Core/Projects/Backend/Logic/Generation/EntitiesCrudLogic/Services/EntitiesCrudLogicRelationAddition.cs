@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Backend.Logic
 {
     internal class EntitiesCrudLogicRelationAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public EntitiesCrudLogicRelationAddition(PathService pathService)
+        public EntitiesCrudLogicRelationAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -21,7 +25,7 @@ namespace Contractor.Core.Projects.Backend.Logic
 
             fileData = UsingStatements.Add(fileData, namespaceToAdd);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
@@ -35,7 +39,7 @@ namespace Contractor.Core.Projects.Backend.Logic
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath, bool addUnique)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
             StringEditor stringEditor = new StringEditor(fileData);
 
             string relationsPropertyLine = $"        private readonly I{options.EntityNamePluralFrom}CrudRepository {options.EntityNamePluralLowerFrom}CrudRepository;";

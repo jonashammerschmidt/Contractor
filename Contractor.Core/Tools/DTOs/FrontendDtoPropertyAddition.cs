@@ -6,10 +6,14 @@ namespace Contractor.Core.Tools
 {
     internal class FrontendDtoPropertyAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public FrontendDtoPropertyAddition(PathService pathService)
+        public FrontendDtoPropertyAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -18,7 +22,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
@@ -28,7 +32,7 @@ namespace Contractor.Core.Tools
 
             fileData = ImportStatements.Add(fileData, importStatementTypes, importStatementPath);
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
@@ -41,7 +45,7 @@ namespace Contractor.Core.Tools
 
         private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
             if (!stringEditor.GetLine().Contains("export interface"))

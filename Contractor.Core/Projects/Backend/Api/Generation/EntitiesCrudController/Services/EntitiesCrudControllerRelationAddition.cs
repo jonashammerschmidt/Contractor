@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Backend.Api
 {
     internal class EntitiesCrudControllerRelationAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public EntitiesCrudControllerRelationAddition(PathService pathService)
+        public EntitiesCrudControllerRelationAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -19,7 +23,7 @@ namespace Contractor.Core.Projects.Backend.Api
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
@@ -33,7 +37,7 @@ namespace Contractor.Core.Projects.Backend.Api
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
             StringEditor stringEditor = new StringEditor(fileData);
 
             string paginationLineStart = "        [Pagination(FilterFields = new[] { ";

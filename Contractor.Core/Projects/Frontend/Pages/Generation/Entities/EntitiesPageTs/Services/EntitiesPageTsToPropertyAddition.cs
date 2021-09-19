@@ -8,11 +8,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 {
     internal class EntitiesPageTsToPropertyAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntitiesPageTsToPropertyAddition(
+            FileSystemClient fileSystemClient,
             PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -29,7 +32,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}-crud.service");
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
@@ -45,7 +48,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
 

@@ -7,10 +7,14 @@ namespace Contractor.Core.Tools
 {
     internal class DtoPropertyAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DtoPropertyAddition(PathService pathService)
+        public DtoPropertyAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -24,7 +28,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath, forInterface);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
@@ -37,7 +41,7 @@ namespace Contractor.Core.Tools
 
         private string UpdateFileData(IPropertyAdditionOptions options, string filePath, bool forInterface)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             fileData = AddUsingStatements(options, fileData);
             fileData = AddProperty(fileData, options, forInterface);

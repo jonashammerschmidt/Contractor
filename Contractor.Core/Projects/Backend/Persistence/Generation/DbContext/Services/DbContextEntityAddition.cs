@@ -7,11 +7,14 @@ namespace Contractor.Core.Projects.Backend.Persistence
 {
     internal class DbContextEntityAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
         public DbContextEntityAddition(
+            FileSystemClient fileSystemClient,
             PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -20,12 +23,12 @@ namespace Contractor.Core.Projects.Backend.Persistence
             string filePath = this.pathService.GetAbsolutePathForDbContext(options);
             string fileData = UpdateFileData(options, filePath);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string UpdateFileData(IEntityAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             string usingStatement = $"{options.ProjectName}.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}";
             fileData = UsingStatements.Add(fileData, usingStatement);

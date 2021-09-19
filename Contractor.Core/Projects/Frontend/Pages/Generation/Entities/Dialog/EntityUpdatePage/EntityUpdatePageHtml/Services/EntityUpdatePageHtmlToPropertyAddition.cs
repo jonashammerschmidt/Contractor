@@ -7,11 +7,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 {
     internal class EntityUpdatePageHtmlToPropertyAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
         public EntityUpdatePageHtmlToPropertyAddition(
+            FileSystemClient fileSystemClient,
             PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -20,7 +23,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
@@ -36,7 +39,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
 

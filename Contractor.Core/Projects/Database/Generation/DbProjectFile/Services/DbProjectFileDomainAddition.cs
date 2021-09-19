@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Database
 {
     internal class DbProjectFileDomainAddition
     {
+        public FileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DbProjectFileDomainAddition(PathService pathService)
+        public DbProjectFileDomainAddition(
+            FileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -19,7 +23,7 @@ namespace Contractor.Core.Projects.Database
             string filePath = GetFilePath(options);
             string fileData = UpdateFileData(options, filePath);
 
-            File.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IDomainAdditionOptions options)
@@ -31,7 +35,7 @@ namespace Contractor.Core.Projects.Database
 
         private string UpdateFileData(IDomainAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             string dbDomainFolderLine = GetDbDomainFolderLine(options);
 
