@@ -24,5 +24,9 @@ namespace Contractor.Core.Tools
 
             File.WriteAllText(path, contents);
         }
+
+        public void SaveAll()
+        {
+        }
     }
 }

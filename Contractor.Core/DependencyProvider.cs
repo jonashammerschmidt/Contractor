@@ -42,7 +42,7 @@ namespace Contractor.Core
 
         private static void ConfigureTools(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<IFileSystemClient, FileSystemClient>();
+            serviceCollection.AddSingleton<IFileSystemClient, FileSystemCacheClient>();
 
             serviceCollection.AddSingleton<DomainDependencyProvider>();
             serviceCollection.AddSingleton<EntityCoreDependencyProvider>();
