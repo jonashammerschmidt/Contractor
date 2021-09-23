@@ -6,10 +6,14 @@ namespace Contractor.Core.Tools
 {
     internal class FrontendDtoAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public FrontendDtoAddition(PathService pathService)
+        public FrontendDtoAddition(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -18,7 +22,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = GetFileData(options, templateFilePath);
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
@@ -31,7 +35,7 @@ namespace Contractor.Core.Tools
 
         private string GetFileData(IEntityAdditionOptions options, string templateFileName)
         {
-            string fileData = File.ReadAllText(templateFileName);
+            string fileData = this.fileSystemClient.ReadAllText(templateFileName);
             fileData = fileData.Replace("ProjectName", options.ProjectName);
             fileData = fileData.Replace("entities-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
             fileData = fileData.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));

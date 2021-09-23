@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Frontend.Model
 {
     internal class FrontendDtoPropertyFromMethodAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public FrontendDtoPropertyFromMethodAddition(PathService pathService)
+        public FrontendDtoPropertyFromMethodAddition(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -19,7 +23,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             string filePath = GetFilePath(options, domainFolder, fileName);
             string fileData = UpdateFileData(options, filePath);
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string fileName)
@@ -33,7 +37,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"public static fromApi{options.EntityNameFrom}Detail");

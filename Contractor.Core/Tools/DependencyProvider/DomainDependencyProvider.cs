@@ -6,10 +6,14 @@ namespace Contractor.Core.Tools
 {
     internal class DomainDependencyProvider
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DomainDependencyProvider(PathService pathService)
+        public DomainDependencyProvider(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -18,7 +22,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(options, projectFolder, fileName);
             string fileData = UpdateFileData(options, filePath, projectFolder);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IDomainAdditionOptions options, string projectFolder, string fileName)
@@ -28,7 +32,7 @@ namespace Contractor.Core.Tools
 
         private string UpdateFileData(IDomainAdditionOptions options, string filePath, string projectFolder)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             fileData = AddStartupMethod(fileData, options, projectFolder);
             fileData = AddGetStartupMethodCall(fileData, options);

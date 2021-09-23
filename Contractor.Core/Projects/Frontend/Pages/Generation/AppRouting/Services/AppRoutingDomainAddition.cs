@@ -7,11 +7,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 {
     internal class AppRoutingDomainAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
         public AppRoutingDomainAddition(
+            IFileSystemClient fileSystemClient,
             PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -20,12 +23,12 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = this.pathService.GetAbsolutePathForFrontendAppRouting(options);
             string fileData = UpdateFileData(options, filePath);
 
-            TypescriptClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string UpdateFileData(IDomainAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
 

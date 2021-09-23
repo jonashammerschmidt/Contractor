@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Backend.Logic
 {
     internal class EntityDetailFromMethodsAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public EntityDetailFromMethodsAddition(PathService pathService)
+        public EntityDetailFromMethodsAddition(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -22,7 +26,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             fileData = UsingStatements.Add(fileData, "System.Linq");
             fileData = UsingStatements.Add(fileData, namespaceToAdd);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
@@ -36,7 +40,7 @@ namespace Contractor.Core.Projects.Backend.Logic
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);

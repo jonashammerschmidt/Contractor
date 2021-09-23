@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Database
 {
     internal class DbTableRelationContraintAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DbTableRelationContraintAddition(PathService pathService)
+        public DbTableRelationContraintAddition(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -19,7 +23,7 @@ namespace Contractor.Core.Projects.Database
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = GetFileData(options, filePath, addUnique);
 
-            File.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
@@ -33,7 +37,7 @@ namespace Contractor.Core.Projects.Database
 
         private string GetFileData(IRelationAdditionOptions options, string filePath, bool addUnique)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("CONSTRAINT [PK_");

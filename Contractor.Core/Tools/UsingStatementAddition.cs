@@ -5,21 +5,25 @@ namespace Contractor.Core.Tools
 {
     internal class UsingStatementAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public UsingStatementAddition(PathService pathService)
+        public UsingStatementAddition(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
         public void Add(IEntityAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             fileData = UsingStatements.Add(fileData, namespaceToAdd);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)

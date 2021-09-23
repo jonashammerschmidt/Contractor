@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Backend.Persistence
 {
     internal class DbEntityDetailToMethodsAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DbEntityDetailToMethodsAddition(PathService pathService)
+        public DbEntityDetailToMethodsAddition(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -21,7 +25,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             fileData = UsingStatements.Add(fileData, namesapceToAdd);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
@@ -35,7 +39,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);

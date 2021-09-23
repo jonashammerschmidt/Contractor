@@ -7,10 +7,14 @@ namespace Contractor.Core.Tools
 {
     internal class DtoRelationAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DtoRelationAddition(PathService pathService)
+        public DtoRelationAddition(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -39,7 +43,7 @@ namespace Contractor.Core.Tools
                 fileData = UsingStatements.Add(fileData, namespaceToAdd);
             }
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
@@ -52,7 +56,7 @@ namespace Contractor.Core.Tools
 
         private string UpdateFileData(IRelationSideAdditionOptions options, string filePath, bool forInterface)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             fileData = AddUsingStatements(options, fileData);
             fileData = AddProperty(fileData, options, forInterface);

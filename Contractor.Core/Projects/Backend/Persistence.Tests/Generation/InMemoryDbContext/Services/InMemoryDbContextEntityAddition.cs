@@ -7,10 +7,14 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 {
     internal class InMemoryDbContextEntityAddition
     {
+        public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public InMemoryDbContextEntityAddition(PathService pathService)
+        public InMemoryDbContextEntityAddition(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
         {
+            this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
@@ -19,12 +23,12 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             string filePath = this.pathService.GetAbsolutePathForInMemoryDbContext(options);
             string fileData = UpdateFileData(options, filePath);
 
-            CsharpClassWriter.Write(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string UpdateFileData(IEntityAdditionOptions options, string filePath)
         {
-            string fileData = File.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}");
             fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Tests.Modules.{options.Domain}.{options.EntityNamePlural}");

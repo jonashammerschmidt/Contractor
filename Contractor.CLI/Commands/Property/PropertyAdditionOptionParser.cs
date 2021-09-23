@@ -1,41 +1,17 @@
 ﻿using Contractor.CLI.Tools;
-using Contractor.Core;
 using Contractor.Core.Options;
 using System;
-using System.IO;
 
 namespace Contractor.CLI
 {
-    internal class PropertyAdditionHandler
+    internal class PropertyAdditionOptionParser
     {
-        public static void Perform(string[] args)
+        public static IPropertyAdditionOptions ParseOptions(IContractorOptions contractorOptions, string[] args)
         {
-            if (args.Length < 6)
-            {
-                Console.WriteLine("Bitte geben sie einen Domain Name an: contractor add property string:256 Name -e Bankwesen.Bank:Banken");
-                return;
-            }
+            IPropertyAdditionOptions options = new PropertyAdditionOptions(contractorOptions);
 
-            var options = ContractorOptionsLoader.Load(Directory.GetCurrentDirectory());
-            var propertyOptions = new PropertyAdditionOptions(options);
-            ParseOptions(propertyOptions, args);
-
-            try
-            {
-                ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-                contractorCoreApi.AddProperty(propertyOptions);
-                Console.WriteLine($"Property '{propertyOptions.PropertyName}' zur Entity '{propertyOptions.EntityName}' hinzugefügt'");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
-        private static void ParseOptions(IPropertyAdditionOptions options, string[] args)
-        {
             options.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
-            
+
             options.PropertyType = ParsePropertyType(args);
             if (args[2].Contains(':'))
             {
@@ -50,6 +26,8 @@ namespace Contractor.CLI
             options.EntityNamePlural = entityName.Split(':')[1];
 
             options.IsOptional = ArgumentParser.HasArgument(args, "-o", "--optional");
+
+            return options;
         }
 
         private static PropertyTypes ParsePropertyType(string[] args)
@@ -61,26 +39,32 @@ namespace Contractor.CLI
                 case "varchar":
                 case "nvarchar":
                     return PropertyTypes.String;
+
                 case "short":
                 case "int":
                 case "integer":
                 case "long":
                     return PropertyTypes.Integer;
+
                 case "datetime":
                 case "date":
                 case "time":
                     return PropertyTypes.DateTime;
+
                 case "bit":
                 case "bool":
                 case "boolean":
                     return PropertyTypes.Boolean;
+
                 case "double":
                 case "float":
                 case "number":
                 case "decimal":
                     return PropertyTypes.Double;
+
                 case "guid":
                     return PropertyTypes.Guid;
+
                 default:
                     throw new ArgumentException("PropertyType cannot be parsed: " + propertyType);
             }
