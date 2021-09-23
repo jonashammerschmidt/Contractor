@@ -1,5 +1,6 @@
 ﻿using Contractor.Core.Options;
 using Contractor.Core.Projects;
+using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,15 @@ namespace Contractor.Core
 {
     public class ContractorCoreApi
     {
+        private readonly IFileSystemClient fileSystemClient;
         private readonly List<ClassGeneration> classGenerations = new List<ClassGeneration>();
 
         public ContractorCoreApi()
         {
             ServiceProvider serviceProvider = DependencyProvider.GetServiceProvider();
-            classGenerations = serviceProvider.GetServices<ClassGeneration>().ToList();
+
+            this.fileSystemClient = serviceProvider.GetRequiredService<IFileSystemClient>();
+            this.classGenerations = serviceProvider.GetServices<ClassGeneration>().ToList();
         }
 
         public void AddDomain(IDomainAdditionOptions options)
@@ -79,6 +83,11 @@ namespace Contractor.Core
             {
                 classGeneration.PerformAddOneToOneRelationCommand(options);
             }
+        }
+
+        public void SaveChanges()
+        {
+            this.fileSystemClient.SaveAll();
         }
     }
 }

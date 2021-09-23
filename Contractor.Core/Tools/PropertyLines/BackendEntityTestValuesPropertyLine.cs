@@ -29,7 +29,7 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.DateTime:
                     Random gen = random;
                     int range = 10 * 365; // 10 years
-                    var randomDate = DateTime.Today.AddDays(-gen.Next(range));
+                    var randomDate = new DateTime(2020, 12, 31).AddDays(-gen.Next(range));
                     return $"new DateTime({randomDate.Year}, {randomDate.Month}, {randomDate.Day})";
 
                 default:

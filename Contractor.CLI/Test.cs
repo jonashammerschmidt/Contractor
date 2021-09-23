@@ -20,6 +20,8 @@ namespace Contractor.CLI
             string dbDestinationFolder,
             string frontendDestinationFolder)
         {
+            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
+
             var contractorOptions = new ContractorOptions()
             {
                 BackendDestinationFolder = backendDestinationFolder,
@@ -30,15 +32,15 @@ namespace Contractor.CLI
                 IsVerbose = false
             };
 
-            AddBanken(contractorOptions);
-            AddKunden(contractorOptions);
-            AddRelation(contractorOptions);
+            AddBanken(contractorCoreApi, contractorOptions);
+            AddKunden(contractorCoreApi, contractorOptions);
+            AddRelation(contractorCoreApi, contractorOptions);
+
+            contractorCoreApi.SaveChanges();
         }
 
-        private static void AddBanken(ContractorOptions contractorOptions)
+        private static void AddBanken(ContractorCoreApi contractorCoreApi, ContractorOptions contractorOptions)
         {
-            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-
             // Domain
             var domainAdditionOptions = new DomainAdditionOptions(contractorOptions)
             {
@@ -107,10 +109,8 @@ namespace Contractor.CLI
             contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
 
-        private static void AddKunden(ContractorOptions contractorOptions)
+        private static void AddKunden(ContractorCoreApi contractorCoreApi, ContractorOptions contractorOptions)
         {
-            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-
             // Domain
             var domainAdditionOptions = new DomainAdditionOptions(contractorOptions)
             {
@@ -184,10 +184,8 @@ namespace Contractor.CLI
             contractorCoreApi.AddProperty(propertyAdditionOptions);
         }
 
-        private static void AddRelation(ContractorOptions contractorOptions)
+        private static void AddRelation(ContractorCoreApi contractorCoreApi, ContractorOptions contractorOptions)
         {
-            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-
             RelationAdditionOptions relationOptions = new RelationAdditionOptions(contractorOptions)
             {
                 DomainFrom = "GegönntesBankwesen",

@@ -46,6 +46,12 @@ namespace Contractor.Core.Tools
                 }
 
                 File.WriteAllText(fileCacheItem.Key, fileCacheItem.Value);
+
+                // string filename = fileCacheItem.Key
+                //     .Split(new[] { "/", "\\" }, StringSplitOptions.None)
+                //     .Last();
+
+                // System.Console.WriteLine($"Written to {filename}");
             }
         }
     }

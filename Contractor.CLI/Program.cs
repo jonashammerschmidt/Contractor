@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Contractor.Core;
+using Contractor.Core.Options;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace Contractor.CLI
 {
@@ -26,9 +31,11 @@ namespace Contractor.CLI
                     Test.Testen();
                     break;
 
+                case "execute":
+                    HandleExecuteJob(args);
+                    break;
+
                 case "add":
-                case "rename":
-                case "remove":
                     HandleMainJobs(args);
                     break;
 
@@ -47,29 +54,66 @@ namespace Contractor.CLI
                 Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
                 return;
             }
-            switch (args[1])
+
+            
+            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
+            ContractorExecuter.Execute(
+                contractorCoreApi,
+                ContractorOptionsLoader.Load(Directory.GetCurrentDirectory()),
+                args);
+            contractorCoreApi.SaveChanges();
+        }
+
+        private static void HandleExecuteJob(string[] args)
+        {
+            if (args.Length < 2)
             {
-                case "domain":
-                    DomainHandler.Perform(args);
-                    break;
-
-                case "entity":
-                    EntityHandler.Perform(args);
-                    break;
-
-                case "property":
-                    PropertyHandler.Perform(args);
-                    break;
-
-                case "relation":
-                    RelationHandler.Perform(args);
-                    break;
-
-                default:
-                    Console.WriteLine("Der Typ '" + args[1] + "' ist ungültig.");
-                    Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
-                    break;
+                Console.WriteLine("Der Typ wurde nicht angegeben.");
+                Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
+                return;
             }
+
+            string filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), args[1]));
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Die angegebene Datei konnte nicht gefunden werden.");
+            }
+
+            var file = File.ReadAllText(filePath);
+            var lines = file.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            var filteredLines = lines
+                .Select(line => line.Trim())
+                .Where(line => line.StartsWith("contractor add"));
+
+            IContractorOptions contractorOptions = ContractorOptionsLoader
+                .Load(Directory.GetCurrentDirectory());
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            Console.WriteLine($"Started generation...");
+
+            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
+            foreach (string line in filteredLines)
+            {
+                var lineArgs = line.Split(" ").ToList();
+                lineArgs.RemoveAt(0);
+                ContractorExecuter.Execute(
+                    contractorCoreApi,
+                    contractorOptions,
+                    lineArgs.ToArray());
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine($"Finished generation after {stopwatch.ElapsedMilliseconds}ms");
+            stopwatch.Reset();
+            stopwatch.Start();
+            Console.WriteLine($"Started saving...");
+            
+            contractorCoreApi.SaveChanges();
+            
+            stopwatch.Stop();
+            Console.WriteLine($"Finished saving after {stopwatch.ElapsedMilliseconds}ms");
+
         }
     }
 }

@@ -1,41 +1,16 @@
 ﻿using Contractor.CLI.Tools;
-using Contractor.Core;
 using Contractor.Core.Options;
-using System;
-using System.IO;
 
 namespace Contractor.CLI
 {
-    internal class Relation1ToNAdditionHandler
+    internal class Relation1ToNAdditionOptionParser
     {
-        public static void Perform(string[] args)
+        public static IRelationAdditionOptions ParseOptions(IContractorOptions contractorOptions, string[] args)
         {
-            if (args.Length < 5)
-            {
-                Console.WriteLine("Bitte geben sie alle Informationen an. Beispiel: contractor add relation 1:n Bankwesen.Bank:Banken Kundenstamm.Kunde:Kunden");
-                return;
-            }
+            RelationAdditionOptions options = new RelationAdditionOptions(contractorOptions);
 
-            var options = ContractorOptionsLoader.Load(Directory.GetCurrentDirectory());
-            RelationAdditionOptions relationOptions = new RelationAdditionOptions(options);
-            ParseOptions(relationOptions, args);
-
-            try
-            {
-                ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-                contractorCoreApi.Add1ToNRelation(relationOptions);
-                Console.WriteLine($"1-zu-N Relation zwischen '{relationOptions.EntityNameFrom}' und '{relationOptions.EntityNamePluralTo}' hinzugefügt");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
-        private static void ParseOptions(IRelationAdditionOptions options, string[] args)
-        {
             options.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
-            
+
             string entityName = args[3];
             options.DomainFrom = entityName.Split('.')[0];
             options.EntityNameFrom = entityName.Split('.')[1].Split(':')[0];
@@ -57,6 +32,8 @@ namespace Contractor.CLI
                 options.PropertyNameFrom = options.EntityNameFrom;
                 options.PropertyNameTo = options.EntityNamePluralTo;
             }
+
+            return options;
         }
     }
 };
