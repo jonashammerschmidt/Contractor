@@ -1,4 +1,5 @@
-﻿using Contractor.Core;
+﻿using Contractor.CLI.Tools;
+using Contractor.Core;
 using Contractor.Core.Options;
 using System;
 using System.Diagnostics;
@@ -55,7 +56,6 @@ namespace Contractor.CLI
                 return;
             }
 
-            
             ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
             ContractorExecuter.Execute(
                 contractorCoreApi,
@@ -88,6 +88,8 @@ namespace Contractor.CLI
             IContractorOptions contractorOptions = ContractorOptionsLoader
                 .Load(Directory.GetCurrentDirectory());
 
+            contractorOptions.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
+
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             Console.WriteLine($"Started generation...");
@@ -97,6 +99,7 @@ namespace Contractor.CLI
             {
                 var lineArgs = line.Split(" ").ToList();
                 lineArgs.RemoveAt(0);
+
                 ContractorExecuter.Execute(
                     contractorCoreApi,
                     contractorOptions,
@@ -108,12 +111,11 @@ namespace Contractor.CLI
             stopwatch.Reset();
             stopwatch.Start();
             Console.WriteLine($"Started saving...");
-            
+
             contractorCoreApi.SaveChanges();
-            
+
             stopwatch.Stop();
             Console.WriteLine($"Finished saving after {stopwatch.ElapsedMilliseconds}ms");
-
         }
     }
 }

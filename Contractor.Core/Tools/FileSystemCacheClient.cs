@@ -7,6 +7,8 @@ namespace Contractor.Core.Tools
     {
         public Dictionary<string, string> fileCache = new Dictionary<string, string>();
 
+        public Dictionary<string, string> fileWriteCache = new Dictionary<string, string>();
+
         public string ReadAllText(string path)
         {
             if (!this.fileCache.ContainsKey(path))
@@ -28,16 +30,18 @@ namespace Contractor.Core.Tools
             if (!this.fileCache.ContainsKey(path))
             {
                 fileCache.Add(path, fileContent);
+                fileWriteCache.Add(path, fileContent);
             }
             else
             {
                 fileCache[path] = fileContent;
+                fileWriteCache[path] = fileContent;
             }
         }
 
         public void SaveAll()
         {
-            foreach (var fileCacheItem in this.fileCache)
+            foreach (var fileCacheItem in this.fileWriteCache)
             {
                 string dirPath = Path.GetDirectoryName(fileCacheItem.Key);
                 if (!Directory.Exists(dirPath))
@@ -46,12 +50,6 @@ namespace Contractor.Core.Tools
                 }
 
                 File.WriteAllText(fileCacheItem.Key, fileCacheItem.Value);
-
-                // string filename = fileCacheItem.Key
-                //     .Split(new[] { "/", "\\" }, StringSplitOptions.None)
-                //     .Last();
-
-                // System.Console.WriteLine($"Written to {filename}");
             }
         }
     }

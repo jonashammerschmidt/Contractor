@@ -11,26 +11,63 @@ namespace Contractor.CLI
             switch (args[1])
             {
                 case "domain":
-                    contractorCoreApi.AddDomain(DomainAdditionOptionParser.ParseOptions(options, args));
+                    DomainAdditionOptions domainOptions = DomainAdditionOptionParser.ParseOptions(options, args);
+                    contractorCoreApi.AddDomain(domainOptions);
+
+                    if (options.IsVerbose)
+                    {
+                        Console.WriteLine($"Domain '{domainOptions.Domain}' hinzugefügt.");
+                    }
+
                     break;
 
                 case "entity":
-                    contractorCoreApi.AddEntity(EntityAdditionOptionParser.ParseOptions(options, args));
+                    EntityAdditionOptions entityOptions = EntityAdditionOptionParser.ParseOptions(options, args);
+                    contractorCoreApi.AddEntity(entityOptions);
+
+                    if (options.IsVerbose)
+                    {
+                        Console.WriteLine($"Entity '{entityOptions.EntityName} ({entityOptions.EntityNamePlural})' zur Domain '{entityOptions.Domain}' hinzugefügt'");
+                    }
+
                     break;
 
                 case "property":
-                    contractorCoreApi.AddProperty(PropertyAdditionOptionParser.ParseOptions(options, args));
+                    IPropertyAdditionOptions propertyOptions = PropertyAdditionOptionParser.ParseOptions(options, args);
+                    contractorCoreApi.AddProperty(propertyOptions);
+
+                    if (options.IsVerbose)
+                    {
+                        Console.WriteLine($"Property '{propertyOptions.PropertyName}' zur Entity '{propertyOptions.EntityName}' hinzugefügt'");
+                    }
+
                     break;
 
                 case "relation":
                     switch (args[2])
                     {
                         case "1:1":
-                            contractorCoreApi.AddOneToOneRelation(RelationOneToOneAdditionOptionParser.ParseOptions(options, args));
+                            IRelationAdditionOptions oneToOneRelationOptions = RelationOneToOneAdditionOptionParser.ParseOptions(options, args);
+                            contractorCoreApi.AddOneToOneRelation(oneToOneRelationOptions);
+
+                            if (options.IsVerbose)
+                            {
+                                Console.WriteLine($"1-zu-1 Relation zwischen '{oneToOneRelationOptions.EntityNameFrom}' und '{oneToOneRelationOptions.EntityNameTo}' hinzugefügt");
+                            }
+
                             break;
 
                         case "1:n":
-                            contractorCoreApi.Add1ToNRelation(Relation1ToNAdditionOptionParser.ParseOptions(options, args));
+                            IRelationAdditionOptions relation1ToNAdditionOptions = Relation1ToNAdditionOptionParser.ParseOptions(options, args);
+                            contractorCoreApi.Add1ToNRelation(relation1ToNAdditionOptions);
+
+
+                            if (options.IsVerbose)
+                            {
+                                Console.WriteLine($"1-zu-N Relation zwischen '{relation1ToNAdditionOptions.EntityNameFrom}' und '{relation1ToNAdditionOptions.EntityNamePluralTo}' hinzugefügt");
+                            }
+
+
                             break;
 
                         default:
