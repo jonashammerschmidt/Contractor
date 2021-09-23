@@ -4,7 +4,6 @@ using ProjectName.Contract.Logic.Tools.Identifier;
 using ProjectName.Contract.Logic.Tools.Pagination;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using ProjectName.Logic.Modules.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -237,7 +236,6 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
 
         private Mock<IEntitiesCrudRepository> SetupEntitiesCrudRepositoryDeleteConflict()
         {
-            // Arrange
             var entitiesCrudRepository = new Mock<IEntitiesCrudRepository>(MockBehavior.Strict);
             entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault)).Returns(true);
             entitiesCrudRepository.Setup(repository => repository.DoesEntityExist(EntityTestValues.IdDefault2)).Returns(true);
