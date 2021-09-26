@@ -46,6 +46,8 @@ namespace Contractor.Core.Projects.Database
             stringEditor.InsertLine(GetPropertyLine(options));
             if (addUnique)
             {
+                stringEditor.MoveToEnd();
+                stringEditor.InsertNewLine();
                 stringEditor.InsertLine(GetUniqueLine(options));
             }
 
@@ -59,7 +61,9 @@ namespace Contractor.Core.Projects.Database
 
         private static string GetUniqueLine(IRelationAdditionOptions options)
         {
-            return $"    CONSTRAINT [UNIQUE_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id] UNIQUE ({options.PropertyNameFrom}Id),";
+            return
+                $"CREATE UNIQUE NONCLUSTERED INDEX[UNIQUE_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id]\n" +
+                $"    ON [dbo].[{options.EntityNamePluralTo}]([{options.PropertyNameFrom}Id] ASC) WHERE([{options.PropertyNameFrom}Id] IS NOT NULL);";
         }
     }
 }

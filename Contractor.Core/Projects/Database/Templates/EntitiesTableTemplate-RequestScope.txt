@@ -4,3 +4,5 @@
     CONSTRAINT [PK_Entities_Id] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Entities_RequestScopeId] FOREIGN KEY ([RequestScopeId]) REFERENCES [dbo].[RequestScopes] ([Id]),
 );
+
+GO

@@ -2,3 +2,5 @@
     [Id]                   UNIQUEIDENTIFIER NOT NULL,
     CONSTRAINT [PK_Entities_Id] PRIMARY KEY CLUSTERED ([Id] ASC),
 );
+
+GO
