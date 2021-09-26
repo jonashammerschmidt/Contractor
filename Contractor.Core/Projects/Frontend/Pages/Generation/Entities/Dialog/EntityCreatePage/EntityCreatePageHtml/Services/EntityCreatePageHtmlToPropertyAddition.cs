@@ -57,7 +57,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             return
               $"            <app-search-dropdown [formGroupInstance]=\"{options.EntityNameLowerTo}CreateForm\" [formControlNameInstance]=\"'{options.PropertyNameFrom.LowerFirstChar()}Id'\"\n" +
-              $"                label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\" required=\"true\" [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\"></app-search-dropdown>";
+              $"                label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\"" +
+              ((!options.IsOptional) ? " required=\"true\"" : "") +
+              $" [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\"></app-search-dropdown>";
         }
     }
 }

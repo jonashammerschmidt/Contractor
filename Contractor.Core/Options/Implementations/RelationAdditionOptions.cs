@@ -4,6 +4,8 @@ namespace Contractor.Core.Options
 {
     public class RelationAdditionOptions : ContractorOptions, IRelationAdditionOptions
     {
+        private bool isOptional;
+
         private string domainFrom;
         private string entityNameFrom;
         private string entityNamePluralFrom;
@@ -13,6 +15,12 @@ namespace Contractor.Core.Options
         private string entityNameTo;
         private string entityNamePluralTo;
         private string propertyNameTo;
+
+        public bool IsOptional
+        {
+            get { return isOptional; }
+            set { isOptional = value; }
+        }
 
         public string DomainFrom
         {
@@ -135,6 +143,7 @@ namespace Contractor.Core.Options
                 EntityNamePlural = options.EntityNamePluralFrom,
                 PropertyType = propertyType,
                 PropertyName = options.PropertyNameTo,
+                IsOptional = options.IsOptional,
             };
         }
 
@@ -146,7 +155,8 @@ namespace Contractor.Core.Options
                 EntityName = options.EntityNameTo,
                 EntityNamePlural = options.EntityNamePluralTo,
                 PropertyType = propertyType,
-                PropertyName = options.PropertyNameFrom + (propertyType.Equals("Guid") ? "Id" : "")
+                PropertyName = options.PropertyNameFrom + (propertyType.Equals("Guid") ? "Id" : ""),
+                IsOptional = options.IsOptional,
             };
         }
 
