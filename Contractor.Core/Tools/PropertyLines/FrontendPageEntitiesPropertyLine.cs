@@ -27,7 +27,8 @@ namespace Contractor.Core.Tools
                         $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
                         $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyName.ToReadable()} </th>\n" +
                         $"                <td mat-cell *matCellDef=\"let element\">\n" +
-                        $"                    {{{{element.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}}\n" +
+                        $"                    <span *ngIf=\"!element.{options.PropertyName.LowerFirstChar()}\">-</span>\n" +
+                        $"                    <span *ngIf=\"element.{options.PropertyName.LowerFirstChar()}\">{{{{element.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}}</span>\n" +
                         $"                </td>\n" +
                         "            </ng-container>\n";
                 default:
@@ -35,7 +36,8 @@ namespace Contractor.Core.Tools
                          $"            <ng-container matColumnDef=\"{options.PropertyName.LowerFirstChar()}\">\n" +
                          $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyName.ToReadable()} </th>\n" +
                          $"                <td mat-cell *matCellDef=\"let element\">\n" +
-                         $"                    {{{{element.{options.PropertyName.LowerFirstChar()}}}}}\n" +
+                         $"                    <span *ngIf=\"!element.{options.PropertyName.LowerFirstChar()}\">-</span>\n" +
+                         $"                    <span *ngIf=\"element.{options.PropertyName.LowerFirstChar()}\">{{{{element.{options.PropertyName.LowerFirstChar()}}}}}</span>\n" +
                          $"                </td>\n" +
                           "            </ng-container>\n";
             }

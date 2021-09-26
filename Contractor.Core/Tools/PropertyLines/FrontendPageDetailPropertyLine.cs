@@ -26,14 +26,16 @@ namespace Contractor.Core.Tools
                         $"    <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + {options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}{(options.IsOptional ? "?" : "")}.toLocaleString()\">\n" +
                         $"        <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{options.PropertyName.ToReadable()}:</span>\n" +
                         $"        <br>\n" +
-                        $"        <span aria-hidden=\"true\">{{{{{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}}</span>\n" +
+                        $"        <span *ngIf=\"!{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">-</span>\n" +
+                        $"        <span *ngIf=\"{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\" aria-hidden=\"true\">{{{{{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()} | date:'dd. MMM. yyyy, HH:mm'}}}}</span>\n" +
                          "    </p>";
                 default:
                     return
                         $"    <p [attr.aria-label]=\"'{options.PropertyName.ToReadable()}: ' + {options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">\n" +
                         $"        <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{options.PropertyName.ToReadable()}:</span>\n" +
                         $"        <br>\n" +
-                        $"        <span aria-hidden=\"true\">{{{{{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}}}}}</span>\n" +
+                        $"        <span *ngIf=\"!{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\">-</span>\n" +
+                        $"        <span *ngIf=\"{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}\" aria-hidden=\"true\">{{{{{options.EntityName.LowerFirstChar()}.{options.PropertyName.LowerFirstChar()}}}}}</span>\n" +
                          "    </p>";
             }
         }

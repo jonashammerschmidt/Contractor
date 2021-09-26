@@ -66,10 +66,12 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetLine(IRelationAdditionOptions options)
         {
             return
-                $"    <p *ngIf=\"{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}\">\n" +
+                $"    <p>\n" +
                 $"        <span style=\"font-size: 0.8em;\">{options.PropertyNameFrom.ToReadable()}:</span>\n" +
                 $"        <br>\n" +
-                $"        <a [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainFrom)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}/detail', {options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.id]\">\n" +
+                $"        <span *ngIf=\"!{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}\">-</span>\n" +
+                $"        <a *ngIf=\"{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}\"\n" +
+                $"            [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainFrom)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}/detail', {options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.id]\">\n" +
                 $"            {{{{{options.EntityNameLowerTo}.{options.PropertyNameFrom.LowerFirstChar()}.bezeichnung}}}}\n" +
                 $"            <mat-icon style=\"font-size: 1em;\">open_in_new</mat-icon>\n" +
                 $"        </a>\n" +

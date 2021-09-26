@@ -60,7 +60,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"                [formControlNameInstance]=\"'{options.PropertyNameFrom.LowerFirstChar()}Id'\" label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\"\n" +
                 $"                " + 
                  ((!options.IsOptional) ? "required=\"true\" " : "") +
-                 "[dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" [initialItem]=\"selected{options.PropertyNameFrom}\">\n" +
+                $"[dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" [initialItem]=\"selected{options.PropertyNameFrom}\">\n" +
                 $"            </app-search-dropdown>";
         }
     }
