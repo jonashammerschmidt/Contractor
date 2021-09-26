@@ -196,6 +196,7 @@ namespace Contractor.CLI
                 EntityNameTo = "GegönnterKunde",
                 EntityNamePluralTo = "GegönnteKunden",
                 PropertyNameTo = "BesteKunden",
+                IsOptional = true,
             };
             contractorCoreApi.Add1ToNRelation(relationOptions);
 

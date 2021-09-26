@@ -94,10 +94,11 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertNewLine();
             }
 
+            string optionalText = (options.IsOptional && options.PropertyType == "Guid") ? "?" : "";
             if (forInterface)
-                stringEditor.InsertLine($"        {options.PropertyType} {options.PropertyName} {{ get; set; }}");
+                stringEditor.InsertLine($"        {options.PropertyType}{optionalText} {options.PropertyName} {{ get; set; }}");
             else
-                stringEditor.InsertLine($"        public {options.PropertyType} {options.PropertyName} {{ get; set; }}");
+                stringEditor.InsertLine($"        public {options.PropertyType}{optionalText} {options.PropertyName} {{ get; set; }}");
 
             return stringEditor.GetText();
         }

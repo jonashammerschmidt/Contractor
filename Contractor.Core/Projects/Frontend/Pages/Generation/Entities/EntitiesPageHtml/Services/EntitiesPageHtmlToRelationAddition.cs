@@ -65,7 +65,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
              $"            <ng-container matColumnDef=\"{options.PropertyNameFrom.LowerFirstChar()}\">\n" +
              $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyNameFrom.ToReadable()} </th>\n" +
               "                <td mat-cell *matCellDef=\"let element\">\n" +
-             $"                    {{{{element.{options.PropertyNameFrom.LowerFirstChar()}.bezeichnung}}}}\n" +
+             $"                    <span *ngIf=\"element.{options.PropertyNameFrom.LowerFirstChar()}\">{{{{element.{options.PropertyNameFrom.LowerFirstChar()}.bezeichnung}}}}</span>\n" +
+             $"                    <span *ngIf=\"!element.{options.PropertyNameFrom.LowerFirstChar()}\">-</span>\n" +
               "                </td>\n" +
               "            </ng-container>\n";
         }
