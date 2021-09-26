@@ -14,7 +14,7 @@ namespace Contractor.Core.Options
             set { propertyName = value.ToVariableName(); }
         }
 
-        public bool IsOptional { get; set; } = false;
+        public bool IsOptional { get; set; }
 
         public RelationSideAdditionOptions()
         {

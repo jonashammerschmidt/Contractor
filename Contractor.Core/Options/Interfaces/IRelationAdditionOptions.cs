@@ -2,6 +2,8 @@
 {
     public interface IRelationAdditionOptions : IContractorOptions
     {
+        bool IsOptional { get; set; }
+
         // From
         string DomainFrom { get; set; }
 

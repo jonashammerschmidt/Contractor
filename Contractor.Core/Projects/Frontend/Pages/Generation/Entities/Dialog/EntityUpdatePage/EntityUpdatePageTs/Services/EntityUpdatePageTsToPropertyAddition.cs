@@ -76,7 +76,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             stringEditor.NextThatContains("this.formBuilder.group({");
             stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"      {options.PropertyNameFrom.LowerFirstChar()}Id: new FormControl(null, [Validators.required]),");
+            stringEditor.InsertLine($"      {options.PropertyNameFrom.LowerFirstChar()}Id: new FormControl(null, [" +
+                ((!options.IsOptional) ? "Validators.required" : "") +
+                "]),");
 
             stringEditor.MoveToStart();
             stringEditor.NextThatContains("ngOnInit()");

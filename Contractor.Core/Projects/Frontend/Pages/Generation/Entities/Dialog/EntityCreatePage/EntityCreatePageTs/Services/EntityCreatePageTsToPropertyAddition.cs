@@ -69,7 +69,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             }
             stringEditor.NextThatContains("this.formBuilder.group({");
             stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"      {options.PropertyNameFrom.LowerFirstChar()}Id: new FormControl(null, [Validators.required]),");
+            stringEditor.InsertLine($"      {options.PropertyNameFrom.LowerFirstChar()}Id: new FormControl(null, [" +
+                ((!options.IsOptional) ? "Validators.required" : "") +
+                "]),");
 
             stringEditor.MoveToStart();
             stringEditor.NextThatContains("ngOnInit()");
@@ -77,7 +79,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"    this.{options.PropertyNameFrom.LowerFirstChar()}DataSource = new DropdownPaginationDataSource(");
             stringEditor.InsertLine($"      (options) => this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}(options),");
-            stringEditor.InsertLine( "      'bezeichnung');");
+            stringEditor.InsertLine("      'bezeichnung');");
 
             return stringEditor.GetText();
         }
