@@ -44,7 +44,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             stringEditor.NextThatContains("return {");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine($"            {options.PropertyNameFrom.LowerFirstChar()}Id: i{options.EntityNameTo}Detail.{options.PropertyNameFrom.LowerFirstChar()}.id,");
+            stringEditor.InsertLine($"            {options.PropertyNameFrom.LowerFirstChar()}Id: i{options.EntityNameTo}Detail.{options.PropertyNameFrom.LowerFirstChar()}?.id,");
 
             return stringEditor.GetText();
         }
