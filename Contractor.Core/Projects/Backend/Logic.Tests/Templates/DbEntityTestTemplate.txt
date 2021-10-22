@@ -27,14 +27,6 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             };
         }
 
-        public static IDbEntity ForUpdate()
-        {
-            return new DbEntityTest()
-            {
-                Id = EntityTestValues.IdDefault,
-            };
-        }
-
         public static void AssertDefault(IDbEntity dbEntity)
         {
             Assert.AreEqual(EntityTestValues.IdDefault, dbEntity.Id);
@@ -48,11 +40,6 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
         public static void AssertCreated(IDbEntity dbEntity)
         {
             Assert.AreEqual(EntityTestValues.IdForCreate, dbEntity.Id);
-        }
-
-        public static void AssertUpdated(IDbEntity dbEntity)
-        {
-            Assert.AreEqual(EntityTestValues.IdDefault, dbEntity.Id);
         }
     }
 }

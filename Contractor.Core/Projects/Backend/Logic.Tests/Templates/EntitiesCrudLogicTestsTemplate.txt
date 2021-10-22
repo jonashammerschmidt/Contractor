@@ -176,7 +176,7 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
 
             // Assert
             Assert.AreEqual(LogicResultState.NotFound, result.State);
-            entitiesCrudRepository.Verify((repository) => repository.UpdateEntity(DbEntityTest.Default()), Times.Never);
+            entitiesCrudRepository.Verify((repository) => repository.UpdateEntity(It.IsAny<IDbEntityUpdate>()), Times.Never);
         }
 
         [TestMethod]

@@ -6,7 +6,7 @@ namespace ProjectName.Contract.Persistence.Modules.Domain.Entities
 {
     public interface IEntitiesCrudRepository
     {
-        void CreateEntity(IDbEntity entity);
+        void CreateEntity(IDbEntity dbEntity);
 
         void DeleteEntity(Guid entityId);
 
@@ -20,6 +20,6 @@ namespace ProjectName.Contract.Persistence.Modules.Domain.Entities
 
         IEnumerable<IDbEntity> GetAllEntities();
 
-        void UpdateEntity(IDbEntity entity);
+        void UpdateEntity(IDbEntityUpdate dbEntityUpdate);
     }
 }

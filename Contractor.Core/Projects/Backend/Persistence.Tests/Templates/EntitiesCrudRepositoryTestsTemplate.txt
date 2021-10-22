@@ -161,7 +161,7 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
 
             // Assert
             IDbEntity dbEntity = entitiesCrudRepository.GetEntity(EntityTestValues.IdDbDefault);
-            DbEntityUpdateTest.AssertForUpdate(dbEntity);
+            DbEntityTest.AssertForUpdate(dbEntity);
         }
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryDefault()

@@ -42,7 +42,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("From" + options.EntityName + "Update(");
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}Update.{options.PropertyName},");
+            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityNameLower}Update.{options.PropertyName},");
             
             return stringEditor.GetText();
         }

@@ -51,12 +51,6 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}Default2,");
             fileData = stringEditor.GetText();
 
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"public static IDb{options.EntityName} ForUpdate()");
-            stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}ForUpdate,");
-            fileData = stringEditor.GetText();
-
             // ----------- Asserts -----------
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("AssertDefault");
@@ -74,12 +68,6 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             stringEditor.NextThatContains("AssertCreated");
             stringEditor.Next(line => line.Trim().Equals("}"));
             stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}ForCreate, db{options.EntityName}.{options.PropertyName});");
-            fileData = stringEditor.GetText();
-
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("AssertUpdated");
-            stringEditor.Next(line => line.Trim().Equals("}"));
-            stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}ForUpdate, db{options.EntityName}.{options.PropertyName});");
             fileData = stringEditor.GetText();
 
             return stringEditor.GetText();
