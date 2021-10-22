@@ -38,8 +38,13 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            // ----------- Creators -----------
             StringEditor stringEditor = new StringEditor(fileData);
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains($"public static IDb{options.EntityName}Update ForUpdate()");
+            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}ForUpdate,");
+
+            stringEditor.MoveToStart();
             stringEditor.NextThatContains("AssertUpdated");
             stringEditor.Next(line => line.Trim().Equals("}"));
             stringEditor.InsertLine($"            Assert.AreEqual({options.EntityName}TestValues.{options.PropertyName}ForUpdate, db{options.EntityName}Update.{options.PropertyName});");

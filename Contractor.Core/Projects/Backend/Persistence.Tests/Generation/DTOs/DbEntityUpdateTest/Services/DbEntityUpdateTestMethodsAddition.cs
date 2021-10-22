@@ -40,7 +40,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
             // ----------- Asserts -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"public static IDb{options.EntityName} ForUpdate()");
+            stringEditor.NextThatContains($"public static IDb{options.EntityName}Update ForUpdate()");
             stringEditor.Next(line => line.Trim().Equals("};"));
             stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}ForUpdate,");
             fileData = stringEditor.GetText();

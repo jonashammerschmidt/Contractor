@@ -11,6 +11,14 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
     {
         public Guid Id { get; set; }
 
+        public static IDbEntityUpdate ForUpdate()
+        {
+            return new DbEntityUpdateTest()
+            {
+                Id = EntityTestValues.IdDefault,
+            };
+        }
+
         public static void AssertUpdated(IDbEntityUpdate dbEntityUpdate)
         {
             Assert.AreEqual(EntityTestValues.IdDefault, dbEntityUpdate.Id);

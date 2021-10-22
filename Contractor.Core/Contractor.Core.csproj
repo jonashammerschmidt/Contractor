@@ -55,6 +55,9 @@
     <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityUpdateTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -64,13 +67,22 @@
     <None Update="Projects\Backend\Logic.Tests\Templates\DbEntityListItemTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Backend\Logic.Tests\Templates\DbEntityUpdateTestTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Backend\Logic.Tests\Templates\EntityListItemTestTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Backend\Logic\Templates\DbEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Backend\Logic\Templates\EntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Backend\Persistence.Tests\Templates\DbEntityListItemTestTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Backend\Persistence.Tests\Templates\DbEntityUpdateTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Backend\Persistence\Templates\DbEntityListItemTemplate.txt">
