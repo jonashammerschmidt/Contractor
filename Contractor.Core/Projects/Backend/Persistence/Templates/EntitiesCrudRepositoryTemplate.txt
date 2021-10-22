@@ -78,15 +78,14 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
                 .Select(efEntity => DbEntity.FromEfEntity(efEntity));
         }
 
-        public void UpdateEntity(IDbEntity dbEntity)
+        public void UpdateEntity(IDbEntityUpdate dbEntityUpdate)
         {
             EfEntity efEntity = this.dbContext.Entities
-                .Where(efEntity => efEntity.Id == dbEntity.Id)
+                .Where(efEntity => efEntity.Id == dbEntityUpdate.Id)
                 .FirstOrDefault();
 
-            DbEntity.UpdateEfEntity(efEntity, dbEntity);
+            DbEntity.UpdateEfEntity(efEntity, dbEntityUpdate);
 
-            this.dbContext.Entities.Update(efEntity);
             this.dbContext.SaveChanges();
         }
     }

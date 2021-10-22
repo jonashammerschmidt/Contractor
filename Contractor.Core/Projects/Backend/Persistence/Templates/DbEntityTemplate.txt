@@ -7,7 +7,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        internal static void UpdateEfEntity(EfEntity efEntity, IDbEntity dbEntity)
+        internal static void UpdateEfEntity(EfEntity efEntity, IDbEntityUpdate dbEntityUpdate)
         {
         }
 

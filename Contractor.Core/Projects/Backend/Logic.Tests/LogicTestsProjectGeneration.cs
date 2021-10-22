@@ -14,6 +14,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             serviceCollection.AddSingleton<ClassGeneration, DbEntityDetailTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DbEntityListItemTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DbEntityTestGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, DbEntityUpdateTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityCreateTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityDetailTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityListItemTestGeneration>();
@@ -26,6 +27,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             serviceCollection.AddSingleton<DbEntityDetailTestFromAssertOneToOneAddition>();
             serviceCollection.AddSingleton<DbEntityListItemTestMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityTestMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityUpdateTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityDetailTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityListItemTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityListItemTestFromOneToOneAssertAddition>();
