@@ -1,0 +1,19 @@
+﻿using ProjectName.Contract.Persistence.Tools.Pagination;
+using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using ProjectName.Logic.Tests.Tools.Pagination;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+
+namespace ProjectName.Logic.Tests.Modules.Domain.Entities
+{
+    internal class DbEntityUpdateTest : IDbEntityUpdate
+    {
+        public Guid Id { get; set; }
+
+        public static void AssertUpdated(IDbEntityUpdate dbEntityUpdate)
+        {
+            Assert.AreEqual(EntityTestValues.IdDefault, dbEntityUpdate.Id);
+        }
+    }
+}

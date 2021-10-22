@@ -1,0 +1,19 @@
+﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
+{
+    internal class DbEntityUpdateTest : IDbEntityUpdate
+    {
+        public Guid Id { get; set; }
+
+        public static IDbEntityUpdate ForUpdate()
+        {
+            return new DbEntityUpdateTest()
+            {
+                Id = EntityTestValues.IdDbDefault,
+            };
+        }
+    }
+}

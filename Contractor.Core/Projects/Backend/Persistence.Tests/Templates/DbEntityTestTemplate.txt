@@ -32,14 +32,6 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
             };
         }
 
-        public static IDbEntity ForUpdate()
-        {
-            return new DbEntityTest()
-            {
-                Id = EntityTestValues.IdDbDefault,
-            };
-        }
-
         public static void AssertDbDefault(IDbEntity dbEntity)
         {
             Assert.AreEqual(EntityTestValues.IdDbDefault, dbEntity.Id);

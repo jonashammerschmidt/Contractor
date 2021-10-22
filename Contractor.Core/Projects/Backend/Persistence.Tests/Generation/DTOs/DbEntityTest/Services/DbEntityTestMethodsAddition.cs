@@ -57,12 +57,6 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}ForCreate,");
             fileData = stringEditor.GetText();
 
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"public static IDb{options.EntityName} ForUpdate()");
-            stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}ForUpdate,");
-            fileData = stringEditor.GetText();
-
             // ----------- Asserts -----------
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("AssertDbDefault");

@@ -91,16 +91,14 @@ namespace ProjectName.Logic.Modules.Domain.Entities
 
         public ILogicResult UpdateEntity(IEntityUpdate entityUpdate)
         {
-            IDbEntity dbEntityToUpdate = this.entitiesCrudRepository.GetEntity(entityUpdate.Id);
-            if (dbEntityToUpdate == null)
+            if (!this.entitiesCrudRepository.DoesEntityExist(entityId))
             {
-                this.logger.LogDebug($"Entity ({entityUpdate.Id}) konnte nicht gefunden werden.");
-                return LogicResult.NotFound($"Entity ({entityUpdate.Id}) konnte nicht gefunden werden.");
+                this.logger.LogDebug($"Entity ({entityId}) konnte nicht gefunden werden.");
+                return LogicResult.NotFound($"Entity ({entityId}) konnte nicht gefunden werden.");
             }
 
-            Entity.UpdateDbEntity(dbEntityToUpdate, entityUpdate);
-
-            this.entitiesCrudRepository.UpdateEntity(dbEntityToUpdate);
+            this.entitiesCrudRepository.UpdateEntity(DbEntityUpdate
+                .FromEntityUpdate(dbEntityToUpdate));
 
             this.logger.LogInformation($"Entity ({entityUpdate.Id}) aktualisiert");
             return LogicResult.Ok();

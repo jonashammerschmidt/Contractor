@@ -3,14 +3,14 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Backend.Persistence
+namespace Contractor.Core.Projects.Backend.Persistence.Tests
 {
-    internal class DbEntityMethodsAddition
+    internal class DbEntityUpdateTestMethodsAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public DbEntityMethodsAddition(
+        public DbEntityUpdateTestMethodsAddition(
             IFileSystemClient fileSystemClient,
             PathService pathService)
         {
@@ -38,28 +38,12 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
+            // ----------- Asserts -----------
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("UpdateEf" + options.EntityName);
-            stringEditor.Next(line => line.Trim().Equals("}"));
-
-            stringEditor.InsertLine($"            ef{options.EntityName}.{options.PropertyName} = db{options.EntityName}Update.{options.PropertyName};");
-            fileData = stringEditor.GetText();
-
-            // ----------- DbSet -----------
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromEf" + options.EntityName);
+            stringEditor.NextThatContains($"public static IDb{options.EntityName} ForUpdate()");
             stringEditor.Next(line => line.Trim().Equals("};"));
-
-            stringEditor.InsertLine($"                {options.PropertyName} = ef{options.EntityName}.{options.PropertyName},");
+            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityName}TestValues.{options.PropertyName}ForUpdate,");
             fileData = stringEditor.GetText();
-
-            // ----------- DbSet -----------
-            stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("ToEf" + options.EntityName);
-            stringEditor.Next(line => line.Trim().Equals("};"));
-
-            stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}.{options.PropertyName},");
 
             return stringEditor.GetText();
         }

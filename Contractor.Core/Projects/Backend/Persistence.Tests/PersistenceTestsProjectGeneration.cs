@@ -14,6 +14,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             serviceCollection.AddSingleton<ClassGeneration, DbEntityDetailTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DbEntityListItemTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DbEntityTestGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, DbEntityUpdateTestGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudRepositoryTestsGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityTestValuesGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, InMemoryDbContextGeneration>();
@@ -22,6 +23,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             serviceCollection.AddSingleton<DbEntityTestMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityDetailTestMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityListItemTestMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityUpdateTestMethodsAddition>();
             serviceCollection.AddSingleton<EntityTestValuesAddition>();
             serviceCollection.AddSingleton<EntityTestValuesRelationAddition>();
             serviceCollection.AddSingleton<DbEntityDetailTestFromAssertAddition>();

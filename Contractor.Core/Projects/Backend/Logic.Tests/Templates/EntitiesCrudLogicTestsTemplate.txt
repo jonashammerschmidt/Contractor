@@ -196,7 +196,7 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
 
             // Assert
             Assert.AreEqual(LogicResultState.Ok, result.State);
-            entitiesCrudRepository.Verify((repository) => repository.UpdateEntity(It.IsAny<IDbEntity>()), Times.Once);
+            entitiesCrudRepository.Verify((repository) => repository.UpdateEntity(It.IsAny<IDbEntityUpdate>()), Times.Once);
         }
 
         private Mock<IEntitiesCrudRepository> SetupEntitiesCrudRepositoryDefaultExists()
@@ -209,9 +209,9 @@ namespace ProjectName.Logic.Tests.Modules.Domain.Entities
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault)).Returns(DbEntityDetailTest.Default());
             entitiesCrudRepository.Setup(repository => repository.GetEntityDetail(EntityTestValues.IdDefault2)).Returns(DbEntityDetailTest.Default2());
             entitiesCrudRepository.Setup(repository => repository.GetPagedEntities()).Returns(DbEntityListItemTest.ForPaged());
-            entitiesCrudRepository.Setup(repository => repository.UpdateEntity(It.IsAny<IDbEntity>())).Callback((IDbEntity dbEntity) =>
+            entitiesCrudRepository.Setup(repository => repository.UpdateEntity(It.IsAny<IDbEntityUpdate>())).Callback((IDbEntityUpdate dbEntityUpdate) =>
             {
-                DbEntityTest.AssertUpdated(dbEntity);
+                DbEntityUpdateTest.AssertUpdated(dbEntityUpdate);
             });
             entitiesCrudRepository.Setup(repository => repository.DeleteEntity(EntityTestValues.IdDefault));
             entitiesCrudRepository.Setup(repository => repository.DeleteEntity(EntityTestValues.IdDefault2));
