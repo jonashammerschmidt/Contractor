@@ -63,7 +63,8 @@ namespace Contractor.Core.Projects.Database
         {
             return
                 $"CREATE UNIQUE NONCLUSTERED INDEX[UNIQUE_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id]\n" +
-                $"    ON [dbo].[{options.EntityNamePluralTo}]([{options.PropertyNameFrom}Id] ASC) WHERE([{options.PropertyNameFrom}Id] IS NOT NULL);";
+                $"    ON [dbo].[{options.EntityNamePluralTo}]([{options.PropertyNameFrom}Id] ASC) WHERE([{options.PropertyNameFrom}Id] IS NOT NULL);\n" +
+                $"GO";
         }
     }
 }
