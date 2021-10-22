@@ -21,6 +21,8 @@ namespace Contractor.CLI
             options.EntityNameTo = entityName.Split('.')[1].Split(':')[0];
             options.EntityNamePluralTo = entityName.Split(':')[1];
 
+            options.IsOptional = ArgumentParser.HasArgument(args, "-o", "--optional");
+
             if (ArgumentParser.HasArgument(args, "-n", "--alternative-property-names"))
             {
                 string st = ArgumentParser.ExtractArgument(args, "-n", "--alternative-property-names");
