@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Options;
+using System.Collections.Generic;
 
 namespace Contractor.CLI
 {
@@ -13,6 +14,8 @@ namespace Contractor.CLI
         public string ProjectName { get; set; }
 
         public string DbProjectName { get; set; }
+
+        public Dictionary<string, string> Replacements { get; set; }
 
         public bool IsVerbose { get; set; }
     }

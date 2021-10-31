@@ -1,5 +1,6 @@
 ﻿using Contractor.Core;
 using Contractor.Core.Options;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Contractor.CLI
@@ -29,6 +30,7 @@ namespace Contractor.CLI
                 FrontendDestinationFolder = frontendDestinationFolder,
                 ProjectName = "Contract.Architecture.Backend.Core",
                 DbProjectName = "Contract.Architecture.Database.Core",
+                Replacements = new Dictionary<string, string>(),
                 IsVerbose = false
             };
 

@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core.Options
+﻿using System.Collections.Generic;
+
+namespace Contractor.Core.Options
 {
     public class ContractorOptions : IContractorOptions
     {
@@ -12,10 +14,13 @@
 
         public string DbProjectName { get; set; }
 
+        public Dictionary<string, string> Replacements { get; set; }
+
         public bool IsVerbose { get; set; }
 
         public ContractorOptions()
         {
+            this.Replacements = new Dictionary<string, string>();
         }
 
         public ContractorOptions(IContractorOptions options)
@@ -25,6 +30,7 @@
             this.DbDestinationFolder = options.DbDestinationFolder;
             this.ProjectName = options.ProjectName;
             this.DbProjectName = options.DbProjectName;
+            this.Replacements = options.Replacements;
             this.IsVerbose = options.IsVerbose;
         }
     }

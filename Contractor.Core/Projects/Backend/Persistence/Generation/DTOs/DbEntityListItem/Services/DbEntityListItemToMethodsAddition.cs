@@ -25,7 +25,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             fileData = UsingStatements.Add(fileData, namesapceToAdd);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData, options);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)

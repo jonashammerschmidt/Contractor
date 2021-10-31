@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Database
             string filePath = GetFilePath(options);
             string fileData = UpdateFileData(options, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData, options);
         }
 
         private string GetFilePath(IEntityAdditionOptions options)

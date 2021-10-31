@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core.Options
+﻿using System.Collections.Generic;
+
+namespace Contractor.Core.Options
 {
     public interface IContractorOptions
     {
@@ -11,6 +13,8 @@
         string ProjectName { get; set; }
 
         string DbProjectName { get; set; }
+
+        Dictionary<string, string> Replacements { get; set; }
 
         bool IsVerbose { get; set; }
     }

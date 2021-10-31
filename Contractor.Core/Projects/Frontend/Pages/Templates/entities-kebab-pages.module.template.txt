@@ -23,6 +23,8 @@ import { EntityDetailPage } from './sub-pages/entity-kebab-detail/entity-kebab-d
 import { EntityUpdateDialog } from './dialogs/entity-kebab-update/entity-kebab-update.dialog';
 import { EntitiesPagesRouting } from './entities-kebab-pages.routing';
 import { EntitiesPage } from './entities-kebab.page';
+import { SearchDropdownModule} from 'src/app/components/ui/search-dropdown/search-dropdown.module';
+import { TableFilterBarModule } from 'src/app/components/ui/table-filter-bar/table-filter-bar.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { EntitiesPage } from './entities-kebab.page';
 
     // UI Components
     UiComponentsModule,
+    SearchDropdownModule,
+    TableFilterBarModule,
 
     // Angular Material Modules
     MatButtonModule,
