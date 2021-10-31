@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Contractor.Core.Options;
+using System.IO;
 
 namespace Contractor.Core.Tools
 {
@@ -9,11 +10,20 @@ namespace Contractor.Core.Tools
             return File.ReadAllText(path);
         }
 
-        public void WriteAllText(string path, string contents)
+        public void WriteAllText(string path, string fileContent, IContractorOptions contractorOptions)
         {
+            foreach (var replacement in contractorOptions.Replacements)
+            {
+                fileContent = fileContent.Replace(replacement.Key, replacement.Value);
+            }
+
             if (path.EndsWith(".cs"))
             {
-                contents = UsingStatements.Sort(contents);
+                fileContent = UsingStatements.Sort(fileContent);
+            }
+            else if (path.EndsWith(".ts"))
+            {
+                fileContent = ImportStatements.Order(fileContent);
             }
 
             string dirPath = Path.GetDirectoryName(path);
@@ -22,7 +32,7 @@ namespace Contractor.Core.Tools
                 Directory.CreateDirectory(dirPath);
             }
 
-            File.WriteAllText(path, contents);
+            File.WriteAllText(path, fileContent);
         }
 
         public void SaveAll()

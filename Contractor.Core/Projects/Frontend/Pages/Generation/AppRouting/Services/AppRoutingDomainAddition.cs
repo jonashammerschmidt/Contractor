@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = this.pathService.GetAbsolutePathForFrontendAppRouting(options);
             string fileData = UpdateFileData(options, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData, options);
         }
 
         private string UpdateFileData(IDomainAdditionOptions options, string filePath)

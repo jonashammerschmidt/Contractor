@@ -43,7 +43,7 @@ namespace Contractor.Core.Tools
                 fileData = UsingStatements.Add(fileData, namespaceToAdd);
             }
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData, options);
         }
 
         private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)

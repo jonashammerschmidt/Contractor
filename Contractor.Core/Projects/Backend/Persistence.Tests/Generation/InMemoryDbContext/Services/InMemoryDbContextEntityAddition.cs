@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             string filePath = this.pathService.GetAbsolutePathForInMemoryDbContext(options);
             string fileData = UpdateFileData(options, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(filePath, fileData, options);
         }
 
         private string UpdateFileData(IEntityAdditionOptions options, string filePath)

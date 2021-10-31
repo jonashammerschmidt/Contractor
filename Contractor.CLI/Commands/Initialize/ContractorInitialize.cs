@@ -1,6 +1,7 @@
 ﻿using Contractor.CLI.Tools;
 using Contractor.Core.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -35,6 +36,7 @@ namespace Contractor.CLI
             options.BackendDestinationFolder = Path.GetRelativePath(currentFolder, options.BackendDestinationFolder);
             options.DbDestinationFolder = Path.GetRelativePath(currentFolder, options.DbDestinationFolder);
             options.FrontendDestinationFolder = Path.GetRelativePath(currentFolder, options.FrontendDestinationFolder);
+            options.Replacements = new Dictionary<string, string>();
             string optionsJson = JsonConvert.SerializeObject(options, Formatting.Indented);
             string optionsPath = Path.Combine(currentFolder, "contractor.json");
             File.WriteAllText(optionsPath, optionsJson);

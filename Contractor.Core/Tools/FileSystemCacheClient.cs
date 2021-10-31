@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Contractor.Core.Options;
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Contractor.Core.Tools
@@ -20,11 +22,20 @@ namespace Contractor.Core.Tools
             return fileCache[path];
         }
 
-        public void WriteAllText(string path, string fileContent)
+        public void WriteAllText(string path, string fileContent, IContractorOptions contractorOptions)
         {
+            foreach (var replacement in contractorOptions.Replacements)
+            {
+                fileContent = fileContent.Replace(replacement.Key, replacement.Value);
+            }
+
             if (path.EndsWith(".cs"))
             {
                 fileContent = UsingStatements.Sort(fileContent);
+            } 
+            else if (path.EndsWith(".ts"))
+            {
+                fileContent = ImportStatements.Order(fileContent);
             }
 
             if (!this.fileCache.ContainsKey(path))

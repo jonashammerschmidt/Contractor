@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Options;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -20,6 +21,7 @@ namespace Contractor.CLI
                 DbDestinationFolder = dbDestinationFolder,
                 FrontendDestinationFolder = frontendDestinationFolder,
                 ProjectName = projectName,
+                Replacements = new Dictionary<string, string>(),
                 DbProjectName = dbProjectName
             };
         }
@@ -44,10 +46,10 @@ namespace Contractor.CLI
         private static string FindDbDestinationFolder(string dir)
         {
             return Directory.GetDirectories(dir)
-                            .Concat(Directory.GetDirectories(dir)
-                                .SelectMany(subDir => Directory.GetDirectories(subDir)))
-                            .Where(directory => new DirectoryInfo(directory).Name.EndsWith(".Database.Core"))
-                            .FirstOrDefault();
+                .Concat(Directory.GetDirectories(dir)
+                    .SelectMany(subDir => Directory.GetDirectories(subDir)))
+                .Where(directory => new DirectoryInfo(directory).Name.EndsWith(".Database.Core"))
+                .FirstOrDefault();
         }
 
         private static string FindBestFrontendDestinationFolder(string folder)
@@ -70,10 +72,10 @@ namespace Contractor.CLI
         private static string FindFrontendDestinationFolder(string dir)
         {
             return Directory.GetDirectories(dir)
-                            .Concat(Directory.GetDirectories(dir)
-                                .SelectMany(subDir => Directory.GetDirectories(subDir)))
-                            .Where(directory => new DirectoryInfo(directory).Name.EndsWith(".Web.Core"))
-                            .FirstOrDefault();
+                .Concat(Directory.GetDirectories(dir)
+                    .SelectMany(subDir => Directory.GetDirectories(subDir)))
+                .Where(directory => new DirectoryInfo(directory).Name.EndsWith(".Web.Core"))
+                .FirstOrDefault();
         }
     }
 }
