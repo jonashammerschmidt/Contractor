@@ -17,12 +17,10 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         public IEntityCreateGeneration(
             FrontendDtoAddition frontendDtoAddition,
-            FrontendDtoPropertyAddition frontendDtoPropertyAddition,
-            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition)
+            FrontendDtoPropertyAddition frontendDtoPropertyAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
-            this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -37,8 +35,6 @@ namespace Contractor.Core.Projects.Frontend.Model
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
             this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
-
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityCreate", "iEntityCreate", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -48,8 +44,6 @@ namespace Contractor.Core.Projects.Frontend.Model
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(toOptions);
 
             this.frontendDtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);
-
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "toApiEntityCreate", "iEntityCreate", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)

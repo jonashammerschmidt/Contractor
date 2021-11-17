@@ -1,11 +1,2 @@
-import { ApiEntityCreate } from './api/api-entity-kebab-create';
-
 export interface IEntityCreate {
-}
-
-export abstract class EntityCreate {
-    public static toApiEntityCreate(iEntityCreate: IEntityCreate): ApiEntityCreate {
-        return {
-        };
-    }
 }

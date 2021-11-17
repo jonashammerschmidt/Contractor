@@ -41,8 +41,6 @@ namespace Contractor.Core.Projects.Frontend.Model
         {
             this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
 
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "toApiEntityUpdate", "iEntityUpdate", ModelProjectGeneration.DomainFolder, FileName);
-
             this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "fromEntityDetail", "iEntityDetail", ModelProjectGeneration.DomainFolder, FileName);
         }
 
@@ -53,8 +51,6 @@ namespace Contractor.Core.Projects.Frontend.Model
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(toOptions);
 
             this.frontendDtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);
-
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "toApiEntityUpdate", "iEntityUpdate", ModelProjectGeneration.DomainFolder, FileName);
 
             this.entityUpdateMethodAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
         }
