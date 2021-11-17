@@ -38,7 +38,7 @@ namespace Contractor.CLI
             AddKunden(contractorCoreApi, contractorOptions);
             AddRelation(contractorCoreApi, contractorOptions);
 
-            contractorCoreApi.SaveChanges();
+            contractorCoreApi.SaveChanges(contractorOptions);
         }
 
         private static void AddBanken(ContractorCoreApi contractorCoreApi, ContractorOptions contractorOptions)

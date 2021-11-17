@@ -22,7 +22,7 @@ namespace Contractor.Core.Projects.Database
             string fileData = GetFileData(options, templateFilePath);
             string filePath = GetFilePath(options, domainFolder, templateFileName);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData, options);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)

@@ -85,9 +85,9 @@ namespace Contractor.Core
             }
         }
 
-        public void SaveChanges()
+        public void SaveChanges(IContractorOptions contractorOptions)
         {
-            this.fileSystemClient.SaveAll();
+            this.fileSystemClient.SaveAll(contractorOptions);
         }
     }
 }

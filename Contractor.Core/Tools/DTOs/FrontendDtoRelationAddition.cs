@@ -22,7 +22,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData, options);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         public void AddPropertyToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
@@ -32,7 +32,7 @@ namespace Contractor.Core.Tools
 
             fileData = ImportStatements.Add(fileData, importStatementTypes, importStatementPath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData, options);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
