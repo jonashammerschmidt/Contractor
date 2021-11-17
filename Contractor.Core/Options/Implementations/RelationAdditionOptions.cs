@@ -105,13 +105,8 @@ namespace Contractor.Core.Options
         {
         }
 
-        public RelationAdditionOptions(IContractorOptions options)
+        public RelationAdditionOptions(IContractorOptions options) : base(options)
         {
-            this.FrontendDestinationFolder = options.FrontendDestinationFolder;
-            this.BackendDestinationFolder = options.BackendDestinationFolder;
-            this.DbDestinationFolder = options.DbDestinationFolder;
-            this.DbProjectName = options.DbProjectName;
-            this.ProjectName = options.ProjectName;
         }
 
         public static IEntityAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options)
