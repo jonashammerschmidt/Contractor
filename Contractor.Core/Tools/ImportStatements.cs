@@ -37,13 +37,21 @@ namespace Contractor.Core.Tools
             imports = ConsolidateImports(imports);
 
             importLines = imports
-                .Select(import =>
-                {
-                    return $"import {{ {import.Value} }} from '{import.Key}';";
-                })
+                .Select(import => $"import {{ {import.Value} }} from '{import.Key}';")
                 .ToList();
 
-            return string.Join("\n", importLines) + "\n" + string.Join("\n", otherLines);
+            var final = string.Join("\n", TrimArray(otherLines)) +
+                "\n";
+
+            if (TrimArray(importLines).Count() > 0)
+            {
+                final = string.Join("\n", TrimArray(importLines)) +
+                    "\n" +
+                    "\n" +
+                    final;
+            }
+
+            return final;
         }
 
         private static IEnumerable<string> GetImportStatements(string fileData)
@@ -135,6 +143,32 @@ namespace Contractor.Core.Tools
             return newImports;
         }
 
+        private static IEnumerable<string> TrimArray(IEnumerable<string> stringArray)
+        {
+            List<string> stringList = stringArray.ToList();
+
+            for (int i = 0; i < stringList.Count(); i++)
+            {
+                if (stringList.ElementAt(i).Trim().Length == 0) {
+                    stringList.RemoveAt(i--);
+                } else {
+                    break;
+                }
+            }
+
+            
+            for (int i = stringList.Count() - 1; i >= 0; i--)
+            {
+                if (stringList.ElementAt(i).Trim().Length == 0) {
+                    stringList.RemoveAt(i);
+                } else {
+                    break;
+                }
+            }
+
+            return stringList;
+        }
+
         private class ImportComparer : IComparer<string>
         {
             public int Compare(string x, string y)
@@ -145,7 +179,7 @@ namespace Contractor.Core.Tools
                 {
                     return 1;
                 }
-                else if(!xStartsWithDot && yStartsWithDot)
+                else if (!xStartsWithDot && yStartsWithDot)
                 {
                     return -1;
                 }
