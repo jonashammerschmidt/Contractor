@@ -37,7 +37,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
                 .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
-                .FirstOrDefault();
+                .Single();
 
             this.dbContext.Entities.Remove(efEntity);
             this.dbContext.SaveChanges();
@@ -54,7 +54,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
                 .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
-                .FirstOrDefault();
+                .SingleOrDefault();
 
             return DbEntity.FromEfEntity(efEntity);
         }
@@ -64,7 +64,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
                 .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
-                .FirstOrDefault();
+                .SingleOrDefault();
 
             return DbEntityDetail.FromEfEntity(efEntity);
         }
@@ -92,7 +92,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == dbEntityUpdate.Id)
                 .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
-                .FirstOrDefault();
+                .SingleOrDefault();
 
             DbEntity.UpdateEfEntity(efEntity, dbEntityUpdate);
 
