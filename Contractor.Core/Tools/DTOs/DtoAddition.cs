@@ -21,7 +21,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = GetFileData(options, templateFilePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData, options);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)

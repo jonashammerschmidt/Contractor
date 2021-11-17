@@ -28,7 +28,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(options, domainFolder, fileName);
             string fileData = UpdateFileData(options, functionName, variableName, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData, options);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string fileName)

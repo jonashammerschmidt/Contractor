@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Options;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -22,22 +21,8 @@ namespace Contractor.Core.Tools
             return fileCache[path];
         }
 
-        public void WriteAllText(string path, string fileContent, IContractorOptions contractorOptions)
+        public void WriteAllText(string path, string fileContent)
         {
-            foreach (var replacement in contractorOptions.Replacements)
-            {
-                fileContent = fileContent.Replace(replacement.Key, replacement.Value);
-            }
-
-            if (path.EndsWith(".cs"))
-            {
-                fileContent = UsingStatements.Sort(fileContent);
-            } 
-            else if (path.EndsWith(".ts"))
-            {
-                fileContent = ImportStatements.Order(fileContent);
-            }
-
             if (!this.fileCache.ContainsKey(path))
             {
                 fileCache.Add(path, fileContent);
@@ -50,17 +35,33 @@ namespace Contractor.Core.Tools
             }
         }
 
-        public void SaveAll()
+        public void SaveAll(IContractorOptions contractorOptions)
         {
             foreach (var fileCacheItem in this.fileWriteCache)
             {
-                string dirPath = Path.GetDirectoryName(fileCacheItem.Key);
+                var filePath = fileCacheItem.Key;
+                var fileContent = fileCacheItem.Value;
+                foreach (var replacement in contractorOptions.Replacements)
+                {
+                    fileContent = fileContent.Replace(replacement.Key, replacement.Value);
+                }
+
+                if (filePath.EndsWith(".cs"))
+                {
+                    fileContent = UsingStatements.Sort(fileContent);
+                }
+                else if (filePath.EndsWith(".ts"))
+                {
+                    fileContent = ImportStatements.Order(fileContent);
+                }
+
+                string dirPath = Path.GetDirectoryName(filePath);
                 if (!Directory.Exists(dirPath))
                 {
                     Directory.CreateDirectory(dirPath);
                 }
 
-                File.WriteAllText(fileCacheItem.Key, fileCacheItem.Value);
+                File.WriteAllText(filePath, fileContent);
             }
         }
     }

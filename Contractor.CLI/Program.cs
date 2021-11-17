@@ -56,12 +56,13 @@ namespace Contractor.CLI
                 return;
             }
 
+            IContractorOptions contractorOptions = ContractorOptionsLoader.Load(Directory.GetCurrentDirectory());
             ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
             ContractorExecuter.Execute(
                 contractorCoreApi,
-                ContractorOptionsLoader.Load(Directory.GetCurrentDirectory()),
+                contractorOptions,
                 args);
-            contractorCoreApi.SaveChanges();
+            contractorCoreApi.SaveChanges(contractorOptions);
         }
 
         private static void HandleExecuteJob(string[] args)
@@ -112,7 +113,7 @@ namespace Contractor.CLI
             stopwatch.Start();
             Console.WriteLine($"Started saving...");
 
-            contractorCoreApi.SaveChanges();
+            contractorCoreApi.SaveChanges(contractorOptions);
 
             stopwatch.Stop();
             Console.WriteLine($"Finished saving after {stopwatch.ElapsedMilliseconds}ms");

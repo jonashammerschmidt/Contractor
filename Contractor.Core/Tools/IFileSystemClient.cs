@@ -6,8 +6,8 @@ namespace Contractor.Core.Tools
     {
         string ReadAllText(string path);
 
-        void WriteAllText(string path, string contents, IContractorOptions contractorOptions);
+        void WriteAllText(string path, string contents);
 
-        void SaveAll();
+        void SaveAll(IContractorOptions contractorOptions);
     }
 }

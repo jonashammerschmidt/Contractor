@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             string filePath = this.pathService.GetAbsolutePathForDbContext(options);
             string fileData = UpdateFileData(options, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData, options);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string UpdateFileData(IRelationAdditionOptions options, string filePath)

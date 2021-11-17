@@ -29,7 +29,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
                 $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}");
 
-            this.fileSystemClient.WriteAllText(filePath, fileData, options);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)

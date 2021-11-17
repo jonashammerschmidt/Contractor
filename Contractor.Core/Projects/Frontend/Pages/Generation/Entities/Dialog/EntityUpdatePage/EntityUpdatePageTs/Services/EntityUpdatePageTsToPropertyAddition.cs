@@ -41,7 +41,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
                 $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}-list-item");
 
-            this.fileSystemClient.WriteAllText(filePath, fileData, options);
+            this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
