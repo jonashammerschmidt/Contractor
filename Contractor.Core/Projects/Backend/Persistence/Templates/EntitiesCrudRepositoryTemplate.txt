@@ -33,7 +33,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .FirstOrDefault();
+                .Single();
 
             this.dbContext.Entities.Remove(efEntity);
             this.dbContext.SaveChanges();
@@ -48,7 +48,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .FirstOrDefault();
+                .SingleOrDefault();
 
             return DbEntity.FromEfEntity(efEntity);
         }
@@ -57,7 +57,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .FirstOrDefault();
+                .SingleOrDefault();
 
             return DbEntityDetail.FromEfEntity(efEntity);
         }
@@ -82,7 +82,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == dbEntityUpdate.Id)
-                .FirstOrDefault();
+                .Single();
 
             DbEntity.UpdateEfEntity(efEntity, dbEntityUpdate);
 
