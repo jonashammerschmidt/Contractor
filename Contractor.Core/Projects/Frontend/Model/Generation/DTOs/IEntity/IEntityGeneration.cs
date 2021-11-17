@@ -37,8 +37,6 @@ namespace Contractor.Core.Projects.Frontend.Model
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
             this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
-
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(options, "fromApiEntity", "apiEntity", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -48,7 +46,6 @@ namespace Contractor.Core.Projects.Frontend.Model
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(toOptions);
 
             this.frontendDtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, ModelProjectGeneration.DomainFolder, FileName);
-            this.frontendDtoPropertyMethodAddition.AddPropertyToDTO(propertyAdditionOptions, "fromApiEntity", "apiEntity", ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)

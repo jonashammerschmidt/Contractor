@@ -2,12 +2,10 @@
 import { BackendCoreService } from 'src/app/services/backend/backend-core.service';
 import { IPagedResult } from 'src/app/services/backend/pagination/i-paged-result';
 import { IPaginationOptions, toPaginationParams } from 'src/app/services/backend/pagination/i-pagination-options';
-import { ApiEntityDetail } from './dtos/api/api-entity-kebab-detail';
-import { ApiEntityListItem } from './dtos/api/api-entity-kebab-list-item';
-import { EntityCreate, IEntityCreate } from './dtos/i-entity-kebab-create';
-import { EntityDetail, IEntityDetail } from './dtos/i-entity-kebab-detail';
-import { EntityListItem, IEntityListItem } from './dtos/i-entity-kebab-list-item';
-import { EntityUpdate, IEntityUpdate } from './dtos/i-entity-kebab-update';
+import { IEntityCreate } from './dtos/i-entity-kebab-create';
+import { IEntityDetail } from './dtos/i-entity-kebab-detail';
+import { IEntityListItem } from './dtos/i-entity-kebab-list-item';
+import { IEntityUpdate } from './dtos/i-entity-kebab-update';
 
 @Injectable()
 export class EntitiesCrudService {
@@ -16,23 +14,16 @@ export class EntitiesCrudService {
 
     public async getPagedEntities(paginationOptions: IPaginationOptions): Promise<IPagedResult<IEntityListItem>> {
         const url = '/api/domain-kebab/entities-kebab?' + toPaginationParams(paginationOptions);
-        const entitiesResult = await this.backendCoreService.get<IPagedResult<ApiEntityListItem>>(url);
-
-        entitiesResult.data = entitiesResult.data
-            .map(apiEntityListItem => EntityListItem.fromApiEntityListItem(apiEntityListItem));
-        return entitiesResult;
+        return await this.backendCoreService.get<IPagedResult<IEntityListItem>>(url);
     }
 
     public async getEntityDetail(entityId: string): Promise<IEntityDetail> {
-        const apiEntityDetail = await this.backendCoreService.get<ApiEntityDetail>('/api/domain-kebab/entities-kebab/' + entityId);
-
-        const entityDetail = EntityDetail.fromApiEntityDetail(apiEntityDetail);
-        return entityDetail;
+        return await this.backendCoreService.get<IEntityDetail>('/api/domain-kebab/entities-kebab/' + entityId);
     }
 
     public async createEntity(entityCreate: IEntityCreate): Promise<string> {
         const options = {
-            body: EntityCreate.toApiEntityCreate(entityCreate)
+            body: entityCreate
         };
 
         const result = await this.backendCoreService.post<{ data: string }>('/api/domain-kebab/entities-kebab', options);
@@ -43,7 +34,7 @@ export class EntitiesCrudService {
 
     public async updateEntity(entityUpdate: IEntityUpdate): Promise<void> {
         const options = {
-            body: EntityUpdate.toApiEntityUpdate(entityUpdate)
+            body: entityUpdate
         };
 
         await this.backendCoreService.put('/api/domain-kebab/entities-kebab', options);

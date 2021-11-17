@@ -1,17 +1,3 @@
-import { ApiEntityDetail } from './api/api-entity-kebab-detail';
-
 export interface IEntityDetail {
     id: string;
-}
-
-export abstract class EntityDetail {
-    public static fromApiEntityDetail(apiEntityDetail: ApiEntityDetail): IEntityDetail {
-        if (apiEntityDetail == null) {
-            return null;
-        }
-
-        return {
-            id: apiEntityDetail.id,
-        };
-    }
 }
