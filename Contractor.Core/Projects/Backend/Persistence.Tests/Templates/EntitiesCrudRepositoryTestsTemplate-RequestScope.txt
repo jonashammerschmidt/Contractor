@@ -168,7 +168,7 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         {
             return new EntitiesCrudRepository(
                 this.GetSessionContext(),
-                this.GetPaginationContext(),
+                PaginationContextTest.SetupPaginationContextDefault(),
                 InMemoryDbContext.CreatePersistenceDbContextWithDbDefault());
         }
 
@@ -176,7 +176,7 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         {
             return new EntitiesCrudRepository(
                 this.GetSessionContext(),
-                this.GetPaginationContext(),
+                PaginationContextTest.SetupPaginationContextDefault(),
                 InMemoryDbContext.CreatePersistenceDbContextEmpty());
         }
 
@@ -186,16 +186,6 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
             sessionContext.Setup(sessionContext => sessionContext.RequestScopeId)
                 .Returns(EntityTestValues.RequestScopeIdDbDefault);
             return sessionContext.Object;
-        }
-
-        private IPaginationContext GetPaginationContext()
-        {
-            Mock<IPaginationContext> paginationContext = new Mock<IPaginationContext>();
-            paginationContext.Setup(context => context.Limit).Returns(10);
-            paginationContext.Setup(context => context.Offset).Returns(0);
-            paginationContext.Setup(context => context.Sort).Returns(Array.Empty<IPaginationSortItem>());
-            paginationContext.Setup(context => context.Filter).Returns(Array.Empty<IPaginationFilterItem>());
-            return paginationContext.Object;
         }
     }
 }
