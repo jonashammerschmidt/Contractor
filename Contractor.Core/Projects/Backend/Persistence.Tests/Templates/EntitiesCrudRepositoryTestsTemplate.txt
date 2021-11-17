@@ -2,6 +2,7 @@
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using ProjectName.Contract.Persistence.Tools.Pagination;
 using ProjectName.Persistence.Modules.Domain.Entities;
+using ProjectName.Persistence.Tests.Tools.Pagination;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -167,25 +168,15 @@ namespace ProjectName.Persistence.Tests.Modules.Domain.Entities
         private EntitiesCrudRepository GetEntitiesCrudRepositoryDefault()
         {
             return new EntitiesCrudRepository(
-                this.GetPaginationContext(),
+                PaginationContextTest.SetupPaginationContextDefault(),
                 InMemoryDbContext.CreatePersistenceDbContextWithDbDefault());
         }
 
         private EntitiesCrudRepository GetEntitiesCrudRepositoryEmpty()
         {
             return new EntitiesCrudRepository(
-                this.GetPaginationContext(),
+                PaginationContextTest.SetupPaginationContextDefault(),
                 InMemoryDbContext.CreatePersistenceDbContextEmpty());
-        }
-
-        private IPaginationContext GetPaginationContext()
-        {
-            Mock<IPaginationContext> paginationContext = new Mock<IPaginationContext>();
-            paginationContext.Setup(context => context.Limit).Returns(10);
-            paginationContext.Setup(context => context.Offset).Returns(0);
-            paginationContext.Setup(context => context.Sort).Returns(Array.Empty<IPaginationSortItem>());
-            paginationContext.Setup(context => context.Filter).Returns(Array.Empty<IPaginationFilterItem>());
-            return paginationContext.Object;
         }
     }
 }
