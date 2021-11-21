@@ -21,7 +21,7 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForBackend(IEntityAdditionOptions options, string domainFolder, params string[] subPaths)
         {
-            string absolutePath = GetAbsolutePathForBackend(options, domainFolder, subPaths);
+            string absolutePath = GetAbsolutePathForBackend(options as IContractorOptions, domainFolder, subPaths);
             absolutePath = absolutePath.Replace("{Domain}", options.Domain);
             absolutePath = absolutePath.Replace("{Entities}", options.EntityNamePlural);
 
@@ -44,7 +44,7 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForFrontend(IEntityAdditionOptions options, string domainFolder)
         {
-            string absolutePath = GetAbsolutePathForFrontend(options, domainFolder);
+            string absolutePath = GetAbsolutePathForFrontend(options as IDomainAdditionOptions, domainFolder);
             absolutePath = absolutePath.Replace("{entity-kebab}", StringConverter.PascalToKebabCase(options.EntityName));
             absolutePath = absolutePath.Replace("{entities-kebab}", StringConverter.PascalToKebabCase(options.EntityNamePlural));
             return absolutePath;
