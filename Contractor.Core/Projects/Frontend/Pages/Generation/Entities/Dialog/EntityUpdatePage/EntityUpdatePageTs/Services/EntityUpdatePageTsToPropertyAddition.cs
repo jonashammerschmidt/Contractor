@@ -47,7 +47,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontendModel(entityOptions, domainFolder);
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontend(entityOptions, domainFolder);
             string fileName = templateFileName.Replace("entities-kebab", StringConverter.PascalToKebabCase(entityOptions.EntityNamePlural));
             fileName = fileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(entityOptions.EntityName));
             fileName = fileName.Replace("domain-kebab", StringConverter.PascalToKebabCase(entityOptions.Domain));

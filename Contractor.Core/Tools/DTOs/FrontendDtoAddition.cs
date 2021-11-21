@@ -27,7 +27,7 @@ namespace Contractor.Core.Tools
 
         private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontendModel(options, domainFolder);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
             string fileName = templateFileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;

@@ -29,7 +29,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             var relationAdditionOptions = RelationAdditionOptions.GetPropertyForTo(options);
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForEntity(relationAdditionOptions, domainFolder);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(relationAdditionOptions, domainFolder);
             string fileName = templateFileName.Replace("Entity", relationAdditionOptions.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;

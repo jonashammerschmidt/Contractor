@@ -48,7 +48,7 @@ namespace Contractor.Core.Tools
 
         private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForDTOs(options, domainFolder);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder, "DTOs");
             string fileName = templateFileName.Replace("Entity", options.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;

@@ -31,7 +31,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForEntity(entityOptions, domainFolder);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(entityOptions, domainFolder);
             string fileName = templateFileName.Replace("Entities", entityOptions.EntityNamePlural);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;

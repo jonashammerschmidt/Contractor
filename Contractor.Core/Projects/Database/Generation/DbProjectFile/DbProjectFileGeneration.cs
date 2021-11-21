@@ -7,22 +7,17 @@ namespace Contractor.Core.Projects.Database
     {
         private readonly DbProjectFileDomainAddition dbProjectFileDomainAddition;
         private readonly DbProjectFileEntityAddition dbProjectFileEntityAddition;
-        private readonly PathService pathService;
 
         public DbProjectFileGeneration(
             DbProjectFileDomainAddition dbProjectFileDomainAddition,
-            DbProjectFileEntityAddition dbProjectFileEntityAddition,
-            PathService pathService)
+            DbProjectFileEntityAddition dbProjectFileEntityAddition)
         {
             this.dbProjectFileDomainAddition = dbProjectFileDomainAddition;
             this.dbProjectFileEntityAddition = dbProjectFileEntityAddition;
-            this.pathService = pathService;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
         {
-            this.pathService.AddDbDomainFolder(options, DBProjectGeneration.DomainFolder);
-
             this.dbProjectFileDomainAddition.Add(options);
         }
 

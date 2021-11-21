@@ -27,7 +27,7 @@ namespace Contractor.Core.Tools
 
         private string GetFilePath(IDomainAdditionOptions options, string domainFolder, string templateFileName)
         {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontendModel(options, domainFolder);
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
             string fileName = templateFileName.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;

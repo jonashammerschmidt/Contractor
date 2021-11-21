@@ -29,7 +29,7 @@ namespace Contractor.Core.Tools
 
         private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
         {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForEntity(options, domainFolder);
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
             string fileName = templateFileName.Replace("Entities", options.EntityNamePlural);
             fileName = fileName.Replace("Entity", options.EntityName);
             string filePath = Path.Combine(absolutePathForDomain, fileName);
