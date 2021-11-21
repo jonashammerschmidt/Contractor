@@ -20,7 +20,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         public void Add(IDomainAdditionOptions options)
         {
-            string filePath = this.pathService.GetAbsolutePathForFrontendAppRouting(options);
+            string filePath = Path.Combine(options.FrontendDestinationFolder, "src\\app\\app-routing.module.ts");
             string fileData = UpdateFileData(options, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);

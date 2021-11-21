@@ -29,7 +29,7 @@ namespace Contractor.Core.Projects.Database
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             var entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForDbDomain(entityOptions, domainFolder);
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForDatabase(entityOptions, domainFolder);
             string fileName = templateFileName.Replace("Entities", entityOptions.EntityNamePlural);
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;

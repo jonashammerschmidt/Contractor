@@ -28,7 +28,7 @@ namespace Contractor.Core.Projects.Database
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForDbDomain(options, domainFolder);
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForDatabase(options, domainFolder);
             string fileName = templateFileName.Replace("Entities", options.EntityNamePlural);
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;
