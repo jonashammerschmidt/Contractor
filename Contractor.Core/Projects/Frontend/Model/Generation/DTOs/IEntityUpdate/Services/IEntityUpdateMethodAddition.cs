@@ -29,7 +29,7 @@ namespace Contractor.Core.Projects.Frontend.Model
         private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string fileName)
         {
             IEntityAdditionOptions entityOptions = RelationAdditionOptions.GetPropertyForTo(options);
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontendModel(entityOptions, domainFolder);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(entityOptions, domainFolder);
             fileName = fileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(entityOptions.EntityName));
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;

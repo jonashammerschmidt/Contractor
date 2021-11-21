@@ -20,7 +20,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
         public void Add(IEntityAdditionOptions options)
         {
-            string filePath = this.pathService.GetAbsolutePathForInMemoryDbContext(options);
+            string filePath = Path.Combine(options.BackendDestinationFolder, "Persistence.Tests\\InMemoryDbContext.cs");
             string fileData = UpdateFileData(options, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);

@@ -33,7 +33,7 @@ namespace Contractor.Core.Tools
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string fileName)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontendModel(options, domainFolder);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
             fileName = fileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;
