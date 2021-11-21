@@ -24,7 +24,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
                 return;
             }
 
-            string filePath = this.pathService.GetAbsolutePathForBackend(options, "Persistence.Tests\\InMemoryDbContext.cs");
+            string filePath = this.pathService.GetAbsolutePathForBackend(options, "Persistence\\PersistenceDbContext.cs");
             string fileData = UpdateFileData(options, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
