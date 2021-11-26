@@ -6,22 +6,17 @@ namespace Contractor.Core.Tools
 {
     internal class PathService
     {
-        public string GetAbsolutePathForBackend(IContractorOptions options, string domainFolder, params string[] subPaths)
+        public string GetAbsolutePathForBackend(IContractorOptions options, string domainFolder)
         {
             string relativePath = domainFolder;
             string absolutePath = Path.Combine(options.BackendDestinationFolder, relativePath);
 
-            foreach (var subPath in subPaths)
-            {
-                absolutePath = Path.Combine(absolutePath, subPath);
-            }
-
             return absolutePath;
         }
 
-        public string GetAbsolutePathForBackend(IEntityAdditionOptions options, string domainFolder, params string[] subPaths)
+        public string GetAbsolutePathForBackend(IEntityAdditionOptions options, string domainFolder)
         {
-            string absolutePath = GetAbsolutePathForBackend(options as IContractorOptions, domainFolder, subPaths);
+            string absolutePath = GetAbsolutePathForBackend(options as IContractorOptions, domainFolder);
             absolutePath = absolutePath.Replace("{Domain}", options.Domain);
             absolutePath = absolutePath.Replace("{Entities}", options.EntityNamePlural);
 

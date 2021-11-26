@@ -31,13 +31,13 @@ namespace Contractor.Core.Projects.Backend.Logic
 
         protected override void AddEntity(IEntityAdditionOptions options)
         {
-            this.dtoAddition.AddDto(options, LogicProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.dtoAddition.AddDto(options, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.dtoPropertyAddition.AddPropertyToDTO(options, LogicProjectGeneration.DomainFolder, FileName);
-            this.dbEntityUpdateMethodsAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName);
+            this.dtoPropertyAddition.AddPropertyToDTO(options, LogicProjectGeneration.DtoFolder, FileName);
+            this.dbEntityUpdateMethodsAddition.Add(options, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -48,8 +48,8 @@ namespace Contractor.Core.Projects.Backend.Logic
 
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
 
-            this.dtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, LogicProjectGeneration.DomainFolder, FileName);
-            this.dbEntityUpdateMethodsAddition.Add(propertyAdditionOptions, LogicProjectGeneration.DomainFolder, FileName);
+            this.dtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, LogicProjectGeneration.DtoFolder, FileName);
+            this.dbEntityUpdateMethodsAddition.Add(propertyAdditionOptions, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)

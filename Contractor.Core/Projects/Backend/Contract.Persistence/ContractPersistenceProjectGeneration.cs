@@ -6,6 +6,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
     internal class ContractPersistenceProjectGeneration
     {
         public static readonly string DomainFolder = "Contract\\Persistence\\Modules\\{Domain}\\{Entities}";
+        public static readonly string DtoFolder = DomainFolder + "\\DTOs";
 
         public static readonly string TemplateFolder = Folder.Executable + @"\Projects\Backend\Contract.Persistence\Templates";
 

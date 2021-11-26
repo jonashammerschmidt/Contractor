@@ -6,6 +6,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
     internal class ContractLogicProjectGeneration
     {
         public static readonly string DomainFolder = "Contract\\Logic\\Modules\\{Domain}\\{Entities}";
+        public static readonly string DtoFolder = DomainFolder + "\\DTOs";
 
         public static readonly string TemplateFolder = Folder.Executable + @"\Projects\Backend\Contract.Logic\Templates";
 

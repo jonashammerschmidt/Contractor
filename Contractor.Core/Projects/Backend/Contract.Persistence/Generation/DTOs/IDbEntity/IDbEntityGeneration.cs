@@ -31,19 +31,19 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
 
         protected override void AddEntity(IEntityAdditionOptions options)
         {
-            this.dtoAddition.AddDto(options, ContractPersistenceProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.dtoAddition.AddDto(options, ContractPersistenceProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.propertyAddition.AddPropertyToDTO(options, ContractPersistenceProjectGeneration.DomainFolder, FileName, true);
+            this.propertyAddition.AddPropertyToDTO(options, ContractPersistenceProjectGeneration.DtoFolder, FileName, true);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             this.relationAddition.AddRelationToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid"),
-                ContractPersistenceProjectGeneration.DomainFolder, FileName, true);
+                ContractPersistenceProjectGeneration.DtoFolder, FileName, true);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)

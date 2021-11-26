@@ -31,19 +31,19 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
 
         protected override void AddEntity(IEntityAdditionOptions options)
         {
-            this.dtoAddition.AddDto(options, ContractLogicProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.dtoAddition.AddDto(options, ContractLogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.propertyAddition.AddPropertyToDTO(options, ContractLogicProjectGeneration.DomainFolder, FileName, true);
+            this.propertyAddition.AddPropertyToDTO(options, ContractLogicProjectGeneration.DtoFolder, FileName, true);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             this.relationAddition.AddRelationToDTO(
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid"),
-                ContractLogicProjectGeneration.DomainFolder, FileName, true);
+                ContractLogicProjectGeneration.DtoFolder, FileName, true);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
