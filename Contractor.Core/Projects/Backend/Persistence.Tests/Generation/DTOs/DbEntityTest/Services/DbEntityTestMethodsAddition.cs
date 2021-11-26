@@ -28,7 +28,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
         private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder, "DTOs");
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
             string fileName = templateFileName.Replace("Entity", options.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;

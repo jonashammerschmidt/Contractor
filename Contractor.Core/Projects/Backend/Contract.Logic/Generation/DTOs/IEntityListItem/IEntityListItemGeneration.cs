@@ -31,12 +31,12 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
 
         protected override void AddEntity(IEntityAdditionOptions options)
         {
-            this.dtoAddition.AddDto(options, ContractLogicProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.dtoAddition.AddDto(options, ContractLogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.propertyAddition.AddPropertyToDTO(options, ContractLogicProjectGeneration.DomainFolder, FileName, true);
+            this.propertyAddition.AddPropertyToDTO(options, ContractLogicProjectGeneration.DtoFolder, FileName, true);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -44,7 +44,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
             // To
             IRelationSideAdditionOptions optionsTo =
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
-            this.relationAddition.AddRelationToDTO(optionsTo, ContractLogicProjectGeneration.DomainFolder, FileName, true,
+            this.relationAddition.AddRelationToDTO(optionsTo, ContractLogicProjectGeneration.DtoFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
 
@@ -53,13 +53,13 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
             // From
             IRelationSideAdditionOptions optionsFrom =
                 RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}");
-            this.relationAddition.AddRelationToDTO(optionsFrom, ContractLogicProjectGeneration.DomainFolder, FileName, true,
+            this.relationAddition.AddRelationToDTO(optionsFrom, ContractLogicProjectGeneration.DtoFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
             IRelationSideAdditionOptions optionsTo =
                 RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
-            this.relationAddition.AddRelationToDTO(optionsTo, ContractLogicProjectGeneration.DomainFolder, FileName, true,
+            this.relationAddition.AddRelationToDTO(optionsTo, ContractLogicProjectGeneration.DtoFolder, FileName, true,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
     }
