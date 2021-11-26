@@ -32,13 +32,13 @@ namespace Contractor.Core.Projects.Backend.Persistence
         protected override void AddEntity(IEntityAdditionOptions options)
         {
             string templatePath = TemplateFileName.GetFileNameForEntityAddition(options, TemplatePath);
-            this.dtoAddition.AddDto(options, PersistenceProjectGeneration.DomainFolder, templatePath, FileName);
+            this.dtoAddition.AddDto(options, PersistenceProjectGeneration.DtoFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.propertyAddition.AddPropertyToDTO(options, PersistenceProjectGeneration.DomainFolder, FileName);
-            this.dbDtoMethodsAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.propertyAddition.AddPropertyToDTO(options, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoMethodsAddition.Add(options, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -47,8 +47,8 @@ namespace Contractor.Core.Projects.Backend.Persistence
                 RelationAdditionOptions.GetPropertyForTo(options, "Guid");
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
 
-            this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, PersistenceProjectGeneration.DomainFolder, FileName);
-            this.dbDtoMethodsAddition.Add(propertyAdditionOptions, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoMethodsAddition.Add(propertyAdditionOptions, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
