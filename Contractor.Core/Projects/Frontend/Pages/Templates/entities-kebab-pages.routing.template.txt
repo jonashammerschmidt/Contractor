@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EntityDetailPage } from './sub-pages/entity-kebab-detail/entity-kebab-detail.page';
+import { EntityDetailPage } from './sub-pages/detail/entity-kebab-detail.page';
 import { EntitiesPage } from './entities-kebab.page';
 
 const routes: Routes = [
