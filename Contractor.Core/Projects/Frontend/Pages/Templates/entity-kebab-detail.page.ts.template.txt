@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/components/ui/confirmation-dialog/confirmation-dialog.service';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-detail';
-import { EntityUpdateDialog } from '../../dialogs/entity-kebab-update/entity-kebab-update.dialog';
+import { EntityUpdateDialog } from '../../dialogs/update/entity-kebab-update.dialog';
 
 @Component({
   selector: 'app-entity-kebab-detail',
