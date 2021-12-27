@@ -38,7 +38,7 @@ namespace Contractor.Core.Projects.Backend.Api
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // To
-            this.controllerRelationAddition.Add(options, ApiProjectGeneration.DomainFolder, FileName);
+            this.controllerRelationAddition.Edit(options, ApiProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)

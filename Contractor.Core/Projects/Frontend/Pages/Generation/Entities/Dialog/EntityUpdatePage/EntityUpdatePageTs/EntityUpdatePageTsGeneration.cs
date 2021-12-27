@@ -41,12 +41,12 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            this.entityUpdatePageTsToPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityUpdatePageTsToPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
         {
-            this.entityUpdatePageTsToPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityUpdatePageTsToPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }

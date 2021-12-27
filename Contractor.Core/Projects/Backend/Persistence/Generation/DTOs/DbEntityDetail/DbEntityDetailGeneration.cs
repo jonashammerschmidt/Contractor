@@ -60,7 +60,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(optionsFrom, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
-            this.dbDtoDetailFromMethodsAddition.Add(options, PersistenceProjectGeneration.DtoFolder, FileName,
+            this.dbDtoDetailFromMethodsAddition.Edit(options, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
@@ -69,7 +69,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(optionsTo, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
-            this.dbDtoDetailToMethodsAddition.Add(options, PersistenceProjectGeneration.DtoFolder, FileName,
+            this.dbDtoDetailToMethodsAddition.Edit(options, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
 
@@ -81,7 +81,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(optionsFrom, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
-            this.dbEntityDetailFromOneToOneMethodsAddition.Add(options, PersistenceProjectGeneration.DtoFolder, FileName,
+            this.dbEntityDetailFromOneToOneMethodsAddition.Edit(options, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To
@@ -90,7 +90,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(optionsTo, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
 
-            this.dbDtoDetailToMethodsAddition.Add(options, PersistenceProjectGeneration.DtoFolder, FileName,
+            this.dbDtoDetailToMethodsAddition.Edit(options, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
         }
     }

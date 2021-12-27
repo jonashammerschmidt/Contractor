@@ -57,12 +57,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             // From
             IRelationSideAdditionOptions dbFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IEnumerable<IDb{options.EntityNameTo}>");
             this.relationAddition.AddRelationToDTO(dbFromOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
-            this.logicDbDtoDetailTestFromAssertAddition.Add(options, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.logicDbDtoDetailTestFromAssertAddition.Edit(options, LogicTestsProjectGeneration.DtoFolder, FileName);
 
             // To
             IRelationSideAdditionOptions dbToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
             this.relationAddition.AddRelationToDTO(dbToOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
-            this.logicDbDtoDetailTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.logicDbDtoDetailTestToAssertAddition.Edit(options, LogicTestsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
@@ -70,12 +70,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             // From ------------- TODO --------------
             IRelationSideAdditionOptions dbFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"IDb{options.EntityNameTo}");
             this.relationAddition.AddRelationToDTO(dbFromOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
-            this.dbEntityDetailTestFromAssertOneToOneAddition.Add(options, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.dbEntityDetailTestFromAssertOneToOneAddition.Edit(options, LogicTestsProjectGeneration.DtoFolder, FileName);
 
             // To
             IRelationSideAdditionOptions dbToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"IDb{options.EntityNameFrom}");
             this.relationAddition.AddRelationToDTO(dbToOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
-            this.logicDbDtoDetailTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.logicDbDtoDetailTestToAssertAddition.Edit(options, LogicTestsProjectGeneration.DtoFolder, FileName);
         }
     }
 }

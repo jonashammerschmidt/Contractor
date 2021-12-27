@@ -54,7 +54,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             // To
             IRelationSideAdditionOptions dtoToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
             this.relationAddition.AddRelationToDTO(dtoToOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
-            this.logicDtoListItemTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.logicDtoListItemTestToAssertAddition.Edit(options, LogicTestsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
@@ -62,12 +62,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             // From
             IRelationSideAdditionOptions dtoFromOptions = RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}");
             this.relationAddition.AddRelationToDTO(dtoFromOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
-            this.entityListItemTestFromOneToOneAssertAddition.Add(options, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.entityListItemTestFromOneToOneAssertAddition.Edit(options, LogicTestsProjectGeneration.DtoFolder, FileName);
 
             // To
             IRelationSideAdditionOptions dtoToOptions = RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
             this.relationAddition.AddRelationToDTO(dtoToOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
-            this.logicDtoListItemTestToAssertAddition.Add(options, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.logicDtoListItemTestToAssertAddition.Edit(options, LogicTestsProjectGeneration.DtoFolder, FileName);
         }
     }
 } 
