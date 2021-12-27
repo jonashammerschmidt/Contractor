@@ -38,7 +38,6 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromEf" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));

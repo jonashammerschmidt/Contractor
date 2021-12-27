@@ -36,7 +36,6 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            // ----------- DbSet -----------
             stringEditor.NextThatContains($"modelBuilder.Entity<Ef{options.EntityName}>");
             stringEditor.NextThatContains("});");
 
