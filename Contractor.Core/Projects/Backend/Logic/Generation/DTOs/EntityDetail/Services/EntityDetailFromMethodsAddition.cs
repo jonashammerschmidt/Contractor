@@ -13,6 +13,8 @@ namespace Contractor.Core.Projects.Backend.Logic
 
         protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
         {
+            fileData = UsingStatements.Add(fileData, "System.Linq");
+
             StringEditor stringEditor = new StringEditor(fileData);
          
             stringEditor.NextThatContains("FromDb" + options.EntityNameFrom);

@@ -5,8 +5,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
 {
     internal class PagesProjectGeneration
     {
-        internal static readonly string PagesFolder = "src\\app\\pages\\{domain-kebab}";
-        internal static readonly string DomainFolder = "src\\app\\pages\\{domain-kebab}\\{entities-kebab}";
+        internal static readonly string PagesFolder = "src\\app\\pages\\domain-kebab";
+        internal static readonly string DomainFolder = "src\\app\\pages\\domain-kebab\\entities-kebab";
 
         internal static readonly string TemplateFolder = Folder.Executable + @"\Projects\Frontend\Pages\Templates";
 

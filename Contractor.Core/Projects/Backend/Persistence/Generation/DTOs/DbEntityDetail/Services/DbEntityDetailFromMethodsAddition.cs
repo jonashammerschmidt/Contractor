@@ -13,7 +13,8 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
         {
-            // ----------- DbSet -----------
+            fileData = UsingStatements.Add(fileData, "System.Linq");
+
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromEf" + options.EntityNameFrom);
             stringEditor.Next(line => line.Trim().Equals("};"));

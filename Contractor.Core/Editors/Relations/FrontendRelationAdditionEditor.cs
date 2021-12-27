@@ -4,14 +4,14 @@ using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    internal abstract class RelationAdditionEditor
+    internal abstract class FrontendRelationAdditionEditor
     {
         private IFileSystemClient fileSystemClient;
         private PathService pathService;
 
         private RelationEnd relationEnd;
 
-        public RelationAdditionEditor(
+        public FrontendRelationAdditionEditor(
             IFileSystemClient fileSystemClient,
             PathService pathService,
             RelationEnd relationEnd)
@@ -43,11 +43,12 @@ namespace Contractor.Core.Tools
                     RelationAdditionOptions.GetPropertyForFrom(options) :
                     RelationAdditionOptions.GetPropertyForTo(options);
 
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(entityOptions, domainFolder);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(entityOptions, domainFolder);
             string filePath = Path.Combine(absolutePathForDTOs, templateFileName);
 
-            filePath = filePath.Replace("Entities", entityOptions.EntityNamePlural);
-            filePath = filePath.Replace("Entity", entityOptions.EntityName);
+            filePath = filePath.Replace("entities-kebab", StringConverter.PascalToKebabCase(entityOptions.EntityNamePlural));
+            filePath = filePath.Replace("entity-kebab", StringConverter.PascalToKebabCase(entityOptions.EntityName));
+            filePath = filePath.Replace("domain-kebab", StringConverter.PascalToKebabCase(entityOptions.Domain));
 
             return filePath;
         }
