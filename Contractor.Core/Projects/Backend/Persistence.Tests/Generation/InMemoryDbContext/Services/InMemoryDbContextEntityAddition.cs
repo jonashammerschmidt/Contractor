@@ -33,7 +33,6 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}");
             fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Tests.Modules.{options.Domain}.{options.EntityNamePlural}");
 
-            // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("persistenceDbContext.SaveChanges();");
 

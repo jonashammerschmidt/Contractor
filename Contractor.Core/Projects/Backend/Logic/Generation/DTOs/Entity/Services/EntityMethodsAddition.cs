@@ -38,7 +38,6 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("UpdateDb" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("}"));
@@ -46,7 +45,6 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor.InsertLine($"            db{options.EntityName}.{options.PropertyName} = {options.EntityNameLower}Update.{options.PropertyName};");
             fileData = stringEditor.GetText();
 
-            // ----------- DbSet -----------
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromDb" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));
@@ -54,7 +52,6 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}.{options.PropertyName},");
             fileData = stringEditor.GetText();
 
-            // ----------- DbSet -----------
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("CreateDb" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));

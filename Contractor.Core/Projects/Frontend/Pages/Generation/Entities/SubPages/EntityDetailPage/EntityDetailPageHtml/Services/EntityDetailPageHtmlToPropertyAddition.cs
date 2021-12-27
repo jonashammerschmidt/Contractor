@@ -14,9 +14,6 @@ namespace Contractor.Core.Projects.Frontend.Pages
         protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
-
-            // ----------- DbSet -----------
-
             if (fileData.Contains("</mat-tab-group>"))
             {
                 stringEditor.NextThatContains("<mat-tab label=\"Stammdaten\">");

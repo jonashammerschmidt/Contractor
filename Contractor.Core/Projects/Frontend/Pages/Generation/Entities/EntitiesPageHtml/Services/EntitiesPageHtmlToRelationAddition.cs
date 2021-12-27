@@ -15,7 +15,6 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
-            // ----------- DbSet -----------
             stringEditor.NextThatContains("</app-table-filter-bar>");
             stringEditor.PrevThatContains("<!-- Right -->");
             stringEditor.Next();

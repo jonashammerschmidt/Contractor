@@ -34,7 +34,6 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            // ----------- DbSet -----------
             stringEditor.NextThatContains("CustomInstantiate");
 
             stringEditor.InsertLine(GetDbSetLine(options));
