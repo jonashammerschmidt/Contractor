@@ -4,7 +4,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
-    internal class EntitiesPageHtmlToRelationAddition : RelationAdditionEditor
+    internal class EntitiesPageHtmlToRelationAddition : FrontendRelationAdditionEditor
     {
         public EntitiesPageHtmlToRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService, RelationEnd.To)

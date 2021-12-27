@@ -5,7 +5,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 {
     internal class ModelProjectGeneration
     {
-        internal static readonly string DomainFolder = "src\\app\\model\\{domain-kebab}\\{entities-kebab}";
+        internal static readonly string DomainFolder = "src\\app\\model\\domain-kebab\\entities-kebab";
 
         internal static readonly string TemplateFolder = Folder.Executable + @"\Projects\Frontend\Model\Templates";
 

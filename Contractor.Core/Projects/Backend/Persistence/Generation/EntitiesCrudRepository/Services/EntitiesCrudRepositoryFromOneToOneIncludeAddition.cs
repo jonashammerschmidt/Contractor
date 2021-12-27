@@ -13,6 +13,8 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
         {
+            fileData = UsingStatements.Add(fileData, "Microsoft.EntityFrameworkCore");
+
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"Get{options.EntityNameFrom}Detail(");
             stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralFrom}");

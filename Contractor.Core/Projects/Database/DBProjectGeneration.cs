@@ -5,7 +5,7 @@ namespace Contractor.Core.Projects.Database
 {
     internal class DBProjectGeneration
     {
-        public static readonly string DomainFolder = "dbo\\Tables\\{Domain}";
+        public static readonly string DomainFolder = "dbo\\Tables\\Domain";
 
         public static readonly string TemplateFolder = Folder.Executable + @"\Projects\Database\Templates";
 
