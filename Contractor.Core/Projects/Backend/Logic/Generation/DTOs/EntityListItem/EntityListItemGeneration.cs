@@ -57,7 +57,7 @@ namespace Contractor.Core.Projects.Backend.Logic
 
             this.relationAddition.AddRelationToDTO(relationAdditionOptionsTo, LogicProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
-            this.dtoListItemToMethodsAddition.Add(options, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoListItemToMethodsAddition.Edit(options, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
@@ -68,7 +68,7 @@ namespace Contractor.Core.Projects.Backend.Logic
 
             this.relationAddition.AddRelationToDTO(relationAdditionOptionsFrom, LogicProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
-            this.entityListItemFromOneToOneMethodsAddition.Add(options, LogicProjectGeneration.DtoFolder, FileName);
+            this.entityListItemFromOneToOneMethodsAddition.Edit(options, LogicProjectGeneration.DtoFolder, FileName);
 
             // To
             IRelationSideAdditionOptions relationAdditionOptionsTo = RelationAdditionOptions.
@@ -76,7 +76,7 @@ namespace Contractor.Core.Projects.Backend.Logic
 
             this.relationAddition.AddRelationToDTO(relationAdditionOptionsTo, LogicProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Contract.Logic.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}");
-            this.dtoListItemToMethodsAddition.Add(options, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoListItemToMethodsAddition.Edit(options, LogicProjectGeneration.DtoFolder, FileName);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
         {
-            this.entitiesCrudRepositoryTestsToOneToOneRelationAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryTestsToOneToOneRelationAddition.Edit(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
     }
 }

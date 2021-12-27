@@ -44,12 +44,12 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            this.logicTestsRelationAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.logicTestsRelationAddition.Edit(options, LogicTestsProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
         {
-            this.entitiesCrudLogicTestsToOneToOneRelationAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudLogicTestsToOneToOneRelationAddition.Edit(options, LogicTestsProjectGeneration.DomainFolder, FileName);
         }
     }
 }

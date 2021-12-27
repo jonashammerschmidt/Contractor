@@ -41,7 +41,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            this.entityCreatePageHtmlToPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityCreatePageHtmlToPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)

@@ -4,9 +4,9 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Logic
 {
-    internal class EntitiesCrudLogicRelationAddition : RelationAdditionEditor
+    internal class UniqueEntitiesCrudLogicRelationAddition : RelationAdditionEditor
     {
-        public EntitiesCrudLogicRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
+        public UniqueEntitiesCrudLogicRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService, RelationEnd.To)
         {
         }
@@ -59,6 +59,26 @@ namespace Contractor.Core.Projects.Backend.Logic
                     "            }\n");
             }
 
+            if (options.IsOptional)
+            {
+                stringEditor.InsertLine(
+                $"            if ({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.HasValue &&\n" +
+                $"                this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value))\n" +
+                    "            {\n" +
+                $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                $"                return LogicResult<Guid>.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    "            }\n");
+            }
+            else
+            {
+                stringEditor.InsertLine(
+                $"            if (this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
+                    "            {\n" +
+                $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                $"                return LogicResult<Guid>.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    "            }\n");
+            }
+
             // ----------- Update Method -----------
             stringEditor.MoveToStart();
             stringEditor.NextThatContains($"ILogicResult Update{options.EntityNameTo}(");
@@ -85,6 +105,31 @@ namespace Contractor.Core.Projects.Backend.Logic
                     $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                     $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
                      "            }");
+            }
+
+            stringEditor.InsertNewLine();
+            if (options.IsOptional)
+            {
+                stringEditor.InsertLine(
+                    $"            bool is{options.PropertyNameFrom}IdGettingUpdated = db{options.EntityNameTo}ToUpdate.{options.PropertyNameFrom}Id != {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.GetValueOrDefault();\n" +
+                    $"            if (is{options.PropertyNameFrom}IdGettingUpdated &&\n" +
+                    $"                {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.HasValue &&\n" +
+                    $"                this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value))\n" +
+                    "            {\n" +
+                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    $"                return LogicResult.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    "            }");
+            }
+            else
+            {
+                stringEditor.InsertLine(
+                    $"            bool is{options.PropertyNameFrom}IdGettingUpdated = db{options.EntityNameTo}ToUpdate.{options.PropertyNameFrom}Id != {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id;\n" +
+                    $"            if (is{options.PropertyNameFrom}IdGettingUpdated &&\n" +
+                    $"                this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
+                    "            {\n" +
+                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    $"                return LogicResult.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
+                    "            }");
             }
 
             return stringEditor.GetText();

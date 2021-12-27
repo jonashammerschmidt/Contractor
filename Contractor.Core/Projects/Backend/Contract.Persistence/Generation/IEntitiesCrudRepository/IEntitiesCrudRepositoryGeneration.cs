@@ -41,7 +41,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
         {
-            this.entitiesCrudRepositoryToOneToOneRelationAddition.Add(options, ContractPersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToOneToOneRelationAddition.Edit(options, ContractPersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

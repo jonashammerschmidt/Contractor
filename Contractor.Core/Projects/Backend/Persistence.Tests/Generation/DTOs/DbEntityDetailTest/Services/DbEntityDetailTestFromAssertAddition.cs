@@ -1,49 +1,22 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
-using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Persistence.Tests
 {
-    internal class DbEntityDetailTestFromAssertAddition
+    internal class DbEntityDetailTestFromAssertAddition : RelationAdditionEditor
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
-
-        public DbEntityDetailTestFromAssertAddition(
-            IFileSystemClient fileSystemClient,
-            PathService pathService)
+        public DbEntityDetailTestFromAssertAddition(IFileSystemClient fileSystemClient, PathService pathService)
+            : base(fileSystemClient, pathService, RelationEnd.From)
         {
-            this.fileSystemClient = fileSystemClient;
-            this.pathService = pathService;
         }
 
-        public void Add(IRelationAdditionOptions options, string domainFolder, string templateFileName)
+        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
-
-            this.fileSystemClient.WriteAllText(filePath, fileData);
-        }
-
-        private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
-        {
-            var entityOptions = RelationAdditionOptions.GetPropertyForFrom(options);
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(entityOptions, domainFolder);
-            string fileName = templateFileName.Replace("Entity", entityOptions.EntityName);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
-
-        private string UpdateFileData(IRelationAdditionOptions options, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
-
             fileData = UsingStatements.Add(fileData, "System.Linq");
             fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
             fileData = UsingStatements.Add(fileData, $"{options.ProjectName}.Persistence.Tests.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
-            // ----------- AssertDbDefault -----------
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("AssertDbDefault(");
             stringEditor.Next(line => line.Trim().Equals("}"));
