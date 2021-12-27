@@ -8,7 +8,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         private readonly DbContextPropertyAddition dbContextPropertyAddition;
         private readonly DbContextRelationToAddition dbContextRelationToAddition;
         private readonly DbContextRelationToOneToOneAddition dbContextRelationToOneToOneAddition;
-        
+
         public DbContextGeneration(
             DbContextEntityAddition dbContextEntityAddition,
             DbContextPropertyAddition dbContextPropertyAddition,
@@ -37,12 +37,12 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            this.dbContextRelationToAddition.Add(options);
+            this.dbContextRelationToAddition.Edit(options);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
         {
-            this.dbContextRelationToOneToOneAddition.Add(options);
+            this.dbContextRelationToOneToOneAddition.Edit(options);
         }
     }
 }

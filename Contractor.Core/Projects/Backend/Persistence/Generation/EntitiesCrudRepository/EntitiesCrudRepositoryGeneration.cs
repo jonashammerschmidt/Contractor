@@ -48,19 +48,19 @@ namespace Contractor.Core.Projects.Backend.Persistence
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
             // From
-            this.dtoFromRepositoryIncludeAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.dtoFromRepositoryIncludeAddition.Edit(options, PersistenceProjectGeneration.DomainFolder, FileName);
 
             // To
-            this.dtoToRepositoryIncludeAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.dtoToRepositoryIncludeAddition.Edit(options, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
         {
             // From
-            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Add(options,PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Edit(options,PersistenceProjectGeneration.DomainFolder, FileName);
 
             // To
-            this.entitiesCrudRepositoryToOneToOneIncludeAddition.Add(options, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToOneToOneIncludeAddition.Edit(options, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

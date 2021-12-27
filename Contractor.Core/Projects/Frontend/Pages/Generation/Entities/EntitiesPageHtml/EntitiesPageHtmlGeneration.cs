@@ -47,14 +47,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
         {
-            this.entitiesPageHtmlToRelationAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entitiesPageHtmlToRelationAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
         {
-            this.entitiesPageHtmlFromOneToOneRelationAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entitiesPageHtmlFromOneToOneRelationAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
 
-            this.entitiesPageHtmlToOneToOneRelationAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entitiesPageHtmlToOneToOneRelationAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }

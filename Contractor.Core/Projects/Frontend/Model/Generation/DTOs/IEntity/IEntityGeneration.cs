@@ -13,16 +13,13 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private readonly FrontendDtoAddition frontendDtoAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
-        private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
 
         public IEntityGeneration(
             FrontendDtoAddition frontendDtoAddition,
-            FrontendDtoPropertyAddition frontendDtoPropertyAddition,
-            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition)
+            FrontendDtoPropertyAddition frontendDtoPropertyAddition)
         {
             this.frontendDtoAddition = frontendDtoAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
-            this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)

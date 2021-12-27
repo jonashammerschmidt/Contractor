@@ -50,7 +50,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
                 RelationAdditionOptions.GetPropertyForFrom(options, $"virtual ICollection<Ef{options.EntityNameTo}>");
             this.relationAddition.AddRelationToDTO(optionsFrom, PersistenceProjectGeneration.DtoFolder, FileName);
 
-            this.efDtoContructorHashSetAddition.Add(options, PersistenceProjectGeneration.DtoFolder, FileName,
+            this.efDtoContructorHashSetAddition.Edit(options, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{options.ProjectName}.Persistence.Modules.{options.DomainTo}.{options.EntityNamePluralTo}");
 
             // To

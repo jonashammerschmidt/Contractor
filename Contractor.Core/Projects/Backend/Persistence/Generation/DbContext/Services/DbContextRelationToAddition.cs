@@ -4,31 +4,15 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Persistence
 {
-    internal class DbContextRelationToAddition
+    internal class DbContextRelationToAddition : DbContextRelationAdditionEditor
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
-
-        public DbContextRelationToAddition(
-            IFileSystemClient fileSystemClient,
-            PathService pathService)
+        public DbContextRelationToAddition(IFileSystemClient fileSystemClient, PathService pathService)
+            : base(fileSystemClient, pathService)
         {
-            this.fileSystemClient = fileSystemClient;
-            this.pathService = pathService;
         }
 
-        public void Add(IRelationAdditionOptions options)
+        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
         {
-            string filePath = this.pathService.GetAbsolutePathForBackend(options, "Persistence\\PersistenceDbContext.cs");
-            string fileData = UpdateFileData(options, filePath);
-
-            this.fileSystemClient.WriteAllText(filePath, fileData);
-        }
-
-        private string UpdateFileData(IRelationAdditionOptions options, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
-
             StringEditor stringEditor = new StringEditor(fileData);
 
             // ----------- DbSet -----------
