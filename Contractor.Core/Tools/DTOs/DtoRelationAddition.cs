@@ -18,29 +18,22 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
+        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            AddRelationToDTO(options, domainFolder, templateFileName, false);
+            AddRelationToDTO(options, domainFolder, templateFileName, false, namespacesToAdd);
         }
 
-        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, string namespaceToAdd)
-        {
-            AddRelationToDTO(options, domainFolder, templateFileName, false, namespaceToAdd);
-        }
-
-        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface)
-        {
-            AddRelationToDTO(options, domainFolder, templateFileName, forInterface, null);
-        }
-
-        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, string namespaceToAdd)
+        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, params string[] namespacesToAdd)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
             string fileData = UpdateFileData(options, filePath, forInterface);
 
-            if (namespaceToAdd != null)
+            if (namespacesToAdd != null)
             {
-                fileData = UsingStatements.Add(fileData, namespaceToAdd);
+                foreach (string namespaceToAdd in namespacesToAdd)
+                {
+                    fileData = UsingStatements.Add(fileData, namespaceToAdd);
+                }
             }
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
@@ -71,7 +64,7 @@ namespace Contractor.Core.Tools
                 fileData = UsingStatements.Add(fileData, "System");
             }
 
-            if (options.PropertyType.Contains("Enumerable"))
+            if (options.PropertyType.Contains("Enumerable") || options.PropertyType.Contains("ICollection"))
             {
                 fileData = UsingStatements.Add(fileData, "System.Collections.Generic");
             }
