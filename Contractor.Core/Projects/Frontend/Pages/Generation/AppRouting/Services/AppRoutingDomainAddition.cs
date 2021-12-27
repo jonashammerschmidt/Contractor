@@ -32,7 +32,6 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            // ----------- DbSet -----------
             stringEditor.NextThatContains("path: '**',");
             stringEditor.Prev();
 

@@ -38,7 +38,6 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromDb" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));

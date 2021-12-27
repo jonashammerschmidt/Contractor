@@ -42,7 +42,6 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            // ----------- DbSet -----------
             stringEditor.NextThatContains("const routes: Routes = [");
             stringEditor.NextThatContains("];");
 

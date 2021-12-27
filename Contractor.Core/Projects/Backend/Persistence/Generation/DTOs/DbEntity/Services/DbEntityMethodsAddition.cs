@@ -38,7 +38,6 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            // ----------- DbSet -----------
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("UpdateEf" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("}"));
@@ -46,7 +45,6 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.InsertLine($"            ef{options.EntityName}.{options.PropertyName} = db{options.EntityName}Update.{options.PropertyName};");
             fileData = stringEditor.GetText();
 
-            // ----------- DbSet -----------
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromEf" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));
@@ -54,7 +52,6 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.InsertLine($"                {options.PropertyName} = ef{options.EntityName}.{options.PropertyName},");
             fileData = stringEditor.GetText();
 
-            // ----------- DbSet -----------
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("ToEf" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));

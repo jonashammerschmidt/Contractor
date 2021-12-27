@@ -41,9 +41,6 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
-
-            // ----------- DbSet -----------
-
             if (fileData.Contains("</mat-tab-group>"))
             {
                 stringEditor.NextThatContains("<mat-tab label=\"Stammdaten\">");
