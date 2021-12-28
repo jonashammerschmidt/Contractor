@@ -37,7 +37,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
             this.dtoPropertyAddition.AddPropertyToDTO(options, LogicProjectGeneration.DtoFolder, FileName);
-            this.dbEntityUpdateMethodsAddition.Add(options, LogicProjectGeneration.DtoFolder, FileName);
+            this.dbEntityUpdateMethodsAddition.Edit(options, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -49,7 +49,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
 
             this.dtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, LogicProjectGeneration.DtoFolder, FileName);
-            this.dbEntityUpdateMethodsAddition.Add(propertyAdditionOptions, LogicProjectGeneration.DtoFolder, FileName);
+            this.dbEntityUpdateMethodsAddition.Edit(propertyAdditionOptions, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)

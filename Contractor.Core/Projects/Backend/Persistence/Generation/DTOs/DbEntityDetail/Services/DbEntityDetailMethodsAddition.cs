@@ -5,39 +5,15 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Persistence
 {
-    internal class DbEntityDetailMethodsAddition
+    internal class DbEntityDetailMethodsAddition : PropertyAdditionEditor
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
-
-        public DbEntityDetailMethodsAddition(
-            IFileSystemClient fileSystemClient,
-            PathService pathService)
+        public DbEntityDetailMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
+            : base(fileSystemClient, pathService)
         {
-            this.fileSystemClient = fileSystemClient;
-            this.pathService = pathService;
         }
 
-        public void Add(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
-
-            this.fileSystemClient.WriteAllText(filePath, fileData);
-        }
-
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
-        {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
-            string fileName = templateFileName.Replace("Entity", options.EntityName);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
-
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
-
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromEf" + options.EntityName);
             stringEditor.Next(line => line.Trim().Equals("};"));

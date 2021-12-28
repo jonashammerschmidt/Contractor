@@ -49,7 +49,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
             this.dtoPropertyAddition.AddPropertyToDTO(options, LogicProjectGeneration.DtoFolder, FileName);
-            this.dtoDetailMethodsAddition.Add(options, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoDetailMethodsAddition.Edit(options, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
