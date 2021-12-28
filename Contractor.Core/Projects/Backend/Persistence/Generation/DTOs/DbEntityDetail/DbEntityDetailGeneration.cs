@@ -49,7 +49,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
             this.propertyAddition.AddPropertyToDTO(options, PersistenceProjectGeneration.DtoFolder, FileName);
-            this.dbDtoDetailMethodsAddition.Add(options, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoDetailMethodsAddition.Edit(options, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)

@@ -44,7 +44,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
             this.propertyAddition.AddPropertyToDTO(options, PersistenceTestsProjectGeneration.DtoFolder, FileName);
-            this.dbDtoTestMethodsAddition.Add(options, PersistenceTestsProjectGeneration.DtoFolder, FileName);
+            this.dbDtoTestMethodsAddition.Edit(options, PersistenceTestsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -55,7 +55,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
             this.relationAddition.AddRelationToDTO(guidPropertyOptions, PersistenceTestsProjectGeneration.DtoFolder, FileName);
 
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(guidPropertyOptions);
-            this.dbDtoTestMethodsAddition.Add(propertyAdditionOptions, PersistenceTestsProjectGeneration.DtoFolder, FileName);
+            this.dbDtoTestMethodsAddition.Edit(propertyAdditionOptions, PersistenceTestsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)

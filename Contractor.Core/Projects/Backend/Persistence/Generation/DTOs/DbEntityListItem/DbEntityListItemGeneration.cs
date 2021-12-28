@@ -46,7 +46,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
             this.propertyAddition.AddPropertyToDTO(options, PersistenceProjectGeneration.DtoFolder, FileName);
-            this.dbDtoListItemMethodsAddition.Add(options, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoListItemMethodsAddition.Edit(options, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
