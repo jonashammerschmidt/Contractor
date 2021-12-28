@@ -6,10 +6,10 @@ namespace Contractor.Core.Tools
 {
     internal abstract class FrontendRelationAdditionEditor
     {
-        private IFileSystemClient fileSystemClient;
-        private PathService pathService;
+        private readonly IFileSystemClient fileSystemClient;
+        private readonly PathService pathService;
 
-        private RelationEnd relationEnd;
+        private readonly RelationEnd relationEnd;
 
         public FrontendRelationAdditionEditor(
             IFileSystemClient fileSystemClient,

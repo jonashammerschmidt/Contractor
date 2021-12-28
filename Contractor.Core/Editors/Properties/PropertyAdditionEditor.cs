@@ -5,8 +5,8 @@ namespace Contractor.Core.Tools
 {
     internal abstract class PropertyAdditionEditor
     {
-        private IFileSystemClient fileSystemClient;
-        private PathService pathService;
+        private readonly IFileSystemClient fileSystemClient;
+        private readonly PathService pathService;
 
         public PropertyAdditionEditor(
             IFileSystemClient fileSystemClient,
