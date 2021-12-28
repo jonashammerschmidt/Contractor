@@ -1,0 +1,31 @@
+﻿using Contractor.Core.Options;
+using System.IO;
+
+namespace Contractor.Core.Tools
+{
+    internal abstract class DbContextPropertyAdditionEditor
+    {
+        private IFileSystemClient fileSystemClient;
+        private PathService pathService;
+
+        public DbContextPropertyAdditionEditor(
+            IFileSystemClient fileSystemClient,
+            PathService pathService)
+        {
+            this.fileSystemClient = fileSystemClient;
+            this.pathService = pathService;
+        }
+
+        public void Edit(IPropertyAdditionOptions options)
+        {
+            string filePath = this.pathService.GetAbsolutePathForBackend(options, "Persistence\\PersistenceDbContext.cs");
+
+            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            fileData = UpdateFileData(options, fileData);
+
+            this.fileSystemClient.WriteAllText(filePath, fileData);
+        }
+
+        protected abstract string UpdateFileData(IPropertyAdditionOptions options, string fileData);
+    }
+}

@@ -36,7 +36,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.entityCreatePageHtmlPropertyAddition.Add(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityCreatePageHtmlPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
