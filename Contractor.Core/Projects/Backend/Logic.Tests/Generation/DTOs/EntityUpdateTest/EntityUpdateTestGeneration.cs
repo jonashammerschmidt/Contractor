@@ -40,7 +40,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
             this.propertyAddition.AddPropertyToDTO(options, LogicTestsProjectGeneration.DtoFolder, FileName);
-            this.logicDtoUpdateTestMethodsAddition.Add(options, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.logicDtoUpdateTestMethodsAddition.Edit(options, LogicTestsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
@@ -50,7 +50,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             this.relationAddition.AddRelationToDTO(guidPropertyOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
 
             PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(guidPropertyOptions);
-            this.logicDtoUpdateTestMethodsAddition.Add(propertyAdditionOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
+            this.logicDtoUpdateTestMethodsAddition.Edit(propertyAdditionOptions, LogicTestsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelation(IRelationAdditionOptions options)
