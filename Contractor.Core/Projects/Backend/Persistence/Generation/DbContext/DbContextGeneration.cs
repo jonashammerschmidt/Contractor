@@ -32,7 +32,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.dbContextPropertyAddition.Add(options);
+            this.dbContextPropertyAddition.Edit(options);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)

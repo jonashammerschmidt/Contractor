@@ -36,7 +36,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.logicDtoTestValuesAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName);
+            this.logicDtoTestValuesAddition.Edit(options, LogicTestsProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)

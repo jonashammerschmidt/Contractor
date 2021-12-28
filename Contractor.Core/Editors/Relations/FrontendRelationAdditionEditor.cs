@@ -21,16 +21,11 @@ namespace Contractor.Core.Tools
             this.relationEnd = relationEnd;
         }
 
-        public void Edit(IRelationAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
+        public void Edit(IRelationAdditionOptions options, string domainFolder, string templateFileName)
         {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
 
             string fileData = this.fileSystemClient.ReadAllText(filePath);
-            foreach (string namespaceToAdd in namespacesToAdd)
-            {
-                fileData = UsingStatements.Add(fileData, namespaceToAdd);
-            }
-
             fileData = UpdateFileData(options, fileData);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
