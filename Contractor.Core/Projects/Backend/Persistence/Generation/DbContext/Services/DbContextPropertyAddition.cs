@@ -4,35 +4,19 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Persistence
 {
-    internal class DbContextPropertyAddition
+    internal class DbContextPropertyAddition : DbContextPropertyAdditionEditor
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
-
-        public DbContextPropertyAddition(
-            IFileSystemClient fileSystemClient,
-            PathService pathService)
+        public DbContextPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
+            : base(fileSystemClient, pathService)
         {
-            this.fileSystemClient = fileSystemClient;
-            this.pathService = pathService;
         }
 
-        public void Add(IPropertyAdditionOptions options)
+        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
         {
             if (DatabaseDbContextPropertyLine.GetPropertyLine(options) == null)
             {
-                return;
+                return fileData;
             }
-
-            string filePath = this.pathService.GetAbsolutePathForBackend(options, "Persistence\\PersistenceDbContext.cs");
-            string fileData = UpdateFileData(options, filePath);
-
-            this.fileSystemClient.WriteAllText(filePath, fileData);
-        }
-
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
 

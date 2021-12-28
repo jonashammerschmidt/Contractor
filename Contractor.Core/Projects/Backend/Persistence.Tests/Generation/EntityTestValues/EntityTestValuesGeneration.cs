@@ -37,7 +37,7 @@ namespace Contractor.Core.Projects.Backend.Persistence.Tests
 
         protected override void AddProperty(IPropertyAdditionOptions options)
         {
-            this.dtoTestValuesAddition.Add(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
+            this.dtoTestValuesAddition.Edit(options, PersistenceTestsProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelation(IRelationAdditionOptions options)
