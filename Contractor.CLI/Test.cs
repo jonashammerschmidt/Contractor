@@ -110,6 +110,13 @@ namespace Contractor.CLI
             // Properties
             contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
             {
+                PropertyType = PropertyTypes.String,
+                PropertyName = "Bezeichnung",
+                PropertyTypeExtra = "256"
+            });
+
+            contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
+            {
                 PropertyType = PropertyTypes.Integer,
                 PropertyName = "Kundennummer",
             });
@@ -117,7 +124,7 @@ namespace Contractor.CLI
             contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Integer,
-                PropertyName = "Kundennummer",
+                PropertyName = "KundennummerLegacy",
                 IsOptional = true,
             });
 
@@ -141,6 +148,13 @@ namespace Contractor.CLI
             contractorCoreApi.AddEntity(entityAdditionOptions);
 
             // Properties
+            contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
+            {
+                PropertyType = PropertyTypes.String,
+                PropertyName = "Bezeichnung",
+                PropertyTypeExtra = "256"
+            });
+
             contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Guid,
