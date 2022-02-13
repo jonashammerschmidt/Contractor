@@ -46,17 +46,18 @@ namespace Contractor.Core.Projects.Backend.Logic
                     $"            if ({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.HasValue &&\n" +
                     $"                !this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value))\n" +
                      "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
+                    $"                this.logger.LogDebug($\"{options.PropertyNameFrom} ({{{options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.GetValueOrDefault()}}) konnte nicht gefunden werden.\");\n" +
+                    $"                return LogicResult<Guid>.NotFound($\"{options.PropertyNameFrom} ({{{options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.GetValueOrDefault()}}) konnte nicht gefunden werden.\");\n" +
                      "            }\n");
             }
             else
             {
-                stringEditor.InsertLine($"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
-                    "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    "            }\n");
+                stringEditor.InsertLine(
+                    $"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
+                     "            {\n" +
+                    $"                this.logger.LogDebug($\"{options.PropertyNameFrom} ({{{options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id}}) konnte nicht gefunden werden.\");\n" +
+                    $"                return LogicResult<Guid>.NotFound($\"{options.PropertyNameFrom} ({{{options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id}}) konnte nicht gefunden werden.\");\n" +
+                     "            }\n");
             }
 
             // ----------- Update Method -----------
@@ -73,8 +74,8 @@ namespace Contractor.Core.Projects.Backend.Logic
                     $"            if ({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.HasValue &&\n" +
                     $"                !this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value))\n" +
                      "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
+                    $"                this.logger.LogDebug($\"{options.PropertyNameFrom} ({{{options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.GetValueOrDefault()}}) konnte nicht gefunden werden.\");\n" +
+                    $"                return LogicResult.NotFound($\"{options.PropertyNameFrom} ({{{options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.GetValueOrDefault()}}) konnte nicht gefunden werden.\");\n" +
                      "            }");
             }
             else
@@ -82,8 +83,8 @@ namespace Contractor.Core.Projects.Backend.Logic
                 stringEditor.InsertLine(
                     $"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
                      "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
+                    $"                this.logger.LogDebug($\"{options.PropertyNameFrom} ({{{options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id}}) konnte nicht gefunden werden.\");\n" +
+                    $"                return LogicResult.NotFound($\"{options.PropertyNameFrom} ({{{options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id}}) konnte nicht gefunden werden.\");\n" +
                      "            }");
             }
 
