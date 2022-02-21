@@ -1,5 +1,6 @@
 ﻿using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Persistence.Tests;
+using ProjectName.Contract.Contexts;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using ProjectName.Persistence.Modules.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
