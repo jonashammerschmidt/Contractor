@@ -1,6 +1,7 @@
 ﻿using Contract.Architecture.Backend.Common.Contract;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Persistence;
+using ProjectName.Contract.Contexts;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using System;
 using System.Collections.Generic;
