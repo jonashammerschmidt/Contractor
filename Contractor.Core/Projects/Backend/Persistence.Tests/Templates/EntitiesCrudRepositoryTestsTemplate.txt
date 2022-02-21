@@ -1,8 +1,7 @@
-﻿using ProjectName.Contract.Contexts;
+﻿using Contract.Architecture.Backend.Common.Contract.Persistence;
+using Contract.Architecture.Backend.Common.Persistence.Tests;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
-using ProjectName.Contract.Persistence.Tools.Pagination;
 using ProjectName.Persistence.Modules.Domain.Entities;
-using ProjectName.Persistence.Tests.Tools.Pagination;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;

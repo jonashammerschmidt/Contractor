@@ -1,6 +1,6 @@
-﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
-using ProjectName.Contract.Persistence.Tools.Pagination;
-using ProjectName.Logic.Tests.Tools.Pagination;
+﻿using Contract.Architecture.Backend.Common.Contract.Persistence;
+using Contract.Architecture.Backend.Common.Persistence;
+using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

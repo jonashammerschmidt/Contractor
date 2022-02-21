@@ -1,12 +1,9 @@
+using Contract.Architecture.Backend.Common.Contract.Logic;
+using Contract.Architecture.Backend.Common.Contract.Persistence;
+using Contract.Architecture.Backend.Common.Logic;
 using Microsoft.Extensions.Logging;
-using ProjectName.Contract.Logic.LogicResults;
 using ProjectName.Contract.Logic.Modules.Domain.Entities;
-using ProjectName.Contract.Logic.Tools.Identifier;
-using ProjectName.Contract.Logic.Tools.Pagination;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
-using ProjectName.Contract.Persistence.Tools.Pagination;
-using ProjectName.Logic.LogicResults;
-using ProjectName.Logic.Tools.Pagination;
 using System;
 
 namespace ProjectName.Logic.Modules.Domain.Entities

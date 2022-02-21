@@ -1,7 +1,7 @@
-﻿using ProjectName.Contract.Contexts;
+﻿using Contract.Architecture.Backend.Common.Contract;
+using Contract.Architecture.Backend.Common.Contract.Persistence;
+using Contract.Architecture.Backend.Common.Persistence;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
-using ProjectName.Contract.Persistence.Tools.Pagination;
-using ProjectName.Persistence.Tools.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;

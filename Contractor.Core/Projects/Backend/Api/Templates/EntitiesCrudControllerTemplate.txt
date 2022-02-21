@@ -1,8 +1,7 @@
-﻿using ProjectName.API.Contexts.Pagination;
+﻿using Contract.Architecture.Backend.Common.API;
+using Contract.Architecture.Backend.Common.Contract.Logic;
 using ProjectName.API.Security.Authorization;
-using ProjectName.Contract.Logic.LogicResults;
 using ProjectName.Contract.Logic.Modules.Domain.Entities;
-using ProjectName.Contract.Logic.Tools.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
