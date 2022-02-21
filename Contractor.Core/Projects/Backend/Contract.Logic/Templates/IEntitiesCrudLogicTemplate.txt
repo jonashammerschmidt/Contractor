@@ -1,5 +1,4 @@
-﻿using ProjectName.Contract.Logic.LogicResults;
-using ProjectName.Contract.Logic.Tools.Pagination;
+﻿using Contract.Architecture.Backend.Common.Contract.Logic;
 using System;
 
 namespace ProjectName.Contract.Logic.Modules.Domain.Entities

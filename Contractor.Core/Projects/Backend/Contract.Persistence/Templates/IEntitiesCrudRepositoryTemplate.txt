@@ -1,4 +1,4 @@
-using ProjectName.Contract.Persistence.Tools.Pagination;
+using Contract.Architecture.Backend.Common.Contract.Persistence;
 using System;
 using System.Collections.Generic;
 
