@@ -23,9 +23,9 @@ namespace Contractor.Core.Tools
                     return
                          "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
                         $"                <mat-label>{options.PropertyName.ToReadable()}</mat-label>\n" +
-                        $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\" [matDatepicker]=\"picker\">\n" +
-                         "                <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n" +
-                         "                <mat-datepicker #picker></mat-datepicker>\n" +
+                        $"                <input matInput formControlName=\"{options.PropertyName.LowerFirstChar()}\" {requiredLine} placeholder=\"{options.PropertyName.ToReadable()}\" [matDatepicker]=\"picker{options.PropertyName}\">\n" +
+                        $"                <mat-datepicker-toggle matSuffix [for]=\"picker{options.PropertyName}\"></mat-datepicker-toggle>\n" +
+                        $"                <mat-datepicker #picker{options.PropertyName}></mat-datepicker>\n" +
                         $"                <mat-error *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.touched && {options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.invalid\">\n" +
                         $"                    <span *ngIf=\"{options.EntityNameLower}UpdateForm.controls.{options.PropertyName.LowerFirstChar()}.errors.required\">\n" +
                         $"                        Dieses Feld ist erforderlich.\n" +

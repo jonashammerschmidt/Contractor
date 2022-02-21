@@ -11,7 +11,7 @@ namespace Contractor.Core.Tools
             switch (options.PropertyType)
             {
                 case PropertyTypes.String:
-                    return $"        public string{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        public string {options.PropertyName} {{ get; set; }}";
 
                 case PropertyTypes.Double:
                     return $"        public double{optionalText} {options.PropertyName} {{ get; set; }}";
