@@ -2,6 +2,7 @@
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_PAGES })]
     internal class AppRoutingGeneration : ClassGeneration
     {
         private readonly AppRoutingDomainAddition appRoutingDomainAddition;

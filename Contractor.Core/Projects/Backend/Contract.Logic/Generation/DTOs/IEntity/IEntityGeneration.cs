@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Contract.Logic
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_CONTRACT_LOGIC })]
     internal class IEntityGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =

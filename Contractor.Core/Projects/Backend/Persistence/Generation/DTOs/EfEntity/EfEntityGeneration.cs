@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Persistence
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE, ClassGenerationTag.BACKEND_EF })]
     internal class EfEntityGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =

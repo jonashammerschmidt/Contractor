@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Database
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.DATABASE })]
     internal class DbTableGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =

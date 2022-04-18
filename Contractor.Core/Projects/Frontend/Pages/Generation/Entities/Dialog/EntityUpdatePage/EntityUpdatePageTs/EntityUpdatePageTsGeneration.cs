@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_PAGES })]
     internal class EntityUpdatePageTsGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =

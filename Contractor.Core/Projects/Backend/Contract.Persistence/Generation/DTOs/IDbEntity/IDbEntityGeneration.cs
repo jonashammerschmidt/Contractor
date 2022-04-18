@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Contract.Persistence
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_CONTRACT_PERSISTENCE })]
     internal class IDbEntityGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =

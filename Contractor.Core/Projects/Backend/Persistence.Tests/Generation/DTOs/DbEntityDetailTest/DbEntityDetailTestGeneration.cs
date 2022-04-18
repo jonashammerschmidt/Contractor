@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Persistence.Tests
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_TESTS })]
     internal class DbEntityDetailTestGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =

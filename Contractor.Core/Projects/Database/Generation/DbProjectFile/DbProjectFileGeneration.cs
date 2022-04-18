@@ -3,6 +3,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Database
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.DATABASE })]
     internal class DbProjectFileGeneration : ClassGeneration
     {
         private readonly DbProjectFileDomainAddition dbProjectFileDomainAddition;

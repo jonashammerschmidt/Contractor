@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Api
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_API })]
     internal class EntitiesCrudController : ClassGeneration
     {
         private static readonly string TemplatePath =

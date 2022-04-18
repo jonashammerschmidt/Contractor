@@ -2,6 +2,7 @@
 
 namespace Contractor.Core.Projects.Backend.Persistence.Tests
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_TESTS })]
     internal class InMemoryDbContextGeneration : ClassGeneration
     {
         private readonly InMemoryDbContextEntityAddition inMemoryDbContextEntityAddition;
