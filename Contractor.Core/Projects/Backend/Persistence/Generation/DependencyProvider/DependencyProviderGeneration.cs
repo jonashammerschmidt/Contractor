@@ -1,8 +1,9 @@
 ﻿using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
-namespace Contractor.Core.Projects.Backend.Logic.Tests
+namespace Contractor.Core.Projects.Backend.Persistence
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE })]
     internal class DependencyProviderGeneration : ClassGeneration
     {
         private static readonly string ProjectFolder = "Persistence";

@@ -5,6 +5,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Model
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
     internal class IEntityListItemGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =

@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Logic.Tests
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_LOGIC_TESTS })]
     internal class DbEntityListItemTestGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =

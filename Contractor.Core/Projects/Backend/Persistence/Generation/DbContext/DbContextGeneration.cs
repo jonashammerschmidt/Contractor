@@ -2,6 +2,7 @@
 
 namespace Contractor.Core.Projects.Backend.Persistence
 {
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE, ClassGenerationTag.BACKEND_EF })]
     internal class DbContextGeneration : ClassGeneration
     {
         private readonly DbContextEntityAddition dbContextEntityAddition;
