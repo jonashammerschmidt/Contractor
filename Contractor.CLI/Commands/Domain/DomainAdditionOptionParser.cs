@@ -1,4 +1,5 @@
-﻿using Contractor.CLI.Tools;
+﻿using Contractor.CLI.Commands._Helper;
+using Contractor.CLI.Tools;
 using Contractor.Core.Helpers;
 using Contractor.Core.Options;
 
@@ -13,6 +14,8 @@ namespace Contractor.CLI
             domainOptions.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
 
             domainOptions.Domain = args[2].UpperFirstChar();
+
+            TagArgumentParser.AddTags(args, domainOptions);
 
             return domainOptions;
         }

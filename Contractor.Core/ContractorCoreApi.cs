@@ -29,7 +29,10 @@ namespace Contractor.Core
 
             foreach (ClassGeneration classGeneration in classGenerations)
             {
-                classGeneration.PerformAddDomainCommand(options);
+                if (ShouldGenerate(options, classGeneration))
+                {
+                    classGeneration.PerformAddDomainCommand(options);
+                }
             }
         }
 
@@ -42,7 +45,10 @@ namespace Contractor.Core
 
             foreach (ClassGeneration classGeneration in classGenerations)
             {
-                classGeneration.PerformAddEntityCommand(options);
+                if (ShouldGenerate(options, classGeneration))
+                {
+                    classGeneration.PerformAddEntityCommand(options);
+                }
             }
         }
 
@@ -55,7 +61,10 @@ namespace Contractor.Core
 
             foreach (ClassGeneration classGeneration in classGenerations)
             {
-                classGeneration.PerformAddPropertyCommand(options);
+                if (ShouldGenerate(options, classGeneration))
+                {
+                    classGeneration.PerformAddPropertyCommand(options);
+                }
             }
         }
 
@@ -68,7 +77,10 @@ namespace Contractor.Core
 
             foreach (ClassGeneration classGeneration in classGenerations)
             {
-                classGeneration.PerformAdd1ToNRelationCommand(options);
+                if (ShouldGenerate(options, classGeneration))
+                {
+                    classGeneration.PerformAdd1ToNRelationCommand(options);
+                }
             }
         }
 
@@ -81,13 +93,31 @@ namespace Contractor.Core
 
             foreach (ClassGeneration classGeneration in classGenerations)
             {
-                classGeneration.PerformAddOneToOneRelationCommand(options);
+                if (ShouldGenerate(options, classGeneration))
+                {
+                    classGeneration.PerformAddOneToOneRelationCommand(options);
+                }
             }
         }
 
         public void SaveChanges(IContractorOptions contractorOptions)
         {
             this.fileSystemClient.SaveAll(contractorOptions);
+        }
+
+        private bool ShouldGenerate(IContractorOptions options, ClassGeneration classGeneration)
+        {
+            if (options.Tags.Count() == 0)
+            {
+                return true;
+            }
+
+            return classGeneration
+               .GetType()
+               .GetCustomAttributes(typeof(ClassGenerationTagsAttribute), false)
+               .Select(attribute => attribute as ClassGenerationTagsAttribute)
+               .SelectMany(attribute => attribute.GetGenerationTags())
+               .Any(tag => options.Tags.Contains(tag));
         }
     }
 }

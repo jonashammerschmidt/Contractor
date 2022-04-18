@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Contractor.Core.Projects;
+using System.Collections.Generic;
 
 namespace Contractor.Core.Options
 {
@@ -18,6 +19,8 @@ namespace Contractor.Core.Options
 
         public bool IsVerbose { get; set; }
 
+        public IEnumerable<ClassGenerationTag> Tags { get; set; } = new List<ClassGenerationTag>();
+
         public ContractorOptions()
         {
             this.Replacements = new Dictionary<string, string>();
@@ -32,6 +35,7 @@ namespace Contractor.Core.Options
             this.DbProjectName = options.DbProjectName;
             this.Replacements = options.Replacements;
             this.IsVerbose = options.IsVerbose;
+            this.Tags = options.Tags;
         }
     }
 }

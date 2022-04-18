@@ -1,4 +1,5 @@
-﻿using Contractor.CLI.Tools;
+﻿using Contractor.CLI.Commands._Helper;
+using Contractor.CLI.Tools;
 using Contractor.Core.Options;
 
 namespace Contractor.CLI
@@ -23,6 +24,8 @@ namespace Contractor.CLI
                 options.RequestScopeName = st.Split(':')[0].Split('.')[1];
                 options.RequestScopeNamePlural = st.Split(':')[1];
             }
+
+            TagArgumentParser.AddTags(args, options);
 
             return options;
         }
