@@ -1,4 +1,5 @@
-﻿using Contractor.CLI.Tools;
+﻿using Contractor.CLI.Commands._Helper;
+using Contractor.CLI.Tools;
 using Contractor.Core.Options;
 
 namespace Contractor.CLI
@@ -34,6 +35,8 @@ namespace Contractor.CLI
                 options.PropertyNameFrom = options.EntityNameFrom;
                 options.PropertyNameTo = options.EntityNamePluralTo;
             }
+
+            TagArgumentParser.AddTags(args, options);
 
             return options;
         }

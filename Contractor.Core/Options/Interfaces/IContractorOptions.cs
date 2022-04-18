@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Contractor.Core.Projects;
+using System.Collections.Generic;
 
 namespace Contractor.Core.Options
 {
@@ -17,5 +18,7 @@ namespace Contractor.Core.Options
         Dictionary<string, string> Replacements { get; set; }
 
         bool IsVerbose { get; set; }
+
+        IEnumerable<ClassGenerationTag> Tags { get; set; }
     }
 }

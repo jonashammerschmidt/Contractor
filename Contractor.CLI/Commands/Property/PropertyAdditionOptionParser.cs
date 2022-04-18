@@ -1,4 +1,5 @@
-﻿using Contractor.CLI.Tools;
+﻿using Contractor.CLI.Commands._Helper;
+using Contractor.CLI.Tools;
 using Contractor.Core.Options;
 using System;
 
@@ -26,6 +27,8 @@ namespace Contractor.CLI
             options.EntityNamePlural = entityName.Split(':')[1];
 
             options.IsOptional = ArgumentParser.HasArgument(args, "-o", "--optional");
+
+            TagArgumentParser.AddTags(args, options);
 
             return options;
         }
