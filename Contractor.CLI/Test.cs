@@ -87,7 +87,6 @@ namespace Contractor.CLI
                 PropertyName = "LegacyIsPleite",
                 IsOptional = true,
             });
-
         }
 
         private static void AddKunden(ContractorCoreApi contractorCoreApi, ContractorOptions contractorOptions)
@@ -127,7 +126,6 @@ namespace Contractor.CLI
                 PropertyName = "KundennummerLegacy",
                 IsOptional = true,
             });
-
         }
 
         private static void AddKonten(ContractorCoreApi contractorCoreApi, ContractorOptions contractorOptions)
@@ -193,7 +191,6 @@ namespace Contractor.CLI
                 PropertyName = "LegacyEröffnetAm",
                 IsOptional = true,
             });
-
         }
 
         private static void AddRelations(ContractorCoreApi contractorCoreApi, ContractorOptions contractorOptions)
@@ -253,7 +250,14 @@ namespace Contractor.CLI
 
         private static DirectoryInfo GetRootFolder()
         {
-            return Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            if (currentDirectory.Contains("\\Contractor.CLI"))
+            {
+                currentDirectory = currentDirectory.Split("\\Contractor.CLI")[0];
+            }
+
+            return new DirectoryInfo(currentDirectory);
         }
     }
 }
