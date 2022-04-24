@@ -85,7 +85,8 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             return this.dbContext.Entities
                 .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
-                .Select(efEntity => DbEntity.FromEfEntity(efEntity));
+                .Select(efEntity => DbEntity.FromEfEntity(efEntity))
+                .ToList();
         }
 
         public void UpdateEntity(IDbEntityUpdate dbEntityUpdate)

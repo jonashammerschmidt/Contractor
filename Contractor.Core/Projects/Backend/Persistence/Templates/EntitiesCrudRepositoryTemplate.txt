@@ -75,7 +75,8 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         public IEnumerable<IDbEntity> GetAllEntities()
         {
             return this.dbContext.Entities
-                .Select(efEntity => DbEntity.FromEfEntity(efEntity));
+                .Select(efEntity => DbEntity.FromEfEntity(efEntity))
+                .ToList();
         }
 
         public void UpdateEntity(IDbEntityUpdate dbEntityUpdate)
