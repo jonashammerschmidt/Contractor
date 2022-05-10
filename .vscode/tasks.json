@@ -23,6 +23,19 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "Contractor.CLI Test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "test"
+            ],
+            "options": {
+                "cwd": "Contractor.CLI"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "Contract.Architecture.Web.Core Start",
             "type": "shell",
             "command": "npm start",
