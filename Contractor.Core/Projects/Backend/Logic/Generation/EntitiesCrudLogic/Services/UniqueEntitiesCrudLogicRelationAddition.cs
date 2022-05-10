@@ -46,37 +46,34 @@ namespace Contractor.Core.Projects.Backend.Logic
                     $"            if ({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.HasValue &&\n" +
                     $"                !this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value))\n" +
                      "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
+                    $"                throw new NotFoundResultException(\"{options.PropertyNameFrom} ({{id}}) konnte nicht gefunden werden.\", {options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value);\n" +
                      "            }\n");
             }
             else
             {
-                stringEditor.InsertLine($"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
-                    "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    $"                return LogicResult<Guid>.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    "            }\n");
+                stringEditor.InsertLine(
+                    $"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
+                     "            {\n" +
+                    $"                throw new NotFoundResultException(\"{options.PropertyNameFrom} ({{id}}) konnte nicht gefunden werden.\", {options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id);\n" +
+                     "            }\n");
             }
 
             if (options.IsOptional)
             {
                 stringEditor.InsertLine(
-                $"            if ({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.HasValue &&\n" +
-                $"                this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value))\n" +
-                    "            {\n" +
-                $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                $"                return LogicResult<Guid>.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    "            }\n");
+                    $"            if ({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.HasValue &&\n" +
+                    $"                this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value))\n" +
+                     "            {\n" +
+                    $"                throw new ConflictResultException(\"{options.PropertyNameFrom} ({{id}}) ist bereits vergeben.\", {options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value);\n" +
+                     "            }\n");
             }
             else
             {
                 stringEditor.InsertLine(
-                $"            if (this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
-                    "            {\n" +
-                $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                $"                return LogicResult<Guid>.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    "            }\n");
+                    $"            if (this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
+                     "            {\n" +
+                    $"                throw new ConflictResultException(\"{options.PropertyNameFrom} ({{id}}) ist bereits vergeben.\", {options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id);\n" +
+                     "            }\n");
             }
 
             // ----------- Update Method -----------
@@ -93,8 +90,7 @@ namespace Contractor.Core.Projects.Backend.Logic
                     $"            if ({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.HasValue &&\n" +
                     $"                !this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value))\n" +
                      "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
+                    $"                throw new NotFoundResultException(\"{options.PropertyNameFrom} ({{id}}) konnte nicht gefunden werden.\", {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value);\n" +
                      "            }");
             }
             else
@@ -102,8 +98,7 @@ namespace Contractor.Core.Projects.Backend.Logic
                 stringEditor.InsertLine(
                     $"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
                      "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
-                    $"                return LogicResult.NotFound(\"{options.PropertyNameFrom} konnte nicht gefunden werden.\");\n" +
+                    $"                throw new NotFoundResultException(\"{options.PropertyNameFrom} ({{id}}) konnte nicht gefunden werden.\", {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id);\n" +
                      "            }");
             }
 
@@ -111,14 +106,13 @@ namespace Contractor.Core.Projects.Backend.Logic
             if (options.IsOptional)
             {
                 stringEditor.InsertLine(
-                    $"            bool is{options.PropertyNameFrom}IdGettingUpdated = db{options.EntityNameTo}ToUpdate.{options.PropertyNameFrom}Id != {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.GetValueOrDefault();\n" +
+                    $"            bool is{options.PropertyNameFrom}IdGettingUpdated = db{options.EntityNameTo}ToUpdate.{options.PropertyNameFrom}Id != {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value;\n" +
                     $"            if (is{options.PropertyNameFrom}IdGettingUpdated &&\n" +
                     $"                {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.HasValue &&\n" +
                     $"                this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value))\n" +
-                    "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    $"                return LogicResult.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    "            }");
+                     "            {\n" +
+                    $"                throw new ConflictResultException(\"{options.PropertyNameFrom} ({{id}}) ist bereits vergeben.\", {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value);\n" +
+                     "            }");
             }
             else
             {
@@ -126,10 +120,9 @@ namespace Contractor.Core.Projects.Backend.Logic
                     $"            bool is{options.PropertyNameFrom}IdGettingUpdated = db{options.EntityNameTo}ToUpdate.{options.PropertyNameFrom}Id != {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id;\n" +
                     $"            if (is{options.PropertyNameFrom}IdGettingUpdated &&\n" +
                     $"                this.{options.EntityNamePluralLowerTo}CrudRepository.Is{options.PropertyNameFrom}IdInUse({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
-                    "            {\n" +
-                    $"                this.logger.LogDebug(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    $"                return LogicResult.Conflict(\"{options.PropertyNameFrom} bereits vergeben.\");\n" +
-                    "            }");
+                     "            {\n" +
+                    $"                throw new ConflictResultException(\"{options.PropertyNameFrom} ({{id}}) ist bereits vergeben.\", {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id);\n" +
+                     "            }");
             }
 
             return stringEditor.GetText();
