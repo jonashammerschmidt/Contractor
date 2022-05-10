@@ -39,7 +39,6 @@ namespace Contractor.CLI.Commands._Helper
                 "logic" => ClassGenerationTag.BACKEND_LOGIC,
                 "logicTest" => ClassGenerationTag.BACKEND_LOGIC_TESTS,
                 "persistence" => ClassGenerationTag.BACKEND_PERSISTENCE,
-                "persistenceTests" => ClassGenerationTag.BACKEND_PERSISTENCE_TESTS,
                 "database" => ClassGenerationTag.DATABASE,
                 "frontend" => ClassGenerationTag.FRONTEND,
                 "frontendModel" => ClassGenerationTag.FRONTEND_MODEL,
