@@ -4,7 +4,6 @@ using Contractor.Core.Projects.Backend.Contract.Persistence;
 using Contractor.Core.Projects.Backend.Logic;
 using Contractor.Core.Projects.Backend.Logic.Tests;
 using Contractor.Core.Projects.Backend.Persistence;
-using Contractor.Core.Projects.Backend.Persistence.Tests;
 using Contractor.Core.Projects.Database;
 using Contractor.Core.Projects.Frontend.Model;
 using Contractor.Core.Projects.Frontend.Pages;
@@ -32,7 +31,6 @@ namespace Contractor.Core
             LogicProjectGeneration.ConfigureServices(serviceCollection);
             LogicTestsProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceProjectGeneration.ConfigureServices(serviceCollection);
-            PersistenceTestsProjectGeneration.ConfigureServices(serviceCollection);
 
             DBProjectGeneration.ConfigureServices(serviceCollection);
 
