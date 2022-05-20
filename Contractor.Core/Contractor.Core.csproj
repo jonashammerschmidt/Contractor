@@ -88,12 +88,6 @@
     <None Update="Projects\Backend\Persistence\Templates\DbEntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Database\Templates\EntitiesTableTemplate-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Database\Templates\EntitiesTableTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Projects\Backend\Logic.Tests\Templates\EntityCreateTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -157,16 +151,16 @@
     <None Update="Projects\Backend\Persistence\Templates\DbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence\Templates\EfEntityTemplate-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Projects\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence\Templates\EfEntityTemplate.txt">
+    <None Update="Projects\Database\Persistence.DbContext\Templates\EfEntityTemplate-RequestScope.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Projects\Database\Persistence.DbContext\Templates\EfEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-create.template.txt">

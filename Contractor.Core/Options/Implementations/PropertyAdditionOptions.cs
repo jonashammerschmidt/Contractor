@@ -18,6 +18,10 @@ namespace Contractor.Core.Options
 
         public bool IsOptional { get; set; } = false;
 
+        public bool HasClusteredIndex { get; set; } = false;
+
+        public bool HasNonClusteredIndex { get; set; } = false;
+
         public PropertyAdditionOptions()
         {
         }
@@ -40,12 +44,16 @@ namespace Contractor.Core.Options
             this.PropertyName = options.PropertyName;
             this.PropertyTypeExtra = options.PropertyTypeExtra;
             this.IsOptional = options.IsOptional;
+            this.HasClusteredIndex = options.HasClusteredIndex;
+            this.HasNonClusteredIndex = options.HasNonClusteredIndex;
         }
 
         internal PropertyAdditionOptions(IRelationSideAdditionOptions options) : base(options)
         {
             this.PropertyName = options.PropertyName;
             this.IsOptional = options.IsOptional;
+            this.HasClusteredIndex = options.HasClusteredIndex;
+            this.HasNonClusteredIndex = options.HasNonClusteredIndex;
             switch (options.PropertyType)
             {
                 case "Guid":

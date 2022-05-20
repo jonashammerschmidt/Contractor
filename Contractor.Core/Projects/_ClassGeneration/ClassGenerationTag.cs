@@ -3,8 +3,6 @@
     public enum ClassGenerationTag
     {
         BACKEND,
-        DATABASE,
-        FRONTEND,
         BACKEND_API,
         BACKEND_CONTRACT,
         BACKEND_CONTRACT_LOGIC,
@@ -12,7 +10,8 @@
         BACKEND_LOGIC,
         BACKEND_LOGIC_TESTS,
         BACKEND_PERSISTENCE,
-        BACKEND_EF,
+        BACKEND_PERSISTENCE_DB_CONTEXT,
+        FRONTEND,
         FRONTEND_MODEL,
         FRONTEND_PAGES
     }

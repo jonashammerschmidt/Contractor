@@ -1,8 +1,8 @@
 ﻿using Contractor.Core.Options;
 
-namespace Contractor.Core.Projects.Backend.Persistence
+namespace Contractor.Core.Projects.Database.Persistence.DbContext
 {
-    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE, ClassGenerationTag.BACKEND_EF })]
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class DbContextGeneration : ClassGeneration
     {
         private readonly DbContextEntityAddition dbContextEntityAddition;

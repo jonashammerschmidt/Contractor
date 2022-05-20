@@ -2,7 +2,7 @@
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
-namespace Contractor.Core.Projects.Backend.Persistence
+namespace Contractor.Core.Projects.Database.Persistence.DbContext
 {
     internal class DbContextRelationToOneToOneAddition : DbContextRelationAdditionEditor
     {
@@ -18,9 +18,12 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.NextThatContains($"modelBuilder.Entity<Ef{options.EntityNameTo}>");
             stringEditor.NextThatContains("});");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"                entity.HasOne(d => d.{options.PropertyNameFrom})\n" +
+            stringEditor.InsertLine(
+                    $"                entity.HasOne(d => d.{options.PropertyNameFrom})\n" +
                     $"                    .WithOne(p => p.{options.PropertyNameTo})\n" +
                     $"                    .HasForeignKey<Ef{options.EntityNameTo}>(d => d.{options.PropertyNameFrom}Id)\n" +
+                    $"                    .IsRequired({!options.IsOptional})\n" +
+                    $"                    .OnDelete(DeleteBehavior.NoAction)\n" +
                     $"                    .HasConstraintName(\"FK_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id\");");
 
             return stringEditor.GetText();

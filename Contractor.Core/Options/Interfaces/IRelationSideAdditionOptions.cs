@@ -7,5 +7,9 @@
         string PropertyName { get; set; }
 
         bool IsOptional { get; set; }
+
+        bool HasClusteredIndex { get; set; }
+
+        bool HasNonClusteredIndex { get; set; }
     }
 }

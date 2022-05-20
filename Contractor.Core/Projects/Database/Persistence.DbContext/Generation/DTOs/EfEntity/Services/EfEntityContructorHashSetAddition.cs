@@ -3,7 +3,7 @@ using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Projects.Backend.Persistence
+namespace Contractor.Core.Projects.Database.Persistence.DbContext
 {
     internal class EfEntityContructorHashSetAddition : RelationAdditionEditor
     {
