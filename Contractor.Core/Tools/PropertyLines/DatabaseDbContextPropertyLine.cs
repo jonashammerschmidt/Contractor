@@ -11,14 +11,19 @@ namespace Contractor.Core.Tools
                 case PropertyTypes.String:
                     return 
                         $"                entity.Property(e => e.{options.PropertyName})\n" +
-                        (options.IsOptional ? "" : "                    .IsRequired()\n") +
+                        $"                    .IsRequired({!options.IsOptional})\n" +
                         $"                    .HasMaxLength({options.PropertyTypeExtra});";
 
                 case PropertyTypes.DateTime:
-                    return $"                entity.Property(e => e.{options.PropertyName}).HasColumnType(\"datetime\");";
+                    return
+                        $"                entity.Property(e => e.{options.PropertyName})\n" +
+                        $"                    .IsRequired({!options.IsOptional})\n" +
+                        $"                    .HasColumnType(\"datetime\");";
 
                 default:
-                    return null;
+                    return
+                        $"                entity.Property(e => e.{options.PropertyName})\n" +
+                        $"                    .IsRequired({!options.IsOptional});";
             }
         }
     }

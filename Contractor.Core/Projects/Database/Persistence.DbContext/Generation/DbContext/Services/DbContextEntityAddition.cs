@@ -2,7 +2,7 @@
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
-namespace Contractor.Core.Projects.Backend.Persistence
+namespace Contractor.Core.Projects.Database.Persistence.DbContext
 {
     internal class DbContextEntityAddition
     {
@@ -60,7 +60,8 @@ namespace Contractor.Core.Projects.Backend.Persistence
                  "            {\n" +
                  $"                entity.ToTable(\"{options.EntityNamePlural}\");\n" +
                  "\n" +
-                 $"                entity.Property(e => e.Id).ValueGeneratedNever();\n" +
+                 $"                entity.Property(e => e.Id)\n" +
+                 $"                    .ValueGeneratedNever();\n" +
                  "            });";
         }
     }

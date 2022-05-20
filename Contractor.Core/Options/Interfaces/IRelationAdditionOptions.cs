@@ -4,6 +4,10 @@
     {
         bool IsOptional { get; set; }
 
+        bool HasClusteredIndex { get; set; }
+
+        bool HasNonClusteredIndex { get; set; }
+
         // From
         string DomainFrom { get; set; }
 

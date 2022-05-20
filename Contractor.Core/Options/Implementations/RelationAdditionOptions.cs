@@ -4,8 +4,6 @@ namespace Contractor.Core.Options
 {
     public class RelationAdditionOptions : ContractorOptions, IRelationAdditionOptions
     {
-        private bool isOptional;
-
         private string domainFrom;
         private string entityNameFrom;
         private string entityNamePluralFrom;
@@ -16,11 +14,11 @@ namespace Contractor.Core.Options
         private string entityNamePluralTo;
         private string propertyNameTo;
 
-        public bool IsOptional
-        {
-            get { return isOptional; }
-            set { isOptional = value; }
-        }
+        public bool IsOptional { get; set; }
+
+        public bool HasClusteredIndex { get; set; }
+
+        public bool HasNonClusteredIndex { get; set; }
 
         public string DomainFrom
         {
@@ -139,6 +137,8 @@ namespace Contractor.Core.Options
                 PropertyType = propertyType,
                 PropertyName = options.PropertyNameTo,
                 IsOptional = options.IsOptional,
+                HasClusteredIndex = options.HasClusteredIndex,
+                HasNonClusteredIndex = options.HasNonClusteredIndex,
             };
         }
 
@@ -151,7 +151,8 @@ namespace Contractor.Core.Options
                 EntityNamePlural = options.EntityNamePluralTo,
                 PropertyType = propertyType,
                 PropertyName = options.PropertyNameFrom + (propertyType.Equals("Guid") ? "Id" : ""),
-                IsOptional = options.IsOptional,
+                HasClusteredIndex = options.HasClusteredIndex,
+                HasNonClusteredIndex = options.HasNonClusteredIndex,
             };
         }
 
@@ -172,7 +173,8 @@ namespace Contractor.Core.Options
                !options.DomainTo.IsAlpha() ||
                !options.EntityNameTo.IsAlpha() ||
                !options.EntityNamePluralTo.IsAlpha() ||
-               !options.PropertyNameTo.IsAlpha())
+               !options.PropertyNameTo.IsAlpha() ||
+               (options.HasClusteredIndex && options.HasNonClusteredIndex))
             {
                 return false;
             }

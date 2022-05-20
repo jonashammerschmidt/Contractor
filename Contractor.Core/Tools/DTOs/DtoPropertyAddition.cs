@@ -25,8 +25,13 @@ namespace Contractor.Core.Tools
 
         public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface)
         {
+            AddPropertyToDTO(options, domainFolder, templateFileName, forInterface, false);
+        }
+
+        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, bool isEf)
+        {
             string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath, forInterface);
+            string fileData = UpdateFileData(options, filePath, forInterface, isEf);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
@@ -39,12 +44,12 @@ namespace Contractor.Core.Tools
             return filePath;
         }
 
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath, bool forInterface)
+        private string UpdateFileData(IPropertyAdditionOptions options, string filePath, bool forInterface, bool isEf)
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             fileData = AddUsingStatements(options, fileData);
-            fileData = AddProperty(fileData, options, forInterface);
+            fileData = AddProperty(fileData, options, forInterface, isEf);
 
             return fileData;
         }
@@ -59,7 +64,7 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddProperty(string file, IPropertyAdditionOptions options, bool forInterface)
+        private string AddProperty(string file, IPropertyAdditionOptions options, bool forInterface, bool isEf)
         {
             StringEditor stringEditor = new StringEditor(file);
             FindStartingLineForNewProperty(file, options, stringEditor);
@@ -76,6 +81,8 @@ namespace Contractor.Core.Tools
 
             if (forInterface)
                 stringEditor.InsertLine(BackendDtoInterfacePropertyLine.GetPropertyLine(options));
+            else if (isEf)
+                stringEditor.InsertLine(BackendEfDtoInterfacePropertyLine.GetPropertyLine(options));
             else
                 stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(options));
 

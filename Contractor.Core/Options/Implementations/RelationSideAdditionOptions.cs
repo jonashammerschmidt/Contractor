@@ -16,6 +16,10 @@ namespace Contractor.Core.Options
 
         public bool IsOptional { get; set; }
 
+        public bool HasClusteredIndex { get; set; }
+
+        public bool HasNonClusteredIndex { get; set; }
+
         public RelationSideAdditionOptions()
         {
         }

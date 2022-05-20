@@ -76,9 +76,14 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertLine("        [Required]");
             }
 
-            if (options.PropertyType == PropertyTypes.String && options.PropertyTypeExtra != null)
+            if (options.PropertyType == PropertyTypes.String && options.PropertyTypeExtra != null && options.IsOptional)
             {
                 stringEditor.InsertLine($"        [StringLength({options.PropertyTypeExtra})]");
+            }
+
+            if (options.PropertyType == PropertyTypes.String && options.PropertyTypeExtra != null && !options.IsOptional)
+            {
+                stringEditor.InsertLine($"        [StringLength({options.PropertyTypeExtra}, MinimumLength = 1)]");
             }
 
             stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(options));
