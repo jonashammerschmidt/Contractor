@@ -1,6 +1,3 @@
-[submodule "Contract.Architecture"]
-	path = Contract.Architecture
-	url = https://github.com/jonashammerschmidt/Contract.Architecture.git
 [submodule "FullstackTemplate"]
 	path = FullstackTemplate
 	url = https://krz-devops@dev.azure.com/krz-devops/FullstackTemplates/_git/FullstackTemplate
