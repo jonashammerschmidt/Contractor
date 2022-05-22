@@ -2,6 +2,8 @@
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Persistence;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using DbProjectName.Persistence.DbContext;
+using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,11 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
     {
         private readonly IPaginationContext paginationContext;
 
-        private readonly PersistenceDbContext dbContext;
+        private readonly DbContextName dbContext;
 
         public EntitiesCrudRepository(
             IPaginationContext paginationContext,
-            PersistenceDbContext dbContext)
+            DbContextName dbContext)
         {
             this.paginationContext = paginationContext;
 
@@ -66,7 +68,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             var efEntities = this.dbContext.Entities;
 
-            return Pagination.Filter(
+            return Pagination.Execute(
                 efEntities,
                 this.paginationContext,
                 efEntity => DbEntityListItem.FromEfEntity(efEntity));

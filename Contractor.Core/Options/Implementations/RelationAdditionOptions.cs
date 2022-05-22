@@ -151,6 +151,7 @@ namespace Contractor.Core.Options
                 EntityNamePlural = options.EntityNamePluralTo,
                 PropertyType = propertyType,
                 PropertyName = options.PropertyNameFrom + (propertyType.Equals("Guid") ? "Id" : ""),
+                IsOptional = options.IsOptional,
                 HasClusteredIndex = options.HasClusteredIndex,
                 HasNonClusteredIndex = options.HasNonClusteredIndex,
             };

@@ -8,10 +8,7 @@ namespace Contractor.Core.Tools
     {
         public string GetAbsolutePathForBackend(IContractorOptions options, string domainFolder)
         {
-            string relativePath = domainFolder;
-            string absolutePath = Path.Combine(options.BackendDestinationFolder, relativePath);
-
-            return absolutePath;
+            return Path.Combine(options.BackendDestinationFolder, domainFolder);
         }
 
         public string GetAbsolutePathForBackend(IEntityAdditionOptions options, string domainFolder)
@@ -23,10 +20,16 @@ namespace Contractor.Core.Tools
             return absolutePath;
         }
 
-        public string GetAbsolutePathForDatabase(IDomainAdditionOptions options, string domainFolder)
+        public string GetAbsolutePathForDatabase(IContractorOptions options, string domainFolder)
         {
-            string absolutePath = Path.Combine(options.DbDestinationFolder, domainFolder);
+            return Path.Combine(options.DbDestinationFolder, domainFolder);
+        }
+
+        public string GetAbsolutePathForDatabase(IEntityAdditionOptions options, string domainFolder)
+        {
+            string absolutePath = GetAbsolutePathForDatabase(options as IContractorOptions, domainFolder);
             absolutePath = absolutePath.Replace("Domain", options.Domain);
+            absolutePath = absolutePath.Replace("Entities", options.EntityNamePlural);
             return absolutePath;
         }
 

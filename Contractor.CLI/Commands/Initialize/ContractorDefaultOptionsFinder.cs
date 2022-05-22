@@ -14,6 +14,7 @@ namespace Contractor.CLI
             string frontendDestinationFolder = FindBestFrontendDestinationFolder(currentFolder);
             string projectName = new DirectoryInfo(backendDestinationFolder).Name;
             string dbProjectName = new DirectoryInfo(dbDestinationFolder).Name;
+            string dbContextName = "FullstackTemplateCoreDbContext";
 
             return new ContractorOptions()
             {
@@ -21,8 +22,9 @@ namespace Contractor.CLI
                 DbDestinationFolder = dbDestinationFolder,
                 FrontendDestinationFolder = frontendDestinationFolder,
                 ProjectName = projectName,
+                DbProjectName = dbProjectName,
                 Replacements = new Dictionary<string, string>(),
-                DbProjectName = dbProjectName
+                DbContextName = dbContextName
             };
         }
 

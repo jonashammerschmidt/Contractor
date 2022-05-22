@@ -15,6 +15,8 @@ namespace Contractor.Core.Options
 
         public string DbProjectName { get; set; }
 
+        public string DbContextName { get; set; }
+
         public Dictionary<string, string> Replacements { get; set; }
 
         public bool IsVerbose { get; set; }
@@ -33,6 +35,7 @@ namespace Contractor.Core.Options
             this.DbDestinationFolder = options.DbDestinationFolder;
             this.ProjectName = options.ProjectName;
             this.DbProjectName = options.DbProjectName;
+            this.DbContextName = options.DbContextName;
             this.Replacements = options.Replacements;
             this.IsVerbose = options.IsVerbose;
             this.Tags = options.Tags;

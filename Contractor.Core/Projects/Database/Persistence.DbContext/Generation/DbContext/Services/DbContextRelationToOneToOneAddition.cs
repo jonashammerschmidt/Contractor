@@ -22,7 +22,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
                     $"                entity.HasOne(d => d.{options.PropertyNameFrom})\n" +
                     $"                    .WithOne(p => p.{options.PropertyNameTo})\n" +
                     $"                    .HasForeignKey<Ef{options.EntityNameTo}>(d => d.{options.PropertyNameFrom}Id)\n" +
-                    $"                    .IsRequired({!options.IsOptional})\n" +
+                    $"                    .IsRequired({(!options.IsOptional).ToString().ToLower()})\n" +
                     $"                    .OnDelete(DeleteBehavior.NoAction)\n" +
                     $"                    .HasConstraintName(\"FK_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id\");");
 

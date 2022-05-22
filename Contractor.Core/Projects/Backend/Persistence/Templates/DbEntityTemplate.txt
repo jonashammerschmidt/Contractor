@@ -1,4 +1,5 @@
 ﻿using ProjectName.Contract.Persistence.Modules.Domain.Entities;
+using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
 using System;
 
 namespace ProjectName.Persistence.Modules.Domain.Entities

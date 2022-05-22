@@ -28,28 +28,30 @@ namespace Contractor.Core.Tools
             AddPropertyToDTO(options, domainFolder, templateFileName, forInterface, false);
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, bool isEf)
+        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, bool forDatabase)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath, forInterface, isEf);
+            string filePath = GetFilePath(options, domainFolder, templateFileName, forDatabase);
+            string fileData = UpdateFileData(options, filePath, forInterface);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forDatabase)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
+            string absolutePathForDTOs = (forDatabase) ?
+                this.pathService.GetAbsolutePathForDatabase(options, domainFolder) :
+                this.pathService.GetAbsolutePathForBackend(options, domainFolder);
             string fileName = templateFileName.Replace("Entity", options.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;
         }
 
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath, bool forInterface, bool isEf)
+        private string UpdateFileData(IPropertyAdditionOptions options, string filePath, bool forInterface)
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
             fileData = AddUsingStatements(options, fileData);
-            fileData = AddProperty(fileData, options, forInterface, isEf);
+            fileData = AddProperty(fileData, options, forInterface);
 
             return fileData;
         }
@@ -64,7 +66,7 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddProperty(string file, IPropertyAdditionOptions options, bool forInterface, bool isEf)
+        private string AddProperty(string file, IPropertyAdditionOptions options, bool forInterface)
         {
             StringEditor stringEditor = new StringEditor(file);
             FindStartingLineForNewProperty(file, options, stringEditor);
@@ -81,8 +83,6 @@ namespace Contractor.Core.Tools
 
             if (forInterface)
                 stringEditor.InsertLine(BackendDtoInterfacePropertyLine.GetPropertyLine(options));
-            else if (isEf)
-                stringEditor.InsertLine(BackendEfDtoInterfacePropertyLine.GetPropertyLine(options));
             else
                 stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(options));
 

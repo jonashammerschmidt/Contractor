@@ -81,12 +81,20 @@ namespace Contractor.CLI
                 defaultOptions.ProjectName = userProjectName;
             }
 
-            // DbProjectName
+            // ProjectName
             System.Console.WriteLine($"Wie heißt das Datenbank-Projekt? (Empty = {defaultOptions.DbProjectName})");
             var userDbProjectName = System.Console.ReadLine().Trim();
             if (userDbProjectName.Length > 0)
             {
                 defaultOptions.DbProjectName = userDbProjectName;
+            }
+
+            // DbContextName
+            System.Console.WriteLine($"Wie heißt der Datenbank-Context? (Empty = {defaultOptions.DbContextName})");
+            var userDbContextName = System.Console.ReadLine().Trim();
+            if (userDbContextName.Length > 0)
+            {
+                defaultOptions.DbContextName = userDbContextName;
             }
 
             return defaultOptions;

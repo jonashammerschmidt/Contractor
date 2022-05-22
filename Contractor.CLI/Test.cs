@@ -10,9 +10,9 @@ namespace Contractor.CLI
         public static void Testen()
         {
             DirectoryInfo rootFolder = GetRootFolder();
-            string backendDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Backends\\Contract.Architecture.Backend.Core");
-            string dbDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Databases\\Contract.Architecture.Database.Core");
-            string frontendDestinationFolder = Path.Join(rootFolder.FullName, "Contract.Architecture\\Contract.Architecture.Frontends\\Contract.Architecture.Web.Core");
+            string backendDestinationFolder = Path.Join(rootFolder.FullName, "FullstackTemplate\\Krz.FullstackTemplate.Backends\\Krz.FullstackTemplate.Backend.Core");
+            string dbDestinationFolder = Path.Join(rootFolder.FullName, "FullstackTemplate\\Krz.FullstackTemplate.Databases\\Krz.FullstackTemplate.Database.Core");
+            string frontendDestinationFolder = Path.Join(rootFolder.FullName, "FullstackTemplate\\Krz.FullstackTemplate.Frontends\\Krz.FullstackTemplate.Web.Core");
             TestApiProjectGeneration(backendDestinationFolder, dbDestinationFolder, frontendDestinationFolder);
         }
 
@@ -28,11 +28,22 @@ namespace Contractor.CLI
                 BackendDestinationFolder = backendDestinationFolder,
                 DbDestinationFolder = dbDestinationFolder,
                 FrontendDestinationFolder = frontendDestinationFolder,
-                ProjectName = "Contract.Architecture.Backend.Core",
-                DbProjectName = "Contract.Architecture.Database.Core",
+                ProjectName = "Krz.FullstackTemplate.Backend.Core",
+                DbProjectName = "Krz.FullstackTemplate.Database.Core",
+                DbContextName = "FullstackTemplateCoreDbContext",
                 Replacements = new Dictionary<string, string>(),
                 IsVerbose = false
             };
+
+            contractorOptions.Replacements.Add("Contract.Architecture", "Krz.FullstackTemplate");
+            contractorOptions.Replacements.Add("app-search-dropdown", "search-dropdown");
+            contractorOptions.Replacements.Add("app-table-filter-bar", "table-filter-bar");
+            contractorOptions.Replacements.Add("src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source", "@krz/material");
+            contractorOptions.Replacements.Add("src/app/components/ui/search-dropdown/search-dropdown.module", "@krz/material");
+            contractorOptions.Replacements.Add("src/app/components/ui/table-filter-bar/table-filter-bar.module", "@krz/material");
+            contractorOptions.Replacements.Add("src/app/services/backend/pagination/i-paged-result", "@krz/material");
+            contractorOptions.Replacements.Add("src/app/services/backend/pagination/i-pagination-options", "@krz/material");
+            contractorOptions.Replacements.Add("src/app/services/backend/pagination/pagination.data-source", "@krz/material");
 
             AddBanken(contractorCoreApi, contractorOptions);
             AddKunden(contractorCoreApi, contractorOptions);

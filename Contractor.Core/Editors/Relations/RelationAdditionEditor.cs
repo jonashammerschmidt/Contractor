@@ -1,5 +1,4 @@
-﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
+﻿using Contractor.Core.Options;
 using System.IO;
 
 namespace Contractor.Core.Tools
@@ -23,7 +22,17 @@ namespace Contractor.Core.Tools
 
         public void Edit(IRelationAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            this.Edit(options, domainFolder, templateFileName, namespacesToAdd, false);
+        }
+
+        public void EditForDatabase(IRelationAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
+        {
+            this.Edit(options, domainFolder, templateFileName, namespacesToAdd, true);
+        }
+
+        private void Edit(IRelationAdditionOptions options, string domainFolder, string templateFileName, string[] namespacesToAdd, bool forDatabase)
+        {
+            string filePath = GetFilePath(options, domainFolder, templateFileName, forDatabase);
 
             string fileData = this.fileSystemClient.ReadAllText(filePath);
             foreach (string namespaceToAdd in namespacesToAdd)
@@ -36,14 +45,17 @@ namespace Contractor.Core.Tools
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IRelationAdditionOptions options, string domainFolder, string templateFileName, bool forDatabase)
         {
             IEntityAdditionOptions entityOptions = 
                 (relationEnd == RelationEnd.From) ?
                     RelationAdditionOptions.GetPropertyForFrom(options) :
                     RelationAdditionOptions.GetPropertyForTo(options);
 
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(entityOptions, domainFolder);
+            string absolutePathForDTOs = 
+                (forDatabase) ?
+                    this.pathService.GetAbsolutePathForDatabase(entityOptions, domainFolder) :
+                    this.pathService.GetAbsolutePathForBackend(entityOptions, domainFolder);
             string filePath = Path.Combine(absolutePathForDTOs, templateFileName);
 
             filePath = filePath.Replace("Entities", entityOptions.EntityNamePlural);

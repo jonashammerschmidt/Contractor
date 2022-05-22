@@ -16,6 +16,8 @@ namespace Contractor.CLI
 
         public string DbProjectName { get; set; }
 
+        public string DbContextName { get; set; }
+
         public Dictionary<string, string> Replacements { get; set; }
 
         public bool IsVerbose { get; set; }
