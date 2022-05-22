@@ -15,18 +15,15 @@ namespace Contractor.Core.Projects.Backend.Logic
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly EntitiesCrudLogicRelationAddition logicRelationAddition;
         private readonly UniqueEntitiesCrudLogicRelationAddition uniquelogicRelationAddition;
-        private readonly UsingStatementAddition usingStatementAddition;
 
         public EntitiesCrudLogicGeneration(
             EntityCoreAddition entityCoreAddition,
             EntitiesCrudLogicRelationAddition logicRelationAddition,
-            UniqueEntitiesCrudLogicRelationAddition uniquelogicRelationAddition,
-            UsingStatementAddition usingStatementAddition)
+            UniqueEntitiesCrudLogicRelationAddition uniquelogicRelationAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.logicRelationAddition = logicRelationAddition;
             this.uniquelogicRelationAddition = uniquelogicRelationAddition;
-            this.usingStatementAddition = usingStatementAddition;
         }
 
         protected override void AddDomain(IDomainAdditionOptions options)
@@ -36,7 +33,6 @@ namespace Contractor.Core.Projects.Backend.Logic
         protected override void AddEntity(IEntityAdditionOptions options)
         {
             this.entityCoreAddition.AddEntityCore(options, LogicProjectGeneration.DomainFolder, TemplatePath, FileName);
-            this.usingStatementAddition.Add(options, LogicProjectGeneration.DomainFolder, FileName, "Microsoft.EntityFrameworkCore");
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

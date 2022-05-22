@@ -43,17 +43,9 @@ namespace ProjectName.Logic.Modules.Domain.Entities
                 throw new NotFoundResultException("Entity ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            // TODO: If relations are implemented, resolve conflict with the FOREIGN KEY constraint
-            try
-            {
-                this.entitiesCrudRepository.DeleteEntity(entityId);
-            }
-            catch (DbUpdateException)
-            {
-                throw new ConflictResultException("Entity ({id}) konnte nicht gefunden werden", entityId);
-            }
+            this.entitiesCrudRepository.DeleteEntity(entityId);
 
-            this.logger.LogInformation("Entity ({id}) gefunden", entityId);
+            this.logger.LogInformation("Entity ({id}) gelöscht", entityId);
             return LogicResult.Ok();
         }
 
