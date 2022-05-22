@@ -1,7 +1,6 @@
 using Contract.Architecture.Backend.Common.Contract.Logic;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Logic;
-using Contract.Architecture.Backend.Common.Logic.Exceptions;
 using Microsoft.Extensions.Logging;
 using ProjectName.Contract.Logic.Modules.Domain.Entities;
 using ProjectName.Contract.Persistence.Modules.Domain.Entities;

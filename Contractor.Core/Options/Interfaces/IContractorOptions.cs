@@ -15,6 +15,8 @@ namespace Contractor.Core.Options
 
         string DbProjectName { get; set; }
 
+        string DbContextName { get; set; }
+
         Dictionary<string, string> Replacements { get; set; }
 
         bool IsVerbose { get; set; }

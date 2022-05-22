@@ -18,7 +18,7 @@ namespace Contractor.Core.Tools
 
         public void Edit(IRelationAdditionOptions options)
         {
-            string filePath = this.pathService.GetAbsolutePathForBackend(options, "Persistence\\PersistenceDbContext.cs");
+            string filePath = this.pathService.GetAbsolutePathForDatabase(options, $"DbContext\\{options.DbContextName}.cs");
 
             string fileData = this.fileSystemClient.ReadAllText(filePath);
             fileData = UpdateFileData(options, fileData);

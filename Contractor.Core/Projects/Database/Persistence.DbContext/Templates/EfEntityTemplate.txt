@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectName.Database.Core.DbContext.Modules.Domain.Entities
+namespace DbProjectName.Persistence.DbContext.Modules.Domain.Entities
 {
     public class EfEntity
     {

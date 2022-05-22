@@ -36,7 +36,9 @@ namespace Contractor.Core.Tools
         private string GetFileData(IDomainAdditionOptions options, string templateFilePath)
         {
             string fileData = this.fileSystemClient.ReadAllText(templateFilePath);
+            fileData = fileData.Replace("DbProjectName", options.DbProjectName);
             fileData = fileData.Replace("ProjectName", options.ProjectName);
+            fileData = fileData.Replace("DbContextName", options.DbContextName);
             fileData = fileData.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
             fileData = fileData.Replace("Domain", options.Domain);
 

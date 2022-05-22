@@ -23,9 +23,19 @@ namespace Contractor.Core.Tools
             AddRelationToDTO(options, domainFolder, templateFileName, false, namespacesToAdd);
         }
 
+        public void AddRelationToDTOForDatabase(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
+        {
+            AddRelationToDTO(options, domainFolder, templateFileName, false, true, namespacesToAdd);
+        }
+
         public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, params string[] namespacesToAdd)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            this.AddRelationToDTO(options, domainFolder, templateFileName, forInterface, false, namespacesToAdd);
+        }
+
+        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, bool forDatabase, params string[] namespacesToAdd)
+        {
+            string filePath = GetFilePath(options, domainFolder, templateFileName, forDatabase);
             string fileData = UpdateFileData(options, filePath, forInterface);
 
             if (namespacesToAdd != null)
@@ -39,9 +49,11 @@ namespace Contractor.Core.Tools
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forDatabase)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
+            string absolutePathForDTOs = (forDatabase) ?
+                this.pathService.GetAbsolutePathForDatabase(options, domainFolder) :
+                this.pathService.GetAbsolutePathForBackend(options, domainFolder);
             string fileName = templateFileName.Replace("Entity", options.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;

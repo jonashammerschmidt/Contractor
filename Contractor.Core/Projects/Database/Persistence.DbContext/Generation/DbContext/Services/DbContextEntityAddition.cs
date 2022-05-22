@@ -19,7 +19,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
         public void Add(IEntityAdditionOptions options)
         {
-            string filePath = this.pathService.GetAbsolutePathForBackend(options, "Persistence\\PersistenceDbContext.cs");
+            string filePath = this.pathService.GetAbsolutePathForDatabase(options, $"DbContext\\{options.DbContextName}.cs");
             string fileData = UpdateFileData(options, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
@@ -29,12 +29,12 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            string usingStatement = $"{options.ProjectName}.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}";
+            string usingStatement = $"{options.DbProjectName}.Persistence.DbContext.Modules.{options.Domain}.{options.EntityNamePlural}";
             fileData = UsingStatements.Add(fileData, usingStatement);
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains("CustomInstantiate");
+            stringEditor.NextThatContains("protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)");
 
             stringEditor.InsertLine(GetDbSetLine(options));
             stringEditor.InsertNewLine();

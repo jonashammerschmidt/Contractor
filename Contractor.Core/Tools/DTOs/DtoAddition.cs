@@ -18,15 +18,22 @@ namespace Contractor.Core.Tools
 
         public void AddDto(IEntityAdditionOptions options, string domainFolder, string templateFilePath, string templateFileName)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            AddDto(options, domainFolder, templateFilePath, templateFileName, false);
+        }
+
+        public void AddDto(IEntityAdditionOptions options, string domainFolder, string templateFilePath, string templateFileName, bool forDatabase)
+        {
+            string filePath = GetFilePath(options, domainFolder, templateFileName, forDatabase);
             string fileData = GetFileData(options, templateFilePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName, bool forDatabase)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
+            string absolutePathForDTOs = (forDatabase) ?
+                this.pathService.GetAbsolutePathForDatabase(options, domainFolder) :
+                this.pathService.GetAbsolutePathForBackend(options, domainFolder);
             string fileName = templateFileName.Replace("Entity", options.EntityName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;
@@ -35,7 +42,9 @@ namespace Contractor.Core.Tools
         private string GetFileData(IEntityAdditionOptions options, string templateFileName)
         {
             string fileData = this.fileSystemClient.ReadAllText(templateFileName);
+            fileData = fileData.Replace("DbProjectName", options.DbProjectName);
             fileData = fileData.Replace("ProjectName", options.ProjectName);
+            fileData = fileData.Replace("DbContextName", options.DbContextName);
             if (options.HasRequestScope)
             {
                 fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);

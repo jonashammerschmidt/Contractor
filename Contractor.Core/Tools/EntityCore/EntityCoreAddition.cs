@@ -39,7 +39,9 @@ namespace Contractor.Core.Tools
         private string GetFileData(IEntityAdditionOptions options, string templateFilePath)
         {
             string fileData = this.fileSystemClient.ReadAllText(templateFilePath);
+            fileData = fileData.Replace("DbProjectName", options.DbProjectName);
             fileData = fileData.Replace("ProjectName", options.ProjectName);
+            fileData = fileData.Replace("DbContextName", options.DbContextName);
             fileData = fileData.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
             fileData = fileData.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
             fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);

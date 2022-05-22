@@ -46,16 +46,16 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
             if (options.HasClusteredIndex || options.HasNonClusteredIndex)
             {
-                if (!stringEditor.ContainsInTheNextNLines($".IsClustered({options.HasClusteredIndex})", 7))
+                if (!stringEditor.ContainsInTheNextNLines($".IsClustered({options.HasClusteredIndex.ToString().ToLower()})", 7))
                 {
                     stringEditor.InsertLine(
                         $"                entity" +
                         $"                    .HasIndex(c => c.{options.PropertyName})" +
-                        $"                    .IsClustered({options.HasClusteredIndex});");
+                        $"                    .IsClustered({options.HasClusteredIndex.ToString().ToLower()});");
                 }
                 else
                 {
-                    stringEditor.NextThatContains($".IsClustered({options.HasClusteredIndex})");
+                    stringEditor.NextThatContains($".IsClustered({options.HasClusteredIndex.ToString().ToLower()})");
                     stringEditor.Prev();
 
                     string line = stringEditor.GetLine();
