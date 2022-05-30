@@ -13,5 +13,7 @@
         bool HasClusteredIndex { get; set; }
 
         bool HasNonClusteredIndex { get; set; }
+
+        bool IsUnique { get; set; }
     }
 }

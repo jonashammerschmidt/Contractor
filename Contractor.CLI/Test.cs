@@ -75,13 +75,16 @@ namespace Contractor.CLI
             {
                 PropertyType = PropertyTypes.String,
                 PropertyName = "Bezeichnung",
-                PropertyTypeExtra = "256"
+                PropertyTypeExtra = "256",
+                HasClusteredIndex = true,
+                IsUnique = true,
             });
 
             contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Boolean,
                 PropertyName = "IsPleite",
+                HasClusteredIndex = true,
             });
 
             contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
@@ -122,13 +125,15 @@ namespace Contractor.CLI
             {
                 PropertyType = PropertyTypes.String,
                 PropertyName = "Bezeichnung",
-                PropertyTypeExtra = "256"
+                PropertyTypeExtra = "256",
+                HasClusteredIndex = true,
             });
 
             contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
             {
                 PropertyType = PropertyTypes.Integer,
                 PropertyName = "Kundennummer",
+                IsUnique = true,
             });
 
             contractorCoreApi.AddProperty(new PropertyAdditionOptions(entityAdditionOptions)
@@ -136,6 +141,7 @@ namespace Contractor.CLI
                 PropertyType = PropertyTypes.Integer,
                 PropertyName = "KundennummerLegacy",
                 IsOptional = true,
+                HasNonClusteredIndex = true,
             });
         }
 
@@ -217,6 +223,7 @@ namespace Contractor.CLI
                 EntityNamePluralTo = "Kunden",
                 PropertyNameTo = "MeineKunden",
                 IsOptional = false,
+                
             });
 
             contractorCoreApi.Add1ToNRelation(new RelationAdditionOptions(contractorOptions)

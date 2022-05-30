@@ -22,6 +22,8 @@ namespace Contractor.Core.Options
 
         public bool HasNonClusteredIndex { get; set; } = false;
 
+        public bool IsUnique { get; set; } = false;
+
         public PropertyAdditionOptions()
         {
         }
@@ -45,7 +47,8 @@ namespace Contractor.Core.Options
             this.PropertyTypeExtra = options.PropertyTypeExtra;
             this.IsOptional = options.IsOptional;
             this.HasClusteredIndex = options.HasClusteredIndex;
-            this.HasNonClusteredIndex = options.HasNonClusteredIndex;
+            this.HasNonClusteredIndex = options.HasNonClusteredIndex || (options.IsUnique && !options.HasClusteredIndex);
+            this.IsUnique = options.IsUnique;
         }
 
         internal PropertyAdditionOptions(IRelationSideAdditionOptions options) : base(options)
@@ -53,7 +56,8 @@ namespace Contractor.Core.Options
             this.PropertyName = options.PropertyName;
             this.IsOptional = options.IsOptional;
             this.HasClusteredIndex = options.HasClusteredIndex;
-            this.HasNonClusteredIndex = options.HasNonClusteredIndex;
+            this.HasNonClusteredIndex = options.HasNonClusteredIndex || (options.IsUnique && !options.HasClusteredIndex);
+            this.IsUnique = options.IsUnique;
             switch (options.PropertyType)
             {
                 case "Guid":
@@ -66,6 +70,7 @@ namespace Contractor.Core.Options
         {
             if (!EntityAdditionOptions.Validate(options) ||
                string.IsNullOrEmpty(options.PropertyName) ||
+               (options.HasClusteredIndex && options.HasNonClusteredIndex) ||
                !options.PropertyName.IsAlpha())
             {
                 return false;

@@ -49,13 +49,16 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
                 if (!stringEditor.ContainsInTheNextNLines($".IsClustered({options.HasClusteredIndex.ToString().ToLower()})", 7))
                 {
                     stringEditor.InsertLine(
-                        $"                entity" +
-                        $"                    .HasIndex(c => c.{options.PropertyName})" +
+                        $"                entity\n" +
+                        $"                    .HasIndex(c => c.{options.PropertyName})\n" +
+                        $"                    .IsUnique({options.IsUnique.ToString().ToLower()})\n" +
                         $"                    .IsClustered({options.HasClusteredIndex.ToString().ToLower()});");
+                    stringEditor.InsertNewLine();
                 }
                 else
                 {
                     stringEditor.NextThatContains($".IsClustered({options.HasClusteredIndex.ToString().ToLower()})");
+                    stringEditor.Prev();
                     stringEditor.Prev();
 
                     string line = stringEditor.GetLine();
@@ -63,18 +66,15 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
                     if (line.Contains(".HasIndex(c => new {"))
                     {
                         string[] parts = line.Split(new string[] { " }" }, StringSplitOptions.None);
-                        line = $"{parts[0]}, c.{options.PropertyName} }}";
-
-                        stringEditor.SetLine(line);
+                        line = $"{parts[0]}, c.{options.PropertyName} }})";
                     }
                     else if (line.Contains(".HasIndex(c => c"))
                     {
-                        string[] parts = line.Split(new string[] { "c =>" }, StringSplitOptions.None);
-                        line = $"{parts[0]} new {{ {parts[1]}";
+                        string[] parts = line.Split(new string[] { "c => " }, StringSplitOptions.None);
+                        line = $"{parts[0]}c => new {{ {parts[1]}";
 
                         parts = line.Split(')');
-                        line = $"{parts[0]} }})";
-
+                        line = $"{parts[0]}, c.{options.PropertyName} }})";
                     }
 
                     stringEditor.SetLine(line);
