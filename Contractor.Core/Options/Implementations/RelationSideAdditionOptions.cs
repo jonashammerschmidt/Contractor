@@ -20,6 +20,8 @@ namespace Contractor.Core.Options
 
         public bool HasNonClusteredIndex { get; set; }
 
+        public bool IsUnique { get; set; }
+
         public RelationSideAdditionOptions()
         {
         }

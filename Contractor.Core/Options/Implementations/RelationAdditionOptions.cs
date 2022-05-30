@@ -107,6 +107,21 @@ namespace Contractor.Core.Options
         {
         }
 
+        public RelationAdditionOptions(IRelationAdditionOptions options) : base(options)
+        {
+            this.DomainFrom = options.DomainFrom;
+            this.EntityNameFrom = options.EntityNameFrom;
+            this.EntityNamePluralFrom = options.EntityNamePluralFrom;
+            this.PropertyNameFrom = options.PropertyNameFrom;
+            this.DomainTo = options.DomainTo;
+            this.EntityNameTo = options.EntityNameTo;
+            this.EntityNamePluralTo = options.EntityNamePluralTo;
+            this.PropertyNameTo = options.PropertyNameTo;
+            this.IsOptional = options.IsOptional;
+            this.HasClusteredIndex = options.HasClusteredIndex;
+            this.HasNonClusteredIndex = options.HasNonClusteredIndex;
+        }
+
         public static IEntityAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options)
         {
             return new EntityAdditionOptions(options)
@@ -139,6 +154,7 @@ namespace Contractor.Core.Options
                 IsOptional = options.IsOptional,
                 HasClusteredIndex = options.HasClusteredIndex,
                 HasNonClusteredIndex = options.HasNonClusteredIndex,
+                IsUnique = false,
             };
         }
 
@@ -154,6 +170,7 @@ namespace Contractor.Core.Options
                 IsOptional = options.IsOptional,
                 HasClusteredIndex = options.HasClusteredIndex,
                 HasNonClusteredIndex = options.HasNonClusteredIndex,
+                IsUnique = false,
             };
         }
 

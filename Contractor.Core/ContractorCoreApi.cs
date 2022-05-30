@@ -22,6 +22,7 @@ namespace Contractor.Core
 
         public void AddDomain(IDomainAdditionOptions options)
         {
+            options = new DomainAdditionOptions(options);
             if (!DomainAdditionOptions.Validate(options))
             {
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
@@ -38,6 +39,7 @@ namespace Contractor.Core
 
         public void AddEntity(IEntityAdditionOptions options)
         {
+            options = new EntityAdditionOptions(options);
             if (!EntityAdditionOptions.Validate(options))
             {
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
@@ -54,6 +56,7 @@ namespace Contractor.Core
 
         public void AddProperty(IPropertyAdditionOptions options)
         {
+            options = new PropertyAdditionOptions(options);
             if (!PropertyAdditionOptions.Validate(options))
             {
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
@@ -70,6 +73,7 @@ namespace Contractor.Core
 
         public void Add1ToNRelation(IRelationAdditionOptions options)
         {
+            options = new RelationAdditionOptions(options);
             if (!RelationAdditionOptions.Validate(options))
             {
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");
@@ -86,6 +90,7 @@ namespace Contractor.Core
 
         public void AddOneToOneRelation(IRelationAdditionOptions options)
         {
+            options = new RelationAdditionOptions(options);
             if (!RelationAdditionOptions.Validate(options))
             {
                 throw new OptionValidationException("Die Optionen sind nicht korrekt formatiert.");

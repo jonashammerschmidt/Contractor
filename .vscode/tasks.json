@@ -9,7 +9,7 @@
             ]
         },
         {
-            "label": "Contract.Architecture.Backend.Core Start",
+            "label": "Krz.FullstackTemplate.Backend.Core Start",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -18,7 +18,7 @@
                 "API"
             ],
             "options": {
-                "cwd": "Contract.Architecture\\Contract.Architecture.Backends\\Contract.Architecture.Backend.Core"
+                "cwd": "FullstackTemplate\\Krz.FullstackTemplate.Backends\\Krz.FullstackTemplate.Backend.Core"
             },
             "problemMatcher": "$msCompile"
         },
@@ -36,11 +36,11 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Contract.Architecture.Web.Core Start",
+            "label": "Krz.FullstackTemplate.Web.Core Start",
             "type": "shell",
             "command": "npm start",
             "options": {
-                "cwd": "Contract.Architecture\\Contract.Architecture.Frontends\\Contract.Architecture.Web.Core"
+                "cwd": "FullstackTemplate\\Krz.FullstackTemplate.Frontends\\Krz.FullstackTemplate.Web.Core"
             }
         }
     ]
