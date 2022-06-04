@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Contractor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Paths">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BackendDestinationFolder" type="xs:string" />
+              <xs:element name="DbDestinationFolder" type="xs:string" />
+              <xs:element name="FrontendDestinationFolder" type="xs:string" />
+              <xs:element name="ProjectName" type="xs:string" />
+              <xs:element name="DbProjectName" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Replacements">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Replacement">
+                <xs:complexType>
+                  <xs:attribute name="pattern" type="xs:string" use="required" />
+                  <xs:attribute name="ReplaceWith" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Modules">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Module">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Entity">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element maxOccurs="unbounded" name="Property">
+                            <xs:complexType>
+                              <xs:attribute name="name" type="xs:string" use="required" />
+                              <xs:attribute name="type" type="xs:string" use="required" />
+                              <xs:attribute name="isOptional" type="xs:boolean" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element minOccurs="0" name="Relation1ToN">
+                            <xs:complexType>
+                              <xs:attribute name="entityNameFrom" type="xs:string" use="required" />
+                              <xs:attribute name="propertyNameFrom" type="xs:string" use="required" />
+                              <xs:attribute name="PropertyNameTo" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element minOccurs="0" name="Relation1To1">
+                            <xs:complexType>
+                              <xs:attribute name="entityNameFrom" type="xs:string" use="required" />
+                              <xs:attribute name="propertyNameFrom" type="xs:string" use="required" />
+                              <xs:attribute name="PropertyNameTo" type="xs:string" use="required" />
+                              <xs:attribute name="isOptional" type="xs:boolean" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Index">
+                            <xs:complexType>
+                              <xs:attribute name="property" type="xs:string" use="required" />
+                              <xs:attribute name="clustered" type="xs:boolean" use="optional" />
+                              <xs:attribute name="unique" type="xs:boolean" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string" use="required" />
+                        <xs:attribute name="namePlural" type="xs:string" use="required" />
+                        <xs:attribute name="scopeEntityName" type="xs:string" use="optional" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
