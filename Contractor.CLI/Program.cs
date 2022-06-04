@@ -1,10 +1,10 @@
-﻿using Contractor.CLI.Tools;
+﻿using Contractor.CLI.DTOs;
 using Contractor.Core;
-using Contractor.Core.Options;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Contractor.CLI
 {
@@ -29,15 +29,11 @@ namespace Contractor.CLI
                     break;
 
                 case "test":
-                    Test.Testen();
+                    HandleExecuteJob(new string[] { "execute", "contractor.xml" });
                     break;
 
                 case "execute":
                     HandleExecuteJob(args);
-                    break;
-
-                case "add":
-                    HandleMainJobs(args);
                     break;
 
                 default:
@@ -45,24 +41,6 @@ namespace Contractor.CLI
                     Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
                     break;
             }
-        }
-
-        private static void HandleMainJobs(string[] args)
-        {
-            if (args.Length < 2)
-            {
-                Console.WriteLine("Der Typ wurde nicht angegeben.");
-                Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
-                return;
-            }
-
-            IContractorOptions contractorOptions = ContractorOptionsLoader.Load(Directory.GetCurrentDirectory());
-            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-            ContractorExecuter.Execute(
-                contractorCoreApi,
-                contractorOptions,
-                args);
-            contractorCoreApi.SaveChanges(contractorOptions);
         }
 
         private static void HandleExecuteJob(string[] args)
@@ -80,32 +58,21 @@ namespace Contractor.CLI
                 Console.WriteLine("Die angegebene Datei konnte nicht gefunden werden.");
             }
 
-            var file = File.ReadAllText(filePath);
-            var lines = file.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-            var filteredLines = lines
-                .Select(line => line.Trim())
-                .Where(line => line.StartsWith("contractor add"));
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(File.OpenRead(filePath));
+            XmlReader reader = new XmlNodeReader(xmlDocument);
 
-            IContractorOptions contractorOptions = ContractorOptionsLoader
-                .Load(Directory.GetCurrentDirectory());
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ContractorXml));
+            ContractorXml contractorXml = (ContractorXml) xmlSerializer.Deserialize(reader);
 
-            contractorOptions.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
+            ContractorGenerationOptions contractorGenerationOptions = contractorXml.ToContractorGenerationOptions(xmlDocument);
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             Console.WriteLine($"Started generation...");
 
-            ContractorCoreApi contractorCoreApi = new ContractorCoreApi();
-            foreach (string line in filteredLines)
-            {
-                var lineArgs = line.Split(" ").ToList();
-                lineArgs.RemoveAt(0);
-
-                ContractorExecuter.Execute(
-                    contractorCoreApi,
-                    contractorOptions,
-                    lineArgs.ToArray());
-            }
+            ContractorCoreApi contractorCoreApi = new ContractorCoreApi(contractorGenerationOptions);
+            contractorCoreApi.Generate();
 
             stopwatch.Stop();
             Console.WriteLine($"Finished generation after {stopwatch.ElapsedMilliseconds}ms");
@@ -113,10 +80,22 @@ namespace Contractor.CLI
             stopwatch.Start();
             Console.WriteLine($"Started saving...");
 
-            contractorCoreApi.SaveChanges(contractorOptions);
+            contractorCoreApi.SaveChanges();
 
             stopwatch.Stop();
             Console.WriteLine($"Finished saving after {stopwatch.ElapsedMilliseconds}ms");
+        }
+
+        private static DirectoryInfo GetRootFolder()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            if (currentDirectory.Contains("\\Contractor.CLI"))
+            {
+                currentDirectory = currentDirectory.Split("\\Contractor.CLI")[0];
+            }
+
+            return new DirectoryInfo(currentDirectory);
         }
     }
 }

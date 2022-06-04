@@ -32,7 +32,7 @@
               <xs:element maxOccurs="unbounded" name="Module">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element minOccurs="1" maxOccurs="unbounded" name="Entity">
+                    <xs:element name="Entity">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element minOccurs="0" maxOccurs="unbounded" name="Property">
