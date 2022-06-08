@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Contractor.Core;
+using System.Collections.Generic;
 
-namespace Contractor.CLI.DTOs
+namespace Contractor.Core
 {
     public class Entity
     {

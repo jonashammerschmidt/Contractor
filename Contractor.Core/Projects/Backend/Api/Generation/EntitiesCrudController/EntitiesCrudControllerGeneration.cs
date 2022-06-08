@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Backend.Api
             this.controllerRelationAddition = controllerRelationAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.entityDetailPageTsFromPropertyAddition = entityDetailPageTsFromPropertyAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

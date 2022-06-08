@@ -26,7 +26,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.dbEntityUpdateMethodsAddition = dbEntityUpdateMethodsAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

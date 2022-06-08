@@ -12,9 +12,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.appRoutingDomainAddition = appRoutingDomainAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
-            this.appRoutingDomainAddition.Add(options);
+            this.appRoutingDomainAddition.Add(module);
         }
 
         protected override void AddEntity(IEntityAdditionOptions options)

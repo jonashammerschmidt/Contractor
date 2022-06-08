@@ -20,9 +20,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.frontendPagesDomainCoreAddition = frontendPagesDomainCoreAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
-            this.frontendPagesDomainCoreAddition.AddEntityCore(options, PagesProjectGeneration.PagesFolder, TemplatePath, FileName);
+            this.frontendPagesDomainCoreAddition.AddEntityCore(module, PagesProjectGeneration.PagesFolder, TemplatePath, FileName);
         }
 
         protected override void AddEntity(IEntityAdditionOptions options)

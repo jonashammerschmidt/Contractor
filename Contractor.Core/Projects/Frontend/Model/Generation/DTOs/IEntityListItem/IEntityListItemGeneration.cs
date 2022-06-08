@@ -30,7 +30,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

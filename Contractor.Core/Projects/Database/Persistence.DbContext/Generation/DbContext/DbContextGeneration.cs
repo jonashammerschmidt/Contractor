@@ -22,7 +22,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             this.dbContextRelationToOneToOneAddition = dbContextRelationToOneToOneAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

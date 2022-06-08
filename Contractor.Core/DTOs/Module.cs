@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Contractor.Core;
+using System.Collections.Generic;
 
-namespace Contractor.CLI.DTOs
+namespace Contractor.Core
 {
     public class Module
     {
@@ -12,9 +13,9 @@ namespace Contractor.CLI.DTOs
 
         public void AddLinks(ContractorGenerationOptions options)
         {
-            this.Options = options;
+            Options = options;
 
-            foreach (var entity in this.Entities)
+            foreach (var entity in Entities)
             {
                 entity.AddLinks(this);
             }

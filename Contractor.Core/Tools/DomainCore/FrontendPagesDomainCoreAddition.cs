@@ -17,30 +17,27 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddEntityCore(IDomainAdditionOptions options, string domainFolder, string templateFilePath, string templateFileName)
+        public void AddEntityCore(Module module, string domainFolder, string templateFilePath, string templateFileName)
         {
-            string fileData = GetFileData(options, templateFilePath);
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            string fileData = GetFileData(module, templateFilePath);
+            string filePath = GetFilePath(module, domainFolder, templateFileName);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IDomainAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(Module module, string domainFolder, string templateFileName)
         {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
-            string fileName = templateFileName.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontend(module, domainFolder);
+            string fileName = templateFileName.Replace("domain-kebab", StringConverter.PascalToKebabCase(module.Name));
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;
         }
 
-        private string GetFileData(IDomainAdditionOptions options, string templateFilePath)
+        private string GetFileData(Module module, string templateFilePath)
         {
             string fileData = this.fileSystemClient.ReadAllText(templateFilePath);
-            fileData = fileData.Replace("DbProjectName", options.DbProjectName);
-            fileData = fileData.Replace("ProjectName", options.ProjectName);
-            fileData = fileData.Replace("DbContextName", options.DbContextName);
-            fileData = fileData.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
-            fileData = fileData.Replace("Domain", options.Domain);
+            fileData = fileData.Replace("domain-kebab", StringConverter.PascalToKebabCase(module.Name));
+            fileData = fileData.Replace("Domain", module.Name);
 
             return fileData;
         }

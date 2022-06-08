@@ -20,7 +20,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
             this.entityCoreAddition = entityCoreAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

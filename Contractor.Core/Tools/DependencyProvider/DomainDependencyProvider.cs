@@ -17,30 +17,30 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void UpdateDependencyProvider(IDomainAdditionOptions options, string projectFolder, string fileName)
+        public void UpdateDependencyProvider(Module module, string projectFolder, string fileName)
         {
-            string filePath = GetFilePath(options, projectFolder, fileName);
-            string fileData = UpdateFileData(options, filePath, projectFolder);
+            string filePath = GetFilePath(module, projectFolder, fileName);
+            string fileData = UpdateFileData(module, filePath, projectFolder);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IDomainAdditionOptions options, string projectFolder, string fileName)
+        private string GetFilePath(Module module, string projectFolder, string fileName)
         {
-            return Path.Combine(options.BackendDestinationFolder, projectFolder, fileName);
+            return Path.Combine(module.Options.Paths.BackendDestinationFolder, projectFolder, fileName);
         }
 
-        private string UpdateFileData(IDomainAdditionOptions options, string filePath, string projectFolder)
+        private string UpdateFileData(Module module, string filePath, string projectFolder)
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            fileData = AddStartupMethod(fileData, options, projectFolder);
-            fileData = AddGetStartupMethodCall(fileData, options);
+            fileData = AddStartupMethod(fileData, module, projectFolder);
+            fileData = AddGetStartupMethodCall(fileData, module);
 
             return fileData;
         }
 
-        private string AddStartupMethod(string fileData, IDomainAdditionOptions options, string projectFolder)
+        private string AddStartupMethod(string fileData, Module module, string projectFolder)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
@@ -50,12 +50,12 @@ namespace Contractor.Core.Tools
                 stringEditor.PrevThatContains("}");
 
             stringEditor.PrevThatContains("}");
-            stringEditor.InsertLine(GetStartupMethod(options.Domain, projectFolder));
+            stringEditor.InsertLine(GetStartupMethod(module.Name, projectFolder));
 
             return stringEditor.GetText();
         }
 
-        private string GetStartupMethod(string domain, string projectFolder)
+        private string GetStartupMethod(string moduleName, string projectFolder)
         {
             string startupMethod = "";
             if (projectFolder.Equals("Logic"))
@@ -73,15 +73,15 @@ namespace Contractor.Core.Tools
         }";
             }
 
-            return startupMethod.Replace("Domain", domain);
+            return startupMethod.Replace("Domain", moduleName);
         }
 
-        private string AddGetStartupMethodCall(string fileData, IDomainAdditionOptions options)
+        private string AddGetStartupMethodCall(string fileData, Module module)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
             // Insert using
-            string startupMethodCall = GetStartupMethodCall(options.Domain);
+            string startupMethodCall = GetStartupMethodCall(module.Name);
             stringEditor.NextThatContains("void Startup(IServiceCollection services");
             stringEditor.Next();
             stringEditor.Next(line => line.CompareTo(startupMethodCall) > 0 || line.Contains("}"));

@@ -26,7 +26,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.entityUpdatePageTsToPropertyAddition = entityUpdatePageTsToPropertyAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

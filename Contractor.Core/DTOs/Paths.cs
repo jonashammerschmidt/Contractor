@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Contractor.CLI.DTOs
+namespace Contractor.Core
 {
     public class Paths
     {
