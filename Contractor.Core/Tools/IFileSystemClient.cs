@@ -8,6 +8,6 @@ namespace Contractor.Core.Tools
 
         void WriteAllText(string path, string contents);
 
-        void SaveAll(IContractorOptions contractorOptions);
+        void SaveAll(ContractorGenerationOptions contractorGenerationOptions);
     }
 }

@@ -20,7 +20,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

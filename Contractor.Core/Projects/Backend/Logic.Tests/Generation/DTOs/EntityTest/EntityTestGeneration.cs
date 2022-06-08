@@ -29,7 +29,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             this.relationAddition = relationAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

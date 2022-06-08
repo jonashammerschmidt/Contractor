@@ -1,8 +1,9 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core;
+using Contractor.Core.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Contractor.CLI.DTOs
+namespace Contractor.Core
 {
     public class Index
     {
@@ -10,9 +11,9 @@ namespace Contractor.CLI.DTOs
 
         public string PropertyNames
         {
-            set { this.propertyNames = value.Split(',').Select(propertyName => propertyName.Trim().UpperFirstChar()); }
+            set { propertyNames = value.Split(',').Select(propertyName => propertyName.Trim().UpperFirstChar()); }
         }
-        
+
         public IEnumerable<Property> Properties { get; private set; }
 
         public bool IsClustered { get; set; }
@@ -23,7 +24,7 @@ namespace Contractor.CLI.DTOs
 
         public void AddLinks(Entity entity)
         {
-            this.Entity = entity;
+            Entity = entity;
 
             Properties = propertyNames.Select(propertyName => entity.FindProperty(propertyName));
         }

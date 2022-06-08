@@ -1,5 +1,4 @@
-﻿using Contractor.Core.Options;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace Contractor.Core.Tools
@@ -35,15 +34,15 @@ namespace Contractor.Core.Tools
             }
         }
 
-        public void SaveAll(IContractorOptions contractorOptions)
+        public void SaveAll(ContractorGenerationOptions contractorGenerationOptions)
         {
             foreach (var fileCacheItem in this.fileWriteCache)
             {
                 var filePath = fileCacheItem.Key;
                 var fileContent = fileCacheItem.Value;
-                foreach (var replacement in contractorOptions.Replacements)
+                foreach (var replacement in contractorGenerationOptions.Replacements)
                 {
-                    fileContent = fileContent.Replace(replacement.Key, replacement.Value);
+                    fileContent = fileContent.Replace(replacement.Pattern, replacement.ReplaceWith);
                 }
 
                 if (filePath.EndsWith(".cs"))

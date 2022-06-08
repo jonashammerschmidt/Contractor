@@ -35,7 +35,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             this.logicDbDtoListItemTestMethodsAddition = logicDbDtoListItemTestMethodsAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

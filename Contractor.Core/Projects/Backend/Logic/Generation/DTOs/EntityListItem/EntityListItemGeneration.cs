@@ -35,7 +35,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.entityListItemFromOneToOneMethodsAddition = entityListItemFromOneToOneMethodsAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

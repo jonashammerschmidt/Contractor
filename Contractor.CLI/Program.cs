@@ -1,5 +1,4 @@
-﻿using Contractor.CLI.DTOs;
-using Contractor.Core;
+﻿using Contractor.Core;
 using System;
 using System.Diagnostics;
 using System.IO;

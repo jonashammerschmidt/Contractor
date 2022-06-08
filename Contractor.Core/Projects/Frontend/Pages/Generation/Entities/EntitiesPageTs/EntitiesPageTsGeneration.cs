@@ -32,7 +32,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.entitiesPageTsToOneToOnePropertyAddition = entitiesPageTsToOneToOnePropertyAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

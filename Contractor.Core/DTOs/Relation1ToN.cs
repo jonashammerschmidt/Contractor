@@ -1,6 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 
-namespace Contractor.CLI.DTOs
+namespace Contractor.Core
 {
     public class Relation1ToN
     {

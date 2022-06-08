@@ -1,5 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Options;
+using System;
 using System.IO;
 
 namespace Contractor.Core.Tools
@@ -33,19 +34,20 @@ namespace Contractor.Core.Tools
             return absolutePath;
         }
 
-        public string GetAbsolutePathForFrontend(IDomainAdditionOptions options, string domainFolder)
+        public string GetAbsolutePathForFrontend(Module module, string domainFolder)
         {
-            string absolutePath = Path.Combine(options.FrontendDestinationFolder, domainFolder);
-            absolutePath = absolutePath.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
+            string absolutePath = Path.Combine(module.Options.Paths.FrontendDestinationFolder, domainFolder);
+            absolutePath = absolutePath.Replace("domain-kebab", StringConverter.PascalToKebabCase(module.Name));
             return absolutePath;
         }
 
         public string GetAbsolutePathForFrontend(IEntityAdditionOptions options, string domainFolder)
         {
-            string absolutePath = GetAbsolutePathForFrontend(options as IDomainAdditionOptions, domainFolder);
-            absolutePath = absolutePath.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
-            absolutePath = absolutePath.Replace("entities-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
-            return absolutePath;
+            //string absolutePath = GetAbsolutePathForFrontend(options as IDomainAdditionOptions, domainFolder);
+            //absolutePath = absolutePath.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
+            //absolutePath = absolutePath.Replace("entities-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
+            //return absolutePath;
+            throw new NotImplementedException();
         }
     }
 }

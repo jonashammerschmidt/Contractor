@@ -18,15 +18,15 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.pathService = pathService;
         }
 
-        public void Add(IDomainAdditionOptions options)
+        public void Add(Module module)
         {
-            string filePath = Path.Combine(options.FrontendDestinationFolder, "src\\app\\app-routing.module.ts");
-            string fileData = UpdateFileData(options, filePath);
+            string filePath = Path.Combine(module.Options.Paths.FrontendDestinationFolder, "src\\app\\app-routing.module.ts");
+            string fileData = UpdateFileData(module, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string UpdateFileData(IDomainAdditionOptions options, string filePath)
+        private string UpdateFileData(Module module, string filePath)
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
@@ -35,18 +35,18 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("path: '**',");
             stringEditor.Prev();
 
-            stringEditor.InsertLine(GetAppRoutingLine(options));
+            stringEditor.InsertLine(GetAppRoutingLine(module));
 
             return stringEditor.GetText();
         }
 
-        private string GetAppRoutingLine(IDomainAdditionOptions options)
+        private string GetAppRoutingLine(Module module)
         {
             return
               "  {\n" +
-             $"    path: '{options.Domain.ToKebab()}',\n" +
-             $"    loadChildren: () => import('./pages/{options.Domain.ToKebab()}/{options.Domain.ToKebab()}-pages.module')\n" +
-             $"      .then(m => m.{options.Domain}PagesModule)\n" +
+             $"    path: '{module.Name.ToKebab()}',\n" +
+             $"    loadChildren: () => import('./pages/{module.Name.ToKebab()}/{module.Name.ToKebab()}-pages.module')\n" +
+             $"      .then(m => m.{module.Name}PagesModule)\n" +
               "  },";
         }
     }

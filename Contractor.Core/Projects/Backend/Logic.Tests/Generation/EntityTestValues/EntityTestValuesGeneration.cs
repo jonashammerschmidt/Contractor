@@ -26,7 +26,7 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
             this.logicDtoTestValuesRelationAddition = logicDtoTestValuesRelationAddition;
         }
 
-        protected override void AddDomain(IDomainAdditionOptions options)
+        protected override void AddModuleActions(Module module)
         {
         }
 

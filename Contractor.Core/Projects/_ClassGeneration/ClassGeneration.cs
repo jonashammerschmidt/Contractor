@@ -6,7 +6,7 @@ namespace Contractor.Core.Projects
 {
     public abstract class ClassGeneration
     {
-        protected abstract void AddDomain(IDomainAdditionOptions options);
+        protected abstract void AddModuleActions(Module module);
 
         protected abstract void AddEntity(IEntityAdditionOptions options);
 
@@ -16,23 +16,23 @@ namespace Contractor.Core.Projects
 
         protected abstract void AddOneToOneRelation(IRelationAdditionOptions options);
 
-        public void PerformAddDomainCommand(IDomainAdditionOptions options)
+        public void AddModule(Module module)
         {
             try
             {
-                this.AddDomain(options);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(this.GetType().Name + " completed successfully");
-                }
+                this.AddModuleActions(module);
+                //if (module.IsVerbose)
+                //{
+                //    Console.WriteLine(this.GetType().Name + " completed successfully");
+                //}
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Domain-Generierung: " + e.Message);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(e.StackTrace);
-                }
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(e.StackTrace);
+                //}
             }
         }
 
