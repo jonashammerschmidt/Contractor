@@ -30,9 +30,9 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.dtoAddition.AddDto(options, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
+            this.dtoAddition.AddDto(entity, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

@@ -4,9 +4,9 @@ namespace Contractor.Core.Tools
 {
     internal class TemplateFileName
     {
-        public static string GetFileNameForEntityAddition(IEntityAdditionOptions options, string originalTemplateFileName)
+        public static string GetFileNameForEntityAddition(Entity entity, string originalTemplateFileName)
         {
-            if (options.HasRequestScope)
+            if (entity.HasScope)
             {
                 originalTemplateFileName = originalTemplateFileName.Replace(".txt", "-RequestScope.txt");
             }

@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using System;
 using System.IO;
 
@@ -18,40 +17,40 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void UpdateDependencyProvider(IEntityAdditionOptions options, string projectFolder, string fileName)
+        public void UpdateDependencyProvider(Entity entity, string projectFolder, string fileName)
         {
-            string filePath = GetFilePath(options, projectFolder, fileName);
-            string fileData = UpdateFileData(options, filePath, projectFolder);
+            string filePath = GetFilePath(entity, projectFolder, fileName);
+            string fileData = UpdateFileData(entity, filePath, projectFolder);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IEntityAdditionOptions options, string projectFolder, string fileName)
+        private string GetFilePath(Entity entity, string projectFolder, string fileName)
         {
-            return Path.Combine(options.BackendDestinationFolder, projectFolder, fileName);
+            return Path.Combine(entity.Module.Options.Paths.BackendDestinationFolder, projectFolder, fileName);
         }
 
-        private string UpdateFileData(IEntityAdditionOptions options, string filePath, string projectFolder)
+        private string UpdateFileData(Entity entity, string filePath, string projectFolder)
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            fileData = AddServices(fileData, options, projectFolder);
+            fileData = AddServices(fileData, entity, projectFolder);
 
             return fileData;
         }
 
-        private string AddServices(string fileData, IEntityAdditionOptions options, string projectFolder)
+        private string AddServices(string fileData, Entity entity, string projectFolder)
         {
-            string contractNamespace = GetContractNamespace(options, projectFolder);
+            string contractNamespace = GetContractNamespace(entity, projectFolder);
             fileData = UsingStatements.Add(fileData, contractNamespace);
 
-            string projectNamespace = GetProjectNamespace(options, projectFolder);
+            string projectNamespace = GetProjectNamespace(entity, projectFolder);
             fileData = UsingStatements.Add(fileData, projectNamespace);
 
             // Insert into Startup-Method
             StringEditor stringEditor = new StringEditor(fileData);
-            string addScopedStatement = GetAddScopedStatement(options.EntityNamePlural, projectFolder);
-            stringEditor.NextThatContains($"void Startup{options.Domain}");
+            string addScopedStatement = GetAddScopedStatement(entity.NamePlural, projectFolder);
+            stringEditor.NextThatContains($"void Startup{entity.Module.Name}");
             stringEditor.Next();
             stringEditor.NextThatContains("}");
 
@@ -59,35 +58,35 @@ namespace Contractor.Core.Tools
             {
                 stringEditor.InsertNewLine();
             }
-            stringEditor.InsertLine($"            // {options.EntityNamePlural}");
+            stringEditor.InsertLine($"            // {entity.NamePlural}");
             stringEditor.InsertLine(addScopedStatement);
 
             return stringEditor.GetText();
         }
 
-        private string GetContractNamespace(IEntityAdditionOptions options, string projectFolder)
+        private string GetContractNamespace(Entity entity, string projectFolder)
         {
             if (projectFolder.Equals("Logic"))
             {
-                return $"{options.ProjectName}.Contract.Logic.Modules.{options.Domain}.{options.EntityNamePlural}";
+                return $"{entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{entity.Module.Name}.{entity.NamePlural}";
             }
             else if (projectFolder.Equals("Persistence"))
             {
-                return $"{options.ProjectName}.Contract.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}";
+                return $"{entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{entity.Module.Name}.{entity.NamePlural}";
             }
 
             throw new ArgumentException("Argument 'projectFolder' invalid");
         }
 
-        private string GetProjectNamespace(IEntityAdditionOptions options, string projectFolder)
+        private string GetProjectNamespace(Entity entity, string projectFolder)
         {
             if (projectFolder.Equals("Logic"))
             {
-                return $"{options.ProjectName}.Logic.Modules.{options.Domain}.{options.EntityNamePlural}";
+                return $"{entity.Module.Options.Paths.ProjectName}.Logic.Modules.{entity.Module.Name}.{entity.NamePlural}";
             }
             else if (projectFolder.Equals("Persistence"))
             {
-                return $"{options.ProjectName}.Persistence.Modules.{options.Domain}.{options.EntityNamePlural}";
+                return $"{entity.Module.Options.Paths.ProjectName}.Persistence.Modules.{entity.Module.Name}.{entity.NamePlural}";
             }
 
             throw new ArgumentException("Argument 'projectFolder' invalid");

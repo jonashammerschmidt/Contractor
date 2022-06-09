@@ -1,8 +1,4 @@
-﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
-using System;
-using System.IO;
-using System.Text.RegularExpressions;
+﻿using System.IO;
 
 namespace Contractor.Core.Tools
 {
@@ -19,58 +15,20 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddEntityCore(IEntityAdditionOptions options, string domainFolder, string templateFilePath, string templateFileName)
+        public void AddEntityCore(Entity entity, string domainFolder, string templateFilePath, string templateFileName)
         {
-            string fileData = GetFileData(options, templateFilePath);
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            string fileData = this.fileSystemClient.ReadAllText(entity, templateFilePath);
+            string filePath = GetFilePath(entity, domainFolder, templateFileName);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(Entity entity, string domainFolder, string templateFileName)
         {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
-            string fileName = templateFileName.Replace("Entities", options.EntityNamePlural);
-            fileName = fileName.Replace("Entity", options.EntityName);
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForBackend(entity, domainFolder);
+            string fileName = ModellNameReplacements.ReplaceEntityPlaceholders(entity, templateFileName);
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;
-        }
-
-        private string GetFileData(IEntityAdditionOptions options, string templateFilePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(templateFilePath);
-            fileData = fileData.Replace("DbProjectName", options.DbProjectName);
-            fileData = fileData.Replace("ProjectName", options.ProjectName);
-            fileData = fileData.Replace("DbContextName", options.DbContextName);
-            fileData = fileData.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
-            fileData = fileData.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
-            fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);
-            fileData = fileData.Replace("RequestScopes", options.RequestScopeNamePlural);
-            fileData = fileData.Replace("RequestScope", options.RequestScopeName);
-            fileData = fileData.Replace("Domain", options.Domain);
-            fileData = fileData.Replace("Entities", options.EntityNamePlural);
-            fileData = fileData.Replace("Entity", options.EntityName);
-            fileData = fileData.Replace("entities", options.EntityNamePluralLower);
-            fileData = fileData.Replace("entity", options.EntityNameLower);
-            fileData = ReplaceGuidPlaceholders(fileData, options.EntityName);
-
-            return fileData;
-        }
-
-        private string ReplaceGuidPlaceholders(string fileData, string entityName)
-        {
-            Random random = new Random(IntHash.ComputeIntHash($"{entityName}"));
-            var regex = new Regex(Regex.Escape("{random-guid}"));
-            int placeholderCount = fileData.Split(new[] { "{random-guid}" }, StringSplitOptions.None).Length - 1;
-
-            for (int i = 0; i < placeholderCount; i++)
-            {
-                var guid = new byte[16];
-                random.NextBytes(guid);
-                fileData = regex.Replace(fileData, new Guid(guid).ToString(), 1);
-            }
-
-            return fileData;
         }
     }
 }

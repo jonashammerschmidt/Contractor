@@ -24,9 +24,9 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.domainDependencyProvider.UpdateDependencyProvider(module, LogicProjectGeneration.ProjectFolder, FileName);
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.entityCoreDependencyProvider.UpdateDependencyProvider(options, LogicProjectGeneration.ProjectFolder, FileName);
+            this.entityCoreDependencyProvider.UpdateDependencyProvider(entity, LogicProjectGeneration.ProjectFolder, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

@@ -28,6 +28,7 @@ namespace Contractor.Core
                     FrontendDestinationFolder = this.Paths.FrontendDestinationFolder,
                     ProjectName = this.Paths.ProjectName,
                     DbProjectName = this.Paths.DbProjectName,
+                    DbContextName = this.Paths.DbContextName,
                 },
                 Replacements = this.Replacements.Replacements.Select(replacement => new Replacement()
                 {
@@ -117,6 +118,9 @@ namespace Contractor.Core
 
         [XmlElement(ElementName = "DbProjectName")]
         public string DbProjectName { get; set; }
+
+        [XmlElement(ElementName = "DbContextName")]
+        public string DbContextName { get; set; }
     }
 
     [XmlRoot(ElementName = "Replacements")]

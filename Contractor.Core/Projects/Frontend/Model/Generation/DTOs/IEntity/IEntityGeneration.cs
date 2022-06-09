@@ -12,14 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private static readonly string FileName = "dtos\\i-entity-kebab.ts";
 
-        private readonly FrontendDtoAddition frontendDtoAddition;
+        private readonly FrontendEntityAddition frontendEntityAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
 
         public IEntityGeneration(
-            FrontendDtoAddition frontendDtoAddition,
+            FrontendEntityAddition frontendEntityAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition)
         {
-            this.frontendDtoAddition = frontendDtoAddition;
+            this.frontendEntityAddition = frontendEntityAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
         }
 
@@ -27,9 +27,9 @@ namespace Contractor.Core.Projects.Frontend.Model
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.frontendDtoAddition.AddDto(options, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendEntityAddition.AddEntity(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

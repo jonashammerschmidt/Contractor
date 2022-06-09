@@ -8,7 +8,7 @@ namespace Contractor.Core.Projects
     {
         protected abstract void AddModuleActions(Module module);
 
-        protected abstract void AddEntity(IEntityAdditionOptions options);
+        protected abstract void AddEntity(Entity entity);
 
         protected abstract void AddProperty(IPropertyAdditionOptions options);
 
@@ -36,23 +36,23 @@ namespace Contractor.Core.Projects
             }
         }
 
-        public void PerformAddEntityCommand(IEntityAdditionOptions options)
+        public void PerformAddEntityCommand(Entity entity)
         {
             try
             {
-                this.AddEntity(options);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(this.GetType().Name + " completed successfully");
-                }
+                this.AddEntity(entity);
+                //if (entity.IsVerbose)
+                //{
+                //    Console.WriteLine(this.GetType().Name + " completed successfully");
+                //}
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Entity-Generierung: " + e.Message);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(e.StackTrace);
-                }
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(e.StackTrace);
+                //}
             }
         }
 

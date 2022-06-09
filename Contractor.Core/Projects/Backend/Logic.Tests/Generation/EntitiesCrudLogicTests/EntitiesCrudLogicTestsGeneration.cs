@@ -33,10 +33,10 @@ namespace Contractor.Core.Projects.Backend.Logic.Tests
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityCore(options, LogicTestsProjectGeneration.DomainFolder, TemplatePath, FileName);
-            this.usingStatementAddition.Add(options, LogicTestsProjectGeneration.DomainFolder, FileName, "Microsoft.EntityFrameworkCore");
+            this.entityCoreAddition.AddEntityCore(entity, LogicTestsProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.usingStatementAddition.Add(entity, LogicTestsProjectGeneration.DomainFolder, FileName, "Microsoft.EntityFrameworkCore");
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

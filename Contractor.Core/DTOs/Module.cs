@@ -1,4 +1,5 @@
 ﻿using Contractor.Core;
+using Contractor.Core.Helpers;
 using System.Collections.Generic;
 
 namespace Contractor.Core
@@ -8,6 +9,11 @@ namespace Contractor.Core
         public IEnumerable<Entity> Entities { get; set; }
 
         public string Name { get; set; }
+
+        public string NameKebab
+        {
+            get { return StringConverter.PascalToKebabCase(Name); }
+        }
 
         public ContractorGenerationOptions Options { get; private set; }
 

@@ -1,5 +1,4 @@
-﻿using Contractor.Core.Options;
-using System.IO;
+﻿using System.IO;
 
 namespace Contractor.Core.Tools
 {
@@ -16,47 +15,27 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddDto(IEntityAdditionOptions options, string domainFolder, string templateFilePath, string templateFileName)
+        public void AddDto(Entity entity, string domainFolder, string templateFilePath, string templateFileName)
         {
-            AddDto(options, domainFolder, templateFilePath, templateFileName, false);
+            AddDto(entity, domainFolder, templateFilePath, templateFileName, false);
         }
 
-        public void AddDto(IEntityAdditionOptions options, string domainFolder, string templateFilePath, string templateFileName, bool forDatabase)
+        public void AddDto(Entity entity, string domainFolder, string templateFilePath, string templateFileName, bool forDatabase)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName, forDatabase);
-            string fileData = GetFileData(options, templateFilePath);
+            string filePath = GetFilePath(entity, domainFolder, templateFileName, forDatabase);
+            string fileData = this.fileSystemClient.ReadAllText(entity, templateFilePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName, bool forDatabase)
+        private string GetFilePath(Entity entity, string domainFolder, string templateFileName, bool forDatabase)
         {
             string absolutePathForDTOs = (forDatabase) ?
-                this.pathService.GetAbsolutePathForDatabase(options, domainFolder) :
-                this.pathService.GetAbsolutePathForBackend(options, domainFolder);
-            string fileName = templateFileName.Replace("Entity", options.EntityName);
+                this.pathService.GetAbsolutePathForDatabase(entity, domainFolder) :
+                this.pathService.GetAbsolutePathForBackend(entity, domainFolder);
+            string fileName = ModellNameReplacements.ReplaceEntityPlaceholders(entity, templateFileName);
             string filePath = Path.Combine(absolutePathForDTOs, fileName);
             return filePath;
-        }
-
-        private string GetFileData(IEntityAdditionOptions options, string templateFileName)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(templateFileName);
-            fileData = fileData.Replace("DbProjectName", options.DbProjectName);
-            fileData = fileData.Replace("ProjectName", options.ProjectName);
-            fileData = fileData.Replace("DbContextName", options.DbContextName);
-            if (options.HasRequestScope)
-            {
-                fileData = fileData.Replace("RequestScopeDomain", options.RequestScopeDomain);
-                fileData = fileData.Replace("RequestScope", options.RequestScopeName);
-                fileData = fileData.Replace("requestScope", options.RequestScopeNameLower);
-            }
-            fileData = fileData.Replace("Domain", options.Domain);
-            fileData = fileData.Replace("Entities", options.EntityNamePlural);
-            fileData = fileData.Replace("Entity", options.EntityName);
-            fileData = fileData.Replace("entities", options.EntityNamePluralLower);
-            fileData = fileData.Replace("entity", options.EntityNameLower);
-            return fileData;
         }
     }
 }

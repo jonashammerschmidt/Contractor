@@ -17,7 +17,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.appRoutingDomainAddition.Add(module);
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
         }
 

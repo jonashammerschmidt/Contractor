@@ -6,6 +6,7 @@
         <FrontendDestinationFolder>FullstackTemplate\Krz.FullstackTemplate.Frontends\Krz.FullstackTemplate.Web.Core</FrontendDestinationFolder>
         <ProjectName>Krz.FullstackTemplate.Backend.Core</ProjectName>
         <DbProjectName>Krz.FullstackTemplate.Database.Core</DbProjectName>
+        <DbContextName>FullstackTemplateCoreDbContext</DbContextName>
     </Paths>
     <Replacements>
         <Replacement pattern="app-search-dropdown" ReplaceWith="search-dropdown" />

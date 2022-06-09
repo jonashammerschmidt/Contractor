@@ -1,4 +1,5 @@
 ﻿using Contractor.Core;
+using Contractor.Core.Helpers;
 using System.Collections.Generic;
 
 namespace Contractor.Core
@@ -7,14 +8,46 @@ namespace Contractor.Core
     {
         public string Name { get; set; }
 
+        public string NameLower
+        {
+            get { return Name.LowerFirstChar(); }
+        }
+
+        public string NameKebab
+        {
+            get { return StringConverter.PascalToKebabCase(Name); }
+        }
+
+        public string NameReadable
+        {
+            get { return Name.ToReadable(); }
+        }
+
         public string NamePlural { get; set; }
 
-        public string ScopeEntityName { get; set; }
+        public string NamePluralLower
+        {
+            get { return NamePlural.LowerFirstChar(); }
+        }
+
+        public string NamePluralKebab
+        {
+            get { return StringConverter.PascalToKebabCase(NamePlural); }
+        }
+
+        public string NamePluralReadable
+        {
+            get { return NamePlural.ToReadable(); }
+        }
+
+        public string ScopeEntityName { private get; set; }
 
         public bool HasScope
         {
             get { return string.IsNullOrWhiteSpace(this.ScopeEntityName); }
         }
+
+        public Entity ScopeEntity { get; private set; }
 
         public IEnumerable<Property> Properties { get; set; }
 
@@ -29,6 +62,7 @@ namespace Contractor.Core
         public void AddLinks(Module module)
         {
             this.Module = module;
+            this.ScopeEntity = module.Options.FindEntity(this.ScopeEntityName);
 
             foreach (var property in this.Properties)
             {
