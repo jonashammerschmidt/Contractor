@@ -32,6 +32,8 @@ namespace Contractor.Core.Tools
             text = text.Replace("RequestScopeDomain", entity.ScopeEntity.Module.Name);
             text = text.Replace("RequestScopes", entity.ScopeEntity.NamePlural);
             text = text.Replace("RequestScope", entity.ScopeEntity.Name);
+            text = text.Replace("DisplayProperty", entity.DisplayProperty.Name);
+            text = text.Replace("displayProperty", entity.DisplayProperty.NameLower);
             text = text.Replace("entities-kebab", entity.NamePluralKebab);
             text = text.Replace("entity-kebab", entity.NameKebab);
             text = text.Replace("EntitiesReadable", entity.NamePluralReadable);

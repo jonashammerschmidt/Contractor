@@ -47,7 +47,7 @@ export class EntityDetailPage implements OnInit {
   }
 
   async onDeleteClicked(): Promise<void> {
-    if (await this.confirmationDialogService.askForConfirmation('Wollen Sie wirklich EntityReadable \'' + this.entity.bezeichnung + '\' löschen?')) {
+    if (await this.confirmationDialogService.askForConfirmation('Wollen Sie wirklich EntityReadable \'' + this.entity.displayProperty + '\' löschen?')) {
         await this.entitiesCrudService.deleteEntity(this.entity.id);
         await this.router.navigate(['/domain-kebab/entities-kebab']);
     }

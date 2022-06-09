@@ -53,6 +53,7 @@ namespace Contractor.Core
                                 Type = property.Type,
                                 Name = property.Name,
                                 IsOptional = property.IsOptional,
+                                IsDisplayProperty = property.IsDisplayProperty,
                                 Order = xmlNodeList.Cast<XmlNode>()
                                     .Select((xmlNode, index) => new { index, xmlNode })
                                     .Where(element => element.xmlNode.Name == "Property")
@@ -193,6 +194,9 @@ namespace Contractor.Core
 
         [XmlAttribute(AttributeName = "optional")]
         public bool IsOptional { get; set; }
+
+        [XmlAttribute(AttributeName = "displayProperty")]
+        public bool IsDisplayProperty { get; set; }
     }
 
     [XmlRoot(ElementName = "Index")]
