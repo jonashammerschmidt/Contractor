@@ -52,9 +52,8 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<UsingStatementAddition>();
 
             serviceCollection.AddSingleton<FrontendPagesDomainCoreAddition>();
-            serviceCollection.AddSingleton<FrontendModelEntityCoreAddition>();
-            serviceCollection.AddSingleton<FrontendPagesEntityCoreAddition>();
-            serviceCollection.AddSingleton<FrontendDtoAddition>();
+            serviceCollection.AddSingleton<FrontendEntityAddition>();
+            serviceCollection.AddSingleton<FrontendEntityAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyAddition>();
             serviceCollection.AddSingleton<FrontendDtoRelationAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyMethodAddition>();

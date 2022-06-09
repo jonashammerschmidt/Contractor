@@ -27,9 +27,9 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityCore(options, ContractPersistenceProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityCore(entity, ContractPersistenceProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

@@ -13,5 +13,7 @@ namespace Contractor.Core
         public string ProjectName { get; set; }
 
         public string DbProjectName { get; set; }
+
+        public string DbContextName { get; set; }
     }
 }

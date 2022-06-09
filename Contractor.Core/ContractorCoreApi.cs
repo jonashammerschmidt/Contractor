@@ -39,7 +39,7 @@ namespace Contractor.Core
                 {
                     foreach (var classGeneration in this.classGenerations)
                     {
-                        //classGeneration.PerformAddEntityCommand
+                        classGeneration.PerformAddEntityCommand(entity);
                     }
 
                     var count = entity.Properties.Count() + entity.Relations1To1.Count() + entity.Relations1ToN.Count();

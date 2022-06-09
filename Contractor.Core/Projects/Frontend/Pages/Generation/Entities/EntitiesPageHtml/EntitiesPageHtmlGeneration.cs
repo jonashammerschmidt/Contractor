@@ -12,20 +12,20 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private static readonly string FileName = "entities-kebab.page.html";
 
-        private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
+        private readonly FrontendEntityAddition frontendEntityCoreAddition;
         private readonly EntitiesPageHtmlPropertyAddition entitiesPageHtmlPropertyAddition;
         private readonly EntitiesPageHtmlToRelationAddition entitiesPageHtmlToRelationAddition;
         private readonly EntitiesPageHtmlFromOneToOneRelationAddition entitiesPageHtmlFromOneToOneRelationAddition;
         private readonly EntitiesPageHtmlToOneToOneRelationAddition entitiesPageHtmlToOneToOneRelationAddition;
 
         public EntityPageHtmlGeneration(
-            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
+            FrontendEntityAddition frontendEntityCoreAddition,
             EntitiesPageHtmlPropertyAddition entitiesPageHtmlPropertyAddition,
             EntitiesPageHtmlToRelationAddition entitiesPageHtmlToRelationAddition,
             EntitiesPageHtmlFromOneToOneRelationAddition entitiesPageHtmlFromOneToOneRelationAddition,
             EntitiesPageHtmlToOneToOneRelationAddition entitiesPageHtmlToOneToOneRelationAddition)
         {
-            this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
+            this.frontendEntityCoreAddition = frontendEntityCoreAddition;
             this.entitiesPageHtmlPropertyAddition = entitiesPageHtmlPropertyAddition;
             this.entitiesPageHtmlToRelationAddition = entitiesPageHtmlToRelationAddition;
             this.entitiesPageHtmlFromOneToOneRelationAddition = entitiesPageHtmlFromOneToOneRelationAddition;
@@ -36,9 +36,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.frontendPagesEntityCoreAddition.AddEntityCore(options, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

@@ -12,16 +12,16 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private static readonly string FileName = "dialogs\\create\\entity-kebab-create.dialog.html";
 
-        private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
+        private readonly FrontendEntityAddition frontendEntityCoreAddition;
         private readonly EntityCreatePageHtmlPropertyAddition entityCreatePageHtmlPropertyAddition;
         private readonly EntityCreatePageHtmlToPropertyAddition entityCreatePageHtmlToPropertyAddition;
 
         public EntityCreatePageHtmlGeneration(
-            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
+            FrontendEntityAddition frontendEntityCoreAddition,
             EntityCreatePageHtmlPropertyAddition entityCreatePageHtmlPropertyAddition,
             EntityCreatePageHtmlToPropertyAddition entityCreatePageHtmlToPropertyAddition)
         {
-            this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
+            this.frontendEntityCoreAddition = frontendEntityCoreAddition;
             this.entityCreatePageHtmlPropertyAddition = entityCreatePageHtmlPropertyAddition;
             this.entityCreatePageHtmlToPropertyAddition = entityCreatePageHtmlToPropertyAddition;
         }
@@ -30,9 +30,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.frontendPagesEntityCoreAddition.AddEntityCore(options, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

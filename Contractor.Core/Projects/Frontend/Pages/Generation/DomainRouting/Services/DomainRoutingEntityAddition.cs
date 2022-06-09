@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -18,25 +17,23 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.pathService = pathService;
         }
 
-        public void Add(IEntityAdditionOptions options, string domainFolder, string templateFileName)
+        public void Add(Entity entity, string domainFolder, string templateFileName)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
+            string filePath = GetFilePath(entity, domainFolder, templateFileName);
+            string fileData = UpdateFileData(entity, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IEntityAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(Entity entity, string domainFolder, string templateFileName)
         {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
-            string fileName = templateFileName.Replace("entities-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
-            fileName = fileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
-            fileName = fileName.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
+            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontend(entity, domainFolder);
+            string fileName = ModellNameReplacements.ReplaceEntityPlaceholders(entity, templateFileName);
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;
         }
 
-        private string UpdateFileData(IEntityAdditionOptions options, string filePath)
+        private string UpdateFileData(Entity entity, string filePath)
         {
             string fileData = this.fileSystemClient.ReadAllText(filePath);
 
@@ -45,18 +42,18 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains("const routes: Routes = [");
             stringEditor.NextThatContains("];");
 
-            stringEditor.InsertLine(GetAppRoutingLine(options));
+            stringEditor.InsertLine(GetAppRoutingLine(entity));
 
             return stringEditor.GetText();
         }
 
-        private string GetAppRoutingLine(IEntityAdditionOptions options)
+        private string GetAppRoutingLine(Entity entity)
         {
             return
               "  {\n" +
-             $"    path: '{options.EntityNamePlural.ToKebab()}',\n" +
-             $"    loadChildren: () => import('./{options.EntityNamePlural.ToKebab()}/{options.EntityNamePlural.ToKebab()}-pages.module')\n" +
-             $"      .then(m => m.{options.EntityNamePlural}PagesModule)\n" +
+             $"    path: '{entity.NamePluralKebab}',\n" +
+             $"    loadChildren: () => import('./{entity.NamePluralKebab}/{entity.NamePluralKebab}-pages.module')\n" +
+             $"      .then(m => m.{entity.NamePlural}PagesModule)\n" +
               "  },";
         }
     }

@@ -12,14 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private static readonly string FileName = "sub-pages\\detail\\entity-kebab-detail.page.ts";
 
-        private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
+        private readonly FrontendEntityAddition frontendEntityCoreAddition;
         private readonly EntityDetailPageTsFromPropertyAddition entityDetailPageTsFromPropertyAddition;
 
         public EntityDetailPageTsGeneration(
-            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
+            FrontendEntityAddition frontendEntityCoreAddition,
             EntityDetailPageTsFromPropertyAddition entityDetailPageTsFromPropertyAddition)
         {
-            this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
+            this.frontendEntityCoreAddition = frontendEntityCoreAddition;
             this.entityDetailPageTsFromPropertyAddition = entityDetailPageTsFromPropertyAddition;
         }
 
@@ -27,9 +27,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.frontendPagesEntityCoreAddition.AddEntityCore(options, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

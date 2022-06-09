@@ -12,10 +12,10 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private static readonly string FileName = "entities-kebab-crud.service.ts";
 
-        private readonly FrontendModelEntityCoreAddition frontendModelEntityCoreAddition;
+        private readonly FrontendEntityAddition frontendModelEntityCoreAddition;
 
         public EntitiesCrudServiceGeneration(
-            FrontendModelEntityCoreAddition frontendModelEntityCoreAddition)
+            FrontendEntityAddition frontendModelEntityCoreAddition)
         {
             this.frontendModelEntityCoreAddition = frontendModelEntityCoreAddition;
         }
@@ -24,9 +24,9 @@ namespace Contractor.Core.Projects.Frontend.Model
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.frontendModelEntityCoreAddition.AddEntityCore(options, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendModelEntityCoreAddition.AddEntity(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

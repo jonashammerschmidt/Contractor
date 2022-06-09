@@ -26,9 +26,9 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.dbContextEntityAddition.Add(options);
+            this.dbContextEntityAddition.Add(entity);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

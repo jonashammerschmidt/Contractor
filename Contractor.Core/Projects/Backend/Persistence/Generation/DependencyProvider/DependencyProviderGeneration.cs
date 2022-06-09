@@ -26,9 +26,9 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.domainDependencyProvider.UpdateDependencyProvider(module, ProjectFolder, FileName);
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.entityCoreDependencyProvider.UpdateDependencyProvider(options, ProjectFolder, FileName);
+            this.entityCoreDependencyProvider.UpdateDependencyProvider(entity, ProjectFolder, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

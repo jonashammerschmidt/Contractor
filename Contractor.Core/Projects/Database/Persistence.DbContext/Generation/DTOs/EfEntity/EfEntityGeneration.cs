@@ -33,10 +33,10 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            string templatePath = TemplateFileName.GetFileNameForEntityAddition(options, TemplatePath);
-            this.dtoAddition.AddDto(options, PersistenceDbContextProjectGeneration.DtoFolder, templatePath, FileName, true);
+            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
+            this.dtoAddition.AddDto(entity, PersistenceDbContextProjectGeneration.DtoFolder, templatePath, FileName, true);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

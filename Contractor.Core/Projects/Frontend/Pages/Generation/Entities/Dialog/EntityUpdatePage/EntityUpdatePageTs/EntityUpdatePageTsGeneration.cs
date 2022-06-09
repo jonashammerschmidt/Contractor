@@ -12,16 +12,16 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private static readonly string FileName = "dialogs\\update\\entity-kebab-update.dialog.ts";
 
-        private readonly FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition;
+        private readonly FrontendEntityAddition frontendEntityCoreAddition;
         private readonly EntityUpdatePageTsPropertyAddition entityUpdatePageTsPropertyAddition;
         private readonly EntityUpdatePageTsToPropertyAddition entityUpdatePageTsToPropertyAddition;
 
         public EntityUpdatePageTsGeneration(
-            FrontendPagesEntityCoreAddition frontendPagesEntityCoreAddition,
+            FrontendEntityAddition frontendEntityCoreAddition,
             EntityUpdatePageTsPropertyAddition entityUpdatePageTsPropertyAddition,
             EntityUpdatePageTsToPropertyAddition entityUpdatePageTsToPropertyAddition)
         {
-            this.frontendPagesEntityCoreAddition = frontendPagesEntityCoreAddition;
+            this.frontendEntityCoreAddition = frontendEntityCoreAddition;
             this.entityUpdatePageTsPropertyAddition = entityUpdatePageTsPropertyAddition;
             this.entityUpdatePageTsToPropertyAddition = entityUpdatePageTsToPropertyAddition;
         }
@@ -30,9 +30,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.frontendPagesEntityCoreAddition.AddEntityCore(options, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

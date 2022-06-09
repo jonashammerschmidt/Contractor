@@ -30,9 +30,9 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
         {
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
-            this.dtoAddition.AddDto(options, ContractPersistenceProjectGeneration.DtoFolder, TemplatePath, FileName);
+            this.dtoAddition.AddDto(entity, ContractPersistenceProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(IPropertyAdditionOptions options)

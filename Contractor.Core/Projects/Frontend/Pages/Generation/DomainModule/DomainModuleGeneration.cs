@@ -25,7 +25,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.frontendPagesDomainCoreAddition.AddEntityCore(module, PagesProjectGeneration.PagesFolder, TemplatePath, FileName);
         }
 
-        protected override void AddEntity(IEntityAdditionOptions options)
+        protected override void AddEntity(Entity entity)
         {
         }
 

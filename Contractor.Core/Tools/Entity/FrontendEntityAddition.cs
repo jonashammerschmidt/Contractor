@@ -2,12 +2,12 @@
 
 namespace Contractor.Core.Tools
 {
-    internal class UsingStatementAddition
+    internal class FrontendEntityAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;
 
-        public UsingStatementAddition(
+        public FrontendEntityAddition(
             IFileSystemClient fileSystemClient,
             PathService pathService)
         {
@@ -15,21 +15,18 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void Add(Entity entity, string domainFolder, string templateFileName, string namespaceToAdd)
+        public void AddEntity(Entity entity, string domainFolder, string templateFilePath, string templateFileName)
         {
+            string fileData = fileSystemClient.ReadAllText(entity, templateFilePath);
             string filePath = GetFilePath(entity, domainFolder, templateFileName);
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
 
-            fileData = UsingStatements.Add(fileData, namespaceToAdd);
-
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            fileSystemClient.WriteAllText(filePath, fileData);
         }
 
         private string GetFilePath(Entity entity, string domainFolder, string templateFileName)
         {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForBackend(entity, domainFolder);
-            string fileName = templateFileName.Replace("Entities", entity.NamePlural);
-            fileName = fileName.Replace("Entity", entity.Name);
+            string absolutePathForDomain = pathService.GetAbsolutePathForFrontend(entity, domainFolder);
+            string fileName = ModellNameReplacements.ReplaceEntityPlaceholders(entity, templateFileName);
             string filePath = Path.Combine(absolutePathForDomain, fileName);
             return filePath;
         }

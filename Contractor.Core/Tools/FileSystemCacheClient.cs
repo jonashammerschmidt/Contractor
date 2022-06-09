@@ -9,11 +9,42 @@ namespace Contractor.Core.Tools
 
         public Dictionary<string, string> fileWriteCache = new Dictionary<string, string>();
 
-        public string ReadAllText(string path)
+        public string ReadAllText(ContractorGenerationOptions options, string path)
         {
             if (!this.fileCache.ContainsKey(path))
             {
                 string fileContent = File.ReadAllText(path);
+
+                fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(options, fileContent);
+
+                fileCache.Add(path, fileContent);
+            }
+
+            return fileCache[path];
+        }
+
+        public string ReadAllText(Module module, string path)
+        {
+            if (!this.fileCache.ContainsKey(path))
+            {
+                string fileContent = File.ReadAllText(path);
+
+                fileContent = ModellNameReplacements.ReplaceModulePlaceholders(module, fileContent);
+
+                fileCache.Add(path, fileContent);
+            }
+
+            return fileCache[path];
+        }
+
+        public string ReadAllText(Entity entity, string path)
+        {
+            if (!this.fileCache.ContainsKey(path))
+            {
+                string fileContent = File.ReadAllText(path);
+
+                fileContent = ModellNameReplacements.ReplaceEntityPlaceholders(entity, fileContent);
+
                 fileCache.Add(path, fileContent);
             }
 
@@ -62,6 +93,11 @@ namespace Contractor.Core.Tools
 
                 File.WriteAllText(filePath, fileContent);
             }
+        }
+
+        public string ReadAllText(string filePath)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
