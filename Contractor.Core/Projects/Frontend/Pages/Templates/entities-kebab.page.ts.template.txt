@@ -33,7 +33,7 @@ export class EntitiesPage implements AfterViewInit {
       (options) => this.entitiesCrudService.getPagedEntities(options),
       () => [
         {
-          filterField: 'bezeichnung',
+          filterField: 'displayProperty',
           containsFilters: [this.filterTerm]
         },
       ]);

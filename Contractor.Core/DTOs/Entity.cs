@@ -1,6 +1,7 @@
 ﻿using Contractor.Core;
 using Contractor.Core.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Contractor.Core
 {
@@ -49,6 +50,8 @@ namespace Contractor.Core
 
         public Entity ScopeEntity { get; private set; }
 
+        public Property DisplayProperty { get; set; }
+
         public IEnumerable<Property> Properties { get; set; }
 
         public IEnumerable<Relation1ToN> Relations1ToN { get; set; }
@@ -63,6 +66,10 @@ namespace Contractor.Core
         {
             this.Module = module;
             this.ScopeEntity = module.Options.FindEntity(this.ScopeEntityName);
+            this.DisplayProperty =
+                this.Properties.FirstOrDefault(property => property.IsDisplayProperty) ??
+                FindProperty("Bezeichnung", true) ??
+                FindProperty("Name", true);
 
             foreach (var property in this.Properties)
             {
@@ -87,6 +94,11 @@ namespace Contractor.Core
 
         public Property FindProperty(string propertyName)
         {
+            return FindProperty(propertyName, false);
+        }
+
+        public Property FindProperty(string propertyName, bool nullable)
+        {
             foreach (var property in Properties)
             {
                 if (property.Name.ToLower() == propertyName)
@@ -95,7 +107,12 @@ namespace Contractor.Core
                 }
             }
 
-            throw new KeyNotFoundException(propertyName);
+            if (!nullable)
+            { 
+                throw new KeyNotFoundException(propertyName);
+            }
+
+            return null;
         }
     }
 }

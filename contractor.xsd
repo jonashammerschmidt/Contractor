@@ -41,6 +41,7 @@
                               <xs:attribute name="name" type="xs:string" use="required" />
                               <xs:attribute name="type" type="xs:string" use="required" />
                               <xs:attribute name="optional" type="xs:boolean" use="optional" />
+                              <xs:attribute name="displayProperty" type="xs:boolean" use="optional" />
                             </xs:complexType>
                           </xs:element>
                           <xs:element minOccurs="0" maxOccurs="unbounded" name="Relation1ToN">
