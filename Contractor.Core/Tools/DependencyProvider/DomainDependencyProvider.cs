@@ -32,7 +32,7 @@ namespace Contractor.Core.Tools
 
         private string UpdateFileData(Module module, string filePath, string projectFolder)
         {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(module, filePath);
 
             fileData = AddStartupMethod(fileData, module, projectFolder);
             fileData = AddGetStartupMethodCall(fileData, module);

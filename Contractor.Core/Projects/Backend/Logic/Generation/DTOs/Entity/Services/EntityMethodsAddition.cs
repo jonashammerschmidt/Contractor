@@ -12,27 +12,27 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
         }
 
-        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
+        protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("UpdateDb" + options.EntityName);
+            stringEditor.NextThatContains("UpdateDb" + property.Entity.Name);
             stringEditor.Next(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"            db{options.EntityName}.{options.PropertyName} = {options.EntityNameLower}Update.{options.PropertyName};");
+            stringEditor.InsertLine($"            db{property.Entity.Name}.{property.Name} = {property.Entity.NameLower}Update.{property.Name};");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromDb" + options.EntityName);
+            stringEditor.NextThatContains("FromDb" + property.Entity.Name);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}.{options.PropertyName},");
+            stringEditor.InsertLine($"                {property.Name} = db{property.Entity.Name}.{property.Name},");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("CreateDb" + options.EntityName);
+            stringEditor.NextThatContains("CreateDb" + property.Entity.Name);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityNameLower}Create.{options.PropertyName},");
+            stringEditor.InsertLine($"                {property.Name} = {property.Entity.NameLower}Create.{property.Name},");
 
             return stringEditor.GetText();
         }

@@ -18,47 +18,40 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName)
         {
-            AddPropertyToDTO(options, domainFolder, templateFileName, false);
+            AddPropertyToDTO(property, domainFolder, templateFileName, false);
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface)
+        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName, bool forInterface)
         {
-            AddPropertyToDTO(options, domainFolder, templateFileName, forInterface, false);
+            AddPropertyToDTO(property, domainFolder, templateFileName, forInterface, false);
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, bool forDatabase)
+        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName, bool forInterface, bool forDatabase)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName, forDatabase);
-            string fileData = UpdateFileData(options, filePath, forInterface);
+            string filePath = (forDatabase) ?
+                this.pathService.GetAbsolutePathForDatabase(property, domainFolder, templateFileName) :
+                this.pathService.GetAbsolutePathForBackend(property, domainFolder, templateFileName);
+
+            string fileData = UpdateFileData(property, filePath, forInterface);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName, bool forDatabase)
+        private string UpdateFileData(Property property, string filePath, bool forInterface)
         {
-            string absolutePathForDTOs = (forDatabase) ?
-                this.pathService.GetAbsolutePathForDatabase(options, domainFolder) :
-                this.pathService.GetAbsolutePathForBackend(options, domainFolder);
-            string fileName = templateFileName.Replace("Entity", options.EntityName);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
+            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
 
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath, bool forInterface)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
-
-            fileData = AddUsingStatements(options, fileData);
-            fileData = AddProperty(fileData, options, forInterface);
+            fileData = AddUsingStatements(property, fileData);
+            fileData = AddProperty(fileData, property, forInterface);
 
             return fileData;
         }
 
-        private string AddUsingStatements(IPropertyAdditionOptions options, string fileData)
+        private string AddUsingStatements(Property property, string fileData)
         {
-            if (options.PropertyType == PropertyTypes.Guid || options.PropertyType == PropertyTypes.DateTime)
+            if (property.Type == PropertyTypes.Guid || property.Type == PropertyTypes.DateTime)
             {
                 fileData = UsingStatements.Add(fileData, "System");
             }
@@ -66,10 +59,10 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddProperty(string file, IPropertyAdditionOptions options, bool forInterface)
+        private string AddProperty(string file, Property property, bool forInterface)
         {
             StringEditor stringEditor = new StringEditor(file);
-            FindStartingLineForNewProperty(file, options, stringEditor);
+            FindStartingLineForNewProperty(file, property, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {
@@ -82,16 +75,16 @@ namespace Contractor.Core.Tools
             }
 
             if (forInterface)
-                stringEditor.InsertLine(BackendDtoInterfacePropertyLine.GetPropertyLine(options));
+                stringEditor.InsertLine(BackendDtoInterfacePropertyLine.GetPropertyLine(property));
             else
-                stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(options));
+                stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
         }
 
-        private void FindStartingLineForNewProperty(string file, IPropertyAdditionOptions options, StringEditor stringEditor)
+        private void FindStartingLineForNewProperty(string file, Property property, StringEditor stringEditor)
         {
-            bool hasConstructor = Regex.IsMatch(file, $"public .*{options.EntityName}.*\\(");
+            bool hasConstructor = Regex.IsMatch(file, $"public .*{property.Entity.Name}.*\\(");
             bool hasProperty = file.Contains("{ get; set; }");
             if (hasConstructor && hasProperty)
             {

@@ -1,6 +1,6 @@
 ﻿namespace Contractor.Core.Tools
 {
-    enum RelationEnd
+    public enum RelationSideType
     {
         From,
         To,

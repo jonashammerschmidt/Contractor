@@ -1,24 +1,29 @@
-﻿using Contractor.Core.Options;
-
-namespace Contractor.Core.Tools
+﻿namespace Contractor.Core.Tools
 {
     internal static class CSharpProperties
     {
-        public static string ToString(PropertyTypes propertyType) {
-            switch (propertyType)
+        public static string ToString(string type)
+        {
+            switch (type)
             {
-                case PropertyTypes.String:
-                    return "string";
-                case PropertyTypes.Integer:
-                    return "int";
-                case PropertyTypes.Double:
-                    return "double";
-                case PropertyTypes.DateTime:
-                    return "DateTime";
-                case PropertyTypes.Boolean:
+                case "Boolean":
                     return "bool";
-                case PropertyTypes.Guid:
+
+                case "DateTime":
+                    return "DateTime";
+
+                case "Double":
+                    return "double";
+
+                case "Guid":
                     return "Guid";
+
+                case "Integer":
+                    return "int";
+
+                case "String":
+                    return "string";
+
                 default:
                     return "object";
             }

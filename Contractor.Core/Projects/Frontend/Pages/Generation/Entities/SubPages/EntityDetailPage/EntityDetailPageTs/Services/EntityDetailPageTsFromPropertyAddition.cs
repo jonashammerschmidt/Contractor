@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -7,35 +6,35 @@ namespace Contractor.Core.Projects.Frontend.Pages
     internal class EntityDetailPageTsFromPropertyAddition : FrontendRelationAdditionEditor
     {
         public EntityDetailPageTsFromPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.From)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             fileData = ImportStatements.Add(fileData, "MatTableDataSource", "@angular/material/table");
-            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameTo}",
-                $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainTo)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}");
+            fileData = ImportStatements.Add(fileData, $"I{relationSide.OtherEntity.Name}",
+                $"src/app/model/{relationSide.OtherEntity.Module.NameKebab}" +
+                $"/{relationSide.OtherEntity.NamePluralKebab}" +
+                $"/dtos/i-{relationSide.OtherEntity.NameKebab}");
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains($"export class {options.EntityNameFrom}DetailPage");
+            stringEditor.NextThatContains($"export class {relationSide.Entity.Name}DetailPage");
             stringEditor.Next();
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"  public {options.PropertyNameTo.LowerFirstChar()}TableDataSource = new MatTableDataSource<I{options.EntityNameTo}>([]);");
-            stringEditor.InsertLine($"  public {options.PropertyNameTo.LowerFirstChar()}GridColumns: string[] = [");
+            stringEditor.InsertLine($"  public {relationSide.NameLower}TableDataSource = new MatTableDataSource<I{relationSide.Entity.Name}>([]);");
+            stringEditor.InsertLine($"  public {relationSide.NameLower}GridColumns: string[] = [");
             stringEditor.InsertLine($"    'bezeichnung',");
             stringEditor.InsertLine($"    'detail',");
             stringEditor.InsertLine($"  ];");
 
-            stringEditor.NextThatContains($"private async load{options.EntityNameFrom}(");
+            stringEditor.NextThatContains($"private async load{relationSide.Name}(");
             stringEditor.NextThatContains("  }");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    this.{options.PropertyNameTo.LowerFirstChar()}TableDataSource.data = this.{options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()};");
+            stringEditor.InsertLine($"    this.{relationSide.NameLower}TableDataSource.data = this.{relationSide.Entity.NameLower}.{relationSide.NameLower};");
 
             return stringEditor.GetText();
         }

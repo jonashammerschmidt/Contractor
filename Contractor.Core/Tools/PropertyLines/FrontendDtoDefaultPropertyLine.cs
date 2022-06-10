@@ -5,14 +5,14 @@ namespace Contractor.Core.Tools
 {
     public static class FrontendDtoDefaultPropertyLine
     {
-        public static string GetPropertyLine(IPropertyAdditionOptions options)
+        public static string GetPropertyLine(Property property)
         {
-            if (options.PropertyType == PropertyTypes.String)
+            if (property.Type == PropertyTypes.String)
             {
-                return $"    {options.PropertyName.LowerFirstChar()}: '',";
+                return $"    {property.Name.LowerFirstChar()}: '',";
             }
 
-            return $"    {options.PropertyName.LowerFirstChar()}: null,";
+            return $"    {property.Name.LowerFirstChar()}: null,";
         }
     }
 }

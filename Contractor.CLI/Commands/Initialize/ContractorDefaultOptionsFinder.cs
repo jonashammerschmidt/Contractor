@@ -1,4 +1,4 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,24 +7,28 @@ namespace Contractor.CLI
 {
     internal static class ContractorDefaultOptionsFinder
     {
-        internal static IContractorOptions FindDefaultOptions(string currentFolder)
+        internal static ContractorXml FindDefaultOptions(string currentFolder)
         {
-            string backendDestinationFolder = currentFolder;
-            string dbDestinationFolder = FindBestDbDestinationFolder(currentFolder);
-            string frontendDestinationFolder = FindBestFrontendDestinationFolder(currentFolder);
-            string projectName = new DirectoryInfo(backendDestinationFolder).Name;
-            string dbProjectName = new DirectoryInfo(dbDestinationFolder).Name;
-            string dbContextName = "FullstackTemplateCoreDbContext";
-
-            return new ContractorOptions()
+            string bestDbDestinationFolder = FindBestDbDestinationFolder(currentFolder);
+            return new ContractorXml()
             {
-                BackendDestinationFolder = backendDestinationFolder,
-                DbDestinationFolder = dbDestinationFolder,
-                FrontendDestinationFolder = frontendDestinationFolder,
-                ProjectName = projectName,
-                DbProjectName = dbProjectName,
-                Replacements = new Dictionary<string, string>(),
-                DbContextName = dbContextName
+                Paths = new PathsXml()
+                {
+                    BackendDestinationFolder = currentFolder,
+                    DbDestinationFolder = bestDbDestinationFolder,
+                    FrontendDestinationFolder = FindBestFrontendDestinationFolder(currentFolder),
+                    ProjectName = new DirectoryInfo(currentFolder).Name,
+                    DbProjectName = new DirectoryInfo(bestDbDestinationFolder).Name,
+                    DbContextName = "FullstackTemplateCoreDbContext"
+                },
+                Replacements = new ReplacementsXml()
+                {
+                    Replacements = new List<ReplacementXml>(),
+                },
+                Modules = new ModulesXml()
+                {
+                    Modules = new List<ModuleXml>(),
+                }
             };
         }
 

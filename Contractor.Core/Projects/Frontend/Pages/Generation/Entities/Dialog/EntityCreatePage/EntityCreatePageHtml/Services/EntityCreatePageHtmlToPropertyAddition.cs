@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
     internal class EntityCreatePageHtmlToPropertyAddition : FrontendRelationAdditionEditor
     {
         public EntityCreatePageHtmlToPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.To)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
@@ -19,18 +19,18 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             stringEditor.InsertNewLine();
 
-            stringEditor.InsertLine(GetLine(options));
+            stringEditor.InsertLine(GetLine(relationSide));
 
             return stringEditor.GetText();
         }
 
-        private string GetLine(IRelationAdditionOptions options)
+        private string GetLine(RelationSide relationSide)
         {
             return
-              $"            <app-search-dropdown [formGroupInstance]=\"{options.EntityNameLowerTo}CreateForm\" [formControlNameInstance]=\"'{options.PropertyNameFrom.LowerFirstChar()}Id'\"\n" +
-              $"                label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\"" +
-              ((!options.IsOptional) ? " required=\"true\"" : "") +
-              $" [dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\"></app-search-dropdown>";
+              $"            <app-search-dropdown [formGroupInstance]=\"{relationSide.Entity.NameLower}CreateForm\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
+              $"                label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\"" +
+              ((!relationSide.IsOptional) ? " required=\"true\"" : "") +
+              $" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>";
         }
     }
 }

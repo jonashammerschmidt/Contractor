@@ -32,17 +32,18 @@ namespace Contractor.Core.Projects.Backend.Api
             this.entityCoreAddition.AddEntityCore(entity, ApiProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
             // To
-            this.controllerRelationAddition.Edit(options, ApiProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.controllerRelationAddition.Edit(relationSideTo, ApiProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
         }
     }

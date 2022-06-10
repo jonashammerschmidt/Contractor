@@ -6,24 +6,24 @@ namespace Contractor.Core.Tools
 {
     public static class FrontendDtoPropertyLine
     {
-        public static string GetPropertyLine(IPropertyAdditionOptions options)
+        public static string GetPropertyLine(Property property)
         {
-            string optionalText = (options.IsOptional) ? "?" : "";
-            switch (options.PropertyType)
+            string optionalText = (property.IsOptional) ? "?" : "";
+            switch (property.Type)
             {
                 case PropertyTypes.String:
                 case PropertyTypes.Guid:
-                    return $"    {options.PropertyName.LowerFirstChar()}{optionalText}: string;";
+                    return $"    {property.Name.LowerFirstChar()}{optionalText}: string;";
 
                 case PropertyTypes.Double:
                 case PropertyTypes.Integer:
-                    return $"    {options.PropertyName.LowerFirstChar()}{optionalText}: number;";
+                    return $"    {property.Name.LowerFirstChar()}{optionalText}: number;";
 
                 case PropertyTypes.DateTime:
-                    return $"    {options.PropertyName.LowerFirstChar()}{optionalText}: Date;";
+                    return $"    {property.Name.LowerFirstChar()}{optionalText}: Date;";
 
                 case PropertyTypes.Boolean:
-                    return $"    {options.PropertyName.LowerFirstChar()}{optionalText}: boolean;";
+                    return $"    {property.Name.LowerFirstChar()}{optionalText}: boolean;";
 
                 default:
                     throw new NotImplementedException();

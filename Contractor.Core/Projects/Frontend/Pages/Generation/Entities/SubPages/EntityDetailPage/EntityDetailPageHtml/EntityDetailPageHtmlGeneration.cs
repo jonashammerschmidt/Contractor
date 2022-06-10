@@ -41,23 +41,27 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.entityDetailPageHtmlPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityDetailPageHtmlPropertyAddition.Edit(property, PagesProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
-            this.entityDetailPageHtmlFromPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
+            this.entityDetailPageHtmlFromPropertyAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
 
-            this.entityDetailPageHtmlToPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.entityDetailPageHtmlToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.entityDetailPageHtmlFromOneToOnePropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
+            this.entityDetailPageHtmlFromOneToOnePropertyAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
 
-            this.entityDetailPageHtmlToPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.entityDetailPageHtmlToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }

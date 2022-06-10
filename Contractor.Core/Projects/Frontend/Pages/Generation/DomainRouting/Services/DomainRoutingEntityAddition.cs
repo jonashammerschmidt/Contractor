@@ -19,23 +19,15 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         public void Add(Entity entity, string domainFolder, string templateFileName)
         {
-            string filePath = GetFilePath(entity, domainFolder, templateFileName);
+            string filePath = this.pathService.GetAbsolutePathForFrontend(entity, domainFolder, templateFileName);
             string fileData = UpdateFileData(entity, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(Entity entity, string domainFolder, string templateFileName)
-        {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForFrontend(entity, domainFolder);
-            string fileName = ModellNameReplacements.ReplaceEntityPlaceholders(entity, templateFileName);
-            string filePath = Path.Combine(absolutePathForDomain, fileName);
-            return filePath;
-        }
-
         private string UpdateFileData(Entity entity, string filePath)
         {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(entity, filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
 

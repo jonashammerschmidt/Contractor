@@ -11,13 +11,13 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
         }
 
-        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
+        protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("</form>");
 
-            stringEditor.InsertLine(FrontendPageUpdatePropertyLine.GetPropertyLine(options));
+            stringEditor.InsertLine(FrontendPageUpdatePropertyLine.GetPropertyLine(property));
 
             stringEditor.InsertNewLine();
 

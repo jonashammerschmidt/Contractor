@@ -5,28 +5,28 @@ namespace Contractor.Core.Tools
 {
     public static class BackendDtoInterfacePropertyLine
     {
-        public static string GetPropertyLine(IPropertyAdditionOptions options)
+        public static string GetPropertyLine(Property property)
         {
-            string optionalText = (options.IsOptional) ? "?" : "";
-            switch (options.PropertyType)
+            string optionalText = (property.IsOptional) ? "?" : "";
+            switch (property.Type)
             {
                 case PropertyTypes.String:
-                    return $"        string {options.PropertyName} {{ get; set; }}";
+                    return $"        string {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.Integer:
-                    return $"        int{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        int{optionalText} {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.Double:
-                    return $"        double{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        double{optionalText} {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.DateTime:
-                    return $"        DateTime{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        DateTime{optionalText} {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.Boolean:
-                    return $"        bool{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        bool{optionalText} {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.Guid:
-                    return $"        Guid{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        Guid{optionalText} {property.Name} {{ get; set; }}";
 
                 default:
                     throw new NotImplementedException();

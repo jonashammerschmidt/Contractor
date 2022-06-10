@@ -1,6 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
-using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
@@ -18,25 +16,28 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
+        public void AddRelationToDTO(RelationSide relationSide, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            AddRelationToDTO(options, domainFolder, templateFileName, false, namespacesToAdd);
+            AddRelationToDTO(relationSide, domainFolder, templateFileName, false, namespacesToAdd);
         }
 
-        public void AddRelationToDTOForDatabase(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
+        public void AddRelationToDTOForDatabase(RelationSide relationSide, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            AddRelationToDTO(options, domainFolder, templateFileName, false, true, namespacesToAdd);
+            AddRelationToDTO(relationSide, domainFolder, templateFileName, false, true, namespacesToAdd);
         }
 
-        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, params string[] namespacesToAdd)
+        public void AddRelationToDTO(RelationSide relationSide, string domainFolder, string templateFileName, bool forInterface, params string[] namespacesToAdd)
         {
-            this.AddRelationToDTO(options, domainFolder, templateFileName, forInterface, false, namespacesToAdd);
+            this.AddRelationToDTO(relationSide, domainFolder, templateFileName, forInterface, false, namespacesToAdd);
         }
 
-        public void AddRelationToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forInterface, bool forDatabase, params string[] namespacesToAdd)
+        public void AddRelationToDTO(RelationSide relationSide, string domainFolder, string templateFileName, bool forInterface, bool forDatabase, params string[] namespacesToAdd)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName, forDatabase);
-            string fileData = UpdateFileData(options, filePath, forInterface);
+            string filePath = (forDatabase) ?
+                this.pathService.GetAbsolutePathForDatabase(relationSide, domainFolder, templateFileName) :
+                this.pathService.GetAbsolutePathForBackend(relationSide, domainFolder, templateFileName);
+
+            string fileData = UpdateFileData(relationSide, filePath, forInterface);
 
             if (namespacesToAdd != null)
             {
@@ -49,34 +50,24 @@ namespace Contractor.Core.Tools
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, bool forDatabase)
+        private string UpdateFileData(RelationSide relationSide, string filePath, bool forInterface)
         {
-            string absolutePathForDTOs = (forDatabase) ?
-                this.pathService.GetAbsolutePathForDatabase(options, domainFolder) :
-                this.pathService.GetAbsolutePathForBackend(options, domainFolder);
-            string fileName = templateFileName.Replace("Entity", options.EntityName);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
+            string fileData = this.fileSystemClient.ReadAllText(relationSide, filePath);
 
-        private string UpdateFileData(IRelationSideAdditionOptions options, string filePath, bool forInterface)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
-
-            fileData = AddUsingStatements(options, fileData);
-            fileData = AddProperty(fileData, options, forInterface);
+            fileData = AddUsingStatements(relationSide, fileData);
+            fileData = AddProperty(fileData, relationSide, forInterface);
 
             return fileData;
         }
 
-        private string AddUsingStatements(IRelationSideAdditionOptions options, string fileData)
+        private string AddUsingStatements(RelationSide relationSide, string fileData)
         {
-            if (options.PropertyType == "Guid")
+            if (relationSide.Type == "Guid")
             {
                 fileData = UsingStatements.Add(fileData, "System");
             }
 
-            if (options.PropertyType.Contains("Enumerable") || options.PropertyType.Contains("ICollection"))
+            if (relationSide.Type.Contains("Enumerable") || relationSide.Type.Contains("ICollection"))
             {
                 fileData = UsingStatements.Add(fileData, "System.Collections.Generic");
             }
@@ -84,10 +75,10 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddProperty(string file, IRelationSideAdditionOptions options, bool forInterface)
+        private string AddProperty(string file, RelationSide relationSide, bool forInterface)
         {
             StringEditor stringEditor = new StringEditor(file);
-            FindStartingLineForNewProperty(file, options, stringEditor);
+            FindStartingLineForNewProperty(file, relationSide, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {
@@ -99,18 +90,18 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertNewLine();
             }
 
-            string optionalText = (options.IsOptional && options.PropertyType == "Guid") ? "?" : "";
+            string optionalText = (relationSide.IsOptional && relationSide.Type == "Guid") ? "?" : "";
             if (forInterface)
-                stringEditor.InsertLine($"        {options.PropertyType}{optionalText} {options.PropertyName} {{ get; set; }}");
+                stringEditor.InsertLine($"        {relationSide.Type}{optionalText} {relationSide.Name} {{ get; set; }}");
             else
-                stringEditor.InsertLine($"        public {options.PropertyType}{optionalText} {options.PropertyName} {{ get; set; }}");
+                stringEditor.InsertLine($"        public {relationSide.Type}{optionalText} {relationSide.Name} {{ get; set; }}");
 
             return stringEditor.GetText();
         }
 
-        private void FindStartingLineForNewProperty(string file, IRelationSideAdditionOptions options, StringEditor stringEditor)
+        private void FindStartingLineForNewProperty(string file, RelationSide relationSide, StringEditor stringEditor)
         {
-            bool hasConstructor = Regex.IsMatch(file, $"public .*{options.EntityName}.*\\(");
+            bool hasConstructor = Regex.IsMatch(file, $"public .*{relationSide.Entity.Name}.*\\(");
             bool hasProperty = file.Contains("{ get; set; }");
             if (hasConstructor && hasProperty)
             {

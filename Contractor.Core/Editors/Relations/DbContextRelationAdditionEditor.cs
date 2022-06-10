@@ -1,7 +1,4 @@
-﻿using Contractor.Core.Options;
-using Contractor.Core.Tools;
-
-namespace Contractor.Core.Tools
+﻿namespace Contractor.Core.Tools
 {
     internal abstract class DbContextRelationAdditionEditor
     {
@@ -16,16 +13,16 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void Edit(IRelationAdditionOptions options)
+        public void Edit(RelationSide relationSide)
         {
-            string filePath = this.pathService.GetAbsolutePathForDatabase(options, $"DbContext\\{options.DbContextName}.cs");
+            string filePath = this.pathService.GetAbsolutePathForDatabase(relationSide, "DbContext", "DbContextName.cs");
 
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
-            fileData = UpdateFileData(options, fileData);
+            string fileData = this.fileSystemClient.ReadAllText(relationSide, filePath);
+            fileData = UpdateFileData(relationSide, fileData);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        protected abstract string UpdateFileData(IRelationAdditionOptions options, string fileData);
+        protected abstract string UpdateFileData(RelationSide relationSide, string fileData);
     }
 }

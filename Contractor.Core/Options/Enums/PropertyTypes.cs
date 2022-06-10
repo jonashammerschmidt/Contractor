@@ -1,12 +1,12 @@
 ﻿namespace Contractor.Core.Options
 {
-    public enum PropertyTypes
+    public static class PropertyTypes
     {
-        String,
-        Integer,
-        Double,
-        DateTime,
-        Boolean,
-        Guid
+        public const string String = "String";
+        public const string Integer = "Integer";
+        public const string Double = "Double";
+        public const string DateTime = "DateTime";
+        public const string Boolean = "Boolean";
+        public const string Guid  = "Guid";
     }
 }

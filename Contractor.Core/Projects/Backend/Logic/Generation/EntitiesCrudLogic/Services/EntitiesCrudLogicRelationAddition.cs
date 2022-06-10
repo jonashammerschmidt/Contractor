@@ -7,80 +7,80 @@ namespace Contractor.Core.Projects.Backend.Logic
     internal class EntitiesCrudLogicRelationAddition : RelationAdditionEditor
     {
         public EntitiesCrudLogicRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.To)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
-            string relationsPropertyLine = $"        private readonly I{options.EntityNamePluralFrom}CrudRepository {options.EntityNamePluralLowerFrom}CrudRepository;";
+            string relationsPropertyLine = $"        private readonly I{relationSide.OtherEntity.NamePlural}CrudRepository {relationSide.OtherEntity.NamePluralLower}CrudRepository;";
 
             if (!fileData.Contains(relationsPropertyLine))
             {
                 // ----------- Property -----------
-                stringEditor.NextThatContains($"private readonly I{options.EntityNamePluralTo}CrudRepository");
+                stringEditor.NextThatContains($"private readonly I{relationSide.Entity.NamePlural}CrudRepository");
                 stringEditor.Next(line => !line.Contains("CrudRepository"));
                 stringEditor.InsertLine(relationsPropertyLine);
 
                 // ----------- Contructor Parameter -----------
-                stringEditor.NextThatContains($"I{options.EntityNamePluralTo}CrudRepository {options.EntityNamePluralLowerTo}CrudRepository,");
+                stringEditor.NextThatContains($"I{relationSide.Entity.NamePlural}CrudRepository {relationSide.Entity.NamePluralLower}CrudRepository,");
                 stringEditor.Next(line => !line.Contains("CrudRepository"));
-                stringEditor.InsertLine($"            I{options.EntityNamePluralFrom}CrudRepository {options.EntityNamePluralLowerFrom}CrudRepository,");
+                stringEditor.InsertLine($"            I{relationSide.OtherEntity.NamePlural}CrudRepository {relationSide.OtherEntity.NamePluralLower}CrudRepository,");
 
                 // ----------- Contructor Assignment -----------
-                stringEditor.NextThatContains($"this.{options.EntityNamePluralLowerTo}CrudRepository =");
+                stringEditor.NextThatContains($"this.{relationSide.Entity.NamePluralLower}CrudRepository =");
                 stringEditor.Next(line => !line.Contains("CrudRepository"));
-                stringEditor.InsertLine($"            this.{options.EntityNamePluralLowerFrom}CrudRepository = {options.EntityNamePluralLowerFrom}CrudRepository;");
+                stringEditor.InsertLine($"            this.{relationSide.OtherEntity.NamePluralLower}CrudRepository = {relationSide.OtherEntity.NamePluralLower}CrudRepository;");
             }
 
             // ----------- Create Method -----------
-            stringEditor.NextThatContains($"Create{options.EntityNameTo}(");
+            stringEditor.NextThatContains($"Create{relationSide.Entity.Name}(");
             stringEditor.NextThatContains("{");
             stringEditor.Next();
 
-            if (options.IsOptional)
+            if (relationSide.IsOptional)
             {
                 stringEditor.InsertLine(
-                    $"            if ({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.HasValue &&\n" +
-                    $"                !this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value))\n" +
+                    $"            if ({relationSide.Entity.NameLower}Create.{relationSide.Name}Id.HasValue &&\n" +
+                    $"                !this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Create.{relationSide.Name}Id.Value))\n" +
                      "            {\n" +
-                    $"                throw new NotFoundResultException(\"{options.PropertyNameFrom} ({{id}}) konnte nicht gefunden werden.\", {options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id.Value);\n" +
+                    $"                throw new NotFoundResultException(\"{relationSide.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Create.{relationSide.Name}Id.Value);\n" +
                      "            }\n");
             }
             else
             {
                 stringEditor.InsertLine(
-                    $"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id))\n" +
+                    $"            if (!this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Create.{relationSide.Name}Id))\n" +
                      "            {\n" +
-                    $"                throw new NotFoundResultException(\"{options.PropertyNameFrom} ({{id}}) konnte nicht gefunden werden.\", {options.EntityNameLowerTo}Create.{options.PropertyNameFrom}Id);\n" +
+                    $"                throw new NotFoundResultException(\"{relationSide.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Create.{relationSide.Name}Id);\n" +
                      "            }\n");
             }
 
             // ----------- Update Method -----------
             stringEditor.MoveToStart();
-            stringEditor.NextThatContains($"ILogicResult Update{options.EntityNameTo}(");
-            stringEditor.NextThatContains($"{options.EntityNamePluralLowerTo}CrudRepository.Get{options.EntityNameTo}(");
+            stringEditor.NextThatContains($"ILogicResult Update{relationSide.Entity.Name}(");
+            stringEditor.NextThatContains($"{relationSide.Entity.NamePluralLower}CrudRepository.Get{relationSide.Entity.Name}(");
             stringEditor.Next(line => line.StartsWith("            }"));
             stringEditor.Next();
             stringEditor.InsertNewLine();
 
-            if (options.IsOptional)
+            if (relationSide.IsOptional)
             {
                 stringEditor.InsertLine(
-                    $"            if ({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.HasValue &&\n" +
-                    $"                !this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value))\n" +
+                    $"            if ({relationSide.Entity.NameLower}Update.{relationSide.Name}Id.HasValue &&\n" +
+                    $"                !this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Update.{relationSide.Name}Id.Value))\n" +
                      "            {\n" +
-                    $"                throw new NotFoundResultException(\"{options.PropertyNameFrom} ({{id}}) konnte nicht gefunden werden.\", {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id.Value);\n" +
+                    $"                throw new NotFoundResultException(\"{relationSide.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Update.{relationSide.Name}Id.Value);\n" +
                      "            }");
             }
             else
             {
                 stringEditor.InsertLine(
-                    $"            if (!this.{options.EntityNamePluralLowerFrom}CrudRepository.Does{options.EntityNameFrom}Exist({options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id))\n" +
+                    $"            if (!this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Update.{relationSide.Name}Id))\n" +
                      "            {\n" +
-                    $"                throw new NotFoundResultException(\"{options.PropertyNameFrom} ({{id}}) konnte nicht gefunden werden.\", {options.EntityNameLowerTo}Update.{options.PropertyNameFrom}Id);\n" +
+                    $"                throw new NotFoundResultException(\"{relationSide.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Update.{relationSide.Name}Id);\n" +
                      "            }");
             }
 

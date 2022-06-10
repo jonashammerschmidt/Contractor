@@ -12,13 +12,13 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
         }
 
-        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
+        protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromDb" + options.EntityName);
+            stringEditor.NextThatContains("FromDb" + property.Entity.Name);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.PropertyName} = db{options.EntityName}ListItem.{options.PropertyName},");
+            stringEditor.InsertLine($"                {property.Name} = db{property.Entity.Name}ListItem.{property.Name},");
 
             return stringEditor.GetText();
         }

@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Logic
@@ -11,13 +10,13 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
         }
 
-        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
+        protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("From" + options.EntityName + "Update(");
+            stringEditor.NextThatContains("From" + property.Entity.Name + "Update(");
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.PropertyName} = {options.EntityNameLower}Update.{options.PropertyName},");
+            stringEditor.InsertLine($"                {property.Name} = {property.Entity.NameLower}Update.{property.Name},");
             
             return stringEditor.GetText();
         }

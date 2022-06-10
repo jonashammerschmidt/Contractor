@@ -12,14 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
         }
 
-        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
+        protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("GridColumns: string[]");
             stringEditor.NextThatContains("'detail'");
 
-            stringEditor.InsertLine($"    '{options.PropertyName.LowerFirstChar()}',");
+            stringEditor.InsertLine($"    '{property.Name.LowerFirstChar()}',");
 
             return stringEditor.GetText();
         }

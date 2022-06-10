@@ -8,10 +8,10 @@
 
         string ReadAllText(Entity entity, string path);
 
+        string ReadAllText(Property property, string path);
+
         void WriteAllText(string path, string contents);
 
         void SaveAll(ContractorGenerationOptions contractorGenerationOptions);
-
-        string ReadAllText(string filePath);
     }
 }

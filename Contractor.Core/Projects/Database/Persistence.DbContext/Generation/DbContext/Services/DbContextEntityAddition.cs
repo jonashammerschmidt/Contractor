@@ -27,7 +27,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
         private string UpdateFileData(Entity entity, string filePath)
         {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(entity, filePath);
 
             string usingStatement = $"{entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{entity.Module.Name}.{entity.NamePlural}";
             fileData = UsingStatements.Add(fileData, usingStatement);

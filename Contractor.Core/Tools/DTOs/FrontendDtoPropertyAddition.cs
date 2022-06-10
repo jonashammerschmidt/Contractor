@@ -1,6 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
-using System.IO;
 
 namespace Contractor.Core.Tools
 {
@@ -17,35 +15,27 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
+            string filePath = this.pathService.GetAbsolutePathForFrontend(property, domainFolder, templateFileName);
+            string fileData = UpdateFileData(property, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
+        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
+            string filePath = this.pathService.GetAbsolutePathForFrontend(property, domainFolder, templateFileName);
+            string fileData = UpdateFileData(property, filePath);
 
             fileData = ImportStatements.Add(fileData, importStatementTypes, importStatementPath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        private string UpdateFileData(Property property, string filePath)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
-            string fileName = templateFileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
-
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
             if (!stringEditor.GetLine().Contains("export interface"))
@@ -54,7 +44,7 @@ namespace Contractor.Core.Tools
             }
             stringEditor.NextThatContains("}");
 
-            stringEditor.InsertLine(FrontendDtoPropertyLine.GetPropertyLine(options));
+            stringEditor.InsertLine(FrontendDtoPropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
         }

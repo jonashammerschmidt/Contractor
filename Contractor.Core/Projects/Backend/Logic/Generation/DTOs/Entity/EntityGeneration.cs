@@ -35,27 +35,23 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.dtoAddition.AddDto(entity, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.dtoPropertyAddition.AddPropertyToDTO(options, LogicProjectGeneration.DtoFolder, FileName);
-            this.dtoMethodsAddition.Edit(options, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoPropertyAddition.AddPropertyToDTO(property, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoMethodsAddition.Edit(property, LogicProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
             // To
-            IRelationSideAdditionOptions relationSideAdditionOptions = RelationAdditionOptions.
-                GetPropertyForTo(options, "Guid");
-
-            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
-
-            this.dtoPropertyAddition.AddPropertyToDTO(propertyAdditionOptions, LogicProjectGeneration.DtoFolder, FileName);
-            this.dtoMethodsAddition.Edit(propertyAdditionOptions, LogicProjectGeneration.DtoFolder, FileName);
+            RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
+            this.dtoPropertyAddition.AddPropertyToDTO(relationSide, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoMethodsAddition.Edit(relationSide, LogicProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.Add1ToNRelation(options);
+            this.Add1ToNRelation(new Relation1ToN(relation));
         }
     }
 }

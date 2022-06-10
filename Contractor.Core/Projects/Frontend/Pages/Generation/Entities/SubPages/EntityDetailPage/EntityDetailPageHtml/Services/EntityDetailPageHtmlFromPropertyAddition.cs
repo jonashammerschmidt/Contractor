@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
     internal class EntityDetailPageHtmlFromPropertyAddition : FrontendRelationAdditionEditor
     {
         public EntityDetailPageHtmlFromPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.From)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
@@ -20,7 +20,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 AddTabs(stringEditor);
             }
 
-            AddTab(options, stringEditor);
+            AddTab(relationSide, stringEditor);
 
             return stringEditor.GetText();
         }
@@ -42,15 +42,15 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.AddPrefixBetweenLinesThatContain("        ", "<mat-tab label=\"Stammdaten\">", " </mat-tab>");
         }
 
-        private void AddTab(IRelationAdditionOptions options, StringEditor stringEditor)
+        private void AddTab(RelationSide relationSide, StringEditor stringEditor)
         {
             stringEditor.MoveToStart();
             stringEditor.NextThatContains("    </mat-tab-group>");
 
-            stringEditor.InsertLine($"        <mat-tab label=\"{options.PropertyNameTo.ToReadable()}\">");
-            stringEditor.InsertLine($"            <h2>{options.PropertyNameTo.ToReadable()}</h2>");
+            stringEditor.InsertLine($"        <mat-tab label=\"{relationSide.Name.ToReadable()}\">");
+            stringEditor.InsertLine($"            <h2>{relationSide.Name.ToReadable()}</h2>");
             stringEditor.InsertLine($"            <div class=\"table-container\">");
-            stringEditor.InsertLine($"                <table mat-table [dataSource]=\"{options.PropertyNameTo.LowerFirstChar()}TableDataSource\">");
+            stringEditor.InsertLine($"                <table mat-table [dataSource]=\"{relationSide.NameLower}TableDataSource\">");
             stringEditor.InsertLine($"");
             stringEditor.InsertLine($"                    <ng-container matColumnDef=\"bezeichnung\">");
             stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> Bezeichnung </th>");
@@ -66,9 +66,9 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"                        </td>");
             stringEditor.InsertLine($"                    </ng-container>");
             stringEditor.InsertLine($"");
-            stringEditor.InsertLine($"                    <tr mat-header-row *matHeaderRowDef=\"{options.PropertyNameTo.LowerFirstChar()}GridColumns; sticky: true\"></tr>");
-            stringEditor.InsertLine($"                    <tr mat-row *matRowDef=\"let row; columns: {options.PropertyNameTo.LowerFirstChar()}GridColumns;\"");
-            stringEditor.InsertLine($"                        [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainTo)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}/detail', row.id]\"></tr>");
+            stringEditor.InsertLine($"                    <tr mat-header-row *matHeaderRowDef=\"{relationSide.NameLower}GridColumns; sticky: true\"></tr>");
+            stringEditor.InsertLine($"                    <tr mat-row *matRowDef=\"let row; columns: {relationSide.NameLower}GridColumns;\"");
+            stringEditor.InsertLine($"                        [routerLink]=\"['/{relationSide.Entity.Module.NameKebab}/{relationSide.OtherEntity.NamePlural}/detail', row.id]\"></tr>");
             stringEditor.InsertLine($"                </table>");
             stringEditor.InsertLine($"            </div>");
             stringEditor.InsertLine($"        </mat-tab>");

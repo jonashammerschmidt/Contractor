@@ -17,35 +17,27 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
+        public void AddPropertyToDTO(RelationSide relationSide, string domainFolder, string templateFileName)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
+            string filePath = this.pathService.GetAbsolutePathForFrontend(relationSide, domainFolder, templateFileName);
+            string fileData = UpdateFileData(relationSide, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        public void AddPropertyToDTO(IRelationSideAdditionOptions options, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
+        public void AddPropertyToDTO(RelationSide relationSide, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
+            string filePath = this.pathService.GetAbsolutePathForFrontend(relationSide, domainFolder, templateFileName);
+            string fileData = UpdateFileData(relationSide, filePath);
 
             fileData = ImportStatements.Add(fileData, importStatementTypes, importStatementPath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IRelationSideAdditionOptions options, string domainFolder, string templateFileName)
+        private string UpdateFileData(RelationSide relationSide, string filePath)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
-            string fileName = templateFileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
-
-        private string UpdateFileData(IRelationSideAdditionOptions options, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(relationSide, filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
             if (!stringEditor.GetLine().Contains("export interface"))
@@ -54,7 +46,7 @@ namespace Contractor.Core.Tools
             }
             stringEditor.NextThatContains("}");
 
-            stringEditor.InsertLine($"    {options.PropertyName.LowerFirstChar()}: {options.PropertyType};");
+            stringEditor.InsertLine($"    {relationSide.NameLower}: {relationSide.Type};");
 
             return stringEditor.GetText();
         }

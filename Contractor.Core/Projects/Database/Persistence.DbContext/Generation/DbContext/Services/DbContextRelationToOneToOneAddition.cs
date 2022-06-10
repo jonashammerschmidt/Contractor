@@ -11,20 +11,20 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains($"modelBuilder.Entity<Ef{options.EntityNameTo}>");
+            stringEditor.NextThatContains($"modelBuilder.Entity<Ef{relationSide.Entity.Name}>");
             stringEditor.NextThatContains("});");
             stringEditor.InsertNewLine();
             stringEditor.InsertLine(
-                    $"                entity.HasOne(d => d.{options.PropertyNameFrom})\n" +
-                    $"                    .WithOne(p => p.{options.PropertyNameTo})\n" +
-                    $"                    .HasForeignKey<Ef{options.EntityNameTo}>(d => d.{options.PropertyNameFrom}Id)\n" +
-                    $"                    .IsRequired({(!options.IsOptional).ToString().ToLower()})\n" +
+                    $"                entity.HasOne(d => d.{relationSide.Name})\n" +
+                    $"                    .WithOne(p => p.{relationSide.Name})\n" +
+                    $"                    .HasForeignKey<Ef{relationSide.Entity.Name}>(d => d.{relationSide.Name}Id)\n" +
+                    $"                    .IsRequired({(!relationSide.IsOptional).ToString().ToLower()})\n" +
                     $"                    .OnDelete(DeleteBehavior.NoAction)\n" +
-                    $"                    .HasConstraintName(\"FK_{options.EntityNamePluralTo}_{options.PropertyNameFrom}Id\");");
+                    $"                    .HasConstraintName(\"FK_{relationSide.Entity.NamePlural}_{relationSide.Name}Id\");");
 
             return stringEditor.GetText();
         }

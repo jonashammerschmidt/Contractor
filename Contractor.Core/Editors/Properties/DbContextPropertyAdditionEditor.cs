@@ -1,7 +1,4 @@
-﻿using Contractor.Core.Options;
-using System.IO;
-
-namespace Contractor.Core.Tools
+﻿namespace Contractor.Core.Tools
 {
     internal abstract class DbContextPropertyAdditionEditor
     {
@@ -16,16 +13,16 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void Edit(IPropertyAdditionOptions options)
+        public void Edit(Property property)
         {
-            string filePath = this.pathService.GetAbsolutePathForDatabase(options, $"DbContext\\{options.DbContextName}.cs");
+            string filePath = this.pathService.GetAbsolutePathForDatabase(property, $"DbContext\\{property.Entity.Module.Options.Paths.DbContextName}.cs");
 
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
-            fileData = UpdateFileData(options, fileData);
+            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
+            fileData = UpdateFileData(property, fileData);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        protected abstract string UpdateFileData(IPropertyAdditionOptions options, string fileData);
+        protected abstract string UpdateFileData(Property property, string fileData);
     }
 }

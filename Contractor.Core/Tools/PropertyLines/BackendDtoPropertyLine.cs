@@ -5,28 +5,28 @@ namespace Contractor.Core.Tools
 {
     public static class BackendDtoPropertyLine
     {
-        public static string GetPropertyLine(IPropertyAdditionOptions options)
+        public static string GetPropertyLine(Property property)
         {
-            string optionalText = (options.IsOptional) ? "?" : "";
-            switch (options.PropertyType)
+            string optionalText = (property.IsOptional) ? "?" : "";
+            switch (property.Type)
             {
                 case PropertyTypes.String:
-                    return $"        public string {options.PropertyName} {{ get; set; }}";
+                    return $"        public string {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.Double:
-                    return $"        public double{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        public double{optionalText} {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.Integer:
-                    return $"        public int{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        public int{optionalText} {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.DateTime:
-                    return $"        public DateTime{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        public DateTime{optionalText} {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.Boolean:
-                    return $"        public bool{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        public bool{optionalText} {property.Name} {{ get; set; }}";
 
                 case PropertyTypes.Guid:
-                    return $"        public Guid{optionalText} {options.PropertyName} {{ get; set; }}";
+                    return $"        public Guid{optionalText} {property.Name} {{ get; set; }}";
 
                 default:
                     throw new NotImplementedException();

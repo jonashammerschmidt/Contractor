@@ -1,6 +1,6 @@
 ﻿using CaseExtensions;
 using Contractor.CLI.Tools;
-using Contractor.Core.Options;
+using Contractor.Core;
 using Contractor.Core.Projects;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +9,11 @@ namespace Contractor.CLI.Commands._Helper
 {
     internal class TagArgumentParser
     {
-        public static void AddTags(string[] args, IContractorOptions options)
+        public static void AddTags(string[] args, ContractorGenerationOptions options)
         {
             if (ArgumentParser.HasArgument(args, "-t", "--tags"))
             {
-                options.Tags = FromString(ArgumentParser.ExtractArgument(args, "-t", "--tags"));
+                //options.Tags = FromString(ArgumentParser.ExtractArgument(args, "-t", "--tags"));
             }
         }
 
