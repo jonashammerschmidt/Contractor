@@ -35,11 +35,19 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
         }
 
-        protected override void Add1ToNRelation(Relation1ToN relation)
+        protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
         }
 
-        protected override void AddOneToOneRelation(Relation1To1 relation)
+        protected override void Add1ToNRelationSideTo(Relation1ToN relation)
+        {
+        }
+
+        protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
+        {
+        }
+
+        protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
         }
     }

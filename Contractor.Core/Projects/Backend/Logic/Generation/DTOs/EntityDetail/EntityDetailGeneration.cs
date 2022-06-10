@@ -53,35 +53,39 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.dtoDetailMethodsAddition.Edit(property, LogicProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(Relation1ToN relation)
+        protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "IEnumerable<I", ">");
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
-
-            // From
+            
             this.relationAddition.AddRelationToDTO(relationSideFrom, LogicProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
             this.dtoDetailFromMethodsAddition.Edit(relationSideFrom, LogicProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Logic.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+        }
 
-            // To
+        protected override void Add1ToNRelationSideTo(Relation1ToN relation)
+        {
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+
             this.relationAddition.AddRelationToDTO(relationSideTo, LogicProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
             this.dtoDetailToMethodsAddition.Edit(relationSideTo, LogicProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(Relation1To1 relation)
+        protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
 
-            // From
             this.relationAddition.AddRelationToDTO(relationSideFrom, LogicProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
             this.entityDetailFromOneToOneMethodsAddition.Edit(relationSideFrom, LogicProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Logic.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+        }
 
-            // To
+        protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
+        {
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+
             this.relationAddition.AddRelationToDTO(relationSideTo, LogicProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
             this.dtoDetailToMethodsAddition.Edit(relationSideTo, LogicProjectGeneration.DtoFolder, FileName);
