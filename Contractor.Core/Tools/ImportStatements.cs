@@ -102,12 +102,15 @@ namespace Contractor.Core.Tools
             Dictionary<string, string> imports = new Dictionary<string, string>();
             foreach (var importLine in importLines)
             {
-                string[] keys = importLine.Split('{')[1].Split('}')[0].Split(',');
+                var keys = importLine.Split('{')[1].Split('}')[0].Split(',').Select(key => key.Trim());
                 string value = importLine.Split(new[] { "\"", "'" }, StringSplitOptions.None)[1];
 
                 foreach (var key in keys)
                 {
-                    imports.Add(key.Trim(), value);
+                    if (!imports.ContainsKey(key))
+                    {
+                        imports.Add(key, value);
+                    }
                 }
             }
 

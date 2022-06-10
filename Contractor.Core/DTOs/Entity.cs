@@ -48,6 +48,8 @@ namespace Contractor.Core
             get { return string.IsNullOrWhiteSpace(this.ScopeEntityName); }
         }
 
+        public bool Skip { get; set; }
+
         public Entity ScopeEntity { get; private set; }
 
         public Property DisplayProperty { get; set; }
@@ -65,7 +67,10 @@ namespace Contractor.Core
         public void AddLinks(Module module)
         {
             this.Module = module;
-            this.ScopeEntity = module.Options.FindEntity(this.ScopeEntityName);
+            if (this.ScopeEntityName != null)
+            { 
+                this.ScopeEntity = module.Options.FindEntity(this.ScopeEntityName);
+            }
             this.DisplayProperty =
                 this.Properties.FirstOrDefault(property => property.IsDisplayProperty) ??
                 FindProperty("Bezeichnung", true) ??
@@ -101,7 +106,7 @@ namespace Contractor.Core
         {
             foreach (var property in Properties)
             {
-                if (property.Name.ToLower() == propertyName)
+                if (property.Name.ToLower() == propertyName.ToLower())
                 {
                     return property;
                 }

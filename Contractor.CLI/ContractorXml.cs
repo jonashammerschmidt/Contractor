@@ -19,7 +19,7 @@ namespace Contractor.Core
 
         internal ContractorGenerationOptions ToContractorGenerationOptions(XmlDocument xmlDocument)
         {
-            return new ContractorGenerationOptions()
+            ContractorGenerationOptions contractorGenerationOptions = new ContractorGenerationOptions()
             {
                 Paths = new Paths()
                 {
@@ -48,6 +48,7 @@ namespace Contractor.Core
                             Name = entity.Name,
                             NamePlural = entity.NamePlural,
                             ScopeEntityName = entity.ScopeEntityName,
+                            Skip = entity.Skip,
                             Properties = entity.Properties.Select(property => new Property()
                             {
                                 Type = property.Type,
@@ -99,6 +100,10 @@ namespace Contractor.Core
                     }).ToList(),
                 }).ToList(),
             };
+
+            contractorGenerationOptions.AddLinks();
+
+            return contractorGenerationOptions;
         }
     }
 
@@ -156,6 +161,9 @@ namespace Contractor.Core
 
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
+
+        [XmlAttribute(AttributeName = "skip")]
+        public bool Skip { get; set; }
     }
 
     [XmlRoot(ElementName = "Entity")]
@@ -169,6 +177,9 @@ namespace Contractor.Core
 
         [XmlAttribute(AttributeName = "scopeEntityName")]
         public string ScopeEntityName { get; set; }
+
+        [XmlAttribute(AttributeName = "skip")]
+        public bool Skip { get; set; }
 
         [XmlElement(ElementName = "Property")]
         public List<PropertyXml> Properties { get; set; }

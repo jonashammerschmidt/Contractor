@@ -1,56 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Contractor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="contractor.xsd">
-    <Paths>
-        <BackendDestinationFolder>FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Core</BackendDestinationFolder>
-        <DbDestinationFolder>FullstackTemplate\Krz.FullstackTemplate.Databases\Krz.FullstackTemplate.Database.Core</DbDestinationFolder>
-        <FrontendDestinationFolder>FullstackTemplate\Krz.FullstackTemplate.Frontends\Krz.FullstackTemplate.Web.Core</FrontendDestinationFolder>
-        <ProjectName>Krz.FullstackTemplate.Backend.Core</ProjectName>
-        <DbProjectName>Krz.FullstackTemplate.Database.Core</DbProjectName>
-    </Paths>
-    <Replacements>
-        <Replacement pattern="app-search-dropdown" ReplaceWith="search-dropdown" />
-        <Replacement pattern="app-table-filter-bar" ReplaceWith="table-filter-bar" />
-        <Replacement pattern="src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source" ReplaceWith="@krz/material" />
-        <Replacement pattern="src/app/components/ui/search-dropdown/search-dropdown.module" ReplaceWith="@krz/material" />
-        <Replacement pattern="src/app/components/ui/table-filter-bar/table-filter-bar.module" ReplaceWith="@krz/material" />
-        <Replacement pattern="src/app/services/backend/pagination/i-paged-result" ReplaceWith="@krz/material" />
-        <Replacement pattern="src/app/services/backend/pagination/i-pagination-options" ReplaceWith="@krz/material" />
-        <Replacement pattern="src/app/services/backend/pagination/pagination.data-source" ReplaceWith="@krz/material" />
-        <Replacement pattern="Contract.Architecture.Backend.Common" ReplaceWith="Krz.FullstackTemplate.Backend.Common" />
-    </Replacements>
-    <Modules>
-        <Module name="Bankwesen">
-            <Entity name="SchöneBank" namePlural="SchöneBänke" scopeEntityName="Mandant">
-                <Property name="Bezeichnung" type="string:256" />
-                <Property name="IsPleite" type="bool" />
-                <Property name="LegacyBezeichnung" type="string:256" optional="true" />
-                <Property name="LegacyIsPleite" type="bool" optional="true" />
-                <Index property="Bezeichnung" clustered="true" unique="true" />
-            </Entity>
-        </Module> 
-        <Module name="Kundenstamm">
-            <Entity name="Kunde" namePlural="Kunden" scopeEntityName="Mandant">
-                <Property name="Bezeichnung" type="string:256" />
-                <Property name="Kundennummer" type="int" />
-                <Property name="KundennummerLegacy" type="int" optional="true" />
-                <Relation1ToN entityNameFrom="SchöneBank" propertyNameFrom="MeineBank" PropertyNameTo="MeineKonten" />
-                <Relation1To1 entityNameFrom="SchöneBank" propertyNameFrom="LieblingsBank" PropertyNameTo="LieblingsKunde"/>
-                <Index property="Bezeichnung" clustered="true" />
-            </Entity>
-        </Module>
-        <Module name="Kontoführung">
-            <Entity name="Konto" namePlural="Konten" scopeEntityName="Mandant">
-                <Property name="Bezeichnung" type="string:256" />
-                <Property name="SystemKontoId" type="Guid" />
-                <Property name="Balance" type="Double" />
-                <Property name="EröffnetAm" type="DateTime" />
-                <Property name="LegacySystemKontoId" type="Guid" optional="true"/>
-                <Property name="LegacyBalance" type="Double" optional="true" />
-                <Property name="LegacyEröffnetAm" type="DateTime" optional="true" />
-                <Relation1ToN entityNameFrom="Kunde" propertyNameFrom="MeinKunde" PropertyNameTo="MeinKonten" optional="true" />
-                <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" PropertyNameTo="BäckupKonto" optional="true" />
-                <Index property="Bezeichnung,SystemKontoId" unique="true" />
-            </Entity>
-        </Module>
-    </Modules>
+  <Paths>
+    <BackendDestinationFolder>..\..\..\..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Core</BackendDestinationFolder>
+    <DbDestinationFolder>..\..\..\..\FullstackTemplate\Krz.FullstackTemplate.Databases\Krz.FullstackTemplate.Database.Core</DbDestinationFolder>
+    <FrontendDestinationFolder>..\..\..\..\FullstackTemplate\Krz.FullstackTemplate.Frontends\Krz.FullstackTemplate.Web.Core</FrontendDestinationFolder>
+    <ProjectName>Krz.FullstackTemplate.Backend.Core</ProjectName>
+    <DbProjectName>Krz.FullstackTemplate.Database.Core</DbProjectName>
+    <DbContextName>FullstackTemplateCoreDbContext</DbContextName>
+  </Paths>
+  <Replacements>
+    <Replacement pattern="app-search-dropdown" ReplaceWith="search-dropdown" />
+    <Replacement pattern="app-table-filter-bar" ReplaceWith="table-filter-bar" />
+    <Replacement pattern="src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source" ReplaceWith="@krz/material" />
+    <Replacement pattern="src/app/components/ui/search-dropdown/search-dropdown.module" ReplaceWith="@krz/material" />
+    <Replacement pattern="src/app/components/ui/table-filter-bar/table-filter-bar.module" ReplaceWith="@krz/material" />
+    <Replacement pattern="src/app/services/backend/pagination/i-paged-result" ReplaceWith="@krz/material" />
+    <Replacement pattern="src/app/services/backend/pagination/i-pagination-options" ReplaceWith="@krz/material" />
+    <Replacement pattern="src/app/services/backend/pagination/pagination.data-source" ReplaceWith="@krz/material" />
+    <Replacement pattern="Contract.Architecture.Backend.Common" ReplaceWith="Krz.FullstackTemplate.Backend.Common" />
+  </Replacements>
+  <Modules>
+    <Module name="MandantenTrennung" skip="true">
+      <Entity name="Mandant" namePlural="Mandanten" skip="true">
+        <Property name="Name" type="String:256" />
+      </Entity>
+    </Module>
+    <Module name="Bankwesen">
+      <Entity name="SchöneBank" namePlural="SchöneBänke" scopeEntityName="Mandant">
+        <Property name="Name" type="String:256" />
+        <Property name="IsPleite" type="Boolean" />
+        <Property name="LegacyBezeichnung" type="String:256" optional="true" />
+        <Property name="LegacyIsPleite" type="Boolean" optional="true" />
+        <Index property="Bezeichnung" clustered="true" unique="true" />
+      </Entity>
+    </Module>
+    <Module name="Kundenstamm">
+      <Entity name="Kunde" namePlural="Kunden" scopeEntityName="Mandant">
+        <Property name="VorUndNachname" type="String:256" displayProperty="true" />
+        <Property name="Kundennummer" type="Integer" />
+        <Property name="KundennummerLegacy" type="Integer" optional="true" />
+        <Relation1ToN entityNameFrom="SchöneBank" propertyNameFrom="MeineBank" PropertyNameTo="MeineKonten" />
+        <Relation1To1 entityNameFrom="SchöneBank" propertyNameFrom="LieblingsBank" PropertyNameTo="LieblingsKunde"/>
+        <Index property="Bezeichnung" clustered="true" />
+      </Entity>
+    </Module>
+    <Module name="Kontoführung">
+      <Entity name="Konto" namePlural="Konten" scopeEntityName="Mandant">
+        <Property name="Bezeichnung" type="String:256" />
+        <Property name="SystemKontoId" type="Guid" />
+        <Property name="Balance" type="Double" />
+        <Property name="EröffnetAm" type="DateTime" />
+        <Property name="LegacySystemKontoId" type="Guid" optional="true"/>
+        <Property name="LegacyBalance" type="Double" optional="true" />
+        <Property name="LegacyEröffnetAm" type="DateTime" optional="true" />
+        <Relation1ToN entityNameFrom="Kunde" propertyNameFrom="MeinKunde" PropertyNameTo="MeinKonten" optional="true" />
+        <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" PropertyNameTo="BäckupKonto" optional="true" />
+        <Index property="Bezeichnung,SystemKontoId" unique="true" />
+      </Entity>
+    </Module>
+  </Modules>
 </Contractor>

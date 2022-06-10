@@ -11,6 +11,7 @@
               <xs:element name="FrontendDestinationFolder" type="xs:string" />
               <xs:element name="ProjectName" type="xs:string" />
               <xs:element name="DbProjectName" type="xs:string" />
+              <xs:element name="DbContextName" type="xs:string" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -32,14 +33,21 @@
               <xs:element maxOccurs="unbounded" name="Module">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="Entity">
+                    <xs:element minOccurs="1" maxOccurs="unbounded" name="Entity">
                       <xs:complexType>
-                        <xs:sequence>
+                        <xs:choice maxOccurs="unbounded">
                           <xs:element minOccurs="0" maxOccurs="unbounded" name="Property">
                             <xs:complexType>
                               <xs:attribute name="name" type="xs:string" use="required" />
-                              <xs:attribute name="type" type="xs:string" use="required" />
+                              <xs:attribute name="type" use="required">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:pattern value="Boolean|DateTime|Double|Guid|Integer|(String(:[0-9]+)?)"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
                               <xs:attribute name="optional" type="xs:boolean" use="optional" />
+                              <xs:attribute name="displayProperty" type="xs:boolean" use="optional" />
                             </xs:complexType>
                           </xs:element>
                           <xs:element minOccurs="0" maxOccurs="unbounded" name="Relation1ToN">
@@ -65,14 +73,16 @@
                               <xs:attribute name="unique" type="xs:boolean" use="optional" />
                             </xs:complexType>
                           </xs:element>
-                        </xs:sequence>
+                        </xs:choice>
                         <xs:attribute name="name" type="xs:string" use="required" />
                         <xs:attribute name="namePlural" type="xs:string" use="required" />
                         <xs:attribute name="scopeEntityName" type="xs:string" use="optional" />
+                        <xs:attribute name="skip" type="xs:boolean" use="optional" />
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
                   <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="skip" type="xs:boolean" use="optional" />
                 </xs:complexType>
               </xs:element>
             </xs:sequence>

@@ -32,9 +32,9 @@ namespace Contractor.Core
                 }
             }
 
-            foreach (Module module in this.contractorGenerationOptions.Modules)
+            foreach (Module module in this.contractorGenerationOptions.Modules.Where(module => !module.Skip))
             {
-                foreach (Entity entity in module.Entities)
+                foreach (Entity entity in module.Entities.Where(entity => !entity.Skip))
                 {
                     foreach (var classGeneration in this.classGenerations)
                     {
@@ -44,7 +44,7 @@ namespace Contractor.Core
                     var count = entity.Properties.Count() + entity.Relations1To1.Count() + entity.Relations1ToN.Count();
                     for (int i = 0; i < count; i++)
                     {
-                        Property property = entity.Properties.Single(p => p.Order == i);
+                        Property property = entity.Properties.SingleOrDefault(p => p.Order == i);
                         if (property != null)
                         {
                             foreach (var classGeneration in this.classGenerations)
@@ -53,7 +53,7 @@ namespace Contractor.Core
                             }
                         }
 
-                        Relation1To1 relation1To1 = entity.Relations1To1.Single(p => p.Order == i);
+                        Relation1To1 relation1To1 = entity.Relations1To1.SingleOrDefault(p => p.Order == i);
                         if (relation1To1 != null)
                         {
                             foreach (var classGeneration in this.classGenerations)
@@ -62,7 +62,7 @@ namespace Contractor.Core
                             }
                         }
 
-                        Relation1ToN relation1ToN = entity.Relations1ToN.Single(p => p.Order == i);
+                        Relation1ToN relation1ToN = entity.Relations1ToN.SingleOrDefault(p => p.Order == i);
                         if (relation1ToN != null)
                         {
                             foreach (var classGeneration in this.classGenerations)
@@ -76,14 +76,14 @@ namespace Contractor.Core
             }
 
 
-            foreach (var module in this.contractorGenerationOptions.Modules)
+            foreach (var module in this.contractorGenerationOptions.Modules.Where(module => !module.Skip))
             {
-                foreach (var entity in module.Entities)
+                foreach (var entity in module.Entities.Where(entity => !entity.Skip))
                 {
                     var count = entity.Properties.Count() + entity.Relations1To1.Count() + entity.Relations1ToN.Count();
                     for (int i = 0; i < count; i++)
                     {
-                        var relation1To1 = entity.Relations1To1.Single(p => p.Order == i);
+                        var relation1To1 = entity.Relations1To1.SingleOrDefault(p => p.Order == i);
                         if (relation1To1 != null)
                         {
                             foreach (var classGeneration in this.classGenerations)
@@ -92,7 +92,7 @@ namespace Contractor.Core
                             }
                         }
 
-                        var relation1ToN = entity.Relations1ToN.Single(p => p.Order == i);
+                        var relation1ToN = entity.Relations1ToN.SingleOrDefault(p => p.Order == i);
                         if (relation1ToN != null)
                         {
                             foreach (var classGeneration in this.classGenerations)
