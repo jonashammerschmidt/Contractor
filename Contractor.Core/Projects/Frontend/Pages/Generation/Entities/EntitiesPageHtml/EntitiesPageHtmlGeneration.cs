@@ -41,21 +41,26 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.entitiesPageHtmlPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entitiesPageHtmlPropertyAddition.Edit(property, PagesProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
-            this.entitiesPageHtmlToRelationAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.entitiesPageHtmlToRelationAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.entitiesPageHtmlFromOneToOneRelationAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            // From
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
+            this.entitiesPageHtmlFromOneToOneRelationAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
 
-            this.entitiesPageHtmlToOneToOneRelationAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            // To
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.entitiesPageHtmlToOneToOneRelationAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }

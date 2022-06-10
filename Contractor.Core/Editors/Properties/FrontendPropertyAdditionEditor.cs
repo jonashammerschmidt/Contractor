@@ -1,6 +1,4 @@
-﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
-using System.IO;
+﻿using System.IO;
 
 namespace Contractor.Core.Tools
 {
@@ -17,33 +15,28 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void Edit(IPropertyAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
+        public void Edit(Property property, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            string filePath = GetFilePath(property, domainFolder, templateFileName);
 
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
             foreach (string namespaceToAdd in namespacesToAdd)
             {
                 fileData = UsingStatements.Add(fileData, namespaceToAdd);
             }
 
-            fileData = UpdateFileData(options, fileData);
+            fileData = UpdateFileData(property, fileData);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        private string GetFilePath(Property property, string domainFolder, string templateFileName)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
+            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(property, domainFolder);
             string filePath = Path.Combine(absolutePathForDTOs, templateFileName);
-
-            filePath = filePath.Replace("entities-kebab", StringConverter.PascalToKebabCase(options.EntityNamePlural));
-            filePath = filePath.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
-            filePath = filePath.Replace("domain-kebab", StringConverter.PascalToKebabCase(options.Domain));
-
             return filePath;
         }
 
-        protected abstract string UpdateFileData(IPropertyAdditionOptions options, string fileData);
+        protected abstract string UpdateFileData(Property property, string fileData);
     }
 }

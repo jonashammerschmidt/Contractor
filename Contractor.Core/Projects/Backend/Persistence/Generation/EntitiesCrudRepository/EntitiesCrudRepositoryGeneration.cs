@@ -42,26 +42,32 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.entityCoreAddition.AddEntityCore(entity, PersistenceProjectGeneration.DomainFolder, templatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+
             // From
-            this.dtoFromRepositoryIncludeAddition.Edit(options, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.dtoFromRepositoryIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
 
             // To
-            this.dtoToRepositoryIncludeAddition.Edit(options, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.dtoToRepositoryIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+
             // From
-            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Edit(options,PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
 
             // To
-            this.entitiesCrudRepositoryToOneToOneIncludeAddition.Edit(options, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToOneToOneIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

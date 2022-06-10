@@ -35,7 +35,7 @@ namespace Contractor.Core.Tools
 
         private string GetFileData(Module module, string templateFilePath)
         {
-            string fileData = this.fileSystemClient.ReadAllText(templateFilePath);
+            string fileData = this.fileSystemClient.ReadAllText(module, templateFilePath);
             fileData = fileData.Replace("domain-kebab", StringConverter.PascalToKebabCase(module.Name));
             fileData = fileData.Replace("Domain", module.Name);
 

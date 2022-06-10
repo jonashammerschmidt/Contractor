@@ -1,9 +1,8 @@
 ﻿using Contractor.CLI.Tools;
-using Contractor.Core.Options;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+using Contractor.Core;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace Contractor.CLI
 {
@@ -20,81 +19,84 @@ namespace Contractor.CLI
         private static void Initialize(string currentFolder)
         {
             LogoWriter.Write();
-            IContractorOptions options = InitializeOptions(currentFolder);
-            Initialize(currentFolder, options);
+            ContractorXml contractorXml = InitializeOptions(currentFolder);
+            Initialize(currentFolder, contractorXml);
         }
 
         private static void InitializeForce(string currentFolder)
         {
             LogoWriter.Write();
-            IContractorOptions options = ContractorDefaultOptionsFinder.FindDefaultOptions(currentFolder);
-            Initialize(currentFolder, options);
+            ContractorXml contractorXml = ContractorDefaultOptionsFinder.FindDefaultOptions(currentFolder);
+            Initialize(currentFolder, contractorXml);
         }
 
-        private static void Initialize(string currentFolder, IContractorOptions options)
+        private static void Initialize(string currentFolder, ContractorXml contractorXml)
         {
-            options.BackendDestinationFolder = Path.GetRelativePath(currentFolder, options.BackendDestinationFolder);
-            options.DbDestinationFolder = Path.GetRelativePath(currentFolder, options.DbDestinationFolder);
-            options.FrontendDestinationFolder = Path.GetRelativePath(currentFolder, options.FrontendDestinationFolder);
-            options.Replacements = new Dictionary<string, string>();
-            string optionsJson = JsonConvert.SerializeObject(options, Formatting.Indented);
-            string optionsPath = Path.Combine(currentFolder, "contractor.json");
-            File.WriteAllText(optionsPath, optionsJson);
+            contractorXml.Paths.BackendDestinationFolder = Path.GetRelativePath(currentFolder, contractorXml.Paths.BackendDestinationFolder);
+            contractorXml.Paths.DbDestinationFolder = Path.GetRelativePath(currentFolder, contractorXml.Paths.DbDestinationFolder);
+            contractorXml.Paths.FrontendDestinationFolder = Path.GetRelativePath(currentFolder, contractorXml.Paths.FrontendDestinationFolder);
 
-            System.Console.WriteLine("contractor.json wurde generiert.");
+            string optionsPath = Path.Combine(currentFolder, "contractor.xml");
+            using (Stream fileWriterStream = File.OpenWrite(optionsPath))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(ContractorXml));
+                xmlSerializer.Serialize(fileWriterStream, contractorXml);
+            }
+
+            System.Console.WriteLine("contractor.xml wurde generiert.");
             System.Console.WriteLine();
         }
 
-        private static IContractorOptions InitializeOptions(string currentFolder)
+        private static ContractorXml InitializeOptions(string currentFolder)
         {
-            IContractorOptions defaultOptions = ContractorDefaultOptionsFinder.FindDefaultOptions(currentFolder);
+            ContractorXml defaultOptions = ContractorDefaultOptionsFinder.FindDefaultOptions(currentFolder);
 
             // BackendDestinationFolder
-            System.Console.WriteLine($"Welches Backend-Projekt soll bearbeitet werden? (Empty = {defaultOptions.BackendDestinationFolder})");
+            System.Console.WriteLine($"Welches Backend-Projekt soll bearbeitet werden? (Empty = {defaultOptions.Paths.BackendDestinationFolder})");
             var userBackendDestinationFolder = System.Console.ReadLine().Trim();
             if (userBackendDestinationFolder.Length > 0)
             {
-                defaultOptions.BackendDestinationFolder = userBackendDestinationFolder;
+                defaultOptions.Paths.BackendDestinationFolder = userBackendDestinationFolder;
             }
 
             // DbDestinationFolder
-            System.Console.WriteLine($"Welches Datenbank-Projekt soll bearbeitet werden? (Empty = {defaultOptions.DbDestinationFolder})");
+            System.Console.WriteLine($"Welches Datenbank-Projekt soll bearbeitet werden? (Empty = {defaultOptions.Paths.DbDestinationFolder})");
             var userDbDestinationFolder = System.Console.ReadLine().Trim();
             if (userDbDestinationFolder.Length > 0)
             {
-                defaultOptions.DbDestinationFolder = userDbDestinationFolder;
+                defaultOptions.Paths.DbDestinationFolder = userDbDestinationFolder;
             }
 
             // FrontendDestinationFolder
-            System.Console.WriteLine($"Welches Frontend-Projekt soll bearbeitet werden? (Empty = {defaultOptions.FrontendDestinationFolder})");
+            System.Console.WriteLine($"Welches Frontend-Projekt soll bearbeitet werden? (Empty = {defaultOptions.Paths.FrontendDestinationFolder})");
             var userFrontendDestinationFolder = System.Console.ReadLine().Trim();
             if (userFrontendDestinationFolder.Length > 0)
             {
-                defaultOptions.FrontendDestinationFolder = userFrontendDestinationFolder;
+                defaultOptions.Paths.FrontendDestinationFolder = userFrontendDestinationFolder;
             }
 
             // ProjectName
-            System.Console.WriteLine($"Wie heißt das Backend-Projekt? (Empty = {defaultOptions.ProjectName})");
+            System.Console.WriteLine($"Wie heißt das Backend-Projekt? (Empty = {defaultOptions.Paths.ProjectName})");
             var userProjectName = System.Console.ReadLine().Trim();
             if (userProjectName.Length > 0)
             {
-                defaultOptions.ProjectName = userProjectName;
+                defaultOptions.Paths.ProjectName = userProjectName;
             }
 
             // ProjectName
-            System.Console.WriteLine($"Wie heißt das Datenbank-Projekt? (Empty = {defaultOptions.DbProjectName})");
+            System.Console.WriteLine($"Wie heißt das Datenbank-Projekt? (Empty = {defaultOptions.Paths.DbProjectName})");
             var userDbProjectName = System.Console.ReadLine().Trim();
             if (userDbProjectName.Length > 0)
             {
-                defaultOptions.DbProjectName = userDbProjectName;
+                defaultOptions.Paths.DbProjectName = userDbProjectName;
             }
 
             // DbContextName
-            System.Console.WriteLine($"Wie heißt der Datenbank-Context? (Empty = {defaultOptions.DbContextName})");
+            System.Console.WriteLine($"Wie heißt der Datenbank-Context? (Empty = {defaultOptions.Paths.DbContextName})");
             var userDbContextName = System.Console.ReadLine().Trim();
             if (userDbContextName.Length > 0)
             {
-                defaultOptions.DbContextName = userDbContextName;
+                defaultOptions.Paths.DbContextName = userDbContextName;
             }
 
             return defaultOptions;

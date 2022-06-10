@@ -7,29 +7,29 @@ namespace Contractor.Core.Projects.Frontend.Pages
     internal class EntitiesPageHtmlFromOneToOneRelationAddition : FrontendRelationAdditionEditor
     {
         public EntitiesPageHtmlFromOneToOneRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.From)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("<table mat-table");
             stringEditor.NextThatContains("<ng-container matColumnDef=\"detail\">");
-            stringEditor.InsertLine(GetAppRoutingLine(options));
+            stringEditor.InsertLine(GetAppRoutingLine(relationSide));
 
             return stringEditor.GetText();
         }
 
-        private string GetAppRoutingLine(IRelationAdditionOptions options)
+        private string GetAppRoutingLine(RelationSide relationSide)
         {
             return
-             $"            <ng-container matColumnDef=\"{options.PropertyNameTo.LowerFirstChar()}\">\n" +
-             $"                <th mat-header-cell *matHeaderCellDef> {options.PropertyNameTo.ToReadable()} </th>\n" +
+             $"            <ng-container matColumnDef=\"{relationSide.NameLower}\">\n" +
+             $"                <th mat-header-cell *matHeaderCellDef> {relationSide.Name.ToReadable()} </th>\n" +
               "                <td mat-cell *matCellDef=\"let element\">\n" +
-             $"                    <span *ngIf=\"element.{options.PropertyNameTo.LowerFirstChar()}\">{{{{element.{options.PropertyNameTo.LowerFirstChar()}.bezeichnung}}}}</span>\n" +
-             $"                    <span *ngIf=\"!element.{options.PropertyNameTo.LowerFirstChar()}\">-</span>\n" +
+             $"                    <span *ngIf=\"element.{relationSide.NameLower}\">{{{{element.{relationSide.NameLower}.bezeichnung}}}}</span>\n" +
+             $"                    <span *ngIf=\"!element.{relationSide.NameLower}\">-</span>\n" +
               "                </td>\n" +
               "            </ng-container>\n";
         }

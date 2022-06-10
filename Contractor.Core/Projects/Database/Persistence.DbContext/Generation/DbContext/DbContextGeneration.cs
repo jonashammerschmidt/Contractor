@@ -31,19 +31,21 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             this.dbContextEntityAddition.Add(entity);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.dbContextPropertyAddition.Edit(options);
+            this.dbContextPropertyAddition.Edit(property);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
-            this.dbContextRelationToAddition.Edit(options);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.dbContextRelationToAddition.Edit(relationSideTo);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.dbContextRelationToOneToOneAddition.Edit(options);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.dbContextRelationToOneToOneAddition.Edit(relationSideTo);
         }
     }
 }

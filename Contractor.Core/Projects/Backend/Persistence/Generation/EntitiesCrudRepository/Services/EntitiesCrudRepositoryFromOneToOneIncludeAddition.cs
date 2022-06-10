@@ -7,24 +7,24 @@ namespace Contractor.Core.Projects.Backend.Persistence
     internal class EntitiesCrudRepositoryFromOneToOneIncludeAddition : RelationAdditionEditor
     {
         public EntitiesCrudRepositoryFromOneToOneIncludeAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.From)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             fileData = UsingStatements.Add(fileData, "Microsoft.EntityFrameworkCore");
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains($"Get{options.EntityNameFrom}Detail(");
-            stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralFrom}");
+            stringEditor.NextThatContains($"Get{relationSide.Entity.Name}Detail(");
+            stringEditor.NextThatContains($"this.dbContext.{relationSide.OtherEntity.NamePlural}");
             stringEditor.Next(line => !line.Contains("Include("));
-            stringEditor.InsertLine($"                .Include(ef{options.EntityNameFrom} => ef{options.EntityNameFrom}.{options.PropertyNameTo})");
+            stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.OtherName})");
             stringEditor.MoveToStart();
 
-            string includeLine = $"                .Include(ef{options.EntityNameFrom} => ef{options.EntityNameFrom}.{options.PropertyNameTo})";
-            stringEditor.NextThatContains($"GetPaged{options.EntityNamePluralFrom}(");
-            stringEditor.NextThatContains($"this.dbContext.{options.EntityNamePluralFrom}");
+            string includeLine = $"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.OtherName})";
+            stringEditor.NextThatContains($"GetPaged{relationSide.OtherEntity.NamePlural}(");
+            stringEditor.NextThatContains($"this.dbContext.{relationSide.OtherEntity.NamePlural}");
             stringEditor.Next(line => !line.Contains("Include("));
             stringEditor.Prev();
             if (stringEditor.GetLine().Contains(";"))

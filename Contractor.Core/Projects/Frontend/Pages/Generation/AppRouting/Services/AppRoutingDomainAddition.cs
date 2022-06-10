@@ -28,7 +28,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private string UpdateFileData(Module module, string filePath)
         {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(module, filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
 

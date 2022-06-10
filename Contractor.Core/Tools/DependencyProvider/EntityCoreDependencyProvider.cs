@@ -32,7 +32,7 @@ namespace Contractor.Core.Tools
 
         private string UpdateFileData(Entity entity, string filePath, string projectFolder)
         {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(entity, filePath);
 
             fileData = AddServices(fileData, entity, projectFolder);
 

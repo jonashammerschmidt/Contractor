@@ -7,11 +7,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
     internal class EntityDetailPageHtmlFromOneToOnePropertyAddition : FrontendRelationAdditionEditor
     {
         public EntityDetailPageHtmlFromOneToOnePropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.From)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
             if (fileData.Contains("</mat-tab-group>"))
@@ -21,25 +21,25 @@ namespace Contractor.Core.Projects.Frontend.Pages
             }
             else
             {
-                stringEditor.NextThatStartsWith($"<div class=\"{options.EntityNameFrom.ToKebab()}-detail-page\"");
+                stringEditor.NextThatStartsWith($"<div class=\"{relationSide.Entity.NameKebab}-detail-page\"");
                 stringEditor.NextThatStartsWith($"</div>");
             }
 
             stringEditor.InsertNewLine();
 
-            stringEditor.InsertLine(GetLine(options));
+            stringEditor.InsertLine(GetLine(relationSide));
 
             return stringEditor.GetText();
         }
 
-        private string GetLine(IRelationAdditionOptions options)
+        private string GetLine(RelationSide relationSide)
         {
             return
-                $"    <p *ngIf=\"{options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()}\">\n" +
-                $"        <span style=\"font-size: 0.8em;\">{options.PropertyNameTo.ToReadable()}:</span>\n" +
+                $"    <p *ngIf=\"{relationSide.Entity.NameLower}.{relationSide.NameLower}\">\n" +
+                $"        <span style=\"font-size: 0.8em;\">{relationSide.Name.ToReadable()}:</span>\n" +
                 $"        <br>\n" +
-                $"        <a [routerLink]=\"['/{StringConverter.PascalToKebabCase(options.DomainTo)}/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}/detail', {options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()}.id]\">\n" +
-                $"            {{{{{options.EntityNameLowerFrom}.{options.PropertyNameTo.LowerFirstChar()}.bezeichnung}}}}\n" +
+                $"        <a [routerLink]=\"['/{relationSide.Entity.Module.NameKebab}/{relationSide.OtherEntity.NamePlural}/detail', {relationSide.Entity.NameLower}.{relationSide.NameLower}.id]\">\n" +
+                $"            {{{{{relationSide.Entity.NameLower}.{relationSide.NameLower}.bezeichnung}}}}\n" +
                 $"            <mat-icon style=\"font-size: 1em;\">open_in_new</mat-icon>\n" +
                 $"        </a>\n" +
                 $"    </p>\n";

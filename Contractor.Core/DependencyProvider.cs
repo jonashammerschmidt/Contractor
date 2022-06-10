@@ -2,7 +2,6 @@
 using Contractor.Core.Projects.Backend.Contract.Logic;
 using Contractor.Core.Projects.Backend.Contract.Persistence;
 using Contractor.Core.Projects.Backend.Logic;
-using Contractor.Core.Projects.Backend.Logic.Tests;
 using Contractor.Core.Projects.Backend.Persistence;
 using Contractor.Core.Projects.Database.Persistence.DbContext;
 using Contractor.Core.Projects.Frontend.Model;
@@ -29,7 +28,6 @@ namespace Contractor.Core
             ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
             ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);
             LogicProjectGeneration.ConfigureServices(serviceCollection);
-            LogicTestsProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceDbContextProjectGeneration.ConfigureServices(serviceCollection);
 

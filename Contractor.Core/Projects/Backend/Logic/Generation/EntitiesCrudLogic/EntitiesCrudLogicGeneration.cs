@@ -1,5 +1,4 @@
-﻿using Contractor.Core.Options;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Logic
@@ -14,7 +13,7 @@ namespace Contractor.Core.Projects.Backend.Logic
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly EntitiesCrudLogicRelationAddition logicRelationAddition;
-        private readonly UniqueEntitiesCrudLogicRelationAddition uniquelogicRelationAddition;
+        private readonly UniqueEntitiesCrudLogicRelationAddition uniqueLogicRelationAddition;
 
         public EntitiesCrudLogicGeneration(
             EntityCoreAddition entityCoreAddition,
@@ -23,7 +22,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
             this.entityCoreAddition = entityCoreAddition;
             this.logicRelationAddition = logicRelationAddition;
-            this.uniquelogicRelationAddition = uniquelogicRelationAddition;
+            this.uniqueLogicRelationAddition = uniquelogicRelationAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -35,22 +34,24 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.entityCoreAddition.AddEntityCore(entity, LogicProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
             // To
-            string usingStatement = $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}";
-            this.logicRelationAddition.Edit(options, LogicProjectGeneration.DomainFolder, FileName, usingStatement);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.logicRelationAddition.Edit(relationSideTo, LogicProjectGeneration.DomainFolder, FileName,
+                $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
             // To
-            string usingStatement = $"{options.ProjectName}.Contract.Persistence.Modules.{options.DomainFrom}.{options.EntityNamePluralFrom}";
-            this.uniquelogicRelationAddition.Edit(options, LogicProjectGeneration.DomainFolder, FileName, usingStatement);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.uniqueLogicRelationAddition.Edit(relationSideTo, LogicProjectGeneration.DomainFolder, FileName,
+                $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
         }
     }
 }

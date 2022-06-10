@@ -1,5 +1,4 @@
-﻿using Contractor.Core.Options;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Contract.Persistence
@@ -32,17 +31,18 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
             this.entityCoreAddition.AddEntityCore(entity, ContractPersistenceProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.entitiesCrudRepositoryToOneToOneRelationAddition.Edit(options, ContractPersistenceProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
+            this.entitiesCrudRepositoryToOneToOneRelationAddition.Edit(relationSide, ContractPersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

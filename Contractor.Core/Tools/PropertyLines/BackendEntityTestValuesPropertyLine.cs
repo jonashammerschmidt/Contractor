@@ -5,12 +5,12 @@ namespace Contractor.Core.Tools
 {
     public static class BackendEntityTestValuesPropertyLine
     {
-        public static string GetPropertyLine(IPropertyAdditionOptions options, string postfix, Random random)
+        public static string GetPropertyLine(Property property, string postfix, Random random)
         {
-            switch (options.PropertyType)
+            switch (property.Type)
             {
                 case PropertyTypes.String:
-                    return "\"" + options.PropertyName + postfix + "\"";
+                    return "\"" + property.Name + postfix + "\"";
 
                 case PropertyTypes.Integer:
                     return random.Next(100, 999).ToString();

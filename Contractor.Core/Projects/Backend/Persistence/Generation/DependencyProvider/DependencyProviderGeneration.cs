@@ -31,15 +31,15 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.entityCoreDependencyProvider.UpdateDependencyProvider(entity, ProjectFolder, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
         }
     }

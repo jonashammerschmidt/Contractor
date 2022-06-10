@@ -7,31 +7,30 @@ namespace Contractor.Core.Projects.Frontend.Pages
     internal class EntityUpdatePageHtmlToPropertyAddition : FrontendRelationAdditionEditor
     {
         public EntityUpdatePageHtmlToPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.To)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("</form>");
 
-            stringEditor.InsertLine(GetLine(options));
+            stringEditor.InsertLine(GetLine(relationSide));
 
             stringEditor.InsertNewLine();
 
             return stringEditor.GetText();
         }
 
-        private string GetLine(IRelationAdditionOptions options)
+        private string GetLine(RelationSide relationSide)
         {
             return
-                $"            <app-search-dropdown [formGroupInstance]=\"{options.EntityNameLowerTo}UpdateForm\"\n" +
-                $"                [formControlNameInstance]=\"'{options.PropertyNameFrom.LowerFirstChar()}Id'\" label=\"{options.PropertyNameFrom.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\"\n" +
-                $"                " + 
-                 ((!options.IsOptional) ? "required=\"true\" " : "") +
-                $"[dataSource]=\"{options.PropertyNameFrom.LowerFirstChar()}DataSource\" [initialItem]=\"selected{options.PropertyNameFrom}\">\n" +
+                $"            <app-search-dropdown [formGroupInstance]=\"{relationSide.Entity.NameLower}UpdateForm\"\n" +
+                $"                [formControlNameInstance]=\"'{relationSide.NameLower}Id'\" label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\"\n" +
+                $"                " + ((!relationSide.IsOptional) ? "required=\"true\" " : "") +
+                $"[dataSource]=\"{relationSide.NameLower}DataSource\" [initialItem]=\"selected{relationSide.Name}\">\n" +
                 $"            </app-search-dropdown>";
         }
     }

@@ -35,22 +35,21 @@ namespace Contractor.Core.Projects.Backend.Logic
             this.dtoAddition.AddDto(entity, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.dtoPropertyAddition.AddPropertyToDTO(options, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoPropertyAddition.AddPropertyToDTO(property, LogicProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
             // To
-            IRelationSideAdditionOptions optionsTo = RelationAdditionOptions
-                .GetPropertyForTo(options, "Guid");
-            this.relationAddition.AddRelationToDTO(optionsTo, LogicProjectGeneration.DtoFolder, FileName);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.relationAddition.AddRelationToDTO(relationSideTo, LogicProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.Add1ToNRelation(options);
+            this.Add1ToNRelation(new Relation1ToN(relation));
         }
     }
 }

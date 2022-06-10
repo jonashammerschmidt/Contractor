@@ -1,7 +1,4 @@
-﻿using Contractor.Core.Options;
-using System.IO;
-
-namespace Contractor.Core.Tools
+﻿namespace Contractor.Core.Tools
 {
     internal abstract class PropertyAdditionEditor
     {
@@ -16,29 +13,21 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void Edit(IPropertyAdditionOptions options, string domainFolder, string templateFileName, params string[] namespacesToAdd)
+        public void Edit(Property property, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
+            string filePath = this.pathService.GetAbsolutePathForBackend(property, domainFolder, templateFileName);
 
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
             foreach (string namespaceToAdd in namespacesToAdd)
             {
                 fileData = UsingStatements.Add(fileData, namespaceToAdd);
             }
 
-            fileData = UpdateFileData(options, fileData);
+            fileData = UpdateFileData(property, fileData);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
-        {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
-            string fileName = templateFileName.Replace("Entity", options.EntityName);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
-
-        protected abstract string UpdateFileData(IPropertyAdditionOptions options, string fileData);
+        protected abstract string UpdateFileData(Property property, string fileData);
     }
 }

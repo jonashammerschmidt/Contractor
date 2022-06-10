@@ -7,50 +7,50 @@ namespace Contractor.Core.Projects.Frontend.Pages
     internal class EntityCreatePageTsToPropertyAddition : FrontendRelationAdditionEditor
     {
         public EntityCreatePageTsToPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.To)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             fileData = ImportStatements.Add(fileData, "DropdownPaginationDataSource",
                 "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
 
-            fileData = ImportStatements.Add(fileData, $"{options.EntityNamePluralFrom}CrudService",
-                $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}-crud.service");
+            fileData = ImportStatements.Add(fileData, $"{relationSide.OtherEntity.NamePlural}CrudService",
+                $"src/app/model/{relationSide.OtherEntity.Module.NameKebab}" +
+                $"/{relationSide.OtherEntity.NamePluralKebab}" +
+                $"/{relationSide.OtherEntity.NamePluralKebab}-crud.service");
 
-            fileData = ImportStatements.Add(fileData, $"I{options.EntityNameFrom}ListItem",
-                $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}-list-item");
+            fileData = ImportStatements.Add(fileData, $"I{relationSide.OtherEntity.Name}ListItem",
+                $"src/app/model/{relationSide.OtherEntity.Module.NameKebab}" +
+                $"/{relationSide.OtherEntity.NamePluralKebab}" +
+                $"/dtos/i-{StringConverter.PascalToKebabCase(relationSide.OtherEntity.Name)}-list-item");
 
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {options.PropertyNameFrom.LowerFirstChar()}DataSource: DropdownPaginationDataSource<I{options.EntityNameFrom}ListItem>;");
+            stringEditor.InsertLine($"  {relationSide.NameLower}DataSource: DropdownPaginationDataSource<I{relationSide.OtherEntity.Name}ListItem>;");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("private formBuilder: FormBuilder");
 
-            string constructorLine = $"    private {options.EntityNamePluralLowerFrom}CrudService: {options.EntityNamePluralFrom}CrudService,";
+            string constructorLine = $"    private {relationSide.OtherEntity.NamePluralLower}CrudService: {relationSide.OtherEntity.NamePlural}CrudService,";
             if (!fileData.Contains(constructorLine))
             {
                 stringEditor.InsertLine(constructorLine);
             }
             stringEditor.NextThatContains("this.formBuilder.group({");
             stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"      {options.PropertyNameFrom.LowerFirstChar()}Id: new FormControl(null, [" +
-                ((!options.IsOptional) ? "Validators.required" : "") +
+            stringEditor.InsertLine($"      {relationSide.NameLower}Id: new FormControl(null, [" +
+                ((!relationSide.IsOptional) ? "Validators.required" : "") +
                 "]),");
 
             stringEditor.MoveToStart();
             stringEditor.NextThatContains("ngOnInit()");
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    this.{options.PropertyNameFrom.LowerFirstChar()}DataSource = new DropdownPaginationDataSource(");
-            stringEditor.InsertLine($"      (options) => this.{options.EntityNamePluralLowerFrom}CrudService.getPaged{options.EntityNamePluralFrom}(options),");
+            stringEditor.InsertLine($"    this.{relationSide.NameLower}DataSource = new DropdownPaginationDataSource(");
+            stringEditor.InsertLine($"      (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),");
             stringEditor.InsertLine("      'bezeichnung');");
 
             return stringEditor.GetText();

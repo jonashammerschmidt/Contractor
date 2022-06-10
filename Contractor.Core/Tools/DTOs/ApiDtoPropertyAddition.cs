@@ -18,35 +18,27 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName)
         {
-            string filePath = GetFilePath(options, domainFolder, templateFileName);
-            string fileData = UpdateFileData(options, filePath);
+            string filePath = this.pathService.GetAbsolutePathForBackend(property, domainFolder, templateFileName);
+            string fileData = UpdateFileData(property, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string templateFileName)
+        private string UpdateFileData(Property property, string filePath)
         {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForBackend(options, domainFolder);
-            string fileName = templateFileName.Replace("Entity", options.EntityName);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
+            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
 
-        private string UpdateFileData(IPropertyAdditionOptions options, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
-
-            fileData = AddUsingStatements(options, fileData);
-            fileData = AddProperty(fileData, options);
+            fileData = AddUsingStatements(property, fileData);
+            fileData = AddProperty(fileData, property);
 
             return fileData;
         }
 
-        private string AddUsingStatements(IPropertyAdditionOptions options, string fileData)
+        private string AddUsingStatements(Property property, string fileData)
         {
-            if (options.PropertyType == PropertyTypes.Guid || options.PropertyType == PropertyTypes.DateTime)
+            if (property.Type == PropertyTypes.Guid || property.Type == PropertyTypes.DateTime)
             {
                 fileData = UsingStatements.Add(fileData, "System");
             }
@@ -56,10 +48,10 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddProperty(string file, IPropertyAdditionOptions options)
+        private string AddProperty(string file, Property property)
         {
             StringEditor stringEditor = new StringEditor(file);
-            FindStartingLineForNewProperty(file, options, stringEditor);
+            FindStartingLineForNewProperty(file, property, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {
@@ -71,29 +63,29 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertNewLine();
             }
 
-            if (!options.IsOptional)
+            if (!property.IsOptional)
             {
                 stringEditor.InsertLine("        [Required]");
             }
 
-            if (options.PropertyType == PropertyTypes.String && options.PropertyTypeExtra != null && options.IsOptional)
+            if (property.Type == PropertyTypes.String && property.TypeExtra != null && property.IsOptional)
             {
-                stringEditor.InsertLine($"        [StringLength({options.PropertyTypeExtra})]");
+                stringEditor.InsertLine($"        [StringLength({property.TypeExtra})]");
             }
 
-            if (options.PropertyType == PropertyTypes.String && options.PropertyTypeExtra != null && !options.IsOptional)
+            if (property.Type == PropertyTypes.String && property.TypeExtra != null && !property.IsOptional)
             {
-                stringEditor.InsertLine($"        [StringLength({options.PropertyTypeExtra}, MinimumLength = 1)]");
+                stringEditor.InsertLine($"        [StringLength({property.TypeExtra}, MinimumLength = 1)]");
             }
 
-            stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(options));
+            stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
         }
 
-        private void FindStartingLineForNewProperty(string file, IPropertyAdditionOptions options, StringEditor stringEditor)
+        private void FindStartingLineForNewProperty(string file, Property property, StringEditor stringEditor)
         {
-            bool hasConstructor = Regex.IsMatch(file, $"public .*{options.EntityName}.*\\(");
+            bool hasConstructor = Regex.IsMatch(file, $"public .*{property.Entity.Name}.*\\(");
             bool hasProperty = file.Contains("{ get; set; }");
             if (hasConstructor && hasProperty)
             {

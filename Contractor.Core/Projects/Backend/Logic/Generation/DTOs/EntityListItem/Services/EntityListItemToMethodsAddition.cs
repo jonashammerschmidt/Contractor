@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Logic
@@ -7,18 +6,18 @@ namespace Contractor.Core.Projects.Backend.Logic
     internal class EntityListItemToMethodsAddition : RelationAdditionEditor
     {
         public EntityListItemToMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.To)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains("FromDb" + options.EntityNameTo);
+            stringEditor.NextThatContains("FromDb" + relationSide.Entity.Name);
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {options.PropertyNameFrom} = {options.DomainFrom}.{options.EntityNamePluralFrom}.{options.EntityNameFrom}" +
-                $".FromDb{options.EntityNameFrom}(db{options.EntityNameTo}ListItem.{options.PropertyNameFrom}),");
+            stringEditor.InsertLine($"                {relationSide.Name} = {relationSide.OtherEntity.Module.Name}.{relationSide.OtherEntity.NamePlural}.{relationSide.OtherEntity.Name}" +
+                $".FromDb{relationSide.OtherEntity.Name}(db{relationSide.Entity.Name}ListItem.{relationSide.NameLower}),");
 
             return stringEditor.GetText();
         }

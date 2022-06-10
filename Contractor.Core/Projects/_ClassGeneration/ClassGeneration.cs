@@ -10,11 +10,11 @@ namespace Contractor.Core.Projects
 
         protected abstract void AddEntity(Entity entity);
 
-        protected abstract void AddProperty(IPropertyAdditionOptions options);
+        protected abstract void AddProperty(Property property);
 
-        protected abstract void Add1ToNRelation(IRelationAdditionOptions options);
+        protected abstract void Add1ToNRelation(Relation1ToN relation);
 
-        protected abstract void AddOneToOneRelation(IRelationAdditionOptions options);
+        protected abstract void AddOneToOneRelation(Relation1To1 relation);
 
         public void AddModule(Module module)
         {
@@ -56,63 +56,63 @@ namespace Contractor.Core.Projects
             }
         }
 
-        public void PerformAddPropertyCommand(IPropertyAdditionOptions options)
+        public void PerformAddPropertyCommand(Property property)
         {
             try
             {
-                this.AddProperty(options);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(this.GetType().Name + " completed successfully");
-                }
+                this.AddProperty(property);
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(this.GetType().Name + " completed successfully");
+                //}
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Property-Generierung: " + e.Message);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(e.StackTrace);
-                }
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(e.StackTrace);
+                //}
             }
         }
 
-        public void PerformAdd1ToNRelationCommand(IRelationAdditionOptions options)
+        public void PerformAdd1ToNRelationCommand(Relation1ToN relation)
         {
             try
             {
-                this.Add1ToNRelation(options);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(this.GetType().Name + " completed successfully");
-                }
+                this.Add1ToNRelation(new Relation1ToN(relation));
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(this.GetType().Name + " completed successfully");
+                //}
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(e.StackTrace);
-                }
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(e.StackTrace);
+                //}
             }
         }
 
-        public void PerformAddOneToOneRelationCommand(IRelationAdditionOptions options)
+        public void PerformAddOneToOneRelationCommand(Relation1To1 relation)
         {
             try
             {
-                this.AddOneToOneRelation(options);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(this.GetType().Name + " completed successfully");
-                }
+                this.AddOneToOneRelation(relation);
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(this.GetType().Name + " completed successfully");
+                //}
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
-                if (options.IsVerbose)
-                {
-                    Console.WriteLine(e.StackTrace);
-                }
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(e.StackTrace);
+                //}
             }
         }
     }

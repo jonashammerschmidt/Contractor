@@ -12,7 +12,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
         }
 
-        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
+        protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
@@ -20,7 +20,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             stringEditor.InsertNewLine();
 
-            stringEditor.InsertLine(FrontendPageCreatePropertyLine.GetPropertyLine(options));
+            stringEditor.InsertLine(FrontendPageCreatePropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
         }

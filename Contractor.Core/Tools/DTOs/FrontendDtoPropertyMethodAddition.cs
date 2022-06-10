@@ -17,38 +17,31 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(IPropertyAdditionOptions options, string functionName, string variableName, string domainFolder, string fileName)
+        public void AddPropertyToDTO(Property property, string functionName, string variableName, string domainFolder, string fileName)
         {
-            functionName = functionName.Replace("Entity", options.EntityName);
-            functionName = functionName.Replace("entity", options.EntityName.LowerFirstChar());
+            functionName = functionName.Replace("Entity", property.Entity.Name);
+            functionName = functionName.Replace("entity", property.Entity.Name.LowerFirstChar());
 
-            variableName = variableName.Replace("Entity", options.EntityName);
-            variableName = variableName.Replace("entity", options.EntityName.LowerFirstChar());
+            variableName = variableName.Replace("Entity", property.Entity.Name);
+            variableName = variableName.Replace("entity", property.Entity.Name.LowerFirstChar());
 
-            string filePath = GetFilePath(options, domainFolder, fileName);
-            string fileData = UpdateFileData(options, functionName, variableName, filePath);
+            string filePath = this.pathService.GetAbsolutePathForFrontend(property, domainFolder, fileName);
+            string fileData = UpdateFileData(property, functionName, variableName, filePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
         }
 
-        private string GetFilePath(IPropertyAdditionOptions options, string domainFolder, string fileName)
-        {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(options, domainFolder);
-            fileName = fileName.Replace("entity-kebab", StringConverter.PascalToKebabCase(options.EntityName));
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
-        }
 
-        private string UpdateFileData(IPropertyAdditionOptions options, string functionName, string variableName, string filePath)
+        private string UpdateFileData(Property property, string functionName, string variableName, string filePath)
         {
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"public static " + functionName);
             stringEditor.NextThatContains("return {");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine($"            {options.PropertyName.LowerFirstChar()}: {variableName}.{options.PropertyName.LowerFirstChar()},");
+            stringEditor.InsertLine($"            {property.Name.LowerFirstChar()}: {variableName}.{property.Name.LowerFirstChar()},");
 
             return stringEditor.GetText();
         }

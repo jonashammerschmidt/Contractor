@@ -35,21 +35,20 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
             this.dtoAddition.AddDto(entity, ContractPersistenceProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.propertyAddition.AddPropertyToDTO(options, ContractPersistenceProjectGeneration.DtoFolder, FileName, true);
+            this.propertyAddition.AddPropertyToDTO(property, ContractPersistenceProjectGeneration.DtoFolder, FileName, true);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
-            this.relationAddition.AddRelationToDTO(
-                RelationAdditionOptions.GetPropertyForTo(options, "Guid"),
-                ContractPersistenceProjectGeneration.DtoFolder, FileName, true);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.relationAddition.AddRelationToDTO(relationSideTo, ContractPersistenceProjectGeneration.DtoFolder, FileName, true);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.Add1ToNRelation(options);
+            this.Add1ToNRelation(new Relation1ToN(relation));
         }
     }
 }

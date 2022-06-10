@@ -64,15 +64,6 @@
     <None Update="Projects\Backend\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\DbEntityListItemTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\DbEntityUpdateTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\EntityListItemTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Projects\Backend\Logic\Templates\DbEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -88,18 +79,6 @@
     <None Update="Projects\Backend\Persistence\Templates\DbEntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\EntityCreateTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\EntityTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\EntityDetailTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\EntityUpdateTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Projects\Backend\Logic\Templates\DbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -110,18 +89,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Backend\Logic\Templates\EntitiesCrudLogicTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\DbEntityDetailTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\DbEntityTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\EntitiesCrudLogicTestsTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Projects\Backend\Logic.Tests\Templates\EntityTestValuesTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Projects\Backend\Persistence.Tests\Templates\DbEntityTestTemplate.txt">

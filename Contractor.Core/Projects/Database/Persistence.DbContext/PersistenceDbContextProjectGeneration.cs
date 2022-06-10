@@ -19,7 +19,6 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             serviceCollection.AddSingleton<DbContextPropertyAddition>();
             serviceCollection.AddSingleton<DbContextRelationToAddition>();
             serviceCollection.AddSingleton<DbContextRelationToOneToOneAddition>();
-            serviceCollection.AddSingleton<EfEntityContructorHashSetAddition>();
         }
     }
 }

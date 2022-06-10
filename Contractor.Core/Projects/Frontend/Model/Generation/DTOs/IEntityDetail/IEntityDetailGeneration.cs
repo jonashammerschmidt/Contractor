@@ -36,59 +36,53 @@ namespace Contractor.Core.Projects.Frontend.Model
             this.frontendEntityAddition.AddEntity(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.frontendDtoPropertyAddition.AddPropertyToDTO(options, ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(property, ModelProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "[]");
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+
             // From
-            string fromImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainTo)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
+            string fromImportStatementPath = $"src/app/model/{relation.EntityTo.Module.NameKebab}" +
+                $"/{relation.EntityTo.NamePluralKebab}" +
+                $"/dtos/i-{relation.EntityTo.NameKebab}";
 
-            IRelationSideAdditionOptions fromOptions =
-                RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}[]");
-
-            this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
-                $"I{options.EntityNameTo}", fromImportStatementPath);
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainFolder, FileName,
+                $"I{relation.EntityTo.Name}", fromImportStatementPath);
 
             // To
-            string toImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}";
+            string toImportStatementPath = $"src/app/model/{relation.EntityFrom.Module.NameKebab}" +
+                $"/{relation.EntityFrom.NamePluralKebab}" +
+                $"/dtos/i-{relation.EntityFrom.NameKebab}";
 
-            IRelationSideAdditionOptions toOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
-
-            this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
-                $"I{options.EntityNameFrom}", toImportStatementPath);
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName,
+                $"I{relation.EntityFrom.Name}", toImportStatementPath);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+
             // From
-            string fromImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainTo)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralTo)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameTo)}";
+            string fromImportStatementPath = $"src/app/model/{relation.EntityTo.Module.NameKebab}" +
+                $"/{relation.EntityTo.NamePluralKebab}" +
+                $"/dtos/i-{relation.EntityTo.NameKebab}";
 
-            IRelationSideAdditionOptions fromOptions =
-                RelationAdditionOptions.GetPropertyForFrom(options, $"I{options.EntityNameTo}");
-
-            this.frontendDtoRelationAddition.AddPropertyToDTO(fromOptions, ModelProjectGeneration.DomainFolder, FileName,
-                $"I{options.EntityNameTo}", fromImportStatementPath);
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainFolder, FileName,
+                $"I{relation.EntityTo.Name}", fromImportStatementPath);
 
             // To
-            string toImportStatementPath = $"src/app/model/{StringConverter.PascalToKebabCase(options.DomainFrom)}" +
-                $"/{StringConverter.PascalToKebabCase(options.EntityNamePluralFrom)}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(options.EntityNameFrom)}";
+            string toImportStatementPath = $"src/app/model/{relation.EntityFrom.Module.NameKebab}" +
+                $"/{relation.EntityFrom.NamePluralKebab}" +
+                $"/dtos/i-{relation.EntityFrom.NameKebab}";
 
-            IRelationSideAdditionOptions toOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, $"I{options.EntityNameFrom}");
-
-            this.frontendDtoRelationAddition.AddPropertyToDTO(toOptions, ModelProjectGeneration.DomainFolder, FileName,
-                $"I{options.EntityNameFrom}", toImportStatementPath);
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName,
+                $"I{relation.EntityFrom.Name}", toImportStatementPath);
         }
     }
 }

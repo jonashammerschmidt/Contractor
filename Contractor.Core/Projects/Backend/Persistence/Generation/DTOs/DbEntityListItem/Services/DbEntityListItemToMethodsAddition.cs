@@ -7,17 +7,17 @@ namespace Contractor.Core.Projects.Backend.Persistence
     internal class DbEntityListItemToMethodsAddition : RelationAdditionEditor
     {
         public DbEntityListItemToMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base(fileSystemClient, pathService, RelationEnd.To)
+            : base(fileSystemClient, pathService)
         {
         }
 
-        protected override string UpdateFileData(IRelationAdditionOptions options, string fileData)
+        protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromEf" + options.EntityNameTo);
+            stringEditor.NextThatContains("FromEf" + relationSide.Entity.Name);
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {options.PropertyNameFrom} = Db{options.EntityNameFrom}.FromEf{options.EntityNameFrom}(ef{options.EntityNameTo}.{options.PropertyNameFrom}),");
+            stringEditor.InsertLine($"                {relationSide.Name} = Db{relationSide.OtherEntity.Name}.FromEf{relationSide.OtherEntity.Name}(ef{relationSide.Entity.Name}.{relationSide.Name}),");
 
             return stringEditor.GetText();
         }

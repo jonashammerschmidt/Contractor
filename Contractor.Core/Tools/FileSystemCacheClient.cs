@@ -51,6 +51,11 @@ namespace Contractor.Core.Tools
             return fileCache[path];
         }
 
+        public string ReadAllText(Property property, string path)
+        {
+            return fileCache[path];
+        }
+
         public void WriteAllText(string path, string fileContent)
         {
             if (!this.fileCache.ContainsKey(path))

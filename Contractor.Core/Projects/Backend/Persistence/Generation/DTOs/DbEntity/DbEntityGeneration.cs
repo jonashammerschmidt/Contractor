@@ -36,25 +36,22 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.dtoAddition.AddDto(entity, PersistenceProjectGeneration.DtoFolder, templatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.propertyAddition.AddPropertyToDTO(options, PersistenceProjectGeneration.DtoFolder, FileName);
-            this.dbDtoMethodsAddition.Edit(options, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.propertyAddition.AddPropertyToDTO(property, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoMethodsAddition.Edit(property, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
-            IRelationSideAdditionOptions relationSideAdditionOptions =
-                RelationAdditionOptions.GetPropertyForTo(options, "Guid");
-            PropertyAdditionOptions propertyAdditionOptions = new PropertyAdditionOptions(relationSideAdditionOptions);
-
-            this.propertyAddition.AddPropertyToDTO(propertyAdditionOptions, PersistenceProjectGeneration.DtoFolder, FileName);
-            this.dbDtoMethodsAddition.Edit(propertyAdditionOptions, PersistenceProjectGeneration.DtoFolder, FileName);
+            RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
+            this.propertyAddition.AddPropertyToDTO(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoMethodsAddition.Edit(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.Add1ToNRelation(options);
+            this.Add1ToNRelation(new Relation1ToN(relation));
         }
     }
 }

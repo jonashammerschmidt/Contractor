@@ -35,19 +35,21 @@ namespace Contractor.Core.Projects.Frontend.Pages
             this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
-        protected override void AddProperty(IPropertyAdditionOptions options)
+        protected override void AddProperty(Property property)
         {
-            this.entityUpdatePageTsPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityUpdatePageTsPropertyAddition.Edit(property, PagesProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(IRelationAdditionOptions options)
+        protected override void Add1ToNRelation(Relation1ToN relation)
         {
-            this.entityUpdatePageTsToPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.entityUpdatePageTsToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(IRelationAdditionOptions options)
+        protected override void AddOneToOneRelation(Relation1To1 relation)
         {
-            this.entityUpdatePageTsToPropertyAddition.Edit(options, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.entityUpdatePageTsToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }

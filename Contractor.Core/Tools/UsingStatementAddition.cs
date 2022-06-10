@@ -18,7 +18,7 @@ namespace Contractor.Core.Tools
         public void Add(Entity entity, string domainFolder, string templateFileName, string namespaceToAdd)
         {
             string filePath = GetFilePath(entity, domainFolder, templateFileName);
-            string fileData = this.fileSystemClient.ReadAllText(filePath);
+            string fileData = this.fileSystemClient.ReadAllText(entity, filePath);
 
             fileData = UsingStatements.Add(fileData, namespaceToAdd);
 

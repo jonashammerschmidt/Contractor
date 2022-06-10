@@ -12,14 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
         }
 
-        protected override string UpdateFileData(IPropertyAdditionOptions options, string fileData)
+        protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("<table mat-table");
             stringEditor.NextThatContains("<ng-container matColumnDef=\"detail\">");
 
-            stringEditor.InsertLine(FrontendPageEntitiesPropertyLine.GetPropertyLine(options));
+            stringEditor.InsertLine(FrontendPageEntitiesPropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
         }
