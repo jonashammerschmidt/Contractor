@@ -58,7 +58,7 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAddOneToOneRelationCommand(relation1To1);
+                                classGeneration.PerformAddOneToOneRelationSideToCommand(relation1To1);
                             }
                         }
 
@@ -67,7 +67,7 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAdd1ToNRelationCommand(relation1ToN);
+                                classGeneration.PerformAdd1ToNRelationSideToCommand(relation1ToN);
                             }
                         }
                     }
@@ -76,33 +76,33 @@ namespace Contractor.Core
             }
 
 
-            //foreach (var module in this.contractorGenerationOptions.Modules)
-            //{
-            //    foreach (var entity in module.Entities)
-            //    {
-            //        var count = entity.Properties.Count() + entity.Relations1To1.Count() + entity.Relations1ToN.Count();
-            //        for (int i = 0; i < count; i++)
-            //        {
-            //            var relation1To1 = entity.Relations1To1.Single(p => p.Order == i);
-            //            if (relation1To1 != null)
-            //            {
-            //                foreach (var classGeneration in this.classGenerations)
-            //                {
-            //                    // FROM classGeneration.PerformAdd1To1RelationCommand
-            //                }
-            //            }
+            foreach (var module in this.contractorGenerationOptions.Modules)
+            {
+                foreach (var entity in module.Entities)
+                {
+                    var count = entity.Properties.Count() + entity.Relations1To1.Count() + entity.Relations1ToN.Count();
+                    for (int i = 0; i < count; i++)
+                    {
+                        var relation1To1 = entity.Relations1To1.Single(p => p.Order == i);
+                        if (relation1To1 != null)
+                        {
+                            foreach (var classGeneration in this.classGenerations)
+                            {
+                                classGeneration.PerformAddOneToOneRelationSideFromCommand(relation1To1);
+                            }
+                        }
 
-            //            var relation1ToN = entity.Relations1ToN.Single(p => p.Order == i);
-            //            if (relation1ToN != null)
-            //            {
-            //                foreach (var classGeneration in this.classGenerations)
-            //                {
-            //                    // FROM classGeneration.PerformAdd1ToNRelationCommand
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+                        var relation1ToN = entity.Relations1ToN.Single(p => p.Order == i);
+                        if (relation1ToN != null)
+                        {
+                            foreach (var classGeneration in this.classGenerations)
+                            {
+                                classGeneration.PerformAdd1ToNRelationSideFromCommand(relation1ToN);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public void SaveChanges()

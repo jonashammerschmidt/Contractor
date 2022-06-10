@@ -36,13 +36,21 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             this.dbContextPropertyAddition.Edit(property);
         }
 
-        protected override void Add1ToNRelation(Relation1ToN relation)
+        protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
+        {
+        }
+
+        protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
             this.dbContextRelationToAddition.Edit(relationSideTo);
         }
 
-        protected override void AddOneToOneRelation(Relation1To1 relation)
+        protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
+        {
+        }
+
+        protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
             RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
             this.dbContextRelationToOneToOneAddition.Edit(relationSideTo);

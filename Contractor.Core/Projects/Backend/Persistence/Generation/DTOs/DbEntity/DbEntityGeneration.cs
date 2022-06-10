@@ -42,16 +42,24 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.dbDtoMethodsAddition.Edit(property, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(Relation1ToN relation)
+        protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
+        {
+        }
+
+        protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
             this.propertyAddition.AddPropertyToDTO(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
             this.dbDtoMethodsAddition.Edit(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(Relation1To1 relation)
+        protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
-            this.Add1ToNRelation(new Relation1ToN(relation));
+        }
+
+        protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
+        {
+            this.Add1ToNRelationSideTo(new Relation1ToN(relation));
         }
     }
 }

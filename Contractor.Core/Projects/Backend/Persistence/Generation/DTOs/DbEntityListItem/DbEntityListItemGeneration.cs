@@ -50,11 +50,14 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.dbDtoListItemMethodsAddition.Edit(property, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(Relation1ToN relation)
+        protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
+        {
+        }
+
+        protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "IDb", "");
 
-            // To
             this.relationAddition.AddRelationToDTO(relationSideTo, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
@@ -62,19 +65,21 @@ namespace Contractor.Core.Projects.Backend.Persistence
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
         }
 
-        protected override void AddOneToOneRelation(Relation1To1 relation)
+        protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "IDb", "");
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "IDb", "");
 
-            // From
             this.relationAddition.AddRelationToDTO(relationSideFrom, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
 
             this.dbEntityListItemFromOneToOneMethodsAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Persistence.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+        }
 
-            // To
+        protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
+        {
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "IDb", "");
+
             this.relationAddition.AddRelationToDTO(relationSideTo, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 

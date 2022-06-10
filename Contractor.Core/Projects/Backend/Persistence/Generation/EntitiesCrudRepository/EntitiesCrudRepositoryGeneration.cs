@@ -1,5 +1,4 @@
-﻿using Contractor.Core.Options;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Persistence
@@ -46,27 +45,31 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
         }
 
-        protected override void Add1ToNRelation(Relation1ToN relation)
+        protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
+
+            this.dtoFromRepositoryIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void Add1ToNRelationSideTo(Relation1ToN relation)
+        {
             RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
 
-            // From
-            this.dtoFromRepositoryIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
-
-            // To
             this.dtoToRepositoryIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void AddOneToOneRelation(Relation1To1 relation)
+        protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
+
+            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
+        }
+
+        protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
+        {
             RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
 
-            // From
-            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
-
-            // To
             this.entitiesCrudRepositoryToOneToOneIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }

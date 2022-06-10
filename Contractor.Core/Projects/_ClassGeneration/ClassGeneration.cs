@@ -1,6 +1,4 @@
-﻿using Contractor.Core.Options;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Contractor.Core.Projects
 {
@@ -12,9 +10,13 @@ namespace Contractor.Core.Projects
 
         protected abstract void AddProperty(Property property);
 
-        protected abstract void Add1ToNRelation(Relation1ToN relation);
+        protected abstract void Add1ToNRelationSideFrom(Relation1ToN relation);
 
-        protected abstract void AddOneToOneRelation(Relation1To1 relation);
+        protected abstract void AddOneToOneRelationSideFrom(Relation1To1 relation);
+
+        protected abstract void Add1ToNRelationSideTo(Relation1ToN relation);
+
+        protected abstract void AddOneToOneRelationSideTo(Relation1To1 relation);
 
         public void AddModule(Module module)
         {
@@ -76,11 +78,11 @@ namespace Contractor.Core.Projects
             }
         }
 
-        public void PerformAdd1ToNRelationCommand(Relation1ToN relation)
+        public void PerformAdd1ToNRelationSideFromCommand(Relation1ToN relation)
         {
             try
             {
-                this.Add1ToNRelation(new Relation1ToN(relation));
+                this.Add1ToNRelationSideFrom(new Relation1ToN(relation));
                 //if (options.IsVerbose)
                 //{
                 //    Console.WriteLine(this.GetType().Name + " completed successfully");
@@ -96,11 +98,51 @@ namespace Contractor.Core.Projects
             }
         }
 
-        public void PerformAddOneToOneRelationCommand(Relation1To1 relation)
+        public void PerformAddOneToOneRelationSideFromCommand(Relation1To1 relation)
         {
             try
             {
-                this.AddOneToOneRelation(relation);
+                this.AddOneToOneRelationSideFrom(relation);
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(this.GetType().Name + " completed successfully");
+                //}
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(e.StackTrace);
+                //}
+            }
+        }
+
+        public void PerformAdd1ToNRelationSideToCommand(Relation1ToN relation)
+        {
+            try
+            {
+                this.Add1ToNRelationSideTo(new Relation1ToN(relation));
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(this.GetType().Name + " completed successfully");
+                //}
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
+                //if (options.IsVerbose)
+                //{
+                //    Console.WriteLine(e.StackTrace);
+                //}
+            }
+        }
+
+        public void PerformAddOneToOneRelationSideToCommand(Relation1To1 relation)
+        {
+            try
+            {
+                this.AddOneToOneRelationSideTo(relation);
                 //if (options.IsVerbose)
                 //{
                 //    Console.WriteLine(this.GetType().Name + " completed successfully");

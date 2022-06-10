@@ -40,27 +40,31 @@ namespace Contractor.Core.Projects.Backend.Contract.Logic
             this.propertyAddition.AddPropertyToDTO(property, ContractLogicProjectGeneration.DtoFolder, FileName, true);
         }
 
-        protected override void Add1ToNRelation(Relation1ToN relation)
+        protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
+        {
+        }
+
+        protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
 
-            // To
             this.relationAddition.AddRelationToDTO(relationSideTo, ContractLogicProjectGeneration.DtoFolder, FileName, true,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
         }
 
-        protected override void AddOneToOneRelation(Relation1To1 relation)
+        protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
 
-            // From
             this.relationAddition.AddRelationToDTO(relationSideFrom, ContractLogicProjectGeneration.DtoFolder, FileName, true,
-                $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideTo.Entity.Module.Name}.{relationSideTo.Entity.NamePlural}");
+                $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+        }
 
-            // To
+        protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
+        {
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
             this.relationAddition.AddRelationToDTO(relationSideTo, ContractLogicProjectGeneration.DtoFolder, FileName, true,
-                $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideFrom.Entity.Module.Name}.{relationSideFrom.Entity.NamePlural}");
+                $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
         }
     }
 }

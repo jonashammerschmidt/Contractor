@@ -1,6 +1,4 @@
-﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Model
@@ -44,11 +42,14 @@ namespace Contractor.Core.Projects.Frontend.Model
             this.frontendDtoPropertyAddition.AddPropertyToDTO(property, ModelProjectGeneration.DomainFolder, FileName);
         }
 
-        protected override void Add1ToNRelation(Relation1ToN relation)
+        protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
+        {
+        }
+
+        protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
 
-            // To
             string toImportStatementPath = $"src/app/model/{relation.EntityFrom.Module.NameKebab}" +
                 $"/{relation.EntityFrom.NamePluralKebab}" +
                 $"/dtos/i-{relation.EntityFrom.NameKebab}";
@@ -57,20 +58,22 @@ namespace Contractor.Core.Projects.Frontend.Model
                 $"I{relation.EntityFrom.Name}", toImportStatementPath);
         }
 
-        protected override void AddOneToOneRelation(Relation1To1 relation)
+        protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
 
-            // From
             string fromImportStatementPath = $"src/app/model/{relation.EntityTo.Module.NameKebab}" +
                 $"/{relation.EntityTo.NamePluralKebab}" +
                 $"/dtos/i-{relation.EntityTo.NameKebab}";
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainFolder, FileName,
                 $"I{relation.EntityTo.Name}", fromImportStatementPath);
+        }
 
-            // To
+        protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
+        {
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+
             string toImportStatementPath = $"src/app/model/{relation.EntityFrom.Module.NameKebab}" +
                 $"/{relation.EntityFrom.NamePluralKebab}" +
                 $"/dtos/i-{relation.EntityFrom.NameKebab}";
