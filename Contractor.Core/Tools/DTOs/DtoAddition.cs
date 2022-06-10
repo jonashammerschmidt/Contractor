@@ -22,20 +22,12 @@ namespace Contractor.Core.Tools
 
         public void AddDto(Entity entity, string domainFolder, string templateFilePath, string templateFileName, bool forDatabase)
         {
-            string filePath = GetFilePath(entity, domainFolder, templateFileName, forDatabase);
+            string filePath = (forDatabase) ?
+                this.pathService.GetAbsolutePathForDatabase(entity, domainFolder, templateFileName) :
+                this.pathService.GetAbsolutePathForBackend(entity, domainFolder, templateFileName);
             string fileData = this.fileSystemClient.ReadAllText(entity, templateFilePath);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
-        }
-
-        private string GetFilePath(Entity entity, string domainFolder, string templateFileName, bool forDatabase)
-        {
-            string absolutePathForDTOs = (forDatabase) ?
-                this.pathService.GetAbsolutePathForDatabase(entity, domainFolder) :
-                this.pathService.GetAbsolutePathForBackend(entity, domainFolder);
-            string fileName = ModellNameReplacements.ReplaceEntityPlaceholders(entity, templateFileName);
-            string filePath = Path.Combine(absolutePathForDTOs, fileName);
-            return filePath;
         }
     }
 }

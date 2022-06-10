@@ -11,44 +11,92 @@ namespace Contractor.Core.Tools
 
         public string ReadAllText(ContractorGenerationOptions options, string path)
         {
+            string fileContent;
             if (!this.fileCache.ContainsKey(path))
             {
-                string fileContent = File.ReadAllText(path);
+                fileContent = File.ReadAllText(path);
+                fileCache.Add(path, fileContent);
 
                 fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(options, fileContent);
 
-                fileCache.Add(path, fileContent);
+                if (!path.Contains("Templates") && !path.EndsWith(".txt"))
+                {
+                    fileCache[path] = fileContent;
+                }
+            }
+            else
+            {
+                fileContent = fileCache[path];
+
+                if (path.Contains("Templates") && path.EndsWith(".txt"))
+                {
+                    fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(options, fileContent);
+                }
             }
 
-            return fileCache[path];
+            return fileContent;
         }
 
         public string ReadAllText(Module module, string path)
         {
+            string fileContent;
             if (!this.fileCache.ContainsKey(path))
             {
-                string fileContent = File.ReadAllText(path);
+                fileContent = File.ReadAllText(path);
+                fileCache.Add(path, fileContent);
 
+                fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(module.Options, fileContent);
                 fileContent = ModellNameReplacements.ReplaceModulePlaceholders(module, fileContent);
 
-                fileCache.Add(path, fileContent);
+                if (!path.Contains("Templates") && !path.EndsWith(".txt"))
+                {
+                    fileCache[path] = fileContent;
+                }
+            }
+            else
+            {
+                fileContent = fileCache[path];
+
+                if (path.Contains("Templates") && path.EndsWith(".txt"))
+                {
+                    fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(module.Options, fileContent);
+                    fileContent = ModellNameReplacements.ReplaceModulePlaceholders(module, fileContent);
+                }
             }
 
-            return fileCache[path];
+            return fileContent;
         }
 
         public string ReadAllText(Entity entity, string path)
         {
+            string fileContent;
             if (!this.fileCache.ContainsKey(path))
             {
-                string fileContent = File.ReadAllText(path);
+                fileContent = File.ReadAllText(path);
+                fileCache.Add(path, fileContent);
 
+                fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(entity.Module.Options, fileContent);
+                fileContent = ModellNameReplacements.ReplaceModulePlaceholders(entity.Module, fileContent);
                 fileContent = ModellNameReplacements.ReplaceEntityPlaceholders(entity, fileContent);
 
-                fileCache.Add(path, fileContent);
+                if (!path.Contains("Templates") && !path.EndsWith(".txt"))
+                {
+                    fileCache[path] = fileContent;
+                }
+            }
+            else
+            {
+                fileContent = fileCache[path];
+
+                if (path.Contains("Templates") && path.EndsWith(".txt"))
+                {
+                    fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(entity.Module.Options, fileContent);
+                    fileContent = ModellNameReplacements.ReplaceModulePlaceholders(entity.Module, fileContent);
+                    fileContent = ModellNameReplacements.ReplaceEntityPlaceholders(entity, fileContent);
+                }
             }
 
-            return fileCache[path];
+            return fileContent;
         }
 
         public string ReadAllText(Property property, string path)

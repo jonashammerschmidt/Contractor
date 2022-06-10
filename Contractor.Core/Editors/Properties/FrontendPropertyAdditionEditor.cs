@@ -17,7 +17,7 @@ namespace Contractor.Core.Tools
 
         public void Edit(Property property, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            string filePath = GetFilePath(property, domainFolder, templateFileName);
+            string filePath = this.pathService.GetAbsolutePathForFrontend(property, domainFolder, templateFileName);
 
             string fileData = this.fileSystemClient.ReadAllText(property, filePath);
             foreach (string namespaceToAdd in namespacesToAdd)
@@ -28,13 +28,6 @@ namespace Contractor.Core.Tools
             fileData = UpdateFileData(property, fileData);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
-        }
-
-        private string GetFilePath(Property property, string domainFolder, string templateFileName)
-        {
-            string absolutePathForDTOs = this.pathService.GetAbsolutePathForFrontend(property, domainFolder);
-            string filePath = Path.Combine(absolutePathForDTOs, templateFileName);
-            return filePath;
         }
 
         protected abstract string UpdateFileData(Property property, string fileData);
