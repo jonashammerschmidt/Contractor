@@ -38,7 +38,10 @@ namespace Contractor.Core
                 {
                     foreach (var classGeneration in this.classGenerations)
                     {
-                        classGeneration.PerformAddEntityCommand(entity);
+                        if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                        {
+                            classGeneration.PerformAddEntityCommand(entity);
+                        }
                     }
 
                     var count = entity.Properties.Count() + entity.Relations1To1.Count() + entity.Relations1ToN.Count();
@@ -49,7 +52,10 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAddPropertyCommand(property);
+                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                {
+                                    classGeneration.PerformAddPropertyCommand(property);
+                                }
                             }
                         }
 
@@ -58,7 +64,10 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAddOneToOneRelationSideToCommand(relation1To1);
+                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                {
+                                    classGeneration.PerformAddOneToOneRelationSideToCommand(relation1To1);
+                                }
                             }
                         }
 
@@ -67,14 +76,15 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAdd1ToNRelationSideToCommand(relation1ToN);
+                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                {
+                                    classGeneration.PerformAdd1ToNRelationSideToCommand(relation1ToN);
+                                }
                             }
                         }
                     }
-
                 }
             }
-
 
             foreach (var module in this.contractorGenerationOptions.Modules.Where(module => !module.Skip))
             {
@@ -88,7 +98,10 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAddOneToOneRelationSideFromCommand(relation1To1);
+                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                {
+                                    classGeneration.PerformAddOneToOneRelationSideFromCommand(relation1To1);
+                                }
                             }
                         }
 
@@ -97,7 +110,10 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAdd1ToNRelationSideFromCommand(relation1ToN);
+                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                {
+                                    classGeneration.PerformAdd1ToNRelationSideFromCommand(relation1ToN);
+                                }
                             }
                         }
                     }
@@ -110,19 +126,19 @@ namespace Contractor.Core
             this.fileSystemClient.SaveAll(contractorGenerationOptions);
         }
 
-        //private bool ShouldGenerate(ContractorGenerationOptions options, ClassGeneration classGeneration)
-        //{
-        //    if (options.Tags.Count() == 0)
-        //    {
-        //        return true;
-        //    }
+        private bool ShouldGenerate(ContractorGenerationOptions options, ClassGeneration classGeneration)
+        {
+            if (options.Tags.Count() == 0)
+            {
+                return true;
+            }
 
-        //    return classGeneration
-        //       .GetType()
-        //       .GetCustomAttributes(typeof(ClassGenerationTagsAttribute), false)
-        //       .Select(attribute => attribute as ClassGenerationTagsAttribute)
-        //       .SelectMany(attribute => attribute.GetGenerationTags())
-        //       .Any(tag => options.Tags.Contains(tag));
-        //}
+            return classGeneration
+               .GetType()
+               .GetCustomAttributes(typeof(ClassGenerationTagsAttribute), false)
+               .Select(attribute => attribute as ClassGenerationTagsAttribute)
+               .SelectMany(attribute => attribute.GetGenerationTags())
+               .Any(tag => options.Tags.Contains(tag));
+        }
     }
 }

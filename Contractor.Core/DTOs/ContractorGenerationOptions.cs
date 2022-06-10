@@ -1,4 +1,4 @@
-﻿using Contractor.Core;
+﻿using Contractor.Core.Projects;
 using System.Collections.Generic;
 
 namespace Contractor.Core
@@ -10,6 +10,10 @@ namespace Contractor.Core
         public IEnumerable<Replacement> Replacements { get; set; }
 
         public IEnumerable<Module> Modules { get; set; }
+
+        public bool IsVerbose { get; set; }
+
+        public IEnumerable<ClassGenerationTag> Tags { get; set; }
 
         public void AddLinks()
         {

@@ -99,10 +99,5 @@ namespace Contractor.Core.Tools
                 File.WriteAllText(filePath, fileContent);
             }
         }
-
-        public string ReadAllText(string filePath)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
