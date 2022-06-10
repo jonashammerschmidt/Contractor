@@ -13,7 +13,7 @@ namespace Contractor.CLI.Commands._Helper
         {
             if (ArgumentParser.HasArgument(args, "-t", "--tags"))
             {
-                //options.Tags = FromString(ArgumentParser.ExtractArgument(args, "-t", "--tags"));
+                options.Tags = FromString(ArgumentParser.ExtractArgument(args, "-t", "--tags"));
             }
         }
 

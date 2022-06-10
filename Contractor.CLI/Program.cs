@@ -1,4 +1,6 @@
-﻿using Contractor.Core;
+﻿using Contractor.CLI.Commands._Helper;
+using Contractor.CLI.Tools;
+using Contractor.Core;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -65,6 +67,8 @@ namespace Contractor.CLI
             ContractorXml contractorXml = (ContractorXml) xmlSerializer.Deserialize(reader);
 
             ContractorGenerationOptions contractorGenerationOptions = contractorXml.ToContractorGenerationOptions(xmlDocument);
+            TagArgumentParser.AddTags(args, contractorGenerationOptions);
+            contractorGenerationOptions.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -83,18 +87,6 @@ namespace Contractor.CLI
 
             stopwatch.Stop();
             Console.WriteLine($"Finished saving after {stopwatch.ElapsedMilliseconds}ms");
-        }
-
-        private static DirectoryInfo GetRootFolder()
-        {
-            string currentDirectory = Directory.GetCurrentDirectory();
-
-            if (currentDirectory.Contains("\\Contractor.CLI"))
-            {
-                currentDirectory = currentDirectory.Split("\\Contractor.CLI")[0];
-            }
-
-            return new DirectoryInfo(currentDirectory);
         }
     }
 }

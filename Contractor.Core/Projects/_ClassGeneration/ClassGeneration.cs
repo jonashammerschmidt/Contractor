@@ -23,18 +23,18 @@ namespace Contractor.Core.Projects
             try
             {
                 this.AddModuleActions(module);
-                //if (module.IsVerbose)
-                //{
-                //    Console.WriteLine(this.GetType().Name + " completed successfully");
-                //}
+                if (module.Options.IsVerbose)
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Domain-Generierung: " + e.Message);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(e.StackTrace);
-                //}
+                if (module.Options.IsVerbose)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -43,18 +43,18 @@ namespace Contractor.Core.Projects
             try
             {
                 this.AddEntity(entity);
-                //if (entity.IsVerbose)
-                //{
-                //    Console.WriteLine(this.GetType().Name + " completed successfully");
-                //}
+                if (entity.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Entity-Generierung: " + e.Message);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(e.StackTrace);
-                //}
+                if (entity.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -63,18 +63,18 @@ namespace Contractor.Core.Projects
             try
             {
                 this.AddProperty(property);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(this.GetType().Name + " completed successfully");
-                //}
+                if (property.Entity.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Property-Generierung: " + e.Message);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(e.StackTrace);
-                //}
+                if (property.Entity.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -83,18 +83,18 @@ namespace Contractor.Core.Projects
             try
             {
                 this.Add1ToNRelationSideFrom(new Relation1ToN(relation));
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(this.GetType().Name + " completed successfully");
-                //}
+                if (relation.EntityFrom.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(e.StackTrace);
-                //}
+                if (relation.EntityFrom.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -103,18 +103,18 @@ namespace Contractor.Core.Projects
             try
             {
                 this.AddOneToOneRelationSideFrom(relation);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(this.GetType().Name + " completed successfully");
-                //}
+                if (relation.EntityFrom.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(e.StackTrace);
-                //}
+                if (relation.EntityFrom.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -123,18 +123,18 @@ namespace Contractor.Core.Projects
             try
             {
                 this.Add1ToNRelationSideTo(new Relation1ToN(relation));
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(this.GetType().Name + " completed successfully");
-                //}
+                if (relation.EntityTo.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(e.StackTrace);
-                //}
+                if (relation.EntityTo.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -143,18 +143,18 @@ namespace Contractor.Core.Projects
             try
             {
                 this.AddOneToOneRelationSideTo(relation);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(this.GetType().Name + " completed successfully");
-                //}
+                if (relation.EntityTo.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(this.GetType().Name + " completed successfully");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
-                //if (options.IsVerbose)
-                //{
-                //    Console.WriteLine(e.StackTrace);
-                //}
+                if (relation.EntityTo.Module.Options.IsVerbose)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
     }
