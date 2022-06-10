@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Contractor.Core.Tools
+﻿namespace Contractor.Core.Tools
 {
     internal class EntityCoreAddition
     {
@@ -17,18 +15,10 @@ namespace Contractor.Core.Tools
 
         public void AddEntityCore(Entity entity, string domainFolder, string templateFilePath, string templateFileName)
         {
+            string filePath = this.pathService.GetAbsolutePathForBackend(entity, domainFolder, templateFileName);
             string fileData = this.fileSystemClient.ReadAllText(entity, templateFilePath);
-            string filePath = GetFilePath(entity, domainFolder, templateFileName);
 
             this.fileSystemClient.WriteAllText(filePath, fileData);
-        }
-
-        private string GetFilePath(Entity entity, string domainFolder, string templateFileName)
-        {
-            string absolutePathForDomain = this.pathService.GetAbsolutePathForBackend(entity, domainFolder);
-            string fileName = ModellNameReplacements.ReplaceEntityPlaceholders(entity, templateFileName);
-            string filePath = Path.Combine(absolutePathForDomain, fileName);
-            return filePath;
         }
     }
 }
