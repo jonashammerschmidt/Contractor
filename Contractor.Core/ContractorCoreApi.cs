@@ -128,7 +128,7 @@ namespace Contractor.Core
 
         private bool ShouldGenerate(ContractorGenerationOptions options, ClassGeneration classGeneration)
         {
-            if (options.Tags.Count() == 0)
+            if (options.Tags == null || options.Tags.Count() == 0)
             {
                 return true;
             }
