@@ -110,7 +110,7 @@ namespace Contractor.Core.Tools
             else
             {
                 stringEditor.NextThatContains("{")
-                          .NextThatContains("{");
+                    .NextThatContains("{"); 
             }
             stringEditor.Next(line => !IsLineEmpty(line) && !ContainsProperty(line));
         }

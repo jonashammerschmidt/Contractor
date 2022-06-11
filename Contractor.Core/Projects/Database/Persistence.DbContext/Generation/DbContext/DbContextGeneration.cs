@@ -1,6 +1,4 @@
-﻿using Contractor.Core.Options;
-
-namespace Contractor.Core.Projects.Database.Persistence.DbContext
+﻿namespace Contractor.Core.Projects.Database.Persistence.DbContext
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class DbContextGeneration : ClassGeneration
