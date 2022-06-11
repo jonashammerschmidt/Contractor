@@ -17,14 +17,14 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains($"Get{relationSide.Entity.Name}Detail(");
-            stringEditor.NextThatContains($"this.dbContext.{relationSide.OtherEntity.NamePlural}");
+            stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
             stringEditor.Next(line => !line.Contains("Include("));
             stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.OtherName})");
             stringEditor.MoveToStart();
 
             string includeLine = $"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.OtherName})";
-            stringEditor.NextThatContains($"GetPaged{relationSide.OtherEntity.NamePlural}(");
-            stringEditor.NextThatContains($"this.dbContext.{relationSide.OtherEntity.NamePlural}");
+            stringEditor.NextThatContains($"GetPaged{relationSide.Entity.NamePlural}(");
+            stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
             stringEditor.Next(line => !line.Contains("Include("));
             stringEditor.Prev();
             if (stringEditor.GetLine().Contains(";"))

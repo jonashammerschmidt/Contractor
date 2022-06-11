@@ -38,12 +38,12 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
+            this.entityDetailPageTsFromPropertyAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            this.entityDetailPageTsFromPropertyAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
