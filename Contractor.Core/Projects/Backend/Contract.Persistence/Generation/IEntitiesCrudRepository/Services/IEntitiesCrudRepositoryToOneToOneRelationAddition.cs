@@ -14,8 +14,7 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
-            // ----------- Create Method -----------
-            stringEditor.NextThatContains($"bool Does{relationSide.Name}Exist(");
+            stringEditor.NextThatContains($"bool Does{relationSide.Entity.Name}Exist(");
             stringEditor.Next();
 
             stringEditor.InsertNewLine();

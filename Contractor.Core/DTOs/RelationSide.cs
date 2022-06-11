@@ -23,7 +23,7 @@ namespace Contractor.Core
                 Entity = relation.EntityFrom,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
-                Name = relation.PropertyNameFrom,
+                Name = relation.PropertyNameTo,
                 Order = int.MaxValue,
                 Type = prefix + relation.EntityTo.Name + postfix,
                 RelationSideType = RelationSideType.From,
@@ -39,12 +39,12 @@ namespace Contractor.Core
                 Entity = relation.EntityTo,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
-                Name = relation.PropertyNameTo,
+                Name = relation.PropertyNameFrom + "Id",
                 Order = int.MaxValue,
                 Type = "Guid",
                 RelationSideType = RelationSideType.To,
                 OtherEntity = relation.EntityFrom,
-                OtherName = relation.PropertyNameFrom,
+                OtherName = relation.PropertyNameFrom + "Id",
             };
         }
 
@@ -55,7 +55,7 @@ namespace Contractor.Core
                 Entity = relation.EntityTo,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
-                Name = relation.PropertyNameTo,
+                Name = relation.PropertyNameFrom,
                 Order = int.MaxValue,
                 Type = prefix + relation.EntityFrom.Name + postfix,
                 RelationSideType = RelationSideType.To,

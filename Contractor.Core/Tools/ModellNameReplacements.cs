@@ -26,6 +26,7 @@ namespace Contractor.Core.Tools
         public static string ReplaceEntityPlaceholders(Entity entity, string text)
         {
             text = ReplaceGuidPlaceholders(text, entity.Name);
+            text = text.Replace("EntityFramework", "##EfCore##");
             text = text.Replace("RequestScopeDomain", entity.ScopeEntity.Module.Name);
             text = text.Replace("RequestScopes", entity.ScopeEntity.NamePlural);
             text = text.Replace("RequestScope", entity.ScopeEntity.Name);
@@ -39,6 +40,7 @@ namespace Contractor.Core.Tools
             text = text.Replace("Entity", entity.Name);
             text = text.Replace("entities", entity.NamePluralLower);
             text = text.Replace("entity", entity.NameLower);
+            text = text.Replace("##EfCore##", "EntityFramework");
 
             return text;
         }
