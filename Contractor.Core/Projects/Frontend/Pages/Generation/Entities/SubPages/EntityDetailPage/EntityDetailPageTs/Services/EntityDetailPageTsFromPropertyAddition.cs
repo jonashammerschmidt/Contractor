@@ -30,7 +30,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"    'detail',");
             stringEditor.InsertLine($"  ];");
 
-            stringEditor.NextThatContains($"private async load{relationSide.Name}(");
+            stringEditor.NextThatContains($"private async load{relationSide.Entity.Name}(");
             stringEditor.NextThatContains("  }");
 
             stringEditor.InsertNewLine();
