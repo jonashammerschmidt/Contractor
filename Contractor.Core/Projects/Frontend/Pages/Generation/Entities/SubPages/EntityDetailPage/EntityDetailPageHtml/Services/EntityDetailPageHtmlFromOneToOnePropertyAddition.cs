@@ -39,7 +39,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"        <span style=\"font-size: 0.8em;\">{relationSide.Name.ToReadable()}:</span>\n" +
                 $"        <br>\n" +
                 $"        <a [routerLink]=\"['/{relationSide.Entity.Module.NameKebab}/{relationSide.OtherEntity.NamePlural}/detail', {relationSide.Entity.NameLower}.{relationSide.NameLower}.id]\">\n" +
-                $"            {{{{{relationSide.Entity.NameLower}.{relationSide.NameLower}.bezeichnung}}}}\n" +
+                $"            {{{{{relationSide.Entity.NameLower}.{relationSide.NameLower}.{relationSide.OtherEntity.DisplayProperty.NameLower}}}}}\n" +
                 $"            <mat-icon style=\"font-size: 1em;\">open_in_new</mat-icon>\n" +
                 $"        </a>\n" +
                 $"    </p>\n";

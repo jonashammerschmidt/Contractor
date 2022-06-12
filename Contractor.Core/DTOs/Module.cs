@@ -6,9 +6,15 @@ namespace Contractor.Core
 {
     public class Module
     {
+        private string name;
+
         public IEnumerable<Entity> Entities { get; set; }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set { this.name = value.ToVariableName(); }
+        }
 
         public string NameKebab
         {

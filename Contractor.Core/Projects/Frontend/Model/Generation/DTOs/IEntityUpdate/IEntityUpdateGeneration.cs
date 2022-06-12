@@ -51,9 +51,11 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
-            this.frontendDtoPropertyAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName);
-            this.entityUpdateMethodAddition.Edit(relationSideTo, ModelProjectGeneration.DomainFolder, FileName);
+            RelationSide guidRelationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            this.frontendDtoPropertyAddition.AddPropertyToDTO(guidRelationSideTo, ModelProjectGeneration.DomainFolder, FileName);
+
+            RelationSide objectRelationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+            this.entityUpdateMethodAddition.Edit(objectRelationSideTo, ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

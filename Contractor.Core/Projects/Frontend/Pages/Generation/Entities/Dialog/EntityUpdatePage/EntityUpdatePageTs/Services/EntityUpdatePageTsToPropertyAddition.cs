@@ -34,7 +34,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             stringEditor.NextThatContains("constructor(");
             stringEditor.InsertLine($"  {relationSide.NameLower}DataSource: DropdownPaginationDataSource<I{relationSide.OtherEntity.Name}ListItem>;");
-            stringEditor.InsertLine($"  selected{relationSide.NameLower}: I{relationSide.OtherEntity.Name};");
+            stringEditor.InsertLine($"  selected{relationSide.Name}: I{relationSide.OtherEntity.Name};");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("private formBuilder: FormBuilder");
@@ -57,7 +57,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"    this.selected{relationSide.Name} = {relationSide.Entity.NameLower}Detail.{relationSide.NameLower};");
             stringEditor.InsertLine($"    this.{relationSide.NameLower}DataSource = new DropdownPaginationDataSource(");
-            stringEditor.InsertLine($"      (options) => this.{relationSide.Entity.NamePluralLower}CrudService.getPaged{relationSide.Entity.NamePlural}(options),");
+            stringEditor.InsertLine($"      (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),");
             stringEditor.InsertLine("      'bezeichnung');");
 
             return stringEditor.GetText();

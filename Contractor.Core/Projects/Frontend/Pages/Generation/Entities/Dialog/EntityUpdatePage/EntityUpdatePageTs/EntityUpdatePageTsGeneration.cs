@@ -46,7 +46,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
             this.entityUpdatePageTsToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
 
@@ -56,7 +56,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
             this.entityUpdatePageTsToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
     }

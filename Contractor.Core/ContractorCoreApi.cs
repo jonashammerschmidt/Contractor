@@ -24,7 +24,7 @@ namespace Contractor.Core
 
         public void Generate()
         {
-            foreach (var module in this.contractorGenerationOptions.Modules)
+            foreach (var module in this.contractorGenerationOptions.Modules.Where(module => !module.Skip))
             {
                 foreach (var classGeneration in this.classGenerations)
                 {

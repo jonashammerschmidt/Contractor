@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -18,8 +17,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
             fileData = ImportStatements.Add(fileData, $"{relationSide.Entity.NamePlural}CrudService",
                 $"src/app/model/{relationSide.Entity.Module.NameKebab}" +
-                $"/{relationSide.OtherEntity.NamePlural}" +
-                $"/{relationSide.OtherEntity.NamePlural}-crud.service");
+                $"/{relationSide.Entity.NamePluralKebab}" +
+                $"/{relationSide.Entity.NamePluralKebab}-crud.service");
 
             StringEditor stringEditor = new StringEditor(fileData);
 
