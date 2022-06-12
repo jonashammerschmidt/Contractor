@@ -75,17 +75,18 @@ namespace Contractor.Core.Tools
             return fileData;
         }
 
-        private string AddProperty(string file, RelationSide relationSide, bool forInterface)
+        private string AddProperty(string fileData, RelationSide relationSide, bool forInterface)
         {
-            StringEditor stringEditor = new StringEditor(file);
-            FindStartingLineForNewProperty(file, relationSide, stringEditor);
+            StringEditor stringEditor = new StringEditor(fileData);
+            PropertyLine.FindStartingLineForNewProperty(fileData, relationSide.Entity.Name, stringEditor);
+
 
             if (!stringEditor.GetLine().Contains("}"))
             {
                 stringEditor.Prev();
             }
 
-            if (ContainsProperty(file))
+            if (PropertyLine.ContainsProperty(fileData))
             {
                 stringEditor.InsertNewLine();
             }
@@ -97,32 +98,6 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertLine($"        public {relationSide.Type}{optionalText} {relationSide.Name} {{ get; set; }}");
 
             return stringEditor.GetText();
-        }
-
-        private void FindStartingLineForNewProperty(string file, RelationSide relationSide, StringEditor stringEditor)
-        {
-            bool hasConstructor = Regex.IsMatch(file, $"public .*{relationSide.Entity.Name}.*\\(");
-            bool hasProperty = file.Contains("{ get; set; }");
-            if (hasConstructor && hasProperty)
-            {
-                stringEditor.NextThatContains("{ get; set; }");
-            }
-            else
-            {
-                stringEditor.NextThatContains("{")
-                    .NextThatContains("{"); 
-            }
-            stringEditor.Next(line => !IsLineEmpty(line) && !ContainsProperty(line));
-        }
-
-        private bool IsLineEmpty(string line)
-        {
-            return line.Trim().Length == 0;
-        }
-
-        private bool ContainsProperty(string line)
-        {
-            return line.Replace(" ", "").Contains("{get;set;}");
         }
     }
 }

@@ -42,36 +42,36 @@ namespace Contractor.Core.Projects.Backend.Logic
             if (relationSide.IsOptional)
             {
                 stringEditor.InsertLine(
-                    $"            if ({relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id.HasValue &&\n" +
-                    $"                !this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id.Value))\n" +
+                    $"            if ({relationSide.Entity.NameLower}Create.{relationSide.Name}.HasValue &&\n" +
+                    $"                !this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Create.{relationSide.Name}.Value))\n" +
                      "            {\n" +
-                    $"                throw new NotFoundResultException(\"{relationSide.Entity.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id.Value);\n" +
+                    $"                throw new NotFoundResultException(\"{relationSide.Entity.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Create.{relationSide.Name}.Value);\n" +
                      "            }\n");
             }
             else
             {
                 stringEditor.InsertLine(
-                    $"            if (!this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id))\n" +
+                    $"            if (!this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Create.{relationSide.Name}))\n" +
                      "            {\n" +
-                    $"                throw new NotFoundResultException(\"{relationSide.Entity.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id);\n" +
+                    $"                throw new NotFoundResultException(\"{relationSide.Entity.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Create.{relationSide.Name});\n" +
                      "            }\n");
             }
 
             if (relationSide.IsOptional)
             {
                 stringEditor.InsertLine(
-                    $"            if ({relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id.HasValue &&\n" +
-                    $"                this.{relationSide.Entity.NamePluralLower}CrudRepository.Is{relationSide.Entity.Name}IdInUse({relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id.Value))\n" +
+                    $"            if ({relationSide.Entity.NameLower}Create.{relationSide.Name}.HasValue &&\n" +
+                    $"                this.{relationSide.Entity.NamePluralLower}CrudRepository.Is{relationSide.Name}InUse({relationSide.Entity.NameLower}Create.{relationSide.Name}.Value))\n" +
                      "            {\n" +
-                    $"                throw new ConflictResultException(\"{relationSide.Entity.Name} ({{id}}) ist bereits vergeben.\", {relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id.Value);\n" +
+                    $"                throw new ConflictResultException(\"{relationSide.OtherEntity.Name} ({{id}}) ist bereits vergeben.\", {relationSide.Entity.NameLower}Create.{relationSide.Name}.Value);\n" +
                      "            }\n");
             }
             else
             {
                 stringEditor.InsertLine(
-                    $"            if (this.{relationSide.Entity.NamePluralLower}CrudRepository.Is{relationSide.Entity.Name}IdInUse({relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id))\n" +
+                    $"            if (this.{relationSide.Entity.NamePluralLower}CrudRepository.Is{relationSide.Name}InUse({relationSide.Entity.NameLower}Create.{relationSide.Name}))\n" +
                      "            {\n" +
-                    $"                throw new ConflictResultException(\"{relationSide.Entity.Name} ({{id}}) ist bereits vergeben.\", {relationSide.Entity.NameLower}Create.{relationSide.Entity.Name}Id);\n" +
+                    $"                throw new ConflictResultException(\"{relationSide.OtherEntity.Name} ({{id}}) ist bereits vergeben.\", {relationSide.Entity.NameLower}Create.{relationSide.Name});\n" +
                      "            }\n");
             }
 
@@ -86,18 +86,18 @@ namespace Contractor.Core.Projects.Backend.Logic
             if (relationSide.IsOptional)
             {
                 stringEditor.InsertLine(
-                    $"            if ({relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id.HasValue &&\n" +
-                    $"                !this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id.Value))\n" +
+                    $"            if ({relationSide.Entity.NameLower}Update.{relationSide.Name}.HasValue &&\n" +
+                    $"                !this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Update.{relationSide.Name}.Value))\n" +
                      "            {\n" +
-                    $"                throw new NotFoundResultException(\"{relationSide.Entity.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id.Value);\n" +
+                    $"                throw new NotFoundResultException(\"{relationSide.Entity.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Update.{relationSide.Name}.Value);\n" +
                      "            }");
             }
             else
             {
                 stringEditor.InsertLine(
-                    $"            if (!this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id))\n" +
+                    $"            if (!this.{relationSide.OtherEntity.NamePluralLower}CrudRepository.Does{relationSide.OtherEntity.Name}Exist({relationSide.Entity.NameLower}Update.{relationSide.Name}))\n" +
                      "            {\n" +
-                    $"                throw new NotFoundResultException(\"{relationSide.Entity.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id);\n" +
+                    $"                throw new NotFoundResultException(\"{relationSide.Entity.Name} ({{id}}) konnte nicht gefunden werden.\", {relationSide.Entity.NameLower}Update.{relationSide.Name});\n" +
                      "            }");
             }
 
@@ -105,22 +105,22 @@ namespace Contractor.Core.Projects.Backend.Logic
             if (relationSide.IsOptional)
             {
                 stringEditor.InsertLine(
-                    $"            bool is{relationSide.Entity.Name}IdGettingUpdated = db{relationSide.Entity.Name}ToUpdate.{relationSide.Entity.Name}Id != {relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id.Value;\n" +
-                    $"            if (is{relationSide.Entity.Name}IdGettingUpdated &&\n" +
-                    $"                {relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id.HasValue &&\n" +
-                    $"                this.{relationSide.Entity.NamePluralLower}CrudRepository.Is{relationSide.Entity.Name}IdInUse({relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id.Value))\n" +
+                    $"            bool is{relationSide.Name}GettingUpdated = db{relationSide.Entity.Name}ToUpdate.{relationSide.Name} != {relationSide.Entity.NameLower}Update.{relationSide.Name}.Value;\n" +
+                    $"            if (is{relationSide.Name}GettingUpdated &&\n" +
+                    $"                {relationSide.Entity.NameLower}Update.{relationSide.Name}.HasValue &&\n" +
+                    $"                this.{relationSide.Entity.NamePluralLower}CrudRepository.Is{relationSide.Name}InUse({relationSide.Entity.NameLower}Update.{relationSide.Name}.Value))\n" +
                      "            {\n" +
-                    $"                throw new ConflictResultException(\"{relationSide.Entity.Name} ({{id}}) ist bereits vergeben.\", {relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id.Value);\n" +
+                    $"                throw new ConflictResultException(\"{relationSide.Entity.Name} ({{id}}) ist bereits vergeben.\", {relationSide.Entity.NameLower}Update.{relationSide.Name}.Value);\n" +
                      "            }");
             }
             else
             {
                 stringEditor.InsertLine(
-                    $"            bool is{relationSide.Entity.Name}IdGettingUpdated = db{relationSide.Entity.Name}ToUpdate.{relationSide.Entity.Name}Id != {relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id;\n" +
-                    $"            if (is{relationSide.Entity.Name}IdGettingUpdated &&\n" +
-                    $"                this.{relationSide.Entity.NamePluralLower}CrudRepository.Is{relationSide.Entity.Name}IdInUse({relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id))\n" +
+                    $"            bool is{relationSide.Name}GettingUpdated = db{relationSide.Entity.Name}ToUpdate.{relationSide.Name} != {relationSide.Entity.NameLower}Update.{relationSide.Name};\n" +
+                    $"            if (is{relationSide.Name}GettingUpdated &&\n" +
+                    $"                this.{relationSide.Entity.NamePluralLower}CrudRepository.Is{relationSide.Name}InUse({relationSide.Entity.NameLower}Update.{relationSide.Name}))\n" +
                      "            {\n" +
-                    $"                throw new ConflictResultException(\"{relationSide.Entity.Name} ({{id}}) ist bereits vergeben.\", {relationSide.Entity.NameLower}Update.{relationSide.Entity.Name}Id);\n" +
+                    $"                throw new ConflictResultException(\"{relationSide.Entity.Name} ({{id}}) ist bereits vergeben.\", {relationSide.Entity.NameLower}Update.{relationSide.Name});\n" +
                      "            }");
             }
 

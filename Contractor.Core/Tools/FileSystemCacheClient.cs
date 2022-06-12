@@ -11,27 +11,21 @@ namespace Contractor.Core.Tools
 
         public string ReadAllText(ContractorGenerationOptions options, string path)
         {
-            string fileContent;
-            if (!this.fileCache.ContainsKey(path))
+            bool isTemplate = path.Contains("Templates") && path.EndsWith(".txt");
+            bool isAlreadyLoaded = this.fileCache.ContainsKey(path);
+
+            string fileContent = (isAlreadyLoaded) ?
+                this.fileCache[path] :
+                File.ReadAllText(path);
+
+            if (!isAlreadyLoaded)
             {
-                fileContent = File.ReadAllText(path);
                 fileCache.Add(path, fileContent);
-
-                fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(options, fileContent);
-
-                if (!path.Contains("Templates") && !path.EndsWith(".txt"))
-                {
-                    fileCache[path] = fileContent;
-                }
             }
-            else
-            {
-                fileContent = fileCache[path];
 
-                if (path.Contains("Templates") && path.EndsWith(".txt"))
-                {
-                    fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(options, fileContent);
-                }
+            if (isTemplate)
+            {
+                fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(options, fileContent);
             }
 
             return fileContent;
@@ -39,29 +33,21 @@ namespace Contractor.Core.Tools
 
         public string ReadAllText(Module module, string path)
         {
-            string fileContent;
-            if (!this.fileCache.ContainsKey(path))
+            bool isTemplate = path.Contains("Templates") && path.EndsWith(".txt");
+            bool isAlreadyLoaded = this.fileCache.ContainsKey(path);
+
+            string fileContent = (isAlreadyLoaded) ?
+                this.fileCache[path] :
+                File.ReadAllText(path);
+
+            if (!isAlreadyLoaded)
             {
-                fileContent = File.ReadAllText(path);
                 fileCache.Add(path, fileContent);
-
-                fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(module.Options, fileContent);
-                fileContent = ModellNameReplacements.ReplaceModulePlaceholders(module, fileContent);
-
-                if (!path.Contains("Templates") && !path.EndsWith(".txt"))
-                {
-                    fileCache[path] = fileContent;
-                }
             }
-            else
-            {
-                fileContent = fileCache[path];
 
-                if (path.Contains("Templates") && path.EndsWith(".txt"))
-                {
-                    fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(module.Options, fileContent);
-                    fileContent = ModellNameReplacements.ReplaceModulePlaceholders(module, fileContent);
-                }
+            if (isTemplate)
+            {
+                fileContent = ModellNameReplacements.ReplaceModulePlaceholdersCascading(module, fileContent);
             }
 
             return fileContent;
@@ -69,31 +55,21 @@ namespace Contractor.Core.Tools
 
         public string ReadAllText(Entity entity, string path)
         {
-            string fileContent;
-            if (!this.fileCache.ContainsKey(path))
+            bool isTemplate = path.Contains("Templates") && path.EndsWith(".txt");
+            bool isAlreadyLoaded = this.fileCache.ContainsKey(path);
+
+            string fileContent = (isAlreadyLoaded) ?
+                this.fileCache[path] :
+                File.ReadAllText(path);
+
+            if (!isAlreadyLoaded)
             {
-                fileContent = File.ReadAllText(path);
                 fileCache.Add(path, fileContent);
-
-                fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(entity.Module.Options, fileContent);
-                fileContent = ModellNameReplacements.ReplaceModulePlaceholders(entity.Module, fileContent);
-                fileContent = ModellNameReplacements.ReplaceEntityPlaceholders(entity, fileContent);
-
-                if (!path.Contains("Templates") && !path.EndsWith(".txt"))
-                {
-                    fileCache[path] = fileContent;
-                }
             }
-            else
-            {
-                fileContent = fileCache[path];
 
-                if (path.Contains("Templates") && path.EndsWith(".txt"))
-                {
-                    fileContent = ModellNameReplacements.ReplaceOptionsPlaceholders(entity.Module.Options, fileContent);
-                    fileContent = ModellNameReplacements.ReplaceModulePlaceholders(entity.Module, fileContent);
-                    fileContent = ModellNameReplacements.ReplaceEntityPlaceholders(entity, fileContent);
-                }
+            if (isTemplate)
+            {
+                fileContent = ModellNameReplacements.ReplaceEntityPlaceholdersCascading(entity, fileContent);
             }
 
             return fileContent;
@@ -101,7 +77,18 @@ namespace Contractor.Core.Tools
 
         public string ReadAllText(Property property, string path)
         {
-            return fileCache[path];
+            bool isAlreadyLoaded = this.fileCache.ContainsKey(path);
+
+            string fileContent = (isAlreadyLoaded) ?
+                this.fileCache[path] :
+                File.ReadAllText(path);
+
+            if (!isAlreadyLoaded)
+            {
+                fileCache.Add(path, fileContent);
+            }
+
+            return fileContent;
         }
 
         public void WriteAllText(string path, string fileContent)
