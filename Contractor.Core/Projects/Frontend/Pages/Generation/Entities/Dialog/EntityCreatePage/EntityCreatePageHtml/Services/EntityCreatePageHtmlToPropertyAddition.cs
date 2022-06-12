@@ -27,7 +27,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         private string GetLine(RelationSide relationSide)
         {
             return
-              $"            <app-search-dropdown [formGroupInstance]=\"{relationSide.Entity.NameLower}CreateForm\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
+              $"            <app-search-dropdown [formGroupInstance]=\"{relationSide.Entity.NameLower}CreateForm\" [formControlNameInstance]=\"'{relationSide.NameLower}'\"\n" +
               $"                label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"bezeichnung\"" +
               ((!relationSide.IsOptional) ? " required=\"true\"" : "") +
               $" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>";

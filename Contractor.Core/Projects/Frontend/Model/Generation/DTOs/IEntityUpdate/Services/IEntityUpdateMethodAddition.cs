@@ -18,7 +18,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             stringEditor.NextThatContains("return {");
             stringEditor.NextThatContains("};");
 
-            stringEditor.InsertLine($"            {relationSide.NameLower}Id: i{relationSide.Entity.Name}Detail.{relationSide.NameLower}?.id,");
+            stringEditor.InsertLine($"            {relationSide.NameLower}: i{relationSide.Entity.Name}Detail.{relationSide.NameLower}?.id,");
 
             return stringEditor.GetText();
         }

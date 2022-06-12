@@ -3,13 +3,17 @@
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class DbContextGeneration : ClassGeneration
     {
+
+        private readonly DbContextEntityAddition dbContextEntityAddition;
         private readonly DbContextRelationToAddition dbContextRelationToAddition;
         private readonly DbContextRelationToOneToOneAddition dbContextRelationToOneToOneAddition;
 
         public DbContextGeneration(
+            DbContextEntityAddition dbContextEntityAddition,
             DbContextRelationToAddition dbContextRelationToAddition,
             DbContextRelationToOneToOneAddition dbContextRelationToOneToOneAddition)
         {
+            this.dbContextEntityAddition = dbContextEntityAddition;
             this.dbContextRelationToAddition = dbContextRelationToAddition;
             this.dbContextRelationToOneToOneAddition = dbContextRelationToOneToOneAddition;
         }
@@ -20,6 +24,7 @@
 
         protected override void AddEntity(Entity entity)
         {
+            this.dbContextEntityAddition.Add(entity);
         }
 
         protected override void AddProperty(Property property)
