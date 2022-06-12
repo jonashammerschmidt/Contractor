@@ -19,7 +19,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
             stringEditor.Next(line => !line.Contains("Include("));
 
-            stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.OtherName})");
+            stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})");
 
             return stringEditor.GetText();
         }

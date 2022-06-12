@@ -18,8 +18,10 @@ namespace Contractor.Core.Projects.Backend.Logic
 
             stringEditor.NextThatContains("FromDb" + relationSide.Entity.Name);
             stringEditor.Next(line => line.Trim().Equals("};"));
-            stringEditor.InsertLine($"                {relationSide.OtherName} = db{relationSide.Entity.Name}Detail.{relationSide.OtherName}" +
-                $".Select(db{relationSide.OtherEntity.Name} => {relationSide.OtherEntity.Name}.FromDb{relationSide.OtherEntity.Name}(db{relationSide.OtherEntity.Name})),");
+            stringEditor.InsertLine(
+                $"                {relationSide.Name} = db{relationSide.Entity.Name}Detail.{relationSide.Name}\n" +
+                $"                    .Select(db{relationSide.OtherEntity.Name} => {relationSide.OtherEntity.Name}\n" +
+                $"                        .FromDb{relationSide.OtherEntity.Name}(db{relationSide.OtherEntity.Name})),");
 
             return stringEditor.GetText();
         }

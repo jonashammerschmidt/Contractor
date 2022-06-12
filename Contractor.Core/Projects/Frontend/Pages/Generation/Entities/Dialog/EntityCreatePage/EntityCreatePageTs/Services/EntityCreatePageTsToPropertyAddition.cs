@@ -41,7 +41,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             }
             stringEditor.NextThatContains("this.formBuilder.group({");
             stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"      {relationSide.NameLower}Id: new FormControl(null, [" +
+            stringEditor.InsertLine($"      {relationSide.NameLower}: new FormControl(null, [" +
                 ((!relationSide.IsOptional) ? "Validators.required" : "") +
                 "]),");
 
