@@ -1,7 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Options;
-using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
@@ -49,14 +47,14 @@ namespace Contractor.Core.Tools
         private string AddProperty(string file, Property property)
         {
             StringEditor stringEditor = new StringEditor(file);
-            FindStartingLineForNewProperty(file, property, stringEditor);
+            PropertyLine.FindStartingLineForNewProperty(file, property.Entity.Name, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {
                 stringEditor.Prev();
             }
 
-            if (ContainsProperty(file))
+            if (PropertyLine.ContainsProperty(file))
             {
                 stringEditor.InsertNewLine();
             }
@@ -64,32 +62,6 @@ namespace Contractor.Core.Tools
             stringEditor.InsertLine(DatabaseEfDtoPropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
-        }
-
-        private void FindStartingLineForNewProperty(string file, Property property, StringEditor stringEditor)
-        {
-            bool hasConstructor = Regex.IsMatch(file, $"public .*{property.Entity.Name}.*\\(");
-            bool hasProperty = file.Contains("{ get; set; }");
-            if (hasConstructor && hasProperty)
-            {
-                stringEditor.NextThatContains("{ get; set; }");
-            }
-            else
-            {
-                stringEditor.NextThatContains("{")
-                          .NextThatContains("{");
-            }
-            stringEditor.Next(line => !IsLineEmpty(line) && !ContainsProperty(line));
-        }
-
-        private bool IsLineEmpty(string line)
-        {
-            return line.Trim().Length == 0;
-        }
-
-        private bool ContainsProperty(string line)
-        {
-            return line.Replace(" ", "").Contains("{get;set;}");
         }
     }
 }

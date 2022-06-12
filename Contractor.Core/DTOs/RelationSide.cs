@@ -28,7 +28,7 @@ namespace Contractor.Core
                 Type = prefix + relation.EntityTo.Name + postfix,
                 RelationSideType = RelationSideType.From,
                 OtherEntity = relation.EntityTo,
-                OtherName = relation.PropertyNameTo,
+                OtherName = relation.PropertyNameFrom,
             };
         }
 
@@ -44,7 +44,7 @@ namespace Contractor.Core
                 Type = "Guid",
                 RelationSideType = RelationSideType.To,
                 OtherEntity = relation.EntityFrom,
-                OtherName = relation.PropertyNameFrom + "Id",
+                OtherName = relation.PropertyNameTo + "Id",
             };
         }
 
@@ -60,7 +60,7 @@ namespace Contractor.Core
                 Type = prefix + relation.EntityFrom.Name + postfix,
                 RelationSideType = RelationSideType.To,
                 OtherEntity = relation.EntityFrom,
-                OtherName = relation.PropertyNameFrom,
+                OtherName = relation.PropertyNameTo,
             };
         }
     }

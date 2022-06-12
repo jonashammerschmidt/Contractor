@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Helpers;
+using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Projects.Database.Persistence.DbContext
@@ -15,10 +16,10 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             serviceCollection.AddSingleton<ClassGeneration, DbContextGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EfEntityGeneration>();
 
-            serviceCollection.AddSingleton<DbContextEntityAddition>();
-            serviceCollection.AddSingleton<DbContextPropertyAddition>();
             serviceCollection.AddSingleton<DbContextRelationToAddition>();
             serviceCollection.AddSingleton<DbContextRelationToOneToOneAddition>();
+
+            serviceCollection.AddSingleton<EfDtoPropertyAddition>();
         }
     }
 }

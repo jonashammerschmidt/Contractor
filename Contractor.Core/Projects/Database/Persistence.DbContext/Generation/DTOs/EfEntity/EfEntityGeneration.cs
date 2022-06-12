@@ -1,5 +1,4 @@
-﻿using Contractor.Core.Options;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Projects.Database.Persistence.DbContext
@@ -13,16 +12,16 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
         private static readonly string FileName = "EfEntity.cs";
 
         private readonly DtoAddition dtoAddition;
-        private readonly DtoPropertyAddition propertyAddition;
+        private readonly EfDtoPropertyAddition efDtoPropertyAddition;
         private readonly DtoRelationAddition relationAddition;
 
         public EfEntityGeneration(
             DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition,
+            EfDtoPropertyAddition efDtoPropertyAddition,
             DtoRelationAddition relationAddition)
         {
             this.dtoAddition = dtoAddition;
-            this.propertyAddition = propertyAddition;
+            this.efDtoPropertyAddition = efDtoPropertyAddition;
             this.relationAddition = relationAddition;
         }
 
@@ -38,7 +37,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
         protected override void AddProperty(Property property)
         {
-            this.propertyAddition.AddPropertyToDTO(property, PersistenceDbContextProjectGeneration.DtoFolder, FileName, false, true);
+            this.efDtoPropertyAddition.AddPropertyToDTO(property, PersistenceDbContextProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)

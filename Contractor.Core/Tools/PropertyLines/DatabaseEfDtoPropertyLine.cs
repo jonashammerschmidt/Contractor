@@ -7,7 +7,7 @@ namespace Contractor.Core.Tools
     {
         public static string GetPropertyLine(Property property)
         {
-            string propertyLines = (property.IsOptional) ? "" : "[Required]\n";
+            string propertyLines = (property.IsOptional) ? "" : "        [Required]\n";
             string optionalText = (property.IsOptional) ? "?" : "";
             switch (property.Type)
             {

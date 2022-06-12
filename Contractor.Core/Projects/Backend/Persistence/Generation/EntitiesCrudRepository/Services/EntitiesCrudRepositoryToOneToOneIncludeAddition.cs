@@ -46,9 +46,9 @@ namespace Contractor.Core.Projects.Backend.Persistence
             stringEditor.InsertNewLine();
 
             stringEditor.InsertLine(
-                $"        public bool Is{relationSide.Name}IdInUse(Guid {relationSide.NameLower}Id)\n" +
+                $"        public bool Is{relationSide.Name}InUse(Guid {relationSide.NameLower}Id)\n" +
                  "        {\n" +
-                $"            return this.dbContext.{relationSide.Entity.NamePlural}.Any(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name}Id == {relationSide.NameLower}Id);\n" +
+                $"            return this.dbContext.{relationSide.Entity.NamePlural}.Any(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name} == {relationSide.NameLower}Id);\n" +
                  "        }");
 
             return stringEditor.GetText();
