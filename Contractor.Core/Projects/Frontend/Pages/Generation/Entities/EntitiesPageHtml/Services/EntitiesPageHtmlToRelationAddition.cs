@@ -35,7 +35,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
              $"            <ng-container matColumnDef=\"{relationSide.NameLower}\">\n" +
              $"                <th mat-header-cell *matHeaderCellDef> {relationSide.Name.ToReadable()} </th>\n" +
               "                <td mat-cell *matCellDef=\"let element\">\n" +
-             $"                    <span *ngIf=\"element.{relationSide.NameLower}\">{{{{element.{relationSide.NameLower}.bezeichnung}}}}</span>\n" +
+             $"                    <span *ngIf=\"element.{relationSide.NameLower}\">{{{{element.{relationSide.NameLower}.{relationSide.OtherEntity.DisplayProperty.NameLower}}}}}</span>\n" +
              $"                    <span *ngIf=\"!element.{relationSide.NameLower}\">-</span>\n" +
               "                </td>\n" +
               "            </ng-container>\n";

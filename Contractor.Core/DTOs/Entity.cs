@@ -1,5 +1,4 @@
-﻿using Contractor.Core;
-using Contractor.Core.Helpers;
+﻿using Contractor.Core.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +6,15 @@ namespace Contractor.Core
 {
     public class Entity
     {
-        public string Name { get; set; }
+        private string name;
+        private string namePlural;
+        private string scopeEntityName;
+
+        public string Name
+        {
+            get { return name; }
+            set { this.name = value.ToVariableName(); }
+        }
 
         public string NameLower
         {
@@ -24,7 +31,11 @@ namespace Contractor.Core
             get { return Name.ToReadable(); }
         }
 
-        public string NamePlural { get; set; }
+        public string NamePlural
+        {
+            get { return namePlural; }
+            set { this.namePlural = value.ToVariableName(); }
+        }
 
         public string NamePluralLower
         {
@@ -41,7 +52,11 @@ namespace Contractor.Core
             get { return NamePlural.ToReadable(); }
         }
 
-        public string ScopeEntityName { private get; set; }
+        public string ScopeEntityName
+        {
+            private get { return scopeEntityName; }
+            set { this.scopeEntityName = value?.ToVariableName(); }
+        }
 
         public bool HasScope
         {
@@ -68,7 +83,7 @@ namespace Contractor.Core
         {
             this.Module = module;
             if (this.ScopeEntityName != null)
-            { 
+            {
                 this.ScopeEntity = module.Options.FindEntity(this.ScopeEntityName);
             }
             this.DisplayProperty =
@@ -113,7 +128,7 @@ namespace Contractor.Core
             }
 
             if (!nullable)
-            { 
+            {
                 throw new KeyNotFoundException(propertyName);
             }
 

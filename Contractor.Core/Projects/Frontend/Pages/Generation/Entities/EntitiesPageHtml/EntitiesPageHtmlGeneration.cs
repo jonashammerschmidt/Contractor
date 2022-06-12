@@ -52,19 +52,19 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            this.entitiesPageHtmlFromOneToOneRelationAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+            this.entitiesPageHtmlToRelationAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
-            this.entitiesPageHtmlToRelationAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
+            this.entitiesPageHtmlFromOneToOneRelationAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
             this.entitiesPageHtmlToOneToOneRelationAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
     }

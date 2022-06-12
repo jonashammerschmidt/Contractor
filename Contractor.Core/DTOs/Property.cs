@@ -5,8 +5,13 @@ namespace Contractor.Core
     public class Property
     {
         private string type;
+        private string name;
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set { this.name = value.ToVariableName(); }
+        }
 
         public string NameLower
         {

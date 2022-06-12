@@ -55,7 +55,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"                    <ng-container matColumnDef=\"bezeichnung\">");
             stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> Bezeichnung </th>");
             stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\">");
-            stringEditor.InsertLine($"                            {{{{element.bezeichnung}}}}");
+            stringEditor.InsertLine($"                            {{{{element.{relationSide.OtherEntity.DisplayProperty.NameLower}}}}}");
             stringEditor.InsertLine($"                        </td>");
             stringEditor.InsertLine($"                    </ng-container>");
             stringEditor.InsertLine($"");
@@ -68,7 +68,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"");
             stringEditor.InsertLine($"                    <tr mat-header-row *matHeaderRowDef=\"{relationSide.NameLower}GridColumns; sticky: true\"></tr>");
             stringEditor.InsertLine($"                    <tr mat-row *matRowDef=\"let row; columns: {relationSide.NameLower}GridColumns;\"");
-            stringEditor.InsertLine($"                        [routerLink]=\"['/{relationSide.Entity.Module.NameKebab}/{relationSide.OtherEntity.NamePlural}/detail', row.id]\"></tr>");
+            stringEditor.InsertLine($"                        [routerLink]=\"['/{relationSide.Entity.Module.NameKebab}/{relationSide.OtherEntity.NamePluralKebab}/detail', row.id]\"></tr>");
             stringEditor.InsertLine($"                </table>");
             stringEditor.InsertLine($"            </div>");
             stringEditor.InsertLine($"        </mat-tab>");

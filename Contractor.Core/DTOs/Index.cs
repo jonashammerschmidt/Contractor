@@ -11,7 +11,7 @@ namespace Contractor.Core
 
         public string PropertyNames
         {
-            set { propertyNames = value.Split(',').Select(propertyName => propertyName.Trim().UpperFirstChar()); }
+            set { propertyNames = value.Split(',').Select(propertyName => propertyName.ToVariableName()); }
         }
 
         public IEnumerable<Property> Properties { get; private set; }

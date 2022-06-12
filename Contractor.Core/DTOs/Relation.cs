@@ -27,18 +27,18 @@ namespace Contractor.Core
 
         public string EntityNameFrom
         {
-            set { this.entityNameFrom = value.Trim().UpperFirstChar(); }
+            set { this.entityNameFrom = value.ToVariableName(); }
         }
 
         public string PropertyNameFrom {
             get { return propertyNameFrom ?? EntityFrom.Name; }
-            set { this.propertyNameFrom = value.Trim().UpperFirstChar(); }
+            set { this.propertyNameFrom = value.ToVariableName(); }
         }
 
         public string PropertyNameTo
         {
             get { return propertyNameTo ?? EntityTo.Name; }
-            set { this.propertyNameTo = value.Trim().UpperFirstChar(); }
+            set { this.propertyNameTo = value.ToVariableName(); }
         }
 
         public bool IsOptional { get; set; }
