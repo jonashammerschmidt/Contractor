@@ -21,7 +21,7 @@
               <xs:element minOccurs="0" maxOccurs="unbounded" name="Replacement">
                 <xs:complexType>
                   <xs:attribute name="pattern" type="xs:string" use="required" />
-                  <xs:attribute name="ReplaceWith" type="xs:string" use="required" />
+                  <xs:attribute name="replaceWith" type="xs:string" use="required" />
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -54,7 +54,7 @@
                             <xs:complexType>
                               <xs:attribute name="entityNameFrom" type="xs:string" use="required" />
                               <xs:attribute name="propertyNameFrom" type="xs:string" use="optional" />
-                              <xs:attribute name="PropertyNameTo" type="xs:string" use="optional" />
+                              <xs:attribute name="propertyNameTo" type="xs:string" use="optional" />
                               <xs:attribute name="optional" type="xs:boolean" use="optional" />
                             </xs:complexType>
                           </xs:element>
@@ -62,7 +62,7 @@
                             <xs:complexType>
                               <xs:attribute name="entityNameFrom" type="xs:string" use="required" />
                               <xs:attribute name="propertyNameFrom" type="xs:string" use="optional" />
-                              <xs:attribute name="PropertyNameTo" type="xs:string" use="optional" />
+                              <xs:attribute name="propertyNameTo" type="xs:string" use="optional" />
                               <xs:attribute name="optional" type="xs:boolean" use="optional" />
                             </xs:complexType>
                           </xs:element>

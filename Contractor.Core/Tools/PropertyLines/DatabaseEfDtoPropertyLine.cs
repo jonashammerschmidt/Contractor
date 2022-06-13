@@ -7,46 +7,24 @@ namespace Contractor.Core.Tools
     {
         public static string GetPropertyLine(Property property)
         {
-            string propertyLines = (property.IsOptional) ? "" : "        [Required]\n";
             string optionalText = (property.IsOptional) ? "?" : "";
             switch (property.Type)
             {
                 case PropertyTypes.String:
-                    propertyLines +=
-                        $"        [MaxLength({property.TypeExtra})]\n" +
-                        $"        public string {property.Name} {{ get; set; }}";
-                    break;
-
+                    return $"        public string {property.Name} {{ get; set; }}";
                 case PropertyTypes.Double:
-                    propertyLines +=
-                        $"        public double{optionalText} {property.Name} {{ get; set; }}";
-                    break;
-
+                    return $"        public double{optionalText} {property.Name} {{ get; set; }}";
                 case PropertyTypes.Integer:
-                    propertyLines +=
-                        $"        public int{optionalText} {property.Name} {{ get; set; }}";
-                    break;
-
+                    return $"        public int{optionalText} {property.Name} {{ get; set; }}";
                 case PropertyTypes.DateTime:
-                    propertyLines +=
-                        $"        public DateTime{optionalText} {property.Name} {{ get; set; }}";
-                    break;
-
+                    return $"        public DateTime{optionalText} {property.Name} {{ get; set; }}";
                 case PropertyTypes.Boolean:
-                    propertyLines +=
-                        $"        public bool{optionalText} {property.Name} {{ get; set; }}";
-                    break;
-
+                    return $"        public bool{optionalText} {property.Name} {{ get; set; }}";
                 case PropertyTypes.Guid:
-                    propertyLines +=
-                        $"        public Guid{optionalText} {property.Name} {{ get; set; }}";
-                    break;
-
+                    return $"        public Guid{optionalText} {property.Name} {{ get; set; }}";
                 default:
                     throw new NotImplementedException();
             }
-
-            return propertyLines;
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "");
 
             this.dtoToRepositoryIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
@@ -68,7 +68,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "");
 
             this.entitiesCrudRepositoryToOneToOneIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }

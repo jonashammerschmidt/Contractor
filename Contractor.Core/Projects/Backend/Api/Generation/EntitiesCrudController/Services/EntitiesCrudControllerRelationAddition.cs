@@ -17,7 +17,7 @@ namespace Contractor.Core.Projects.Backend.Api
             string paginationLineStart = "        [Pagination(FilterFields = new[] { ";
             stringEditor.NextThatContains(paginationLineStart);
             var paginationLineEnd = stringEditor.GetLine().Substring(paginationLineStart.Length);
-            var updatedLine = paginationLineStart + "\"" + relationSide.Name + "Id\", " + paginationLineEnd;
+            var updatedLine = $"{paginationLineStart}\"{relationSide.Name}\", " + paginationLineEnd;
             stringEditor.SetLine(updatedLine);
 
             return stringEditor.GetText();

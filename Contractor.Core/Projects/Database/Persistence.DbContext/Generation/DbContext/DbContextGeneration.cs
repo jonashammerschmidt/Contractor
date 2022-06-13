@@ -5,15 +5,21 @@
     {
 
         private readonly DbContextEntityAddition dbContextEntityAddition;
+        private readonly DbContextIndexAddition dbContextIndexAddition;
+        private readonly DbContextPropertyAddition dbContextPropertyAddition;
         private readonly DbContextRelationToAddition dbContextRelationToAddition;
         private readonly DbContextRelationToOneToOneAddition dbContextRelationToOneToOneAddition;
 
         public DbContextGeneration(
             DbContextEntityAddition dbContextEntityAddition,
+            DbContextIndexAddition dbContextIndexAddition,
+            DbContextPropertyAddition dbContextPropertyAddition,
             DbContextRelationToAddition dbContextRelationToAddition,
             DbContextRelationToOneToOneAddition dbContextRelationToOneToOneAddition)
         {
             this.dbContextEntityAddition = dbContextEntityAddition;
+            this.dbContextIndexAddition = dbContextIndexAddition;
+            this.dbContextPropertyAddition = dbContextPropertyAddition;
             this.dbContextRelationToAddition = dbContextRelationToAddition;
             this.dbContextRelationToOneToOneAddition = dbContextRelationToOneToOneAddition;
         }
@@ -25,10 +31,12 @@
         protected override void AddEntity(Entity entity)
         {
             this.dbContextEntityAddition.Add(entity);
+            this.dbContextIndexAddition.Add(entity);
         }
 
         protected override void AddProperty(Property property)
         {
+            this.dbContextPropertyAddition.Edit(property);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)

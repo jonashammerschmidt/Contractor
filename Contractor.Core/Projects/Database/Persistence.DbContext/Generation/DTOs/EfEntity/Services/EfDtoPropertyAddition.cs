@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 
 namespace Contractor.Core.Tools
 {
@@ -28,37 +27,20 @@ namespace Contractor.Core.Tools
         {
             string fileData = this.fileSystemClient.ReadAllText(property, filePath);
 
-            fileData = AddUsingStatements(property, fileData);
-            fileData = AddProperty(fileData, property);
-
-            return fileData;
-        }
-
-        private string AddUsingStatements(Property property, string fileData)
-        {
-            if (property.Type == PropertyTypes.Guid || property.Type == PropertyTypes.DateTime)
-            {
-                fileData = UsingStatements.Add(fileData, "System");
-            }
-
-            return fileData;
-        }
-
-        private string AddProperty(string file, Property property)
-        {
-            StringEditor stringEditor = new StringEditor(file);
-            PropertyLine.FindStartingLineForNewProperty(file, property.Entity.Name, stringEditor);
+            StringEditor stringEditor = new StringEditor(fileData);
+            PropertyLine.FindStartingLineForNewProperty(filePath, property.Entity.Name, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {
                 stringEditor.Prev();
             }
 
-            if (PropertyLine.ContainsProperty(file))
+            if (PropertyLine.ContainsProperty(filePath))
             {
                 stringEditor.InsertNewLine();
             }
 
+            stringEditor.InsertNewLine();
             stringEditor.InsertLine(DatabaseEfDtoPropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();

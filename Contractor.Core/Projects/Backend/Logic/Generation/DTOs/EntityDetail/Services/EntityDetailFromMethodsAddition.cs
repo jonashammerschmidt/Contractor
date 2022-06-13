@@ -20,7 +20,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor.Next(line => line.Trim().Equals("};"));
             stringEditor.InsertLine(
                 $"                {relationSide.Name} = db{relationSide.Entity.Name}Detail.{relationSide.Name}\n" +
-                $"                    .Select(db{relationSide.OtherEntity.Name} => {relationSide.OtherEntity.Name}\n" +
+                $"                    .Select(db{relationSide.OtherEntity.Name} => {relationSide.OtherEntity.Module.Name}.{relationSide.OtherEntity.NamePlural}.{relationSide.OtherEntity.Name}\n" +
                 $"                        .FromDb{relationSide.OtherEntity.Name}(db{relationSide.OtherEntity.Name})),");
 
             return stringEditor.GetText();

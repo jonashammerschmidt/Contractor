@@ -32,13 +32,13 @@ namespace Contractor.Core
 
         public string PropertyNameFrom {
             get { return propertyNameFrom ?? EntityFrom.Name; }
-            set { this.propertyNameFrom = value.ToVariableName(); }
+            set { this.propertyNameFrom = value?.ToVariableName(); }
         }
 
         public string PropertyNameTo
         {
             get { return propertyNameTo ?? EntityTo.Name; }
-            set { this.propertyNameTo = value.ToVariableName(); }
+            set { this.propertyNameTo = value?.ToVariableName(); }
         }
 
         public bool IsOptional { get; set; }

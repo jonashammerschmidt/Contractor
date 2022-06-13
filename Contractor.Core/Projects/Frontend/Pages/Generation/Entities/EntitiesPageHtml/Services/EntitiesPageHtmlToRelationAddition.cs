@@ -18,7 +18,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.PrevThatContains("<!-- Right -->");
             stringEditor.Next();
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        <app-table-filter-bar-dropdown [floatingRight]=\"true\" [dataSource]=\"{relationSide.NameLower}DataSource\" idExpr=\"id\" displayExpr=\"bezeichnung\"");
+            stringEditor.InsertLine($"        <app-table-filter-bar-dropdown [floatingRight]=\"true\" [dataSource]=\"{relationSide.NameLower}DataSource\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\"");
             stringEditor.InsertLine($"            label=\"{relationSide.Name.ToReadable()}\" [(values)]=\"{relationSide.NameLower}SelectedValues\" (valuesChange)=\"{relationSide.Entity.NamePluralLower}DataSource.triggerUpdate()\">");
             stringEditor.InsertLine("        </app-table-filter-bar-dropdown>");
 

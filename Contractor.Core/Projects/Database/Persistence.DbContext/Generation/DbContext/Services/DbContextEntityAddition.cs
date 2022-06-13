@@ -38,6 +38,16 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             stringEditor.InsertLine($"        public virtual DbSet<Ef{entity.Name}> {entity.NamePlural}" + " { get; set; }");
             stringEditor.InsertNewLine();
 
+            stringEditor.NextThatContains("this.OnModelCreatingPartial(modelBuilder);");
+
+            stringEditor.InsertLine(
+                $"            modelBuilder.Entity<Ef{entity.Name}>(entity =>\n" +
+                 "            {\n" +
+                $"                entity.ToTable(\"{entity.NameKebab}\");\n" +
+                 "            });");
+            stringEditor.InsertNewLine();
+            stringEditor.MoveToStart();
+
             return stringEditor.GetText();
         }
     }
