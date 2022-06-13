@@ -9,15 +9,15 @@
     <DbContextName>FullstackTemplateCoreDbContext</DbContextName>
   </Paths>
   <Replacements>
-    <Replacement pattern="app-search-dropdown" ReplaceWith="search-dropdown" />
-    <Replacement pattern="app-table-filter-bar" ReplaceWith="table-filter-bar" />
-    <Replacement pattern="src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source" ReplaceWith="@krz/material" />
-    <Replacement pattern="src/app/components/ui/search-dropdown/search-dropdown.module" ReplaceWith="@krz/material" />
-    <Replacement pattern="src/app/components/ui/table-filter-bar/table-filter-bar.module" ReplaceWith="@krz/material" />
-    <Replacement pattern="src/app/services/backend/pagination/i-paged-result" ReplaceWith="@krz/material" />
-    <Replacement pattern="src/app/services/backend/pagination/i-pagination-options" ReplaceWith="@krz/material" />
-    <Replacement pattern="src/app/services/backend/pagination/pagination.data-source" ReplaceWith="@krz/material" />
-    <Replacement pattern="Contract.Architecture.Backend.Common" ReplaceWith="Krz.FullstackTemplate.Backend.Common" />
+    <Replacement pattern="app-search-dropdown" replaceWith="search-dropdown" />
+    <Replacement pattern="app-table-filter-bar" replaceWith="table-filter-bar" />
+    <Replacement pattern="src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source" replaceWith="@krz/material" />
+    <Replacement pattern="src/app/components/ui/search-dropdown/search-dropdown.module" replaceWith="@krz/material" />
+    <Replacement pattern="src/app/components/ui/table-filter-bar/table-filter-bar.module" replaceWith="@krz/material" />
+    <Replacement pattern="src/app/services/backend/pagination/i-paged-result" replaceWith="@krz/material" />
+    <Replacement pattern="src/app/services/backend/pagination/i-pagination-options" replaceWith="@krz/material" />
+    <Replacement pattern="src/app/services/backend/pagination/pagination.data-source" replaceWith="@krz/material" />
+    <Replacement pattern="Contract.Architecture.Backend.Common" replaceWith="Krz.FullstackTemplate.Backend.Common" />
   </Replacements>
   <Modules>
     <Module name="MandantenTrennung" skip="true">
@@ -31,7 +31,7 @@
         <Property name="IsPleite" type="Boolean" />
         <Property name="LegacyBezeichnung" type="String:256" optional="true" />
         <Property name="LegacyIsPleite" type="Boolean" optional="true" />
-        <Index property="Bezeichnung" clustered="true" unique="true" />
+        <Index property="Name" clustered="true" unique="true" />
       </Entity>
     </Module>
     <Module name="Kundenstamm">
@@ -39,9 +39,9 @@
         <Property name="VorUndNachname" type="String:256" displayProperty="true" />
         <Property name="Kundennummer" type="Integer" />
         <Property name="KundennummerLegacy" type="Integer" optional="true" />
-        <Relation1ToN entityNameFrom="SchöneBank" propertyNameFrom="MeineBank" PropertyNameTo="MeineKonten" />
-        <Relation1To1 entityNameFrom="SchöneBank" propertyNameFrom="LieblingsBank" PropertyNameTo="LieblingsKunde"/>
-        <Index property="Bezeichnung" clustered="true" />
+        <Relation1ToN entityNameFrom="SchöneBank" propertyNameFrom="MeineBank" propertyNameTo="MeineKonten" />
+        <Relation1To1 entityNameFrom="SchöneBank" propertyNameFrom="LieblingsBank" propertyNameTo="LieblingsKunde"/>
+        <Index property="VorUndNachname" clustered="true" />
       </Entity>
     </Module>
     <Module name="Kontoführung">
@@ -53,8 +53,8 @@
         <Property name="LegacySystemKontoId" type="Guid" optional="true"/>
         <Property name="LegacyBalance" type="Double" optional="true" />
         <Property name="LegacyEröffnetAm" type="DateTime" optional="true" />
-        <Relation1ToN entityNameFrom="Kunde" propertyNameFrom="MeinKunde" PropertyNameTo="MeinKonten" optional="true" />
-        <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" PropertyNameTo="BäckupKonto" optional="true" />
+        <Relation1ToN entityNameFrom="Kunde" optional="true" />
+        <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" propertyNameTo="BäckupKonto" optional="true" />
         <Index property="Bezeichnung,SystemKontoId" unique="true" />
       </Entity>
     </Module>

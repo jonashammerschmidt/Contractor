@@ -89,7 +89,7 @@ namespace Contractor.Core
             this.DisplayProperty =
                 this.Properties.FirstOrDefault(property => property.IsDisplayProperty) ??
                 FindProperty("Bezeichnung", true) ??
-                FindProperty("Name", true);
+                FindProperty("Name");
 
             foreach (var property in this.Properties)
             {

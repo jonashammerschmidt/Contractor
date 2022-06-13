@@ -17,7 +17,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             stringEditor.NextThatContains("FromDb" + relationSide.Entity.Name);
             stringEditor.Next(line => line.Trim().Equals("};"));
             stringEditor.InsertLine(
-                $"                {relationSide.Name} = {relationSide.OtherEntity.Name}\n" +
+                $"                {relationSide.Name} = {relationSide.OtherEntity.Module.Name}.{relationSide.OtherEntity.NamePlural}.{relationSide.OtherEntity.Name}\n" +
                 $"                    .FromDb{relationSide.OtherEntity.Name}(db{relationSide.Entity.Name}Detail.{relationSide.Name}),");
 
             return stringEditor.GetText();

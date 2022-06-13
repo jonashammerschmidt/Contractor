@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace ProjectName.API.Modules.Domain.Entities
 {
     [ApiController]
-    [Route("api/domain-kebab/entity-kebab")]
+    [Route("domain-kebab/entities-kebab")]
     public class EntitiesCrudController : ControllerBase
     {
         private readonly IEntitiesCrudLogic entitiesCrudLogic;

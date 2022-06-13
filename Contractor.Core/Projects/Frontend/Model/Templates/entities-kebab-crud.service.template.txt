@@ -13,12 +13,12 @@ export class EntitiesCrudService {
     constructor(private backendCoreService: BackendCoreService) { }
 
     public async getPagedEntities(paginationOptions: IPaginationOptions): Promise<IPagedResult<IEntityListItem>> {
-        const url = '/api/domain-kebab/entities-kebab?' + toPaginationParams(paginationOptions);
+        const url = '/domain-kebab/entities-kebab?' + toPaginationParams(paginationOptions);
         return await this.backendCoreService.get<IPagedResult<IEntityListItem>>(url);
     }
 
     public async getEntityDetail(entityId: string): Promise<IEntityDetail> {
-        return await this.backendCoreService.get<IEntityDetail>('/api/domain-kebab/entities-kebab/' + entityId);
+        return await this.backendCoreService.get<IEntityDetail>('/domain-kebab/entities-kebab/' + entityId);
     }
 
     public async createEntity(entityCreate: IEntityCreate): Promise<string> {
@@ -26,7 +26,7 @@ export class EntitiesCrudService {
             body: entityCreate
         };
 
-        const result = await this.backendCoreService.post<{ data: string }>('/api/domain-kebab/entities-kebab', options);
+        const result = await this.backendCoreService.post<{ data: string }>('/domain-kebab/entities-kebab', options);
 
         const newEntityId = result.data;
         return newEntityId;
@@ -37,11 +37,11 @@ export class EntitiesCrudService {
             body: entityUpdate
         };
 
-        await this.backendCoreService.put('/api/domain-kebab/entities-kebab', options);
+        await this.backendCoreService.put('/domain-kebab/entities-kebab', options);
     }
 
     public async deleteEntity(entityId: string): Promise<void> {
-        await this.backendCoreService.delete('/api/domain-kebab/entities-kebab/' + entityId);
+        await this.backendCoreService.delete('/domain-kebab/entities-kebab/' + entityId);
     }
 
 }

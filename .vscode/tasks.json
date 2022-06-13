@@ -13,6 +13,7 @@
             "command": "dotnet",
             "type": "process",
             "args": [
+                "watch",
                 "run",
                 "--project",
                 "API"

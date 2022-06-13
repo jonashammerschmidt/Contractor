@@ -72,7 +72,7 @@ namespace Contractor.Core
                                     .Select((xmlNode, index) => new { index, xmlNode })
                                     .Where(element => element.xmlNode.Name == "Relation1To1")
                                     .Where(element => element.xmlNode.Attributes["entityNameFrom"].Value == relation1To1.EntityNameFrom)
-                                    .Where(element => element.xmlNode.Attributes["propertyNameFrom"].Value == relation1To1.PropertyNameFrom)
+                                    .Where(element => element.xmlNode.Attributes["propertyNameFrom"]?.Value == relation1To1.PropertyNameFrom)
                                     .Single()
                                     .index,
                             }).ToList(),
@@ -86,7 +86,7 @@ namespace Contractor.Core
                                     .Select((xmlNode, index) => new { index, xmlNode })
                                     .Where(element => element.xmlNode.Name == "Relation1ToN")
                                     .Where(element => element.xmlNode.Attributes["entityNameFrom"].Value == relation1ToN.EntityNameFrom)
-                                    .Where(element => element.xmlNode.Attributes["propertyNameFrom"].Value == relation1ToN.PropertyNameFrom)
+                                    .Where(element => element.xmlNode.Attributes["propertyNameFrom"]?.Value == relation1ToN.PropertyNameFrom)
                                     .Single()
                                     .index,
                             }).ToList(),
@@ -142,7 +142,7 @@ namespace Contractor.Core
         [XmlAttribute(AttributeName = "pattern")]
         public string Pattern { get; set; }
 
-        [XmlAttribute(AttributeName = "ReplaceWith")]
+        [XmlAttribute(AttributeName = "replaceWith")]
         public string ReplaceWith { get; set; }
     }
 
@@ -232,7 +232,7 @@ namespace Contractor.Core
         [XmlAttribute(AttributeName = "propertyNameFrom")]
         public string PropertyNameFrom { get; set; }
 
-        [XmlAttribute(AttributeName = "PropertyNameTo")]
+        [XmlAttribute(AttributeName = "propertyNameTo")]
         public string PropertyNameTo { get; set; }
 
         [XmlAttribute(AttributeName = "optional")]
@@ -248,7 +248,7 @@ namespace Contractor.Core
         [XmlAttribute(AttributeName = "propertyNameFrom")]
         public string PropertyNameFrom { get; set; }
 
-        [XmlAttribute(AttributeName = "PropertyNameTo")]
+        [XmlAttribute(AttributeName = "propertyNameTo")]
         public string PropertyNameTo { get; set; }
 
         [XmlAttribute(AttributeName = "optional")]
