@@ -1,5 +1,4 @@
-﻿using Contractor.Core;
-using Contractor.Core.Helpers;
+﻿using Contractor.Core.Helpers;
 using System.Collections.Generic;
 
 namespace Contractor.Core
@@ -28,10 +27,18 @@ namespace Contractor.Core
         public void AddLinks(ContractorGenerationOptions options)
         {
             Options = options;
+        }
 
+        public void AddLinksForChildren(ContractorGenerationOptions options)
+        {
             foreach (var entity in Entities)
             {
                 entity.AddLinks(this);
+            }
+
+            foreach (var entity in Entities)
+            {
+                entity.AddLinksForChildren(this);
             }
         }
     }

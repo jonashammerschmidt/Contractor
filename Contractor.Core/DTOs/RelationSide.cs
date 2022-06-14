@@ -9,6 +9,8 @@ namespace Contractor.Core
 
         public Entity OtherEntity { get; private set; }
 
+        public string OnDelete { get; private set; }
+
         public string OtherName { get; private set; }
 
         public string OtherNameLower
@@ -23,6 +25,7 @@ namespace Contractor.Core
                 Entity = relation.EntityFrom,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
+                OnDelete = relation.OnDelete,
                 Name = relation.PropertyNameTo,
                 Order = int.MaxValue,
                 Type = prefix + relation.EntityTo.Name + postfix,
@@ -39,6 +42,7 @@ namespace Contractor.Core
                 Entity = relation.EntityTo,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
+                OnDelete = relation.OnDelete,
                 Name = relation.PropertyNameFrom + "Id",
                 Order = int.MaxValue,
                 Type = "Guid",
@@ -55,6 +59,7 @@ namespace Contractor.Core
                 Entity = relation.EntityTo,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
+                OnDelete = relation.OnDelete,
                 Name = relation.PropertyNameFrom,
                 Order = int.MaxValue,
                 Type = prefix + relation.EntityFrom.Name + postfix,

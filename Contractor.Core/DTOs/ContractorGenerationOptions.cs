@@ -21,6 +21,11 @@ namespace Contractor.Core
             {
                 module.AddLinks(this);
             }
+
+            foreach (var module in this.Modules)
+            {
+                module.AddLinksForChildren(this);
+            }
         }
 
         public Entity FindEntity(string entityName)

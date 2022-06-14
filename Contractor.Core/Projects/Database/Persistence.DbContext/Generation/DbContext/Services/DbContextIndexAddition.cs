@@ -45,7 +45,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
             foreach (var index in entity.Indices)
             {
-                string indexProperties = string.Join(", ", index.Properties.Select(property => "c." + property.Name));
+                string indexProperties = string.Join(", ", index.ColumnNames.Select(columnName => "c." + columnName));
 
                 stringEditor.InsertNewLine();
                 stringEditor.InsertLine(
