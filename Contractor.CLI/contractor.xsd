@@ -56,6 +56,13 @@
                               <xs:attribute name="propertyNameFrom" type="xs:string" use="optional" />
                               <xs:attribute name="propertyNameTo" type="xs:string" use="optional" />
                               <xs:attribute name="optional" type="xs:boolean" use="optional" />
+                              <xs:attribute name="onDelete" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:pattern value="NoAction|SetNull|Cascade"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
                             </xs:complexType>
                           </xs:element>
                           <xs:element minOccurs="0" maxOccurs="unbounded" name="Relation1To1">
@@ -64,6 +71,13 @@
                               <xs:attribute name="propertyNameFrom" type="xs:string" use="optional" />
                               <xs:attribute name="propertyNameTo" type="xs:string" use="optional" />
                               <xs:attribute name="optional" type="xs:boolean" use="optional" />
+                              <xs:attribute name="onDelete" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:pattern value="NoAction|SetNull|Cascade"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
                             </xs:complexType>
                           </xs:element>
                           <xs:element minOccurs="0" maxOccurs="unbounded" name="Index">

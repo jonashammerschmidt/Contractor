@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Contractor.Core
+﻿namespace Contractor.Core
 {
     public class Paths
     {

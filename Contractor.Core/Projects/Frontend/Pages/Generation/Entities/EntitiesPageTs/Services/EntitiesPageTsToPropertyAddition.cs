@@ -56,7 +56,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
                 $"  {relationSide.NameLower}SelectedValues = [];\n" +
                 $"  {relationSide.NameLower}DataSource = new DropdownPaginationDataSource(\n" +
                 $"    (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),\n" +
-                 "    'bezeichnung');";
+                $"      '{relationSide.OtherEntity.DisplayProperty.NameLower}');";
         }
 
     }

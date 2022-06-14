@@ -26,7 +26,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"  public {relationSide.NameLower}TableDataSource = new MatTableDataSource<I{relationSide.OtherEntity.Name}>([]);");
             stringEditor.InsertLine($"  public {relationSide.NameLower}GridColumns: string[] = [");
-            stringEditor.InsertLine($"    'bezeichnung',");
+            stringEditor.InsertLine($"    '{relationSide.OtherEntity.DisplayProperty.NameLower}',");
             stringEditor.InsertLine($"    'detail',");
             stringEditor.InsertLine($"  ];");
 

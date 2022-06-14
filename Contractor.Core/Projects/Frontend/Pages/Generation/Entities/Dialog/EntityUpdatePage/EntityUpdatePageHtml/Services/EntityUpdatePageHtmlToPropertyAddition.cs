@@ -28,7 +28,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         {
             return
                 $"            <app-search-dropdown [formGroupInstance]=\"{relationSide.Entity.NameLower}UpdateForm\"\n" +
-                $"                [formControlNameInstance]=\"'{relationSide.NameLower}'\" label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\"\n" +
+                $"                [formControlNameInstance]=\"'{relationSide.NameLower}Id'\" label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\"\n" +
                 $"                " + ((!relationSide.IsOptional) ? "required=\"true\" " : "") +
                 $"[dataSource]=\"{relationSide.NameLower}DataSource\" [initialItem]=\"selected{relationSide.Name}\">\n" +
                 $"            </app-search-dropdown>";

@@ -43,7 +43,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             stringEditor.InsertLine(
                 $"            modelBuilder.Entity<Ef{entity.Name}>(entity =>\n" +
                  "            {\n" +
-                $"                entity.ToTable(\"{entity.NameKebab}\");\n" +
+                $"                entity.ToTable(\"{entity.NamePlural}\");\n" +
                  "            });");
             stringEditor.InsertNewLine();
             stringEditor.MoveToStart();

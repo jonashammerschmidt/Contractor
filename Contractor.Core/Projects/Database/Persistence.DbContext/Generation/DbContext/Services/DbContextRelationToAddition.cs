@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
                     $"                    .WithMany(p => p.{relationSide.OtherName})\n" +
                     $"                    .HasForeignKey(d => d.{relationSide.Name}Id)\n" +
                     $"                    .IsRequired({(!relationSide.IsOptional).ToString().ToLower()})\n" +
-                    $"                    .OnDelete(DeleteBehavior.NoAction)\n" +
+                    $"                    .OnDelete(DeleteBehavior.{relationSide.OnDelete})\n" +
                     $"                    .HasConstraintName(\"FK_{relationSide.Entity.NamePlural}_{relationSide.Name}\");");
 
             return stringEditor.GetText();

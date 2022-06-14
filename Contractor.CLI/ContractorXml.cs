@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
@@ -68,6 +69,7 @@ namespace Contractor.Core
                                 PropertyNameFrom = relation1To1.PropertyNameFrom,
                                 PropertyNameTo = relation1To1.PropertyNameTo,
                                 IsOptional = relation1To1.IsOptional,
+                                OnDelete = ParseRelationDeleteBehaviour(relation1To1.OnDelete),
                                 Order = xmlNodeList.Cast<XmlNode>()
                                     .Select((xmlNode, index) => new { index, xmlNode })
                                     .Where(element => element.xmlNode.Name == "Relation1To1")
@@ -82,6 +84,7 @@ namespace Contractor.Core
                                 PropertyNameFrom = relation1ToN.PropertyNameFrom,
                                 PropertyNameTo = relation1ToN.PropertyNameTo,
                                 IsOptional = relation1ToN.IsOptional,
+                                OnDelete = ParseRelationDeleteBehaviour(relation1ToN.OnDelete),
                                 Order = xmlNodeList.Cast<XmlNode>()
                                     .Select((xmlNode, index) => new { index, xmlNode })
                                     .Where(element => element.xmlNode.Name == "Relation1ToN")
@@ -105,6 +108,15 @@ namespace Contractor.Core
 
             return contractorGenerationOptions;
         }
+
+        private static string ParseRelationDeleteBehaviour(string relationDeleteBehaviour)
+        {
+            if (relationDeleteBehaviour == "SetNull" || relationDeleteBehaviour == "Cascade")
+                return relationDeleteBehaviour;
+
+            return "NoAction";
+        }
+
     }
 
     [XmlRoot(ElementName = "Paths")]
@@ -237,6 +249,9 @@ namespace Contractor.Core
 
         [XmlAttribute(AttributeName = "optional")]
         public bool IsOptional { get; set; }
+
+        [XmlAttribute(AttributeName = "onDelete")]
+        public string OnDelete { get; set; }
     }
 
     [XmlRoot(ElementName = "Relation1To1")]
@@ -253,5 +268,8 @@ namespace Contractor.Core
 
         [XmlAttribute(AttributeName = "optional")]
         public bool IsOptional { get; set; }
+
+        [XmlAttribute(AttributeName = "onDelete")]
+        public string OnDelete { get; set; }
     }
 }

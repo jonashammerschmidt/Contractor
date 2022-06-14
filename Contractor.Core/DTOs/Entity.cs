@@ -86,11 +86,10 @@ namespace Contractor.Core
             {
                 this.ScopeEntity = module.Options.FindEntity(this.ScopeEntityName);
             }
-            this.DisplayProperty =
-                this.Properties.FirstOrDefault(property => property.IsDisplayProperty) ??
-                FindProperty("Bezeichnung", true) ??
-                FindProperty("Name");
+        }
 
+        public void AddLinksForChildren(Module module)
+        {
             foreach (var property in this.Properties)
             {
                 property.AddLinks(this);
@@ -110,6 +109,11 @@ namespace Contractor.Core
             {
                 index.AddLinks(this);
             }
+
+            this.DisplayProperty =
+                this.Properties.FirstOrDefault(property => property.IsDisplayProperty) ??
+                FindProperty("Bezeichnung", true) ??
+                FindProperty("Name");
         }
 
         public Property FindProperty(string propertyName)

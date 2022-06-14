@@ -1,5 +1,4 @@
-﻿using Contractor.Core;
-using Contractor.Core.Helpers;
+﻿using Contractor.Core.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,14 +6,17 @@ namespace Contractor.Core
 {
     public class Index
     {
-        private IEnumerable<string> propertyNames;
+        private IEnumerable<string> columnNames;
 
         public string PropertyNames
         {
-            set { propertyNames = value.Split(',').Select(propertyName => propertyName.ToVariableName()); }
+            set { columnNames = value.Split(',').Select(propertyName => propertyName.ToVariableName()); }
         }
 
-        public IEnumerable<Property> Properties { get; private set; }
+        public IEnumerable<string> ColumnNames
+        {
+            get { return this.columnNames; }
+        }
 
         public bool IsClustered { get; set; }
 
@@ -25,8 +27,6 @@ namespace Contractor.Core
         public void AddLinks(Entity entity)
         {
             Entity = entity;
-
-            Properties = propertyNames.Select(propertyName => entity.FindProperty(propertyName));
         }
     }
 }

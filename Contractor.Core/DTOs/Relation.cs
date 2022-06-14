@@ -20,6 +20,7 @@ namespace Contractor.Core
             this.propertyNameTo  = relation.propertyNameTo;
             
             this.IsOptional = relation.IsOptional;
+            this.OnDelete = relation.OnDelete;
             this.Order = relation.Order;
             this.EntityFrom = relation.EntityFrom;
             this.EntityTo = relation.EntityTo;
@@ -44,6 +45,8 @@ namespace Contractor.Core
         public bool IsOptional { get; set; }
 
         public int Order { get; set; }
+
+        public string OnDelete { get; set; }
 
         public Entity EntityFrom { get; private set; }
 

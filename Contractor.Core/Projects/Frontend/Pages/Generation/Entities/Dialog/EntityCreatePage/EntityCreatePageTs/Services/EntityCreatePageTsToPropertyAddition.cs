@@ -41,7 +41,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             }
             stringEditor.NextThatContains("this.formBuilder.group({");
             stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"      {relationSide.NameLower}: new FormControl(null, [" +
+            stringEditor.InsertLine($"      {relationSide.NameLower}Id: new FormControl(null, [" +
                 ((!relationSide.IsOptional) ? "Validators.required" : "") +
                 "]),");
 
@@ -51,7 +51,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertNewLine();
             stringEditor.InsertLine($"    this.{relationSide.NameLower}DataSource = new DropdownPaginationDataSource(");
             stringEditor.InsertLine($"      (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),");
-            stringEditor.InsertLine("      'bezeichnung');");
+            stringEditor.InsertLine($"      '{relationSide.OtherEntity.DisplayProperty.NameLower}');");
 
             return stringEditor.GetText();
         }
