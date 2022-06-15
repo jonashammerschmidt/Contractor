@@ -25,20 +25,6 @@
         <Property name="Name" type="String:256" />
       </Entity>
     </Module>
-    <Module name="Kontoführung">
-      <Entity name="Konto" namePlural="Konten" scopeEntityName="Mandant">
-        <Property name="Bezeichnung" type="String:256" />
-        <Property name="SystemKontoId" type="Guid" />
-        <Property name="Balance" type="Double" />
-        <Property name="EröffnetAm" type="DateTime" />
-        <Property name="LegacySystemKontoId" type="Guid" optional="true"/>
-        <Property name="LegacyBalance" type="Double" optional="true" />
-        <Property name="LegacyEröffnetAm" type="DateTime" optional="true" />
-        <Relation1ToN entityNameFrom="Kunde" optional="true" />
-        <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" propertyNameTo="BäckupKonto" optional="true" onDelete="SetNull" />
-        <Index property="Bezeichnung,SystemKontoId" unique="true" />
-      </Entity>
-    </Module>
     <Module name="Bankwesen">
       <Entity name="SchöneBank" namePlural="SchöneBänke" scopeEntityName="Mandant">
         <Property name="Name" type="String:256" />
@@ -56,6 +42,20 @@
         <Relation1ToN entityNameFrom="SchöneBank" propertyNameFrom="MeineBank" propertyNameTo="MeineKonten" onDelete="Cascade"/>
         <Relation1To1 entityNameFrom="SchöneBank" propertyNameFrom="LieblingsBank" propertyNameTo="LieblingsKunde"/>
         <Index property="VorUndNachname" clustered="true" />
+      </Entity>
+    </Module>
+    <Module name="Kontoführung">
+      <Entity name="Konto" namePlural="Konten" scopeEntityName="Mandant">
+        <Property name="Bezeichnung" type="String:256" />
+        <Property name="SystemKontoId" type="Guid" />
+        <Property name="Balance" type="Double" />
+        <Property name="EröffnetAm" type="DateTime" />
+        <Property name="LegacySystemKontoId" type="Guid" optional="true"/>
+        <Property name="LegacyBalance" type="Double" optional="true" />
+        <Property name="LegacyEröffnetAm" type="DateTime" optional="true" />
+        <Relation1ToN entityNameFrom="Kunde" optional="true" />
+        <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" propertyNameTo="BäckupKonto" optional="true" onDelete="SetNull" />
+        <Index property="Bezeichnung,SystemKontoId" unique="true" />
       </Entity>
     </Module>
   </Modules>

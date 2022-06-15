@@ -20,6 +20,11 @@ namespace Contractor.Core
             get { return StringConverter.PascalToKebabCase(Name); }
         }
 
+        public string NameReadable
+        {
+            get { return Name.ToReadable(); }
+        }
+
         public bool Skip { get; set; }
 
         public ContractorGenerationOptions Options { get; private set; }
