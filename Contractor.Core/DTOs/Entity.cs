@@ -60,7 +60,7 @@ namespace Contractor.Core
 
         public bool HasScope
         {
-            get { return string.IsNullOrWhiteSpace(this.ScopeEntityName); }
+            get { return !string.IsNullOrWhiteSpace(this.ScopeEntityName); }
         }
 
         public bool Skip { get; set; }
@@ -113,7 +113,13 @@ namespace Contractor.Core
             this.DisplayProperty =
                 this.Properties.FirstOrDefault(property => property.IsDisplayProperty) ??
                 FindProperty("Bezeichnung", true) ??
-                FindProperty("Name");
+                FindProperty("Name", true) ??
+                new Property()
+                {
+                    Name = "Id",
+                    IsDisplayProperty = true,
+                    Type = "Guid",
+                };
         }
 
         public Property FindProperty(string propertyName)

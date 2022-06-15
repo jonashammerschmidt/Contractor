@@ -22,7 +22,7 @@
     <br>
 
     <div class="table-container">
-        <table mat-table [dataSource]="entitiesDataSource" matSort>
+        <table mat-table [dataSource]="entitiesDataSource" matSort matSortActive="displayProperty" matSortDirection="asc">
 
             <ng-container matColumnDef="detail">
                 <th mat-header-cell *matHeaderCellDef></th>

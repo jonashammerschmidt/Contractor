@@ -3,7 +3,6 @@
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class PersistenceInsertDataDevProjectFileGeneration : ClassGeneration
     {
-        private static readonly string FileName = "dbo.Entities.csv";
 
         private readonly PersistenceInsertDataDevProjectFileEntityAddition entityAddition;
 
