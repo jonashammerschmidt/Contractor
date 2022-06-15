@@ -85,6 +85,13 @@ namespace Contractor.Core.Helpers
             return this;
         }
 
+        public StringEditor InsertIntoLine(string text)
+        {
+            this.SetLine(this.GetLine() + text);
+
+            return this;
+        }
+
         public void MoveToEnd()
         {
             this.lineNumber = this.lines.Count - 1;
