@@ -4,6 +4,7 @@ using Contractor.Core.Projects.Backend.Contract.Persistence;
 using Contractor.Core.Projects.Backend.Logic;
 using Contractor.Core.Projects.Backend.Persistence;
 using Contractor.Core.Projects.Database.Persistence.DbContext;
+using Contractor.Core.Projects.Database.Persistence.InsertData.Dev;
 using Contractor.Core.Projects.Frontend.Model;
 using Contractor.Core.Projects.Frontend.Pages;
 using Contractor.Core.Tools;
@@ -30,6 +31,7 @@ namespace Contractor.Core
             LogicProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceProjectGeneration.ConfigureServices(serviceCollection);
             PersistenceDbContextProjectGeneration.ConfigureServices(serviceCollection);
+            PersistenceInsertDataDevProjectGeneration.ConfigureServices(serviceCollection);
 
             ModelProjectGeneration.ConfigureServices(serviceCollection);
             PagesProjectGeneration.ConfigureServices(serviceCollection);
