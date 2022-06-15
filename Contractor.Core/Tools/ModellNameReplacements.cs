@@ -27,9 +27,14 @@ namespace Contractor.Core.Tools
         {
             text = ReplaceGuidPlaceholders(text, entity.Name);
             text = text.Replace("EntityFramework", "##EfCore##");
-            text = text.Replace("RequestScopeDomain", entity.ScopeEntity.Module.Name);
-            text = text.Replace("RequestScopes", entity.ScopeEntity.NamePlural);
-            text = text.Replace("RequestScope", entity.ScopeEntity.Name);
+            
+            if (entity.HasScope)
+            {
+                text = text.Replace("RequestScopeDomain", entity.ScopeEntity.Module.Name);
+                text = text.Replace("RequestScopes", entity.ScopeEntity.NamePlural);
+                text = text.Replace("RequestScope", entity.ScopeEntity.Name);
+            }
+            
             text = text.Replace("DisplayProperty", entity.DisplayProperty.Name);
             text = text.Replace("displayProperty", entity.DisplayProperty.NameLower);
             text = text.Replace("entities-kebab", entity.NamePluralKebab);
@@ -47,6 +52,7 @@ namespace Contractor.Core.Tools
 
         public static string ReplaceModulePlaceholdersCascading(Module module, string text)
         {
+            text = ReplaceModulePlaceholders(module, text);
             text = ReplaceOptionsPlaceholders(module.Options, text);
             text = text.Replace("domain-kebab", module.NameKebab);
             text = text.Replace("Domain", module.Name);
@@ -56,24 +62,10 @@ namespace Contractor.Core.Tools
 
         public static string ReplaceEntityPlaceholdersCascading(Entity entity, string text)
         {
+            text = ReplaceEntityPlaceholders(entity, text);
             text = ReplaceModulePlaceholdersCascading(entity.Module, text);
             text = ReplaceGuidPlaceholders(text, entity.Name);
-            text = text.Replace("EntityFramework", "##EfCore##");
-            text = text.Replace("RequestScopeDomain", entity.ScopeEntity.Module.Name);
-            text = text.Replace("RequestScopes", entity.ScopeEntity.NamePlural);
-            text = text.Replace("RequestScope", entity.ScopeEntity.Name);
-            text = text.Replace("DisplayProperty", entity.DisplayProperty.Name);
-            text = text.Replace("displayProperty", entity.DisplayProperty.NameLower);
-            text = text.Replace("entities-kebab", entity.NamePluralKebab);
-            text = text.Replace("entity-kebab", entity.NameKebab);
-            text = text.Replace("EntitiesReadable", entity.NamePluralReadable);
-            text = text.Replace("EntityReadable", entity.NameReadable);
-            text = text.Replace("Entities", entity.NamePlural);
-            text = text.Replace("Entity", entity.Name);
-            text = text.Replace("entities", entity.NamePluralLower);
-            text = text.Replace("entity", entity.NameLower);
-            text = text.Replace("##EfCore##", "EntityFramework");
-
+            
             return text;
         }
 

@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -13,7 +12,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
-            if (fileData.Contains($"{relationSide.OtherEntity.NamePlural}Module,"))
+            if (fileData.Contains($" {relationSide.OtherEntity.NamePlural}Module,"))
             {
                 return fileData;
             }

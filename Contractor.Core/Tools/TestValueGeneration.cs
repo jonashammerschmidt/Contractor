@@ -10,7 +10,8 @@ namespace Contractor.Core.Tools
             switch (property.Type)
             {
                 case PropertyTypes.String:
-                    return property.Name + postfix;
+                    var length = Math.Min(property.Name.Length, int.Parse(property.TypeExtra) - postfix.Length);
+                    return property.Name.Substring(0, length) + postfix;
 
                 case PropertyTypes.Integer:
                     return random.Next(100, 999).ToString();
