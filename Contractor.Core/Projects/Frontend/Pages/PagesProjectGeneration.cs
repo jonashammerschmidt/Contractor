@@ -16,6 +16,11 @@ namespace Contractor.Core.Projects.Frontend.Pages
             serviceCollection.AddSingleton<ClassGeneration, AppRoutingGeneration>();
             serviceCollection.AddSingleton<AppRoutingDomainAddition>();
 
+            // App-Component
+            serviceCollection.AddSingleton<ClassGeneration, AppComponentGeneration>();
+            serviceCollection.AddSingleton<AppComponentModuleAddition>();
+            serviceCollection.AddSingleton<AppComponentEntityAddition>();
+
             // Domain Core
             serviceCollection.AddSingleton<ClassGeneration, DomainModuleGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, DomainRoutingGeneration>();

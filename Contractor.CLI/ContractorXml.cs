@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
@@ -39,6 +38,7 @@ namespace Contractor.Core
                 Modules = this.Modules.Modules.Select(module => new Module()
                 {
                     Name = module.Name,
+                    Skip = module.Skip,
                     Entities = module.Entities.Select(entity =>
                     {
                         XmlNode xmlNode = xmlDocument.SelectSingleNode($"//Entity[@name='{entity.Name}']");
