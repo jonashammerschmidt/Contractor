@@ -2,6 +2,7 @@
 using Contractor.Core.Projects.Backend.Contract.Logic;
 using Contractor.Core.Projects.Backend.Contract.Persistence;
 using Contractor.Core.Projects.Backend.Logic;
+using Contractor.Core.Projects.Backend.Misc;
 using Contractor.Core.Projects.Backend.Persistence;
 using Contractor.Core.Projects.Database.Persistence.DbContext;
 using Contractor.Core.Projects.Database.Persistence.InsertData.Dev;
@@ -25,6 +26,7 @@ namespace Contractor.Core
         {
             ConfigureTools(serviceCollection);
 
+            MiscBackendGeneration.ConfigureServices(serviceCollection);
             ApiProjectGeneration.ConfigureServices(serviceCollection);
             ContractLogicProjectGeneration.ConfigureServices(serviceCollection);
             ContractPersistenceProjectGeneration.ConfigureServices(serviceCollection);

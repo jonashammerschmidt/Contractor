@@ -22,7 +22,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = this.pathService.GetAbsolutePathForFrontend(entity, domainFolder, templateFileName);
             string fileData = UpdateFileData(entity, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(Entity entity, string filePath)

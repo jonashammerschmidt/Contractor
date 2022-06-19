@@ -28,7 +28,7 @@ namespace Contractor.Core.Tools
             string filePath = this.pathService.GetAbsolutePathForFrontend(property, domainFolder, fileName);
             string fileData = UpdateFileData(property, functionName, variableName, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
 

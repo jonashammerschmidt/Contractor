@@ -85,6 +85,13 @@ namespace Contractor.Core.Helpers
             return this;
         }
 
+        public StringEditor InsertIntoLine(int startIndex, string text)
+        {
+            this.SetLine(this.GetLine().Insert(startIndex, text));
+
+            return this;
+        }
+
         public StringEditor InsertIntoLine(string text)
         {
             this.SetLine(this.GetLine() + text);

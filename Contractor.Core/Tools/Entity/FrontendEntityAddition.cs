@@ -18,7 +18,7 @@
             string filePath = pathService.GetAbsolutePathForFrontend(entity, domainFolder, templateFileName);
             string fileData = fileSystemClient.ReadAllText(entity, templateFilePath);
 
-            fileSystemClient.WriteAllText(filePath, fileData);
+            fileSystemClient.WriteAllText(fileData, filePath);
         }
     }
 }

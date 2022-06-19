@@ -25,7 +25,7 @@
 
             fileData = UpdateFileData(property, fileData);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         protected abstract string UpdateFileData(Property property, string fileData);

@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             string fileData = this.fileSystemClient.ReadAllText(entity, filePath);
             fileData = UpdateFileData(entity, fileData);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         protected string UpdateFileData(Entity entity, string fileData)

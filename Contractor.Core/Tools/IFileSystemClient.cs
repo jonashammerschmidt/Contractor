@@ -2,15 +2,15 @@
 {
     internal interface IFileSystemClient
     {
-        string ReadAllText(ContractorGenerationOptions options, string path);
+        string ReadAllText(ContractorGenerationOptions options, params string[] pathParts);
 
-        string ReadAllText(Module module, string path);
+        string ReadAllText(Module module, params string[] pathParts);
 
-        string ReadAllText(Entity entity, string path);
+        string ReadAllText(Entity entity, params string[] pathParts);
 
-        string ReadAllText(Property property, string path);
+        string ReadAllText(Property property, params string[] pathParts);
 
-        void WriteAllText(string path, string contents);
+        void WriteAllText(string contents, params string[] pathParts);
 
         void SaveAll(ContractorGenerationOptions contractorGenerationOptions);
     }

@@ -22,7 +22,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = Path.Combine(entity.Module.Options.Paths.FrontendDestinationFolder, "src\\app\\app.component.ts");
             string fileData = UpdateFileData(entity, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(Entity entity, string filePath)

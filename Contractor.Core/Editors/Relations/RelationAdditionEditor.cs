@@ -36,7 +36,7 @@
 
             fileData = UpdateFileData(relationSide, fileData);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         protected abstract string UpdateFileData(RelationSide relationSide, string fileData);

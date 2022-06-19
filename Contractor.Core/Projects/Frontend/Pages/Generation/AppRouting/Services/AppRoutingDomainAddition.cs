@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             string filePath = Path.Combine(module.Options.Paths.FrontendDestinationFolder, "src\\app\\app-routing.module.ts");
             string fileData = UpdateFileData(module, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(Module module, string filePath)

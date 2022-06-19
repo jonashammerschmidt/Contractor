@@ -20,7 +20,7 @@ namespace Contractor.Core.Tools
             string filePath = this.pathService.GetAbsolutePathForDatabase(property, domainFolder, templateFileName);
             string fileData = UpdateFileData(property, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(Property property, string filePath)

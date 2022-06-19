@@ -27,7 +27,7 @@ namespace Contractor.Core.Tools
                 this.pathService.GetAbsolutePathForBackend(entity, domainFolder, templateFileName);
             string fileData = this.fileSystemClient.ReadAllText(entity, templateFilePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
     }
 }
