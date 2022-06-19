@@ -24,8 +24,7 @@ namespace ProjectName.API.Modules.Domain.Entities
         [Pagination(FilterFields = new[] { "DisplayProperty" }, SortFields = new[] { "DisplayProperty" })]
         public ActionResult<IPagedResult<IEntityListItem>> GetPagedEntities()
         {
-            var pagedEntitiesPagedResult = this.entitiesCrudLogic.GetPagedEntities();
-            return this.FromLogicResult(pagedEntitiesPagedResult);
+            return this.Ok(this.entitiesCrudLogic.GetPagedEntities());
         }
 
         [HttpGet]
@@ -33,29 +32,22 @@ namespace ProjectName.API.Modules.Domain.Entities
         [Route("{entityId}")]
         public ActionResult<IEntityDetail> GetEntityDetail(Guid entityId)
         {
-            var getEntityDetailResult = this.entitiesCrudLogic.GetEntityDetail(entityId);
-            return this.FromLogicResult(getEntityDetailResult);
+            return this.Ok(this.entitiesCrudLogic.GetEntityDetail(entityId));
         }
 
         [HttpPost]
         [Authorized]
         public ActionResult<DataBody<Guid>> CreateEntity([FromBody] EntityCreate entityCreate)
         {
-            ILogicResult<Guid> createEntityResult = this.entitiesCrudLogic.CreateEntity(entityCreate);
-            if (!createEntityResult.IsSuccessful)
-            {
-                return this.FromLogicResult(createEntityResult);
-            }
-
-            return this.Ok(new DataBody<Guid>(createEntityResult.Data));
+            return this.Ok(new DataBody<Guid>(this.entitiesCrudLogic.CreateEntity(entityCreate)));
         }
 
         [HttpPut]
         [Authorized]
         public ActionResult UpdateEntity([FromBody] EntityUpdate entityUpdate)
         {
-            ILogicResult updateEntityResult = this.entitiesCrudLogic.UpdateEntity(entityUpdate);
-            return this.FromLogicResult(updateEntityResult);
+            this.entitiesCrudLogic.UpdateEntity(entityUpdate);
+            return this.Ok();
         }
 
         [HttpDelete]
@@ -63,8 +55,8 @@ namespace ProjectName.API.Modules.Domain.Entities
         [Route("{entityId}")]
         public ActionResult DeleteEntity(Guid entityId)
         {
-            ILogicResult deleteEntityResult = this.entitiesCrudLogic.DeleteEntity(entityId);
-            return this.FromLogicResult(deleteEntityResult);
+            this.entitiesCrudLogic.DeleteEntity(entityId);
+            return this.Ok();
         }
     }
 }

@@ -5,14 +5,14 @@ namespace ProjectName.Contract.Logic.Modules.Domain.Entities
 {
     public interface IEntitiesCrudLogic
     {
-        ILogicResult<Guid> CreateEntity(IEntityCreate entityCreate);
+        Guid CreateEntity(IEntityCreate entityCreate);
 
-        ILogicResult DeleteEntity(Guid entityId);
+        void DeleteEntity(Guid entityId);
 
-        ILogicResult<IEntityDetail> GetEntityDetail(Guid entityId);
+        IEntityDetail GetEntityDetail(Guid entityId);
 
-        ILogicResult<IPagedResult<IEntityListItem>> GetPagedEntities();
+        IPagedResult<IEntityListItem> GetPagedEntities();
 
-        ILogicResult UpdateEntity(IEntityUpdate entityUpdate);
+        void UpdateEntity(IEntityUpdate entityUpdate);
     }
 }

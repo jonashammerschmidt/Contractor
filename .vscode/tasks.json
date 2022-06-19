@@ -2,14 +2,48 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Full Build",
-            "dependsOn": [
-                "Backends Builds",
-                "Frontends Builds"
-            ]
+            "label": "Database - Add Migration Bankwesen",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "migrations",
+                "add",
+                "Bankwesen"
+            ],
+            "options": {
+                "cwd": "FullstackTemplate\\Krz.FullstackTemplate.Databases\\Krz.FullstackTemplate.Database.Core\\EfMigrations"
+            },
+            "problemMatcher": "$msCompile"
         },
         {
-            "label": "Krz.FullstackTemplate.Backend.Core Start",
+            "label": "Database - Update Database",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "update",
+            ],
+            "options": {
+                "cwd": "FullstackTemplate\\Krz.FullstackTemplate.Databases\\Krz.FullstackTemplate.Database.Core\\EfMigrations"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Database - InsertData.Dev ",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+            ],
+            "options": {
+                "cwd": "FullstackTemplate\\Krz.FullstackTemplate.Databases\\Krz.FullstackTemplate.Database.Core\\InsertData.Dev"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "FullstackTemplate - Backend.Core Start",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -24,6 +58,14 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "FullstackTemplate - Web.Core Start",
+            "type": "shell",
+            "command": "npm start",
+            "options": {
+                "cwd": "FullstackTemplate\\Krz.FullstackTemplate.Frontends\\Krz.FullstackTemplate.Web.Core"
+            }
+        },
+        {
             "label": "Contractor.CLI Test",
             "command": "dotnet",
             "type": "process",
@@ -36,13 +78,5 @@
             },
             "problemMatcher": "$msCompile"
         },
-        {
-            "label": "Krz.FullstackTemplate.Web.Core Start",
-            "type": "shell",
-            "command": "npm start",
-            "options": {
-                "cwd": "FullstackTemplate\\Krz.FullstackTemplate.Frontends\\Krz.FullstackTemplate.Web.Core"
-            }
-        }
     ]
 }
