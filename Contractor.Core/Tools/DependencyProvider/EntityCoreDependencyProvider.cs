@@ -22,7 +22,7 @@ namespace Contractor.Core.Tools
             string filePath = GetFilePath(entity, projectFolder, fileName);
             string fileData = UpdateFileData(entity, filePath, projectFolder);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string GetFilePath(Entity entity, string projectFolder, string fileName)

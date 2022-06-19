@@ -36,7 +36,7 @@ namespace Contractor.Core.Tools
 
             string fileData = UpdateFileData(property, filePath, forInterface);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(Property property, string filePath, bool forInterface)

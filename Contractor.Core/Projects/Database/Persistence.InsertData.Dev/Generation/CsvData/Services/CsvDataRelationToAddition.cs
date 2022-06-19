@@ -23,7 +23,7 @@ namespace Contractor.Core.Projects.Database.Persistence.InsertData.Dev
 
             fileData = UpdateFileData(relationSide, fileData);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         protected string UpdateFileData(RelationSide relationSide, string fileData)

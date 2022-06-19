@@ -22,7 +22,7 @@ namespace Contractor.Core.Tools
 
             fileData = UsingStatements.Add(fileData, namespaceToAdd);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string GetFilePath(Entity entity, string domainFolder, string templateFileName)

@@ -124,6 +124,9 @@
     <None Update="Projects\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Projects\Backend\_Misc\Templates\E2ePostmanTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Projects\Database\Persistence.DbContext\Templates\EfEntityTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

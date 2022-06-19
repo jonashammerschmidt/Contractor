@@ -22,7 +22,7 @@ namespace Contractor.Core.Projects.Database.Persistence.InsertData.Dev
             
             string fileData = UpdateFileData(entity, "");
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         protected string UpdateFileData(Entity entity, string fileData)

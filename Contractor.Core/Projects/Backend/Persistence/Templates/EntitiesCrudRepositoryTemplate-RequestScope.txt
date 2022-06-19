@@ -15,7 +15,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
     {
         private readonly ISessionContext sessionContext;
         private readonly IPaginationContext paginationContext;
-        
+
         private readonly DbContextName dbContext;
 
         public EntitiesCrudRepository(

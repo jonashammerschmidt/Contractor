@@ -22,7 +22,7 @@ namespace Contractor.Core.Tools
             string filePath = this.pathService.GetAbsolutePathForFrontend(relationSide, domainFolder, templateFileName);
             string fileData = UpdateFileData(relationSide, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         public void AddPropertyToDTO(RelationSide relationSide, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
@@ -32,7 +32,7 @@ namespace Contractor.Core.Tools
 
             fileData = ImportStatements.Add(fileData, importStatementTypes, importStatementPath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(RelationSide relationSide, string filePath)

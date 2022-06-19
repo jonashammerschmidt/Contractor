@@ -21,7 +21,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             string filePath = this.pathService.GetAbsolutePathForDatabase(entity, $"DbContext\\{entity.Module.Options.Paths.DbContextName}.cs");
             string fileData = UpdateFileData(entity, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(Entity entity, string filePath)

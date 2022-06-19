@@ -1,5 +1,6 @@
 ﻿using Contractor.Core.Options;
 using System;
+using System.Globalization;
 
 namespace Contractor.Core.Tools
 {
@@ -7,11 +8,18 @@ namespace Contractor.Core.Tools
     {
         public static string GetPropertyLine(Property property, string postfix, Random random)
         {
+            return GetPropertyLine(property, string.Empty, postfix, random);
+        }
+
+        public static string GetPropertyLine(Property property, string prefix, string postfix, Random random)
+        {
             switch (property.Type)
             {
                 case PropertyTypes.String:
-                    var length = Math.Min(property.Name.Length, int.Parse(property.TypeExtra) - postfix.Length);
-                    return property.Name.Substring(0, length) + postfix;
+                    var length = Math.Min(
+                        property.Name.Length,
+                        int.Parse(property.TypeExtra) - prefix.Length - postfix.Length);
+                    return "\"" + prefix + property.Name.Substring(0, length) + postfix + "\"";
 
                 case PropertyTypes.Integer:
                     return random.Next(100, 999).ToString();
@@ -20,7 +28,7 @@ namespace Contractor.Core.Tools
                     return random.Next(10, 99).ToString() + "." + random.Next(0, 99999).ToString();
 
                 case PropertyTypes.Guid:
-                    return GenerateGuid(random);
+                    return "\"" + GenerateGuid(random) + "\"";
 
                 case PropertyTypes.Boolean:
                     return postfix.Equals("DbDefault").ToString().ToLower();
@@ -29,7 +37,7 @@ namespace Contractor.Core.Tools
                     Random gen = random;
                     int range = 10 * 365; // 10 years
                     var randomDate = new DateTime(2020, 12, 31).AddDays(-gen.Next(range));
-                    return randomDate.ToUniversalTime().ToString();
+                    return "\"" + randomDate.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture) + "\"";
 
                 default:
                     throw new NotImplementedException();

@@ -9,8 +9,9 @@ namespace Contractor.Core.Tools
 
         public Dictionary<string, string> fileWriteCache = new Dictionary<string, string>();
 
-        public string ReadAllText(ContractorGenerationOptions options, string path)
+        public string ReadAllText(ContractorGenerationOptions options, params string[] pathParts)
         {
+            string path = Path.Combine(pathParts);
             bool isTemplate = path.Contains("Templates") && path.EndsWith(".txt");
             bool isAlreadyLoaded = this.fileCache.ContainsKey(path);
 
@@ -31,8 +32,9 @@ namespace Contractor.Core.Tools
             return fileContent;
         }
 
-        public string ReadAllText(Module module, string path)
+        public string ReadAllText(Module module, params string[] pathParts)
         {
+            string path = Path.Combine(pathParts);
             bool isTemplate = path.Contains("Templates") && path.EndsWith(".txt");
             bool isAlreadyLoaded = this.fileCache.ContainsKey(path);
 
@@ -53,8 +55,9 @@ namespace Contractor.Core.Tools
             return fileContent;
         }
 
-        public string ReadAllText(Entity entity, string path)
+        public string ReadAllText(Entity entity, params string[] pathParts)
         {
+            string path = Path.Combine(pathParts);
             bool isTemplate = path.Contains("Templates") && path.EndsWith(".txt");
             bool isAlreadyLoaded = this.fileCache.ContainsKey(path);
 
@@ -75,8 +78,9 @@ namespace Contractor.Core.Tools
             return fileContent;
         }
 
-        public string ReadAllText(Property property, string path)
+        public string ReadAllText(Property property, params string[] pathParts)
         {
+            string path = Path.Combine(pathParts);
             bool isAlreadyLoaded = this.fileCache.ContainsKey(path);
 
             string fileContent = (isAlreadyLoaded) ?
@@ -91,8 +95,9 @@ namespace Contractor.Core.Tools
             return fileContent;
         }
 
-        public void WriteAllText(string path, string fileContent)
+        public void WriteAllText(string fileContent, params string[] pathParts)
         {
+            string path = Path.Combine(pathParts);
             if (!this.fileCache.ContainsKey(path))
             {
                 fileCache.Add(path, fileContent);

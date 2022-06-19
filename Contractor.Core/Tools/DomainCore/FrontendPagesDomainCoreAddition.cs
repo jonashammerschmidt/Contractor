@@ -22,7 +22,7 @@ namespace Contractor.Core.Tools
             string fileData = GetFileData(module, templateFilePath);
             string filePath = GetFilePath(module, domainFolder, templateFileName);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string GetFilePath(Module module, string domainFolder, string templateFileName)

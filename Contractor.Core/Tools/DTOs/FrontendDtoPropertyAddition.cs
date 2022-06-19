@@ -20,7 +20,7 @@ namespace Contractor.Core.Tools
             string filePath = this.pathService.GetAbsolutePathForFrontend(property, domainFolder, templateFileName);
             string fileData = UpdateFileData(property, filePath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
@@ -30,7 +30,7 @@ namespace Contractor.Core.Tools
 
             fileData = ImportStatements.Add(fileData, importStatementTypes, importStatementPath);
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(Property property, string filePath)

@@ -47,7 +47,7 @@ namespace Contractor.Core.Tools
                 }
             }
 
-            this.fileSystemClient.WriteAllText(filePath, fileData);
+            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         private string UpdateFileData(RelationSide relationSide, string filePath, bool forInterface)
