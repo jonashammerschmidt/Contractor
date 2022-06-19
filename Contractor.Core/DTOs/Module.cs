@@ -1,5 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Contractor.Core
 {
@@ -45,6 +46,12 @@ namespace Contractor.Core
             {
                 entity.AddLinksForChildren(this);
             }
+        }
+
+        public void Sort(IEnumerable<Entity> sortedEntities)
+        {
+            this.Entities = sortedEntities
+                .Where(entity => entity.Module == this);
         }
     }
 }

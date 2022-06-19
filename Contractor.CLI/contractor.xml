@@ -25,15 +25,6 @@
         <Property name="Name" type="String:256" />
       </Entity>
     </Module>
-    <Module name="Bankwesen">
-      <Entity name="SchöneBank" namePlural="SchöneBänke" scopeEntityName="Mandant">
-        <Property name="Name" type="String:256" />
-        <Property name="IsPleite" type="Boolean" />
-        <Property name="LegacyBezeichnung" type="String:256" optional="true" />
-        <Property name="LegacyIsPleite" type="Boolean" optional="true" />
-        <Index property="Name" clustered="true" unique="true" />
-      </Entity>
-    </Module>
     <Module name="Kundenstamm">
       <Entity name="Kunde" namePlural="Kunden" scopeEntityName="Mandant">
         <Property name="VorUndNachname" type="String:256" displayProperty="true" />
@@ -44,7 +35,7 @@
         <Index property="VorUndNachname" clustered="true" />
       </Entity>
     </Module>
-    <Module name="Kontoführung">
+    <Module name="Bankwesen">
       <Entity name="Konto" namePlural="Konten" scopeEntityName="Mandant">
         <Property name="Bezeichnung" type="String:256" />
         <Property name="SystemKontoId" type="Guid" />
@@ -56,6 +47,13 @@
         <Relation1ToN entityNameFrom="Kunde" optional="true" />
         <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" propertyNameTo="BäckupKonto" optional="true" onDelete="SetNull" />
         <Index property="Bezeichnung,SystemKontoId" unique="true" />
+      </Entity>
+      <Entity name="SchöneBank" namePlural="SchöneBänke" scopeEntityName="Mandant">
+        <Property name="Name" type="String:256" />
+        <Property name="IsPleite" type="Boolean" />
+        <Property name="LegacyBezeichnung" type="String:256" optional="true" />
+        <Property name="LegacyIsPleite" type="Boolean" optional="true" />
+        <Index property="Name" clustered="true" unique="true" />
       </Entity>
     </Module>
   </Modules>

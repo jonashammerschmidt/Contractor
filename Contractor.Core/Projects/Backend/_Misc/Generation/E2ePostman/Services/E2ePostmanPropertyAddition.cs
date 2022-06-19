@@ -23,8 +23,7 @@ namespace Contractor.Core.Projects.Backend.Misc
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatStartsWith("\t\"item\": [");
-            stringEditor.NextThatStartsWith($"\t\t\t\"name\": \"{property.Entity.Module.Name}\"");
-            stringEditor.NextThatStartsWith($"\t\t\t\t\t\"name\": \"{property.Entity.NamePlural}\",");
+            stringEditor.NextThatStartsWith($"\t\t\t\"name\": \"{property.Entity.Module.Name} - {property.Entity.NamePlural}\",");
 
             InsertCreateLine(property, createPropertyValue, stringEditor, string.Empty);
 
@@ -45,9 +44,9 @@ namespace Contractor.Core.Projects.Backend.Misc
 
         private static void InsertCreateLine(Property property, string createPropertyValue, StringEditor stringEditor, string postfix)
         {
-            stringEditor.NextThatStartsWith($"\t\t\t\t\t\t\t\"name\": \"Create {property.Entity.Name + postfix}\",");
-            stringEditor.NextThatStartsWith("\t\t\t\t\t\t\t\t\"body\": {");
-            stringEditor.NextThatStartsWith("\t\t\t\t\t\t\t\t\t\"raw\": \"{\\n");
+            stringEditor.NextThatStartsWith($"\t\t\t\t\t\"name\": \"Create {property.Entity.Name + postfix}\",");
+            stringEditor.NextThatStartsWith("\t\t\t\t\t\t\"body\": {");
+            stringEditor.NextThatStartsWith("\t\t\t\t\t\t\t\"raw\": \"{\\n");
             if (stringEditor.GetLine().Split(':').Count() > 2)
             {
                 stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $",");
@@ -57,25 +56,25 @@ namespace Contractor.Core.Projects.Backend.Misc
 
         private static void InsertGetSingleLine(Property property, string propertyValue, StringEditor stringEditor)
         {
-            stringEditor.NextThatStartsWith($"\t\t\t\t\t\t\t\"name\": \"Get {property.Entity.Name}\",");
+            stringEditor.NextThatStartsWith($"\t\t\t\t\t\"name\": \"Get {property.Entity.Name}\",");
             stringEditor.NextThatContains("var jsonData = pm.response.json();");
             stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"\t\t\t\t\t\t\t\t\t\t\t\"    pm.expect(jsonData.{property.NameLower}).to.eql({propertyValue});\\r\",");
+            stringEditor.InsertLine($"\t\t\t\t\t\t\t\t\t\"    pm.expect(jsonData.{property.NameLower}).to.eql({propertyValue});\\r\",");
         }
 
         private static void InsertGetPaggedLine(Property property, string createPropertyValue, StringEditor stringEditor)
         {
-            stringEditor.NextThatStartsWith($"\t\t\t\t\t\t\t\"name\": \"Get {property.Entity.NamePlural}\",");
+            stringEditor.NextThatStartsWith($"\t\t\t\t\t\"name\": \"Get {property.Entity.NamePlural}\",");
             stringEditor.NextThatContains("var jsonData = pm.response.json();");
             stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"\t\t\t\t\t\t\t\t\t\t\t\"    pm.expect(jsonData.data[0].{property.NameLower}).to.eql({createPropertyValue});\\r\",");
+            stringEditor.InsertLine($"\t\t\t\t\t\t\t\t\t\"    pm.expect(jsonData.data[0].{property.NameLower}).to.eql({createPropertyValue});\\r\",");
         }
 
         private static void InsertUpdateLine(Property property, string updatePropertyValue, StringEditor stringEditor)
         {
-            stringEditor.NextThatStartsWith($"\t\t\t\t\t\t\t\"name\": \"Update {property.Entity.Name}\",");
-            stringEditor.NextThatStartsWith("\t\t\t\t\t\t\t\t\"body\": {");
-            stringEditor.NextThatStartsWith("\t\t\t\t\t\t\t\t\t\"raw\": \"{\\n");
+            stringEditor.NextThatStartsWith($"\t\t\t\t\t\"name\": \"Update {property.Entity.Name}\",");
+            stringEditor.NextThatStartsWith("\t\t\t\t\t\t\"body\": {");
+            stringEditor.NextThatStartsWith("\t\t\t\t\t\t\t\"raw\": \"{\\n");
             stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $",\\n  \\\"{property.NameLower}\\\": {updatePropertyValue}");
         }
     }

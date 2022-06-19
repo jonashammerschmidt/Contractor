@@ -11,7 +11,6 @@ namespace Contractor.Core.Projects.Backend.Misc
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, E2ePostmanGeneration>();
-            serviceCollection.AddSingleton<E2ePostmanModuleAddition>();
             serviceCollection.AddSingleton<E2ePostmanEntityAddition>();
             serviceCollection.AddSingleton<E2ePostmanPropertyAddition>();
             serviceCollection.AddSingleton<E2ePostmanRelationSideAddition>();
