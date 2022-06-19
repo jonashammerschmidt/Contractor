@@ -1,5 +1,6 @@
 ﻿using Contractor.Core.Projects;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Contractor.Core
 {
@@ -42,6 +43,18 @@ namespace Contractor.Core
             }
 
             throw new KeyNotFoundException(entityName);
+        }
+
+        public void Sort(IEnumerable<Entity> sortedEntities)
+        {
+            this.Modules = sortedEntities
+                .Select(entity => entity.Module)
+                .Distinct();
+
+            foreach (var module in this.Modules)
+            {
+                module.Sort(sortedEntities);
+            }
         }
     }
 }

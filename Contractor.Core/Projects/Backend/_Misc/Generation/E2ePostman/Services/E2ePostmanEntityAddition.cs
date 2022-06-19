@@ -18,8 +18,7 @@ namespace Contractor.Core.Projects.Backend.Misc
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatStartsWith("\t\"item\": [");
-            stringEditor.NextThatStartsWith($"\t\t\t\"name\": \"{entity.Module.Name}\"");
-            stringEditor.NextThatStartsWith("\t\t\t]");
+            stringEditor.NextThatStartsWith("\t]");
 
             stringEditor.Prev();
             if (!stringEditor.GetLine().Contains("\"item\": ["))

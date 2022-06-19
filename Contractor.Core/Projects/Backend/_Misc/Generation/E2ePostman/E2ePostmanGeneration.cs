@@ -5,18 +5,15 @@
     {
         private static readonly string FileName = "e2e-postman.json";
 
-        private readonly E2ePostmanModuleAddition e2ePostmanModuleAddition;
         private readonly E2ePostmanEntityAddition e2ePostmanEntityAddition;
         private readonly E2ePostmanPropertyAddition e2ePostmanPropertyAddition;
         private readonly E2ePostmanRelationSideAddition e2ePostmanRelationSideAddition;
 
         public E2ePostmanGeneration(
-            E2ePostmanModuleAddition e2ePostmanModuleAddition,
             E2ePostmanEntityAddition e2ePostmanEntityAddition,
             E2ePostmanPropertyAddition e2ePostmanPropertyAddition,
             E2ePostmanRelationSideAddition e2ePostmanRelationSideAddition)
         {
-            this.e2ePostmanModuleAddition = e2ePostmanModuleAddition;
             this.e2ePostmanEntityAddition = e2ePostmanEntityAddition;
             this.e2ePostmanPropertyAddition = e2ePostmanPropertyAddition;
             this.e2ePostmanRelationSideAddition = e2ePostmanRelationSideAddition;
@@ -24,7 +21,6 @@
 
         protected override void AddModuleActions(Module module)
         {
-            this.e2ePostmanModuleAddition.AddModuleToBackendFile(module, FileName);
         }
 
         protected override void AddEntity(Entity entity)
