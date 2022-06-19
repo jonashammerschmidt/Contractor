@@ -35,7 +35,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             }
 
             // ----------- Create Method -----------
-            stringEditor.NextThatContains($"Create{relationSide.Entity.Name}(");
+            stringEditor.NextThatContains($"Guid Create{relationSide.Entity.Name}(");
             stringEditor.NextThatContains("{");
             stringEditor.Next();
 
@@ -77,7 +77,7 @@ namespace Contractor.Core.Projects.Backend.Logic
 
             // ----------- Update Method -----------
             stringEditor.MoveToStart();
-            stringEditor.NextThatContains($"ILogicResult Update{relationSide.Entity.Name}(");
+            stringEditor.NextThatContains($"void Update{relationSide.Entity.Name}(");
             stringEditor.NextThatContains($"{relationSide.Entity.NamePluralLower}CrudRepository.Get{relationSide.Entity.Name}(");
             stringEditor.Next(line => line.StartsWith("            }"));
             stringEditor.Next();
