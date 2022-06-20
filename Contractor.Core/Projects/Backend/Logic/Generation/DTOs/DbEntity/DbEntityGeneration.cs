@@ -14,16 +14,19 @@ namespace Contractor.Core.Projects.Backend.Logic
 
         private readonly DtoAddition dtoAddition;
         private readonly DtoPropertyAddition dtoPropertyAddition;
-        private readonly DtoRelationAddition relationAddition;
+        private readonly DbEntityMethodsAddition dbEntityMethodsAddition;
+        private readonly DtoRelationAddition dtoRelationAddition;
 
         public DbEntityGeneration(
             DtoAddition dtoAddition,
             DtoPropertyAddition dtoPropertyAddition,
+            DbEntityMethodsAddition dbEntityMethodsAddition,
             DtoRelationAddition relationAddition)
         {
             this.dtoAddition = dtoAddition;
             this.dtoPropertyAddition = dtoPropertyAddition;
-            this.relationAddition = relationAddition;
+            this.dbEntityMethodsAddition = dbEntityMethodsAddition;
+            this.dtoRelationAddition = relationAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -38,6 +41,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         protected override void AddProperty(Property property)
         {
             this.dtoPropertyAddition.AddPropertyToDTO(property, LogicProjectGeneration.DtoFolder, FileName);
+            this.dbEntityMethodsAddition.Edit(property, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -47,7 +51,8 @@ namespace Contractor.Core.Projects.Backend.Logic
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
-            this.relationAddition.AddRelationToDTO(relationSideTo, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoRelationAddition.AddRelationToDTO(relationSideTo, LogicProjectGeneration.DtoFolder, FileName);
+            this.dbEntityMethodsAddition.Edit(relationSideTo, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
