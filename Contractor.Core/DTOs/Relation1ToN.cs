@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core
+﻿using Contractor.Core.Helpers;
+
+namespace Contractor.Core
 {
     public class Relation1ToN : Relation
     {

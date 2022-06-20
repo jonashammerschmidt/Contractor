@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Tools;
+﻿using Contractor.Core.Projects.Backend.Persistence;
+using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Projects.Database.Persistence.DbContext
@@ -15,17 +16,20 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
         private readonly EfDtoEntityAddition efDtoEntityAddition;
         private readonly EfDtoPropertyAddition efDtoPropertyAddition;
         private readonly DtoRelationAddition relationAddition;
+        private readonly EfDtoContructorHashSetAddition efDtoContructorHashSetAddition;
 
         public EfEntityGeneration(
             DtoAddition dtoAddition,
             EfDtoEntityAddition efDtoEntityAddition,
             EfDtoPropertyAddition efDtoPropertyAddition,
-            DtoRelationAddition relationAddition)
+            DtoRelationAddition relationAddition,
+            EfDtoContructorHashSetAddition efDtoContructorHashSetAddition)
         {
             this.dtoAddition = dtoAddition;
             this.efDtoEntityAddition = efDtoEntityAddition;
             this.efDtoPropertyAddition = efDtoPropertyAddition;
             this.relationAddition = relationAddition;
+            this.efDtoContructorHashSetAddition = efDtoContructorHashSetAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -50,6 +54,8 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
             this.relationAddition.AddRelationToDTOForDatabase(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+
+            this.efDtoContructorHashSetAddition.Add(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)

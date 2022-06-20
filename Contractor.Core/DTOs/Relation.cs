@@ -4,9 +4,8 @@ namespace Contractor.Core
 {
     public abstract class Relation
     {
-
         private string entityNameFrom;
-        private string propertyNameFrom;
+        protected string propertyNameFrom;
         private string propertyNameTo;
 
         protected Relation()
@@ -17,8 +16,8 @@ namespace Contractor.Core
         {
             this.entityNameFrom = relation.entityNameFrom;
             this.propertyNameFrom = relation.propertyNameFrom;
-            this.propertyNameTo  = relation.propertyNameTo;
-            
+            this.propertyNameTo = relation.propertyNameTo;
+
             this.IsOptional = relation.IsOptional;
             this.OnDelete = relation.OnDelete;
             this.Order = relation.Order;
@@ -31,14 +30,15 @@ namespace Contractor.Core
             set { this.entityNameFrom = value.ToVariableName(); }
         }
 
-        public string PropertyNameFrom {
-            get { return propertyNameFrom ?? EntityFrom.Name; }
+        public string PropertyNameFrom
+        {
+            get { return this.propertyNameFrom; }
             set { this.propertyNameFrom = value?.ToVariableName(); }
         }
 
         public string PropertyNameTo
         {
-            get { return propertyNameTo ?? EntityTo.Name; }
+            get { return propertyNameTo; }
             set { this.propertyNameTo = value?.ToVariableName(); }
         }
 
