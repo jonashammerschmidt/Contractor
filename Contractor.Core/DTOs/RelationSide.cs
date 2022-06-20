@@ -20,52 +20,65 @@ namespace Contractor.Core
 
         public static RelationSide FromObjectRelationEndFrom(Relation relation, string prefix, string postfix)
         {
+            var is1ToN = relation.GetType() == typeof(Relation1ToN);
+            string name = relation.PropertyNameTo ?? (is1ToN ? relation.EntityTo.NamePlural : relation.EntityTo.Name);
+            string otherName = relation.PropertyNameFrom ?? relation.EntityFrom.Name;
+
             return new RelationSide()
             {
                 Entity = relation.EntityFrom,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
                 OnDelete = relation.OnDelete,
-                Name = relation.PropertyNameTo,
+                Name = name,
                 Order = int.MaxValue,
                 Type = prefix + relation.EntityTo.Name + postfix,
                 RelationSideType = RelationSideType.From,
                 OtherEntity = relation.EntityTo,
-                OtherName = relation.PropertyNameFrom,
+                OtherName = otherName,
             };
         }
 
         public static RelationSide FromGuidRelationEndTo(Relation relation)
         {
+            string name = relation.PropertyNameFrom ?? relation.EntityFrom.Name;
+            string otherName = relation.PropertyNameTo ?? relation.EntityTo.Name;
+            name = name + "Id";
+            otherName = otherName + "Id";
+
             return new RelationSide()
             {
                 Entity = relation.EntityTo,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
                 OnDelete = relation.OnDelete,
-                Name = relation.PropertyNameFrom + "Id",
+                Name = name,
                 Order = int.MaxValue,
                 Type = "Guid",
                 RelationSideType = RelationSideType.To,
                 OtherEntity = relation.EntityFrom,
-                OtherName = relation.PropertyNameTo + "Id",
+                OtherName = otherName,
             };
         }
 
         public static RelationSide FromObjectRelationEndTo(Relation relation, string prefix, string postfix)
         {
+            var is1ToN = relation.GetType() == typeof(Relation1ToN);
+            string name = relation.PropertyNameFrom ?? relation.EntityFrom.Name;
+            string otherName = relation.PropertyNameTo ?? (is1ToN ? relation.EntityTo.NamePlural : relation.EntityTo.Name);
+
             return new RelationSide()
             {
                 Entity = relation.EntityTo,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
                 OnDelete = relation.OnDelete,
-                Name = relation.PropertyNameFrom,
+                Name = name,
                 Order = int.MaxValue,
                 Type = prefix + relation.EntityFrom.Name + postfix,
                 RelationSideType = RelationSideType.To,
                 OtherEntity = relation.EntityFrom,
-                OtherName = relation.PropertyNameTo,
+                OtherName = otherName,
             };
         }
     }

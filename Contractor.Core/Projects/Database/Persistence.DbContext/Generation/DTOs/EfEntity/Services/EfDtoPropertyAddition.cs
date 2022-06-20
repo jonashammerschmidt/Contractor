@@ -28,7 +28,7 @@ namespace Contractor.Core.Tools
             string fileData = this.fileSystemClient.ReadAllText(property, filePath);
 
             StringEditor stringEditor = new StringEditor(fileData);
-            PropertyLine.FindStartingLineForNewProperty(filePath, property.Entity.Name, stringEditor);
+            PropertyLine.FindStartingLineForNewProperty(fileData, property.Entity.Name, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {

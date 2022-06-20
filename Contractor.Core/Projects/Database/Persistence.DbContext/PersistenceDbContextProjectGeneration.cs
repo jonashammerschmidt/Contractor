@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Helpers;
+using Contractor.Core.Projects.Backend.Persistence;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +25,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
             serviceCollection.AddSingleton<EfDtoEntityAddition>();
             serviceCollection.AddSingleton<EfDtoPropertyAddition>();
+            serviceCollection.AddSingleton<EfDtoContructorHashSetAddition>();
         }
     }
 }
