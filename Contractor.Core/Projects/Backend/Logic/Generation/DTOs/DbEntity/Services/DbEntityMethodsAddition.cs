@@ -1,13 +1,11 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
-using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Logic
 {
-    internal class EntityMethodsAddition : PropertyAdditionEditor
+    internal class DbEntityMethodsAddition : PropertyAdditionEditor
     {
-        public EntityMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
+        public DbEntityMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
         {
         }
@@ -15,12 +13,12 @@ namespace Contractor.Core.Projects.Backend.Logic
         protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
-            
-            stringEditor.NextThatContains("FromDb" + property.Entity.Name);
+
+            stringEditor.NextThatContains("From" + property.Entity.Name + "Create(");
             stringEditor.Next(line => line.Trim().Equals("};"));
 
-            stringEditor.InsertLine($"                {property.Name} = db{property.Entity.Name}.{property.Name},");
-            
+            stringEditor.InsertLine($"                {property.Name} = {property.Entity.NameLower}Create.{property.Name},");
+
             return stringEditor.GetText();
         }
     }

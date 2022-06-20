@@ -32,6 +32,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             serviceCollection.AddSingleton<EntityListItemFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<EntityListItemToMethodsAddition>();
             serviceCollection.AddSingleton<EntityMethodsAddition>();
+            serviceCollection.AddSingleton<DbEntityMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityUpdateMethodsAddition>();
         }
     }
