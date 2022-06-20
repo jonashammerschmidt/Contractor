@@ -49,6 +49,7 @@ namespace Contractor.Core
                             Name = entity.Name,
                             NamePlural = entity.NamePlural,
                             ScopeEntityName = entity.ScopeEntityName,
+                            IdType = entity.IdType,
                             Skip = entity.Skip,
                             Properties = entity.Properties.Select(property => new Property()
                             {
@@ -189,6 +190,9 @@ namespace Contractor.Core
 
         [XmlAttribute(AttributeName = "scopeEntityName")]
         public string ScopeEntityName { get; set; }
+
+        [XmlAttribute(AttributeName = "idType")]
+        public string IdType { get; set; }
 
         [XmlAttribute(AttributeName = "skip")]
         public bool Skip { get; set; }

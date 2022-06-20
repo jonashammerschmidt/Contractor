@@ -40,13 +40,22 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
             stringEditor.NextThatContains("this.OnModelCreatingPartial(modelBuilder);");
 
-            stringEditor.InsertLine(
-                $"            modelBuilder.Entity<Ef{entity.Name}>(entity =>\n" +
-                 "            {\n" +
-                $"                entity.ToTable(\"{entity.NamePlural}\");\n" +
-                 "            });");
+            stringEditor.InsertLine($"            modelBuilder.Entity<Ef{entity.Name}>(entity =>");
+            stringEditor.InsertLine( "            {");
+            stringEditor.InsertLine($"                entity.ToTable(\"{entity.NamePlural}\");");
+            stringEditor.InsertLine("");
+            stringEditor.InsertLine($"                entity.Property(e => e.Id)");
+            if (entity.IdType == "AutoIncrement")
+            {
+                stringEditor.InsertLine($"                    .ValueGeneratedOnAdd();");
+            }
+            else
+            {
+                stringEditor.InsertLine($"                    .ValueGeneratedNever();");
+            }
+
+            stringEditor.InsertLine("            });");
             stringEditor.InsertNewLine();
-            stringEditor.MoveToStart();
 
             return stringEditor.GetText();
         }
