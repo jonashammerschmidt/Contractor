@@ -38,8 +38,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             {
                 stringEditor.InsertNewLine();
                 stringEditor.InsertLine(
-                    $"                entity\n" +
-                    $"                    .HasKey(c => c.Id)\n" +
+                    $"                entity.HasKey(c => c.Id)\n" +
                     $"                    .IsClustered(false);");
             }
 
@@ -49,8 +48,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
 
                 stringEditor.InsertNewLine();
                 stringEditor.InsertLine(
-                    $"                entity\n" +
-                    $"                    .HasIndex(c => new {{ {indexProperties} }})\n" +
+                    $"                entity.HasIndex(c => new {{ {indexProperties} }})\n" +
                     $"                    .IsUnique({index.IsUnique.ToString().ToLower()})\n" +
                     $"                    .IsClustered({index.IsClustered.ToString().ToLower()});");
             }

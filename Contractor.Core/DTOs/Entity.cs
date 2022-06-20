@@ -65,6 +65,8 @@ namespace Contractor.Core
 
         public bool Skip { get; set; }
 
+        public string IdType { get; set; }
+
         public Entity ScopeEntity { get; private set; }
 
         public Property DisplayProperty { get; set; }

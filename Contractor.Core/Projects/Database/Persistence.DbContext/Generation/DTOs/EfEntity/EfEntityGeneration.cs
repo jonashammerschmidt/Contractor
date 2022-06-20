@@ -12,15 +12,18 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
         private static readonly string FileName = "EfEntity.cs";
 
         private readonly DtoAddition dtoAddition;
+        private readonly EfDtoEntityAddition efDtoEntityAddition;
         private readonly EfDtoPropertyAddition efDtoPropertyAddition;
         private readonly DtoRelationAddition relationAddition;
 
         public EfEntityGeneration(
             DtoAddition dtoAddition,
+            EfDtoEntityAddition efDtoEntityAddition,
             EfDtoPropertyAddition efDtoPropertyAddition,
             DtoRelationAddition relationAddition)
         {
             this.dtoAddition = dtoAddition;
+            this.efDtoEntityAddition = efDtoEntityAddition;
             this.efDtoPropertyAddition = efDtoPropertyAddition;
             this.relationAddition = relationAddition;
         }
@@ -33,6 +36,7 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
         {
             string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
             this.dtoAddition.AddDto(entity, PersistenceDbContextProjectGeneration.DtoFolder, templatePath, FileName, true);
+            this.efDtoEntityAddition.Edit(entity, PersistenceDbContextProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddProperty(Property property)
