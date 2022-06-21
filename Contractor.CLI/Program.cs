@@ -30,7 +30,7 @@ namespace Contractor.CLI
                     break;
 
                 case "test":
-                    HandleExecuteJob(new string[] { "execute", "contractor.xml" });
+                    HandleExecuteJob(new string[] { "execute", @"..\Contractor.XML\contractor.xml" });
                     break;
 
                 case "execute":
@@ -53,20 +53,47 @@ namespace Contractor.CLI
                 return;
             }
 
-            string filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), args[1]));
-            if (!File.Exists(filePath))
+            string contractorXmlFilePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), args[1]));
+            FileInfo contractorXmlFileInfo = new FileInfo(contractorXmlFilePath);
+            if (!contractorXmlFileInfo.Exists)
             {
-                Console.WriteLine("Die angegebene Datei konnte nicht gefunden werden.");
+                contractorXmlFilePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..", args[1]));
+                contractorXmlFileInfo = new FileInfo(contractorXmlFilePath);
+                
+                if (!contractorXmlFileInfo.Exists)
+                {
+                    Console.WriteLine("Die angegebene Datei konnte nicht gefunden werden.");
+                }
             }
 
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(File.OpenRead(filePath));
-            XmlReader reader = new XmlNodeReader(xmlDocument);
+            XmlDocument contractorXmlDocument = new XmlDocument();
+            contractorXmlDocument.Load(File.OpenRead(contractorXmlFilePath));
+            XmlReader contractorXmlReader = new XmlNodeReader(contractorXmlDocument);
 
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ContractorXml));
-            ContractorXml contractorXml = (ContractorXml) xmlSerializer.Deserialize(reader);
+            XmlSerializer contractorXmlSerializer = new XmlSerializer(typeof(ContractorXml));
+            ContractorXml contractorXml = (ContractorXml) contractorXmlSerializer.Deserialize(contractorXmlReader);
 
-            ContractorGenerationOptions contractorGenerationOptions = contractorXml.ToContractorGenerationOptions(xmlDocument);
+            ContractorGenerationOptions contractorGenerationOptions = ContractorXmlConverter
+                .ToContractorGenerationOptions(contractorXml, contractorXmlDocument);
+
+            foreach (var include in contractorXml.Includes.Includes)
+            {
+                string contractorIncludeXmlFilePath = Path.GetFullPath(Path.Combine(
+                    contractorXmlFileInfo.Directory.FullName, 
+                    include.Src));
+
+                XmlDocument contractorIncludeXmlDocument = new XmlDocument();
+                contractorIncludeXmlDocument.Load(File.OpenRead(contractorIncludeXmlFilePath));
+                XmlReader contractorIncludeXmlReader = new XmlNodeReader(contractorIncludeXmlDocument);
+
+                XmlSerializer contractorIncludeXmlSerializer = new XmlSerializer(typeof(ContractorIncludeXml));
+                ContractorIncludeXml contractorIncludeXml = (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
+
+                ContractorXmlConverter.AddToContractorGenerationOptions(contractorGenerationOptions, contractorIncludeXml, contractorIncludeXmlDocument);
+            }
+
+            contractorGenerationOptions.AddLinks();
+
             TagArgumentParser.AddTags(args, contractorGenerationOptions);
             contractorGenerationOptions.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
 

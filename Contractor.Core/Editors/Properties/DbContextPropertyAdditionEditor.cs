@@ -15,7 +15,7 @@
 
         public void Edit(Property property)
         {
-            string filePath = this.pathService.GetAbsolutePathForDatabase(property, $"DbContext\\{property.Entity.Module.Options.Paths.DbContextName}.cs");
+            string filePath = this.pathService.GetAbsolutePathForDatabase(property, $"DbContext\\{property.Entity.Module.Options.Paths.DbContextName}Raw.cs");
 
             string fileData = this.fileSystemClient.ReadAllText(property, filePath);
             fileData = UpdateFileData(property, fileData);

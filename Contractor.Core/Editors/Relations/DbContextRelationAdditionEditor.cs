@@ -15,7 +15,7 @@
 
         public void Edit(RelationSide relationSide)
         {
-            string filePath = this.pathService.GetAbsolutePathForDatabase(relationSide, "DbContext", "DbContextName.cs");
+            string filePath = this.pathService.GetAbsolutePathForDatabase(relationSide, "DbContext", "DbContextNameRaw.cs");
 
             string fileData = this.fileSystemClient.ReadAllText(relationSide, filePath);
             fileData = UpdateFileData(relationSide, fileData);
