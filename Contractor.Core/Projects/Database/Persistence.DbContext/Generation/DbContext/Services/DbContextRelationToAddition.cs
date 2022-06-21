@@ -18,13 +18,21 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             stringEditor.NextThatContains("});");
 
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine(
-                    $"                entity.HasOne(d => d.{relationSide.Name})\n" +
-                    $"                    .WithMany(p => p.{relationSide.OtherName})\n" +
-                    $"                    .HasForeignKey(d => d.{relationSide.Name}Id)\n" +
-                    $"                    .IsRequired({(!relationSide.IsOptional).ToString().ToLower()})\n" +
-                    $"                    .OnDelete(DeleteBehavior.{relationSide.OnDelete})\n" +
-                    $"                    .HasConstraintName(\"FK_{relationSide.Entity.NamePlural}_{relationSide.Name}\");");
+            stringEditor.InsertLine($"                entity.HasOne(d => d.{relationSide.Name})");
+            stringEditor.InsertLine($"                    .WithMany(p => p.{relationSide.OtherName})");
+
+            if (relationSide.OtherEntity.HasScope)
+            {
+                stringEditor.InsertLine($"                    .HasForeignKey(d => new {{ d.{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
+            }
+            else
+            {
+                stringEditor.InsertLine($"                    .HasForeignKey(d => d.{relationSide.Name}Id)");
+            }
+
+            stringEditor.InsertLine($"                    .IsRequired({(!relationSide.IsOptional).ToString().ToLower()})");
+            stringEditor.InsertLine($"                    .OnDelete(DeleteBehavior.{relationSide.OnDelete})");
+            stringEditor.InsertLine($"                    .HasConstraintName(\"FK_{relationSide.Entity.NamePlural}_{relationSide.Name}\");");
 
             return stringEditor.GetText();
         }

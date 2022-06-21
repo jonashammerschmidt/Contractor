@@ -11,7 +11,7 @@
         <Property name="LegacyBalance" type="Double" optional="true" />
         <Property name="LegacyEröffnetAm" type="DateTime" optional="true" />
         <Relation1ToN entityNameFrom="Kunde" optional="true" />
-        <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" propertyNameTo="BäckupKonto" optional="true" onDelete="SetNull" />
+        <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" propertyNameTo="BäckupKonto" optional="true" onDelete="ClientSetNull" />
         <Index property="Bezeichnung,SystemKontoId" unique="true" />
       </Entity>
       <Entity name="SchöneBank" namePlural="SchöneBänke" scopeEntityName="Mandant">

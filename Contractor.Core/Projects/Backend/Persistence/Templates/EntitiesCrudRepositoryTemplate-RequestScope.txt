@@ -1,4 +1,5 @@
-﻿using Contract.Architecture.Backend.Common.Contract;
+﻿using Contract.Architecture.Backend.Common;
+using Contract.Architecture.Backend.Common.Contract;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Persistence;
 using ProjectName.Contract.Contexts;
@@ -39,25 +40,27 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
-                .Single();
+                .SingleOrDefault();
+
+            if (efEntity == null)
+            {
+                throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entityId);
+            }
 
             this.dbContext.Entities.Remove(efEntity);
             this.dbContext.SaveChanges();
-        }
-
-        public bool DoesEntityExist(Guid entityId)
-        {
-            return this.dbContext.Entities
-                .Any(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId && efEntity.Id == entityId);
         }
 
         public IDbEntity GetEntity(Guid entityId)
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
                 .SingleOrDefault();
+
+            if (efEntity == null)
+            {
+                throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entityId);
+            }
 
             return DbEntity.FromEfEntity(efEntity);
         }
@@ -66,16 +69,19 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
-                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
                 .SingleOrDefault();
+
+            if (efEntity == null)
+            {
+                throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entityId);
+            }
 
             return DbEntityDetail.FromEfEntity(efEntity);
         }
 
         public IDbPagedResult<IDbEntityListItem> GetPagedEntities()
         {
-            var efEntities = this.dbContext.Entities
-                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId);
+            var efEntities = this.dbContext.Entities;
 
             return Pagination.Execute(
                 efEntities,
@@ -83,20 +89,16 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
                 efEntity => DbEntityListItem.FromEfEntity(efEntity));
         }
 
-        public IEnumerable<IDbEntity> GetAllEntities()
-        {
-            return this.dbContext.Entities
-                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
-                .Select(efEntity => DbEntity.FromEfEntity(efEntity))
-                .ToList();
-        }
-
         public void UpdateEntity(IDbEntityUpdate dbEntityUpdate)
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == dbEntityUpdate.Id)
-                .Where(efEntity => efEntity.RequestScopeId == this.sessionContext.RequestScopeId)
                 .SingleOrDefault();
+
+            if (efEntity == null)
+            {
+                throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", dbEntityUpdate.Id);
+            }
 
             DbEntity.UpdateEfEntity(efEntity, dbEntityUpdate);
 

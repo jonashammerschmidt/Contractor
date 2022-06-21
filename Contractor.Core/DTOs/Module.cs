@@ -35,7 +35,7 @@ namespace Contractor.Core
             Options = options;
         }
 
-        public void AddLinksForChildren(ContractorGenerationOptions options)
+        public void AddLinksForChildren()
         {
             foreach (var entity in Entities)
             {
@@ -44,7 +44,7 @@ namespace Contractor.Core
 
             foreach (var entity in Entities)
             {
-                entity.AddLinksForChildren(this);
+                entity.AddLinksForChildren();
             }
         }
 

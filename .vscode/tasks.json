@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Database - Add Migration Initial",
+            "label": "Database - 0. Add Migration Initial",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -17,7 +17,7 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Database - Add Migration Bankwesen",
+            "label": "Database - 1. Add Migration Bankwesen",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -32,7 +32,7 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Database - Update Database",
+            "label": "Database - 2. Update Database",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -46,7 +46,7 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Database - InsertData.Dev ",
+            "label": "Database - 3. InsertData.Dev ",
             "command": "dotnet",
             "type": "process",
             "args": [

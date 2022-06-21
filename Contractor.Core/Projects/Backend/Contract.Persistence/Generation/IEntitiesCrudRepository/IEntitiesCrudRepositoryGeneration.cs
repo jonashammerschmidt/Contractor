@@ -12,14 +12,11 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
         private static readonly string FileName = "IEntitiesCrudRepository.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
-        private readonly IEntitiesCrudRepositoryToOneToOneRelationAddition entitiesCrudRepositoryToOneToOneRelationAddition;
 
         public IEntitiesCrudRepositoryGeneration(
-            EntityCoreAddition entityCoreAddition,
-            IEntitiesCrudRepositoryToOneToOneRelationAddition entitiesCrudRepositoryToOneToOneRelationAddition)
+            EntityCoreAddition entityCoreAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
-            this.entitiesCrudRepositoryToOneToOneRelationAddition = entitiesCrudRepositoryToOneToOneRelationAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -49,8 +46,6 @@ namespace Contractor.Core.Projects.Backend.Contract.Persistence
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
-            RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
-            this.entitiesCrudRepositoryToOneToOneRelationAddition.Edit(relationSide, ContractPersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

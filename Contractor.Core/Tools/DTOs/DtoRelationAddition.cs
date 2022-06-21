@@ -67,7 +67,7 @@ namespace Contractor.Core.Tools
                 fileData = UsingStatements.Add(fileData, "System");
             }
 
-            if (relationSide.Type.Contains("Enumerable") || relationSide.Type.Contains("ICollection"))
+            if (relationSide.Type.Contains("Enumerable"))
             {
                 fileData = UsingStatements.Add(fileData, "System.Collections.Generic");
             }
