@@ -22,8 +22,6 @@ namespace Contractor.Core.Projects.Backend.Logic
             serviceCollection.AddSingleton<ClassGeneration, DbEntityUpdateGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, LogicDependencyProviderGeneration>();
 
-            serviceCollection.AddSingleton<EntitiesCrudLogicRelationAddition>();
-            serviceCollection.AddSingleton<UniqueEntitiesCrudLogicRelationAddition>();
             serviceCollection.AddSingleton<EntityDetailFromMethodsAddition>();
             serviceCollection.AddSingleton<EntityDetailFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<EntityDetailMethodsAddition>();

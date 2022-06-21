@@ -1,5 +1,6 @@
 ﻿using Contractor.Core;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 
@@ -7,15 +8,18 @@ namespace Contractor.CLI
 {
     internal class ContractorXmlConverter
     {
-        internal static ContractorGenerationOptions ToContractorGenerationOptions(ContractorXml contractorXml, XmlDocument xmlDocument)
+        internal static ContractorGenerationOptions ToContractorGenerationOptions(
+            ContractorXml contractorXml,
+            XmlDocument xmlDocument,
+            string contractorXmlFolderPath)
         {
             ContractorGenerationOptions contractorGenerationOptions = new ContractorGenerationOptions()
             {
                 Paths = new Paths()
                 {
-                    BackendDestinationFolder = contractorXml.Paths.BackendDestinationFolder,
-                    DbDestinationFolder = contractorXml.Paths.DbDestinationFolder,
-                    FrontendDestinationFolder = contractorXml.Paths.FrontendDestinationFolder,
+                    BackendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.BackendDestinationFolder)),
+                    DbDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.DbDestinationFolder)),
+                    FrontendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.FrontendDestinationFolder)),
                     ProjectName = contractorXml.Paths.ProjectName,
                     DbProjectName = contractorXml.Paths.DbProjectName,
                     DbContextName = contractorXml.Paths.DbContextName,

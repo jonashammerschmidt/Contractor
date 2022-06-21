@@ -18,7 +18,6 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             serviceCollection.AddSingleton<ClassGeneration, EfEntityGeneration>();
 
             serviceCollection.AddSingleton<DbContextEntityAddition>();
-            serviceCollection.AddSingleton<DbContextIndexAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();
             serviceCollection.AddSingleton<DbContextRelationToAddition>();
             serviceCollection.AddSingleton<DbContextRelationToOneToOneAddition>();

@@ -25,7 +25,7 @@ namespace Contractor.Core
 
             foreach (var module in this.Modules)
             {
-                module.AddLinksForChildren(this);
+                module.AddLinksForChildren();
             }
         }
 

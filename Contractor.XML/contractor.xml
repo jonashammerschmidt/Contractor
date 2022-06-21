@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Contractor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor.xsd">
   <Paths>
-    <BackendDestinationFolder>..\..\..\..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Core</BackendDestinationFolder>
-    <DbDestinationFolder>..\..\..\..\FullstackTemplate\Krz.FullstackTemplate.Databases\Krz.FullstackTemplate.Database.Core</DbDestinationFolder>
-    <FrontendDestinationFolder>..\..\..\..\FullstackTemplate\Krz.FullstackTemplate.Frontends\Krz.FullstackTemplate.Web.Core</FrontendDestinationFolder>
+    <BackendDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Core</BackendDestinationFolder>
+    <DbDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Databases\Krz.FullstackTemplate.Database.Core</DbDestinationFolder>
+    <FrontendDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Frontends\Krz.FullstackTemplate.Web.Core</FrontendDestinationFolder>
     <ProjectName>Krz.FullstackTemplate.Backend.Core</ProjectName>
     <DbProjectName>Krz.FullstackTemplate.Database.Core</DbProjectName>
     <DbContextName>FullstackTemplateCoreDbContext</DbContextName>

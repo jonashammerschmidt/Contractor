@@ -1,5 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.Tools;
+using System.Linq;
 
 namespace Contractor.Core.Projects.Database.Persistence.DbContext
 {
@@ -44,6 +45,32 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             stringEditor.InsertLine( "            {");
             stringEditor.InsertLine($"                entity.ToTable(\"{entity.NamePlural}\");");
             stringEditor.InsertLine("");
+
+            if (entity.HasScope)
+            {
+                stringEditor.InsertLine($"                entity.HasKey(c => new {{ c.{entity.ScopeEntity.Name}Id, c.Id }})");
+            }
+            else
+            {
+                stringEditor.InsertLine($"                entity.HasKey(c => c.Id)");
+            }
+
+            stringEditor.InsertLine($"                    .IsClustered({(!entity.Indices.Any(index => index.IsClustered)).ToString().ToLower()});");
+
+            foreach (var index in entity.Indices)
+            {
+                string indexProperties = string.Join(", ", index.ColumnNames.Select(columnName => "c." + columnName));
+
+                stringEditor.InsertNewLine();
+                stringEditor.InsertLine(
+                    $"                entity.HasIndex(c => new {{ {indexProperties} }})\n" +
+                    $"                    .IsUnique({index.IsUnique.ToString().ToLower()})\n" +
+                    $"                    .IsClustered({index.IsClustered.ToString().ToLower()});");
+            }
+
+
+            stringEditor.InsertNewLine();
+
             stringEditor.InsertLine($"                entity.Property(e => e.Id)");
             if (entity.IdType == "AutoIncrement")
             {

@@ -38,11 +38,6 @@ namespace ProjectName.Logic.Modules.Domain.Entities
 
         public void DeleteEntity(Guid entityId)
         {
-            if (!this.entitiesCrudRepository.DoesEntityExist(entityId))
-            {
-                throw new NotFoundResultException("Entity ({id}) konnte nicht gefunden werden.", entityId);
-            }
-
             this.entitiesCrudRepository.DeleteEntity(entityId);
 
             this.logger.LogInformation("Entity ({id}) gelöscht", entityId);
@@ -51,13 +46,10 @@ namespace ProjectName.Logic.Modules.Domain.Entities
         public IEntityDetail GetEntityDetail(Guid entityId)
         {
             IDbEntityDetail dbEntityDetail = this.entitiesCrudRepository.GetEntityDetail(entityId);
-            if (dbEntityDetail == null)
-            {
-                throw new NotFoundResultException("Entity ({id}) konnte nicht gefunden werden.", entityId);
-            }
+            IEntityDetail entityDetail = EntityDetail.FromDbEntityDetail(dbEntityDetail);
 
             this.logger.LogDebug("Details für Entity ({id}) wurde geladen", entityId);
-            return EntityDetail.FromDbEntityDetail(dbEntityDetail);
+            return entityDetail;
         }
 
         public IPagedResult<IEntityListItem> GetPagedEntities()
@@ -77,10 +69,6 @@ namespace ProjectName.Logic.Modules.Domain.Entities
         public void UpdateEntity(IEntityUpdate entityUpdate)
         {
             IDbEntity dbEntityToUpdate = this.entitiesCrudRepository.GetEntity(entityUpdate.Id);
-            if (dbEntityToUpdate == null)
-            {
-                throw new NotFoundResultException("Entity ({id}) konnte nicht gefunden werden.", entityUpdate.Id);
-            }
 
             this.entitiesCrudRepository.UpdateEntity(DbEntityUpdate
                 .FromEntityUpdate(entityUpdate));

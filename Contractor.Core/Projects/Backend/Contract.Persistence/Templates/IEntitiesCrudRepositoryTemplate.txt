@@ -10,15 +10,11 @@ namespace ProjectName.Contract.Persistence.Modules.Domain.Entities
 
         void DeleteEntity(Guid entityId);
 
-        bool DoesEntityExist(Guid entityId);
-
         IDbEntity GetEntity(Guid entityId);
 
         IDbEntityDetail GetEntityDetail(Guid entityId);
 
         IDbPagedResult<IDbEntityListItem> GetPagedEntities();
-
-        IEnumerable<IDbEntity> GetAllEntities();
 
         void UpdateEntity(IDbEntityUpdate dbEntityUpdate);
     }

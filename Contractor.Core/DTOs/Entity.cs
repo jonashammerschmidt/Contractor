@@ -90,7 +90,7 @@ namespace Contractor.Core
             }
         }
 
-        public void AddLinksForChildren(Module module)
+        public void AddLinksForChildren()
         {
             foreach (var property in this.Properties)
             {
