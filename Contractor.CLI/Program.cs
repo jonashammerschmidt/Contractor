@@ -55,7 +55,6 @@ namespace Contractor.CLI
 
             string contractorXmlFilePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), args[1]));
             FileInfo contractorXmlFileInfo = new FileInfo(contractorXmlFilePath);
-            Console.WriteLine(contractorXmlFilePath);
             if (!contractorXmlFileInfo.Exists)
             {
                 contractorXmlFilePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..", args[1]));

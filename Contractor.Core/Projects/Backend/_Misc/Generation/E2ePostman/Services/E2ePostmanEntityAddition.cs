@@ -14,6 +14,12 @@ namespace Contractor.Core.Projects.Backend.Misc
         protected override string UpdateFileData(Entity entity, string fileData)
         {
             var e2ePostmanEntityText = this.ReadFile(entity, MiscBackendGeneration.TemplateFolder, "E2ePostmanTemplate.txt");
+            if (!entity.HasScope)
+            {
+                e2ePostmanEntityText = e2ePostmanEntityText.Replace(
+                    "pm.expect(jsonData.count).to.eql(1);",
+                    "pm.expect(jsonData.count).to.eql(5);");
+            }
 
             StringEditor stringEditor = new StringEditor(fileData);
 
