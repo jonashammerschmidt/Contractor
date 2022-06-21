@@ -1,5 +1,4 @@
 ﻿using Contractor.CLI.Tools;
-using Contractor.Core;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;

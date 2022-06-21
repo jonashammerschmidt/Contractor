@@ -2,6 +2,21 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Database - Add Migration Initial",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "migrations",
+                "add",
+                "Initial"
+            ],
+            "options": {
+                "cwd": "FullstackTemplate\\Krz.FullstackTemplate.Databases\\Krz.FullstackTemplate.Database.Core\\EfMigrations"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "Database - Add Migration Bankwesen",
             "command": "dotnet",
             "type": "process",

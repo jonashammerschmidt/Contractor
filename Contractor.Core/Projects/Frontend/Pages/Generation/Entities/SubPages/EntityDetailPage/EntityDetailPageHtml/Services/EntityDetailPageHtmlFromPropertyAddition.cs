@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -52,8 +51,8 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.InsertLine($"            <div class=\"table-container\">");
             stringEditor.InsertLine($"                <table mat-table [dataSource]=\"{relationSide.NameLower}TableDataSource\">");
             stringEditor.InsertLine($"");
-            stringEditor.InsertLine($"                    <ng-container matColumnDef=\"bezeichnung\">");
-            stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> Bezeichnung </th>");
+            stringEditor.InsertLine($"                    <ng-container matColumnDef=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\">");
+            stringEditor.InsertLine($"                        <th mat-header-cell *matHeaderCellDef> {relationSide.OtherEntity.DisplayProperty.Name.ToReadable()} </ th > ");
             stringEditor.InsertLine($"                        <td mat-cell *matCellDef=\"let element\">");
             stringEditor.InsertLine($"                            {{{{element.{relationSide.OtherEntity.DisplayProperty.NameLower}}}}}");
             stringEditor.InsertLine($"                        </td>");
