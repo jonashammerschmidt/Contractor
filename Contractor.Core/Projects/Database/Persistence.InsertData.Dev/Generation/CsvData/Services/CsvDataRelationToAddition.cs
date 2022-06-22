@@ -36,13 +36,13 @@ namespace Contractor.Core.Projects.Database.Persistence.InsertData.Dev
 
             if (relationSide.IsCreatedByPreProcessor)
             {
-                stringEditor.InsertIntoLine($";936071b5-d532-45bb-b7d1-166884e7cf62");
+                stringEditor.InsertIntoLine($";22222222-2222-2222-2222-222222222222");
                 stringEditor.Next();
-                stringEditor.InsertIntoLine($";936071b5-d532-45bb-b7d1-166884e7cf62");
+                stringEditor.InsertIntoLine($";22222222-2222-2222-2222-222222222222");
                 stringEditor.Next();
-                stringEditor.InsertIntoLine($";936071b5-d532-45bb-b7d1-166884e7cf62");
+                stringEditor.InsertIntoLine($";22222222-2222-2222-2222-222222222222");
                 stringEditor.Next();
-                stringEditor.InsertIntoLine($";936071b5-d532-45bb-b7d1-166884e7cf62");
+                stringEditor.InsertIntoLine($";22222222-2222-2222-2222-222222222222");
             }
             else
             {

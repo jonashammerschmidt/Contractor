@@ -33,10 +33,10 @@ namespace Contractor.Core.Projects.Database.Persistence.InsertData.Dev
             if (entity.HasScope)
             {
                 stringEditor.InsertLine($"Id;{entity.ScopeEntity.Name}Id");
-                stringEditor.InsertLine($"{TestValueGeneration.GenerateGuid(random)};936071b5-d532-45bb-b7d1-166884e7cf62");
-                stringEditor.InsertLine($"{TestValueGeneration.GenerateGuid(random)};936071b5-d532-45bb-b7d1-166884e7cf62");
-                stringEditor.InsertLine($"{TestValueGeneration.GenerateGuid(random)};936071b5-d532-45bb-b7d1-166884e7cf62");
-                stringEditor.InsertLine($"{TestValueGeneration.GenerateGuid(random)};936071b5-d532-45bb-b7d1-166884e7cf62");
+                stringEditor.InsertLine($"{TestValueGeneration.GenerateGuid(random)};22222222-2222-2222-2222-222222222222");
+                stringEditor.InsertLine($"{TestValueGeneration.GenerateGuid(random)};22222222-2222-2222-2222-222222222222");
+                stringEditor.InsertLine($"{TestValueGeneration.GenerateGuid(random)};22222222-2222-2222-2222-222222222222");
+                stringEditor.InsertLine($"{TestValueGeneration.GenerateGuid(random)};22222222-2222-2222-2222-222222222222");
             }
             else
             {
