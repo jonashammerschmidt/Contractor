@@ -26,6 +26,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             serviceCollection.AddSingleton<DbEntityListItemMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityListItemFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<DbEntityListItemToMethodsAddition>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryToRelationAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryFromIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryFromOneToOneIncludeAddition>();

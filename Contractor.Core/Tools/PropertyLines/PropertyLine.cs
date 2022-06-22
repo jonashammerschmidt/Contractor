@@ -18,7 +18,7 @@ namespace Contractor.Core.Tools
                 stringEditor.NextThatContains("{")
                           .NextThatContains("{");
             }
-            stringEditor.Next(line => !IsLineEmpty(line) && !ContainsProperty(line) && !ContainsAnnotation(line));
+            stringEditor.NextUntil(line => !IsLineEmpty(line) && !ContainsProperty(line) && !ContainsAnnotation(line));
         }
 
         private static bool IsLineEmpty(string line)

@@ -17,7 +17,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             StringEditor stringEditor = new StringEditor(fileData);
             
             stringEditor.NextThatContains("FromDb" + property.Entity.Name);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.NextUntil(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {property.Name} = db{property.Entity.Name}.{property.Name},");
             

@@ -15,7 +15,7 @@ namespace Contractor.Core.Projects.Backend.Logic
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("From" + property.Entity.Name + "Update(");
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.NextUntil(line => line.Trim().Equals("};"));
             stringEditor.InsertLine($"                {property.Name} = {property.Entity.NameLower}Update.{property.Name},");
             
             return stringEditor.GetText();

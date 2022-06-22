@@ -1,6 +1,6 @@
 ﻿namespace Contractor.Core.Projects.Backend.Misc
 {
-    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND })]
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_MISC })]
     internal class E2ePostmanGeneration : ClassGeneration
     {
         private static readonly string FileName = "e2e-postman.json";

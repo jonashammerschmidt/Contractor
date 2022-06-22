@@ -84,7 +84,7 @@ namespace Contractor.Core.Tools
             string startupMethodCall = GetStartupMethodCall(module.Name);
             stringEditor.NextThatContains("void Startup(IServiceCollection services");
             stringEditor.Next();
-            stringEditor.Next(line => line.CompareTo(startupMethodCall) > 0 || line.Contains("}"));
+            stringEditor.NextUntil(line => line.CompareTo(startupMethodCall) > 0 || line.Contains("}"));
             stringEditor.InsertLine(startupMethodCall);
 
             return stringEditor.GetText();

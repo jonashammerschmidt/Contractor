@@ -16,7 +16,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromEf" + property.Entity.Name);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.NextUntil(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {property.Name} = ef{property.Entity.Name}.{property.Name},");
 

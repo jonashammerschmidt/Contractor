@@ -27,6 +27,7 @@ namespace Contractor.Core
                                 OnDelete = "NoAction",
                                 Order = relation1To1.Order,
                                 IsCreatedByPreProcessor = true,
+                                RelationBeforePreProcessor = relation1To1,
                             };
                             scopeRelation1ToN.AddLinks(entity);
                             entity.Relations1ToN = entity.Relations1ToN.Concat(new List<Relation1ToN>() { scopeRelation1ToN });
@@ -46,6 +47,7 @@ namespace Contractor.Core
                                 OnDelete = "NoAction",
                                 Order = relation1ToN.Order,
                                 IsCreatedByPreProcessor = true,
+                                RelationBeforePreProcessor = relation1ToN,
                             };
                             scopeRelation1ToN.AddLinks(entity);
                             entity.Relations1ToN = entity.Relations1ToN.Concat(new List<Relation1ToN>() { scopeRelation1ToN });

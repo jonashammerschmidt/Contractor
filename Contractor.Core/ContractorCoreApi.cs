@@ -38,7 +38,7 @@ namespace Contractor.Core
             {
                 foreach (var classGeneration in this.classGenerations)
                 {
-                    if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                    if (ShouldGenerate(this.contractorGenerationOptions.Tags, classGeneration))
                     {
                         classGeneration.PerformAddEntityCommand(entity);
                     }
@@ -52,19 +52,18 @@ namespace Contractor.Core
                     {
                         foreach (var classGeneration in this.classGenerations)
                         {
-                            if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                            if (ShouldGenerate(this.contractorGenerationOptions.Tags, classGeneration))
                             {
                                 classGeneration.PerformAddPropertyCommand(property);
                             }
                         }
                     }
 
-
                     foreach (var relation1To1 in entity.Relations1To1.Where(p => p.Order == i))
                     {
                         foreach (var classGeneration in this.classGenerations)
                         {
-                            if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                            if (ShouldGenerateRelation(relation1To1, classGeneration))
                             {
                                 classGeneration.PerformAddOneToOneRelationSideToCommand(relation1To1);
                             }
@@ -75,7 +74,7 @@ namespace Contractor.Core
                     {
                         foreach (var classGeneration in this.classGenerations)
                         {
-                            if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                            if (ShouldGenerateRelation(relation1ToN, classGeneration))
                             {
                                 classGeneration.PerformAdd1ToNRelationSideToCommand(relation1ToN);
                             }
@@ -95,7 +94,7 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                if (ShouldGenerateRelation(relation1To1, classGeneration))
                                 {
                                     classGeneration.PerformAddOneToOneRelationSideFromCommand(relation1To1);
                                 }
@@ -108,7 +107,7 @@ namespace Contractor.Core
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
-                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                if (ShouldGenerateRelation(relation1ToN, classGeneration))
                                 {
                                     classGeneration.PerformAdd1ToNRelationSideFromCommand(relation1ToN);
                                 }
@@ -124,9 +123,9 @@ namespace Contractor.Core
             this.fileSystemClient.SaveAll(contractorGenerationOptions);
         }
 
-        private bool ShouldGenerate(ContractorGenerationOptions options, ClassGeneration classGeneration)
+        private bool ShouldGenerate(IEnumerable<ClassGenerationTag> tags, ClassGeneration classGeneration)
         {
-            if (options.Tags == null || options.Tags.Count() == 0)
+            if (tags == null || tags.Count() == 0)
             {
                 return true;
             }
@@ -136,7 +135,28 @@ namespace Contractor.Core
                .GetCustomAttributes(typeof(ClassGenerationTagsAttribute), false)
                .Select(attribute => attribute as ClassGenerationTagsAttribute)
                .SelectMany(attribute => attribute.GetGenerationTags())
-               .Any(tag => options.Tags.Contains(tag));
+               .Any(tag => tags.Contains(tag));
+        }
+
+        private bool ShouldGenerateRelation(Relation relation, ClassGeneration classGeneration)
+        {
+            if (!relation.IsCreatedByPreProcessor)
+            {
+                return ShouldGenerate(relation.EntityTo.Module.Options.Tags, classGeneration);
+            }
+
+            IEnumerable<ClassGenerationTag> tagIntersection = new List<ClassGenerationTag>()
+            {
+                ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT,
+                ClassGenerationTag.BACKEND_PERSISTENCE_REPOSITORY,
+            };
+
+            if (relation.EntityTo.Module.Options.Tags != null && relation.EntityTo.Module.Options.Tags.Count() > 0)
+            {
+                tagIntersection = tagIntersection.Intersect(relation.EntityTo.Module.Options.Tags);
+            }
+
+            return ShouldGenerate(tagIntersection, classGeneration);
         }
     }
 }

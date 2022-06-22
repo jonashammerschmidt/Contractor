@@ -109,7 +109,7 @@ namespace Contractor.Core.Helpers
             this.lineNumber = 0;
         }
 
-        public StringEditor Next(Predicate<string> predicate)
+        public StringEditor NextUntil(Predicate<string> predicate)
         {
             do
             {
@@ -131,14 +131,14 @@ namespace Contractor.Core.Helpers
 
         public StringEditor NextThatContains(string pattern)
         {
-            this.Next((line) => line.Contains(pattern));
+            this.NextUntil((line) => line.Contains(pattern));
 
             return this;
         }
 
         public StringEditor NextThatStartsWith(string pattern)
         {
-            this.Next((line) => line.StartsWith(pattern));
+            this.NextUntil((line) => line.StartsWith(pattern));
 
             return this;
         }

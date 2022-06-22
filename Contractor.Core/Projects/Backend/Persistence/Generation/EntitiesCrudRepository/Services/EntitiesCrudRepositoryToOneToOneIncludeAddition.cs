@@ -18,13 +18,13 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             stringEditor.NextThatContains($"Get{relationSide.Entity.Name}Detail(");
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
-            stringEditor.Next(line => !line.Contains("Include("));
+            stringEditor.NextUntil(line => !line.Contains("Include("));
             stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})");
             stringEditor.MoveToStart();
 
             stringEditor.NextThatContains($"GetPaged{relationSide.Entity.NamePlural}(");
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
-            stringEditor.Next(line => !line.Contains("Include("));
+            stringEditor.NextUntil(line => !line.Contains("Include("));
             stringEditor.Prev();
             if (stringEditor.GetLine().Contains(";"))
             {
@@ -41,5 +41,6 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             return stringEditor.GetText();
         }
+
     }
 }
