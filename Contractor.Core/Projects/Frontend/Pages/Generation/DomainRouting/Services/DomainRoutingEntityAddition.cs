@@ -32,21 +32,33 @@ namespace Contractor.Core.Projects.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("const routes: Routes = [");
-            stringEditor.NextThatContains("];");
 
-            stringEditor.InsertLine(GetAppRoutingLine(entity));
+
+            if (stringEditor.GetText().Contains("'**'"))
+            {
+                stringEditor.NextThatContains("'**'");
+                stringEditor.Prev();
+            }
+            else
+            {
+                stringEditor.NextThatContains("];");
+            }
+
+            stringEditor.InsertLine("  {");
+            stringEditor.InsertLine(             $"    path: '{entity.NamePluralKebab}',");
+            stringEditor.InsertLine(             $"    loadChildren: () => import('./{entity.NamePluralKebab}/{entity.NamePluralKebab}-pages.module')");
+            stringEditor.InsertLine(             $"      .then(m => m.{entity.NamePlural}PagesModule)");
+            stringEditor.InsertLine("  },");
+
+            if (!stringEditor.GetText().Contains("'**'"))
+            {
+                stringEditor.InsertLine("  {");
+                stringEditor.InsertLine($"    path: '**',");
+                stringEditor.InsertLine($"    redirectTo: '{entity.NamePluralKebab}',");
+                stringEditor.InsertLine("  },");
+            }
 
             return stringEditor.GetText();
-        }
-
-        private string GetAppRoutingLine(Entity entity)
-        {
-            return
-              "  {\n" +
-             $"    path: '{entity.NamePluralKebab}',\n" +
-             $"    loadChildren: () => import('./{entity.NamePluralKebab}/{entity.NamePluralKebab}-pages.module')\n" +
-             $"      .then(m => m.{entity.NamePlural}PagesModule)\n" +
-              "  },";
         }
     }
 }

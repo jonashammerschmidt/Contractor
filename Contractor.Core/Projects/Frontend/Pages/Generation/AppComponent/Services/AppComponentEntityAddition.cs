@@ -34,7 +34,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
             stringEditor.NextThatContains(" addMainMenuItems(");
             stringEditor.NextThatContains($"text: '{entity.Module.Name}',");
             stringEditor.NextThatContains($"subMenu: [");
-            stringEditor.Next();
+            stringEditor.NextThatStartsWith("      ]");
 
             stringEditor.InsertLine(
                  "        {\n" +
