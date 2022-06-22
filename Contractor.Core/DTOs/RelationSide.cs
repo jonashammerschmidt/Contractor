@@ -11,6 +11,8 @@ namespace Contractor.Core
 
         public string OnDelete { get; private set; }
 
+        public bool IsCreatedByPreProcessor { get; set; }
+
         public string OtherName { get; private set; }
 
         public string OtherNameLower
@@ -36,6 +38,7 @@ namespace Contractor.Core
                 RelationSideType = RelationSideType.From,
                 OtherEntity = relation.EntityTo,
                 OtherName = otherName,
+                IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
             };
         }
 
@@ -58,6 +61,7 @@ namespace Contractor.Core
                 RelationSideType = RelationSideType.To,
                 OtherEntity = relation.EntityFrom,
                 OtherName = otherName,
+                IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
             };
         }
 
@@ -79,6 +83,7 @@ namespace Contractor.Core
                 RelationSideType = RelationSideType.To,
                 OtherEntity = relation.EntityFrom,
                 OtherName = otherName,
+                IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
             };
         }
     }
