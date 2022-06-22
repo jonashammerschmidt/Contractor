@@ -28,7 +28,9 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
 
         public void CreateEntity(IDbEntity dbEntity)
         {
-            this.dbContext.Entities.Add(DbEntity.ToEfEntity(dbEntity));
+            EfEntity efEntity = DbEntity.ToEfEntity(dbEntity);
+
+            this.dbContext.Entities.Add(efEntity);
             this.dbContext.SaveChanges();
         }
 

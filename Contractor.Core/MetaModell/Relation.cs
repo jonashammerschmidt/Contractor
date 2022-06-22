@@ -21,6 +21,7 @@ namespace Contractor.Core
             this.IsOptional = relation.IsOptional;
             this.OnDelete = relation.OnDelete;
             this.IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor;
+            this.RelationBeforePreProcessor = relation.RelationBeforePreProcessor;
             this.Order = relation.Order;
             this.EntityFrom = relation.EntityFrom;
             this.EntityTo = relation.EntityTo;
@@ -48,6 +49,8 @@ namespace Contractor.Core
         public int Order { get; set; }
 
         public bool IsCreatedByPreProcessor { get; internal set; }
+
+        public Relation RelationBeforePreProcessor { get; internal set; }
 
         public string OnDelete { get; set; }
 

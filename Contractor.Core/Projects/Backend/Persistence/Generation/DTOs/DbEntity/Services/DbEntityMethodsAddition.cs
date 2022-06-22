@@ -14,21 +14,21 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("UpdateEf" + property.Entity.Name);
-            stringEditor.Next(line => line.Trim().Equals("}"));
+            stringEditor.NextUntil(line => line.Trim().Equals("}"));
 
             stringEditor.InsertLine($"            ef{property.Entity.Name}.{property.Name} = db{property.Entity.Name}Update.{property.Name};");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromEf" + property.Entity.Name);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.NextUntil(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {property.Name} = ef{property.Entity.Name}.{property.Name},");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("ToEf" + property.Entity.Name);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.NextUntil(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {property.Name} = db{property.Entity.Name}.{property.Name},");
 

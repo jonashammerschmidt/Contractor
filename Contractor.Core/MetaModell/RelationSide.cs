@@ -13,6 +13,8 @@ namespace Contractor.Core
 
         public bool IsCreatedByPreProcessor { get; set; }
 
+        public Relation RelationBeforePreProcessor { get; set; }
+
         public string OtherName { get; private set; }
 
         public string OtherNameLower
@@ -39,6 +41,7 @@ namespace Contractor.Core
                 OtherEntity = relation.EntityTo,
                 OtherName = otherName,
                 IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
+                RelationBeforePreProcessor = relation.RelationBeforePreProcessor
             };
         }
 
@@ -62,6 +65,7 @@ namespace Contractor.Core
                 OtherEntity = relation.EntityFrom,
                 OtherName = otherName,
                 IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
+                RelationBeforePreProcessor = relation.RelationBeforePreProcessor
             };
         }
 
@@ -84,6 +88,7 @@ namespace Contractor.Core
                 OtherEntity = relation.EntityFrom,
                 OtherName = otherName,
                 IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
+                RelationBeforePreProcessor = relation.RelationBeforePreProcessor
             };
         }
     }

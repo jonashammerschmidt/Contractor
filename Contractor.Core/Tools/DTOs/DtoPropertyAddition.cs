@@ -95,7 +95,7 @@ namespace Contractor.Core.Tools
                 stringEditor.NextThatContains("{")
                           .NextThatContains("{");
             }
-            stringEditor.Next(line => !IsLineEmpty(line) && !ContainsProperty(line));
+            stringEditor.NextUntil(line => !IsLineEmpty(line) && !ContainsProperty(line));
         }
 
         private bool IsLineEmpty(string line)

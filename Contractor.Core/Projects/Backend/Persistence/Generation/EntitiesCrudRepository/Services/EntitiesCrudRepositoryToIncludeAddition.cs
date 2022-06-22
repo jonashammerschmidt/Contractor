@@ -16,16 +16,17 @@ namespace Contractor.Core.Projects.Backend.Persistence
             fileData = UsingStatements.Add(fileData, "Microsoft.EntityFrameworkCore");
 
             StringEditor stringEditor = new StringEditor(fileData);
+
             stringEditor.NextThatContains($"Get{relationSide.Entity.Name}Detail(");
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
-            stringEditor.Next(line => !line.Contains("Include("));
+            stringEditor.NextUntil(line => !line.Contains("Include("));
             stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})");
             stringEditor.MoveToStart();
 
             string includeLine = $"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})";
             stringEditor.NextThatContains($"GetPaged{relationSide.Entity.NamePlural}(");
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
-            stringEditor.Next(line => !line.Contains("Include("));
+            stringEditor.NextUntil(line => !line.Contains("Include("));
             stringEditor.Prev();
             if (stringEditor.GetLine().Contains(";"))
             {

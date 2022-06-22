@@ -16,7 +16,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("FromEf" + relationSide.Entity.Name);
-            stringEditor.Next(line => line.Trim().Equals("};"));
+            stringEditor.NextUntil(line => line.Trim().Equals("};"));
             stringEditor.InsertLine(
                 $"                {relationSide.Name} = Db{relationSide.OtherEntity.Name}\n" +
                 $"                    .FromEf{relationSide.OtherEntity.Name}(ef{relationSide.Entity.Name}.{relationSide.Name}),");

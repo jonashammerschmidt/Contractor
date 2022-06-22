@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Persistence
 {
-    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE })]
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE, ClassGenerationTag.BACKEND_PERSISTENCE_REPOSITORY })]
     internal class EntitiesCrudRepositoryGeneration : ClassGeneration
     {
         public static readonly string TemplatePath =
@@ -12,6 +12,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         public static readonly string FileName = "EntitiesCrudRepository.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
+        private readonly EntitiesCrudRepositoryToRelationAddition entitiesCrudRepositoryToRelationAddition;
         private readonly EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition;
         private readonly EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition;
         private readonly EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition;
@@ -19,12 +20,14 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         public EntitiesCrudRepositoryGeneration(
             EntityCoreAddition entityCoreAddition,
+            EntitiesCrudRepositoryToRelationAddition entitiesCrudRepositoryToRelationAddition,
             EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition,
             EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition,
             EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition,
             EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
+            this.entitiesCrudRepositoryToRelationAddition = entitiesCrudRepositoryToRelationAddition;
             this.dtoFromRepositoryIncludeAddition = dtoFromRepositoryIncludeAddition;
             this.dtoToRepositoryIncludeAddition = dtoToRepositoryIncludeAddition;
             this.entitiesCrudRepositoryFromOneToOneIncludeAddition = entitiesCrudRepositoryFromOneToOneIncludeAddition;
@@ -57,6 +60,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "");
 
             this.dtoToRepositoryIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToRelationAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -71,6 +75,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "");
 
             this.entitiesCrudRepositoryToOneToOneIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToRelationAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

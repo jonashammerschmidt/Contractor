@@ -31,7 +31,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains($"public Ef{relationSide.Entity.Name}()");
-            stringEditor.Next(line => line.Trim().Equals("}"));
+            stringEditor.NextUntil(line => line.Trim().Equals("}"));
 
             stringEditor.InsertLine($"            this.{relationSide.Name} = new HashSet<Ef{relationSide.OtherEntity.Name}>();");
 
