@@ -20,11 +20,23 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             stringEditor.InsertNewLine();
             
             stringEditor.InsertLine($"                entity.HasOne(d => d.{relationSide.Name})");
-            stringEditor.InsertLine($"                    .WithOne(p => p.{relationSide.OtherName})");
 
-            if (relationSide.OtherEntity.HasScope)
+            if (relationSide.OtherEntity.Skip)
+            {
+                stringEditor.InsertLine($"                    .WithOne()");
+            }
+            else
+            {
+                stringEditor.InsertLine($"                    .WithOne(p => p.{relationSide.OtherName})");
+            }
+
+            if (relationSide.OtherEntity.HasScope && relationSide.Entity.HasScope)
             {
                 stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}>(d => new {{ d.{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
+            }
+            else if (relationSide.OtherEntity.HasScope && !relationSide.Entity.HasScope)
+            {
+                stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}>(d => new {{ d.{relationSide.Name}{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
             }
             else
             {

@@ -1,8 +1,6 @@
-﻿using Contractor.Core.Helpers;
-using Contractor.Core.Projects;
+﻿using Contractor.Core.Projects;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +17,7 @@ namespace Contractor.Core
         public ContractorCoreApi(ContractorGenerationOptions contractorGenerationOptions)
         {
             this.contractorGenerationOptions = contractorGenerationOptions;
-            SortEntities();
+            this.sortedEntities = ContractorPreprocessor.PreProcess(this.contractorGenerationOptions);
 
             ServiceProvider serviceProvider = DependencyProvider.GetServiceProvider();
             this.fileSystemClient = serviceProvider.GetRequiredService<IFileSystemClient>();
@@ -61,8 +59,8 @@ namespace Contractor.Core
                         }
                     }
 
-                    Relation1To1 relation1To1 = entity.Relations1To1.SingleOrDefault(p => p.Order == i);
-                    if (relation1To1 != null)
+
+                    foreach (var relation1To1 in entity.Relations1To1.Where(p => p.Order == i))
                     {
                         foreach (var classGeneration in this.classGenerations)
                         {
@@ -73,8 +71,7 @@ namespace Contractor.Core
                         }
                     }
 
-                    Relation1ToN relation1ToN = entity.Relations1ToN.SingleOrDefault(p => p.Order == i);
-                    if (relation1ToN != null)
+                    foreach (var relation1ToN in entity.Relations1ToN.Where(p => p.Order == i))
                     {
                         foreach (var classGeneration in this.classGenerations)
                         {
@@ -92,26 +89,29 @@ namespace Contractor.Core
                 var count = entity.Properties.Count() + entity.Relations1To1.Count() + entity.Relations1ToN.Count();
                 for (int i = 0; i < count; i++)
                 {
-                    var relation1To1 = entity.Relations1To1.SingleOrDefault(p => p.Order == i);
-                    if (relation1To1 != null)
+                    foreach (var relation1To1 in entity.Relations1To1.Where(p => p.Order == i))
                     {
-                        foreach (var classGeneration in this.classGenerations)
+                        if (relation1To1 != null && !relation1To1.EntityFrom.Skip)
                         {
-                            if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                            foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAddOneToOneRelationSideFromCommand(relation1To1);
+                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                {
+                                    classGeneration.PerformAddOneToOneRelationSideFromCommand(relation1To1);
+                                }
                             }
                         }
                     }
-
-                    var relation1ToN = entity.Relations1ToN.SingleOrDefault(p => p.Order == i);
-                    if (relation1ToN != null)
+                    foreach (var relation1ToN in entity.Relations1ToN.Where(p => p.Order == i))
                     {
-                        foreach (var classGeneration in this.classGenerations)
+                        if (relation1ToN != null && !relation1ToN.EntityFrom.Skip)
                         {
-                            if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                            foreach (var classGeneration in this.classGenerations)
                             {
-                                classGeneration.PerformAdd1ToNRelationSideFromCommand(relation1ToN);
+                                if (ShouldGenerate(this.contractorGenerationOptions, classGeneration))
+                                {
+                                    classGeneration.PerformAdd1ToNRelationSideFromCommand(relation1ToN);
+                                }
                             }
                         }
                     }
@@ -122,23 +122,6 @@ namespace Contractor.Core
         public void SaveChanges()
         {
             this.fileSystemClient.SaveAll(contractorGenerationOptions);
-        }
-
-        private void SortEntities()
-        {
-            IEnumerable<Entity> entities = this.contractorGenerationOptions.Modules
-                .SelectMany(module => module.Entities);
-
-            Func<Entity, IEnumerable<Entity>> dependencyBuilder = (entity) =>
-                {
-                    var dependencies1To1 = entity.Relations1To1.Select(relation => relation.EntityFrom);
-                    var dependencies1ToN = entity.Relations1ToN.Select(relation => relation.EntityFrom);
-                    return dependencies1To1.Concat(dependencies1ToN);
-                };
-
-            this.sortedEntities = SortingByDependency.Sort(entities, dependencyBuilder, true);
-
-            this.contractorGenerationOptions.Sort(sortedEntities);
         }
 
         private bool ShouldGenerate(ContractorGenerationOptions options, ClassGeneration classGeneration)

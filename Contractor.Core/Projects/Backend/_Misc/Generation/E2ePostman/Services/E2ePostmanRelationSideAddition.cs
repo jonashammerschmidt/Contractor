@@ -39,7 +39,14 @@ namespace Contractor.Core.Projects.Backend.Misc
             {
                 stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $",");
             }
-            stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $"\\n  \\\"{relationSide.NameLower}Id\\\": \\\"{{{{e2e{relationSide.OtherEntity.Name}{postfix2}Id}}}}\\\"");
+
+            var variableName = $"e2e{relationSide.OtherEntity.Name}{postfix2}Id";
+            if (relationSide.IsCreatedByPreProcessor)
+            {
+                variableName = "mandantId";
+            }
+
+            stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $"\\n  \\\"{relationSide.NameLower}Id\\\": \\\"{{{{{variableName}}}}}\\\"");
         }
 
         private static void InsertUpdateLine(RelationSide relationSide, StringEditor stringEditor)
@@ -47,7 +54,14 @@ namespace Contractor.Core.Projects.Backend.Misc
             stringEditor.NextThatStartsWith($"\t\t\t\t\t\"name\": \"Update {relationSide.Entity.Name}\",");
             stringEditor.NextThatStartsWith("\t\t\t\t\t\t\"body\": {");
             stringEditor.NextThatStartsWith("\t\t\t\t\t\t\t\"raw\": \"{\\n");
-            stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $",\\n  \\\"{relationSide.NameLower}Id\\\": \\\"{{{{e2e{relationSide.OtherEntity.Name}2Id}}}}\\\"");
+
+            var variableName = $"e2e{relationSide.OtherEntity.Name}2Id";
+            if (relationSide.IsCreatedByPreProcessor)
+            {
+                variableName = "mandantId";
+            }
+
+            stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $",\\n  \\\"{relationSide.NameLower}Id\\\": \\\"{{{{{variableName}}}}}\\\"");
         }
     }
 }

@@ -33,13 +33,27 @@ namespace Contractor.Core.Projects.Database.Persistence.InsertData.Dev
 
             stringEditor.InsertIntoLine($";{relationSide.Name}");
             stringEditor.Next();
-            stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
-            stringEditor.Next();
-            stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
-            stringEditor.Next();
-            stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
-            stringEditor.Next();
-            stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
+
+            if (relationSide.IsCreatedByPreProcessor)
+            {
+                stringEditor.InsertIntoLine($";936071b5-d532-45bb-b7d1-166884e7cf62");
+                stringEditor.Next();
+                stringEditor.InsertIntoLine($";936071b5-d532-45bb-b7d1-166884e7cf62");
+                stringEditor.Next();
+                stringEditor.InsertIntoLine($";936071b5-d532-45bb-b7d1-166884e7cf62");
+                stringEditor.Next();
+                stringEditor.InsertIntoLine($";936071b5-d532-45bb-b7d1-166884e7cf62");
+            }
+            else
+            {
+                stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
+                stringEditor.Next();
+                stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
+                stringEditor.Next();
+                stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
+                stringEditor.Next();
+                stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
+            }
 
             return stringEditor.GetText();
         }
