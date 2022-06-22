@@ -5,6 +5,7 @@ using ProjectName.Contract.Logic.Modules.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ProjectName.API.Modules.Domain.Entities
 {
@@ -21,6 +22,7 @@ namespace ProjectName.API.Modules.Domain.Entities
 
         [HttpGet]
         [Authorized]
+        [SwaggerOperation(Summary = "Get EntitiesReadable with Pagination", Tags = new[] { "Domain" })]
         [Pagination(FilterFields = new[] { "DisplayProperty" }, SortFields = new[] { "DisplayProperty" })]
         public ActionResult<IPagedResult<IEntityListItem>> GetPagedEntities()
         {
@@ -30,6 +32,7 @@ namespace ProjectName.API.Modules.Domain.Entities
         [HttpGet]
         [Authorized]
         [Route("{entityId}")]
+        [SwaggerOperation(Summary = "Get EntityReadable by Id", Tags = new[] { "Domain" })]
         public ActionResult<IEntityDetail> GetEntityDetail(Guid entityId)
         {
             return this.Ok(this.entitiesCrudLogic.GetEntityDetail(entityId));
@@ -37,6 +40,7 @@ namespace ProjectName.API.Modules.Domain.Entities
 
         [HttpPost]
         [Authorized]
+        [SwaggerOperation(Summary = "Create EntityReadable", Tags = new[] { "Domain" })]
         public ActionResult<DataBody<Guid>> CreateEntity([FromBody] EntityCreate entityCreate)
         {
             return this.Ok(new DataBody<Guid>(this.entitiesCrudLogic.CreateEntity(entityCreate)));
@@ -44,6 +48,7 @@ namespace ProjectName.API.Modules.Domain.Entities
 
         [HttpPut]
         [Authorized]
+        [SwaggerOperation(Summary = "Update EntityReadable", Tags = new[] { "Domain" })]
         public ActionResult UpdateEntity([FromBody] EntityUpdate entityUpdate)
         {
             this.entitiesCrudLogic.UpdateEntity(entityUpdate);
@@ -53,6 +58,7 @@ namespace ProjectName.API.Modules.Domain.Entities
         [HttpDelete]
         [Authorized]
         [Route("{entityId}")]
+        [SwaggerOperation(Summary = "Delete EntityReadable by Id", Tags = new[] { "Domain" })]
         public ActionResult DeleteEntity(Guid entityId)
         {
             this.entitiesCrudLogic.DeleteEntity(entityId);
