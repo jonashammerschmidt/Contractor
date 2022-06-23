@@ -21,8 +21,8 @@ namespace Contractor.Core
                             Relation1ToN scopeRelation1ToN = new Relation1ToN()
                             {
                                 EntityNameFrom = relation1To1.EntityFrom.ScopeEntity.Name,
-                                PropertyNameFrom = relation1To1.PropertyNameFrom + relation1To1.EntityFrom.ScopeEntity.Name,
-                                PropertyNameTo = relation1To1.PropertyNameTo + relation1To1.EntityFrom.Name,
+                                PropertyNameFrom = (relation1To1.PropertyNameFrom ?? relation1To1.EntityFrom.Name) + relation1To1.EntityFrom.ScopeEntity.Name,
+                                PropertyNameTo = (relation1To1.PropertyNameTo ?? relation1To1.EntityTo.Name) + relation1To1.EntityFrom.Name,
                                 IsOptional = relation1To1.IsOptional,
                                 OnDelete = "NoAction",
                                 Order = relation1To1.Order,
@@ -41,8 +41,8 @@ namespace Contractor.Core
                             Relation1ToN scopeRelation1ToN = new Relation1ToN()
                             {
                                 EntityNameFrom = relation1ToN.EntityFrom.ScopeEntity.Name,
-                                PropertyNameFrom = relation1ToN.PropertyNameFrom + relation1ToN.EntityFrom.ScopeEntity.Name,
-                                PropertyNameTo = relation1ToN.PropertyNameTo + relation1ToN.EntityFrom.Name,
+                                PropertyNameFrom = (relation1ToN.PropertyNameFrom ?? relation1ToN.EntityFrom.Name) + relation1ToN.EntityFrom.ScopeEntity.Name,
+                                PropertyNameTo = (relation1ToN.PropertyNameTo ?? relation1ToN.EntityTo.Name) + relation1ToN.EntityFrom.Name,
                                 IsOptional = relation1ToN.IsOptional,
                                 OnDelete = "NoAction",
                                 Order = relation1ToN.Order,
