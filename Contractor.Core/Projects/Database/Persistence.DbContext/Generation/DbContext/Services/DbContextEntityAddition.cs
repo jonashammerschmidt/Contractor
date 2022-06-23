@@ -68,7 +68,6 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
                     $"                    .IsClustered({index.IsClustered.ToString().ToLower()});");
             }
 
-
             stringEditor.InsertNewLine();
 
             stringEditor.InsertLine($"                entity.Property(e => e.Id)");
@@ -79,6 +78,17 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             else
             {
                 stringEditor.InsertLine($"                    .ValueGeneratedNever();");
+            }
+
+            if (entity.HasScope)
+            {
+                stringEditor.InsertNewLine();
+                stringEditor.InsertLine($"                entity.HasOne(d => d.{entity.ScopeEntity.Name})");
+                stringEditor.InsertLine( "                    .WithMany()");
+                stringEditor.InsertLine($"                    .HasForeignKey(d => d.{entity.ScopeEntity.Name}Id)");
+                stringEditor.InsertLine( "                    .IsRequired(true)");
+                stringEditor.InsertLine( "                    .OnDelete(DeleteBehavior.NoAction)");
+                stringEditor.InsertLine($"                    .HasConstraintName(\"FK_{entity.NamePlural}_{entity.ScopeEntity.Name}Id\");");
             }
 
             stringEditor.InsertLine("            });");
