@@ -1,4 +1,5 @@
 ﻿using DbProjectName.Persistence.DbContext;
+using DbProjectName.Persistence.DbContext.Modules.RequestScopeDomain.RequestScopes;
 
 namespace DbProjectName.Persistence.DbContext.Modules.Domain.Entities
 {
@@ -11,5 +12,7 @@ namespace DbProjectName.Persistence.DbContext.Modules.Domain.Entities
         public Guid Id { get; set; }
 
         public Guid RequestScopeId { get; set; }
+
+        public EfRequestScope RequestScope { get; set; }
     }
 }

@@ -18,7 +18,10 @@ namespace Contractor.Core.Projects.Database.Persistence.DbContext
             stringEditor.NextThatContains("});");
 
             stringEditor.InsertNewLine();
-            
+            stringEditor.InsertLine($"                entity.Property(e => e.{relationSide.Name}Id)");
+            stringEditor.InsertLine($"                    .IsRequired({(!relationSide.IsOptional).ToString().ToLower()});");
+
+            stringEditor.InsertNewLine();
             stringEditor.InsertLine($"                entity.HasOne(d => d.{relationSide.Name})");
 
             if (relationSide.OtherEntity.Skip)

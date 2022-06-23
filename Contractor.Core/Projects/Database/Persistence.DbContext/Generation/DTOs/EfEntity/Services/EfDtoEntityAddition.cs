@@ -29,8 +29,8 @@
             string fileData = this.fileSystemClient.ReadAllText(entity, filePath);
 
             fileData = fileData.Replace(
-            "public Guid Id { get; set; }",
-            "public int Id { get; set; }");
+                "public Guid Id { get; set; }",
+                "public int Id { get; set; }");
 
             return fileData;
         }
