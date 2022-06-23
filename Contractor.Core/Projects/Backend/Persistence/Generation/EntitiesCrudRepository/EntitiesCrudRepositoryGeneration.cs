@@ -50,6 +50,11 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
+            if (relation.IsCreatedByPreProcessor)
+            {
+                return;
+            }
+
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
 
             this.dtoFromRepositoryIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
@@ -65,6 +70,11 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
+            if (relation.IsCreatedByPreProcessor)
+            {
+                return;
+            }
+
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
 
             this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);

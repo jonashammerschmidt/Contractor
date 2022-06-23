@@ -32,7 +32,9 @@ namespace Contractor.Core.Tools
             {
                 text = text.Replace("RequestScopeDomain", entity.ScopeEntity.Module.Name);
                 text = text.Replace("RequestScopes", entity.ScopeEntity.NamePlural);
+                text = text.Replace("requestScopes", entity.ScopeEntity.NamePluralLower);
                 text = text.Replace("RequestScope", entity.ScopeEntity.Name);
+                text = text.Replace("requestScope", entity.ScopeEntity.NameLower);
             }
             
             text = text.Replace("DisplayProperty", entity.DisplayProperty.Name);
