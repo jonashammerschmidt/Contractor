@@ -5,14 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Projects\Backend\Persistence.Tests\DtoTestMethods\**" />
-    <EmbeddedResource Remove="Projects\Backend\Persistence.Tests\DtoTestMethods\**" />
-    <None Remove="Projects\Backend\Persistence.Tests\DtoTestMethods\**" />
+    <Compile Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
+    <EmbeddedResource Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
+    <None Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Projects\Backend\Api\ApiCreateDto.txt" />
-    <None Remove="Projects\Backend\Api\ApiUpdateDto.txt" />
+    <None Remove="Generation\Backend\Api\ApiCreateDto.txt" />
+    <None Remove="Generation\Backend\Api\ApiUpdateDto.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,204 +22,200 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Projects\Backend\Api\Templates\EntitiesCrudControllerTemplate.txt">
+    <None Update="Generation\Backend\Api\Templates\EntitiesCrudControllerTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Api\Templates\EntityCreateTemplate.txt">
+    <None Update="Generation\Backend\Api\Templates\EntityCreateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Api\Templates\EntityUpdateTemplate.txt">
+    <None Update="Generation\Backend\Api\Templates\EntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Logic\Templates\IEntityCreateTemplate.txt">
+    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityCreateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Logic\Templates\IEntityDetailTemplate.txt">
+    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Logic\Templates\IEntityListItemTemplate.txt">
+    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Logic\Templates\IEntityTemplate.txt">
+    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Logic\Templates\IEntitiesCrudLogicTemplate.txt">
+    <None Update="Generation\Backend\Contract.Logic\Templates\IEntitiesCrudLogicTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Logic\Templates\IEntityUpdateTemplate.txt">
+    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityDetailTemplate.txt">
+    <None Update="Generation\Backend\Contract.Persistence\Templates\IDbEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityListItemTemplate.txt">
+    <None Update="Generation\Backend\Contract.Persistence\Templates\IDbEntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityUpdateTemplate.txt">
+    <None Update="Generation\Backend\Contract.Persistence\Templates\IDbEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Persistence\Templates\IDbEntityTemplate.txt">
+    <None Update="Generation\Backend\Contract.Persistence\Templates\IDbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
+    <None Update="Generation\Backend\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Logic\Templates\DbEntityUpdateTemplate.txt">
+    <None Update="Generation\Backend\Logic\Templates\DbEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Logic\Templates\EntityListItemTemplate.txt">
+    <None Update="Generation\Backend\Logic\Templates\EntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence.Tests\Templates\DbEntityListItemTestTemplate.txt">
+    <None Update="Generation\Backend\Persistence.Tests\Templates\DbEntityListItemTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence.Tests\Templates\DbEntityUpdateTestTemplate.txt">
+    <None Update="Generation\Backend\Persistence.Tests\Templates\DbEntityUpdateTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence\Templates\DbEntityListItemTemplate.txt">
+    <None Update="Generation\Backend\Persistence\Templates\DbEntityListItemTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Logic\Templates\DbEntityTemplate.txt">
+    <None Update="Generation\Backend\Logic\Templates\DbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Logic\Templates\EntityDetailTemplate.txt">
+    <None Update="Generation\Backend\Logic\Templates\EntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Logic\Templates\EntityTemplate.txt">
+    <None Update="Generation\Backend\Logic\Templates\EntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Logic\Templates\EntitiesCrudLogicTemplate.txt">
+    <None Update="Generation\Backend\Logic\Templates\EntitiesCrudLogicTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence.Tests\Templates\DbEntityTestTemplate.txt">
+    <None Update="Generation\Backend\Persistence.Tests\Templates\DbEntityTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence.Tests\Templates\DbEntityDetailTestTemplate.txt">
+    <None Update="Generation\Backend\Persistence.Tests\Templates\DbEntityDetailTestTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate-RequestScope.txt">
+    <None Update="Generation\Backend\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence.Tests\Templates\EntityTestValuesTemplate-RequestScope.txt">
+    <None Update="Generation\Backend\Persistence.Tests\Templates\EntityTestValuesTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence.Tests\Templates\EntityTestValuesTemplate.txt">
+    <None Update="Generation\Backend\Persistence.Tests\Templates\EntityTestValuesTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate.txt">
+    <None Update="Generation\Backend\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence\Templates\DbEntityDetailTemplate.txt">
+    <None Update="Generation\Backend\Persistence\Templates\DbEntityDetailTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence\Templates\DbEntityTemplate-RequestScope.txt">
+    <None Update="Generation\Backend\Persistence\Templates\DbEntityTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence\Templates\DbEntityTemplate.txt">
+    <None Update="Generation\Backend\Persistence\Templates\DbEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate-RequestScope.txt">
+    <None Update="Generation\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate.txt">
+    <None Update="Generation\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Backend\_Misc\Templates\E2ePostmanTemplate.txt">
+    <None Update="Generation\Backend\_Misc\Templates\E2ePostmanTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Database\Persistence.DbContext\Templates\EfEntityTemplate-RequestScope.txt">
+    <None Update="Generation\Database\Persistence.DbContext\Templates\EfEntityTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Database\Persistence.DbContext\Templates\EfEntityTemplate.txt">
+    <None Update="Generation\Database\Persistence.DbContext\Templates\EfEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-create.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\api-entity-kebab-create.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-detail.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\api-entity-kebab-detail.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-list-item.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\api-entity-kebab-list-item.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab-update.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\api-entity-kebab-update.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\api-entity-kebab.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\api-entity-kebab.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\entities-kebab-crud.service.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\entities-kebab-crud.service.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\entities-kebab.module.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\entities-kebab.module.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-create.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-create.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-detail.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-detail.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-list-item.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-list-item.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab-update.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-update.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Model\Templates\i-entity-kebab.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-update.page.scss.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-update.page.scss.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-update.page.ts.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-update.page.ts.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-update.page.html.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-update.page.html.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-create.page.html.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-create.page.html.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-create.page.scss.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-create.page.scss.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-create.page.ts.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-create.page.ts.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-detail.page.html.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-detail.page.html.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-detail.page.scss.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-detail.page.scss.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entity-kebab-detail.page.ts.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-detail.page.ts.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entities-kebab.page.scss.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entities-kebab.page.scss.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entities-kebab.page.ts.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entities-kebab.page.ts.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entities-kebab.page.html.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entities-kebab.page.html.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entities-kebab-pages.routing.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entities-kebab-pages.routing.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\entities-kebab-pages.module.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\entities-kebab-pages.module.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\domain-kebab-pages.routing.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\domain-kebab-pages.routing.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Projects\Frontend\Pages\Templates\domain-kebab-pages.module.template.txt">
+    <None Update="Generation\Frontend\Pages\Templates\domain-kebab-pages.module.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Tools\EntityCore\" />
   </ItemGroup>
 </Project>
