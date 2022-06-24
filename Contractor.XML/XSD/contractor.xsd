@@ -5,35 +5,86 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="Paths">
+          <xs:annotation>
+            <xs:documentation xml:lang="de">Definition von Pfaden zu den Projekten und Namen innerhalb der Anwendung.</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="BackendDestinationFolder" type="xs:string" />
-              <xs:element name="DbDestinationFolder" type="xs:string" />
-              <xs:element name="FrontendDestinationFolder" type="xs:string" />
-              <xs:element name="ProjectName" type="xs:string" />
-              <xs:element name="DbProjectName" type="xs:string" />
-              <xs:element name="DbContextName" type="xs:string" />
+              <xs:element name="BackendDestinationFolder" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Pfad zum Backend-Ordner, relativ von dieser Datei aus.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="DbDestinationFolder" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Pfad zum Database-Ordner, relativ von dieser Datei aus.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="FrontendDestinationFolder" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Pfad zum Frontend-Ordner, relativ von dieser Datei aus.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="ProjectName" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Name des Backend-Projekts.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="DbProjectName" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Name des Database-Projekts.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="DbContextName" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Name des DbContexts.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="Replacements">
+          <xs:annotation>
+            <xs:documentation xml:lang="de">Automatisiertes Ersetzen von Strings während der Generierung.</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element minOccurs="0" maxOccurs="unbounded" name="Replacement">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Defintion einer Ersetzung.</xs:documentation>
+                </xs:annotation>
                 <xs:complexType>
-                  <xs:attribute name="pattern" type="xs:string" use="required" />
-                  <xs:attribute name="replaceWith" type="xs:string" use="required" />
+                  <xs:attribute name="pattern" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Der Wert der ersetzt werden soll.</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="replaceWith" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Der Wert, mit dem der gefundene Wert ersetzt werden soll.</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="Includes">
+          <xs:annotation>
+            <xs:documentation xml:lang="de">Inkludierung anderer XML-Dateien, zur Auslagerung von Modulen in andere Dateien.</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element minOccurs="0" maxOccurs="unbounded" name="Include">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Inkludierung einer anderer XML-Datei, zur Auslagerung von Modulen in andere Dateien.</xs:documentation>
+                </xs:annotation>
                 <xs:complexType>
-                  <xs:attribute name="src" type="xs:string" use="required" />
+                  <xs:attribute name="src" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Pfad zu der zu inkludierenden XML-Datei, relativ von dieser Datei aus.</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
