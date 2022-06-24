@@ -1,5 +1,5 @@
-﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -12,14 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private static readonly string FileName = "sub-pages\\detail\\entity-kebab-detail.page.html";
 
-        private readonly FrontendEntityAddition frontendEntityCoreAddition;
+        private readonly EntityCoreAddition frontendEntityCoreAddition;
         private readonly EntityDetailPageHtmlPropertyAddition entityDetailPageHtmlPropertyAddition;
         private readonly EntityDetailPageHtmlFromPropertyAddition entityDetailPageHtmlFromPropertyAddition;
         private readonly EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition;
         private readonly EntityDetailPageHtmlFromOneToOnePropertyAddition entityDetailPageHtmlFromOneToOnePropertyAddition;
 
         public EntityDetailPageHtmlGeneration(
-            FrontendEntityAddition frontendEntityCoreAddition,
+            EntityCoreAddition frontendEntityCoreAddition,
             EntityDetailPageHtmlPropertyAddition entityDetailPageHtmlPropertyAddition,
             EntityDetailPageHtmlFromPropertyAddition entityDetailPageHtmlFromPropertyAddition,
             EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition,
@@ -38,7 +38,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddEntity(Entity entity)
         {
-            this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendEntityCoreAddition.AddEntityToFrontend(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

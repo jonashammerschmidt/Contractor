@@ -1,5 +1,5 @@
-﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -12,12 +12,12 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private static readonly string FileName = "dialogs\\update\\entity-kebab-update.dialog.ts";
 
-        private readonly FrontendEntityAddition frontendEntityCoreAddition;
+        private readonly EntityCoreAddition frontendEntityCoreAddition;
         private readonly EntityUpdatePageTsPropertyAddition entityUpdatePageTsPropertyAddition;
         private readonly EntityUpdatePageTsToPropertyAddition entityUpdatePageTsToPropertyAddition;
 
         public EntityUpdatePageTsGeneration(
-            FrontendEntityAddition frontendEntityCoreAddition,
+            EntityCoreAddition frontendEntityCoreAddition,
             EntityUpdatePageTsPropertyAddition entityUpdatePageTsPropertyAddition,
             EntityUpdatePageTsToPropertyAddition entityUpdatePageTsToPropertyAddition)
         {
@@ -32,7 +32,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddEntity(Entity entity)
         {
-            this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendEntityCoreAddition.AddEntityToFrontend(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

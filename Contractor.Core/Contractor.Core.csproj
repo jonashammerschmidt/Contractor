@@ -218,4 +218,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Tools\EntityCore\" />
+  </ItemGroup>
 </Project>

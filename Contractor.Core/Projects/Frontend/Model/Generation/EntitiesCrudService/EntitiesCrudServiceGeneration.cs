@@ -1,5 +1,5 @@
-﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Model
@@ -12,10 +12,10 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private static readonly string FileName = "entities-kebab-crud.service.ts";
 
-        private readonly FrontendEntityAddition frontendModelEntityCoreAddition;
+        private readonly EntityCoreAddition frontendModelEntityCoreAddition;
 
         public EntitiesCrudServiceGeneration(
-            FrontendEntityAddition frontendModelEntityCoreAddition)
+            EntityCoreAddition frontendModelEntityCoreAddition)
         {
             this.frontendModelEntityCoreAddition = frontendModelEntityCoreAddition;
         }
@@ -26,7 +26,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void AddEntity(Entity entity)
         {
-            this.frontendModelEntityCoreAddition.AddEntity(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendModelEntityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

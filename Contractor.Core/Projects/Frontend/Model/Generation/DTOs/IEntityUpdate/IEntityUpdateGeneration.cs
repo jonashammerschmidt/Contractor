@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -12,18 +13,18 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         private static readonly string FileName = "dtos\\i-entity-kebab-update.ts";
 
-        private readonly FrontendEntityAddition frontendEntityAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
         private readonly IEntityUpdateMethodAddition entityUpdateMethodAddition;
 
         public IEntityUpdateGeneration(
-            FrontendEntityAddition frontendEntityAddition,
+            EntityCoreAddition entityCoreAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition,
             FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
             IEntityUpdateMethodAddition entityUpdateMethodAddition)
         {
-            this.frontendEntityAddition = frontendEntityAddition;
+            this.entityCoreAddition = entityCoreAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
             this.entityUpdateMethodAddition = entityUpdateMethodAddition;
@@ -35,7 +36,7 @@ namespace Contractor.Core.Projects.Frontend.Model
 
         protected override void AddEntity(Entity entity)
         {
-            this.frontendEntityAddition.AddEntity(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
