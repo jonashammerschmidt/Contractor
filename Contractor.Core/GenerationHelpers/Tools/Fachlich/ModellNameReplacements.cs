@@ -57,8 +57,6 @@ namespace Contractor.Core.Tools
         {
             text = ReplaceModulePlaceholders(module, text);
             text = ReplaceOptionsPlaceholders(module.Options, text);
-            text = text.Replace("domain-kebab", module.NameKebab);
-            text = text.Replace("Domain", module.Name);
 
             return text;
         }

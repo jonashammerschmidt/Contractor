@@ -14,11 +14,6 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
 
         protected override string UpdateFileData(Property property, string fileData)
         {
-            if (DatabaseDbContextPropertyLine.GetPropertyLine(property) == null)
-            {
-                return fileData;
-            }
-
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains($"modelBuilder.Entity<Ef{property.Entity.Name}>");
