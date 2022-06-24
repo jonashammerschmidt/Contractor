@@ -1,35 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" vc:minVersion="1.1" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
   <xs:element name="Modules">
+    <xs:annotation>
+      <xs:documentation xml:lang="de">Liste der zu generierenden Module. Hier wird das Domänenmodell definiert.</xs:documentation>
+    </xs:annotation>
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" maxOccurs="unbounded" name="Module">
+          <xs:annotation>
+            <xs:documentation xml:lang="de">Definition eines Moduls. Module teilen das Domänenmodell in fachliche (nicht technische) Bestandteile. Wird nur für die Ordnerstruktur und Namespaces verwendet.</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element minOccurs="1" maxOccurs="unbounded" name="Entity">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Definition einer Entität. Eine Entität ist eine Datenbanktabelle, die im Zuge der Generierung mit CRUD-Funktionalität ausgestattet wird.</xs:documentation>
+                </xs:annotation>
                 <xs:complexType>
                   <xs:choice maxOccurs="unbounded">
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="Property">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="de">Definition einer Property. Eine Property ist eine Datenbankspalte mit einem von mehreren Datentypen.</xs:documentation>
+                      </xs:annotation>
                       <xs:complexType>
-                        <xs:attribute name="name" type="xs:string" use="required" />
+                        <xs:attribute name="name" type="xs:string" use="required">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Name der Property.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
                         <xs:attribute name="type" use="required">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Typ der Property. Zulässige Typen: Boolean, DateTime, Double, Guid, Integer und String:{Maximallänge}</xs:documentation>
+                          </xs:annotation>
                           <xs:simpleType>
                             <xs:restriction base="xs:string">
                               <xs:pattern value="Boolean|DateTime|Double|Guid|Integer|(String(:[0-9]+)?)" />
                             </xs:restriction>
                           </xs:simpleType>
                         </xs:attribute>
-                        <xs:attribute name="optional" type="xs:boolean" use="optional" />
-                        <xs:attribute name="displayProperty" type="xs:boolean" use="optional" />
+                        <xs:attribute name="optional" type="xs:boolean" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Definition, ob diese Property NULL als Wert erlaubt. Default: false</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="displayProperty" type="xs:boolean" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Definition, ob diese Property die Display-Property der Entität ist. Diese wird zur Anzeige im Frontend verwendet. Sollte keine Display Property angegeben sein, wird als Fallback eine der folgenden Properties ausgewählt: Bezeichnung, Name, Id. Default: false.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
                       </xs:complexType>
                     </xs:element>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="Relation1ToN">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="de">Definition einer 1-zu-N Relation. Eintragung des Fremdschlüssels in dieser Entität.</xs:documentation>
+                      </xs:annotation>
                       <xs:complexType>
-                        <xs:attribute name="entityNameFrom" type="xs:string" use="required" />
-                        <xs:attribute name="propertyNameFrom" type="xs:string" use="optional" />
-                        <xs:attribute name="propertyNameTo" type="xs:string" use="optional" />
-                        <xs:attribute name="optional" type="xs:boolean" use="optional" />
+                        <xs:attribute name="entityNameFrom" type="xs:string" use="required">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Name (Singular) der Entität auf die diese Relation zeigt.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="propertyNameFrom" type="xs:string" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Alternativer Name (Singular) der Relation-Property für die andere Entität **in dieser Entität**. Default: Name der anderen Entität</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="propertyNameTo" type="xs:string" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Alternativer Name (Plural) der Relation-Property für diese Entität **in der anderen Entität**. Default: Name dieser Entität</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="optional" type="xs:boolean" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Definition, ob diese Relation NULL als Wert erlaubt. Default: false</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
                         <xs:attribute name="onDelete" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Setzt das Löschverhalten der Entitäten für diese Relation. Default: NoAction</xs:documentation>
+                          </xs:annotation>
                           <xs:simpleType>
                             <xs:restriction base="xs:string">
                               <xs:pattern value="NoAction|SetNull|Cascade|ClientSetNull|ClientCascade" />
@@ -39,12 +88,34 @@
                       </xs:complexType>
                     </xs:element>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="Relation1To1">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="de">Definition einer 1-zu-1 Relation. Eintragung des Fremdschlüssels in dieser Entität.</xs:documentation>
+                      </xs:annotation>
                       <xs:complexType>
-                        <xs:attribute name="entityNameFrom" type="xs:string" use="required" />
-                        <xs:attribute name="propertyNameFrom" type="xs:string" use="optional" />
-                        <xs:attribute name="propertyNameTo" type="xs:string" use="optional" />
-                        <xs:attribute name="optional" type="xs:boolean" use="optional" />
+                        <xs:attribute name="entityNameFrom" type="xs:string" use="required">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Name (Singular) der Entität auf die diese Relation zeigt.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="propertyNameFrom" type="xs:string" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Alternativer Name (Singular) der Relation-Property für die andere Entität **in dieser Entität**. Default: Name der anderen Entität</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="propertyNameTo" type="xs:string" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Alternativer Name (Singular) der Relation-Property für diese Entität **in der anderen Entität**. Default: Name dieser Entität</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="optional" type="xs:boolean" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Definition, ob diese Relation NULL als Wert erlaubt. Default: false</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
                         <xs:attribute name="onDelete" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Setzt das Löschverhalten der Entitäten für diese Relation. Default: NoAction</xs:documentation>
+                          </xs:annotation>
                           <xs:simpleType>
                             <xs:restriction base="xs:string">
                               <xs:pattern value="NoAction|SetNull|Cascade|ClientSetNull|ClientCascade" />
@@ -54,29 +125,71 @@
                       </xs:complexType>
                     </xs:element>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="Index">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="de">Definition eines Index zur Datenbank-Optimierung und optional zur Einzigartigkeitsbeschränkung.</xs:documentation>
+                      </xs:annotation>
                       <xs:complexType>
-                        <xs:attribute name="property" type="xs:string" use="required" />
-                        <xs:attribute name="clustered" type="xs:boolean" use="optional" />
-                        <xs:attribute name="unique" type="xs:boolean" use="optional" />
+                        <xs:attribute name="property" type="xs:string" use="required">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Eine oder mehrere Properties (komma-separiert), die Teil des Index sein sollen. Hier können auch Scope-, bzw Relation-Properties verwendet werden. Hierbei den Suffix "Id" nicht vergessen. Beispiel: Name,MandantId</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="clustered" type="xs:boolean" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Definition, ob der Index clustered sein soll. Es kann nur einen clustered Index pro Entität geben. Default: false.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="unique" type="xs:boolean" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Definition, ob der Index eine Einzigartigkeitsbeschränkung haben soll. Default: false.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
                       </xs:complexType>
                     </xs:element>
                   </xs:choice>
-                  <xs:attribute name="name" type="xs:string" use="required" />
-                  <xs:attribute name="namePlural" type="xs:string" use="required" />
-                  <xs:attribute name="scopeEntityName" type="xs:string" use="optional" />
+                  <xs:attribute name="name" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Name (Singular) der Entität.</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="namePlural" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Name (Plural) der Entität.</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="scopeEntityName" type="xs:string" use="optional">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Name (Singular) der Scope-Entität für Mandantentrennung.</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
                   <xs:attribute name="idType" use="optional">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Typ des Id-Feldes. Wird nur auf die Datenbank-Schicht angewandt. **Relationen, etc. funktionieren unter AutoIncrement nicht! Nur unter ganz besonderen Umständen anpassen!** z.B. für die Log-Tabelle. Auswahl: Guid, AutoIncrement. Default: Guid</xs:documentation>
+                    </xs:annotation>
                     <xs:simpleType>
                       <xs:restriction base="xs:string">
                         <xs:pattern value="Guid|AutoIncrement" />
                       </xs:restriction>
                     </xs:simpleType>
                   </xs:attribute>
-                  <xs:attribute name="skip" type="xs:boolean" use="optional" />
+                  <xs:attribute name="skip" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Definition, ob diese Entität bei der Generierung übersprungen werden soll. Jedoch ist diese Entität im Domänenmodell vorhanden und kann demnach referenziert werden. Default: false</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
-            <xs:attribute name="name" type="xs:string" use="required" />
-            <xs:attribute name="skip" type="xs:boolean" use="optional" />
+            <xs:attribute name="name" type="xs:string" use="required">
+              <xs:annotation>
+                <xs:documentation xml:lang="de">Name des Moduls</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="skip" type="xs:boolean" use="optional">
+              <xs:annotation>
+                <xs:documentation xml:lang="de">Definition, ob dieses Modul bei der Generierung übersprungen werden soll. Jedoch ist dieses Modul im Domänenmodell vorhanden und kann demnach referenziert werden. Default: false</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
           </xs:complexType>
         </xs:element>
       </xs:sequence>
