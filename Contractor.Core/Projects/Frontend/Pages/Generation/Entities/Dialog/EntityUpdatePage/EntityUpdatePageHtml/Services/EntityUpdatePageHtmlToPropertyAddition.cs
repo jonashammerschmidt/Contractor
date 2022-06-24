@@ -1,10 +1,12 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
-    internal class EntityUpdatePageHtmlToPropertyAddition : FrontendRelationAdditionEditor
+    internal class EntityUpdatePageHtmlToPropertyAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntityUpdatePageHtmlToPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

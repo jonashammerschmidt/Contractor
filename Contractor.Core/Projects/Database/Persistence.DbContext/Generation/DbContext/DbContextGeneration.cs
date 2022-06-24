@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core.Projects.Database.Persistence.DbContext
+﻿using Contractor.Core.MetaModell;
+
+namespace Contractor.Core.Projects.Database.Persistence.DbContext
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class DbContextGeneration : ClassGeneration
@@ -32,7 +34,7 @@
 
         protected override void AddProperty(Property property)
         {
-            this.dbContextPropertyAddition.Edit(property);
+            this.dbContextPropertyAddition.AddPropertyToDatabaseFile(property, "DbContext", $"DbContextNameRaw.cs");
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -42,7 +44,7 @@
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "Ef", "");
-            this.dbContextRelationToAddition.Edit(relationSideTo);
+            this.dbContextRelationToAddition.AddRelationSideToDatabaseFile(relationSideTo, "DbContext", "DbContextNameRaw.cs");
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -52,7 +54,7 @@
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "Ef", "");
-            this.dbContextRelationToOneToOneAddition.Edit(relationSideTo);
+            this.dbContextRelationToOneToOneAddition.AddRelationSideToDatabaseFile(relationSideTo, "DbContext", "DbContextNameRaw.cs");
         }
     }
 }

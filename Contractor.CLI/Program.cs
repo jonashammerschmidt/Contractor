@@ -1,6 +1,7 @@
 ﻿using Contractor.CLI.Commands._Helper;
 using Contractor.CLI.Tools;
 using Contractor.Core;
+using Contractor.Core.MetaModell;
 using System;
 using System.Diagnostics;
 using System.IO;

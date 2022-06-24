@@ -1,4 +1,4 @@
-﻿namespace Contractor.Core.Tools
+﻿namespace Contractor.Core.MetaModell
 {
     public enum RelationSideType
     {

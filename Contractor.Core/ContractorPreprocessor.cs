@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Tools;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -42,31 +43,31 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddProperty(Property property)
         {
-            this.entityDetailPageHtmlPropertyAddition.Edit(property, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityDetailPageHtmlPropertyAddition.AddPropertyToFrontendFile(property, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            this.entityDetailPageHtmlFromPropertyAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityDetailPageHtmlFromPropertyAddition.AddRelationSideToFrontendFile(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
-            this.entityDetailPageHtmlToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityDetailPageHtmlToPropertyAddition.AddRelationSideToFrontendFile(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            this.entityDetailPageHtmlFromOneToOnePropertyAddition.Edit(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityDetailPageHtmlFromOneToOnePropertyAddition.AddRelationSideToFrontendFile(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
-            this.entityDetailPageHtmlToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityDetailPageHtmlToPropertyAddition.AddRelationSideToFrontendFile(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
     }
 }

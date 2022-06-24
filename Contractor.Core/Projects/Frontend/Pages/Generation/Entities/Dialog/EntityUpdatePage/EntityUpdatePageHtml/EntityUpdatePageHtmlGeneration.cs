@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -37,7 +38,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddProperty(Property property)
         {
-            this.entityUpdatePageHtmlPropertyAddition.Edit(property, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityUpdatePageHtmlPropertyAddition.AddPropertyToFrontendFile(property, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -47,7 +48,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
-            this.entityUpdatePageHtmlToPropertyAddition.Edit(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
+            this.entityUpdatePageHtmlToPropertyAddition.AddRelationSideToFrontendFile(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

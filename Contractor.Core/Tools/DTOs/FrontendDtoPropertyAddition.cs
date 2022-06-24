@@ -1,4 +1,5 @@
 ﻿using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 
 namespace Contractor.Core.Tools
 {

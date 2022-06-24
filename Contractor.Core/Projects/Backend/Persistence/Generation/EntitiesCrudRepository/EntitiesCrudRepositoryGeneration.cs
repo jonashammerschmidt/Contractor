@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Tools;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Persistence
@@ -57,15 +58,15 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
 
-            this.dtoFromRepositoryIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.dtoFromRepositoryIncludeAddition.AddRelationSideToBackendFile(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "");
 
-            this.dtoToRepositoryIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
-            this.entitiesCrudRepositoryToRelationAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.dtoToRepositoryIncludeAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToRelationAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -77,15 +78,15 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
 
-            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.AddRelationSideToBackendFile(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "");
 
-            this.entitiesCrudRepositoryToOneToOneIncludeAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
-            this.entitiesCrudRepositoryToRelationAddition.Edit(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToOneToOneIncludeAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryToRelationAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

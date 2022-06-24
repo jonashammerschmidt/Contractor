@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core.Projects.Backend.Misc
+﻿using Contractor.Core.MetaModell;
+
+namespace Contractor.Core.Projects.Backend.Misc
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_MISC })]
     internal class E2ePostmanGeneration : ClassGeneration

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Contractor.Core
+namespace Contractor.Core.MetaModell
 {
     public class ContractorGenerationOptions
     {
@@ -18,12 +18,12 @@ namespace Contractor.Core
 
         public void AddLinks()
         {
-            foreach (var module in this.Modules)
+            foreach (var module in Modules)
             {
                 module.AddLinks(this);
             }
 
-            foreach (var module in this.Modules)
+            foreach (var module in Modules)
             {
                 module.AddLinksForChildren();
             }
@@ -31,7 +31,7 @@ namespace Contractor.Core
 
         public Entity FindEntity(string entityName)
         {
-            foreach (var module in this.Modules)
+            foreach (var module in Modules)
             {
                 foreach (var entity in module.Entities)
                 {
@@ -47,11 +47,11 @@ namespace Contractor.Core
 
         public void Sort(IEnumerable<Entity> sortedEntities)
         {
-            this.Modules = sortedEntities
+            Modules = sortedEntities
                 .Select(entity => entity.Module)
                 .Distinct();
 
-            foreach (var module in this.Modules)
+            foreach (var module in Modules)
             {
                 module.Sort(sortedEntities);
             }

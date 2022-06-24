@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core.Projects.Frontend.Pages
+﻿using Contractor.Core.MetaModell;
+
+namespace Contractor.Core.Projects.Frontend.Pages
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_PAGES })]
     internal class AppComponentGeneration : ClassGeneration

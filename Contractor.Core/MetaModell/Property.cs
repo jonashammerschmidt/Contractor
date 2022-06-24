@@ -1,6 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 
-namespace Contractor.Core
+namespace Contractor.Core.MetaModell
 {
     public class Property
     {
@@ -10,7 +10,7 @@ namespace Contractor.Core
         public string Name
         {
             get { return name; }
-            set { this.name = value.ToVariableName(); }
+            set { name = value.ToVariableName(); }
         }
 
         public string NameLower
@@ -18,14 +18,15 @@ namespace Contractor.Core
             get { return Name.LowerFirstChar(); }
         }
 
-        public string Type {
-            get { return this.type.Split(':')[0]; }
-            set { this.type = value; }
+        public string Type
+        {
+            get { return type.Split(':')[0]; }
+            set { type = value; }
         }
 
         public string TypeExtra
         {
-            get { return this.type.Split(':')[1]; }
+            get { return type.Split(':')[1]; }
         }
 
         public bool IsOptional { get; set; }
@@ -38,7 +39,7 @@ namespace Contractor.Core
 
         public void AddLinks(Entity entity)
         {
-            this.Entity = entity;
+            Entity = entity;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Contractor.Core
+namespace Contractor.Core.MetaModell
 {
     public class Index
     {
@@ -15,7 +15,7 @@ namespace Contractor.Core
 
         public IEnumerable<string> ColumnNames
         {
-            get { return this.columnNames; }
+            get { return columnNames; }
         }
 
         public bool IsClustered { get; set; }

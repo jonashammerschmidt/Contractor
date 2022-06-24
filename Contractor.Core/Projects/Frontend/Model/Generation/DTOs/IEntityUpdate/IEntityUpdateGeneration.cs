@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -55,7 +56,7 @@ namespace Contractor.Core.Projects.Frontend.Model
             this.frontendDtoPropertyAddition.AddPropertyToDTO(guidRelationSideTo, ModelProjectGeneration.DomainFolder, FileName);
 
             RelationSide objectRelationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
-            this.entityUpdateMethodAddition.Edit(objectRelationSideTo, ModelProjectGeneration.DomainFolder, FileName);
+            this.entityUpdateMethodAddition.AddRelationSideToFrontendFile(objectRelationSideTo, ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
