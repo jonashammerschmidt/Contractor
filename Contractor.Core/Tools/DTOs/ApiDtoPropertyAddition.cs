@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -39,7 +38,7 @@ namespace Contractor.Core.Tools
 
         private string AddUsingStatements(Property property, string fileData)
         {
-            if (property.Type == PropertyTypes.Guid || property.Type == PropertyTypes.DateTime)
+            if (property.Type == PropertyType.Guid || property.Type == PropertyType.DateTime)
             {
                 fileData = UsingStatements.Add(fileData, "System");
             }
@@ -69,12 +68,12 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertLine("        [Required]");
             }
 
-            if (property.Type == PropertyTypes.String && property.TypeExtra != null && property.IsOptional)
+            if (property.Type == PropertyType.String && property.TypeExtra != null && property.IsOptional)
             {
                 stringEditor.InsertLine($"        [StringLength({property.TypeExtra})]");
             }
 
-            if (property.Type == PropertyTypes.String && property.TypeExtra != null && !property.IsOptional)
+            if (property.Type == PropertyType.String && property.TypeExtra != null && !property.IsOptional)
             {
                 stringEditor.InsertLine($"        [StringLength({property.TypeExtra}, MinimumLength = 1)]");
             }

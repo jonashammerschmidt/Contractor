@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 using System;
 
 namespace Contractor.Core.Tools
@@ -11,22 +10,22 @@ namespace Contractor.Core.Tools
             string optionalText = (property.IsOptional) ? "?" : "";
             switch (property.Type)
             {
-                case PropertyTypes.String:
+                case PropertyType.String:
                     return $"        public string {property.Name} {{ get; set; }}";
 
-                case PropertyTypes.Double:
+                case PropertyType.Double:
                     return $"        public double{optionalText} {property.Name} {{ get; set; }}";
 
-                case PropertyTypes.Integer:
+                case PropertyType.Integer:
                     return $"        public int{optionalText} {property.Name} {{ get; set; }}";
 
-                case PropertyTypes.DateTime:
+                case PropertyType.DateTime:
                     return $"        public DateTime{optionalText} {property.Name} {{ get; set; }}";
 
-                case PropertyTypes.Boolean:
+                case PropertyType.Boolean:
                     return $"        public bool{optionalText} {property.Name} {{ get; set; }}";
 
-                case PropertyTypes.Guid:
+                case PropertyType.Guid:
                     return $"        public Guid{optionalText} {property.Name} {{ get; set; }}";
 
                 default:

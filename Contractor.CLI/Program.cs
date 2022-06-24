@@ -55,7 +55,7 @@ namespace Contractor.CLI
             }
 
             string contractorXmlFilePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), args[1]));
-            FileInfo contractorXmlFileInfo = new FileInfo(contractorXmlFilePath);
+            var contractorXmlFileInfo = new FileInfo(contractorXmlFilePath);
             if (!contractorXmlFileInfo.Exists)
             {
                 contractorXmlFilePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..", args[1]));
@@ -67,11 +67,11 @@ namespace Contractor.CLI
                 }
             }
 
-            XmlDocument contractorXmlDocument = new XmlDocument();
+            var contractorXmlDocument = new XmlDocument();
             contractorXmlDocument.Load(File.OpenRead(contractorXmlFilePath));
-            XmlReader contractorXmlReader = new XmlNodeReader(contractorXmlDocument);
+            var contractorXmlReader = new XmlNodeReader(contractorXmlDocument);
 
-            XmlSerializer contractorXmlSerializer = new XmlSerializer(typeof(ContractorXml));
+            var contractorXmlSerializer = new XmlSerializer(typeof(ContractorXml));
             ContractorXml contractorXml = (ContractorXml) contractorXmlSerializer.Deserialize(contractorXmlReader);
 
             ContractorGenerationOptions contractorGenerationOptions = ContractorXmlConverter
@@ -83,11 +83,11 @@ namespace Contractor.CLI
                     contractorXmlFileInfo.Directory.FullName, 
                     include.Src));
 
-                XmlDocument contractorIncludeXmlDocument = new XmlDocument();
+                var contractorIncludeXmlDocument = new XmlDocument();
                 contractorIncludeXmlDocument.Load(File.OpenRead(contractorIncludeXmlFilePath));
                 XmlReader contractorIncludeXmlReader = new XmlNodeReader(contractorIncludeXmlDocument);
 
-                XmlSerializer contractorIncludeXmlSerializer = new XmlSerializer(typeof(ContractorIncludeXml));
+                var contractorIncludeXmlSerializer = new XmlSerializer(typeof(ContractorIncludeXml));
                 ContractorIncludeXml contractorIncludeXml = (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
 
                 ContractorXmlConverter.AddToContractorGenerationOptions(contractorGenerationOptions, contractorIncludeXml, contractorIncludeXmlDocument);
@@ -98,11 +98,11 @@ namespace Contractor.CLI
             TagArgumentParser.AddTags(args, contractorGenerationOptions);
             contractorGenerationOptions.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
 
-            Stopwatch stopwatch = new Stopwatch();
+            var stopwatch = new Stopwatch();
             stopwatch.Start();
             Console.WriteLine($"Started generation...");
 
-            ContractorCoreApi contractorCoreApi = new ContractorCoreApi(contractorGenerationOptions);
+            var contractorCoreApi = new ContractorCoreApi(contractorGenerationOptions);
             contractorCoreApi.Generate();
 
             stopwatch.Stop();

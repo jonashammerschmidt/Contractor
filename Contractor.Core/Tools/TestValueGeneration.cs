@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 using System;
 using System.Globalization;
 
@@ -16,25 +15,25 @@ namespace Contractor.Core.Tools
         {
             switch (property.Type)
             {
-                case PropertyTypes.String:
+                case PropertyType.String:
                     var length = Math.Min(
                         property.Name.Length,
                         int.Parse(property.TypeExtra) - prefix.Length - postfix.Length);
                     return "\"" + prefix + property.Name.Substring(0, length) + postfix + "\"";
 
-                case PropertyTypes.Integer:
+                case PropertyType.Integer:
                     return random.Next(100, 999).ToString();
 
-                case PropertyTypes.Double:
+                case PropertyType.Double:
                     return random.Next(10, 99).ToString() + "." + random.Next(0, 99999).ToString();
 
-                case PropertyTypes.Guid:
+                case PropertyType.Guid:
                     return "\"" + GenerateGuid(random) + "\"";
 
-                case PropertyTypes.Boolean:
+                case PropertyType.Boolean:
                     return postfix.Equals("DbDefault").ToString().ToLower();
 
-                case PropertyTypes.DateTime:
+                case PropertyType.DateTime:
                     Random gen = random;
                     int range = 10 * 365; // 10 years
                     var randomDate = new DateTime(2020, 12, 31).AddDays(-gen.Next(range));

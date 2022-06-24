@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 
 namespace Contractor.Core.Tools
 {
@@ -10,7 +9,7 @@ namespace Contractor.Core.Tools
         {
             switch (property.Type)
             {
-                case PropertyTypes.Boolean:
+                case PropertyType.Boolean:
                     return
                         $"            <ng-container matColumnDef=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                <th mat-header-cell *matHeaderCellDef> {property.Name.ToReadable()} </th>\n" +
@@ -23,7 +22,7 @@ namespace Contractor.Core.Tools
                         $"                    </mat-icon>\n" +
                         $"                </td>\n" +
                         $"            </ng-container>\n";
-                case PropertyTypes.DateTime:
+                case PropertyType.DateTime:
                     return
                         $"            <ng-container matColumnDef=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                <th mat-header-cell *matHeaderCellDef> {property.Name.ToReadable()} </th>\n" +

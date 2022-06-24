@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 using System;
 
 namespace Contractor.Core.Tools
@@ -12,18 +11,18 @@ namespace Contractor.Core.Tools
             string optionalText = (property.IsOptional) ? "?" : "";
             switch (property.Type)
             {
-                case PropertyTypes.String:
-                case PropertyTypes.Guid:
+                case PropertyType.String:
+                case PropertyType.Guid:
                     return $"    {property.Name.LowerFirstChar()}{optionalText}: string;";
 
-                case PropertyTypes.Double:
-                case PropertyTypes.Integer:
+                case PropertyType.Double:
+                case PropertyType.Integer:
                     return $"    {property.Name.LowerFirstChar()}{optionalText}: number;";
 
-                case PropertyTypes.DateTime:
+                case PropertyType.DateTime:
                     return $"    {property.Name.LowerFirstChar()}{optionalText}: Date;";
 
-                case PropertyTypes.Boolean:
+                case PropertyType.Boolean:
                     return $"    {property.Name.LowerFirstChar()}{optionalText}: boolean;";
 
                 default:

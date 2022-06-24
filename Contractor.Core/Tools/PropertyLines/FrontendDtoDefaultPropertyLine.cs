@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 
 namespace Contractor.Core.Tools
 {
@@ -8,7 +7,7 @@ namespace Contractor.Core.Tools
     {
         public static string GetPropertyLine(Property property)
         {
-            if (property.Type == PropertyTypes.String)
+            if (property.Type == PropertyType.String)
             {
                 return $"    {property.Name.LowerFirstChar()}: '',";
             }
