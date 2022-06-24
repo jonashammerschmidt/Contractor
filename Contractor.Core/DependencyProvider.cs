@@ -1,14 +1,14 @@
 ﻿using Contractor.Core.BaseClasses;
-using Contractor.Core.Projects.Backend.Api;
-using Contractor.Core.Projects.Backend.Contract.Logic;
-using Contractor.Core.Projects.Backend.Contract.Persistence;
-using Contractor.Core.Projects.Backend.Logic;
-using Contractor.Core.Projects.Backend.Misc;
-using Contractor.Core.Projects.Backend.Persistence;
-using Contractor.Core.Projects.Database.Persistence.DbContext;
-using Contractor.Core.Projects.Database.Persistence.InsertData.Dev;
-using Contractor.Core.Projects.Frontend.Model;
-using Contractor.Core.Projects.Frontend.Pages;
+using Contractor.Core.Generation.Backend.Api;
+using Contractor.Core.Generation.Backend.Contract.Logic;
+using Contractor.Core.Generation.Backend.Contract.Persistence;
+using Contractor.Core.Generation.Backend.Logic;
+using Contractor.Core.Generation.Backend.Misc;
+using Contractor.Core.Generation.Backend.Persistence;
+using Contractor.Core.Generation.Database.Persistence.DbContext;
+using Contractor.Core.Generation.Database.Persistence.InsertData.Dev;
+using Contractor.Core.Generation.Frontend.Model;
+using Contractor.Core.Generation.Frontend.Pages;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -51,11 +51,8 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<DtoAddition>();
             serviceCollection.AddSingleton<DtoPropertyAddition>();
             serviceCollection.AddSingleton<DtoRelationAddition>();
-            serviceCollection.AddSingleton<EntityCoreAddition>();
-            serviceCollection.AddSingleton<UsingStatementAddition>();
 
-            serviceCollection.AddSingleton<FrontendPagesDomainCoreAddition>();
-            serviceCollection.AddSingleton<EntityCoreAddition>();
+            serviceCollection.AddSingleton<ModuleCoreAddition>();
             serviceCollection.AddSingleton<EntityCoreAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyAddition>();
             serviceCollection.AddSingleton<FrontendDtoRelationAddition>();
