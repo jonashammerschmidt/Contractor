@@ -1,10 +1,12 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
-    internal class EntityCreatePageTsToPropertyAddition : FrontendRelationAdditionEditor
+    internal class EntityCreatePageTsToPropertyAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntityCreatePageTsToPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

@@ -1,9 +1,11 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Pages
 {
-    internal class EntitiesPageHtmlToRelationAddition : FrontendRelationAdditionEditor
+    internal class EntitiesPageHtmlToRelationAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntitiesPageHtmlToRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

@@ -1,9 +1,11 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Logic
 {
-    internal class EntityDetailMethodsAddition : PropertyAdditionEditor
+    internal class EntityDetailMethodsAddition : PropertyAdditionToExisitingFileGeneration
     {
         public EntityDetailMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

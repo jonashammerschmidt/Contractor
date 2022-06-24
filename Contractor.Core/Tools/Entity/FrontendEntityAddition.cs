@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core.Tools
+﻿using Contractor.Core.MetaModell;
+
+namespace Contractor.Core.Tools
 {
     internal class FrontendEntityAddition
     {

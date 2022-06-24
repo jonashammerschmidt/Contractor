@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Tools;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Tools;
 
 namespace Contractor.Core.BaseClasses
 {

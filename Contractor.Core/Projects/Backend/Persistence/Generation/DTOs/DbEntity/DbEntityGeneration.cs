@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -39,7 +40,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         protected override void AddProperty(Property property)
         {
             this.propertyAddition.AddPropertyToDTO(property, PersistenceProjectGeneration.DtoFolder, FileName);
-            this.dbDtoMethodsAddition.Edit(property, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoMethodsAddition.AddPropertyToBackendFile(property, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -50,7 +51,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
             this.propertyAddition.AddPropertyToDTO(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
-            this.dbDtoMethodsAddition.Edit(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoMethodsAddition.AddPropertyToBackendFile(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

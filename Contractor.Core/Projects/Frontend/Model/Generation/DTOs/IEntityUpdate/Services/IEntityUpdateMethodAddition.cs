@@ -1,9 +1,11 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Frontend.Model
 {
-    internal class IEntityUpdateMethodAddition : FrontendRelationAdditionEditor
+    internal class IEntityUpdateMethodAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public IEntityUpdateMethodAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base (fileSystemClient, pathService)

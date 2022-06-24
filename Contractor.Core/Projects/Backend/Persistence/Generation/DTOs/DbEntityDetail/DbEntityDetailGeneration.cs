@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -50,7 +51,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
         protected override void AddProperty(Property property)
         {
             this.propertyAddition.AddPropertyToDTO(property, PersistenceProjectGeneration.DtoFolder, FileName);
-            this.dbDtoDetailMethodsAddition.Edit(property, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.dbDtoDetailMethodsAddition.AddPropertyToBackendFile(property, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -60,8 +61,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(relationSideFrom, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.OtherEntity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
 
-            this.dbDtoDetailFromMethodsAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DtoFolder, FileName,
-                $"{relationSideFrom.OtherEntity.Module.Options.Paths.ProjectName}.Persistence.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+            this.dbDtoDetailFromMethodsAddition.AddRelationSideToBackendFile(relationSideFrom, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
@@ -71,8 +71,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(relationSideTo, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
-            this.dbDtoDetailToMethodsAddition.Edit(relationSideTo, PersistenceProjectGeneration.DtoFolder, FileName,
-                $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
+            this.dbDtoDetailToMethodsAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -82,8 +81,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(relationSideFrom, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
 
-            this.dbEntityDetailFromOneToOneMethodsAddition.Edit(relationSideFrom, PersistenceProjectGeneration.DtoFolder, FileName,
-                $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Persistence.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+            this.dbEntityDetailFromOneToOneMethodsAddition.AddRelationSideToBackendFile(relationSideFrom, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
@@ -93,8 +91,7 @@ namespace Contractor.Core.Projects.Backend.Persistence
             this.relationAddition.AddRelationToDTO(relationSideTo, PersistenceProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
-            this.dbDtoDetailToMethodsAddition.Edit(relationSideTo, PersistenceProjectGeneration.DtoFolder, FileName,
-                $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
+            this.dbDtoDetailToMethodsAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DtoFolder, FileName);
         }
     }
 }

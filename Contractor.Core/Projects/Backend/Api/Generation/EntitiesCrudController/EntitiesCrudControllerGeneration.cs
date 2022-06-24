@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -43,7 +44,7 @@ namespace Contractor.Core.Projects.Backend.Api
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
-            this.controllerRelationAddition.Edit(relationSideTo, ApiProjectGeneration.DomainFolder, FileName);
+            this.controllerRelationAddition.AddRelationSideToBackendFile(relationSideTo, ApiProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

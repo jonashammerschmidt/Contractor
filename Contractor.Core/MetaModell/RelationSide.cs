@@ -1,7 +1,6 @@
 ﻿using Contractor.Core.Helpers;
-using Contractor.Core.Tools;
 
-namespace Contractor.Core
+namespace Contractor.Core.MetaModell
 {
     public class RelationSide : Property
     {

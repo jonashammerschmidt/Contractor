@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Contractor.Core
+namespace Contractor.Core.MetaModell
 {
     public class Entity
     {
@@ -13,7 +13,7 @@ namespace Contractor.Core
         public string Name
         {
             get { return name; }
-            set { this.name = value.ToVariableName(); }
+            set { name = value.ToVariableName(); }
         }
 
         public string NameLower
@@ -23,7 +23,7 @@ namespace Contractor.Core
 
         public string NameKebab
         {
-            get { return StringConverter.PascalToKebabCase(Name); }
+            get { return Name.PascalToKebabCase(); }
         }
 
         public string NameReadable
@@ -34,7 +34,7 @@ namespace Contractor.Core
         public string NamePlural
         {
             get { return namePlural; }
-            set { this.namePlural = value.ToVariableName(); }
+            set { namePlural = value.ToVariableName(); }
         }
 
         public string NamePluralLower
@@ -44,7 +44,7 @@ namespace Contractor.Core
 
         public string NamePluralKebab
         {
-            get { return StringConverter.PascalToKebabCase(NamePlural); }
+            get { return NamePlural.PascalToKebabCase(); }
         }
 
         public string NamePluralReadable
@@ -55,12 +55,12 @@ namespace Contractor.Core
         public string ScopeEntityName
         {
             private get { return scopeEntityName; }
-            set { this.scopeEntityName = value?.ToVariableName(); }
+            set { scopeEntityName = value?.ToVariableName(); }
         }
 
         public bool HasScope
         {
-            get { return !string.IsNullOrWhiteSpace(this.ScopeEntityName); }
+            get { return !string.IsNullOrWhiteSpace(ScopeEntityName); }
         }
 
         public bool Skip { get; set; }
@@ -83,37 +83,37 @@ namespace Contractor.Core
 
         public void AddLinks(Module module)
         {
-            this.Module = module;
-            if (this.ScopeEntityName != null)
+            Module = module;
+            if (ScopeEntityName != null)
             {
-                this.ScopeEntity = module.Options.FindEntity(this.ScopeEntityName);
+                ScopeEntity = module.Options.FindEntity(ScopeEntityName);
             }
         }
 
         public void AddLinksForChildren()
         {
-            foreach (var property in this.Properties)
+            foreach (var property in Properties)
             {
                 property.AddLinks(this);
             }
 
-            foreach (var relation1ToN in this.Relations1ToN)
+            foreach (var relation1ToN in Relations1ToN)
             {
                 relation1ToN.AddLinks(this);
             }
 
-            foreach (var relation1To1 in this.Relations1To1)
+            foreach (var relation1To1 in Relations1To1)
             {
                 relation1To1.AddLinks(this);
             }
 
-            foreach (var index in this.Indices)
+            foreach (var index in Indices)
             {
                 index.AddLinks(this);
             }
 
-            this.DisplayProperty =
-                this.Properties.FirstOrDefault(property => property.IsDisplayProperty) ??
+            DisplayProperty =
+                Properties.FirstOrDefault(property => property.IsDisplayProperty) ??
                 FindProperty("Bezeichnung", true) ??
                 FindProperty("Name", true) ??
                 new Property()

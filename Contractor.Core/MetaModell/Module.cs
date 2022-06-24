@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Contractor.Core
+namespace Contractor.Core.MetaModell
 {
     public class Module
     {
@@ -13,12 +13,12 @@ namespace Contractor.Core
         public string Name
         {
             get { return name; }
-            set { this.name = value.ToVariableName(); }
+            set { name = value.ToVariableName(); }
         }
 
         public string NameKebab
         {
-            get { return StringConverter.PascalToKebabCase(Name); }
+            get { return Name.PascalToKebabCase(); }
         }
 
         public string NameReadable
@@ -50,7 +50,7 @@ namespace Contractor.Core
 
         public void Sort(IEnumerable<Entity> sortedEntities)
         {
-            this.Entities = sortedEntities
+            Entities = sortedEntities
                 .Where(entity => entity.Module == this);
         }
     }

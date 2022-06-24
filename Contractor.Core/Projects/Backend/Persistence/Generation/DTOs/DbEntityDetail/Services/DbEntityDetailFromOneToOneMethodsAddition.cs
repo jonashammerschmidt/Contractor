@@ -1,10 +1,12 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Persistence
 {
-    internal class DbEntityDetailFromOneToOneMethodsAddition : RelationAdditionEditor
+    internal class DbEntityDetailFromOneToOneMethodsAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public DbEntityDetailFromOneToOneMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
@@ -13,6 +15,8 @@ namespace Contractor.Core.Projects.Backend.Persistence
 
         protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
+            fileData = UsingStatements.Add(fileData, $"{relationSide.Entity.Module.Options.Paths.ProjectName}.Persistence.Modules.{relationSide.OtherEntity.Module.Name}.{relationSide.OtherEntity.NamePlural}");
+
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("FromEf" + relationSide.Entity.Name);

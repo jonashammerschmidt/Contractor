@@ -1,44 +1,45 @@
-﻿using Contractor.Core.Tools;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Tools;
 
 namespace Contractor.Core.BaseClasses
 {
-    internal abstract class RelationSideAdditionToExisitingFileGeneration
+    internal abstract class PropertyAdditionToExisitingFileGeneration
     {
         private readonly IFileSystemClient fileSystemClient;
         private readonly PathService pathService;
 
-        public RelationSideAdditionToExisitingFileGeneration(IFileSystemClient fileSystemClient, PathService pathService)
+        public PropertyAdditionToExisitingFileGeneration(IFileSystemClient fileSystemClient, PathService pathService)
         {
             this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
         }
 
-        public void AddRelationSideToBackendFile(RelationSide relationSide, string fileName)
+        public void AddPropertyToBackendFile(Property property, params string[] paths)
         {
-            string filePath = pathService.GetAbsolutePathForBackend(relationSide, fileName);
-            AddRelationSideToFile(relationSide, filePath);
+            string filePath = pathService.GetAbsolutePathForBackend(property, paths);
+            AddPropertyToFile(property, filePath);
         }
 
-        public void AddRelationSideToDatabaseFile(RelationSide relationSide, string fileName)
+        public void AddPropertyToDatabaseFile(Property property, params string[] paths)
         {
-            string filePath = pathService.GetAbsolutePathForDatabase(relationSide, fileName);
-            AddRelationSideToFile(relationSide, filePath);
+            string filePath = pathService.GetAbsolutePathForDatabase(property, paths);
+            AddPropertyToFile(property, filePath);
         }
 
-        public void AddRelationSideToFrontendFile(RelationSide relationSide, string fileName)
+        public void AddPropertyToFrontendFile(Property property, params string[] paths)
         {
-            string filePath = pathService.GetAbsolutePathForFrontend(relationSide, fileName);
-            AddRelationSideToFile(relationSide, filePath);
+            string filePath = pathService.GetAbsolutePathForFrontend(property, paths);
+            AddPropertyToFile(property, filePath);
         }
 
-        private void AddRelationSideToFile(RelationSide relationSide, string filePath)
+        private void AddPropertyToFile(Property property, string filePath)
         {
-            string fileData = fileSystemClient.ReadAllText(relationSide, filePath);
-            fileData = UpdateFileData(relationSide, fileData);
+            string fileData = fileSystemClient.ReadAllText(property, filePath);
+            fileData = UpdateFileData(property, fileData);
 
             fileSystemClient.WriteAllText(fileData, filePath);
         }
 
-        protected abstract string UpdateFileData(RelationSide relationSide, string fileData);
+        protected abstract string UpdateFileData(Property property, string fileData);
     }
 }

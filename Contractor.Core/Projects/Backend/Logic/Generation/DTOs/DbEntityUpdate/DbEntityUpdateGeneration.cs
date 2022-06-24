@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Options;
+﻿using Contractor.Core.MetaModell;
+using Contractor.Core.Options;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -38,7 +39,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         protected override void AddProperty(Property property)
         {
             this.dtoPropertyAddition.AddPropertyToDTO(property, LogicProjectGeneration.DtoFolder, FileName);
-            this.dbEntityUpdateMethodsAddition.Edit(property, LogicProjectGeneration.DtoFolder, FileName);
+            this.dbEntityUpdateMethodsAddition.AddPropertyToBackendFile(property, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -49,7 +50,7 @@ namespace Contractor.Core.Projects.Backend.Logic
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
             this.dtoPropertyAddition.AddPropertyToDTO(relationSide, LogicProjectGeneration.DtoFolder, FileName);
-            this.dbEntityUpdateMethodsAddition.Edit(relationSide, LogicProjectGeneration.DtoFolder, FileName);
+            this.dbEntityUpdateMethodsAddition.AddPropertyToBackendFile(relationSide, LogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

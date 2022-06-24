@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contractor.Core.MetaModell;
+using System;
 
 namespace Contractor.Core.Projects
 {

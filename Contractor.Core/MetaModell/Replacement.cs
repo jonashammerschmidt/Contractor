@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Contractor.Core
+namespace Contractor.Core.MetaModell
 {
     public class Replacement
     {

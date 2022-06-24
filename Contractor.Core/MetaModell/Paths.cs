@@ -1,4 +1,4 @@
-﻿namespace Contractor.Core
+﻿namespace Contractor.Core.MetaModell
 {
     public class Paths
     {

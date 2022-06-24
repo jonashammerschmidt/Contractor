@@ -1,9 +1,11 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Database.Persistence.DbContext
 {
-    internal class DbContextPropertyAddition : DbContextPropertyAdditionEditor
+    internal class DbContextPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public DbContextPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

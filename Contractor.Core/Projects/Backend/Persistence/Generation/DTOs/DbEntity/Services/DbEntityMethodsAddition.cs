@@ -1,9 +1,11 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Persistence
 {
-    internal class DbEntityMethodsAddition : PropertyAdditionEditor
+    internal class DbEntityMethodsAddition : PropertyAdditionToExisitingFileGeneration
     {
         public DbEntityMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

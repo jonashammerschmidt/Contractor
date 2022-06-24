@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core.Projects.Database.Persistence.InsertData.Dev
+﻿using Contractor.Core.MetaModell;
+
+namespace Contractor.Core.Projects.Database.Persistence.InsertData.Dev
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class PersistenceInsertDataDevProjectFileGeneration : ClassGeneration
