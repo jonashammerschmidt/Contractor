@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 using System;
 
 namespace Contractor.Core.Tools
@@ -12,7 +11,7 @@ namespace Contractor.Core.Tools
             string requiredLine = (property.IsOptional ? "" : "required=\"true\"");
             switch (property.Type)
             {
-                case PropertyTypes.Boolean:
+                case PropertyType.Boolean:
                     return
                         $"            <mat-checkbox formControlName=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                {property.Name.ToReadable()}\n" +
@@ -20,7 +19,7 @@ namespace Contractor.Core.Tools
                         $"\n" +
                         $"            <br>";
 
-                case PropertyTypes.DateTime:
+                case PropertyType.DateTime:
                     return
                          "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
                         $"                <mat-label>{property.Name.ToReadable()}</mat-label>\n" +
@@ -37,8 +36,8 @@ namespace Contractor.Core.Tools
                          "                </mat-error>\n" +
                          "            </mat-form-field>";
 
-                case PropertyTypes.Integer:
-                case PropertyTypes.Double:
+                case PropertyType.Integer:
+                case PropertyType.Double:
                     return
                          "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
                         $"                <mat-label>{property.Name.ToReadable()}</mat-label>\n" +
@@ -53,7 +52,7 @@ namespace Contractor.Core.Tools
                          "                </mat-error>\n" +
                          "            </mat-form-field>";
 
-                case PropertyTypes.String:
+                case PropertyType.String:
                     return
                          "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
                         $"                <mat-label>{property.Name.ToReadable()}</mat-label>\n" +
@@ -69,7 +68,7 @@ namespace Contractor.Core.Tools
                          "                </mat-error>\n" +
                          "            </mat-form-field>";
 
-                case PropertyTypes.Guid:
+                case PropertyType.Guid:
                     return
                          "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
                         $"                <mat-label>{property.Name.ToReadable()}</mat-label>\n" +

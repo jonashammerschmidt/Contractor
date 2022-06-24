@@ -170,19 +170,6 @@ namespace Contractor.Core.Helpers
             return this;
         }
 
-        public bool ContainsInTheNextNLines(string pattern, int n)
-        {
-            for (int i = 1; i <= 10 && lineNumber + i < this.lines.Count; i++)
-            {
-                if (this.lines[lineNumber + i].Contains(pattern))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public void SetLine(string line)
         {
             this.lines[lineNumber] = line;

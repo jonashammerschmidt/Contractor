@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 using System;
 
 namespace Contractor.Core.Tools
@@ -13,20 +12,20 @@ namespace Contractor.Core.Tools
             {
                 switch (property.Type)
                 {
-                    case PropertyTypes.DateTime:
-                    case PropertyTypes.Double:
+                    case PropertyType.DateTime:
+                    case PropertyType.Double:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(null, []),";
 
-                    case PropertyTypes.Integer:
+                    case PropertyType.Integer:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.pattern(integerRegex)]),";
 
-                    case PropertyTypes.Guid:
+                    case PropertyType.Guid:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.pattern(guidRegex)]),";
 
-                    case PropertyTypes.String:
+                    case PropertyType.String:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl('', [Validators.maxLength({property.TypeExtra})]),";
 
-                    case PropertyTypes.Boolean:
+                    case PropertyType.Boolean:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(false, []),";
                 }
             }
@@ -34,20 +33,20 @@ namespace Contractor.Core.Tools
             {
                 switch (property.Type)
                 {
-                    case PropertyTypes.DateTime:
-                    case PropertyTypes.Double:
+                    case PropertyType.DateTime:
+                    case PropertyType.Double:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.required]),";
 
-                    case PropertyTypes.Integer:
+                    case PropertyType.Integer:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.required, Validators.pattern(integerRegex)]),";
 
-                    case PropertyTypes.Guid:
+                    case PropertyType.Guid:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.required, Validators.pattern(guidRegex)]),";
 
-                    case PropertyTypes.String:
+                    case PropertyType.String:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength({property.TypeExtra})]),";
 
-                    case PropertyTypes.Boolean:
+                    case PropertyType.Boolean:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(false, [Validators.required]),";
                 }
             }

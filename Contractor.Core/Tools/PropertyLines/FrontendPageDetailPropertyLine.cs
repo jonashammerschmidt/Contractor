@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 
 namespace Contractor.Core.Tools
 {
@@ -10,7 +9,7 @@ namespace Contractor.Core.Tools
         {
             switch (property.Type)
             {
-                case PropertyTypes.Boolean:
+                case PropertyType.Boolean:
                     return
                         $"    <p [attr.aria-label]=\"'{property.Name.ToReadable()}: ' + ({property.Entity.Name.LowerFirstChar()}.{property.Name.LowerFirstChar()}) ? 'aktiv' : 'inaktiv' \">\n" +
                         $"        <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{property.Name.ToReadable()}:</span>\n" +
@@ -22,7 +21,7 @@ namespace Contractor.Core.Tools
                         $"            check_box_outline_blank\n" +
                         $"        </mat-icon>\n" +
                          "    </p>";
-                case PropertyTypes.DateTime:
+                case PropertyType.DateTime:
                     return
                         $"    <p [attr.aria-label]=\"'{property.Name.ToReadable()}: ' + {property.Entity.Name.LowerFirstChar()}.{property.Name.LowerFirstChar()}{(property.IsOptional ? "?" : "")}.toLocaleString()\">\n" +
                         $"        <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{property.Name.ToReadable()}:</span>\n" +

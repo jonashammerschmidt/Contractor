@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 
 namespace Contractor.Core.Tools
 {
@@ -9,13 +8,13 @@ namespace Contractor.Core.Tools
         {
             switch (property.Type)
             {
-                case PropertyTypes.String:
+                case PropertyType.String:
                     return 
                         $"                entity.Property(e => e.{property.Name})\n" +
                         $"                    .IsRequired({(!property.IsOptional).ToString().ToLower()})\n" +
                         $"                    .HasMaxLength({property.TypeExtra});";
 
-                case PropertyTypes.DateTime:
+                case PropertyType.DateTime:
                     return
                         $"                entity.Property(e => e.{property.Name})\n" +
                         $"                    .IsRequired({(!property.IsOptional).ToString().ToLower()})\n" +

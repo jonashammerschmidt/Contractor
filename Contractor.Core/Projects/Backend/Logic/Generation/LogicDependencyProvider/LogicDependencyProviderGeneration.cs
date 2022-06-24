@@ -1,5 +1,4 @@
 ﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Options;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Projects.Backend.Logic
