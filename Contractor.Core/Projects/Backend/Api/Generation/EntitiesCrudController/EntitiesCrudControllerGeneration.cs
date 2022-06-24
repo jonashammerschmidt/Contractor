@@ -1,5 +1,5 @@
-﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using System.IO;
 
 namespace Contractor.Core.Projects.Backend.Api
@@ -29,7 +29,7 @@ namespace Contractor.Core.Projects.Backend.Api
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityCore(entity, ApiProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, ApiProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

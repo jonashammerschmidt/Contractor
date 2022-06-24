@@ -1,5 +1,5 @@
-﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Tools;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using System.IO;
 
 namespace Contractor.Core.Projects.Frontend.Pages
@@ -12,14 +12,14 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         private static readonly string FileName = "entities-kebab.page.ts";
 
-        private readonly FrontendEntityAddition frontendEntityCoreAddition;
+        private readonly EntityCoreAddition frontendEntityCoreAddition;
         private readonly EntitiesPageTsPropertyAddition entitiesPageTsPropertyAddition;
         private readonly EntitiesPageTsToPropertyAddition entitiesPageTsToPropertyAddition;
         private readonly EntitiesPageTsFromOneToOnePropertyAddition entitiesPageTsFromOneToOnePropertyAddition;
         private readonly EntitiesPageTsToOneToOnePropertyAddition entitiesPageTsToOneToOnePropertyAddition;
 
         public EntitiesPageTsGeneration(
-            FrontendEntityAddition frontendEntityCoreAddition,
+            EntityCoreAddition frontendEntityCoreAddition,
             EntitiesPageTsPropertyAddition entitiesPageTsPropertyAddition,
             EntitiesPageTsToPropertyAddition entitiesPageTsToPropertyAddition,
             EntitiesPageTsFromOneToOnePropertyAddition entitiesPageTsFromOneToOnePropertyAddition,
@@ -38,7 +38,7 @@ namespace Contractor.Core.Projects.Frontend.Pages
 
         protected override void AddEntity(Entity entity)
         {
-            this.frontendEntityCoreAddition.AddEntity(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.frontendEntityCoreAddition.AddEntityToFrontend(entity, PagesProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

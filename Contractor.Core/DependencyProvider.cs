@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Projects.Backend.Api;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Projects.Backend.Api;
 using Contractor.Core.Projects.Backend.Contract.Logic;
 using Contractor.Core.Projects.Backend.Contract.Persistence;
 using Contractor.Core.Projects.Backend.Logic;
@@ -54,8 +55,8 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<UsingStatementAddition>();
 
             serviceCollection.AddSingleton<FrontendPagesDomainCoreAddition>();
-            serviceCollection.AddSingleton<FrontendEntityAddition>();
-            serviceCollection.AddSingleton<FrontendEntityAddition>();
+            serviceCollection.AddSingleton<EntityCoreAddition>();
+            serviceCollection.AddSingleton<EntityCoreAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyAddition>();
             serviceCollection.AddSingleton<FrontendDtoRelationAddition>();
             serviceCollection.AddSingleton<FrontendDtoPropertyMethodAddition>();
