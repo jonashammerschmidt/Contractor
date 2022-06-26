@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -12,17 +13,17 @@ namespace Contractor.Core.Generation.Backend.Contract.Logic
 
         private static readonly string FileName = "IEntityUpdate.cs";
 
-        private readonly DtoAddition dtoAddition;
-        private readonly DtoPropertyAddition propertyAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
+        private readonly DtoInterfacePropertyAddition dtoInterfacePropertyAddition;
         private readonly DtoRelationAddition relationAddition;
 
         public IEntityUpdateGeneration(
-            DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition,
+            EntityCoreAddition entityCoreAddition,
+            DtoInterfacePropertyAddition dtoInterfacePropertyAddition,
             DtoRelationAddition relationAddition)
         {
-            this.dtoAddition = dtoAddition;
-            this.propertyAddition = propertyAddition;
+            this.entityCoreAddition = entityCoreAddition;
+            this.dtoInterfacePropertyAddition = dtoInterfacePropertyAddition;
             this.relationAddition = relationAddition;
         }
 
@@ -32,12 +33,12 @@ namespace Contractor.Core.Generation.Backend.Contract.Logic
 
         protected override void AddEntity(Entity entity)
         {
-            this.dtoAddition.AddDto(entity, ContractLogicProjectGeneration.DtoFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, ContractLogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            this.propertyAddition.AddPropertyToDTO(property, ContractLogicProjectGeneration.DtoFolder, FileName, true);
+            this.dtoInterfacePropertyAddition.AddPropertyToBackendFile(property, ContractLogicProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)

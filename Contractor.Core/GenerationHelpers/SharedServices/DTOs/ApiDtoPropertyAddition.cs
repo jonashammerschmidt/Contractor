@@ -1,42 +1,18 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
-    internal class ApiDtoPropertyAddition
+    internal class ApiDtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
-
-        public ApiDtoPropertyAddition(
-            IFileSystemClient fileSystemClient,
-            PathService pathService)
+        public ApiDtoPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
+            : base(fileSystemClient, pathService)
         {
-            this.fileSystemClient = fileSystemClient;
-            this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName)
-        {
-            string filePath = this.pathService.GetAbsolutePathForBackend(property, domainFolder, templateFileName);
-            string fileData = UpdateFileData(property, filePath);
-
-            this.fileSystemClient.WriteAllText(fileData, filePath);
-        }
-
-        private string UpdateFileData(Property property, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
-
-            fileData = AddUsingStatements(property, fileData);
-            fileData = AddProperty(fileData, property);
-
-            return fileData;
-        }
-
-        private string AddUsingStatements(Property property, string fileData)
+        protected override string UpdateFileData(Property property, string fileData)
         {
             if (property.Type == PropertyType.Guid || property.Type == PropertyType.DateTime)
             {
@@ -45,20 +21,15 @@ namespace Contractor.Core.Tools
 
             fileData = UsingStatements.Add(fileData, "System.ComponentModel.DataAnnotations");
 
-            return fileData;
-        }
-
-        private string AddProperty(string file, Property property)
-        {
-            StringEditor stringEditor = new StringEditor(file);
-            FindStartingLineForNewProperty(file, property, stringEditor);
+            StringEditor stringEditor = new StringEditor(fileData);
+            FindStartingLineForNewProperty(fileData, property, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {
                 stringEditor.Prev();
             }
 
-            if (ContainsProperty(file))
+            if (ContainsProperty(fileData))
             {
                 stringEditor.InsertNewLine();
             }

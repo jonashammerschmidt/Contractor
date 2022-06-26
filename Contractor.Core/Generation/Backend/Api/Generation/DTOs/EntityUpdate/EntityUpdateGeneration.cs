@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -12,14 +13,14 @@ namespace Contractor.Core.Generation.Backend.Api
 
         private static readonly string FileName = "EntityUpdate.cs";
 
-        private readonly DtoAddition dtoAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
         private readonly ApiDtoPropertyAddition apiPropertyAddition;
 
         public EntityUpdateGeneration(
-            DtoAddition dtoAddition,
+            EntityCoreAddition entityCoreAddition,
             ApiDtoPropertyAddition apiPropertyAddition)
         {
-            this.dtoAddition = dtoAddition;
+            this.entityCoreAddition = entityCoreAddition;
             this.apiPropertyAddition = apiPropertyAddition;
         }
 
@@ -29,12 +30,12 @@ namespace Contractor.Core.Generation.Backend.Api
 
         protected override void AddEntity(Entity entity)
         {
-            this.dtoAddition.AddDto(entity, ApiProjectGeneration.DtoFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, ApiProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            this.apiPropertyAddition.AddPropertyToDTO(property, ApiProjectGeneration.DtoFolder, FileName);
+            this.apiPropertyAddition.AddPropertyToBackendFile(property, ApiProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -44,7 +45,7 @@ namespace Contractor.Core.Generation.Backend.Api
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
-            this.apiPropertyAddition.AddPropertyToDTO(relationSide, ApiProjectGeneration.DtoFolder, FileName);
+            this.apiPropertyAddition.AddPropertyToBackendFile(relationSide, ApiProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

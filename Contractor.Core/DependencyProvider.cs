@@ -48,8 +48,8 @@ namespace Contractor.Core
             serviceCollection.AddSingleton<EntityCoreDependencyProvider>();
 
             serviceCollection.AddSingleton<ApiDtoPropertyAddition>();
-            serviceCollection.AddSingleton<DtoAddition>();
             serviceCollection.AddSingleton<DtoPropertyAddition>();
+            serviceCollection.AddSingleton<DtoInterfacePropertyAddition>();
             serviceCollection.AddSingleton<DtoRelationAddition>();
 
             serviceCollection.AddSingleton<ModuleCoreAddition>();
