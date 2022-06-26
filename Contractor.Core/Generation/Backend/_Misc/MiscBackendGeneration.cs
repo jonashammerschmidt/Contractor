@@ -5,7 +5,6 @@ namespace Contractor.Core.Generation.Backend.Misc
 {
     internal class MiscBackendGeneration
     {
-
         internal static readonly string TemplateFolder = Folder.Executable + @"\Generation\Backend\_Misc\Templates";
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
@@ -14,7 +13,6 @@ namespace Contractor.Core.Generation.Backend.Misc
             serviceCollection.AddSingleton<E2ePostmanEntityAddition>();
             serviceCollection.AddSingleton<E2ePostmanPropertyAddition>();
             serviceCollection.AddSingleton<E2ePostmanRelationSideAddition>();
-
         }
     }
 }

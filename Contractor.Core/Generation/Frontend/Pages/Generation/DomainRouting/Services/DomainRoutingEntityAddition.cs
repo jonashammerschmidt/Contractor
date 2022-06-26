@@ -1,7 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
-using System.IO;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
@@ -34,7 +33,6 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
             stringEditor.NextThatContains("const routes: Routes = [");
 
-
             if (stringEditor.GetText().Contains("'**'"))
             {
                 stringEditor.NextThatContains("'**'");
@@ -46,9 +44,9 @@ namespace Contractor.Core.Generation.Frontend.Pages
             }
 
             stringEditor.InsertLine("  {");
-            stringEditor.InsertLine(             $"    path: '{entity.NamePluralKebab}',");
-            stringEditor.InsertLine(             $"    loadChildren: () => import('./{entity.NamePluralKebab}/{entity.NamePluralKebab}-pages.module')");
-            stringEditor.InsertLine(             $"      .then(m => m.{entity.NamePlural}PagesModule)");
+            stringEditor.InsertLine($"    path: '{entity.NamePluralKebab}',");
+            stringEditor.InsertLine($"    loadChildren: () => import('./{entity.NamePluralKebab}/{entity.NamePluralKebab}-pages.module')");
+            stringEditor.InsertLine($"      .then(m => m.{entity.NamePlural}PagesModule)");
             stringEditor.InsertLine("  },");
 
             if (!stringEditor.GetText().Contains("'**'"))

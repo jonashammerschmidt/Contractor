@@ -60,7 +60,7 @@ namespace Contractor.CLI
             {
                 contractorXmlFilePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..", args[1]));
                 contractorXmlFileInfo = new FileInfo(contractorXmlFilePath);
-                
+
                 if (!contractorXmlFileInfo.Exists)
                 {
                     Console.WriteLine("Die angegebene Datei konnte nicht gefunden werden.");
@@ -72,7 +72,7 @@ namespace Contractor.CLI
             var contractorXmlReader = new XmlNodeReader(contractorXmlDocument);
 
             var contractorXmlSerializer = new XmlSerializer(typeof(ContractorXml));
-            ContractorXml contractorXml = (ContractorXml) contractorXmlSerializer.Deserialize(contractorXmlReader);
+            ContractorXml contractorXml = (ContractorXml)contractorXmlSerializer.Deserialize(contractorXmlReader);
 
             ContractorGenerationOptions contractorGenerationOptions = ContractorXmlConverter
                 .ToContractorGenerationOptions(contractorXml, contractorXmlDocument, contractorXmlFileInfo.Directory.FullName);
@@ -80,7 +80,7 @@ namespace Contractor.CLI
             foreach (var include in contractorXml.Includes.Includes)
             {
                 string contractorIncludeXmlFilePath = Path.GetFullPath(Path.Combine(
-                    contractorXmlFileInfo.Directory.FullName, 
+                    contractorXmlFileInfo.Directory.FullName,
                     include.Src));
 
                 var contractorIncludeXmlDocument = new XmlDocument();

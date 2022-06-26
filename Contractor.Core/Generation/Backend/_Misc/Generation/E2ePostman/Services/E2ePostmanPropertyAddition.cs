@@ -31,7 +31,7 @@ namespace Contractor.Core.Generation.Backend.Misc
             InsertGetSingleLine(property, createPropertyValue, stringEditor);
 
             InsertGetPaggedLine(property, createPropertyValue, stringEditor);
-            
+
             InsertUpdateLine(property, updatePropertyValue, stringEditor);
 
             InsertGetSingleLine(property, updatePropertyValue, stringEditor);

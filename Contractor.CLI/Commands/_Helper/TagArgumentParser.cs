@@ -1,7 +1,7 @@
 ﻿using CaseExtensions;
 using Contractor.CLI.Tools;
-using Contractor.Core.MetaModell;
 using Contractor.Core.Generation;
+using Contractor.Core.MetaModell;
 using System.Collections.Generic;
 using System.Linq;
 

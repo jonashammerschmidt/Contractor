@@ -8,7 +8,7 @@ namespace Contractor.Core.Generation.Frontend.Model
     internal class IEntityUpdateMethodAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public IEntityUpdateMethodAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base (fileSystemClient, pathService)
+            : base(fileSystemClient, pathService)
         {
         }
 

@@ -20,7 +20,7 @@ namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
         public void Add(Entity entity, string domainFolder, string templateFileName)
         {
             string filePath = this.pathService.GetAbsolutePathForDatabase(entity, domainFolder, templateFileName);
-            
+
             string fileData = UpdateFileData(entity, "");
 
             this.fileSystemClient.WriteAllText(fileData, filePath);

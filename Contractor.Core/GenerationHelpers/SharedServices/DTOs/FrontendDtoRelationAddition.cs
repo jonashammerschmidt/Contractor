@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using System.IO;
 
 namespace Contractor.Core.Tools
 {
@@ -15,14 +14,6 @@ namespace Contractor.Core.Tools
         {
             this.fileSystemClient = fileSystemClient;
             this.pathService = pathService;
-        }
-
-        public void AddPropertyToDTO(RelationSide relationSide, string domainFolder, string templateFileName)
-        {
-            string filePath = this.pathService.GetAbsolutePathForFrontend(relationSide, domainFolder, templateFileName);
-            string fileData = UpdateFileData(relationSide, filePath);
-
-            this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
         public void AddPropertyToDTO(RelationSide relationSide, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)

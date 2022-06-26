@@ -5,7 +5,6 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class DbContextGeneration : ClassGeneration
     {
-
         private readonly DbContextEntityAddition dbContextEntityAddition;
         private readonly DbContextPropertyAddition dbContextPropertyAddition;
         private readonly DbContextRelationToAddition dbContextRelationToAddition;

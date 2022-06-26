@@ -60,7 +60,7 @@ namespace Contractor.Core.Generation.Backend.Contract.Persistence
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "IDb", "");
-            
+
             this.relationAddition.AddRelationToDTO(relationSideFrom, ContractPersistenceProjectGeneration.DtoFolder, FileName, true,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
         }
@@ -68,7 +68,7 @@ namespace Contractor.Core.Generation.Backend.Contract.Persistence
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "IDb", "");
-            
+
             this.relationAddition.AddRelationToDTO(relationSideTo, ContractPersistenceProjectGeneration.DtoFolder, FileName, true,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
         }

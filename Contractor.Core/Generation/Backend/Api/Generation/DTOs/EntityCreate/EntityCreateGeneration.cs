@@ -30,7 +30,7 @@ namespace Contractor.Core.Generation.Backend.Api
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToBackend(entity, ApiProjectGeneration.DtoFolder , TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, ApiProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

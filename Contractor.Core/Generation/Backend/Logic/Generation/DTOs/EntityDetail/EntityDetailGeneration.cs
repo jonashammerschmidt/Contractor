@@ -57,7 +57,7 @@ namespace Contractor.Core.Generation.Backend.Logic
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "IEnumerable<I", ">");
-            
+
             this.relationAddition.AddRelationToDTO(relationSideFrom, LogicProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
             this.dtoDetailFromMethodsAddition.AddRelationSideToBackendFile(relationSideFrom, LogicProjectGeneration.DtoFolder, FileName);

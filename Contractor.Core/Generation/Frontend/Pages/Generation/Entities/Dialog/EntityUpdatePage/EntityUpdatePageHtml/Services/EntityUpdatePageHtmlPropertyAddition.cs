@@ -8,7 +8,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
     internal class EntityUpdatePageHtmlPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public EntityUpdatePageHtmlPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base (fileSystemClient, pathService)
+            : base(fileSystemClient, pathService)
         {
         }
 

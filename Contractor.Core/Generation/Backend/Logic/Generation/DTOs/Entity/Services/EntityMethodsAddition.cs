@@ -2,7 +2,6 @@
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
-using System.IO;
 
 namespace Contractor.Core.Generation.Backend.Logic
 {
@@ -16,12 +15,12 @@ namespace Contractor.Core.Generation.Backend.Logic
         protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
-            
+
             stringEditor.NextThatContains("FromDb" + property.Entity.Name);
             stringEditor.NextUntil(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine($"                {property.Name} = db{property.Entity.Name}.{property.Name},");
-            
+
             return stringEditor.GetText();
         }
     }
