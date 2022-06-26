@@ -10,7 +10,7 @@ namespace Contractor.Core
     public class ContractorCoreApi
     {
         private readonly ContractorGenerationOptions contractorGenerationOptions;
-        private IEnumerable<Entity> sortedEntities;
+        private readonly IEnumerable<Entity> sortedEntities;
 
         private readonly IFileSystemClient fileSystemClient;
         private readonly List<ClassGeneration> classGenerations = new List<ClassGeneration>();

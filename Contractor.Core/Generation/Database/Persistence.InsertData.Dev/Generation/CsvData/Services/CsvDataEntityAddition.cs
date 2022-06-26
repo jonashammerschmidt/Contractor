@@ -7,9 +7,9 @@ namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
 {
     internal class CsvDataEntityAddition
     {
-        private IFileSystemClient fileSystemClient;
+        private readonly IFileSystemClient fileSystemClient;
 
-        private PathService pathService;
+        private readonly PathService pathService;
 
         public CsvDataEntityAddition(IFileSystemClient fileSystemClient, PathService pathService)
         {
@@ -20,7 +20,6 @@ namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
         public void Add(Entity entity, string domainFolder, string templateFileName)
         {
             string filePath = this.pathService.GetAbsolutePathForDatabase(entity, domainFolder, templateFileName);
-
             string fileData = UpdateFileData(entity, "");
 
             this.fileSystemClient.WriteAllText(fileData, filePath);
