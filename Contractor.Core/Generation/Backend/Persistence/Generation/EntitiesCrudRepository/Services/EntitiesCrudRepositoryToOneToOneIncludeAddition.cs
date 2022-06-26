@@ -43,6 +43,5 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
             return stringEditor.GetText();
         }
-
     }
 }

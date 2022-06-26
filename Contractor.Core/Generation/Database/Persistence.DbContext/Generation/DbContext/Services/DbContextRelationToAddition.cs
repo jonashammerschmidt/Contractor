@@ -36,7 +36,6 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
                 stringEditor.InsertLine($"                    .WithMany(p => p.{relationSide.OtherName})");
             }
 
-
             if (relationSide.OtherEntity.HasScope && relationSide.Entity.HasScope)
             {
                 stringEditor.InsertLine($"                    .HasForeignKey(d => new {{ d.{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");

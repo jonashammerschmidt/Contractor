@@ -41,7 +41,7 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddProperty(Property property)
         {
-            this.frontendDtoPropertyAddition.AddPropertyToDTO(property, ModelProjectGeneration.DomainFolder, FileName);
+            this.frontendDtoPropertyAddition.AddPropertyToFrontendFile(property, ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)

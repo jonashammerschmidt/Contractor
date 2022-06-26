@@ -33,7 +33,7 @@ namespace Contractor.Core.Tools
             }
 
             stringEditor.InsertLine(BackendDtoInterfacePropertyLine.GetPropertyLine(property));
-            
+
             return stringEditor.GetText();
         }
 

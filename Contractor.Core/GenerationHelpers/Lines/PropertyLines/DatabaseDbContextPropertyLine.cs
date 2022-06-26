@@ -9,7 +9,7 @@ namespace Contractor.Core.Tools
             switch (property.Type)
             {
                 case PropertyType.String:
-                    return 
+                    return
                         $"                entity.Property(e => e.{property.Name})\n" +
                         $"                    .IsRequired({(!property.IsOptional).ToString().ToLower()})\n" +
                         $"                    .HasMaxLength({property.TypeExtra});";

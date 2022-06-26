@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -152,19 +151,24 @@ namespace Contractor.Core.Tools
 
             for (int i = 0; i < stringList.Count(); i++)
             {
-                if (stringList.ElementAt(i).Trim().Length == 0) {
+                if (stringList.ElementAt(i).Trim().Length == 0)
+                {
                     stringList.RemoveAt(i--);
-                } else {
+                }
+                else
+                {
                     break;
                 }
             }
 
-            
             for (int i = stringList.Count() - 1; i >= 0; i--)
             {
-                if (stringList.ElementAt(i).Trim().Length == 0) {
+                if (stringList.ElementAt(i).Trim().Length == 0)
+                {
                     stringList.RemoveAt(i);
-                } else {
+                }
+                else
+                {
                     break;
                 }
             }

@@ -5,7 +5,6 @@ namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class PersistenceInsertDataDevProjectFileGeneration : ClassGeneration
     {
-
         private readonly PersistenceInsertDataDevProjectFileEntityAddition entityAddition;
 
         public PersistenceInsertDataDevProjectFileGeneration(

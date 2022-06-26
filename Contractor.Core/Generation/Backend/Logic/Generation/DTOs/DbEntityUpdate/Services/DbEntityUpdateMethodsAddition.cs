@@ -19,7 +19,7 @@ namespace Contractor.Core.Generation.Backend.Logic
             stringEditor.NextThatContains("From" + property.Entity.Name + "Update(");
             stringEditor.NextUntil(line => line.Trim().Equals("};"));
             stringEditor.InsertLine($"                {property.Name} = {property.Entity.NameLower}Update.{property.Name},");
-            
+
             return stringEditor.GetText();
         }
     }

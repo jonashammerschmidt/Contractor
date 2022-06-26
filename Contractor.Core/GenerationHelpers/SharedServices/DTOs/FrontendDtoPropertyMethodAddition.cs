@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using System.IO;
 
 namespace Contractor.Core.Tools
 {
@@ -30,7 +29,6 @@ namespace Contractor.Core.Tools
 
             this.fileSystemClient.WriteAllText(fileData, filePath);
         }
-
 
         private string UpdateFileData(Property property, string functionName, string variableName, string filePath)
         {

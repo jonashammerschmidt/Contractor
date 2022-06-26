@@ -1,43 +1,20 @@
-﻿using Contractor.Core.Helpers;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 
 namespace Contractor.Core.Tools
 {
-    internal class FrontendDtoPropertyAddition
+    internal class FrontendDtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
-
         public FrontendDtoPropertyAddition(
             IFileSystemClient fileSystemClient,
             PathService pathService)
+            : base(fileSystemClient, pathService)
         {
-            this.fileSystemClient = fileSystemClient;
-            this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName)
+        protected override string UpdateFileData(Property property, string fileData)
         {
-            string filePath = this.pathService.GetAbsolutePathForFrontend(property, domainFolder, templateFileName);
-            string fileData = UpdateFileData(property, filePath);
-
-            this.fileSystemClient.WriteAllText(fileData, filePath);
-        }
-
-        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName, string importStatementTypes, string importStatementPath)
-        {
-            string filePath = this.pathService.GetAbsolutePathForFrontend(property, domainFolder, templateFileName);
-            string fileData = UpdateFileData(property, filePath);
-
-            fileData = ImportStatements.Add(fileData, importStatementTypes, importStatementPath);
-
-            this.fileSystemClient.WriteAllText(fileData, filePath);
-        }
-
-        private string UpdateFileData(Property property, string filePath)
-        {
-            string fileData = this.fileSystemClient.ReadAllText(property, filePath);
-
             StringEditor stringEditor = new StringEditor(fileData);
             if (!stringEditor.GetLine().Contains("export interface"))
             {

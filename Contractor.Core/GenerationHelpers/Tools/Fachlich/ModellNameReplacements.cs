@@ -28,7 +28,7 @@ namespace Contractor.Core.Tools
         {
             text = ReplaceGuidPlaceholders(text, entity.Name);
             text = text.Replace("EntityFramework", "##EfCore##");
-            
+
             if (entity.HasScope)
             {
                 text = text.Replace("RequestScopeDomain", entity.ScopeEntity.Module.Name);
@@ -37,7 +37,7 @@ namespace Contractor.Core.Tools
                 text = text.Replace("RequestScope", entity.ScopeEntity.Name);
                 text = text.Replace("requestScope", entity.ScopeEntity.NameLower);
             }
-            
+
             text = text.Replace("DisplayProperty", entity.DisplayProperty.Name);
             text = text.Replace("displayProperty", entity.DisplayProperty.NameLower);
             text = text.Replace("entities-kebab", entity.NamePluralKebab);
@@ -66,7 +66,7 @@ namespace Contractor.Core.Tools
             text = ReplaceEntityPlaceholders(entity, text);
             text = ReplaceModulePlaceholdersCascading(entity.Module, text);
             text = ReplaceGuidPlaceholders(text, entity.Name);
-            
+
             return text;
         }
 

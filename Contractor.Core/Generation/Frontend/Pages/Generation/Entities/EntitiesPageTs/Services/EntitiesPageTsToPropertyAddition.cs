@@ -53,12 +53,11 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         private static string GetDataSourceLine(RelationSide relationSide)
         {
-            return 
+            return
                 $"  {relationSide.NameLower}SelectedValues = [];\n" +
                 $"  {relationSide.NameLower}DataSource = new DropdownPaginationDataSource(\n" +
                 $"    (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),\n" +
                 $"      '{relationSide.OtherEntity.DisplayProperty.NameLower}');";
         }
-
     }
 }

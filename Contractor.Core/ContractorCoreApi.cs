@@ -1,5 +1,5 @@
-﻿using Contractor.Core.MetaModell;
-using Contractor.Core.Generation;
+﻿using Contractor.Core.Generation;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;

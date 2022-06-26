@@ -1,6 +1,4 @@
-﻿using Contractor.Core.Helpers;
-
-namespace Contractor.Core.MetaModell
+﻿namespace Contractor.Core.MetaModell
 {
     public class Relation1To1 : Relation
     {

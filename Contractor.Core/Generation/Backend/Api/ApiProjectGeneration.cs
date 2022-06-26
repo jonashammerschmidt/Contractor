@@ -17,7 +17,6 @@ namespace Contractor.Core.Generation.Backend.Api
 
             serviceCollection.AddSingleton<ClassGeneration, EntityCreateGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, EntityUpdateGeneration>();
-
         }
     }
 }

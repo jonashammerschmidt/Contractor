@@ -31,7 +31,7 @@ namespace Contractor.Core.Tools
                          "                        Dieses Feld ist erforderlich.\n" +
                          "                    </span>\n" +
                         $"                    <span *ngIf=\"{property.Entity.NameLower}CreateForm.controls.{property.Name.LowerFirstChar()}.errors.pattern\">\n" +
-                         "                        Dieses Feld ist ungültig.\n" + 
+                         "                        Dieses Feld ist ungültig.\n" +
                          "                    </span>\n" +
                          "                </mat-error>\n" +
                          "            </mat-form-field>";
@@ -63,7 +63,7 @@ namespace Contractor.Core.Tools
                          "                        Dieses Feld ist erforderlich.\n" +
                          "                    </span>\n" +
                         $"                    <span *ngIf=\"{property.Entity.NameLower}CreateForm.controls.{property.Name.LowerFirstChar()}.errors.pattern\">\n" +
-                         "                        Dieses Feld ist ungültig.\n" + 
+                         "                        Dieses Feld ist ungültig.\n" +
                          "                    </span>\n" +
                          "                </mat-error>\n" +
                          "            </mat-form-field>";

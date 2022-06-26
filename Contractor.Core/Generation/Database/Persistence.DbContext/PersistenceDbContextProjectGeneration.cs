@@ -1,5 +1,5 @@
-﻿using Contractor.Core.Helpers;
-using Contractor.Core.Generation.Backend.Persistence;
+﻿using Contractor.Core.Generation.Backend.Persistence;
+using Contractor.Core.Helpers;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 

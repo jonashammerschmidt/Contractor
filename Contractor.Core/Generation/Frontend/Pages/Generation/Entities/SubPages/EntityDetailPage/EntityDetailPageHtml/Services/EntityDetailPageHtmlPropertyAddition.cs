@@ -2,14 +2,13 @@
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
-using System.IO;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
     internal class EntityDetailPageHtmlPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public EntityDetailPageHtmlPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
-            : base (fileSystemClient, pathService)
+            : base(fileSystemClient, pathService)
         {
         }
 

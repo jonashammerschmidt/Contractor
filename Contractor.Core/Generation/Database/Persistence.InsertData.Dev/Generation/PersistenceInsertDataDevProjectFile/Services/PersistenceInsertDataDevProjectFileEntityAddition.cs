@@ -1,7 +1,6 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
-using System;
 
 namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
 {
