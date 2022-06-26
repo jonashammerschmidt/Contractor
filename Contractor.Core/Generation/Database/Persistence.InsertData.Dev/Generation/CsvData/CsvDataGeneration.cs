@@ -42,7 +42,7 @@ namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
-            this.csvDataRelationToAddition.Add(relationSideTo, PersistenceInsertDataDevProjectGeneration.DomainFolder, FileName);
+            this.csvDataRelationToAddition.AddRelationSideToDatabaseFile(relationSideTo, PersistenceInsertDataDevProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

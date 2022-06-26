@@ -6,9 +6,9 @@ namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
 {
     internal class PersistenceInsertDataDevProjectFileEntityAddition
     {
-        private IFileSystemClient fileSystemClient;
+        private readonly IFileSystemClient fileSystemClient;
 
-        private PathService pathService;
+        private readonly PathService pathService;
 
         public PersistenceInsertDataDevProjectFileEntityAddition(IFileSystemClient fileSystemClient, PathService pathService)
         {

@@ -13,7 +13,7 @@ namespace Contractor.CLI
             XmlDocument xmlDocument,
             string contractorXmlFolderPath)
         {
-            ContractorGenerationOptions contractorGenerationOptions = new ContractorGenerationOptions()
+            var contractorGenerationOptions = new ContractorGenerationOptions()
             {
                 Paths = new Paths()
                 {
