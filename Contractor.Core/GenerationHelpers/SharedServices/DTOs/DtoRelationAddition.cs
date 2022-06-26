@@ -1,6 +1,5 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
@@ -80,7 +79,6 @@ namespace Contractor.Core.Tools
         {
             StringEditor stringEditor = new StringEditor(fileData);
             PropertyLine.FindStartingLineForNewProperty(fileData, relationSide.Entity.Name, stringEditor);
-
 
             if (!stringEditor.GetLine().Contains("}"))
             {

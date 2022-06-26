@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -16,7 +17,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
         private readonly DbEntityDetailFromMethodsAddition dbDtoDetailFromMethodsAddition;
         private readonly DbEntityDetailToMethodsAddition dbDtoDetailToMethodsAddition;
         private readonly DbEntityDetailFromOneToOneMethodsAddition dbEntityDetailFromOneToOneMethodsAddition;
-        private readonly DtoAddition dtoAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoPropertyAddition propertyAddition;
         private readonly DtoRelationAddition relationAddition;
 
@@ -25,7 +26,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
             DbEntityDetailFromMethodsAddition dbDtoDetailFromMethodsAddition,
             DbEntityDetailToMethodsAddition dbDtoDetailToMethodsAddition,
             DbEntityDetailFromOneToOneMethodsAddition dbEntityDetailFromOneToOneMethodsAddition,
-            DtoAddition dtoAddition,
+            EntityCoreAddition entityCoreAddition,
             DtoPropertyAddition propertyAddition,
             DtoRelationAddition relationAddition)
         {
@@ -33,7 +34,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
             this.dbDtoDetailFromMethodsAddition = dbDtoDetailFromMethodsAddition;
             this.dbDtoDetailToMethodsAddition = dbDtoDetailToMethodsAddition;
             this.dbEntityDetailFromOneToOneMethodsAddition = dbEntityDetailFromOneToOneMethodsAddition;
-            this.dtoAddition = dtoAddition;
+            this.entityCoreAddition = entityCoreAddition;
             this.propertyAddition = propertyAddition;
             this.relationAddition = relationAddition;
         }
@@ -44,12 +45,12 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
         protected override void AddEntity(Entity entity)
         {
-            this.dtoAddition.AddDto(entity, PersistenceProjectGeneration.DtoFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, PersistenceProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            this.propertyAddition.AddPropertyToDTO(property, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.propertyAddition.AddPropertyToBackendFile(property, PersistenceProjectGeneration.DtoFolder, FileName);
             this.dbDtoDetailMethodsAddition.AddPropertyToBackendFile(property, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 

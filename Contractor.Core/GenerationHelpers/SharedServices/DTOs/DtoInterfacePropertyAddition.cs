@@ -5,9 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
-    internal class DtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
+    internal class DtoInterfacePropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
-        public DtoPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
+        public DtoInterfacePropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
         {
         }
@@ -32,8 +32,8 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertNewLine();
             }
 
-            stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(property));
-
+            stringEditor.InsertLine(BackendDtoInterfacePropertyLine.GetPropertyLine(property));
+            
             return stringEditor.GetText();
         }
 

@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -12,7 +13,7 @@ namespace Contractor.Core.Generation.Backend.Logic
 
         private static readonly string FileName = "EntityDetail.cs";
 
-        private readonly DtoAddition dtoAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoPropertyAddition dtoPropertyAddition;
         private readonly DtoRelationAddition relationAddition;
         private readonly EntityDetailMethodsAddition dtoDetailMethodsAddition;
@@ -21,7 +22,7 @@ namespace Contractor.Core.Generation.Backend.Logic
         private readonly EntityDetailFromOneToOneMethodsAddition entityDetailFromOneToOneMethodsAddition;
 
         public EntityDetailGeneration(
-            DtoAddition dtoAddition,
+            EntityCoreAddition entityCoreAddition,
             DtoPropertyAddition dtoPropertyAddition,
             DtoRelationAddition relationAddition,
             EntityDetailMethodsAddition dtoDetailMethodsAddition,
@@ -29,7 +30,7 @@ namespace Contractor.Core.Generation.Backend.Logic
             EntityDetailToMethodsAddition dtoDetailToMethodsAddition,
             EntityDetailFromOneToOneMethodsAddition entityDetailFromOneToOneMethodsAddition)
         {
-            this.dtoAddition = dtoAddition;
+            this.entityCoreAddition = entityCoreAddition;
             this.dtoPropertyAddition = dtoPropertyAddition;
             this.relationAddition = relationAddition;
             this.dtoDetailMethodsAddition = dtoDetailMethodsAddition;
@@ -44,12 +45,12 @@ namespace Contractor.Core.Generation.Backend.Logic
 
         protected override void AddEntity(Entity entity)
         {
-            this.dtoAddition.AddDto(entity, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            this.dtoPropertyAddition.AddPropertyToDTO(property, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoPropertyAddition.AddPropertyToBackendFile(property, LogicProjectGeneration.DtoFolder, FileName);
             this.dtoDetailMethodsAddition.AddPropertyToBackendFile(property, LogicProjectGeneration.DtoFolder, FileName);
         }
 

@@ -2,6 +2,7 @@
 using Contractor.Core.Generation.Backend.Persistence;
 using Contractor.Core.Tools;
 using System.IO;
+using Contractor.Core.BaseClasses;
 
 namespace Contractor.Core.Generation.Database.Persistence.DbContext
 {
@@ -13,20 +14,20 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
 
         private static readonly string FileName = "EfEntity.cs";
 
-        private readonly DtoAddition dtoAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
         private readonly EfDtoEntityAddition efDtoEntityAddition;
         private readonly EfDtoPropertyAddition efDtoPropertyAddition;
         private readonly DtoRelationAddition relationAddition;
         private readonly EfDtoContructorHashSetAddition efDtoContructorHashSetAddition;
 
         public EfEntityGeneration(
-            DtoAddition dtoAddition,
+            EntityCoreAddition entityCoreAddition,
             EfDtoEntityAddition efDtoEntityAddition,
             EfDtoPropertyAddition efDtoPropertyAddition,
             DtoRelationAddition relationAddition,
             EfDtoContructorHashSetAddition efDtoContructorHashSetAddition)
         {
-            this.dtoAddition = dtoAddition;
+            this.entityCoreAddition = entityCoreAddition;
             this.efDtoEntityAddition = efDtoEntityAddition;
             this.efDtoPropertyAddition = efDtoPropertyAddition;
             this.relationAddition = relationAddition;
@@ -40,7 +41,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
         protected override void AddEntity(Entity entity)
         {
             string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
-            this.dtoAddition.AddDto(entity, PersistenceDbContextProjectGeneration.DtoFolder, templatePath, FileName, true);
+            this.entityCoreAddition.AddEntityToDatabase(entity, PersistenceDbContextProjectGeneration.DtoFolder, templatePath, FileName);
             this.efDtoEntityAddition.Edit(entity, PersistenceDbContextProjectGeneration.DtoFolder, FileName);
         }
 

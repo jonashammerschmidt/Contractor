@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -12,17 +13,17 @@ namespace Contractor.Core.Generation.Backend.Contract.Persistence
 
         private static readonly string FileName = "IDbEntityUpdate.cs";
 
-        private readonly DtoAddition dtoAddition;
-        private readonly DtoPropertyAddition propertyAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
+        private readonly DtoInterfacePropertyAddition dtoInterfacePropertyAddition;
         private readonly DtoRelationAddition relationAddition;
 
         public IDbEntityUpdateGeneration(
-            DtoAddition dtoAddition,
-            DtoPropertyAddition propertyAddition,
+            EntityCoreAddition entityCoreAddition,
+            DtoInterfacePropertyAddition dtoInterfacePropertyAddition,
             DtoRelationAddition relationAddition)
         {
-            this.dtoAddition = dtoAddition;
-            this.propertyAddition = propertyAddition;
+            this.entityCoreAddition = entityCoreAddition;
+            this.dtoInterfacePropertyAddition = dtoInterfacePropertyAddition;
             this.relationAddition = relationAddition;
         }
 
@@ -32,12 +33,12 @@ namespace Contractor.Core.Generation.Backend.Contract.Persistence
 
         protected override void AddEntity(Entity entity)
         {
-            this.dtoAddition.AddDto(entity, ContractPersistenceProjectGeneration.DtoFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, ContractPersistenceProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            this.propertyAddition.AddPropertyToDTO(property, ContractPersistenceProjectGeneration.DtoFolder, FileName, true);
+            this.dtoInterfacePropertyAddition.AddPropertyToBackendFile(property, ContractPersistenceProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)

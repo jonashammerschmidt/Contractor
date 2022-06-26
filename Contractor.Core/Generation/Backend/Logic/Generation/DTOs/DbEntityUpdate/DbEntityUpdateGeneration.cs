@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -12,16 +13,16 @@ namespace Contractor.Core.Generation.Backend.Logic
 
         private static readonly string FileName = "DbEntityUpdate.cs";
 
-        private readonly DtoAddition dtoAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoPropertyAddition dtoPropertyAddition;
         private readonly DbEntityUpdateMethodsAddition dbEntityUpdateMethodsAddition;
 
         public DbEntityUpdateGeneration(
-            DtoAddition dtoAddition,
+            EntityCoreAddition entityCoreAddition,
             DtoPropertyAddition dtoPropertyAddition,
             DbEntityUpdateMethodsAddition dbEntityUpdateMethodsAddition)
         {
-            this.dtoAddition = dtoAddition;
+            this.entityCoreAddition = entityCoreAddition;
             this.dtoPropertyAddition = dtoPropertyAddition;
             this.dbEntityUpdateMethodsAddition = dbEntityUpdateMethodsAddition;
         }
@@ -32,12 +33,12 @@ namespace Contractor.Core.Generation.Backend.Logic
 
         protected override void AddEntity(Entity entity)
         {
-            this.dtoAddition.AddDto(entity, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, LogicProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            this.dtoPropertyAddition.AddPropertyToDTO(property, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoPropertyAddition.AddPropertyToBackendFile(property, LogicProjectGeneration.DtoFolder, FileName);
             this.dbEntityUpdateMethodsAddition.AddPropertyToBackendFile(property, LogicProjectGeneration.DtoFolder, FileName);
         }
 
@@ -48,7 +49,7 @@ namespace Contractor.Core.Generation.Backend.Logic
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
-            this.dtoPropertyAddition.AddPropertyToDTO(relationSide, LogicProjectGeneration.DtoFolder, FileName);
+            this.dtoPropertyAddition.AddPropertyToBackendFile(relationSide, LogicProjectGeneration.DtoFolder, FileName);
             this.dbEntityUpdateMethodsAddition.AddPropertyToBackendFile(relationSide, LogicProjectGeneration.DtoFolder, FileName);
         }
 

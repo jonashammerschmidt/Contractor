@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
@@ -13,16 +14,16 @@ namespace Contractor.Core.Generation.Backend.Persistence
         private static readonly string FileName = "DbEntity.cs";
 
         private readonly DbEntityMethodsAddition dbDtoMethodsAddition;
-        private readonly DtoAddition dtoAddition;
+        private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoPropertyAddition propertyAddition;
 
         public DbEntityGeneration(
             DbEntityMethodsAddition dbDtoMethodsAddition,
-            DtoAddition dtoAddition,
+            EntityCoreAddition entityCoreAddition,
             DtoPropertyAddition propertyAddition)
         {
             this.dbDtoMethodsAddition = dbDtoMethodsAddition;
-            this.dtoAddition = dtoAddition;
+            this.entityCoreAddition = entityCoreAddition;
             this.propertyAddition = propertyAddition;
         }
 
@@ -33,12 +34,12 @@ namespace Contractor.Core.Generation.Backend.Persistence
         protected override void AddEntity(Entity entity)
         {
             string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
-            this.dtoAddition.AddDto(entity, PersistenceProjectGeneration.DtoFolder, templatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, PersistenceProjectGeneration.DtoFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            this.propertyAddition.AddPropertyToDTO(property, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.propertyAddition.AddPropertyToBackendFile(property, PersistenceProjectGeneration.DtoFolder, FileName);
             this.dbDtoMethodsAddition.AddPropertyToBackendFile(property, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
@@ -49,7 +50,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
-            this.propertyAddition.AddPropertyToDTO(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
+            this.propertyAddition.AddPropertyToBackendFile(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
             this.dbDtoMethodsAddition.AddPropertyToBackendFile(relationSide, PersistenceProjectGeneration.DtoFolder, FileName);
         }
 
