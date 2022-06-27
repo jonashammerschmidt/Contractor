@@ -37,9 +37,19 @@ namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
                 stringEditor.Next();
                 stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
                 stringEditor.Next();
-                stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
-                stringEditor.Next();
-                stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
+                
+                if (relationSide.IsOptional)
+                {
+                    stringEditor.InsertIntoLine($";NULL");
+                    stringEditor.Next();
+                    stringEditor.InsertIntoLine($";NULL");
+                }
+                else
+                {
+                    stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
+                    stringEditor.Next();
+                    stringEditor.InsertIntoLine($";{TestValueGeneration.GenerateGuid(random)}");
+                }
             }
 
             return stringEditor.GetText();

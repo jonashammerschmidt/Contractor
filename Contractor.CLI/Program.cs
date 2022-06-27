@@ -5,6 +5,7 @@ using Contractor.Core.MetaModell;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -31,7 +32,10 @@ namespace Contractor.CLI
                     break;
 
                 case "test":
-                    HandleExecuteJob(new string[] { "execute", @"..\Contractor.XML\contractor.xml" });
+                    HandleExecuteJob(
+                        (new string[] { "execute", @"..\Contractor.XML\contractor.xml" })
+                        .Concat(args[1..])
+                        .ToArray());
                     break;
 
                 case "execute":

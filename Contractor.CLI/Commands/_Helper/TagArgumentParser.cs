@@ -23,7 +23,8 @@ namespace Contractor.CLI.Commands._Helper
                 .Split(",")
                 .Select(item => Parse(item))
                 .Where(item => item.HasValue)
-                .Select(item => item.Value);
+                .Select(item => item.Value)
+                .SelectMany(item => GetChildren(item).Append(item));
         }
 
         private static ClassGenerationTag? Parse(string text)
@@ -38,11 +39,45 @@ namespace Contractor.CLI.Commands._Helper
                 "logic" => ClassGenerationTag.BACKEND_LOGIC,
                 "logicTest" => ClassGenerationTag.BACKEND_LOGIC_TESTS,
                 "persistence" => ClassGenerationTag.BACKEND_PERSISTENCE,
+                "persistenceRepository" => ClassGenerationTag.BACKEND_PERSISTENCE_REPOSITORY,
                 "persistenceDbContext" => ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT,
+                "misc" => ClassGenerationTag.BACKEND_MISC,
                 "frontend" => ClassGenerationTag.FRONTEND,
                 "frontendModel" => ClassGenerationTag.FRONTEND_MODEL,
                 "frontendPages" => ClassGenerationTag.FRONTEND_PAGES,
                 _ => null,
+            };
+        }
+
+        private static ClassGenerationTag[] GetChildren(ClassGenerationTag tag)
+        {
+            return tag switch
+            {
+                ClassGenerationTag.BACKEND => new[] {
+                    ClassGenerationTag.BACKEND_API,
+                    ClassGenerationTag.BACKEND_CONTRACT,
+                    ClassGenerationTag.BACKEND_CONTRACT_LOGIC,
+                    ClassGenerationTag.BACKEND_CONTRACT_PERSISTENCE,
+                    ClassGenerationTag.BACKEND_LOGIC,
+                    ClassGenerationTag.BACKEND_LOGIC_TESTS,
+                    ClassGenerationTag.BACKEND_PERSISTENCE,
+                    ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT,
+                    ClassGenerationTag.BACKEND_PERSISTENCE_REPOSITORY,
+                    ClassGenerationTag.BACKEND_MISC,
+                },
+                ClassGenerationTag.BACKEND_CONTRACT => new[] {
+                    ClassGenerationTag.BACKEND_CONTRACT_LOGIC,
+                    ClassGenerationTag.BACKEND_CONTRACT_PERSISTENCE,
+                },
+                ClassGenerationTag.BACKEND_PERSISTENCE => new[] {
+                    ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT,
+                },
+                ClassGenerationTag.FRONTEND => new[] { 
+                    ClassGenerationTag.FRONTEND,
+                    ClassGenerationTag.FRONTEND_MODEL,
+                    ClassGenerationTag.FRONTEND_PAGES,
+                },
+                _ => new ClassGenerationTag[] { },
             };
         }
     }

@@ -28,6 +28,9 @@ namespace Contractor.Core.Tools
                 case PropertyType.Guid:
                     return $"        public Guid{optionalText} {property.Name} {{ get; set; }}";
 
+                case PropertyType.ByteArray:
+                    return $"        public byte[] {property.Name} {{ get; set; }}";
+
                 default:
                     throw new NotImplementedException();
             }

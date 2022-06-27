@@ -31,7 +31,10 @@ namespace Contractor.Core
             {
                 foreach (var classGeneration in this.classGenerations)
                 {
-                    classGeneration.AddModule(module);
+                    if (ShouldGenerate(this.contractorGenerationOptions.Tags, classGeneration))
+                    {
+                        classGeneration.AddModule(module);
+                    }
                 }
             }
 
@@ -126,7 +129,12 @@ namespace Contractor.Core
 
         private bool ShouldGenerate(IEnumerable<ClassGenerationTag> tags, ClassGeneration classGeneration)
         {
-            if (tags == null || tags.Count() == 0)
+            return ShouldGenerate(tags, classGeneration, false);
+        }
+
+        private bool ShouldGenerate(IEnumerable<ClassGenerationTag> tags, ClassGeneration classGeneration, bool strict)
+        {
+            if (!strict && (tags == null || tags.Count() == 0))
             {
                 return true;
             }
@@ -148,6 +156,7 @@ namespace Contractor.Core
 
             IEnumerable<ClassGenerationTag> tagIntersection = new List<ClassGenerationTag>()
             {
+                ClassGenerationTag.BACKEND_MISC,
                 ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT,
                 ClassGenerationTag.BACKEND_PERSISTENCE_REPOSITORY,
             };
@@ -157,7 +166,7 @@ namespace Contractor.Core
                 tagIntersection = tagIntersection.Intersect(relation.EntityTo.Module.Options.Tags);
             }
 
-            return ShouldGenerate(tagIntersection, classGeneration);
+            return ShouldGenerate(tagIntersection, classGeneration, true);
         }
     }
 }

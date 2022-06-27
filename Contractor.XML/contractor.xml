@@ -26,32 +26,37 @@
     <Module name="Bankwesen">
       <Entity name="Konto" namePlural="Konten" scopeEntityName="Mandant">
         <Property name="Bezeichnung" type="String:256" />
-        <Property name="SystemKontoId" type="Guid" />
-        <Property name="Balance" type="Double" />
-        <Property name="EröffnetAm" type="DateTime" />
-        <Property name="LegacySystemKontoId" type="Guid" optional="true"/>
-        <Property name="LegacyBalance" type="Double" optional="true" />
-        <Property name="LegacyEröffnetAm" type="DateTime" optional="true" />
         <Relation1ToN entityNameFrom="Kunde" onDelete="Cascade"/>
         <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" propertyNameTo="BäckupKonto" optional="true" onDelete="ClientSetNull" />
-        <Index property="Bezeichnung,SystemKontoId" unique="true" />
+        <Index property="Bezeichnung" unique="true" />
       </Entity>
       <Entity name="SchöneBank" namePlural="SchöneBänke" scopeEntityName="Mandant">
         <Property name="Name" type="String:256" />
-        <Property name="IsPleite" type="Boolean" />
-        <Property name="LegacyBezeichnung" type="String:256" optional="true" />
-        <Property name="LegacyIsPleite" type="Boolean" optional="true" />
-        <Index property="Name" clustered="true" unique="true" />
+        <Index property="Name,MandantId" clustered="true" unique="true" />
       </Entity>
     </Module>
     <Module name="Kundenstamm">
       <Entity name="Kunde" namePlural="Kunden">
         <Property name="VorUndNachname" type="String:256" displayProperty="true" />
-        <Property name="Kundennummer" type="Integer" />
-        <Property name="KundennummerLegacy" type="Integer" optional="true" />
         <Relation1ToN entityNameFrom="SchöneBank" propertyNameFrom="MeineBank" propertyNameTo="MeineKunden" optional="true"/>
         <Relation1To1 entityNameFrom="SchöneBank" propertyNameFrom="LieblingsBank" propertyNameTo="LieblingsKunde"/>
         <Index property="VorUndNachname" clustered="true" />
+      </Entity>
+    </Module>
+    <Module name="PropertyTesting">
+      <Entity name="PropertyTest" namePlural="PropertyTests">
+        <Property name="TestString" type="String:256" />
+        <Property name="TestGuid" type="Guid" />
+        <Property name="TestDouble" type="Double" />
+        <Property name="TestBoolean" type="Boolean" />
+        <Property name="TestInteger" type="Integer" />
+        <Property name="TestByteArray" type="ByteArray" />
+        <Property name="OptionalTestString" type="String:256" optional="true"/>
+        <Property name="OptionalTestGuid" type="Guid" optional="true"/>
+        <Property name="OptionalTestDouble" type="Double" optional="true"/>
+        <Property name="OptionalTestBöüleän" type="Boolean" optional="true"/>
+        <Property name="OptionalTestInteger" type="Integer" optional="true"/>
+        <Property name="OptionalTestByteArray" type="ByteArray" optional="true"/>
       </Entity>
     </Module>
   </Modules>

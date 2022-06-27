@@ -38,9 +38,18 @@ namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
             stringEditor.Next();
             stringEditor.InsertIntoLine($";{TestValueGeneration.GetPropertyLine(property, " 2", random)}");
             stringEditor.Next();
-            stringEditor.InsertIntoLine($";{TestValueGeneration.GetPropertyLine(property, " 3", random)}");
-            stringEditor.Next();
-            stringEditor.InsertIntoLine($";{TestValueGeneration.GetPropertyLine(property, " 4", random)}");
+            if (property.IsOptional)
+            {
+                stringEditor.InsertIntoLine($";NULL");
+                stringEditor.Next();
+                stringEditor.InsertIntoLine($";NULL");
+            }
+            else
+            {
+                stringEditor.InsertIntoLine($";{TestValueGeneration.GetPropertyLine(property, " 3", random)}");
+                stringEditor.Next();
+                stringEditor.InsertIntoLine($";{TestValueGeneration.GetPropertyLine(property, " 4", random)}");
+            }
 
             return stringEditor.GetText();
         }

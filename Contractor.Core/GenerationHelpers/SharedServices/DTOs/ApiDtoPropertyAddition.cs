@@ -1,7 +1,6 @@
 ﻿using Contractor.Core.BaseClasses;
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
-using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
@@ -22,14 +21,14 @@ namespace Contractor.Core.Tools
             fileData = UsingStatements.Add(fileData, "System.ComponentModel.DataAnnotations");
 
             StringEditor stringEditor = new StringEditor(fileData);
-            FindStartingLineForNewProperty(fileData, property, stringEditor);
+            PropertyLine.FindStartingLineForNewProperty(fileData, property.Entity.Name, stringEditor);
 
             if (!stringEditor.GetLine().Contains("}"))
             {
                 stringEditor.Prev();
             }
 
-            if (ContainsProperty(fileData))
+            if (PropertyLine.ContainsProperty(fileData))
             {
                 stringEditor.InsertNewLine();
             }
@@ -52,32 +51,6 @@ namespace Contractor.Core.Tools
             stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
-        }
-
-        private void FindStartingLineForNewProperty(string file, Property property, StringEditor stringEditor)
-        {
-            bool hasConstructor = Regex.IsMatch(file, $"public .*{property.Entity.Name}.*\\(");
-            bool hasProperty = file.Contains("{ get; set; }");
-            if (hasConstructor && hasProperty)
-            {
-                stringEditor.NextThatContains("{ get; set; }");
-            }
-            else
-            {
-                stringEditor.NextThatContains("{")
-                          .NextThatContains("{");
-            }
-            stringEditor.NextUntil(line => !IsLineEmpty(line) && !ContainsProperty(line));
-        }
-
-        private bool IsLineEmpty(string line)
-        {
-            return line.Trim().Length == 0;
-        }
-
-        private bool ContainsProperty(string line)
-        {
-            return line.Replace(" ", "").Contains("{get;set;}") || line.Contains("[");
         }
     }
 }

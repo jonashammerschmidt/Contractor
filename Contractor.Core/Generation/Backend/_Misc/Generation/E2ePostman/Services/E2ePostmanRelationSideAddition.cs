@@ -20,18 +20,18 @@ namespace Contractor.Core.Generation.Backend.Misc
             stringEditor.NextThatStartsWith("\t\"item\": [");
             stringEditor.NextThatStartsWith($"\t\t\t\"name\": \"{relationSide.Entity.Module.Name} - {relationSide.Entity.NamePlural}\",");
 
-            InsertCreateLine(relationSide, stringEditor, string.Empty, "1");
+            InsertCreateLine(relationSide, stringEditor, string.Empty, "1", false);
 
             InsertUpdateLine(relationSide, stringEditor);
 
-            InsertCreateLine(relationSide, stringEditor, " 1", "1");
+            InsertCreateLine(relationSide, stringEditor, " 1", "1", false);
 
-            InsertCreateLine(relationSide, stringEditor, " 2", "2");
+            InsertCreateLine(relationSide, stringEditor, " 2", "2", relationSide.IsOptional);
 
             return stringEditor.GetText();
         }
 
-        private static void InsertCreateLine(RelationSide relationSide, StringEditor stringEditor, string postfix1, string postfix2)
+        private static void InsertCreateLine(RelationSide relationSide, StringEditor stringEditor, string postfix1, string postfix2, bool isOptional)
         {
             stringEditor.NextThatStartsWith($"\t\t\t\t\t\"name\": \"Create {relationSide.Entity.Name + postfix1}\",");
             stringEditor.NextThatStartsWith("\t\t\t\t\t\t\"body\": {");
@@ -41,7 +41,14 @@ namespace Contractor.Core.Generation.Backend.Misc
                 stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $",");
             }
 
-            stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $"\\n  \\\"{relationSide.NameLower}Id\\\": \\\"{{{{e2e{relationSide.OtherEntity.Name}{postfix2}Id}}}}\\\"");
+            if (isOptional)
+            {
+                stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $"\\n  \\\"{relationSide.NameLower}Id\\\": null");
+            }
+            else
+            {
+                stringEditor.InsertIntoLine(stringEditor.GetLine().Length - 5, $"\\n  \\\"{relationSide.NameLower}Id\\\": \\\"{{{{e2e{relationSide.OtherEntity.Name}{postfix2}Id}}}}\\\"");
+            }
         }
 
         private static void InsertUpdateLine(RelationSide relationSide, StringEditor stringEditor)
