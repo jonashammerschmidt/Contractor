@@ -8,5 +8,6 @@
         public const string DateTime = "DateTime";
         public const string Boolean = "Boolean";
         public const string Guid = "Guid";
+        public const string ByteArray = "ByteArray";
     }
 }

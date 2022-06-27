@@ -129,13 +129,19 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/domain-kebab/entities-kebab",
+							"raw": "{{baseUrl}}/domain-kebab/entities-kebab?filter.id={{e2eEntity1Id}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"domain-kebab",
 								"entities-kebab"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eEntity1Id}}"
+								}
 							]
 						}
 					},

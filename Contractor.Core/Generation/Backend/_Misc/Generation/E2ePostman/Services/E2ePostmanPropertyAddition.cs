@@ -38,7 +38,7 @@ namespace Contractor.Core.Generation.Backend.Misc
 
             InsertCreateLine(property, createPropertyValue, stringEditor, " 1");
 
-            InsertCreateLine(property, createPropertyValue2, stringEditor, " 2");
+            InsertCreateLine(property, (property.IsOptional) ? "null" : createPropertyValue2, stringEditor, " 2");
 
             return stringEditor.GetText();
         }

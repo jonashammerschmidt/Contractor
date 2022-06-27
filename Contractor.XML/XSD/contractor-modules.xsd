@@ -30,11 +30,11 @@
                         </xs:attribute>
                         <xs:attribute name="type" use="required">
                           <xs:annotation>
-                            <xs:documentation xml:lang="de">Typ der Property. Zulässige Typen: Boolean, DateTime, Double, Guid, Integer und String:{Maximallänge}</xs:documentation>
+                            <xs:documentation xml:lang="de">Typ der Property. Zulässige Typen: Boolean, ByteArray, DateTime, Double, Guid, Integer und String:{Maximallänge}</xs:documentation>
                           </xs:annotation>
                           <xs:simpleType>
                             <xs:restriction base="xs:string">
-                              <xs:pattern value="Boolean|DateTime|Double|Guid|Integer|(String(:[0-9]+)?)" />
+                              <xs:pattern value="Boolean|ByteArray|DateTime|Double|Guid|Integer|(String(:[0-9]+)?)" />
                             </xs:restriction>
                           </xs:simpleType>
                         </xs:attribute>
