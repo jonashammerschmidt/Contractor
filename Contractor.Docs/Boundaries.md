@@ -1,3 +1,0 @@
- - Handel deletion of relations, you have to decide
- - Add precice Input Validation, just required and string length will add automatically
- - Add menu items to menu
