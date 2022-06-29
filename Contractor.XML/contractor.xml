@@ -51,13 +51,15 @@
         <Property name="TestDouble" type="Double" />
         <Property name="TestBoolean" type="Boolean" />
         <Property name="TestInteger" type="Integer" />
+        <Property name="TestDateTime" type="DateTime" />
         <Property name="TestByteArray" type="ByteArray" />
         <Property name="OptionalTestString" type="String:256" optional="true"/>
         <Property name="OptionalTestGuid" type="Guid" optional="true"/>
         <Property name="OptionalTestDouble" type="Double" optional="true"/>
-        <Property name="OptionalTestBöüleän" type="Boolean" optional="true"/>
+        <Property name="OptionalTestBöüleänß" type="Boolean" optional="true"/>
         <Property name="OptionalTestInteger" type="Integer" optional="true"/>
         <Property name="OptionalTestByteArray" type="ByteArray" optional="true"/>
+        <Property name="OptionalTestDateTime" type="DateTime" optional="true"/>
       </Entity>
     </Module>
   </Modules>
