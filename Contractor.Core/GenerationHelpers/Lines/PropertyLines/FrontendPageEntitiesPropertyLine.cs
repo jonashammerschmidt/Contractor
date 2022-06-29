@@ -22,6 +22,15 @@ namespace Contractor.Core.Tools
                         $"                    </mat-icon>\n" +
                         $"                </td>\n" +
                         $"            </ng-container>\n";
+                case PropertyType.ByteArray:
+                    return
+                        $"            <ng-container matColumnDef=\"{property.Name.LowerFirstChar()}\">\n" +
+                        $"                <th mat-header-cell *matHeaderCellDef> {property.Name.ToReadable()} </th>\n" +
+                        $"                <td mat-cell *matCellDef=\"let element\">\n" +
+                        $"                    <span *ngIf=\"!element.{property.Name.LowerFirstChar()}\">-</span>\n" +
+                        $"                    <span *ngIf=\"element.{property.Name.LowerFirstChar()}\">Unbekannte Datei ({{{{element.{property.Name.LowerFirstChar()}.length | base64Bytes}}}})</span>\n" +
+                        $"                </td>\n" +
+                        "            </ng-container>\n";
                 case PropertyType.DateTime:
                     return
                         $"            <ng-container matColumnDef=\"{property.Name.LowerFirstChar()}\">\n" +
