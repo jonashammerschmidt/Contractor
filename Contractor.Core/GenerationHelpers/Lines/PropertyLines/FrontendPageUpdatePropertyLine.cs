@@ -19,6 +19,18 @@ namespace Contractor.Core.Tools
                         $"\n" +
                         $"            <br>";
 
+                case PropertyType.ByteArray:
+                    return
+                         "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
+                        $"                <mat-label>{property.Name.ToReadable()}</mat-label>\n" +
+                        $"                <file-picker formControlName=\"{property.Name.LowerFirstChar()}\" {requiredLine} placeholder=\"{property.Name.ToReadable()}\"></file-picker>\n" +
+                        $"                <mat-error *ngIf=\"{property.Entity.NameLower}UpdateForm.controls.{property.Name.LowerFirstChar()}.touched && {property.Entity.NameLower}UpdateForm.controls.{property.Name.LowerFirstChar()}.invalid\">\n" +
+                        $"                    <span *ngIf=\"{property.Entity.NameLower}UpdateForm.controls.{property.Name.LowerFirstChar()}.errors.required\">\n" +
+                        $"                        Dieses Feld ist erforderlich.\n" +
+                        $"                    </span>\n" +
+                         "                </mat-error>\n" +
+                         "            </mat-form-field>";
+
                 case PropertyType.DateTime:
                     return
                          "            <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +

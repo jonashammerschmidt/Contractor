@@ -21,6 +21,14 @@ namespace Contractor.Core.Tools
                         $"            check_box_outline_blank\n" +
                         $"        </mat-icon>\n" +
                          "    </p>";
+                case PropertyType.ByteArray:
+                    return
+                        $"    <p [attr.aria-label]=\"'{property.Name.ToReadable()}: Unbekannte Datei ({{{{{property.Entity.Name.LowerFirstChar()}.{property.Name.LowerFirstChar()}.length | base64Bytes}}}})'\">\n" +
+                        $"        <span style=\"font-size: 0.8em;\" aria-hidden=\"true\">{property.Name.ToReadable()}:</span>\n" +
+                        $"        <br>\n" +
+                        $"        <span *ngIf=\"!{property.Entity.Name.LowerFirstChar()}.{property.Name.LowerFirstChar()}\">-</span>\n" +
+                        $"        <span *ngIf=\"{property.Entity.Name.LowerFirstChar()}.{property.Name.LowerFirstChar()}\" aria-hidden=\"true\">Unbekannte Datei ({{{{{property.Entity.Name.LowerFirstChar()}.{property.Name.LowerFirstChar()}.length | base64Bytes}}}})</span>\n" +
+                         "    </p>";
                 case PropertyType.DateTime:
                     return
                         $"    <p [attr.aria-label]=\"'{property.Name.ToReadable()}: ' + {property.Entity.Name.LowerFirstChar()}.{property.Name.LowerFirstChar()}{(property.IsOptional ? "?" : "")}.toLocaleString()\">\n" +

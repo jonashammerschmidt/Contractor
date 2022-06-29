@@ -25,6 +25,7 @@ import { EntitiesPagesRouting } from './entities-kebab-pages.routing';
 import { EntitiesPage } from './entities-kebab.page';
 import { SearchDropdownModule} from 'src/app/components/ui/search-dropdown/search-dropdown.module';
 import { TableFilterBarModule } from 'src/app/components/ui/table-filter-bar/table-filter-bar.module';
+import { FilePickerModule } from 'src/app/components/ui/file-picker/file-picker.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TableFilterBarModule } from 'src/app/components/ui/table-filter-bar/tab
     UiComponentsModule,
     SearchDropdownModule,
     TableFilterBarModule,
+    FilePickerModule,
 
     // Angular Material Modules
     MatButtonModule,

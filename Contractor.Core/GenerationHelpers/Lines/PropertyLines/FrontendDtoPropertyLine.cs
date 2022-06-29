@@ -11,6 +11,7 @@ namespace Contractor.Core.Tools
             string optionalText = (property.IsOptional) ? "?" : "";
             switch (property.Type)
             {
+                case PropertyType.ByteArray:
                 case PropertyType.String:
                 case PropertyType.Guid:
                     return $"    {property.Name.LowerFirstChar()}{optionalText}: string;";

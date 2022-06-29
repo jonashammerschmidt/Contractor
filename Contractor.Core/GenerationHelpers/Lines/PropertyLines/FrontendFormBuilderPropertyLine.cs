@@ -12,6 +12,7 @@ namespace Contractor.Core.Tools
             {
                 switch (property.Type)
                 {
+                    case PropertyType.ByteArray:
                     case PropertyType.DateTime:
                     case PropertyType.Double:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(null, []),";
@@ -33,6 +34,7 @@ namespace Contractor.Core.Tools
             {
                 switch (property.Type)
                 {
+                    case PropertyType.ByteArray:
                     case PropertyType.DateTime:
                     case PropertyType.Double:
                         return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.required]),";
