@@ -26,7 +26,7 @@ namespace Contractor.Core.Generation
             this.AddModuleActions(module);
             if (module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully");
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + module.Name);
             }
             //}
             //catch (Exception e)
@@ -46,7 +46,7 @@ namespace Contractor.Core.Generation
             this.AddEntity(entity);
             if (entity.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully");
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + entity.Name);
             }
             //}
             //catch (Exception e)
@@ -66,7 +66,7 @@ namespace Contractor.Core.Generation
             this.AddProperty(property);
             if (property.Entity.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully");
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + property.Entity.Name + "." + property.Name);
             }
             //}
             //catch (Exception e)
@@ -86,7 +86,7 @@ namespace Contractor.Core.Generation
             this.Add1ToNRelationSideFrom(new Relation1ToN(relation));
             if (relation.EntityFrom.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully");
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
             }
             //}
             //catch (Exception e)
@@ -106,7 +106,7 @@ namespace Contractor.Core.Generation
             this.AddOneToOneRelationSideFrom(relation);
             if (relation.EntityFrom.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully");
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
             }
             //}
             //catch (Exception e)
@@ -126,7 +126,7 @@ namespace Contractor.Core.Generation
             this.Add1ToNRelationSideTo(new Relation1ToN(relation));
             if (relation.EntityTo.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully");
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
             }
             //}
             //catch (Exception e)
@@ -146,7 +146,7 @@ namespace Contractor.Core.Generation
             this.AddOneToOneRelationSideTo(relation);
             if (relation.EntityTo.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully");
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
             }
             //}
             //catch (Exception e)

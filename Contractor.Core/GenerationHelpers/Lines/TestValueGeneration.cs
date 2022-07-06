@@ -19,7 +19,7 @@ namespace Contractor.Core.Tools
                 case PropertyType.String:
                     var length = Math.Min(
                         property.Name.Length,
-                        int.Parse(property.TypeExtra) - prefix.Length - postfix.Length);
+                        Math.Max(0, int.Parse(property.TypeExtra) - prefix.Length - postfix.Length));
                     return "\"" + prefix + property.Name.Substring(0, length) + postfix + "\"";
 
                 case PropertyType.Integer:

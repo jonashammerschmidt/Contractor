@@ -17,7 +17,7 @@ namespace Contractor.Core
                 {
                     foreach (var relation1To1 in entity.Relations1To1)
                     {
-                        if (relation1To1.EntityFrom.HasScope && !relation1To1.EntityTo.HasScope)
+                        if ((relation1To1.EntityFrom.HasScope && !relation1To1.EntityTo.HasScope) || relation1To1.EntityTo.HasOtherScope(relation1To1.EntityFrom))
                         {
                             Relation1ToN scopeRelation1ToN = new Relation1ToN()
                             {
@@ -37,7 +37,7 @@ namespace Contractor.Core
 
                     foreach (var relation1ToN in entity.Relations1ToN)
                     {
-                        if (relation1ToN.EntityFrom.HasScope && !relation1ToN.EntityTo.HasScope)
+                        if ((relation1ToN.EntityFrom.HasScope && !relation1ToN.EntityTo.HasScope) || relation1ToN.EntityTo.HasOtherScope(relation1ToN.EntityFrom))
                         {
                             Relation1ToN scopeRelation1ToN = new Relation1ToN()
                             {
@@ -69,7 +69,10 @@ namespace Contractor.Core
                 {
                     var dependencies1To1 = entity.Relations1To1.Select(relation => relation.EntityFrom);
                     var dependencies1ToN = entity.Relations1ToN.Select(relation => relation.EntityFrom);
-                    return dependencies1To1.Concat(dependencies1ToN);
+                    var dependencies = dependencies1To1
+                        .Concat(dependencies1ToN)
+                        .Where(dependency => dependency != entity);
+                    return dependencies;
                 };
 
             IEnumerable<Entity> sortedEntities = SortingByDependency.Sort(entities, dependencyBuilder, true);

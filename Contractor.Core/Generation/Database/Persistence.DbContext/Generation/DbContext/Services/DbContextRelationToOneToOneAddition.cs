@@ -34,12 +34,12 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
             {
                 stringEditor.InsertLine($"                    .WithOne(p => p.{relationSide.OtherName})");
             }
-
-            if (relationSide.OtherEntity.HasScope && relationSide.Entity.HasScope)
+            
+            if (relationSide.OtherEntity.HasScope && relationSide.Entity.HasScope && !relationSide.Entity.HasOtherScope(relationSide.OtherEntity))
             {
                 stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}>(d => new {{ d.{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
             }
-            else if (relationSide.OtherEntity.HasScope && !relationSide.Entity.HasScope)
+            else if ((relationSide.OtherEntity.HasScope && !relationSide.Entity.HasScope) || relationSide.Entity.HasOtherScope(relationSide.OtherEntity))
             {
                 stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}>(d => new {{ d.{relationSide.Name}{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
             }
