@@ -144,6 +144,33 @@
                             <xs:documentation xml:lang="de">Optional. Definition, ob der Index eine Einzigartigkeitsbeschränkung haben soll. Default: false.</xs:documentation>
                           </xs:annotation>
                         </xs:attribute>
+                        <xs:attribute name="where" type="xs:string" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Es kann eine SQL-WHERE-Bedingungen eingerichtet werden, bei denen der Unique-Constraint des Index aktiv sein soll. Beispiel: where="[AnzahlMitarbeiter] > 0"</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="Check">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="de">Check-Constraints definieren eine Regel für eine oder mehrere Spalten in der Datenbanktabelle, die besagt, dass jede Zeile der Tabelle dieser Regel entsprechen muss.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:attribute name="name" use="required">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Der Name des Check-Constraints im PascalCase. Der Prefix 'CHK_Tabellenname_' wird automatisch ergänzt.  Beispiel: 'MindestensEinMitarbeiter'</xs:documentation>
+                          </xs:annotation>
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([A-Z][a-z]+)+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="query" type="xs:string" use="required">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Die SQL-WHERE-Bedingungen, die auf die gesamte Tabelle zutreffen muss. Beispiel: query="[AnzahlMitarbeiter] > 0</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
                       </xs:complexType>
                     </xs:element>
                   </xs:choice>

@@ -79,6 +79,8 @@ namespace Contractor.Core.MetaModell
 
         public IEnumerable<Index> Indices { get; set; }
 
+        public IEnumerable<Check> Checks { get; set; }
+
         public Module Module { get; private set; }
 
         public bool HasOtherScope(Entity otherEntity)
@@ -115,6 +117,11 @@ namespace Contractor.Core.MetaModell
             foreach (var index in Indices)
             {
                 index.AddLinks(this);
+            }
+
+            foreach (var check in Checks)
+            {
+                check.AddLinks(this);
             }
 
             DisplayProperty =

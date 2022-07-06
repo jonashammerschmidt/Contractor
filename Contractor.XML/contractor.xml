@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Contractor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor.xsd">
   <Paths>
     <BackendDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Core</BackendDestinationFolder>
@@ -27,7 +27,7 @@
     <Module name="Bankwesen">
       <Entity name="Konto" namePlural="Konten" scopeEntityName="Mandant">
         <Property name="Bezeichnung" type="String:256" />
-        <Relation1ToN entityNameFrom="Kunde" onDelete="Cascade"/>
+        <Relation1ToN entityNameFrom="Kunde" onDelete="Cascade" />
         <Relation1To1 entityNameFrom="Kunde" propertyNameFrom="BäckupKunde" propertyNameTo="BäckupKonto" optional="true" onDelete="ClientSetNull" />
         <Index property="Bezeichnung" unique="true" />
       </Entity>
@@ -39,8 +39,8 @@
     <Module name="Kundenstamm">
       <Entity name="Kunde" namePlural="Kunden">
         <Property name="VorUndNachname" type="String:256" displayProperty="true" />
-        <Relation1ToN entityNameFrom="SchöneBank" propertyNameFrom="MeineBank" propertyNameTo="MeineKunden" optional="true"/>
-        <Relation1To1 entityNameFrom="SchöneBank" propertyNameFrom="LieblingsBank" propertyNameTo="LieblingsKunde"/>
+        <Relation1ToN entityNameFrom="SchöneBank" propertyNameFrom="MeineBank" propertyNameTo="MeineKunden" optional="true" />
+        <Relation1To1 entityNameFrom="SchöneBank" propertyNameFrom="LieblingsBank" propertyNameTo="LieblingsKunde" />
         <Index property="VorUndNachname" clustered="true" />
       </Entity>
     </Module>
@@ -53,13 +53,15 @@
         <Property name="TestInteger" type="Integer" />
         <Property name="TestDateTime" type="DateTime" />
         <Property name="TestByteArray" type="ByteArray" />
-        <Property name="OptionalTestString" type="String:256" optional="true"/>
-        <Property name="OptionalTestGuid" type="Guid" optional="true"/>
-        <Property name="OptionalTestDouble" type="Double" optional="true"/>
-        <Property name="OptionalTestBöüleänß" type="Boolean" optional="true"/>
-        <Property name="OptionalTestInteger" type="Integer" optional="true"/>
-        <Property name="OptionalTestByteArray" type="ByteArray" optional="true"/>
-        <Property name="OptionalTestDateTime" type="DateTime" optional="true"/>
+        <Property name="OptionalTestString" type="String:256" optional="true" />
+        <Property name="OptionalTestGuid" type="Guid" optional="true" />
+        <Property name="OptionalTestDouble" type="Double" optional="true" />
+        <Property name="OptionalTestBöüleänß" type="Boolean" optional="true" />
+        <Property name="OptionalTestInteger" type="Integer" optional="true" />
+        <Property name="OptionalTestByteArray" type="ByteArray" optional="true" />
+        <Property name="OptionalTestDateTime" type="DateTime" optional="true" />
+        <Index property="TestInteger" unique="true" where="[TestInteger] > 0" />
+        <Check name="TestDoubleGroesserNull" query="[TestDouble] > 0" />
       </Entity>
     </Module>
   </Modules>
