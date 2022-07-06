@@ -11,6 +11,7 @@ namespace Contractor.CLI
                 @"Commands:
 contractor init [-y]
 contractor execute <relative-path> [-v|--verbose]
+contractor migrate <relative-path>
             ");
         }
     }

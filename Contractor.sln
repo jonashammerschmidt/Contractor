@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contractor.CLI", "Contracto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contractor.Core", "Contractor.Core\Contractor.Core.csproj", "{3BD8CACC-2C04-46DA-9D19-CF87FF86A15B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contractor.Migrator", "Contractor.Migrator\Contractor.Migrator.csproj", "{2AA1C2B4-AAE5-466B-9C28-F1B14CBF70E4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{3BD8CACC-2C04-46DA-9D19-CF87FF86A15B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BD8CACC-2C04-46DA-9D19-CF87FF86A15B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BD8CACC-2C04-46DA-9D19-CF87FF86A15B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2AA1C2B4-AAE5-466B-9C28-F1B14CBF70E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2AA1C2B4-AAE5-466B-9C28-F1B14CBF70E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2AA1C2B4-AAE5-466B-9C28-F1B14CBF70E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2AA1C2B4-AAE5-466B-9C28-F1B14CBF70E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
