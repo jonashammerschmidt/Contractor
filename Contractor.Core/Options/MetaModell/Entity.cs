@@ -81,6 +81,11 @@ namespace Contractor.Core.MetaModell
 
         public Module Module { get; private set; }
 
+        public bool HasOtherScope(Entity otherEntity)
+        {
+            return HasScope && otherEntity.HasScope && ScopeEntity != otherEntity.ScopeEntity;
+        }
+
         public void AddLinks(Module module)
         {
             Module = module;
@@ -145,6 +150,11 @@ namespace Contractor.Core.MetaModell
             }
 
             return null;
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }

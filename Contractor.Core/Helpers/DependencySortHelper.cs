@@ -30,7 +30,7 @@ namespace Contractor.Core.Helpers
             else
             {
                 if (throwOnCycle && !sorted.Contains(item))
-                    throw new Exception("Cyclic dependency found");
+                    throw new Exception("Cyclic dependency found: " + item.ToString());
             }
         }
     }
