@@ -121,14 +121,17 @@ namespace Contractor.CLI
         [XmlElement(ElementName = "Property")]
         public List<PropertyXml> Properties { get; set; }
 
-        [XmlElement(ElementName = "Index")]
-        public List<IndexXml> Indices { get; set; }
-
         [XmlElement(ElementName = "Relation1ToN")]
         public List<Relation1ToNXml> Relation1ToN { get; set; }
 
         [XmlElement(ElementName = "Relation1To1")]
         public List<Relation1To1Xml> Relations1To1 { get; set; }
+
+        [XmlElement(ElementName = "Index")]
+        public List<IndexXml> Indices { get; set; }
+
+        [XmlElement(ElementName = "Check")]
+        public List<CheckXml> Checks { get; set; }
     }
 
     [XmlRoot(ElementName = "Property")]
@@ -158,6 +161,19 @@ namespace Contractor.CLI
 
         [XmlAttribute(AttributeName = "unique")]
         public bool IsUnique { get; set; }
+
+        [XmlAttribute(AttributeName = "where")]
+        public string Where { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Check")]
+    public class CheckXml
+    {
+        [XmlAttribute(AttributeName = "name")]
+        public string Name { get; set; }
+
+        [XmlAttribute(AttributeName = "query")]
+        public string Query { get; set; }
     }
 
     [XmlRoot(ElementName = "Relation1ToN")]

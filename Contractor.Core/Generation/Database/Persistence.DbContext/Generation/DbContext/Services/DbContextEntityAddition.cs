@@ -47,6 +47,12 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
             stringEditor.InsertLine($"                entity.ToTable(\"{entity.NamePlural}\");");
             stringEditor.InsertLine("");
 
+            foreach (var check in entity.Checks)
+            {
+                stringEditor.InsertLine($"                entity.HasCheckConstraint(\"CHK_{check.Entity.NamePlural}_{check.Name}\", \"{check.Query}\");");
+                stringEditor.InsertLine("");
+            }
+
             if (entity.HasScope)
             {
                 stringEditor.InsertLine($"                entity.HasKey(c => new {{ c.{entity.ScopeEntity.Name}Id, c.Id }})");
@@ -63,10 +69,15 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
                 string indexProperties = string.Join(", ", index.ColumnNames.Select(columnName => "c." + columnName));
 
                 stringEditor.InsertNewLine();
-                stringEditor.InsertLine(
-                    $"                entity.HasIndex(c => new {{ {indexProperties} }})\n" +
-                    $"                    .IsUnique({index.IsUnique.ToString().ToLower()})\n" +
-                    $"                    .IsClustered({index.IsClustered.ToString().ToLower()});");
+                stringEditor.InsertLine($"                entity.HasIndex(c => new {{ {indexProperties} }})");
+                stringEditor.InsertLine($"                    .IsUnique({index.IsUnique.ToString().ToLower()})");
+
+                if (!string.IsNullOrWhiteSpace(index.Where))
+                {
+                    stringEditor.InsertLine($"                    .HasFilter(\"{index.Where}\")");
+                }
+
+                stringEditor.InsertLine($"                    .IsClustered({index.IsClustered.ToString().ToLower()});");
             }
 
             stringEditor.InsertNewLine();

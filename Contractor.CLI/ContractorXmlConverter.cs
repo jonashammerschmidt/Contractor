@@ -116,6 +116,12 @@ namespace Contractor.CLI
                             PropertyNames = index.PropertyNames,
                             IsUnique = index.IsUnique,
                             IsClustered = index.IsClustered,
+                            Where = index.Where,
+                        }).ToList(),
+                        Checks = entity.Checks.Select(check => new Check()
+                        {
+                            Name = check.Name,
+                            Query = check.Query,
                         }).ToList(),
                     };
                 }).ToList(),

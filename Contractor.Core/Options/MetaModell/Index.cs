@@ -22,6 +22,8 @@ namespace Contractor.Core.MetaModell
 
         public bool IsUnique { get; set; }
 
+        public string Where { get; set; }
+
         public Entity Entity { get; private set; }
 
         public void AddLinks(Entity entity)
