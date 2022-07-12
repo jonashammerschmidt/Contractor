@@ -65,20 +65,40 @@ namespace Contractor.Core
             IEnumerable<Entity> entities = contractorGenerationOptions.Modules
                 .SelectMany(module => module.Entities);
 
-            Func<Entity, IEnumerable<Entity>> dependencyBuilder = (entity) =>
-                {
-                    var dependencies1To1 = entity.Relations1To1.Select(relation => relation.EntityFrom);
-                    var dependencies1ToN = entity.Relations1ToN.Select(relation => relation.EntityFrom);
-                    var dependencies = dependencies1To1
-                        .Concat(dependencies1ToN)
-                        .Where(dependency => dependency != entity);
-                    return dependencies;
-                };
+            var circularRelationPath = DependencyCycleHelper.FindCycle(entities, GetDependencyBuilder(true));
+            if (circularRelationPath != null)
+            {
+                string cycleName = string.Join(" -> ", circularRelationPath.Select(cycleItem => cycleItem.ToString()));
+                throw new ApplicationException("Circular relation path found, where every relation is mandtory: " + cycleName);
+            }
 
-            IEnumerable<Entity> sortedEntities = SortingByDependency.Sort(entities, dependencyBuilder, true);
+            IEnumerable<Entity> sortedEntities = DependencySortHelper.Sort(entities, GetDependencyBuilder(false));
 
             contractorGenerationOptions.Sort(sortedEntities);
             return sortedEntities;
+        }
+
+        private static Func<Entity, IEnumerable<Entity>> GetDependencyBuilder(bool excludeOptionalRelations)
+        {
+            return (entity) =>
+            {
+                var dependencies1To1 = entity.Relations1To1
+                    .Where(relation => !excludeOptionalRelations || !relation.IsOptional)
+                    .Select(relation => relation.EntityFrom);
+                var dependencies1ToN = entity.Relations1ToN
+                    .Where(relation => !excludeOptionalRelations || !relation.IsOptional)
+                    .Select(relation => relation.EntityFrom);
+                var dependencies = dependencies1To1
+                    .Concat(dependencies1ToN)
+                    .Where(dependency => dependency != entity);
+
+                if (entity.HasScope)
+                {
+                    dependencies = dependencies.Append(entity.ScopeEntity);
+                }
+
+                return dependencies;
+            };
         }
     }
 }

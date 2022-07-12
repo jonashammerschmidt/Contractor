@@ -131,14 +131,20 @@ namespace Contractor.Core.Helpers
 
         public StringEditor NextThatContains(string pattern)
         {
-            this.NextUntil((line) => line.Contains(pattern));
+            do
+            {
+                this.lineNumber++;
+            } while (this.lineNumber < lines.Count() && !this.lines[lineNumber].Contains(pattern));
 
             return this;
         }
 
         public StringEditor NextThatStartsWith(string pattern)
         {
-            this.NextUntil((line) => line.StartsWith(pattern));
+            do
+            {
+                this.lineNumber++;
+            } while (this.lineNumber < lines.Count() && !this.lines[lineNumber].StartsWith(pattern, StringComparison.Ordinal));
 
             return this;
         }
