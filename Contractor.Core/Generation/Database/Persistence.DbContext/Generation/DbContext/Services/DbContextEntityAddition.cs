@@ -96,7 +96,16 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
             {
                 stringEditor.InsertNewLine();
                 stringEditor.InsertLine($"                entity.HasOne(d => d.{entity.ScopeEntity.Name})");
-                stringEditor.InsertLine($"                    .WithMany(d => d.{entity.NamePlural})");
+
+                if (entity.ScopeEntity.Skip)
+                {
+                    stringEditor.InsertLine($"                    .WithMany()");
+                }
+                else
+                {
+                    stringEditor.InsertLine($"                    .WithMany(d => d.{entity.NamePlural})");
+                }
+
                 stringEditor.InsertLine($"                    .HasForeignKey(d => d.{entity.ScopeEntity.Name}Id)");
                 stringEditor.InsertLine("                    .IsRequired(true)");
                 stringEditor.InsertLine("                    .OnDelete(DeleteBehavior.NoAction)");

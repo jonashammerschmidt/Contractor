@@ -38,7 +38,7 @@ namespace Contractor.Core.Tools
                     Random gen = random;
                     int range = 10 * 365; // 10 years
                     var randomDate = new DateTime(2020, 12, 31).AddDays(-gen.Next(range));
-                    return "\"" + randomDate.ToString("yyyy-MM-ddTHH:mmZ", CultureInfo.InvariantCulture) + "\"";
+                    return "\"" + randomDate.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture) + "\"";
 
                 case PropertyType.ByteArray:
                     return "\"" + Convert.ToBase64String(Encoding.UTF8.GetBytes(prefix + property.Name + postfix)) + "\"";
