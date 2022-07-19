@@ -120,6 +120,17 @@ namespace Contractor.Core
                     }
                 }
             }
+
+            foreach (Entity entity in this.sortedEntities.Where(entity => !entity.Skip))
+            {
+                foreach (var classGeneration in this.classGenerations)
+                {
+                    if (ShouldGenerate(this.contractorGenerationOptions.Tags, classGeneration))
+                    {
+                        classGeneration.PerformPostGenerationCommand(entity);
+                    }
+                }
+            }
         }
 
         public void SaveChanges()

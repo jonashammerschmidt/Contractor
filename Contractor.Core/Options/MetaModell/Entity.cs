@@ -69,6 +69,8 @@ namespace Contractor.Core.MetaModell
 
         public Entity ScopeEntity { get; private set; }
 
+        public List<Entity> ScopedEntities { get; private set; } = new List<Entity>();
+
         public Property DisplayProperty { get; set; }
 
         public IEnumerable<Property> Properties { get; set; }
@@ -94,6 +96,7 @@ namespace Contractor.Core.MetaModell
             if (ScopeEntityName != null)
             {
                 ScopeEntity = module.Options.FindEntity(ScopeEntityName);
+                ScopeEntity.ScopedEntities.Add(this);
             }
         }
 
