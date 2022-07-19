@@ -87,5 +87,16 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
             this.relationAddition.AddRelationToDTOForDatabase(relationSideToEfObject, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
                 $"{relationSideToEfObject.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSideToEfObject.OtherEntity.Module.Name}.{relationSideToEfObject.OtherEntity.NamePlural}");
         }
+
+        protected override void PostGeneration(Entity entity)
+        {
+            foreach (var scopedEntity in entity.ScopedEntities)
+            {
+                RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(entity, scopedEntity, "virtual ICollection<Ef", ">");
+
+                this.relationAddition.AddRelationToDTOForDatabase(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
+                    $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+            }
+        }
     }
 }

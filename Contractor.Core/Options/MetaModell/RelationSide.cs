@@ -21,6 +21,28 @@ namespace Contractor.Core.MetaModell
             get { return OtherName.LowerFirstChar(); }
         }
 
+        public static RelationSide FromObjectRelationEndFrom(Entity entityFrom, Entity entityTo, string prefix, string postfix)
+        {
+            string name = entityTo.NamePlural;
+            string otherName = entityFrom.Name;
+
+            return new RelationSide()
+            {
+                Entity = entityFrom,
+                IsDisplayProperty = false,
+                IsOptional = false,
+                OnDelete = "NoAction",
+                Name = name,
+                Order = int.MaxValue,
+                Type = prefix + entityTo.Name + postfix,
+                RelationSideType = RelationSideType.From,
+                OtherEntity = entityTo,
+                OtherName = otherName,
+                IsCreatedByPreProcessor = false,
+                RelationBeforePreProcessor = null
+            };
+        }
+
         public static RelationSide FromObjectRelationEndFrom(Relation relation, string prefix, string postfix)
         {
             var is1ToN = relation.GetType() == typeof(Relation1ToN);

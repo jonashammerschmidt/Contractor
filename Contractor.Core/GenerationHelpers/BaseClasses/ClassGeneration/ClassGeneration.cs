@@ -19,6 +19,8 @@ namespace Contractor.Core.Generation
 
         protected abstract void AddOneToOneRelationSideTo(Relation1To1 relation);
 
+        protected virtual void PostGeneration(Entity entity) { }
+
         public void AddModule(Module module)
         {
             //try
@@ -147,6 +149,26 @@ namespace Contractor.Core.Generation
             if (relation.EntityTo.Module.Options.IsVerbose)
             {
                 Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
+            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine("Fehler bei Relation-Generierung: " + e.Message);
+            //    if (relation.EntityTo.Module.Options.IsVerbose)
+            //    {
+            //        Console.WriteLine(e.StackTrace);
+            //    }
+            //}
+        }
+
+        public void PerformPostGenerationCommand(Entity entity)
+        {
+            //try
+            //{
+            this.PostGeneration(entity);
+            if (entity.Module.Options.IsVerbose)
+            {
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + entity.Name + " -> " + entity.Name);
             }
             //}
             //catch (Exception e)
