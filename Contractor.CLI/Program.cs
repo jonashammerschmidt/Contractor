@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -83,6 +84,11 @@ namespace Contractor.CLI
 
             var contractorXmlSerializer = new XmlSerializer(typeof(ContractorXml));
             ContractorXml contractorXml = (ContractorXml)contractorXmlSerializer.Deserialize(contractorXmlReader);
+
+            if (Assembly.GetExecutingAssembly().GetName().Version.CompareTo(Version.Parse(contractorXml.MinContractorVersion)) < 0)
+            {
+                Console.WriteLine("Es muss mindestens die Contractor Version {1} verwendet werden.", contractorXml.MinContractorVersion);
+            }
 
             ContractorGenerationOptions contractorGenerationOptions = ContractorXmlConverter
                 .ToContractorGenerationOptions(contractorXml, contractorXmlDocument, contractorXmlFileInfo.Directory.FullName);

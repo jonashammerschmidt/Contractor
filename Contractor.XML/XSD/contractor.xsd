@@ -92,6 +92,16 @@
         </xs:element>
         <xs:element ref="Modules" minOccurs="0" maxOccurs="1"></xs:element>
       </xs:sequence>
+      <xs:attribute name="minContractorVersion" use="required">
+        <xs:annotation>
+          <xs:documentation xml:lang="de">Die Versionsnummer, die lokal mindestens installiert sein muss.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="(\d+\.)?(\d+\.)?(\*|\d+)" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
 </xs:schema>
