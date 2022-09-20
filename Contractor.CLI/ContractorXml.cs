@@ -18,6 +18,9 @@ namespace Contractor.CLI
 
         [XmlElement(ElementName = "Includes")]
         public IncludesXml Includes { get; set; }
+
+        [XmlAttribute(AttributeName = "minContractorVersion")]
+        public string MinContractorVersion { get; set; }
     }
 
     [XmlRoot(ElementName = "Include")]
