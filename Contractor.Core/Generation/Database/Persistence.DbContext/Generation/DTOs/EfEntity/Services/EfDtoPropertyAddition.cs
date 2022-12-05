@@ -1,12 +1,13 @@
 ﻿using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
+using Contractor.Core.Tools;
 
-namespace Contractor.Core.Tools
+namespace Contractor.Core.Generation.Backend.Persistence.DbContext
 {
     internal class EfDtoPropertyAddition
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
+        private readonly IFileSystemClient fileSystemClient;
+        private readonly PathService pathService;
 
         public EfDtoPropertyAddition(
             IFileSystemClient fileSystemClient,
@@ -16,7 +17,7 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void AddPropertyToDTO(Property property, string domainFolder, string templateFileName)
+        public void AddPropertyToDto(Property property, string domainFolder, string templateFileName)
         {
             string filePath = this.pathService.GetAbsolutePathForDatabase(property, domainFolder, templateFileName);
             string fileData = UpdateFileData(property, filePath);

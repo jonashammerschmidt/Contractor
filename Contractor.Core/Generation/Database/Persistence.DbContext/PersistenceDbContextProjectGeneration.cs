@@ -1,6 +1,5 @@
-﻿using Contractor.Core.Generation.Backend.Persistence;
+﻿using Contractor.Core.Generation.Backend.Persistence.DbContext;
 using Contractor.Core.Helpers;
-using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Database.Persistence.DbContext
@@ -24,7 +23,8 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
 
             serviceCollection.AddSingleton<EfDtoEntityAddition>();
             serviceCollection.AddSingleton<EfDtoPropertyAddition>();
-            serviceCollection.AddSingleton<EfDtoContructorHashSetAddition>();
+            serviceCollection.AddSingleton<EfDtoRelationAddition>();
+            serviceCollection.AddSingleton<EfDtoConstructorHashSetAddition>();
         }
     }
 }

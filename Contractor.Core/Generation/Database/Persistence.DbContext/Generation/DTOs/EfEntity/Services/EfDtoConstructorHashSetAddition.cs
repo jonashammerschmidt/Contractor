@@ -2,14 +2,14 @@
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
-namespace Contractor.Core.Generation.Backend.Persistence
+namespace Contractor.Core.Generation.Backend.Persistence.DbContext
 {
-    internal class EfDtoContructorHashSetAddition
+    internal class EfDtoConstructorHashSetAddition
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
+        private readonly IFileSystemClient fileSystemClient;
+        private readonly PathService pathService;
 
-        public EfDtoContructorHashSetAddition(
+        public EfDtoConstructorHashSetAddition(
             IFileSystemClient fileSystemClient,
             PathService pathService)
         {
