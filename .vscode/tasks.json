@@ -2,6 +2,45 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Pack and Install",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Tasks - Pack",
+                "Tasks - Uninstall",
+                "Tasks - Install",
+            ],
+        },
+        {
+            "label": "Tasks - Pack",
+            "type": "shell",
+            "windows": {
+                "command": "dotnet pack -c Release"
+            },
+            "options": {
+                "cwd": "Contractor.CLI"
+            },
+        },
+        {
+            "label": "Tasks - Uninstall",
+            "type": "shell",
+            "windows": {
+                "command": "dotnet tool uninstall --global contractor"
+            },
+            "options": {
+                "cwd": "Contractor.CLI"
+            },
+        },
+        {
+            "label": "Tasks - Install",
+            "type": "shell",
+            "windows": {
+                "command": "dotnet tool install --global --add-source .\\bin\\Release contractor"
+            },
+            "options": {
+                "cwd": "Contractor.CLI"
+            },
+        },
+        {
             "label": "Database - 0. Add Migration Initial",
             "command": "dotnet",
             "type": "process",
