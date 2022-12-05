@@ -111,7 +111,7 @@ namespace Contractor.CLI
                                 .Single()
                                 .index,
                         }).ToList(),
-                        Indices = entity.Indices.Select(index => new Index()
+                        Indices = entity.Indices.Select(index => new Contractor.Core.MetaModell.Index()
                         {
                             PropertyNames = index.PropertyNames,
                             IsUnique = index.IsUnique,

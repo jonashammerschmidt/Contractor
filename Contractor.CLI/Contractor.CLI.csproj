@@ -1,9 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>contractor</PackageId>
+    <Title>contractor</Title>
+    <Version>2.2.0</Version>
+    <Summary>Der Contractor ist eine CLI um Domänen, Entitäten, Eigenschaften und Beziehungen zur Contract Architektur hinzuzufügen.</Summary>
+    <Description>Der Contractor ist eine CLI um Domänen, Entitäten, Eigenschaften und Beziehungen zur Contract Architektur hinzuzufügen.</Description>
+    <Authors>Jonas Hammerschmidt</Authors>
+    <ToolCommandName>contractor</ToolCommandName>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/jonashammerschmidt/Contractor</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/jonashammerschmidt/Contractor</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>2.2.0</Version>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <PackAsTool>true</PackAsTool>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +26,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contractor.Core\Contractor.Core.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="LICENSE" Pack="true" PackagePath=""/>
   </ItemGroup>
 
   <ItemGroup>

@@ -12,3 +12,16 @@
 # Allgemein
 
 Der Contractor ist eine CLI um Domänen, Entitäten, Eigenschaften und Beziehungen zur Contract Architektur hinzuzufügen.
+
+## Installation
+
+```
+dotnet tool install -g contractor
+```
+
+## Usage
+
+```
+contractor init [-y]
+contractor execute <relative-path> [-v|--verbose]
+```
