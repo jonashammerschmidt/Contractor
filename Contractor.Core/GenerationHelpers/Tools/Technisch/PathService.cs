@@ -39,6 +39,39 @@ namespace Contractor.Core.Tools
             return GetAbsolutePathForBackend(relation.EntityTo, paths);
         }
 
+        // Backend.Generated
+
+        public string GetAbsolutePathForBackendGenerated(ContractorGenerationOptions options, params string[] paths)
+        {
+            string absolutePath = Path.Combine(options.Paths.BackendGeneratedDestinationFolder, paths.Aggregate(Path.Combine));
+            absolutePath = ModellNameReplacements.ReplaceOptionsPlaceholders(options, absolutePath);
+            return absolutePath;
+        }
+
+        internal string GetAbsolutePathForBackendGenerated(Module module, params string[] paths)
+        {
+            string absolutePath = GetAbsolutePathForBackendGenerated(module.Options, paths);
+            absolutePath = ModellNameReplacements.ReplaceModulePlaceholders(module, absolutePath);
+            return absolutePath;
+        }
+
+        internal string GetAbsolutePathForBackendGenerated(Entity entity, params string[] paths)
+        {
+            string absolutePath = GetAbsolutePathForBackendGenerated(entity.Module, paths);
+            absolutePath = ModellNameReplacements.ReplaceEntityPlaceholders(entity, absolutePath);
+            return absolutePath;
+        }
+
+        internal string GetAbsolutePathForBackendGenerated(Property property, params string[] paths)
+        {
+            return GetAbsolutePathForBackendGenerated(property.Entity, paths);
+        }
+
+        internal string GetAbsolutePathForBackendGenerated(Relation relation, params string[] paths)
+        {
+            return GetAbsolutePathForBackendGenerated(relation.EntityTo, paths);
+        }
+
         // Database
 
         public string GetAbsolutePathForDatabase(ContractorGenerationOptions options, params string[] paths)

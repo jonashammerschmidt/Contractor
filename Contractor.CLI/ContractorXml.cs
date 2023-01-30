@@ -36,6 +36,9 @@ namespace Contractor.CLI
         [XmlElement(ElementName = "BackendDestinationFolder")]
         public string BackendDestinationFolder { get; set; }
 
+        [XmlElement(ElementName = "BackendGeneratedDestinationFolder")]
+        public string BackendGeneratedDestinationFolder { get; set; }
+
         [XmlElement(ElementName = "DbDestinationFolder")]
         public string DbDestinationFolder { get; set; }
 

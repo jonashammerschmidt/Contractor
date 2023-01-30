@@ -20,6 +20,12 @@ namespace Contractor.Core.BaseClasses
             AddRelationSideToFile(relationSide, filePath);
         }
 
+        public void AddRelationSideToBackendGeneratedFile(RelationSide relationSide, params string[] paths)
+        {
+            string filePath = pathService.GetAbsolutePathForBackendGenerated(relationSide, paths);
+            AddRelationSideToFile(relationSide, filePath);
+        }
+
         public void AddRelationSideToDatabaseFile(RelationSide relationSide, params string[] paths)
         {
             string filePath = pathService.GetAbsolutePathForDatabase(relationSide, paths);

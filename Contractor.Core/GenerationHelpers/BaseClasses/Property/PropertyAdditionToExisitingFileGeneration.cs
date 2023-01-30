@@ -20,6 +20,12 @@ namespace Contractor.Core.BaseClasses
             AddPropertyToFile(property, filePath);
         }
 
+        public void AddPropertyToBackendGeneratedFile(Property property, params string[] paths)
+        {
+            string filePath = pathService.GetAbsolutePathForBackendGenerated(property, paths);
+            AddPropertyToFile(property, filePath);
+        }
+
         public void AddPropertyToDatabaseFile(Property property, params string[] paths)
         {
             string filePath = pathService.GetAbsolutePathForDatabase(property, paths);

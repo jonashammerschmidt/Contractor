@@ -18,25 +18,30 @@ namespace Contractor.Core.Tools
 
         public void AddRelationToDTO(RelationSide relationSide, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            AddRelationToDTO(relationSide, domainFolder, templateFileName, false, namespacesToAdd);
+            string filePath = this.pathService.GetAbsolutePathForBackend(relationSide, domainFolder, templateFileName);
+            AddRelationToDTO(relationSide, domainFolder, templateFileName, false, filePath, namespacesToAdd);
+        }
+
+        public void AddRelationToDTOForBackendGenerated(RelationSide relationSide, string domainFolder, string templateFileName, params string[] namespacesToAdd)
+        {
+            string filePath = this.pathService.GetAbsolutePathForBackendGenerated(relationSide, domainFolder, templateFileName);
+            AddRelationToDTO(relationSide, domainFolder, templateFileName, false, filePath, namespacesToAdd);
         }
 
         public void AddRelationToDTOForDatabase(RelationSide relationSide, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
-            AddRelationToDTO(relationSide, domainFolder, templateFileName, false, true, namespacesToAdd);
+            string filePath = this.pathService.GetAbsolutePathForDatabase(relationSide, domainFolder, templateFileName);
+            AddRelationToDTO(relationSide, domainFolder, templateFileName, false, filePath, namespacesToAdd);
         }
 
         public void AddRelationToDTO(RelationSide relationSide, string domainFolder, string templateFileName, bool forInterface, params string[] namespacesToAdd)
         {
-            this.AddRelationToDTO(relationSide, domainFolder, templateFileName, forInterface, false, namespacesToAdd);
+            string filePath = this.pathService.GetAbsolutePathForBackend(relationSide, domainFolder, templateFileName);
+            this.AddRelationToDTO(relationSide, domainFolder, templateFileName, forInterface, filePath, namespacesToAdd);
         }
 
-        public void AddRelationToDTO(RelationSide relationSide, string domainFolder, string templateFileName, bool forInterface, bool forDatabase, params string[] namespacesToAdd)
+        private void AddRelationToDTO(RelationSide relationSide, string domainFolder, string templateFileName, bool forInterface, string filePath, params string[] namespacesToAdd)
         {
-            string filePath = (forDatabase) ?
-                this.pathService.GetAbsolutePathForDatabase(relationSide, domainFolder, templateFileName) :
-                this.pathService.GetAbsolutePathForBackend(relationSide, domainFolder, templateFileName);
-
             string fileData = UpdateFileData(relationSide, filePath, forInterface);
 
             if (namespacesToAdd != null)
