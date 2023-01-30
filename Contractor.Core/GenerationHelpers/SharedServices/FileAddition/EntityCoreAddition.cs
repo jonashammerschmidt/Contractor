@@ -24,6 +24,14 @@ namespace Contractor.Core.BaseClasses
             fileSystemClient.WriteAllText(fileData, filePath);
         }
 
+        public void AddEntityToBackendGenerated(Entity entity, string domainFolder, string templateFilePath, string templateFileName)
+        {
+            string filePath = pathService.GetAbsolutePathForBackendGenerated(entity, domainFolder, templateFileName);
+            string fileData = fileSystemClient.ReadAllText(entity, templateFilePath);
+
+            fileSystemClient.WriteAllText(fileData, filePath);
+        }
+
         public void AddEntityToDatabase(Entity entity, string domainFolder, string templateFilePath, string templateFileName)
         {
             string filePath = pathService.GetAbsolutePathForDatabase(entity, domainFolder, templateFileName);

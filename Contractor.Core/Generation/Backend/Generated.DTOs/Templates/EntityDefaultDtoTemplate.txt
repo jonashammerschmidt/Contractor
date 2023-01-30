@@ -1,0 +1,23 @@
+﻿using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
+using System;
+
+namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
+{
+    public class EntityDefaultDto
+    {
+        public Guid Id { get; set; }
+
+        public static EntityDefaultDto FromEfEntity(EfEntity efEntity)
+        {
+            if (efEntity == null)
+            {
+                return null;
+            }
+
+            return new EntityDefaultDto()
+            {
+                Id = efEntity.Id,
+            };
+        }
+    }
+}

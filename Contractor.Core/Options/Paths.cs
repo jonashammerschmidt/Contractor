@@ -4,6 +4,8 @@
     {
         public string BackendDestinationFolder { get; set; }
 
+        public string BackendGeneratedDestinationFolder { get; set; }
+
         public string DbDestinationFolder { get; set; }
 
         public string FrontendDestinationFolder { get; set; }

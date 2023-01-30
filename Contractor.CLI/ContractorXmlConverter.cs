@@ -18,6 +18,7 @@ namespace Contractor.CLI
                 Paths = new Paths()
                 {
                     BackendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.BackendDestinationFolder)),
+                    BackendGeneratedDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.BackendGeneratedDestinationFolder)),
                     DbDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.DbDestinationFolder)),
                     FrontendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.FrontendDestinationFolder)),
                     ProjectName = contractorXml.Paths.ProjectName,

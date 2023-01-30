@@ -2,6 +2,7 @@
 <Contractor minContractorVersion="2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor.xsd">
   <Paths>
     <BackendDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Core</BackendDestinationFolder>
+    <BackendGeneratedDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Generated</BackendGeneratedDestinationFolder>
     <DbDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Databases\Krz.FullstackTemplate.Database.Core</DbDestinationFolder>
     <FrontendDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Frontends\Krz.FullstackTemplate.Web.Core</FrontendDestinationFolder>
     <ProjectName>Krz.FullstackTemplate.Backend.Core</ProjectName>

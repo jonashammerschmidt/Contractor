@@ -64,6 +64,21 @@
     <None Update="Generation\Backend\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDetailDefaultDtoTemplate-RequestScope.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDefaultDtoTemplate-RequestScope.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDetailDefaultDtoTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDefaultDtoTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Generation\Backend\Generated.Persistence\Templates\EntitiesDefaultReadRepositoryTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Generation\Backend\Logic\Templates\DbEntityUpdateTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
