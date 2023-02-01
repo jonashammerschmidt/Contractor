@@ -15,6 +15,11 @@
                   <xs:documentation xml:lang="de">Pfad zum Backend-Ordner, relativ von dieser Datei aus.</xs:documentation>
                 </xs:annotation>
               </xs:element>
+              <xs:element name="BackendGeneratedDestinationFolder" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Pfad zum Backend-Generated-Ordner, relativ von dieser Datei aus.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
               <xs:element name="DbDestinationFolder" type="xs:string">
                 <xs:annotation>
                   <xs:documentation xml:lang="de">Pfad zum Database-Ordner, relativ von dieser Datei aus.</xs:documentation>
