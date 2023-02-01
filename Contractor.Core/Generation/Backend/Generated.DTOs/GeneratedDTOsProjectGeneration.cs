@@ -1,4 +1,4 @@
-﻿using Contractor.Core.Helpers;
+using Contractor.Core.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
@@ -12,13 +12,13 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ClassGeneration, EntityDefaultDtoGeneration>();
-            serviceCollection.AddSingleton<EntityDefaultDtoMethodsAddition>();
+            serviceCollection.AddSingleton<ClassGeneration, EntityDtoGeneration>();
+            serviceCollection.AddSingleton<EntityDtoMethodsAddition>();
 
-            serviceCollection.AddSingleton<ClassGeneration, EntityDetailDefaultDtoGeneration>();
-            serviceCollection.AddSingleton<EntityDetailDefaultDtoMethodsAddition >();
-            serviceCollection.AddSingleton<EntityDetailDefaultDtoToMethodsAddition >();
-            serviceCollection.AddSingleton<EntityDetailDefaultDtoFromOneToOneMethodsAddition>();
+            serviceCollection.AddSingleton<ClassGeneration, EntityDtoExpandedGeneration>();
+            serviceCollection.AddSingleton<EntityDtoExpandedMethodsAddition >();
+            serviceCollection.AddSingleton<EntityDtoExpandedToMethodsAddition >();
+            serviceCollection.AddSingleton<EntityDtoExpandedFromOneToOneMethodsAddition>();
         }
     }
 }

@@ -64,19 +64,19 @@
     <None Update="Generation\Backend\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDetailDefaultDtoTemplate-RequestScope.txt">
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoExpandedTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDefaultDtoTemplate-RequestScope.txt">
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDetailDefaultDtoTemplate.txt">
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoExpandedTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDefaultDtoTemplate.txt">
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Generated.Persistence\Templates\EntitiesDefaultReadRepositoryTemplate.txt">
+    <None Update="Generation\Backend\Generated.Persistence\Templates\EntitiesReadRepositoryDefaultTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Backend\Logic\Templates\DbEntityUpdateTemplate.txt">

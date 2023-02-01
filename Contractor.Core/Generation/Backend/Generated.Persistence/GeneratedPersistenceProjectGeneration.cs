@@ -1,4 +1,4 @@
-﻿using Contractor.Core.Helpers;
+using Contractor.Core.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Backend.Generated.Persistence
@@ -11,12 +11,12 @@ namespace Contractor.Core.Generation.Backend.Generated.Persistence
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ClassGeneration, EntitiesDefaultReadRepositoryGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntitiesReadRepositoryDefaultGeneration>();
 
-            serviceCollection.AddSingleton<EntitiesDefaultReadRepositoryFromIncludeAddition>();
-            serviceCollection.AddSingleton<EntitiesDefaultReadRepositoryToIncludeAddition>();
-            serviceCollection.AddSingleton<EntitiesDefaultReadRepositoryFromOneToOneIncludeAddition>();
-            serviceCollection.AddSingleton<EntitiesDefaultReadRepositoryToOneToOneIncludeAddition>();
+            serviceCollection.AddSingleton<EntitiesReadRepositoryDefaultFromIncludeAddition>();
+            serviceCollection.AddSingleton<EntitiesReadRepositoryDefaultToIncludeAddition>();
+            serviceCollection.AddSingleton<EntitiesReadRepositoryDefaultFromOneToOneIncludeAddition>();
+            serviceCollection.AddSingleton<EntitiesReadRepositoryDefaultToOneToOneIncludeAddition>();
         }
     }
 }

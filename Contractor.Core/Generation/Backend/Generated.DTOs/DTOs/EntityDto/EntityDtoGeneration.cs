@@ -1,4 +1,4 @@
-﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
@@ -6,23 +6,23 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_GENERATED, ClassGenerationTag.BACKEND_GENERATED_DTOS })]
-    internal class EntityDefaultDtoGeneration : ClassGeneration
+    internal class EntityDtoGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDefaultDtoTemplate.txt");
+            Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoTemplate.txt");
 
-        private static readonly string FileName = "EntityDefaultDto.cs";
+        private static readonly string FileName = "EntityDto.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoPropertyAddition propertyAddition;
-        private readonly EntityDefaultDtoMethodsAddition entityDefaultDtoMethodsAddition;
+        private readonly EntityDtoMethodsAddition entityDtoMethodsAddition;
 
-        public EntityDefaultDtoGeneration(
+        public EntityDtoGeneration(
             EntityCoreAddition entityCoreAddition,
             DtoPropertyAddition propertyAddition,
-            EntityDefaultDtoMethodsAddition entityDefaultDtoMethodsAddition)
+            EntityDtoMethodsAddition entityDtoMethodsAddition)
         {
-            this.entityDefaultDtoMethodsAddition = entityDefaultDtoMethodsAddition;
+            this.entityDtoMethodsAddition = entityDtoMethodsAddition;
             this.entityCoreAddition = entityCoreAddition;
             this.propertyAddition = propertyAddition;
         }
@@ -40,7 +40,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         protected override void AddProperty(Property property)
         {
             this.propertyAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
-            this.entityDefaultDtoMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -51,7 +51,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
             this.propertyAddition.AddPropertyToBackendGeneratedFile(relationSide, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
-            this.entityDefaultDtoMethodsAddition.AddPropertyToBackendGeneratedFile(relationSide, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoMethodsAddition.AddPropertyToBackendGeneratedFile(relationSide, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

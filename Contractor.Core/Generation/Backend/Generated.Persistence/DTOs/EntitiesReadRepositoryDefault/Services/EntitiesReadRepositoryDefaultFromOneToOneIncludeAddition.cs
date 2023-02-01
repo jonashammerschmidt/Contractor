@@ -1,13 +1,13 @@
-﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.Persistence
 {
-    internal class EntitiesDefaultReadRepositoryToIncludeAddition : RelationSideAdditionToExisitingFileGeneration
+    internal class EntitiesReadRepositoryDefaultFromOneToOneIncludeAddition : RelationSideAdditionToExisitingFileGeneration
     {
-        public EntitiesDefaultReadRepositoryToIncludeAddition(IFileSystemClient fileSystemClient, PathService pathService)
+        public EntitiesReadRepositoryDefaultFromOneToOneIncludeAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
         {
         }
@@ -17,7 +17,6 @@ namespace Contractor.Core.Generation.Backend.Generated.Persistence
             fileData = UsingStatements.Add(fileData, "Microsoft.EntityFrameworkCore");
 
             StringEditor stringEditor = new StringEditor(fileData);
-
             stringEditor.NextThatContains($"Get{relationSide.Entity.Name}Detail(");
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
             stringEditor.NextUntil(line => !line.Contains("Include("));

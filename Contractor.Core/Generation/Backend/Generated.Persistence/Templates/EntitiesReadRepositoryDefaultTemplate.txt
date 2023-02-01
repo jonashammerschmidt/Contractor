@@ -1,4 +1,4 @@
-﻿using Contract.Architecture.Backend.Common;
+using Contract.Architecture.Backend.Common;
 using Contract.Architecture.Backend.Common.Contract;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Persistence;
@@ -11,13 +11,13 @@ using System.Linq;
 
 namespace ProjectName.Persistence.Modules.Domain.Entities
 {
-    public class EntitiesDefaultReadRepository
+    public class EntitiesReadRepositoryDefault
     {
         private readonly IPaginationContext paginationContext;
 
         private readonly FullstackTemplateCoreDbContextRaw dbContext;
 
-        public EntitiesDefaultReadRepository(
+        public EntitiesReadRepositoryDefault(
             IPaginationContext paginationContext,
             FullstackTemplateCoreDbContextRaw dbContext)
         {
@@ -26,7 +26,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             this.dbContext = dbContext;
         }
 
-        public EntityDefaultDto GetEntity(Guid entityId)
+        public EntityDto GetEntity(Guid entityId)
         {
             EfEntity efEntity = dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
@@ -37,10 +37,10 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
                 throw new NotFoundResultException("Entity ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            return EntityDefaultDto.FromEfEntity(efEntity);
+            return EntityDto.FromEfEntity(efEntity);
         }
 
-        public EntityDetailDefaultDto GetEntityDetail(Guid entityId)
+        public EntityDtoExpanded GetEntityDetail(Guid entityId)
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
@@ -51,17 +51,17 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
                 throw new NotFoundResultException("Entity ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            return EntityDetailDefaultDto.FromEfEntity(efEntity);
+            return EntityDtoExpanded.FromEfEntity(efEntity);
         }
 
-        public IDbPagedResult<EntityDetailDefaultDto> GetPagedEntities()
+        public IDbPagedResult<EntityDtoExpanded> GetPagedEntities()
         {
             var efEntities = this.dbContext.Entities;
 
             return Pagination.Execute(
                 efEntities,
                 this.paginationContext,
-                efEntity => EntityDetailDefaultDto.FromEfEntity(efEntity));
+                efEntity => EntityDtoExpanded.FromEfEntity(efEntity));
         }
     }
 }

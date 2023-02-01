@@ -1,13 +1,13 @@
-﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.Persistence
 {
-    internal class EntitiesDefaultReadRepositoryToOneToOneIncludeAddition : RelationSideAdditionToExisitingFileGeneration
+    internal class EntitiesReadRepositoryDefaultToIncludeAddition : RelationSideAdditionToExisitingFileGeneration
     {
-        public EntitiesDefaultReadRepositoryToOneToOneIncludeAddition(IFileSystemClient fileSystemClient, PathService pathService)
+        public EntitiesReadRepositoryDefaultToIncludeAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
         {
         }
@@ -24,6 +24,7 @@ namespace Contractor.Core.Generation.Backend.Generated.Persistence
             stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})");
             stringEditor.MoveToStart();
 
+            string includeLine = $"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})";
             stringEditor.NextThatContains($"GetPaged{relationSide.Entity.NamePlural}(");
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
             stringEditor.NextUntil(line => !line.Contains("Include("));
@@ -34,7 +35,6 @@ namespace Contractor.Core.Generation.Backend.Generated.Persistence
             }
             stringEditor.Next();
 
-            string includeLine = $"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})";
             if (!stringEditor.GetLine().Trim().StartsWith("."))
             {
                 includeLine += ";";

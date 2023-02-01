@@ -1,13 +1,13 @@
-﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.Persistence
 {
-    internal class EntitiesDefaultReadRepositoryFromIncludeAddition : RelationSideAdditionToExisitingFileGeneration
+    internal class EntitiesReadRepositoryDefaultFromIncludeAddition : RelationSideAdditionToExisitingFileGeneration
     {
-        public EntitiesDefaultReadRepositoryFromIncludeAddition(IFileSystemClient fileSystemClient, PathService pathService)
+        public EntitiesReadRepositoryDefaultFromIncludeAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
         {
         }
