@@ -21,7 +21,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             stringEditor.NextUntil(line => line.Trim().Equals("};"));
 
             stringEditor.InsertLine(
-                $"                {relationSide.Name} = Db{relationSide.OtherEntity.Name}\n" +
+                $"                {relationSide.Name} = {relationSide.OtherEntity.Name}Dto\n" +
                 $"                    .FromEf{relationSide.OtherEntity.Name}(ef{relationSide.Entity.Name}.{relationSide.Name}),");
 
             return stringEditor.GetText();

@@ -21,6 +21,13 @@ namespace Contractor.Core.BaseClasses
             string filePath = pathService.GetAbsolutePathForBackend(entity, domainFolder, templateFileName);
             string fileData = fileSystemClient.ReadAllText(entity, templateFilePath);
 
+            if (entity.IdType == "AutoIncrement")
+            {
+                fileData = fileData.Replace(
+                    "public Guid Id { get; set; }",
+                    "public int Id { get; set; }");
+            }
+
             fileSystemClient.WriteAllText(fileData, filePath);
         }
 
@@ -28,6 +35,17 @@ namespace Contractor.Core.BaseClasses
         {
             string filePath = pathService.GetAbsolutePathForBackendGenerated(entity, domainFolder, templateFileName);
             string fileData = fileSystemClient.ReadAllText(entity, templateFilePath);
+
+            if (entity.IdType == "AutoIncrement")
+            {
+                fileData = fileData.Replace(
+                    "public Guid Id { get; set; }",
+                    "public int Id { get; set; }");
+                    
+                fileData = fileData.Replace(
+                    $"(Guid {entity.NameLower}Id)",
+                    $"(int {entity.NameLower}Id)");
+            }
 
             fileSystemClient.WriteAllText(fileData, filePath);
         }

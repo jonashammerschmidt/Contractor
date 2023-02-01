@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Contractor minContractorVersion="2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor.xsd">
+<Contractor minContractorVersion="2.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor.xsd">
   <Paths>
     <BackendDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Core</BackendDestinationFolder>
     <BackendGeneratedDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Generated</BackendGeneratedDestinationFolder>
