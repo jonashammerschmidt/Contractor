@@ -57,7 +57,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "DetailDefaultDto");
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "Dto");
 
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Generated.DTOs.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
@@ -67,7 +67,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "DetailDefaultDto");
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "Dto");
 
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideFrom, GeneratedDTOsProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Generated.DTOs.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
@@ -77,7 +77,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "DetailDefaultDto");
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "Dto");
 
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Generated.DTOs.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");

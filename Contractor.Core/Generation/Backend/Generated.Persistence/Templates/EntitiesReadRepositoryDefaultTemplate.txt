@@ -2,7 +2,7 @@ using Contract.Architecture.Backend.Common;
 using Contract.Architecture.Backend.Common.Contract;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Persistence;
-using ProjectName.Contract.Generated.DTOs.Modules.Domain.Entities;
+using ProjectName.Generated.DTOs.Modules.Domain.Entities;
 using DbProjectName.Persistence.DbContext;
 using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
 using System;
@@ -15,11 +15,11 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
     {
         private readonly IPaginationContext paginationContext;
 
-        private readonly FullstackTemplateCoreDbContextRaw dbContext;
+        private readonly DbContextNameRaw dbContext;
 
         public EntitiesReadRepositoryDefault(
             IPaginationContext paginationContext,
-            FullstackTemplateCoreDbContextRaw dbContext)
+            DbContextNameRaw dbContext)
         {
             this.paginationContext = paginationContext;
 
