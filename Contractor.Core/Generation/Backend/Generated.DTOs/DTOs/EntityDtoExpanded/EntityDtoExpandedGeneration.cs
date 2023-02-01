@@ -1,4 +1,4 @@
-﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
@@ -6,34 +6,34 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_GENERATED, ClassGenerationTag.BACKEND_GENERATED_DTOS })]
-    internal class EntityDetailDefaultDtoGeneration : ClassGeneration
+    internal class EntityDtoExpandedGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDetailDefaultDtoTemplate.txt");
+            Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoExpandedTemplate.txt");
 
-        private static readonly string FileName = "EntityDetailDefaultDto.cs";
+        private static readonly string FileName = "EntityDtoExpanded.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoPropertyAddition propertyAddition;
         private readonly DtoRelationAddition relationAddition;
-        private readonly EntityDetailDefaultDtoMethodsAddition entityDetailDefaultDtoMethodsAddition;
-        private readonly EntityDetailDefaultDtoToMethodsAddition entityDetailDefaultDtoToMethodsAddition;
-        private readonly EntityDetailDefaultDtoFromOneToOneMethodsAddition entityDetailDefaultDtoFromOneToOneMethodsAddition;
+        private readonly EntityDtoExpandedMethodsAddition entityDtoExpandedMethodsAddition;
+        private readonly EntityDtoExpandedToMethodsAddition entityDtoExpandedToMethodsAddition;
+        private readonly EntityDtoExpandedFromOneToOneMethodsAddition entityDtoExpandedFromOneToOneMethodsAddition;
 
-        public EntityDetailDefaultDtoGeneration(
+        public EntityDtoExpandedGeneration(
             EntityCoreAddition entityCoreAddition,
             DtoPropertyAddition propertyAddition,
             DtoRelationAddition relationAddition,
-            EntityDetailDefaultDtoMethodsAddition entityDetailDefaultDtoMethodsAddition,
-            EntityDetailDefaultDtoToMethodsAddition entityDetailDefaultDtoToMethodsAddition,
-            EntityDetailDefaultDtoFromOneToOneMethodsAddition entityDetailDefaultDtoFromOneToOneMethodsAddition)
+            EntityDtoExpandedMethodsAddition entityDtoExpandedMethodsAddition,
+            EntityDtoExpandedToMethodsAddition entityDtoExpandedToMethodsAddition,
+            EntityDtoExpandedFromOneToOneMethodsAddition entityDtoExpandedFromOneToOneMethodsAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.propertyAddition = propertyAddition;
             this.relationAddition = relationAddition;
-            this.entityDetailDefaultDtoMethodsAddition = entityDetailDefaultDtoMethodsAddition;
-            this.entityDetailDefaultDtoToMethodsAddition = entityDetailDefaultDtoToMethodsAddition;
-            this.entityDetailDefaultDtoFromOneToOneMethodsAddition = entityDetailDefaultDtoFromOneToOneMethodsAddition;
+            this.entityDtoExpandedMethodsAddition = entityDtoExpandedMethodsAddition;
+            this.entityDtoExpandedToMethodsAddition = entityDtoExpandedToMethodsAddition;
+            this.entityDtoExpandedFromOneToOneMethodsAddition = entityDtoExpandedFromOneToOneMethodsAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -48,7 +48,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         protected override void AddProperty(Property property)
         {
             this.propertyAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
-            this.entityDetailDefaultDtoMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoExpandedMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -62,7 +62,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Generated.DTOs.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
-            this.entityDetailDefaultDtoToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -72,7 +72,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideFrom, GeneratedDTOsProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Generated.DTOs.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
 
-            this.entityDetailDefaultDtoFromOneToOneMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideFrom, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoExpandedFromOneToOneMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideFrom, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
@@ -82,7 +82,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DtoFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Generated.DTOs.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
-            this.entityDetailDefaultDtoToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
     }
 }

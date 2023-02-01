@@ -1,13 +1,13 @@
-﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    internal class EntityDefaultDtoMethodsAddition : PropertyAdditionToExisitingFileGeneration
+    internal class EntityDtoMethodsAddition : PropertyAdditionToExisitingFileGeneration
     {
-        public EntityDefaultDtoMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
+        public EntityDtoMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
         {
         }

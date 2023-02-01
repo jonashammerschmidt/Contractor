@@ -1,20 +1,20 @@
-﻿using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
+using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
 using System;
 
 namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
 {
-    public class EntityDetailDefaultDto
+    public class EntityDtoExpanded
     {
         public Guid Id { get; set; }
 
-        public static EntityDetailDefaultDto FromEfEntity(EfEntity efEntity)
+        public static EntityDtoExpanded FromEfEntity(EfEntity efEntity)
         {
             if (efEntity == null)
             {
                 return null;
             }
 
-            return new EntityDetailDefaultDto()
+            return new EntityDtoExpanded()
             {
                 Id = efEntity.Id,
             };
