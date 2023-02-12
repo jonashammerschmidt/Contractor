@@ -20,6 +20,23 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
             };
         }
 
+        public static EntityDto FromEntityDtoNoId(Guid id, EntityDtoNoId entity)
+        {
+            return new EntityDto()
+            {
+                Id = id,
+            };
+        }
+
+        public static EfEntity ToEfEntity(EntityDto entity, Guid requestScopeId)
+        {
+            return new EfEntity()
+            {
+                Id = entity.Id,
+                RequestScopeId = requestScopeId,
+            };
+        }
+
         public override string ToString()
         {
             return $"{this.DisplayProperty} ({this.Id})";
