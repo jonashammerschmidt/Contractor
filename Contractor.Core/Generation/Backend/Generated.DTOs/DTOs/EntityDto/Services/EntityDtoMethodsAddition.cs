@@ -17,29 +17,31 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("public " + property.Entity.Name + "Dto(" + property.Entity.Name + "Dto");
             stringEditor.NextUntil(line => line.Trim().Equals("}"));
-
             stringEditor.InsertLine($"            this.{property.Name} = {property.Entity.Name.LowerFirstChar()}.{property.Name};");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("FromEf" + property.Entity.Name);
             stringEditor.NextUntil(line => line.Trim().Equals("};"));
-
             stringEditor.InsertLine($"                {property.Name} = ef{property.Entity.Name}.{property.Name},");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("From" + property.Entity.Name + "DtoNoId");
             stringEditor.NextUntil(line => line.Trim().Equals("};"));
-
             stringEditor.InsertLine($"                {property.Name} = {property.Entity.Name.LowerFirstChar()}.{property.Name},");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("ToEf" + property.Entity.Name);
             stringEditor.NextUntil(line => line.Trim().Equals("};"));
-
             stringEditor.InsertLine($"                {property.Name} = {property.Entity.Name.LowerFirstChar()}.{property.Name},");
+            fileData = stringEditor.GetText();
+
+            stringEditor = new StringEditor(fileData);
+            stringEditor.NextThatContains("UpdateEf" + property.Entity.Name);
+            stringEditor.NextUntil(line => line.Trim().Equals("}"));
+            stringEditor.InsertLine($"            ef{property.Entity.Name}.{property.Name} = {property.Entity.Name.LowerFirstChar()}.{property.Name};");
 
             return stringEditor.GetText();
         }
