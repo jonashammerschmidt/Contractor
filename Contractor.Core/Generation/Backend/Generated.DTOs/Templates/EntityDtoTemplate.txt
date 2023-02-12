@@ -43,6 +43,10 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
             };
         }
 
+        public static void UpdateEfEntity(EfEntity efEntity, EntityDto entity)
+        {
+        }
+
         public override string ToString()
         {
             return $"{this.DisplayProperty} ({this.Id})";
