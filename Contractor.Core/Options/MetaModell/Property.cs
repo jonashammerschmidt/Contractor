@@ -33,6 +33,8 @@ namespace Contractor.Core.MetaModell
 
         public bool IsDisplayProperty { get; set; }
 
+        public bool IsHidden { get; set; }
+
         public int Order { get; set; }
 
         public Entity Entity { get; protected set; }
