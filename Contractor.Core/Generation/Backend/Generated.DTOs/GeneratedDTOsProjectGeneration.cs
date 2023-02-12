@@ -16,9 +16,11 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             serviceCollection.AddSingleton<EntityDtoMethodsAddition>();
 
             serviceCollection.AddSingleton<ClassGeneration, EntityDtoExpandedGeneration>();
-            serviceCollection.AddSingleton<EntityDtoExpandedMethodsAddition >();
-            serviceCollection.AddSingleton<EntityDtoExpandedToMethodsAddition >();
+            serviceCollection.AddSingleton<EntityDtoExpandedMethodsAddition>();
+            serviceCollection.AddSingleton<EntityDtoExpandedToMethodsAddition>();
             serviceCollection.AddSingleton<EntityDtoExpandedFromOneToOneMethodsAddition>();
+
+            serviceCollection.AddSingleton<ClassGeneration, EntityDtoNoIdGeneration>();
         }
     }
 }

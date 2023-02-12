@@ -1,0 +1,9 @@
+using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
+using System;
+
+namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
+{
+    public class EntityDtoNoId
+    {
+    }
+}
