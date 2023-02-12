@@ -48,6 +48,11 @@
                             <xs:documentation xml:lang="de">Optional. Definition, ob diese Property die Display-Property der Entität ist. Diese wird zur Anzeige im Frontend verwendet. Sollte keine Display Property angegeben sein, wird als Fallback eine der folgenden Properties ausgewählt: Bezeichnung, Name, Id. Default: false.</xs:documentation>
                           </xs:annotation>
                         </xs:attribute>
+                        <xs:attribute name="hidden" type="xs:boolean" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Definition, ob diese Property aus den generierten DTOs entfernt werden soll. Default: False.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
                       </xs:complexType>
                     </xs:element>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="Relation1ToN">

@@ -75,6 +75,7 @@ namespace Contractor.CLI
                             Name = property.Name,
                             IsOptional = property.IsOptional,
                             IsDisplayProperty = property.IsDisplayProperty,
+                            IsHidden = property.IsHidden,
                             Order = xmlNodeList.Cast<XmlNode>()
                                 .Select((xmlNode, index) => new { index, xmlNode })
                                 .Where(element => element.xmlNode.Name == "Property")

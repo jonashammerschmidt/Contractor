@@ -39,6 +39,11 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void AddProperty(Property property)
         {
+            if (property.IsHidden)
+            {
+                return;
+            }
+
             this.apiPropertyAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
             this.entityDtoMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }

@@ -26,6 +26,10 @@ namespace Contractor.Core.BaseClasses
                 fileData = fileData.Replace(
                     "public Guid Id { get; set; }",
                     "public int Id { get; set; }");
+                    
+                fileData = fileData.Replace(
+                    $"Guid id",
+                    $"int id");
             }
 
             fileSystemClient.WriteAllText(fileData, filePath);
@@ -45,6 +49,10 @@ namespace Contractor.Core.BaseClasses
                 fileData = fileData.Replace(
                     $"(Guid {entity.NameLower}Id)",
                     $"(int {entity.NameLower}Id)");
+                    
+                fileData = fileData.Replace(
+                    $"Guid id",
+                    $"int id");
             }
 
             fileSystemClient.WriteAllText(fileData, filePath);

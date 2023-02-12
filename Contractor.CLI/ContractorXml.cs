@@ -154,6 +154,9 @@ namespace Contractor.CLI
 
         [XmlAttribute(AttributeName = "displayProperty")]
         public bool IsDisplayProperty { get; set; }
+
+        [XmlAttribute(AttributeName = "hidden")]
+        public bool IsHidden { get; set; }
     }
 
     [XmlRoot(ElementName = "Index")]

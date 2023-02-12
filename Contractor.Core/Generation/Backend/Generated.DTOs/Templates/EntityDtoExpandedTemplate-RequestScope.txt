@@ -7,6 +7,16 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
     {
         public Guid Id { get; set; }
 
+        public Guid RequestScopeId { get; set; }
+
+        public EntityDtoExpanded() { }
+
+        public EntityDtoExpanded(EntityDtoExpanded entity)
+        {
+            this.Id = entity.Id;
+            this.RequestScopeId = entity.RequestScopeId;
+        }
+
         public static EntityDtoExpanded FromEfEntity(EfEntity efEntity)
         {
             if (efEntity == null)
@@ -17,6 +27,7 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
             return new EntityDtoExpanded()
             {
                 Id = efEntity.Id,
+                RequestScopeId = efEntity.RequestScopeId,
             };
         }
 

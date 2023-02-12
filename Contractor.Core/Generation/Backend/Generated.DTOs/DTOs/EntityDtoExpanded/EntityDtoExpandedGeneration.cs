@@ -42,11 +42,17 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DtoFolder, TemplatePath, FileName);
+            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
+            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DtoFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
+            if (property.IsHidden)
+            {
+                return;
+            }
+
             this.propertyAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
             this.entityDtoExpandedMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
