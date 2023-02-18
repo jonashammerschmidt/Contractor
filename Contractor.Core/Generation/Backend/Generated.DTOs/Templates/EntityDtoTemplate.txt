@@ -3,15 +3,20 @@ using System;
 
 namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
 {
-    public class EntityDto
+    public class EntityDto : EntityDtoData
     {
         public Guid Id { get; set; }
 
         public EntityDto() { }
 
-        public EntityDto(EntityDto entity)
+        public EntityDto(EntityDto entityDto)
         {
-            this.Id = entity.Id;
+            this.Id = entityDto.Id;
+        }
+
+        public EntityDto(Guid id, EntityDtoData entityDtoData)
+        {
+            this.Id = id;
         }
 
         public static EntityDto FromEfEntity(EfEntity efEntity)
@@ -27,7 +32,7 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
             };
         }
 
-        public static EntityDto FromEntityDtoData(Guid id, EntityDtoData entity)
+        public static EntityDto FromEntityDtoData(Guid id, EntityDtoData entityDtoData)
         {
             return new EntityDto()
             {
@@ -35,16 +40,12 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
             };
         }
 
-        public static EfEntity ToEfEntity(EntityDto entity)
+        public static EfEntity ToEfEntity(EntityDto entityDto)
         {
             return new EfEntity()
             {
-                Id = entity.Id,
+                Id = entityDto.Id,
             };
-        }
-
-        public static void UpdateEfEntity(EfEntity efEntity, EntityDto entity)
-        {
         }
 
         public override string ToString()

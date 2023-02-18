@@ -1,6 +1,7 @@
 ﻿using Contractor.Core.BaseClasses;
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
+using System;
 
 namespace Contractor.Core.Tools
 {
@@ -28,7 +29,7 @@ namespace Contractor.Core.Tools
                 stringEditor.Prev();
             }
 
-            if (PropertyLine.ContainsProperty(fileData))
+            if (PropertyLine.ContainsProperty(fileData) && stringEditor.GetPrevLine().Trim().Length != 0)
             {
                 stringEditor.InsertNewLine();
             }
@@ -49,6 +50,11 @@ namespace Contractor.Core.Tools
             }
 
             stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(property));
+
+            if (stringEditor.GetLine().Trim() != "}")
+            {
+                stringEditor.InsertNewLine();
+            }
 
             return stringEditor.GetText();
         }

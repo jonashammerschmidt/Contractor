@@ -38,6 +38,8 @@ namespace Contractor.Core.Tools
                 text = text.Replace("requestScope", entity.ScopeEntity.NameLower);
             }
 
+            text = text.Replace("DisplayPropertyFallback", entity.DisplayPropertyFallback);
+            text = text.Replace("displayPropertyFallback", entity.DisplayPropertyFallback.LowerFirstChar());
             text = text.Replace("DisplayProperty", entity.DisplayProperty.Name);
             text = text.Replace("displayProperty", entity.DisplayProperty.NameLower);
             text = text.Replace("entities-kebab", entity.NamePluralKebab);

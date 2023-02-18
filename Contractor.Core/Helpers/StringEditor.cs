@@ -22,6 +22,16 @@ namespace Contractor.Core.Helpers
             return this.lines[lineNumber];
         }
 
+        public string GetPrevLine()
+        {
+            return this.lines[lineNumber - 1];
+        }
+
+        public string GetNextLine()
+        {
+            return this.lines[lineNumber + 1];
+        }
+
         public string GetLineAtOffset(int offset)
         {
             return this.lines[lineNumber + offset];

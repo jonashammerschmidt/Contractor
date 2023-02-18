@@ -73,6 +73,8 @@ namespace Contractor.Core.MetaModell
 
         public Property DisplayProperty { get; set; }
 
+        public string DisplayPropertyFallback { get; set; }
+
         public IEnumerable<Property> Properties { get; set; }
 
         public IEnumerable<Relation1ToN> Relations1ToN { get; set; }
@@ -137,6 +139,19 @@ namespace Contractor.Core.MetaModell
                     IsDisplayProperty = true,
                     Type = "Guid",
                 };
+
+            DisplayPropertyFallback =
+                Properties.FirstOrDefault(property => property.IsDisplayProperty)?.Name ??
+                FindProperty("Bezeichnung", true)?.Name ??
+                FindProperty("Name", true)?.Name ??
+                Properties.FirstOrDefault()?.Name ??
+                (Relations1To1.FirstOrDefault() != null
+                    ? (Relations1To1.FirstOrDefault().PropertyNameFrom ?? Relations1To1.FirstOrDefault().EntityFrom.Name) + "Id" 
+                    : null) ??
+                (Relations1ToN.FirstOrDefault() != null
+                    ? (Relations1ToN.FirstOrDefault().PropertyNameFrom ?? Relations1ToN.FirstOrDefault().EntityFrom.Name) + "Id" 
+                    : null) ??
+                "Id";
         }
 
         public Property FindProperty(string propertyName)

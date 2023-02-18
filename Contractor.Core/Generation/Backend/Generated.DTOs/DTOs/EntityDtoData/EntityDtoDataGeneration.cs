@@ -15,13 +15,16 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly ApiDtoPropertyAddition apiPropertyAddition;
+        private readonly EntityDtoDataMethodsAddition entityDtoDataMethodsAddition;
 
         public EntityDtoDataGeneration(
             EntityCoreAddition entityCoreAddition,
-            ApiDtoPropertyAddition apiPropertyAddition)
+            ApiDtoPropertyAddition apiPropertyAddition,
+            EntityDtoDataMethodsAddition entityDtoDataMethodsAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.apiPropertyAddition = apiPropertyAddition;
+            this.entityDtoDataMethodsAddition = entityDtoDataMethodsAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -30,8 +33,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void AddEntity(Entity entity)
         {
-            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
-            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DtoFolder, templatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DtoFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
@@ -42,6 +44,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             }
 
             this.apiPropertyAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoDataMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -52,6 +55,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
             this.apiPropertyAddition.AddPropertyToBackendGeneratedFile(relationSide, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoDataMethodsAddition.AddPropertyToBackendGeneratedFile(relationSide, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
