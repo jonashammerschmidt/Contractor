@@ -5,5 +5,27 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
 {
     public class EntityDtoData
     {
+        public EntityDtoData() { }
+
+        public EntityDtoData(EntityDtoData entityDtoData)
+        {
+        }
+
+        public static EntityDto ToEntityDto(Guid id, EntityDtoData entityDtoData)
+        {
+            return new EntityDto()
+            {
+                Id = id,
+            };
+        }
+
+        public static void UpdateEfEntity(EfEntity efEntity, EntityDtoData entityDtoData)
+        {
+        }
+
+        public override string ToString()
+        {
+            return $"{this.DisplayPropertyFallback}";
+        }
     }
 }
