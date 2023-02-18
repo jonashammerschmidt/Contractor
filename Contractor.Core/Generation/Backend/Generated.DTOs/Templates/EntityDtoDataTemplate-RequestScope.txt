@@ -3,7 +3,7 @@ using System;
 
 namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
 {
-    public class EntityDtoNoId
+    public class EntityDtoData
     {
     }
 }

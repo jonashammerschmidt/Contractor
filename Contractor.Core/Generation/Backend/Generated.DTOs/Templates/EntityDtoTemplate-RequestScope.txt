@@ -7,11 +7,14 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
     {
         public Guid Id { get; set; }
 
+        public Guid RequestScopeId { get; set; }
+
         public EntityDto() { }
 
         public EntityDto(EntityDto entity)
         {
             this.Id = entity.Id;
+            this.RequestScopeId = entity.RequestScopeId;
         }
 
         public static EntityDto FromEfEntity(EfEntity efEntity)
@@ -24,23 +27,25 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
             return new EntityDto()
             {
                 Id = efEntity.Id,
+                RequestScopeId = efEntity.RequestScopeId,
             };
         }
 
-        public static EntityDto FromEntityDtoNoId(Guid id, EntityDtoNoId entity)
+        public static EntityDto FromEntityDtoData(Guid id, Guid requestScopeId, EntityDtoData entity)
         {
             return new EntityDto()
             {
                 Id = id,
+                RequestScopeId = requestScopeId,
             };
         }
 
-        public static EfEntity ToEfEntity(EntityDto entity, Guid requestScopeId)
+        public static EfEntity ToEfEntity(EntityDto entity)
         {
             return new EfEntity()
             {
                 Id = entity.Id,
-                RequestScopeId = requestScopeId,
+                RequestScopeId = entity.RequestScopeId,
             };
         }
 

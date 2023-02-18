@@ -20,7 +20,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             serviceCollection.AddSingleton<EntityDtoExpandedToMethodsAddition>();
             serviceCollection.AddSingleton<EntityDtoExpandedFromOneToOneMethodsAddition>();
 
-            serviceCollection.AddSingleton<ClassGeneration, EntityDtoNoIdGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EntityDtoDataGeneration>();
         }
     }
 }

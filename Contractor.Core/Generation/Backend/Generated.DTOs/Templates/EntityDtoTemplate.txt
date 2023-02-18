@@ -27,7 +27,7 @@ namespace ProjectName.Generated.DTOs.Modules.Domain.Entities
             };
         }
 
-        public static EntityDto FromEntityDtoNoId(Guid id, EntityDtoNoId entity)
+        public static EntityDto FromEntityDtoData(Guid id, EntityDtoData entity)
         {
             return new EntityDto()
             {
