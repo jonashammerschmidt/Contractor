@@ -1,4 +1,4 @@
-﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
@@ -6,17 +6,17 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_GENERATED, ClassGenerationTag.BACKEND_GENERATED_DTOS })]
-    internal class EntityDtoNoIdGeneration : ClassGeneration
+    internal class EntityDtoDataGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoNoIdTemplate.txt");
+            Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoDataTemplate.txt");
 
-        private static readonly string FileName = "EntityDtoNoId.cs";
+        private static readonly string FileName = "EntityDtoData.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly ApiDtoPropertyAddition apiPropertyAddition;
 
-        public EntityDtoNoIdGeneration(
+        public EntityDtoDataGeneration(
             EntityCoreAddition entityCoreAddition,
             ApiDtoPropertyAddition apiPropertyAddition)
         {

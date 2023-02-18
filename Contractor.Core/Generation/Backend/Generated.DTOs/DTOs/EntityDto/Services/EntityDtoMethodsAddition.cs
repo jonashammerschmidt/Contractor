@@ -27,7 +27,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("From" + property.Entity.Name + "DtoNoId");
+            stringEditor.NextThatContains("From" + property.Entity.Name + "DtoData");
             stringEditor.NextUntil(line => line.Trim().Equals("};"));
             stringEditor.InsertLine($"                {property.Name} = {property.Entity.Name.LowerFirstChar()}.{property.Name},");
             fileData = stringEditor.GetText();
