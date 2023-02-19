@@ -10,6 +10,8 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
     {
         private static readonly string TemplatePath =
             Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoDataTemplate.txt");
+        private static readonly string TemplatePathEmpty =
+            Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoDataTemplate-Empty.txt");
 
         private static readonly string FileName = "EntityDtoData.cs";
 
@@ -33,7 +35,12 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DtoFolder, TemplatePath, FileName);
+            string templatePath = TemplatePath;
+            if (!entity.HasPropertiesOrRelations()) {
+                templatePath = TemplatePathEmpty;
+            }
+
+            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DtoFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
