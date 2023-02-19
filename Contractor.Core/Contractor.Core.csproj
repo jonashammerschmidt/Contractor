@@ -76,7 +76,7 @@
     <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDataTemplate-RequestScope.txt">
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDataTemplate-Empty.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDataTemplate.txt">

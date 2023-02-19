@@ -146,10 +146,10 @@ namespace Contractor.Core.MetaModell
                 FindProperty("Name", true)?.Name ??
                 Properties.FirstOrDefault()?.Name ??
                 (Relations1To1.FirstOrDefault() != null
-                    ? (Relations1To1.FirstOrDefault().PropertyNameFrom ?? Relations1To1.FirstOrDefault().EntityFrom.Name) + "Id" 
+                    ? (Relations1To1.FirstOrDefault().PropertyNameFrom ?? Relations1To1.FirstOrDefault().EntityFrom.Name) + "Id"
                     : null) ??
                 (Relations1ToN.FirstOrDefault() != null
-                    ? (Relations1ToN.FirstOrDefault().PropertyNameFrom ?? Relations1ToN.FirstOrDefault().EntityFrom.Name) + "Id" 
+                    ? (Relations1ToN.FirstOrDefault().PropertyNameFrom ?? Relations1ToN.FirstOrDefault().EntityFrom.Name) + "Id"
                     : null) ??
                 "Id";
         }
@@ -175,6 +175,11 @@ namespace Contractor.Core.MetaModell
             }
 
             return null;
+        }
+
+        public bool HasPropertiesOrRelations()
+        {
+            return this.Properties.Count() + this.Relations1To1.Count() + this.Relations1ToN.Count() > 0;
         }
 
         public override string ToString()
