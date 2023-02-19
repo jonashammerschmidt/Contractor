@@ -51,7 +51,7 @@ namespace Contractor.Core.Tools
 
             stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(property));
 
-            if (stringEditor.GetLine().Trim() != "}")
+            if (stringEditor.GetLine().Trim() != "}" && stringEditor.GetLine().Trim() != "")
             {
                 stringEditor.InsertNewLine();
             }
