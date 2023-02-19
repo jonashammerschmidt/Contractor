@@ -27,12 +27,17 @@ namespace Contractor.Core.Tools
                 stringEditor.Prev();
             }
 
-            if (PropertyLine.ContainsProperty(fileData))
+            if (PropertyLine.ContainsProperty(fileData) && stringEditor.GetPrevLine().Trim().Length != 0)
             {
                 stringEditor.InsertNewLine();
             }
 
             stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(property));
+
+            if (stringEditor.GetLine().Trim() != "}" && stringEditor.GetLine().Trim() != "")
+            {
+                stringEditor.InsertNewLine();
+            }
 
             return stringEditor.GetText();
         }

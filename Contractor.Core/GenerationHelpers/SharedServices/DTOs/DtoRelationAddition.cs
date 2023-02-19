@@ -90,7 +90,7 @@ namespace Contractor.Core.Tools
                 stringEditor.Prev();
             }
 
-            if (PropertyLine.ContainsProperty(fileData))
+            if (PropertyLine.ContainsProperty(fileData) && stringEditor.GetPrevLine().Trim().Length != 0)
             {
                 stringEditor.InsertNewLine();
             }
@@ -100,6 +100,11 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertLine($"        {relationSide.Type}{optionalText} {relationSide.Name} {{ get; set; }}");
             else
                 stringEditor.InsertLine($"        public {relationSide.Type}{optionalText} {relationSide.Name} {{ get; set; }}");
+
+            if (stringEditor.GetLine().Trim() != "}" && stringEditor.GetLine().Trim() != "")
+            {
+                stringEditor.InsertNewLine();
+            }
 
             return stringEditor.GetText();
         }
