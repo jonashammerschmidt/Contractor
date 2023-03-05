@@ -12,6 +12,7 @@ namespace Contractor.Core.Generation.Backend.Generated.Persistence
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, EntitiesReadRepositoryDefaultGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, IEntitiesReadRepositoryDefaultGeneration>();
 
             serviceCollection.AddSingleton<EntitiesReadRepositoryDefaultFromIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesReadRepositoryDefaultToIncludeAddition>();

@@ -1,0 +1,14 @@
+using Contract.Architecture.Backend.Common.Contract.Persistence;
+using System;
+
+namespace ProjectName.Modules.Domain.Entities
+{
+    public interface IEntitiesReadRepositoryDefault
+    {
+        EntityDto GetEntity(Guid entityId);
+
+        EntityDtoExpanded GetEntityDetail(Guid entityId);
+
+        IDbPagedResult<EntityDtoExpanded> GetPagedEntities();
+    }
+}

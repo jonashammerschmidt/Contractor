@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace ProjectName.Modules.Domain.Entities
 {
-    public class EntitiesReadRepositoryDefault
+    public class EntitiesReadRepositoryDefault : IEntitiesReadRepositoryDefault
     {
         private readonly IPaginationContext paginationContext;
 

@@ -82,6 +82,9 @@
     <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDataTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Generation\Backend\Generated.Persistence\Templates\IEntitiesReadRepositoryDefaultTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Generation\Backend\Generated.Persistence\Templates\EntitiesReadRepositoryDefaultTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
