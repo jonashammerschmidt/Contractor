@@ -34,7 +34,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         protected override void AddEntity(Entity entity)
         {
             string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
-            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DtoFolder, templatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DomainFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
@@ -44,7 +44,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                 return;
             }
 
-            this.entityDtoMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -54,7 +54,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSide = RelationSide.FromGuidRelationEndTo(relation);
-            this.entityDtoMethodsAddition.AddPropertyToBackendGeneratedFile(relationSide, GeneratedDTOsProjectGeneration.DtoFolder, FileName);
+            this.entityDtoMethodsAddition.AddPropertyToBackendGeneratedFile(relationSide, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)

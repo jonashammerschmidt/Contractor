@@ -14,7 +14,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
-            fileData = UsingStatements.Add(fileData, $"{relationSide.Entity.Module.Options.Paths.ProjectName}.Generated.DTOs.Modules.{relationSide.OtherEntity.Module.Name}.{relationSide.OtherEntity.NamePlural}");
+            fileData = UsingStatements.Add(fileData, $"{relationSide.Entity.Module.Options.Paths.ProjectName}.Modules.{relationSide.OtherEntity.Module.Name}.{relationSide.OtherEntity.NamePlural}");
 
             StringEditor stringEditor = new StringEditor(fileData);
             stringEditor.NextThatContains("public " + relationSide.Entity.Name + "DtoExpanded(" + relationSide.Entity.Name + "DtoExpanded");

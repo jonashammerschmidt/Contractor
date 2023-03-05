@@ -5,8 +5,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
     internal class GeneratedDTOsProjectGeneration
     {
-        public static readonly string DomainFolder = "DTOs\\Modules\\Domain\\Entities";
-        public static readonly string DtoFolder = DomainFolder + "\\DTOs";
+        public static readonly string DomainFolder = "Modules\\Domain\\Entities\\DTOs";
 
         public static readonly string TemplateFolder = Folder.Executable + @"\Generation\Backend\Generated.DTOs\Templates";
 
