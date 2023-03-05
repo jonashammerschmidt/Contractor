@@ -5,7 +5,7 @@ namespace Contractor.Core.Generation.Backend.Generated.Persistence
 {
     internal class GeneratedPersistenceProjectGeneration
     {
-        public static readonly string DomainFolder = "Persistence\\Modules\\Domain\\Entities";
+        public static readonly string DomainFolder = "Modules\\Domain\\Entities\\Persistence";
 
         public static readonly string TemplateFolder = Folder.Executable + @"\Generation\Backend\Generated.Persistence\Templates";
 
