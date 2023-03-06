@@ -12,9 +12,9 @@ namespace ProjectName.Modules.Domain.Entities
 {
     public class EntitiesReadRepositoryDefault : IEntitiesReadRepositoryDefault
     {
-        private readonly IPaginationContext paginationContext;
+        protected readonly IPaginationContext paginationContext;
 
-        private readonly DbContextNameRaw dbContext;
+        protected readonly DbContextNameRaw dbContext;
 
         public EntitiesReadRepositoryDefault(
             IPaginationContext paginationContext,
