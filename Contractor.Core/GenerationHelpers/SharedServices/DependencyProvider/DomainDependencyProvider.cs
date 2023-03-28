@@ -17,30 +17,30 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void UpdateDependencyProvider(Module module, string projectFolder, string fileName)
+        public void UpdateDependencyProvider(Module module, string fileName)
         {
-            string filePath = GetFilePath(module, projectFolder, fileName);
-            string fileData = UpdateFileData(module, filePath, projectFolder);
+            string filePath = GetFilePath(module, fileName);
+            string fileData = UpdateFileData(module, filePath);
 
             this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
-        private string GetFilePath(Module module, string projectFolder, string fileName)
+        private string GetFilePath(Module module, string fileName)
         {
-            return Path.Combine(module.Options.Paths.BackendDestinationFolder, projectFolder, fileName);
+            return Path.Combine(module.Options.Paths.BackendDestinationFolder, fileName);
         }
 
-        private string UpdateFileData(Module module, string filePath, string projectFolder)
+        private string UpdateFileData(Module module, string filePath)
         {
             string fileData = this.fileSystemClient.ReadAllText(module, filePath);
 
-            fileData = AddStartupMethod(fileData, module, projectFolder);
+            fileData = AddStartupMethod(fileData, module);
             fileData = AddGetStartupMethodCall(fileData, module);
 
             return fileData;
         }
 
-        private string AddStartupMethod(string fileData, Module module, string projectFolder)
+        private string AddStartupMethod(string fileData, Module module)
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
@@ -50,30 +50,12 @@ namespace Contractor.Core.Tools
                 stringEditor.PrevThatContains("}");
 
             stringEditor.PrevThatContains("}");
-            stringEditor.InsertLine(GetStartupMethod(module.Name, projectFolder));
+            stringEditor.InsertNewLine();
+            stringEditor.InsertLine($"        private static void Startup{module.Name}(IServiceCollection services)");
+            stringEditor.InsertLine("        {");
+            stringEditor.InsertLine("        }");
 
             return stringEditor.GetText();
-        }
-
-        private string GetStartupMethod(string moduleName, string projectFolder)
-        {
-            string startupMethod = "";
-            if (projectFolder.Equals("Logic"))
-            {
-                startupMethod = @"
-        private static void StartupDomain(IServiceCollection services)
-        {
-        }";
-            }
-            else if (projectFolder.Equals("Persistence"))
-            {
-                startupMethod = @"
-        private static void StartupDomain(IServiceCollection services)
-        {
-        }";
-            }
-
-            return startupMethod.Replace("Domain", moduleName);
         }
 
         private string AddGetStartupMethodCall(string fileData, Module module)

@@ -2,6 +2,7 @@ using Contract.Architecture.Backend.Common.Contract.Logic;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Logic;
 using Microsoft.Extensions.Logging;
+using ProjectName.Contexts;
 using System;
 
 namespace ProjectName.Modules.Domain.Entities
@@ -11,23 +12,26 @@ namespace ProjectName.Modules.Domain.Entities
         private readonly IEntitiesCrudRepository entitiesCrudRepository;
 
         private readonly IGuidGenerator guidGenerator;
+        private readonly ISessionContext sessionContext;
         private readonly ILogger<EntitiesCrudLogic> logger;
 
         public EntitiesCrudLogic(
             IEntitiesCrudRepository entitiesCrudRepository,
             IGuidGenerator guidGenerator,
+            ISessionContext sessionContext,
             ILogger<EntitiesCrudLogic> logger)
         {
             this.entitiesCrudRepository = entitiesCrudRepository;
 
             this.guidGenerator = guidGenerator;
+            this.sessionContext = sessionContext;
             this.logger = logger;
         }
 
         public Guid CreateEntity(EntityDtoData entityDtoData)
         {
             Guid newEntityId = this.guidGenerator.NewGuid();
-            EntityDto entityToCreate = EntityDtoData.ToEntityDto(newEntityId, entityDtoData);
+            EntityDto entityToCreate = EntityDto.FromEntityDtoData(newEntityId, this.sessionContext.RequestScopeId, entityDtoData);
             this.entitiesCrudRepository.CreateEntity(entityToCreate);
 
             this.logger.LogInformation("Entity ({id}) angelegt", newEntityId);

@@ -2,14 +2,13 @@
 using Contract.Architecture.Backend.Common.Contract;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Persistence;
-using ProjectName.Contract.Persistence.Modules.Domain.Entities;
 using DbProjectName.Persistence.DbContext;
 using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectName.Persistence.Modules.Domain.Entities
+namespace ProjectName.Modules.Domain.Entities
 {
     internal class EntitiesCrudRepository : IEntitiesCrudRepository
     {
@@ -26,9 +25,9 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             this.dbContext = dbContext;
         }
 
-        public void CreateEntity(IDbEntity dbEntity)
+        public void CreateEntity(EntityDto entity)
         {
-            EfEntity efEntity = DbEntity.ToEfEntity(dbEntity);
+            EfEntity efEntity = EntityDto.ToEfEntity(entity);
 
             this.dbContext.Entities.Add(efEntity);
             this.dbContext.SaveChanges();
@@ -49,7 +48,7 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
             this.dbContext.SaveChanges();
         }
 
-        public IDbEntity GetEntity(Guid entityId)
+        public EntityDto GetEntity(Guid entityId)
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
@@ -60,10 +59,10 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
                 throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            return DbEntity.FromEfEntity(efEntity);
+            return EntityDto.FromEfEntity(efEntity);
         }
 
-        public IDbEntityDetail GetEntityDetail(Guid entityId)
+        public EntityDtoExpanded GetEntityDetail(Guid entityId)
         {
             EfEntity efEntity = this.dbContext.Entities
                 .Where(efEntity => efEntity.Id == entityId)
@@ -74,31 +73,31 @@ namespace ProjectName.Persistence.Modules.Domain.Entities
                 throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            return DbEntityDetail.FromEfEntity(efEntity);
+            return EntityDtoExpanded.FromEfEntity(efEntity);
         }
 
-        public IDbPagedResult<IDbEntityListItem> GetPagedEntities()
+        public IDbPagedResult<EntityDtoExpanded> GetPagedEntities()
         {
             var efEntities = this.dbContext.Entities;
 
             return Pagination.Execute(
                 efEntities,
                 this.paginationContext,
-                efEntity => DbEntityListItem.FromEfEntity(efEntity));
+                efEntity => EntityDtoExpanded.FromEfEntity(efEntity));
         }
 
-        public void UpdateEntity(IDbEntityUpdate dbEntityUpdate)
+        public void UpdateEntity(EntityDto entity)
         {
             EfEntity efEntity = this.dbContext.Entities
-                .Where(efEntity => efEntity.Id == dbEntityUpdate.Id)
+                .Where(efEntity => efEntity.Id == entity.Id)
                 .SingleOrDefault();
 
             if (efEntity == null)
             {
-                throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", dbEntityUpdate.Id);
+                throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entity.Id);
             }
 
-            DbEntity.UpdateEfEntity(efEntity, dbEntityUpdate);
+            EntityDto.UpdateEfEntity(efEntity, entity);
 
             this.dbContext.SaveChanges();
         }
