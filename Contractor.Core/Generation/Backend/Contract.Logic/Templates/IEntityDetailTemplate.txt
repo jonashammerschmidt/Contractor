@@ -1,9 +1,0 @@
-﻿using System;
-
-namespace ProjectName.Contract.Logic.Modules.Domain.Entities
-{
-    public interface IEntityDetail
-    {
-        Guid Id { get; set; }
-    }
-}

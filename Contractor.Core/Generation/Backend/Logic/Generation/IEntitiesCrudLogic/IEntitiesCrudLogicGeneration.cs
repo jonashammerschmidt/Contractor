@@ -2,19 +2,19 @@
 using Contractor.Core.MetaModell;
 using System.IO;
 
-namespace Contractor.Core.Generation.Backend.Contract.Persistence
+namespace Contractor.Core.Generation.Backend.Logic
 {
-    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_CONTRACT_PERSISTENCE })]
-    internal class IEntitiesCrudRepositoryGeneration : ClassGeneration
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_CONTRACT_LOGIC })]
+    internal class IEntitiesCrudLogicGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(ContractPersistenceProjectGeneration.TemplateFolder, "IEntitiesCrudRepositoryTemplate.txt");
+            Path.Combine(LogicProjectGeneration.TemplateFolder, "IEntitiesCrudLogicTemplate.txt");
 
-        private static readonly string FileName = "IEntitiesCrudRepository.cs";
+        private static readonly string FileName = "IEntitiesCrudLogic.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
 
-        public IEntitiesCrudRepositoryGeneration(
+        public IEntitiesCrudLogicGeneration(
             EntityCoreAddition entityCoreAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
@@ -26,7 +26,7 @@ namespace Contractor.Core.Generation.Backend.Contract.Persistence
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToBackend(entity, ContractPersistenceProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, LogicProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

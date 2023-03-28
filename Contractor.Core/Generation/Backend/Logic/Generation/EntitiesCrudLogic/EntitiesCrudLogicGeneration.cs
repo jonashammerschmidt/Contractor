@@ -1,5 +1,6 @@
 ﻿using Contractor.Core.BaseClasses;
 using Contractor.Core.MetaModell;
+using Contractor.Core.Tools;
 using System.IO;
 
 namespace Contractor.Core.Generation.Backend.Logic
@@ -26,7 +27,8 @@ namespace Contractor.Core.Generation.Backend.Logic
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToBackend(entity, LogicProjectGeneration.DomainFolder, TemplatePath, FileName);
+            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
+            this.entityCoreAddition.AddEntityToBackend(entity, LogicProjectGeneration.DomainFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

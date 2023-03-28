@@ -1,13 +1,12 @@
 ﻿using Contract.Architecture.Backend.Common.API;
-using Contract.Architecture.Backend.Common.Contract.Logic;
+using Contract.Architecture.Backend.Common.Contract.Persistence;
 using ProjectName.API.Security.Authorization;
-using ProjectName.Contract.Logic.Modules.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace ProjectName.API.Modules.Domain.Entities
+namespace ProjectName.Modules.Domain.Entities
 {
     [ApiController]
     [Route("domain-kebab/entities-kebab")]
@@ -24,7 +23,7 @@ namespace ProjectName.API.Modules.Domain.Entities
         [Authorized]
         [SwaggerOperation(Summary = "Get EntitiesReadable with Pagination", Tags = new[] { "Domain" })]
         [Pagination(FilterFields = new[] { "DisplayProperty" }, SortFields = new[] { "DisplayProperty" })]
-        public ActionResult<IPagedResult<IEntityListItem>> GetPagedEntities()
+        public ActionResult<IDbPagedResult<EntityDtoExpanded>> GetPagedEntities()
         {
             return this.Ok(this.entitiesCrudLogic.GetPagedEntities());
         }
@@ -33,7 +32,7 @@ namespace ProjectName.API.Modules.Domain.Entities
         [Authorized]
         [Route("{entityId}")]
         [SwaggerOperation(Summary = "Get EntityReadable by Id", Tags = new[] { "Domain" })]
-        public ActionResult<IEntityDetail> GetEntityDetail(Guid entityId)
+        public ActionResult<EntityDtoExpanded> GetEntityDetail(Guid entityId)
         {
             return this.Ok(this.entitiesCrudLogic.GetEntityDetail(entityId));
         }
@@ -41,17 +40,17 @@ namespace ProjectName.API.Modules.Domain.Entities
         [HttpPost]
         [Authorized]
         [SwaggerOperation(Summary = "Create EntityReadable", Tags = new[] { "Domain" })]
-        public ActionResult<DataBody<Guid>> CreateEntity([FromBody] EntityCreate entityCreate)
+        public ActionResult<DataBody<Guid>> CreateEntity([FromBody] EntityDtoData entity)
         {
-            return this.Ok(new DataBody<Guid>(this.entitiesCrudLogic.CreateEntity(entityCreate)));
+            return this.Ok(new DataBody<Guid>(this.entitiesCrudLogic.CreateEntity(entity)));
         }
 
         [HttpPut]
         [Authorized]
         [SwaggerOperation(Summary = "Update EntityReadable", Tags = new[] { "Domain" })]
-        public ActionResult UpdateEntity([FromBody] EntityUpdate entityUpdate)
+        public ActionResult UpdateEntity([FromBody] EntityDto entity)
         {
-            this.entitiesCrudLogic.UpdateEntity(entityUpdate);
+            this.entitiesCrudLogic.UpdateEntity(entity);
             return this.Ok();
         }
 

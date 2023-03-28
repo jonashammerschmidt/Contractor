@@ -1,0 +1,21 @@
+using Contract.Architecture.Backend.Common.Contract.Persistence;
+using System;
+using System.Collections.Generic;
+
+namespace ProjectName.Modules.Domain.Entities
+{
+    public interface IEntitiesCrudRepository
+    {
+        void CreateEntity(EntityDto entity);
+
+        void DeleteEntity(Guid entityId);
+
+        EntityDto GetEntity(Guid entityId);
+
+        EntityDtoExpanded GetEntityDetail(Guid entityId);
+
+        IDbPagedResult<EntityDtoExpanded> GetPagedEntities();
+
+        void UpdateEntity(EntityDto entity);
+    }
+}

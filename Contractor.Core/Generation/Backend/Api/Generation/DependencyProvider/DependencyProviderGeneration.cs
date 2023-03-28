@@ -1,17 +1,17 @@
 ﻿using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
-namespace Contractor.Core.Generation.Backend.Logic
+namespace Contractor.Core.Generation.Backend.Api
 {
-    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_LOGIC })]
-    internal class LogicDependencyProviderGeneration : ClassGeneration
+    [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND })]
+    internal class DependencyProviderGeneration : ClassGeneration
     {
-        private static readonly string FileName = "DependencyProvider.cs";
+        private static readonly string FileName = @"API\DependencyProvider.cs";
 
         private readonly DomainDependencyProvider domainDependencyProvider;
         private readonly EntityCoreDependencyProvider entityCoreDependencyProvider;
 
-        public LogicDependencyProviderGeneration(
+        public DependencyProviderGeneration(
             DomainDependencyProvider domainDependencyProvider,
             EntityCoreDependencyProvider entityCoreDependencyProvider)
         {
@@ -21,12 +21,12 @@ namespace Contractor.Core.Generation.Backend.Logic
 
         protected override void AddModuleActions(Module module)
         {
-            this.domainDependencyProvider.UpdateDependencyProvider(module, LogicProjectGeneration.ProjectFolder, FileName);
+            this.domainDependencyProvider.UpdateDependencyProvider(module, FileName);
         }
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreDependencyProvider.UpdateDependencyProvider(entity, LogicProjectGeneration.ProjectFolder, FileName);
+            this.entityCoreDependencyProvider.UpdateDependencyProvider(entity, FileName);
         }
 
         protected override void AddProperty(Property property)

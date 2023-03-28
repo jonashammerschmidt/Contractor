@@ -18,39 +18,35 @@ namespace Contractor.Core.Tools
             this.pathService = pathService;
         }
 
-        public void UpdateDependencyProvider(Entity entity, string projectFolder, string fileName)
+        public void UpdateDependencyProvider(Entity entity, string fileName)
         {
-            string filePath = GetFilePath(entity, projectFolder, fileName);
-            string fileData = UpdateFileData(entity, filePath, projectFolder);
+            string filePath = GetFilePath(entity, fileName);
+            string fileData = UpdateFileData(entity, filePath);
 
             this.fileSystemClient.WriteAllText(fileData, filePath);
         }
 
-        private string GetFilePath(Entity entity, string projectFolder, string fileName)
+        private string GetFilePath(Entity entity, string fileName)
         {
-            return Path.Combine(entity.Module.Options.Paths.BackendDestinationFolder, projectFolder, fileName);
+            return Path.Combine(entity.Module.Options.Paths.BackendDestinationFolder, fileName);
         }
 
-        private string UpdateFileData(Entity entity, string filePath, string projectFolder)
+        private string UpdateFileData(Entity entity, string filePath)
         {
             string fileData = this.fileSystemClient.ReadAllText(entity, filePath);
 
-            fileData = AddServices(fileData, entity, projectFolder);
+            fileData = AddServices(fileData, entity);
 
             return fileData;
         }
 
-        private string AddServices(string fileData, Entity entity, string projectFolder)
+        private string AddServices(string fileData, Entity entity)
         {
-            string contractNamespace = GetContractNamespace(entity, projectFolder);
-            fileData = UsingStatements.Add(fileData, contractNamespace);
-
-            string projectNamespace = GetProjectNamespace(entity, projectFolder);
+            string projectNamespace = $"{entity.Module.Options.Paths.ProjectName}.Modules.{entity.Module.Name}.{entity.NamePlural}";
             fileData = UsingStatements.Add(fileData, projectNamespace);
 
             // Insert into Startup-Method
             StringEditor stringEditor = new StringEditor(fileData);
-            string addScopedStatement = GetAddScopedStatement(entity.NamePlural, projectFolder);
             stringEditor.NextThatContains($"void Startup{entity.Module.Name}");
             stringEditor.Next();
             stringEditor.NextThatContains("}");
@@ -60,51 +56,10 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertNewLine();
             }
             stringEditor.InsertLine($"            // {entity.NamePlural}");
-            stringEditor.InsertLine(addScopedStatement);
+            stringEditor.InsertLine($"            services.AddScoped<I{entity.NamePlural}CrudLogic, {entity.NamePlural}CrudLogic>();");
+            stringEditor.InsertLine($"            services.AddScoped<I{entity.NamePlural}CrudRepository, {entity.NamePlural}CrudRepository>();");
 
             return stringEditor.GetText();
-        }
-
-        private string GetContractNamespace(Entity entity, string projectFolder)
-        {
-            if (projectFolder.Equals("Logic"))
-            {
-                return $"{entity.Module.Options.Paths.ProjectName}.Contract.Logic.Modules.{entity.Module.Name}.{entity.NamePlural}";
-            }
-            else if (projectFolder.Equals("Persistence"))
-            {
-                return $"{entity.Module.Options.Paths.ProjectName}.Contract.Persistence.Modules.{entity.Module.Name}.{entity.NamePlural}";
-            }
-
-            throw new ArgumentException("Argument 'projectFolder' invalid");
-        }
-
-        private string GetProjectNamespace(Entity entity, string projectFolder)
-        {
-            if (projectFolder.Equals("Logic"))
-            {
-                return $"{entity.Module.Options.Paths.ProjectName}.Logic.Modules.{entity.Module.Name}.{entity.NamePlural}";
-            }
-            else if (projectFolder.Equals("Persistence"))
-            {
-                return $"{entity.Module.Options.Paths.ProjectName}.Persistence.Modules.{entity.Module.Name}.{entity.NamePlural}";
-            }
-
-            throw new ArgumentException("Argument 'projectFolder' invalid");
-        }
-
-        private string GetAddScopedStatement(string entityNamePlural, string projectFolder)
-        {
-            if (projectFolder.Equals("Logic"))
-            {
-                return $"            services.AddScoped<I{entityNamePlural}CrudLogic, {entityNamePlural}CrudLogic>();";
-            }
-            else if (projectFolder.Equals("Persistence"))
-            {
-                return $"            services.AddScoped<I{entityNamePlural}CrudRepository, {entityNamePlural}CrudRepository>();";
-            }
-
-            throw new ArgumentException("Argument 'projectFolder' invalid");
         }
     }
 }

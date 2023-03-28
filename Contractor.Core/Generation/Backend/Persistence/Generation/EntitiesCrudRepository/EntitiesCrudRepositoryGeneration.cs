@@ -42,8 +42,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
         protected override void AddEntity(Entity entity)
         {
-            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
-            this.entityCoreAddition.AddEntityToBackend(entity, PersistenceProjectGeneration.DomainFolder, templatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackend(entity, PersistenceProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

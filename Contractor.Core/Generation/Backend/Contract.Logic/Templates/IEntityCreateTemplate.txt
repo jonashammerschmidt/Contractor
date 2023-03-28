@@ -1,6 +1,0 @@
-﻿namespace ProjectName.Contract.Logic.Modules.Domain.Entities
-{
-    public interface IEntityCreate
-    {
-    }
-}

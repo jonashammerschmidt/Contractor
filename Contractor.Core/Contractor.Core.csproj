@@ -25,45 +25,6 @@
     <None Update="Generation\Backend\Api\Templates\EntitiesCrudControllerTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Api\Templates\EntityCreateTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Api\Templates\EntityUpdateTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityCreateTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityDetailTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityListItemTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Logic\Templates\IEntitiesCrudLogicTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Logic\Templates\IEntityUpdateTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Persistence\Templates\IDbEntityDetailTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Persistence\Templates\IDbEntityListItemTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Persistence\Templates\IDbEntityUpdateTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Persistence\Templates\IDbEntityTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Contract.Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoExpandedTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -88,64 +49,19 @@
     <None Update="Generation\Backend\Generated.Persistence\Templates\EntitiesReadRepositoryDefaultTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Logic\Templates\DbEntityUpdateTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Logic\Templates\EntityListItemTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence.Tests\Templates\DbEntityListItemTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence.Tests\Templates\DbEntityUpdateTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence\Templates\DbEntityListItemTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Logic\Templates\DbEntityTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Logic\Templates\EntityDetailTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Logic\Templates\EntityTemplate.txt">
+    <None Update="Generation\Backend\Logic\Templates\EntitiesCrudLogicTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Backend\Logic\Templates\EntitiesCrudLogicTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Persistence.Tests\Templates\DbEntityTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence.Tests\Templates\DbEntityDetailTestTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence.Tests\Templates\EntityTestValuesTemplate-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence.Tests\Templates\EntityTestValuesTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence.Tests\Templates\EntitiesCrudRepositoryTestsTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence\Templates\DbEntityDetailTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence\Templates\DbEntityTemplate-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence\Templates\DbEntityTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate-RequestScope.txt">
+    <None Update="Generation\Backend\Logic\Templates\IEntitiesCrudLogicTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Generation\Backend\Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Backend\_Misc\Templates\E2ePostmanTemplate.txt">

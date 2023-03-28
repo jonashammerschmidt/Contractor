@@ -1,0 +1,18 @@
+﻿using Contract.Architecture.Backend.Common.Contract.Persistence;
+using System;
+
+namespace ProjectName.Modules.Domain.Entities
+{
+    public interface IEntitiesCrudLogic
+    {
+        Guid CreateEntity(EntityDtoData entityCreate);
+
+        void DeleteEntity(Guid entityId);
+
+        EntityDtoExpanded GetEntityDetail(Guid entityId);
+
+        IDbPagedResult<EntityDtoExpanded> GetPagedEntities();
+
+        void UpdateEntity(EntityDto entityUpdate);
+    }
+}

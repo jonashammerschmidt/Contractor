@@ -1,9 +1,0 @@
-﻿using System;
-
-namespace ProjectName.Contract.Persistence.Modules.Domain.Entities
-{
-    public interface IDbEntityListItem
-    {
-        Guid Id { get; set; }
-    }
-}
