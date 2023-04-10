@@ -66,7 +66,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "Dto");
 
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName,
-                $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
+                $"{relationSideTo.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
             this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }
@@ -76,7 +76,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "Dto");
 
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideFrom, GeneratedDTOsProjectGeneration.DomainFolder, FileName,
-                $"{relationSideFrom.Entity.Module.Options.Paths.ProjectName}.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+                $"{relationSideFrom.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
 
             this.entityDtoExpandedFromOneToOneMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideFrom, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }
@@ -86,7 +86,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "", "Dto");
 
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName,
-                $"{relationSideTo.Entity.Module.Options.Paths.ProjectName}.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
+                $"{relationSideTo.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
             this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }

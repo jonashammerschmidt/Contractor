@@ -1,7 +1,7 @@
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using System;
 
-namespace ProjectName.Modules.Domain.Entities
+namespace GeneratedProjectName.Modules.Domain.Entities
 {
     public interface IEntitiesReadRepositoryDefault
     {

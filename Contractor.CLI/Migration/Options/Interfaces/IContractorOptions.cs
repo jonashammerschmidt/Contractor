@@ -12,6 +12,8 @@ namespace Contractor.CLI.Migration
 
         string ProjectName { get; set; }
 
+        string GeneratedProjectName { get; set; }
+
         string DbProjectName { get; set; }
 
         Dictionary<string, string> Replacements { get; set; }

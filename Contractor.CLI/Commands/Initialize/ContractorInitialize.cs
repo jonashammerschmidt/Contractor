@@ -82,7 +82,15 @@ namespace Contractor.CLI
                 defaultOptions.Paths.ProjectName = userProjectName;
             }
 
-            // ProjectName
+            // GeneratedProjectName
+            System.Console.WriteLine($"Wie heißt das Generated-Backend-Projekt? (Empty = {defaultOptions.Paths.GeneratedProjectName})");
+            var userGeneratedProjectName = System.Console.ReadLine().Trim();
+            if (userGeneratedProjectName.Length > 0)
+            {
+                defaultOptions.Paths.GeneratedProjectName = userGeneratedProjectName;
+            }
+
+            // DbProjectName
             System.Console.WriteLine($"Wie heißt das Datenbank-Projekt? (Empty = {defaultOptions.Paths.DbProjectName})");
             var userDbProjectName = System.Console.ReadLine().Trim();
             if (userDbProjectName.Length > 0)

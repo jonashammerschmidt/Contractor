@@ -17,6 +17,7 @@ namespace Contractor.CLI
                     DbDestinationFolder = bestDbDestinationFolder,
                     FrontendDestinationFolder = FindBestFrontendDestinationFolder(currentFolder),
                     ProjectName = new DirectoryInfo(currentFolder).Name,
+                    GeneratedProjectName = new DirectoryInfo(currentFolder).Name,
                     DbProjectName = new DirectoryInfo(bestDbDestinationFolder).Name,
                     DbContextName = "FullstackTemplateCoreDbContext"
                 },

@@ -22,6 +22,7 @@ namespace Contractor.CLI
                     DbDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.DbDestinationFolder)),
                     FrontendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.FrontendDestinationFolder)),
                     ProjectName = contractorXml.Paths.ProjectName,
+                    GeneratedProjectName = contractorXml.Paths.GeneratedProjectName,
                     DbProjectName = contractorXml.Paths.DbProjectName,
                     DbContextName = contractorXml.Paths.DbContextName,
                 },

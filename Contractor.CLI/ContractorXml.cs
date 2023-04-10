@@ -48,6 +48,9 @@ namespace Contractor.CLI
         [XmlElement(ElementName = "ProjectName")]
         public string ProjectName { get; set; }
 
+        [XmlElement(ElementName = "GeneratedProjectName")]
+        public string GeneratedProjectName { get; set; }
+
         [XmlElement(ElementName = "DbProjectName")]
         public string DbProjectName { get; set; }
 

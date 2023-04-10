@@ -67,10 +67,10 @@
     <None Update="Generation\Backend\_Misc\Templates\E2ePostmanTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Database\Persistence.DbContext\Templates\EfEntityTemplate-RequestScope.txt">
+    <None Update="Generation\Database\Generated.DbContext\Templates\EfEntityTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Database\Persistence.DbContext\Templates\EfEntityTemplate.txt">
+    <None Update="Generation\Database\Generated.DbContext\Templates\EfEntityTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Frontend\Model\Templates\api-entity-kebab-create.template.txt">

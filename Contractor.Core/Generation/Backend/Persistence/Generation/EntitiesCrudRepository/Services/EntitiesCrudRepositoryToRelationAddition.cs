@@ -20,7 +20,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
             }
 
             fileData = UsingStatements.Add(fileData,
-                $"{relationSide.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSide.RelationBeforePreProcessor.EntityFrom.Module.Name}.{relationSide.RelationBeforePreProcessor.EntityFrom.NamePlural}");
+                $"{relationSide.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSide.RelationBeforePreProcessor.EntityFrom.Module.Name}.{relationSide.RelationBeforePreProcessor.EntityFrom.NamePlural}");
 
             StringEditor stringEditor = new StringEditor(fileData);
 
