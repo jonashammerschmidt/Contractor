@@ -4,7 +4,7 @@ using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 
-namespace Contractor.Core.Generation.Database.Persistence.DbContext
+namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class EfEntityGeneration : ClassGeneration
@@ -55,7 +55,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "virtual ICollection<Ef", ">");
 
             this.relationAddition.AddRelationToDTOForDatabase(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
-                $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+                $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
 
             this.efDtoContructorHashSetAddition.Add(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName);
         }
@@ -67,7 +67,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
 
             RelationSide relationSideToEfObject = RelationSide.FromObjectRelationEndTo(relation, "virtual Ef", "");
             this.relationAddition.AddRelationToDTOForDatabase(relationSideToEfObject, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
-                $"{relationSideToEfObject.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSideToEfObject.OtherEntity.Module.Name}.{relationSideToEfObject.OtherEntity.NamePlural}");
+                $"{relationSideToEfObject.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideToEfObject.OtherEntity.Module.Name}.{relationSideToEfObject.OtherEntity.NamePlural}");
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -75,7 +75,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "virtual Ef", "");
 
             this.relationAddition.AddRelationToDTOForDatabase(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
-                $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+                $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
@@ -85,7 +85,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
 
             RelationSide relationSideToEfObject = RelationSide.FromObjectRelationEndTo(relation, "virtual Ef", "");
             this.relationAddition.AddRelationToDTOForDatabase(relationSideToEfObject, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
-                $"{relationSideToEfObject.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSideToEfObject.OtherEntity.Module.Name}.{relationSideToEfObject.OtherEntity.NamePlural}");
+                $"{relationSideToEfObject.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideToEfObject.OtherEntity.Module.Name}.{relationSideToEfObject.OtherEntity.NamePlural}");
         }
 
         protected override void PostGeneration(Entity entity)
@@ -95,7 +95,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
                 RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(entity, scopedEntity, "virtual ICollection<Ef", ">");
 
                 this.relationAddition.AddRelationToDTOForDatabase(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
-                    $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
+                    $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
             }
         }
     }

@@ -3,7 +3,7 @@ using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.Linq;
 
-namespace Contractor.Core.Generation.Database.Persistence.DbContext
+namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
     internal class DbContextEntityAddition
     {
@@ -20,7 +20,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
 
         public void Add(Entity entity)
         {
-            string filePath = this.pathService.GetAbsolutePathForDatabase(entity, $"DbContext\\{entity.Module.Options.Paths.DbContextName}Raw.cs");
+            string filePath = this.pathService.GetAbsolutePathForDatabase(entity, $"Generated.DbContext\\{entity.Module.Options.Paths.DbContextName}Raw.cs");
             string fileData = UpdateFileData(entity, filePath);
 
             this.fileSystemClient.WriteAllText(fileData, filePath);
@@ -30,7 +30,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
         {
             string fileData = this.fileSystemClient.ReadAllText(entity, filePath);
 
-            string usingStatement = $"{entity.Module.Options.Paths.DbProjectName}.Persistence.DbContext.Modules.{entity.Module.Name}.{entity.NamePlural}";
+            string usingStatement = $"{entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{entity.Module.Name}.{entity.NamePlural}";
             fileData = UsingStatements.Add(fileData, usingStatement);
 
             StringEditor stringEditor = new StringEditor(fileData);

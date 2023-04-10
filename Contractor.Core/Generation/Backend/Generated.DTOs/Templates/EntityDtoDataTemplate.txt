@@ -1,7 +1,7 @@
-using DbProjectName.Persistence.DbContext.Modules.Domain.Entities;
+using DbProjectName.Generated.DbContext.Modules.Domain.Entities;
 using System;
 
-namespace ProjectName.Modules.Domain.Entities
+namespace GeneratedProjectName.Modules.Domain.Entities
 {
     public class EntityDtoData
     {

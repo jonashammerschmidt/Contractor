@@ -11,6 +11,7 @@ namespace Contractor.Core.Tools
         {
             text = text.Replace("DbContextName", options.Paths.DbContextName);
             text = text.Replace("DbProjectName", options.Paths.DbProjectName);
+            text = text.Replace("GeneratedProjectName", options.Paths.GeneratedProjectName);
             text = text.Replace("ProjectName", options.Paths.ProjectName);
 
             return text;

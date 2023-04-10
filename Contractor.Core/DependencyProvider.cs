@@ -5,7 +5,7 @@ using Contractor.Core.Generation.Backend.Generated.Persistence;
 using Contractor.Core.Generation.Backend.Logic;
 using Contractor.Core.Generation.Backend.Misc;
 using Contractor.Core.Generation.Backend.Persistence;
-using Contractor.Core.Generation.Database.Persistence.DbContext;
+using Contractor.Core.Generation.Database.Generated.DbContext;
 using Contractor.Core.Generation.Database.Persistence.InsertData.Dev;
 using Contractor.Core.Generation.Frontend.Model;
 using Contractor.Core.Generation.Frontend.Pages;

@@ -1,6 +1,6 @@
 ﻿using Contractor.Core.MetaModell;
 
-namespace Contractor.Core.Generation.Database.Persistence.DbContext
+namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
     internal class DbContextGeneration : ClassGeneration
@@ -33,7 +33,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
 
         protected override void AddProperty(Property property)
         {
-            this.dbContextPropertyAddition.AddPropertyToDatabaseFile(property, "DbContext", $"DbContextNameRaw.cs");
+            this.dbContextPropertyAddition.AddPropertyToDatabaseFile(property, "Generated.DbContext", $"DbContextNameRaw.cs");
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -43,7 +43,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "Ef", "");
-            this.dbContextRelationToAddition.AddRelationSideToDatabaseFile(relationSideTo, "DbContext", "DbContextNameRaw.cs");
+            this.dbContextRelationToAddition.AddRelationSideToDatabaseFile(relationSideTo, "Generated.DbContext", "DbContextNameRaw.cs");
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -53,7 +53,7 @@ namespace Contractor.Core.Generation.Database.Persistence.DbContext
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "Ef", "");
-            this.dbContextRelationToOneToOneAddition.AddRelationSideToDatabaseFile(relationSideTo, "DbContext", "DbContextNameRaw.cs");
+            this.dbContextRelationToOneToOneAddition.AddRelationSideToDatabaseFile(relationSideTo, "Generated.DbContext", "DbContextNameRaw.cs");
         }
     }
 }

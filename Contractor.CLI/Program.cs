@@ -165,6 +165,7 @@ namespace Contractor.CLI
             contractorXml.Paths.BackendDestinationFolder = contractorOptions.BackendDestinationFolder;
             contractorXml.Paths.FrontendDestinationFolder = contractorOptions.DbProjectName;
             contractorXml.Paths.DbDestinationFolder = contractorOptions.DbProjectName;
+            contractorXml.Paths.GeneratedProjectName = contractorOptions.DbProjectName;
             contractorXml.Paths.DbProjectName = contractorOptions.DbProjectName;
             contractorXml.Paths.DbContextName = String.Empty;
 

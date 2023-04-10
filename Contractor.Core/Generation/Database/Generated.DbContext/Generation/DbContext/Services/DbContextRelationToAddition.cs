@@ -3,7 +3,7 @@ using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
-namespace Contractor.Core.Generation.Database.Persistence.DbContext
+namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
     internal class DbContextRelationToAddition : RelationSideAdditionToExisitingFileGeneration
     {

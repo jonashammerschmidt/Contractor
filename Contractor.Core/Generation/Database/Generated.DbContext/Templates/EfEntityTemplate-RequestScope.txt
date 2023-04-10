@@ -1,7 +1,6 @@
-﻿using DbProjectName.Persistence.DbContext;
-using DbProjectName.Persistence.DbContext.Modules.RequestScopeDomain.RequestScopes;
+﻿using DbProjectName.Generated.DbContext.Modules.RequestScopeDomain.RequestScopes;
 
-namespace DbProjectName.Persistence.DbContext.Modules.Domain.Entities
+namespace DbProjectName.Generated.DbContext.Modules.Domain.Entities
 {
     public class EfEntity : IEfRequestScopeGetrennt
     {
