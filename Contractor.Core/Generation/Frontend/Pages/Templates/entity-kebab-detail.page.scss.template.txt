@@ -17,6 +17,12 @@
     a mat-icon {
         transform: translateY(2px);
     }
+    
+    .entity-kebab-update-form {
+        background-color: #edf1f5;
+        padding: 1px 9px;
+        min-height: calc(100% - 2px);
+    }
 
     mat-tab-group {
         width: calc(var(--content-width) - 20px);

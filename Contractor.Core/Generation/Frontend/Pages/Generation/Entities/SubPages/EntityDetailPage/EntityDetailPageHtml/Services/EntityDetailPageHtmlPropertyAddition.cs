@@ -15,20 +15,13 @@ namespace Contractor.Core.Generation.Frontend.Pages
         protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
-            if (fileData.Contains("</mat-tab-group>"))
-            {
-                stringEditor.NextThatContains("<mat-tab label=\"Stammdaten\">");
-                stringEditor.NextThatContains("</mat-tab>");
-            }
-            else
-            {
-                stringEditor.NextThatStartsWith($"<div class=\"{property.Entity.Name.ToKebab()}-detail-page\"");
-                stringEditor.NextThatStartsWith($"</div>");
-            }
+
+            stringEditor.NextThatContains("</form>");
+            stringEditor.Prev();
 
             stringEditor.InsertNewLine();
 
-            stringEditor.InsertLine(FrontendPageDetailPropertyLine.GetPropertyLine(property));
+            stringEditor.InsertLine(FrontendPageCreateUpdatePropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
         }

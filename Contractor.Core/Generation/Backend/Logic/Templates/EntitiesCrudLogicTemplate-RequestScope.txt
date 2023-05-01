@@ -1,6 +1,7 @@
 using Contract.Architecture.Backend.Common.Contract.Logic;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Logic;
+using GeneratedProjectName.Modules.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using ProjectName.Contexts;
 using System;
@@ -62,7 +63,7 @@ namespace ProjectName.Modules.Domain.Entities
             return entitiesPagedResult;
         }
 
-        public void UpdateEntity(EntityDto entityDto)
+        public void UpdateEntity(EntityDtoDefaultUpdate entityDto)
         {
             this.entitiesCrudRepository.UpdateEntity(entityDto);
 

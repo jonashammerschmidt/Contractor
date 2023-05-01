@@ -28,8 +28,19 @@ namespace Contractor.Core.Generation.Frontend.Pages
         private string GetLine(RelationSide relationSide)
         {
             return
-              $"            <app-search-dropdown [formGroupInstance]=\"{relationSide.Entity.NameLower}CreateForm\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
-              $"                label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" required=\"true\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>";
+                $"                <div formLayoutRow [formGroupInstance]=\"formGroup\" formControlNameInstance=\"{relationSide.NameLower}Id\" >\n" +
+                $"                    <mat-label>{relationSide.Name.ToReadable()}:</mat-label>\n" +
+                 "                    <div class=\"form-layout-inputs\">\n" +
+                $"                        <app-search-dropdown [formGroupInstance]=\"formGroup\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
+                $"                            label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>" +
+                 "                    </div>\n" +
+                 "                    <form-layout-row-status></form-layout-row-status>\n" +
+                 "                    <div class=\"form-layout-side-bar\" >\n" +
+                $"                        <form-layout-error formControlNameInstance=\"{relationSide.NameLower}Id\" errorType=\"required\"\n" +
+                 "                            title=\"Eingabe fehlt\" description=\"Dieses Feld ist erforderlich.\">\n" +
+                 "                        </form-layout-error>\n" +
+                 "                    </div>\n" +
+                 "                </div>";
         }
     }
 }

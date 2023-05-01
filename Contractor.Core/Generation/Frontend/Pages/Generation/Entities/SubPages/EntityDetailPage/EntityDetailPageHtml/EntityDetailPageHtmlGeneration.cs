@@ -14,22 +14,16 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         private readonly EntityCoreAddition frontendEntityCoreAddition;
         private readonly EntityDetailPageHtmlPropertyAddition entityDetailPageHtmlPropertyAddition;
-        private readonly EntityDetailPageHtmlFromPropertyAddition entityDetailPageHtmlFromPropertyAddition;
         private readonly EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition;
-        private readonly EntityDetailPageHtmlFromOneToOnePropertyAddition entityDetailPageHtmlFromOneToOnePropertyAddition;
 
         public EntityDetailPageHtmlGeneration(
             EntityCoreAddition frontendEntityCoreAddition,
             EntityDetailPageHtmlPropertyAddition entityDetailPageHtmlPropertyAddition,
-            EntityDetailPageHtmlFromPropertyAddition entityDetailPageHtmlFromPropertyAddition,
-            EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition,
-            EntityDetailPageHtmlFromOneToOnePropertyAddition entityDetailPageHtmlFromOneToOnePropertyAddition)
+            EntityDetailPageHtmlToPropertyAddition entityDetailPageHtmlToPropertyAddition)
         {
             this.frontendEntityCoreAddition = frontendEntityCoreAddition;
             this.entityDetailPageHtmlPropertyAddition = entityDetailPageHtmlPropertyAddition;
-            this.entityDetailPageHtmlFromPropertyAddition = entityDetailPageHtmlFromPropertyAddition;
             this.entityDetailPageHtmlToPropertyAddition = entityDetailPageHtmlToPropertyAddition;
-            this.entityDetailPageHtmlFromOneToOnePropertyAddition = entityDetailPageHtmlFromOneToOnePropertyAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -48,8 +42,6 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            this.entityDetailPageHtmlFromPropertyAddition.AddRelationSideToFrontendFile(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
@@ -60,8 +52,6 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            this.entityDetailPageHtmlFromOneToOnePropertyAddition.AddRelationSideToFrontendFile(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)

@@ -44,8 +44,7 @@ namespace Contractor.Core.Tools
 
                 if (a.Contains("using") && b.Contains("using"))
                 {
-                    return a.Replace(".", "").Replace(";", "")
-                        .CompareTo(b.Replace(".", "").Replace(";", ""));
+                    return a.CompareTo(b);
                 }
 
                 return 1;

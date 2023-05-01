@@ -33,7 +33,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
             stringEditor.InsertLine($"  {relationSide.NameLower}DataSource: DropdownPaginationDataSource<I{relationSide.OtherEntity.Name}ListItem>;");
             stringEditor.InsertNewLine();
 
-            stringEditor.NextThatContains("private formBuilder: FormBuilder");
+            stringEditor.NextThatContains("private formBuilder: UntypedFormBuilder");
 
             string constructorLine = $"    private {relationSide.OtherEntity.NamePluralLower}CrudService: {relationSide.OtherEntity.NamePlural}CrudService,";
             if (!fileData.Contains(constructorLine))
@@ -42,7 +42,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
             }
             stringEditor.NextThatContains("this.formBuilder.group({");
             stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"      {relationSide.NameLower}Id: new FormControl(null, [" +
+            stringEditor.InsertLine($"      {relationSide.NameLower}Id: new UntypedFormControl(null, [" +
                 ((!relationSide.IsOptional) ? "Validators.required" : "") +
                 "]),");
 

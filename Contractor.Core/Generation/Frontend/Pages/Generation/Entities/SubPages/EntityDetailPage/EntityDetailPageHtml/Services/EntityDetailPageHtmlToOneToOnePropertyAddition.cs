@@ -5,9 +5,9 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class EntityDetailPageHtmlToPropertyAddition : RelationSideAdditionToExisitingFileGeneration
+    internal class EntityDetailPageHtmlToOneToOnePropertyAddition : RelationSideAdditionToExisitingFileGeneration
     {
-        public EntityDetailPageHtmlToPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
+        public EntityDetailPageHtmlToOneToOnePropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
         {
         }
@@ -17,7 +17,6 @@ namespace Contractor.Core.Generation.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("</form>");
-            stringEditor.Prev();
 
             stringEditor.InsertNewLine();
 
@@ -33,7 +32,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
                 $"                    <mat-label>{relationSide.Name.ToReadable()}:</mat-label>\n" +
                  "                    <div class=\"form-layout-inputs\">\n" +
                 $"                        <app-search-dropdown [formGroupInstance]=\"formGroup\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
-                $"                        label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>" +
+                $"                            label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>" +
                  "                    </div>\n" +
                  "                    <form-layout-row-status></form-layout-row-status>\n" +
                  "                    <div class=\"form-layout-side-bar\" >\n" +

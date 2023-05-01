@@ -37,6 +37,12 @@
     <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDefaultUpdateTemplate-RequestScope.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDefaultUpdateTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDataTemplate-Empty.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -107,15 +113,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Frontend\Model\Templates\i-entity-kebab.template.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-update.page.scss.template.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-update.page.ts.template.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Frontend\Pages\Templates\entity-kebab-update.page.html.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Frontend\Pages\Templates\entity-kebab-create.page.html.template.txt">

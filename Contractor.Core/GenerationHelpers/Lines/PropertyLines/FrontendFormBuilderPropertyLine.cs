@@ -15,19 +15,19 @@ namespace Contractor.Core.Tools
                     case PropertyType.ByteArray:
                     case PropertyType.DateTime:
                     case PropertyType.Double:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl(null, []),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, []),";
 
                     case PropertyType.Integer:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.pattern(integerRegex)]),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.pattern(integerRegex)]),";
 
                     case PropertyType.Guid:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.pattern(guidRegex)]),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.pattern(guidRegex)]),";
 
                     case PropertyType.String:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl('', [Validators.maxLength({property.TypeExtra})]),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl('', [Validators.maxLength({property.TypeExtra})]),";
 
                     case PropertyType.Boolean:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl(false, []),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(false, []),";
                 }
             }
             else
@@ -37,19 +37,19 @@ namespace Contractor.Core.Tools
                     case PropertyType.ByteArray:
                     case PropertyType.DateTime:
                     case PropertyType.Double:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.required]),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.required]),";
 
                     case PropertyType.Integer:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.required, Validators.pattern(integerRegex)]),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.required, Validators.pattern(integerRegex)]),";
 
                     case PropertyType.Guid:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl(null, [Validators.required, Validators.pattern(guidRegex)]),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.required, Validators.pattern(guidRegex)]),";
 
                     case PropertyType.String:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength({property.TypeExtra})]),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength({property.TypeExtra})]),";
 
                     case PropertyType.Boolean:
-                        return $"      {property.Name.LowerFirstChar()}: new FormControl(false, [Validators.required]),";
+                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(false, [Validators.required]),";
                 }
             }
 

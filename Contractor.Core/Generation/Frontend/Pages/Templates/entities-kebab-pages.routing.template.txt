@@ -6,7 +6,7 @@ import { EntitiesPage } from './entities-kebab.page';
 const routes: Routes = [
   { path: '', component: EntitiesPage },
   { path: 'detail/:id', component: EntityDetailPage },
-  { path: '**', redirectTo: ''}
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

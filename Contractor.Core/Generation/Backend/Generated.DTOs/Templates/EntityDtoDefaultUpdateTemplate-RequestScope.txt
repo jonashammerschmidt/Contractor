@@ -1,0 +1,15 @@
+using DbProjectName.Generated.DbContext.Modules.Domain.Entities;
+using System;
+
+namespace GeneratedProjectName.Modules.Domain.Entities
+{
+    public class EntityDtoDefaultUpdate : EntityDtoData
+    {
+        public Guid Id { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.DisplayProperty} ({this.Id})";
+        }
+    }
+}
