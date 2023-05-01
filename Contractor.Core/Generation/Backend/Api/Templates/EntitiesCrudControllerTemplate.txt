@@ -1,10 +1,10 @@
 ﻿using Contract.Architecture.Backend.Common.API;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
+using GeneratedProjectName.Modules.Domain.Entities;
 using ProjectName.API.Security.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
 
 namespace ProjectName.Modules.Domain.Entities
 {
@@ -48,7 +48,7 @@ namespace ProjectName.Modules.Domain.Entities
         [HttpPut]
         [Authorized]
         [SwaggerOperation(Summary = "Update EntityReadable", Tags = new[] { "Domain" })]
-        public ActionResult UpdateEntity([FromBody] EntityDto entity)
+        public ActionResult UpdateEntity([FromBody] EntityDtoDefaultUpdate entity)
         {
             this.entitiesCrudLogic.UpdateEntity(entity);
             return this.Ok();

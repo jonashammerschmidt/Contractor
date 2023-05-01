@@ -35,7 +35,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
                 stringEditor.InsertLine($"            ef{relationSide.Entity.Name}.{relationSide.Name}Id = this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id);");
             }
 
-            stringEditor.NextThatContains($"{relationSide.Entity.Name}Dto.UpdateEf{relationSide.Entity.Name}(");
+            stringEditor.NextThatContains($"{relationSide.Entity.Name}DtoData.UpdateEf{relationSide.Entity.Name}(");
             stringEditor.NextUntil(line => !line.Contains("this.Lookup"));
             if (relationSide.IsOptional)
             {

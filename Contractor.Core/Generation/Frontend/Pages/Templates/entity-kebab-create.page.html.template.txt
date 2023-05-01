@@ -1,28 +1,27 @@
-<div class="toolbar">
-    <h1 mat-dialog-title>
-        EntityReadable erstellen
-    </h1>
-    <button mat-icon-button mat-dialog-close>
-        <mat-icon>close</mat-icon>
-    </button>
-</div>
-
-<mat-dialog-content>
-    <div class="entity-kebab-create-dialog" *ngIf="entityCreateForm">
-        <form [formGroup]="entityCreateForm">
+<div class="entity-kebab-create-dialog">
+    <div class="form-layout-container">
+        <div class="form-layout-header">
+            <div class="form-layout-header-toolbar">
+                <h2>EntityReadable erstellen</h2>
+                <button mat-icon-button mat-dialog-close>
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+        <form [formGroup]="formGroup">
+            <div class="form-layout-card">
+            </div>
         </form>
-    </div>
-</mat-dialog-content>
 
-<mat-dialog-actions align="end">
-    <div class="buttons">
-        <button mat-flat-button color="primary" (click)="onCreateClicked()">
-            <mat-icon class="mat-icon-button-fix">add</mat-icon>
-            Erstellen
-        </button>
+        <div class="form-layout-buttons">
+            <button mat-flat-button color="primary" (click)="onCreateClicked()">
+                <mat-icon class="mat-icon-button-fix">add</mat-icon>
+                Erstellen
+            </button>
 
-        <button mat-flat-button mat-dialog-close>
-            Abbrechen
-        </button>
+            <button mat-flat-button mat-dialog-close>
+                Abbrechen
+            </button>
+        </div>
     </div>
-</mat-dialog-actions>
+</div>

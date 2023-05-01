@@ -1,4 +1,5 @@
 ﻿using Contract.Architecture.Backend.Common.Contract.Persistence;
+using GeneratedProjectName.Modules.Domain.Entities;
 using System;
 
 namespace ProjectName.Modules.Domain.Entities
@@ -13,6 +14,6 @@ namespace ProjectName.Modules.Domain.Entities
 
         IDbPagedResult<EntityDtoExpanded> GetPagedEntities();
 
-        void UpdateEntity(EntityDto entityUpdate);
+        void UpdateEntity(EntityDtoDefaultUpdate entityUpdate);
     }
 }

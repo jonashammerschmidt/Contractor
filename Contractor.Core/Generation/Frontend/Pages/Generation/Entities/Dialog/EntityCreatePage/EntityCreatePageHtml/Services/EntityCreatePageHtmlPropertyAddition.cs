@@ -17,10 +17,11 @@ namespace Contractor.Core.Generation.Frontend.Pages
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("</form>");
+            stringEditor.Prev();
 
             stringEditor.InsertNewLine();
 
-            stringEditor.InsertLine(FrontendPageCreatePropertyLine.GetPropertyLine(property));
+            stringEditor.InsertLine(FrontendPageCreateUpdatePropertyLine.GetPropertyLine(property));
 
             return stringEditor.GetText();
         }

@@ -13,14 +13,20 @@ namespace Contractor.Core.Generation.Frontend.Pages
         private static readonly string FileName = "sub-pages\\detail\\entity-kebab-detail.page.ts";
 
         private readonly EntityCoreAddition frontendEntityCoreAddition;
+        private readonly EntityDetailPageTsPropertyAddition entityDetailPageTsPropertyAddition;
         private readonly EntityDetailPageTsFromPropertyAddition entityDetailPageTsFromPropertyAddition;
+        private readonly EntityDetailPageTsToPropertyAddition entityDetailPageTsToPropertyAddition;
 
         public EntityDetailPageTsGeneration(
             EntityCoreAddition frontendEntityCoreAddition,
-            EntityDetailPageTsFromPropertyAddition entityDetailPageTsFromPropertyAddition)
+            EntityDetailPageTsPropertyAddition entityDetailPageTsPropertyAddition,
+            EntityDetailPageTsFromPropertyAddition entityDetailPageTsFromPropertyAddition,
+            EntityDetailPageTsToPropertyAddition entityDetailPageTsToPropertyAddition)
         {
             this.frontendEntityCoreAddition = frontendEntityCoreAddition;
+            this.entityDetailPageTsPropertyAddition = entityDetailPageTsPropertyAddition;
             this.entityDetailPageTsFromPropertyAddition = entityDetailPageTsFromPropertyAddition;
+            this.entityDetailPageTsToPropertyAddition  = entityDetailPageTsToPropertyAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -34,6 +40,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override void AddProperty(Property property)
         {
+            this.entityDetailPageTsPropertyAddition.AddPropertyToFrontendFile(property, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -44,6 +51,8 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+            this.entityDetailPageTsToPropertyAddition.AddRelationSideToFrontendFile(relationSideTo, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -52,6 +61,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
+            this.Add1ToNRelationSideTo(new Relation1ToN(relation));
         }
     }
 }
