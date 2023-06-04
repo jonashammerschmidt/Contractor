@@ -6,17 +6,17 @@ using System.IO;
 namespace Contractor.Core.Generation.Frontend.Model
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
-    internal class IEntityGeneration : ClassGeneration
+    internal class IEntityDtoGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab.template.txt");
+            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto.template.txt");
 
-        private static readonly string FileName = "dtos\\i-entity-kebab.ts";
+        private static readonly string FileName = "dtos\\i-entity-kebab-dto.ts";
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
 
-        public IEntityGeneration(
+        public IEntityDtoGeneration(
             EntityCoreAddition entityCoreAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition)
         {
@@ -35,7 +35,6 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddProperty(Property property)
         {
-            this.frontendDtoPropertyAddition.AddPropertyToFrontendFile(property, ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
@@ -44,8 +43,6 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
-            this.frontendDtoPropertyAddition.AddPropertyToFrontendFile(relationSideTo, ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -54,7 +51,6 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
-            this.Add1ToNRelationSideTo(new Relation1ToN(relation));
         }
     }
 }

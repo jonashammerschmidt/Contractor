@@ -6,25 +6,28 @@ using System.IO;
 namespace Contractor.Core.Generation.Frontend.Model
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
-    internal class IEntityDetailGeneration : ClassGeneration
+    internal class IEntityDtoExpandedGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-detail.template.txt");
+            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto-expanded.template.txt");
 
-        private static readonly string FileName = "dtos\\i-entity-kebab-detail.ts";
+        private static readonly string FileName = "dtos\\i-entity-kebab-dto-expanded.ts";
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendDtoRelationAddition frontendDtoRelationAddition;
+        private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
 
-        public IEntityDetailGeneration(
+        public IEntityDtoExpandedGeneration(
             EntityCoreAddition entityCoreAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition,
-            FrontendDtoRelationAddition frontendDtoRelationAddition)
+            FrontendDtoRelationAddition frontendDtoRelationAddition,
+            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.frontendDtoRelationAddition = frontendDtoRelationAddition;
+            this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
         }
 
         protected override void AddModuleActions(Module module)
@@ -38,19 +41,10 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddProperty(Property property)
         {
-            this.frontendDtoPropertyAddition.AddPropertyToFrontendFile(property, ModelProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "[]");
-
-            string fromImportStatementPath = $"src/app/model/{relation.EntityTo.Module.NameKebab}" +
-                $"/{relation.EntityTo.NamePluralKebab}" +
-                $"/dtos/i-{relation.EntityTo.NameKebab}";
-
-            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainFolder, FileName,
-                $"I{relation.EntityTo.Name}", fromImportStatementPath);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)

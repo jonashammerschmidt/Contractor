@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
-import { IEntityListItem } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-list-item';
+import { IEntityDtoExpanded } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
 import { PaginationDataSource } from 'src/app/services/backend/pagination/pagination.data-source';
 import { EntityCreateDialog } from './dialogs/create/entity-kebab-create.dialog';
 
@@ -20,7 +20,7 @@ export class EntitiesPage implements AfterViewInit {
   // Table
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  public entitiesDataSource: PaginationDataSource<IEntityListItem>;
+  public entitiesDataSource: PaginationDataSource<IEntityDtoExpanded>;
   public entitiesGridColumns: string[] = [
     'detail',
   ];
@@ -29,7 +29,7 @@ export class EntitiesPage implements AfterViewInit {
     private entitiesCrudService: EntitiesCrudService,
     private matDialog: MatDialog) {
 
-    this.entitiesDataSource = new PaginationDataSource<IEntityListItem>(
+    this.entitiesDataSource = new PaginationDataSource<IEntityDtoExpanded>(
       (options) => this.entitiesCrudService.getPagedEntities(options),
       () => [
         {

@@ -6,17 +6,17 @@ using System.IO;
 namespace Contractor.Core.Generation.Frontend.Model
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
-    internal class IEntityCreateGeneration : ClassGeneration
+    internal class IEntityDtoDataGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-create.template.txt");
+            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto-data.template.txt");
 
-        private static readonly string FileName = "dtos\\i-entity-kebab-create.ts";
+        private static readonly string FileName = "dtos\\i-entity-kebab-dto-data.ts";
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
 
-        public IEntityCreateGeneration(
+        public IEntityDtoDataGeneration(
             EntityCoreAddition entityCoreAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition)
         {

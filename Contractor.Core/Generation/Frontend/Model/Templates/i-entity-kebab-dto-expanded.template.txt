@@ -1,0 +1,4 @@
+import { IEntityDto } from './i-entity-kebab-dto';
+
+export interface IEntityDtoExpanded extends IEntityDto {
+}

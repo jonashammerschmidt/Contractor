@@ -1,7 +1,7 @@
 ﻿using Contract.Architecture.Backend.Common.API;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using GeneratedProjectName.Modules.Domain.Entities;
-using ProjectName.API.Security.Authorization;
+using ProjectName.Security.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;

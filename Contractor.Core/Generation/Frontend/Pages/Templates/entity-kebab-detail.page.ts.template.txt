@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/components/ui/confirmation-dialog/confirmation-dialog.service';
 import { EntityUpdate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-update';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
-import { IEntityDetail } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-detail';
+import { IEntityDtoExpanded } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
 import { AppEventService } from 'src/app/services/event/app-event.service';
 import { guidRegex, integerRegex } from 'src/app/helpers/regex.helper';
 
@@ -16,7 +16,7 @@ import { guidRegex, integerRegex } from 'src/app/helpers/regex.helper';
 export class EntityDetailPage implements OnInit {
 
   entityId: string;
-  entity: IEntityDetail;
+  entity: IEntityDtoExpanded;
   
   formGroup: FormGroup;
 
@@ -66,7 +66,7 @@ export class EntityDetailPage implements OnInit {
     this.entity = null;
     this.entity = await this.entitiesCrudService.getEntityDetail(this.entityId);
 
-    this.formGroup.patchValue(EntityUpdate.fromEntityDetail(this.entity));
+    this.formGroup.patchValue(this.entity);
   }
 
 }
