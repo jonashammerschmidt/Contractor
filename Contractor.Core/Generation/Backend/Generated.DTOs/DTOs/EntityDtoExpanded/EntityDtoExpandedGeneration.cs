@@ -53,7 +53,6 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                 return;
             }
 
-            this.propertyAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
             this.entityDtoExpandedMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }
 

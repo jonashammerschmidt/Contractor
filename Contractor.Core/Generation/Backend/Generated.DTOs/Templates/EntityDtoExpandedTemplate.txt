@@ -1,12 +1,9 @@
 using DbProjectName.Generated.DbContext.Modules.Domain.Entities;
-using System;
 
 namespace GeneratedProjectName.Modules.Domain.Entities
 {
-    public class EntityDtoExpanded
+    public class EntityDtoExpanded : EntityDto
     {
-        public Guid Id { get; set; }
-
         public EntityDtoExpanded() { }
 
         public EntityDtoExpanded(EntityDtoExpanded entity)
@@ -14,7 +11,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
             this.Id = entity.Id;
         }
 
-        public static EntityDtoExpanded FromEfEntity(EfEntity efEntity)
+        public new static EntityDtoExpanded FromEfEntity(EfEntity efEntity)
         {
             if (efEntity == null)
             {
