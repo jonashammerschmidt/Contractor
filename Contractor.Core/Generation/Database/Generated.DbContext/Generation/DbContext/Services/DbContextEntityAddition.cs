@@ -64,6 +64,14 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
 
             stringEditor.InsertLine($"                    .IsClustered({(!entity.Indices.Any(index => index.IsClustered)).ToString().ToLower()});");
 
+            if (entity.HasScope)
+            {
+                stringEditor.InsertNewLine();
+                stringEditor.InsertLine($"                entity.HasIndex(c => new {{ c.Id }})");
+                stringEditor.InsertLine($"                    .IsUnique(true)");
+                stringEditor.InsertLine($"                    .IsClustered(false);");
+            }
+
             foreach (var index in entity.Indices)
             {
                 string indexProperties = string.Join(", ", index.ColumnNames.Select(columnName => "c." + columnName));
