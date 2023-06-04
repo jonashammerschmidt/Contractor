@@ -10,7 +10,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
         private static readonly string TemplatePath =
             Path.Combine(PersistenceProjectGeneration.TemplateFolder, "IEntitiesCrudRepositoryTemplate.txt");
 
-        private static readonly string FileName = "IEntitiesCrudRepository.cs";
+        private static readonly string FileName = "Interfaces\\IEntitiesCrudRepository.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
 
