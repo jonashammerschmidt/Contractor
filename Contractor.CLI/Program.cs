@@ -93,20 +93,23 @@ namespace Contractor.CLI
             ContractorGenerationOptions contractorGenerationOptions = ContractorXmlConverter
                 .ToContractorGenerationOptions(contractorXml, contractorXmlDocument, contractorXmlFileInfo.Directory.FullName);
 
-            foreach (var include in contractorXml.Includes.Includes)
+            if (contractorXml.Includes is not null)
             {
-                string contractorIncludeXmlFilePath = Path.GetFullPath(Path.Combine(
-                    contractorXmlFileInfo.Directory.FullName,
-                    include.Src));
+                foreach (var include in contractorXml.Includes.Includes)
+                {
+                    string contractorIncludeXmlFilePath = Path.GetFullPath(Path.Combine(
+                        contractorXmlFileInfo.Directory.FullName,
+                        include.Src));
 
-                var contractorIncludeXmlDocument = new XmlDocument();
-                contractorIncludeXmlDocument.Load(File.OpenRead(contractorIncludeXmlFilePath));
-                XmlReader contractorIncludeXmlReader = new XmlNodeReader(contractorIncludeXmlDocument);
+                    var contractorIncludeXmlDocument = new XmlDocument();
+                    contractorIncludeXmlDocument.Load(File.OpenRead(contractorIncludeXmlFilePath));
+                    XmlReader contractorIncludeXmlReader = new XmlNodeReader(contractorIncludeXmlDocument);
 
-                var contractorIncludeXmlSerializer = new XmlSerializer(typeof(ContractorIncludeXml));
-                ContractorIncludeXml contractorIncludeXml = (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
+                    var contractorIncludeXmlSerializer = new XmlSerializer(typeof(ContractorIncludeXml));
+                    ContractorIncludeXml contractorIncludeXml = (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
 
-                ContractorXmlConverter.AddToContractorGenerationOptions(contractorGenerationOptions, contractorIncludeXml, contractorIncludeXmlDocument);
+                    ContractorXmlConverter.AddToContractorGenerationOptions(contractorGenerationOptions, contractorIncludeXml, contractorIncludeXmlDocument);
+                }
             }
 
             contractorGenerationOptions.AddLinks();
