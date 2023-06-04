@@ -100,19 +100,13 @@
     <None Update="Generation\Frontend\Model\Templates\entities-kebab.module.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-create.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-dto.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-detail.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-dto-data.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-list-item.template.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-update.template.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab.template.txt">
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-dto-expanded.template.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Frontend\Pages\Templates\entity-kebab-create.page.html.template.txt">

@@ -16,12 +16,9 @@ namespace Contractor.Core.Generation.Frontend.Model
             serviceCollection.AddSingleton<ClassGeneration, EntitiesModuleGeneration>();
 
             // dtos
-            serviceCollection.AddSingleton<ClassGeneration, IEntityGeneration>();
-            serviceCollection.AddSingleton<ClassGeneration, IEntityCreateGeneration>();
-            serviceCollection.AddSingleton<ClassGeneration, IEntityDetailGeneration>();
-            serviceCollection.AddSingleton<ClassGeneration, IEntityListItemGeneration>();
-            serviceCollection.AddSingleton<ClassGeneration, IEntityUpdateGeneration>();
-            serviceCollection.AddSingleton<IEntityUpdateMethodAddition>();
+            serviceCollection.AddSingleton<ClassGeneration, IEntityDtoGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, IEntityDtoDataGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, IEntityDtoExpandedGeneration>();
         }
     }
 }
