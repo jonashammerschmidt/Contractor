@@ -24,26 +24,26 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains($"{relationSide.Entity.Name}Dto.ToEf{relationSide.Entity.Name}(");
+            stringEditor.NextThatContains($"{relationSide.Entity.Name}Dto.ToEf{relationSide.Entity.Name}Dto(");
             stringEditor.NextUntil(line => !line.Contains("this.Lookup"));
             if (relationSide.IsOptional)
             {
-                stringEditor.InsertLine($"            ef{relationSide.Entity.Name}.{relationSide.Name}Id = {relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id.HasValue ? this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id.Value) : null;");
+                stringEditor.InsertLine($"            ef{relationSide.Entity.Name}Dto.{relationSide.Name}Id = {relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id.HasValue ? this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id.Value) : null;");
             }
             else
             {
-                stringEditor.InsertLine($"            ef{relationSide.Entity.Name}.{relationSide.Name}Id = this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id);");
+                stringEditor.InsertLine($"            ef{relationSide.Entity.Name}Dto.{relationSide.Name}Id = this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id);");
             }
 
-            stringEditor.NextThatContains($"{relationSide.Entity.Name}DtoData.UpdateEf{relationSide.Entity.Name}(");
+            stringEditor.NextThatContains($"{relationSide.Entity.Name}DtoData.UpdateEf{relationSide.Entity.Name}Dto(");
             stringEditor.NextUntil(line => !line.Contains("this.Lookup"));
             if (relationSide.IsOptional)
             {
-                stringEditor.InsertLine($"            ef{relationSide.Entity.Name}.{relationSide.Name}Id = {relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id.HasValue ? this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id.Value) : null;");
+                stringEditor.InsertLine($"            ef{relationSide.Entity.Name}Dto.{relationSide.Name}Id = {relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id.HasValue ? this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id.Value) : null;");
             }
             else
             {
-                stringEditor.InsertLine($"            ef{relationSide.Entity.Name}.{relationSide.Name}Id = this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id);");
+                stringEditor.InsertLine($"            ef{relationSide.Entity.Name}Dto.{relationSide.Name}Id = this.Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id({relationSide.Entity.NameLower}.{relationSide.RelationBeforePreProcessor.PropertyNameFrom}Id);");
             }
 
             if (!stringEditor.GetText().Contains($"Guid Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id("))
@@ -52,16 +52,16 @@ namespace Contractor.Core.Generation.Backend.Persistence
                 stringEditor.InsertLine("");
                 stringEditor.InsertLine($"        private Guid Lookup{relationSide.RelationBeforePreProcessor.EntityFrom.Name}{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id(Guid {relationSide.RelationBeforePreProcessor.EntityFrom.NameLower}Id)");
                 stringEditor.InsertLine("        {");
-                stringEditor.InsertLine($"            Ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name} ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name} = this.dbContext.{relationSide.RelationBeforePreProcessor.EntityFrom.NamePlural}");
-                stringEditor.InsertLine($"                .Where(ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name} => ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}.Id == {relationSide.RelationBeforePreProcessor.EntityFrom.NameLower}Id)");
+                stringEditor.InsertLine($"            Ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}Dto ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}Dto = this.dbContext.{relationSide.RelationBeforePreProcessor.EntityFrom.NamePlural}");
+                stringEditor.InsertLine($"                .Where(ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}Dto => ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}Dto.Id == {relationSide.RelationBeforePreProcessor.EntityFrom.NameLower}Id)");
                 stringEditor.InsertLine("                .SingleOrDefault();");
                 stringEditor.InsertLine("");
-                stringEditor.InsertLine($"            if (ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name} == null)");
+                stringEditor.InsertLine($"            if (ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}Dto == null)");
                 stringEditor.InsertLine("            {");
                 stringEditor.InsertLine($"                throw new NotFoundResultException(\"{relationSide.RelationBeforePreProcessor.EntityFrom.NameReadable} ({{id}}) konnte nicht gefunden werden.\", {relationSide.RelationBeforePreProcessor.EntityFrom.NameLower}Id);");
                 stringEditor.InsertLine("            }");
                 stringEditor.InsertLine("");
-                stringEditor.InsertLine($"            return ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}.MandantId;");
+                stringEditor.InsertLine($"            return ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}Dto.MandantId;");
                 stringEditor.InsertLine("        }");
             }
 

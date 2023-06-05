@@ -49,38 +49,38 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "Dto");
 
             string toImportStatementPath = $"src/app/model/{relation.EntityFrom.Module.NameKebab}" +
                 $"/{relation.EntityFrom.NamePluralKebab}" +
-                $"/dtos/i-{relation.EntityFrom.NameKebab}";
+                $"/dtos/i-{relation.EntityFrom.NameKebab}-dto";
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName,
-                $"I{relation.EntityFrom.Name}", toImportStatementPath);
+                $"I{relation.EntityFrom.Name}Dto", toImportStatementPath);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "Dto");
 
             string fromImportStatementPath = $"src/app/model/{relation.EntityTo.Module.NameKebab}" +
                 $"/{relation.EntityTo.NamePluralKebab}" +
-                $"/dtos/i-{relation.EntityTo.NameKebab}";
+                $"/dtos/i-{relation.EntityTo.NameKebab}-dto";
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainFolder, FileName,
-                $"I{relation.EntityTo.Name}", fromImportStatementPath);
+                $"I{relation.EntityTo.Name}Dto", fromImportStatementPath);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "");
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "Dto");
 
             string toImportStatementPath = $"src/app/model/{relation.EntityFrom.Module.NameKebab}" +
                 $"/{relation.EntityFrom.NamePluralKebab}" +
-                $"/dtos/i-{relation.EntityFrom.NameKebab}";
+                $"/dtos/i-{relation.EntityFrom.NameKebab}-dto";
 
             this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName,
-                $"I{relation.EntityFrom.Name}", toImportStatementPath);
+                $"I{relation.EntityFrom.Name}Dto", toImportStatementPath);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Contractor.Core.Generation.Backend.Generated.Persistence
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
             stringEditor.NextUntil(line => !line.Contains("Include("));
 
-            stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})");
+            stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name}Dto => ef{relationSide.Entity.Name}Dto.{relationSide.Name})");
 
             return stringEditor.GetText();
         }

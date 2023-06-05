@@ -30,8 +30,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void AddEntity(Entity entity)
         {
-            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
-            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DomainFolder, templatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)

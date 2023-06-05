@@ -37,12 +37,12 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
 
             stringEditor.NextThatContains("protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)");
 
-            stringEditor.InsertLine($"        public virtual DbSet<Ef{entity.Name}> {entity.NamePlural}" + " { get; set; }");
+            stringEditor.InsertLine($"        public virtual DbSet<Ef{entity.Name}Dto> {entity.NamePlural}" + " { get; set; }");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("this.OnModelCreatingPartial(modelBuilder);");
 
-            stringEditor.InsertLine($"            modelBuilder.Entity<Ef{entity.Name}>(entity =>");
+            stringEditor.InsertLine($"            modelBuilder.Entity<Ef{entity.Name}Dto>(entity =>");
             stringEditor.InsertLine("            {");
             stringEditor.InsertLine($"                entity.ToTable(\"{entity.NamePlural}\");");
             stringEditor.InsertLine("");

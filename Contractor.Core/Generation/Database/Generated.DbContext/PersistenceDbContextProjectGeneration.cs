@@ -1,4 +1,4 @@
-﻿using Contractor.Core.Generation.Backend.Persistence;
+using Contractor.Core.Generation.Backend.Persistence;
 using Contractor.Core.Helpers;
 using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +15,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, DbContextGeneration>();
-            serviceCollection.AddSingleton<ClassGeneration, EfEntityGeneration>();
+            serviceCollection.AddSingleton<ClassGeneration, EfEntityDtoGeneration>();
 
             serviceCollection.AddSingleton<DbContextEntityAddition>();
             serviceCollection.AddSingleton<DbContextPropertyAddition>();

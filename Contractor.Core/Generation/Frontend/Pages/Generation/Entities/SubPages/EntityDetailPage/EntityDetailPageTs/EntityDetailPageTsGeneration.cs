@@ -14,18 +14,15 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         private readonly EntityCoreAddition frontendEntityCoreAddition;
         private readonly EntityDetailPageTsPropertyAddition entityDetailPageTsPropertyAddition;
-        private readonly EntityDetailPageTsFromPropertyAddition entityDetailPageTsFromPropertyAddition;
         private readonly EntityDetailPageTsToPropertyAddition entityDetailPageTsToPropertyAddition;
 
         public EntityDetailPageTsGeneration(
             EntityCoreAddition frontendEntityCoreAddition,
             EntityDetailPageTsPropertyAddition entityDetailPageTsPropertyAddition,
-            EntityDetailPageTsFromPropertyAddition entityDetailPageTsFromPropertyAddition,
             EntityDetailPageTsToPropertyAddition entityDetailPageTsToPropertyAddition)
         {
             this.frontendEntityCoreAddition = frontendEntityCoreAddition;
             this.entityDetailPageTsPropertyAddition = entityDetailPageTsPropertyAddition;
-            this.entityDetailPageTsFromPropertyAddition = entityDetailPageTsFromPropertyAddition;
             this.entityDetailPageTsToPropertyAddition  = entityDetailPageTsToPropertyAddition;
         }
 
@@ -45,8 +42,6 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "");
-            this.entityDetailPageTsFromPropertyAddition.AddRelationSideToFrontendFile(relationSideFrom, PagesProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)

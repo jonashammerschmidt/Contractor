@@ -48,7 +48,7 @@ export class EntitiesPage implements AfterViewInit {
   openCreateDialog(): void {
     this.matDialog.open(EntityCreateDialog, {
       maxHeight: '90vh',
-      panelClass: 'mat-dialog-form-layout',
+      panelClass: 'fst-dialog',
     });
   }
 

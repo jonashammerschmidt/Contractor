@@ -28,7 +28,7 @@ namespace ProjectName.Modules.Domain.Entities
         public Guid CreateEntity(EntityDtoData entityDtoData)
         {
             Guid newEntityId = this.guidGenerator.NewGuid();
-            EntityDto entityToCreate = EntityDtoData.ToEntityDto(newEntityId, entityDtoData);
+            EntityDto entityToCreate = EntityDto.FromEntityDtoData(newEntityId, entityDtoData);
             this.entitiesCrudRepository.CreateEntity(entityToCreate);
 
             this.logger.LogInformation("Entity ({id}) angelegt", newEntityId);

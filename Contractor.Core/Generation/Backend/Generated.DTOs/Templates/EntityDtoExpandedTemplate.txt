@@ -6,27 +6,22 @@ namespace GeneratedProjectName.Modules.Domain.Entities
     {
         public EntityDtoExpanded() { }
 
-        public EntityDtoExpanded(EntityDtoExpanded entity)
+        protected EntityDtoExpanded(EntityDtoExpanded entity) : base(entity)
         {
-            this.Id = entity.Id;
         }
 
-        public new static EntityDtoExpanded FromEfEntity(EfEntity efEntity)
+        protected EntityDtoExpanded(EfEntityDto efEntityDto) : base(efEntityDto)
         {
-            if (efEntity == null)
+        }
+
+        public new static EntityDtoExpanded FromEfEntityDto(EfEntityDto efEntityDto)
+        {
+            if (efEntityDto == null)
             {
                 return null;
             }
 
-            return new EntityDtoExpanded()
-            {
-                Id = efEntity.Id,
-            };
-        }
-
-        public override string ToString()
-        {
-            return $"{this.DisplayProperty} ({this.Id})";
+            return new EntityDtoExpanded(efEntityDto);
         }
     }
 }

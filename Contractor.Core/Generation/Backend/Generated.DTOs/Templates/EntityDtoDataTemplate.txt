@@ -7,19 +7,15 @@ namespace GeneratedProjectName.Modules.Domain.Entities
     {
         public EntityDtoData() { }
 
-        public EntityDtoData(EntityDtoData entityDtoData)
+        protected EntityDtoData(EntityDtoData entityDtoData)
         {
         }
 
-        public static EntityDto ToEntityDto(Guid id, EntityDtoData entityDtoData)
+        protected EntityDtoData(EfEntityDto efEntityDto)
         {
-            return new EntityDto()
-            {
-                Id = id,
-            };
         }
 
-        public static void UpdateEfEntity(EfEntity efEntity, EntityDtoData entityDtoData)
+        public static void UpdateEfEntityDto(EfEntityDto efEntityDto, EntityDtoData entityDtoData)
         {
         }
 

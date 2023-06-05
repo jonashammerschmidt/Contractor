@@ -1,27 +1,27 @@
-<div class="entity-kebab-create-dialog">
-    <div class="form-layout-container">
-        <div class="form-layout-header">
-            <div class="form-layout-header-toolbar">
-                <h2>EntityReadable erstellen</h2>
-                <button mat-icon-button mat-dialog-close>
-                    <mat-icon>close</mat-icon>
-                </button>
-            </div>
+<div class="fst-container">
+    <div class="fst-header">
+        <div class="fst-toolbar">
+            <h2>EntityReadable erstellen</h2>
+            <button mat-icon-button mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
         </div>
-        <form [formGroup]="formGroup">
+    </div>
+    <div class="fst-content">
+        <form [formGroup]="formGroup" class="form-layout-container">
             <div class="form-layout-card">
             </div>
+
+            <div class="form-layout-buttons">
+                <button mat-button mat-dialog-close>
+                    Abbrechen
+                </button>
+
+                <button mat-flat-button color="primary" (click)="onCreateClicked()">
+                    <mat-icon class="mat-icon-button-fix">add</mat-icon>
+                    Erstellen
+                </button>
+            </div>
         </form>
-
-        <div class="form-layout-buttons">
-            <button mat-flat-button color="primary" (click)="onCreateClicked()">
-                <mat-icon class="mat-icon-button-fix">add</mat-icon>
-                Erstellen
-            </button>
-
-            <button mat-flat-button mat-dialog-close>
-                Abbrechen
-            </button>
-        </div>
     </div>
 </div>

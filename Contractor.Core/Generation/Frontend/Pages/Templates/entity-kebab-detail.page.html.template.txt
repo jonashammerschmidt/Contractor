@@ -1,23 +1,26 @@
-<div class="loading" *ngIf="!entity">
-    <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
-</div>
-
-<div class="entity-kebab-detail-page" *ngIf="entity">
-    <div class="toolbar">
-        <h1>EntityReadable: {{entity.displayProperty}}</h1>
-        <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
-            Schließen
-        </button>
-        <button mat-flat-button color="primary" class="save-button" (click)="onSaveClicked()">
-            <mat-icon class="mat-icon-button-fix">save</mat-icon>
-            Speichern
-        </button>
-        <button mat-flat-button color="warn" class="save-button" (click)="onDeleteClicked()">
-            <mat-icon class="mat-icon-button-fix">delete</mat-icon>
-            Löschen
-        </button>
+<div class="fst-container">
+    <div class="fst-header">
+        <div class="fst-toolbar">
+            <h1>EntityReadable: {{entity?.displayProperty}}</h1>
+            <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
+                Schließen
+            </button>
+            <button mat-flat-button color="primary" class="save-button" (click)="onSaveClicked()">
+                <mat-icon class="mat-icon-button-fix">save</mat-icon>
+                Speichern
+            </button>
+            <button mat-flat-button color="warn" class="save-button" (click)="onDeleteClicked()">
+                <mat-icon class="mat-icon-button-fix">delete</mat-icon>
+                Löschen
+            </button>
+        </div>
     </div>
-    <div class="entity-kebab-update-form">
+
+    <div class="fst-content loading" *ngIf="!entity">
+        <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+    </div>
+
+    <div class="fst-content" *ngIf="entity">
         <form [formGroup]="formGroup" class="form-layout-container">
             <div class="form-layout-card">
             </div>

@@ -26,30 +26,30 @@ namespace GeneratedProjectName.Modules.Domain.Entities
 
         public EntityDto GetEntity(Guid entityId)
         {
-            EfEntity efEntity = dbContext.Entities
-                .Where(efEntity => efEntity.Id == entityId)
+            EfEntityDto efEntityDto = dbContext.Entities
+                .Where(efEntityDto => efEntityDto.Id == entityId)
                 .SingleOrDefault();
 
-            if (efEntity == null)
+            if (efEntityDto == null)
             {
                 throw new NotFoundResultException("Entity ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            return EntityDto.FromEfEntity(efEntity);
+            return EntityDto.FromEfEntityDto(efEntityDto);
         }
 
         public EntityDtoExpanded GetEntityDetail(Guid entityId)
         {
-            EfEntity efEntity = this.dbContext.Entities
-                .Where(efEntity => efEntity.Id == entityId)
+            EfEntityDto efEntityDto = this.dbContext.Entities
+                .Where(efEntityDto => efEntityDto.Id == entityId)
                 .SingleOrDefault();
 
-            if (efEntity == null)
+            if (efEntityDto == null)
             {
                 throw new NotFoundResultException("Entity ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            return EntityDtoExpanded.FromEfEntity(efEntity);
+            return EntityDtoExpanded.FromEfEntityDto(efEntityDto);
         }
 
         public IDbPagedResult<EntityDtoExpanded> GetPagedEntities()
@@ -59,7 +59,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
             return Pagination.Execute(
                 efEntities,
                 this.paginationContext,
-                efEntity => EntityDtoExpanded.FromEfEntity(efEntity));
+                efEntityDto => EntityDtoExpanded.FromEfEntityDto(efEntityDto));
         }
     }
 }

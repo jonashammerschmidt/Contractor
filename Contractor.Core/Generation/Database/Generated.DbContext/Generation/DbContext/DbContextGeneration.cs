@@ -42,7 +42,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
         {
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "Ef", "");
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "Ef", "Dto");
             this.dbContextRelationToAddition.AddRelationSideToDatabaseFile(relationSideTo, "Generated.DbContext", "DbContextNameRaw.cs");
         }
 
@@ -52,7 +52,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
-            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "Ef", "");
+            RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "Ef", "Dto");
             this.dbContextRelationToOneToOneAddition.AddRelationSideToDatabaseFile(relationSideTo, "Generated.DbContext", "DbContextNameRaw.cs");
         }
     }
