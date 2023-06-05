@@ -11,44 +11,42 @@ namespace GeneratedProjectName.Modules.Domain.Entities
 
         public EntityDto() { }
 
-        public EntityDto(EntityDto entityDto)
+        protected EntityDto(EntityDto entityDto) : base(entityDto)
         {
             this.Id = entityDto.Id;
             this.RequestScopeId = entityDto.RequestScopeId;
         }
 
-        public EntityDto(Guid id, Guid requestScopeId, EntityDtoData entityDtoData)
+        protected EntityDto(EfEntityDto efEntityDto) : base(efEntityDto)
+        {
+            this.Id = efEntityDto.Id;
+            this.RequestScopeId = efEntityDto.RequestScopeId;
+        }
+
+        protected EntityDto(Guid id, Guid requestScopeId, EntityDtoData entityDtoData) : base(entityDtoData)
         {
             this.Id = id;
             this.RequestScopeId = requestScopeId;
         }
 
-        public static EntityDto FromEfEntity(EfEntity efEntity)
+        public static EntityDto FromEfEntityDto(EfEntityDto efEntityDto)
         {
-            if (efEntity == null)
+            if (efEntityDto == null)
             {
                 return null;
             }
 
-            return new EntityDto()
-            {
-                Id = efEntity.Id,
-                RequestScopeId = efEntity.RequestScopeId,
-            };
+            return new EntityDto(efEntityDto);
         }
 
         public static EntityDto FromEntityDtoData(Guid id, Guid requestScopeId, EntityDtoData entityDtoData)
         {
-            return new EntityDto()
-            {
-                Id = id,
-                RequestScopeId = requestScopeId,
-            };
+            return new EntityDto(id, requestScopeId, entityDtoData);
         }
 
-        public static EfEntity ToEfEntity(EntityDto entityDto)
+        public static EfEntityDto ToEfEntityDto(EntityDto entityDto)
         {
-            return new EfEntity()
+            return new EfEntityDto()
             {
                 Id = entityDto.Id,
                 RequestScopeId = entityDto.RequestScopeId,

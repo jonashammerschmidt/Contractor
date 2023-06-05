@@ -1,4 +1,4 @@
-﻿using Contract.Architecture.Backend.Common;
+using Contract.Architecture.Backend.Common;
 using Contract.Architecture.Backend.Common.Contract;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Persistence;
@@ -28,53 +28,53 @@ namespace ProjectName.Modules.Domain.Entities
 
         public void CreateEntity(EntityDto entity)
         {
-            EfEntity efEntity = EntityDto.ToEfEntity(entity);
+            EfEntityDto efEntityDto = EntityDto.ToEfEntityDto(entity);
 
-            this.dbContext.Entities.Add(efEntity);
+            this.dbContext.Entities.Add(efEntityDto);
             this.dbContext.SaveChanges();
         }
 
         public void DeleteEntity(Guid entityId)
         {
-            EfEntity efEntity = this.dbContext.Entities
-                .Where(efEntity => efEntity.Id == entityId)
+            EfEntityDto efEntityDto = this.dbContext.Entities
+                .Where(efEntityDto => efEntityDto.Id == entityId)
                 .SingleOrDefault();
 
-            if (efEntity == null)
+            if (efEntityDto == null)
             {
                 throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            this.dbContext.Entities.Remove(efEntity);
+            this.dbContext.Entities.Remove(efEntityDto);
             this.dbContext.SaveChanges();
         }
 
         public EntityDto GetEntity(Guid entityId)
         {
-            EfEntity efEntity = this.dbContext.Entities
-                .Where(efEntity => efEntity.Id == entityId)
+            EfEntityDto efEntityDto = this.dbContext.Entities
+                .Where(efEntityDto => efEntityDto.Id == entityId)
                 .SingleOrDefault();
 
-            if (efEntity == null)
+            if (efEntityDto == null)
             {
                 throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            return EntityDto.FromEfEntity(efEntity);
+            return EntityDto.FromEfEntityDto(efEntityDto);
         }
 
         public EntityDtoExpanded GetEntityDetail(Guid entityId)
         {
-            EfEntity efEntity = this.dbContext.Entities
-                .Where(efEntity => efEntity.Id == entityId)
+            EfEntityDto efEntityDto = this.dbContext.Entities
+                .Where(efEntityDto => efEntityDto.Id == entityId)
                 .SingleOrDefault();
 
-            if (efEntity == null)
+            if (efEntityDto == null)
             {
                 throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entityId);
             }
 
-            return EntityDtoExpanded.FromEfEntity(efEntity);
+            return EntityDtoExpanded.FromEfEntityDto(efEntityDto);
         }
 
         public IDbPagedResult<EntityDtoExpanded> GetPagedEntities()
@@ -84,21 +84,21 @@ namespace ProjectName.Modules.Domain.Entities
             return Pagination.Execute(
                 efEntities,
                 this.paginationContext,
-                efEntity => EntityDtoExpanded.FromEfEntity(efEntity));
+                efEntityDto => EntityDtoExpanded.FromEfEntityDto(efEntityDto));
         }
 
         public void UpdateEntity(EntityDtoDefaultUpdate entity)
         {
-            EfEntity efEntity = this.dbContext.Entities
-                .Where(efEntity => efEntity.Id == entity.Id)
+            EfEntityDto efEntityDto = this.dbContext.Entities
+                .Where(efEntityDto => efEntityDto.Id == entity.Id)
                 .SingleOrDefault();
 
-            if (efEntity == null)
+            if (efEntityDto == null)
             {
                 throw new NotFoundResultException("EntityReadable ({id}) konnte nicht gefunden werden.", entity.Id);
             }
 
-            EntityDtoData.UpdateEfEntity(efEntity, entity);
+            EntityDtoData.UpdateEfEntityDto(efEntityDto, entity);
 
             this.dbContext.SaveChanges();
         }

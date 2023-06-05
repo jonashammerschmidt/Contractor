@@ -16,7 +16,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains($"modelBuilder.Entity<Ef{relationSide.Entity.Name}>");
+            stringEditor.NextThatContains($"modelBuilder.Entity<Ef{relationSide.Entity.Name}Dto>");
             stringEditor.NextThatContains("});");
 
             stringEditor.InsertNewLine();
@@ -37,15 +37,15 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
             
             if (relationSide.OtherEntity.HasScope && relationSide.Entity.HasScope && !relationSide.Entity.HasOtherScope(relationSide.OtherEntity))
             {
-                stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}>(d => new {{ d.{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
+                stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}Dto>(d => new {{ d.{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
             }
             else if ((relationSide.OtherEntity.HasScope && !relationSide.Entity.HasScope) || relationSide.Entity.HasOtherScope(relationSide.OtherEntity))
             {
-                stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}>(d => new {{ d.{relationSide.Name}{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
+                stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}Dto>(d => new {{ d.{relationSide.Name}{relationSide.OtherEntity.ScopeEntity.Name}Id, d.{relationSide.Name}Id }})");
             }
             else
             {
-                stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}>(d => d.{relationSide.Name}Id)");
+                stringEditor.InsertLine($"                    .HasForeignKey<Ef{relationSide.Entity.Name}Dto>(d => d.{relationSide.Name}Id)");
             }
 
             stringEditor.InsertLine($"                    .IsRequired({(!relationSide.IsOptional).ToString().ToLower()})");

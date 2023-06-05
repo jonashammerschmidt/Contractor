@@ -61,7 +61,6 @@ namespace Contractor.Core.Generation.Frontend.Pages
             serviceCollection.AddSingleton<EntityDetailPageHtmlPropertyAddition>();
             serviceCollection.AddSingleton<EntityDetailPageHtmlToOneToOnePropertyAddition>();
             serviceCollection.AddSingleton<EntityDetailPageHtmlToPropertyAddition>();
-            serviceCollection.AddSingleton<EntityDetailPageTsFromPropertyAddition>();
             serviceCollection.AddSingleton<EntityDetailPageTsPropertyAddition>();
             serviceCollection.AddSingleton<EntityDetailPageTsToPropertyAddition>();
         }

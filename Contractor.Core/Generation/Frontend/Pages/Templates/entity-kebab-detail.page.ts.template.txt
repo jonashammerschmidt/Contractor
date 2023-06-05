@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/components/ui/confirmation-dialog/confirmation-dialog.service';
-import { EntityUpdate } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-update';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityDtoExpanded } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
 import { AppEventService } from 'src/app/services/event/app-event.service';

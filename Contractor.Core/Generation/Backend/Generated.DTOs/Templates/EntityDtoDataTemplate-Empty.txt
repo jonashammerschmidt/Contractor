@@ -11,15 +11,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
         {
         }
 
-        public static EntityDto ToEntityDto(Guid id, EntityDtoData entityDtoData)
-        {
-            return new EntityDto()
-            {
-                Id = id,
-            };
-        }
-
-        public static void UpdateEfEntity(EfEntity efEntity, EntityDtoData entityDtoData)
+        public static void UpdateEfEntityDto(EfEntityDto efEntityDto, EntityDtoData entityDtoData)
         {
         }
     }

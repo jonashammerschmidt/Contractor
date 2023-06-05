@@ -16,7 +16,8 @@ namespace Contractor.Core.Generation.Frontend.Pages
         {
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains("</form>");
+            stringEditor.NextThatContains("<div class=\"form-layout-card\">");
+            stringEditor.NextThatStartsWith("            </div>");
 
             stringEditor.InsertNewLine();
 

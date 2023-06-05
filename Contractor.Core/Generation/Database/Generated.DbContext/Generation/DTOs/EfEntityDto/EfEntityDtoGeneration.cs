@@ -1,4 +1,4 @@
-﻿using Contractor.Core.BaseClasses;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.Generation.Backend.Persistence;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
@@ -7,12 +7,12 @@ using System.IO;
 namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
-    internal class EfEntityGeneration : ClassGeneration
+    internal class EfEntityDtoGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(PersistenceDbContextProjectGeneration.TemplateFolder, "EfEntityTemplate.txt");
+            Path.Combine(PersistenceDbContextProjectGeneration.TemplateFolder, "EfEntityDtoTemplate.txt");
 
-        private static readonly string FileName = "EfEntity.cs";
+        private static readonly string FileName = "EfEntityDto.cs";
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly EfDtoEntityAddition efDtoEntityAddition;
@@ -20,7 +20,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
         private readonly DtoRelationAddition relationAddition;
         private readonly EfDtoContructorHashSetAddition efDtoContructorHashSetAddition;
 
-        public EfEntityGeneration(
+        public EfEntityDtoGeneration(
             EntityCoreAddition entityCoreAddition,
             EfDtoEntityAddition efDtoEntityAddition,
             EfDtoPropertyAddition efDtoPropertyAddition,
@@ -52,7 +52,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "virtual ICollection<Ef", ">");
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "virtual ICollection<Ef", "Dto>");
 
             this.relationAddition.AddRelationToDTOForDatabase(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
@@ -65,14 +65,14 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
             RelationSide relationSideToGuid = RelationSide.FromGuidRelationEndTo(relation);
             this.relationAddition.AddRelationToDTOForDatabase(relationSideToGuid, PersistenceDbContextProjectGeneration.DtoFolder, FileName);
 
-            RelationSide relationSideToEfObject = RelationSide.FromObjectRelationEndTo(relation, "virtual Ef", "");
+            RelationSide relationSideToEfObject = RelationSide.FromObjectRelationEndTo(relation, "virtual Ef", "Dto");
             this.relationAddition.AddRelationToDTOForDatabase(relationSideToEfObject, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
                 $"{relationSideToEfObject.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideToEfObject.OtherEntity.Module.Name}.{relationSideToEfObject.OtherEntity.NamePlural}");
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
-            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "virtual Ef", "");
+            RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "virtual Ef", "Dto");
 
             this.relationAddition.AddRelationToDTOForDatabase(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
@@ -83,7 +83,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
             RelationSide relationSideToGuid = RelationSide.FromGuidRelationEndTo(relation);
             this.relationAddition.AddRelationToDTOForDatabase(relationSideToGuid, PersistenceDbContextProjectGeneration.DtoFolder, FileName);
 
-            RelationSide relationSideToEfObject = RelationSide.FromObjectRelationEndTo(relation, "virtual Ef", "");
+            RelationSide relationSideToEfObject = RelationSide.FromObjectRelationEndTo(relation, "virtual Ef", "Dto");
             this.relationAddition.AddRelationToDTOForDatabase(relationSideToEfObject, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
                 $"{relationSideToEfObject.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideToEfObject.OtherEntity.Module.Name}.{relationSideToEfObject.OtherEntity.NamePlural}");
         }
@@ -92,7 +92,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
         {
             foreach (var scopedEntity in entity.ScopedEntities)
             {
-                RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(entity, scopedEntity, "virtual ICollection<Ef", ">");
+                RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(entity, scopedEntity, "virtual ICollection<Ef", "Dto>");
 
                 this.relationAddition.AddRelationToDTOForDatabase(relationSideFrom, PersistenceDbContextProjectGeneration.DtoFolder, FileName,
                     $"{relationSideFrom.Entity.Module.Options.Paths.DbProjectName}.Generated.DbContext.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");

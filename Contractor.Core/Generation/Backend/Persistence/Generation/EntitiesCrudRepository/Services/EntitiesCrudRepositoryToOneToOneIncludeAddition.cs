@@ -21,7 +21,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
             stringEditor.NextThatContains($"Get{relationSide.Entity.Name}Detail(");
             stringEditor.NextThatContains($"this.dbContext.{relationSide.Entity.NamePlural}");
             stringEditor.NextUntil(line => !line.Contains("Include("));
-            stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})");
+            stringEditor.InsertLine($"                .Include(ef{relationSide.Entity.Name}Dto => ef{relationSide.Entity.Name}Dto.{relationSide.Name})");
             stringEditor.MoveToStart();
 
             stringEditor.NextThatContains($"GetPaged{relationSide.Entity.NamePlural}(");
@@ -34,7 +34,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
             }
             stringEditor.Next();
 
-            string includeLine = $"                .Include(ef{relationSide.Entity.Name} => ef{relationSide.Entity.Name}.{relationSide.Name})";
+            string includeLine = $"                .Include(ef{relationSide.Entity.Name}Dto => ef{relationSide.Entity.Name}Dto.{relationSide.Name})";
             if (!stringEditor.GetLine().Trim().StartsWith("."))
             {
                 includeLine += ";";

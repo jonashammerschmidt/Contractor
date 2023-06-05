@@ -1,0 +1,11 @@
+namespace DbProjectName.Generated.DbContext.Modules.Domain.Entities
+{
+    public class EfEntityDto
+    {
+        public EfEntityDto()
+        {
+        }
+
+        public Guid Id { get; set; }
+    }
+}

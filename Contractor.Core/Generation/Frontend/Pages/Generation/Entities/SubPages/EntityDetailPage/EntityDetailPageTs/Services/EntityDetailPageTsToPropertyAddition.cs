@@ -22,15 +22,15 @@ namespace Contractor.Core.Generation.Frontend.Pages
                 $"/{relationSide.OtherEntity.NamePluralKebab}" +
                 $"/{relationSide.OtherEntity.NamePluralKebab}-crud.service");
 
-            fileData = ImportStatements.Add(fileData, $"I{relationSide.OtherEntity.Name}ListItem",
+            fileData = ImportStatements.Add(fileData, $"I{relationSide.OtherEntity.Name}DtoExpanded",
                 $"src/app/model/{relationSide.OtherEntity.Module.NameKebab}" +
                 $"/{relationSide.OtherEntity.NamePluralKebab}" +
-                $"/dtos/i-{StringConverter.PascalToKebabCase(relationSide.OtherEntity.Name)}-list-item");
+                $"/dtos/i-{StringConverter.PascalToKebabCase(relationSide.OtherEntity.Name)}-dto-expanded");
 
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {relationSide.NameLower}DataSource: DropdownPaginationDataSource<I{relationSide.OtherEntity.Name}ListItem>;");
+            stringEditor.InsertLine($"  {relationSide.NameLower}DataSource: DropdownPaginationDataSource<I{relationSide.OtherEntity.Name}DtoExpanded>;");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("private formBuilder: UntypedFormBuilder");

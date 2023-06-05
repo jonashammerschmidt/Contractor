@@ -31,10 +31,10 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains($"public Ef{relationSide.Entity.Name}()");
+            stringEditor.NextThatContains($"public Ef{relationSide.Entity.Name}Dto()");
             stringEditor.NextUntil(line => line.Trim().Equals("}"));
 
-            stringEditor.InsertLine($"            this.{relationSide.Name} = new HashSet<Ef{relationSide.OtherEntity.Name}>();");
+            stringEditor.InsertLine($"            this.{relationSide.Name} = new HashSet<Ef{relationSide.OtherEntity.Name}Dto>();");
 
             return stringEditor.GetText();
         }

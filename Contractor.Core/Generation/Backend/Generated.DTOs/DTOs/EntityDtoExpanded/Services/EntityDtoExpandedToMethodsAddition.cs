@@ -17,19 +17,17 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             fileData = UsingStatements.Add(fileData, $"{relationSide.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSide.OtherEntity.Module.Name}.{relationSide.OtherEntity.NamePlural}");
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("public " + relationSide.Entity.Name + "DtoExpanded(" + relationSide.Entity.Name + "DtoExpanded");
+            stringEditor.NextThatContains("protected " + relationSide.Entity.Name + "DtoExpanded(" + relationSide.Entity.Name + "DtoExpanded");
             stringEditor.NextUntil(line => line.Trim().Equals("}"));
-
             stringEditor.InsertLine($"            this.{relationSide.Name} = {relationSide.Entity.Name.LowerFirstChar()}.{relationSide.Name};");
             fileData = stringEditor.GetText();
 
             stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("FromEf" + relationSide.Entity.Name);
-            stringEditor.NextUntil(line => line.Trim().Equals("};"));
-
+            stringEditor.NextThatContains("protected " + relationSide.Entity.Name + "DtoExpanded(Ef" + relationSide.Entity.Name + "Dto");
+            stringEditor.NextUntil(line => line.Trim().Equals("}"));
             stringEditor.InsertLine(
-                $"                {relationSide.Name} = {relationSide.OtherEntity.Name}Dto\n" +
-                $"                    .FromEf{relationSide.OtherEntity.Name}(ef{relationSide.Entity.Name}.{relationSide.Name}),");
+                $"            this.{relationSide.Name} = {relationSide.OtherEntity.Name}Dto\n" +
+                $"                .FromEf{relationSide.OtherEntity.Name}Dto(ef{relationSide.Entity.Name}Dto.{relationSide.Name});");
 
             return stringEditor.GetText();
         }

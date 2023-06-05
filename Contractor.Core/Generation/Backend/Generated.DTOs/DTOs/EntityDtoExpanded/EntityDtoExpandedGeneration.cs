@@ -16,7 +16,6 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoPropertyAddition propertyAddition;
         private readonly DtoRelationAddition relationAddition;
-        private readonly EntityDtoExpandedMethodsAddition entityDtoExpandedMethodsAddition;
         private readonly EntityDtoExpandedToMethodsAddition entityDtoExpandedToMethodsAddition;
         private readonly EntityDtoExpandedFromOneToOneMethodsAddition entityDtoExpandedFromOneToOneMethodsAddition;
 
@@ -24,14 +23,12 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             EntityCoreAddition entityCoreAddition,
             DtoPropertyAddition propertyAddition,
             DtoRelationAddition relationAddition,
-            EntityDtoExpandedMethodsAddition entityDtoExpandedMethodsAddition,
             EntityDtoExpandedToMethodsAddition entityDtoExpandedToMethodsAddition,
             EntityDtoExpandedFromOneToOneMethodsAddition entityDtoExpandedFromOneToOneMethodsAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.propertyAddition = propertyAddition;
             this.relationAddition = relationAddition;
-            this.entityDtoExpandedMethodsAddition = entityDtoExpandedMethodsAddition;
             this.entityDtoExpandedToMethodsAddition = entityDtoExpandedToMethodsAddition;
             this.entityDtoExpandedFromOneToOneMethodsAddition = entityDtoExpandedFromOneToOneMethodsAddition;
         }
@@ -42,18 +39,11 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
         protected override void AddEntity(Entity entity)
         {
-            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
-            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DomainFolder, templatePath, FileName);
+            this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DomainFolder, TemplatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            if (property.IsHidden)
-            {
-                return;
-            }
-
-            this.entityDtoExpandedMethodsAddition.AddPropertyToBackendGeneratedFile(property, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
