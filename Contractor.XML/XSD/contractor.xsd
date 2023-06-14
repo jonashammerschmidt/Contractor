@@ -35,6 +35,11 @@
                   <xs:documentation xml:lang="de">Name des Backend-Projekts.</xs:documentation>
                 </xs:annotation>
               </xs:element>
+              <xs:element name="GeneratedProjectName" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Name des Generated-Backend-Projekts.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
               <xs:element name="DbProjectName" type="xs:string">
                 <xs:annotation>
                   <xs:documentation xml:lang="de">Name des Database-Projekts.</xs:documentation>
