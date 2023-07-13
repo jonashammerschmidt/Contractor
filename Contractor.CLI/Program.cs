@@ -87,7 +87,13 @@ namespace Contractor.CLI
 
             if (Assembly.GetExecutingAssembly().GetName().Version.CompareTo(Version.Parse(contractorXml.MinContractorVersion)) < 0)
             {
-                Console.WriteLine("Es muss mindestens die Contractor Version {1} verwendet werden.", contractorXml.MinContractorVersion);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Es muss mindestens die Contractor Version {0} verwendet werden.", contractorXml.MinContractorVersion);
+                Console.WriteLine("");
+                Console.WriteLine("Update-Befehl: dotnet tool update --global contractor");
+                Console.WriteLine("");
+                Console.ResetColor(); 
+                return;
             }
 
             ContractorGenerationOptions contractorGenerationOptions = ContractorXmlConverter

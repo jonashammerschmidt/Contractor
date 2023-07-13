@@ -10,7 +10,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
         private static readonly string TemplatePath =
             Path.Combine(PagesProjectGeneration.TemplateFolder, "entity-kebab-detail.page.scss.template.txt");
 
-        private static readonly string FileName = "sub-pages\\detail\\entity-kebab-detail.page.scss";
+        private static readonly string FileName = Path.Combine("sub-pages", "detail", "entity-kebab-detail.page.scss");
 
         private readonly EntityCoreAddition frontendEntityCoreAddition;
 

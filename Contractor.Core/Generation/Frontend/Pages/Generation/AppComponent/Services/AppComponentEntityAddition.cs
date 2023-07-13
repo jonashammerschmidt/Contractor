@@ -20,7 +20,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         public void Add(Entity entity)
         {
-            string filePath = Path.Combine(entity.Module.Options.Paths.FrontendDestinationFolder, "src\\app\\app.component.ts");
+            string filePath = Path.Combine(entity.Module.Options.Paths.FrontendDestinationFolder, "src", "app", "app.component.ts");
             string fileData = UpdateFileData(entity, filePath);
 
             this.fileSystemClient.WriteAllText(fileData, filePath);

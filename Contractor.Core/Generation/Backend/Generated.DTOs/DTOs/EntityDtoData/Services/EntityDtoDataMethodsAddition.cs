@@ -15,7 +15,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         protected override string UpdateFileData(Property property, string fileData)
         {
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("protected " + property.Entity.Name + "DtoData(" + property.Entity.Name + "DtoData");
+            stringEditor.NextThatContains("public " + property.Entity.Name + "DtoData(" + property.Entity.Name + "DtoData");
             stringEditor.NextUntil(line => line.Trim().Equals("}"));
             stringEditor.InsertLine($"            this.{property.Name} = {property.Entity.Name.LowerFirstChar()}DtoData.{property.Name};");
             fileData = stringEditor.GetText();

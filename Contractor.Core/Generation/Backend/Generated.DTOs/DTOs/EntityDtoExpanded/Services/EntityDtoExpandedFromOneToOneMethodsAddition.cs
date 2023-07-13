@@ -17,7 +17,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             fileData = UsingStatements.Add(fileData, $"{relationSide.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSide.OtherEntity.Module.Name}.{relationSide.OtherEntity.NamePlural}");
 
             StringEditor stringEditor = new StringEditor(fileData);
-            stringEditor.NextThatContains("protected " + relationSide.Entity.Name + "DtoExpanded(" + relationSide.Entity.Name + "DtoExpanded");
+            stringEditor.NextThatContains("public " + relationSide.Entity.Name + "DtoExpanded(" + relationSide.Entity.Name + "DtoExpanded");
             stringEditor.NextUntil(line => line.Trim().Equals("}"));
             stringEditor.InsertLine($"            this.{relationSide.Name} = {relationSide.Entity.Name.LowerFirstChar()}.{relationSide.Name};");
             fileData = stringEditor.GetText();

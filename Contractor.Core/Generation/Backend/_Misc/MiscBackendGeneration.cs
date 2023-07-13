@@ -1,12 +1,12 @@
-﻿using Contractor.Core.Helpers;
+﻿using System.IO;
+using Contractor.Core.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Backend.Misc
 {
     internal class MiscBackendGeneration
     {
-        internal static readonly string TemplateFolder = Folder.Executable + @"\Generation\Backend\_Misc\Templates";
-
+        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Backend", "_Misc", "Templates");
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, E2ePostmanGeneration>();

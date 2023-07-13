@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
 {
     internal class PersistenceInsertDataDevProjectGeneration
     {
-        public static readonly string DomainFolder = "InsertData.Dev\\CsvData\\Domain";
+        public static readonly string DomainFolder = Path.Combine("InsertData.Dev", "CsvData", "Domain");
 
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {

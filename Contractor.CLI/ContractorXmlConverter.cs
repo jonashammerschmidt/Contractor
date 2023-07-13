@@ -17,10 +17,10 @@ namespace Contractor.CLI
             {
                 Paths = new Paths()
                 {
-                    BackendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.BackendDestinationFolder)),
-                    BackendGeneratedDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.BackendGeneratedDestinationFolder)),
-                    DbDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.DbDestinationFolder)),
-                    FrontendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, contractorXml.Paths.FrontendDestinationFolder)),
+                    BackendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.BackendDestinationFolder))),
+                    BackendGeneratedDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.BackendGeneratedDestinationFolder))),
+                    DbDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.DbDestinationFolder))),
+                    FrontendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.FrontendDestinationFolder))),
                     ProjectName = contractorXml.Paths.ProjectName,
                     GeneratedProjectName = contractorXml.Paths.GeneratedProjectName,
                     DbProjectName = contractorXml.Paths.DbProjectName,
@@ -37,6 +37,11 @@ namespace Contractor.CLI
             };
 
             return contractorGenerationOptions;
+        }
+
+        private static string FixPath(string path)
+        {
+            return Path.Combine(path.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries));
         }
 
         internal static void AddToContractorGenerationOptions(

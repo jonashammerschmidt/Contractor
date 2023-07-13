@@ -1,13 +1,14 @@
-﻿using Contractor.Core.Helpers;
+﻿using System.IO;
+using Contractor.Core.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Backend.Api
 {
-    internal class ApiProjectGeneration
+    internal static class ApiProjectGeneration
     {
-        internal static readonly string DomainFolder = "API\\Modules\\Domain\\Entities\\API";
+        internal static readonly string DomainFolder = Path.Combine("API", "Modules", "Domain", "Entities", "API");
 
-        internal static readonly string TemplateFolder = Folder.Executable + @"\Generation\Backend\Api\Templates";
+        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Backend", "Api", "Templates");
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {

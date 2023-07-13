@@ -11,7 +11,7 @@ namespace Contractor.Core.Generation.Frontend.Model
         private static readonly string TemplatePath =
             Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto.template.txt");
 
-        private static readonly string FileName = "dtos\\i-entity-kebab-dto.ts";
+        private static readonly string FileName = Path.Combine("dtos", "i-entity-kebab-dto.ts");
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;

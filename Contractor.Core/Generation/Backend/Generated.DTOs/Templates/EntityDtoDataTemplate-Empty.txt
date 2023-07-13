@@ -11,6 +11,10 @@ namespace GeneratedProjectName.Modules.Domain.Entities
         {
         }
 
+        protected EntityDtoData(EfEntityDto efEntityDto)
+        {
+        }
+
         public static void UpdateEfEntityDto(EfEntityDto efEntityDto, EntityDtoData entityDtoData)
         {
         }

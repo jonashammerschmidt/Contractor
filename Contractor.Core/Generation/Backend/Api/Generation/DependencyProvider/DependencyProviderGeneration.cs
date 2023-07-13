@@ -1,4 +1,5 @@
-﻿using Contractor.Core.MetaModell;
+﻿using System.IO;
+using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Api
@@ -6,7 +7,7 @@ namespace Contractor.Core.Generation.Backend.Api
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND })]
     internal class DependencyProviderGeneration : ClassGeneration
     {
-        private static readonly string FileName = @"API\DependencyProvider.cs";
+        private static readonly string FileName = Path.Combine("API", "DependencyProvider.cs");
 
         private readonly DomainDependencyProvider domainDependencyProvider;
         private readonly EntityCoreDependencyProvider entityCoreDependencyProvider;
