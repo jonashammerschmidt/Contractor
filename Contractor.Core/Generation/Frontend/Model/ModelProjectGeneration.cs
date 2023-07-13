@@ -1,13 +1,14 @@
-﻿using Contractor.Core.Helpers;
+﻿using System.IO;
+using Contractor.Core.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Frontend.Model
 {
     internal class ModelProjectGeneration
     {
-        internal static readonly string DomainFolder = "src\\app\\model\\domain-kebab\\entities-kebab";
+        internal static readonly string DomainFolder = Path.Combine("src", "app", "model", "domain-kebab", "entities-kebab");
 
-        internal static readonly string TemplateFolder = Folder.Executable + @"\Generation\Frontend\Model\Templates";
+        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Frontend", "Model", "Templates");
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {

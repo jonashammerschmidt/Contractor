@@ -7,7 +7,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
     {
         public EntityDtoData() { }
 
-        protected EntityDtoData(EntityDtoData entityDtoData)
+        public EntityDtoData(EntityDtoData entityDtoData)
         {
         }
 

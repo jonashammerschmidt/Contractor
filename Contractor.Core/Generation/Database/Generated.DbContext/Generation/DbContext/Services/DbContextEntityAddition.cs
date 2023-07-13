@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Helpers;
+﻿using System.IO;
+using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
 
         public void Add(Entity entity)
         {
-            string filePath = this.pathService.GetAbsolutePathForDatabase(entity, $"Generated.DbContext\\{entity.Module.Options.Paths.DbContextName}Raw.cs");
+            string filePath = this.pathService.GetAbsolutePathForDatabase(entity, Path.Combine("Generated.DbContext", $"{entity.Module.Options.Paths.DbContextName}Raw.cs"));
             string fileData = UpdateFileData(entity, filePath);
 
             this.fileSystemClient.WriteAllText(fileData, filePath);

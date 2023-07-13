@@ -6,7 +6,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
     {
         public EntityDtoExpanded() { }
 
-        protected EntityDtoExpanded(EntityDtoExpanded entity) : base(entity)
+        public EntityDtoExpanded(EntityDtoExpanded entity) : base(entity)
         {
         }
 

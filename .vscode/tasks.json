@@ -13,9 +13,7 @@
         {
             "label": "Tasks - Pack",
             "type": "shell",
-            "windows": {
-                "command": "dotnet pack -c Release"
-            },
+            "command": "dotnet pack -c Release",
             "options": {
                 "cwd": "Contractor.CLI"
             },
@@ -23,9 +21,7 @@
         {
             "label": "Tasks - Uninstall",
             "type": "shell",
-            "windows": {
-                "command": "dotnet tool uninstall --global contractor"
-            },
+            "command": "dotnet tool uninstall --global contractor",
             "options": {
                 "cwd": "Contractor.CLI"
             },
@@ -33,6 +29,9 @@
         {
             "label": "Tasks - Install",
             "type": "shell",
+            "osx": {
+                "command": "dotnet tool install --global --add-source ./bin/Release contractor"
+            },
             "windows": {
                 "command": "dotnet tool install --global --add-source .\\bin\\Release contractor"
             },

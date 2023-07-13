@@ -10,7 +10,7 @@ namespace Contractor.Core.Generation.Backend.Logic
         private static readonly string TemplatePath =
             Path.Combine(LogicProjectGeneration.TemplateFolder, "IEntitiesCrudLogicTemplate.txt");
 
-        private static readonly string FileName = "Interfaces\\IEntitiesCrudLogic.cs";
+        private static readonly string FileName = Path.Combine("Interfaces", "IEntitiesCrudLogic.cs");
 
         private readonly EntityCoreAddition entityCoreAddition;
 

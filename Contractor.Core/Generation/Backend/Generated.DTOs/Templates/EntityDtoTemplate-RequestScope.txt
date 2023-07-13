@@ -11,7 +11,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
 
         public EntityDto() { }
 
-        protected EntityDto(EntityDto entityDto) : base(entityDto)
+        public EntityDto(EntityDto entityDto) : base(entityDto)
         {
             this.Id = entityDto.Id;
             this.RequestScopeId = entityDto.RequestScopeId;
