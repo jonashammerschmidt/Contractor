@@ -29,7 +29,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
             this.RequestScopeId = requestScopeId;
         }
 
-        public static EntityDto FromEfEntityDto(EfEntityDto efEntityDto)
+        public static new EntityDto FromEfEntityDto(EfEntityDto efEntityDto)
         {
             if (efEntityDto == null)
             {

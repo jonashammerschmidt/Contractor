@@ -24,7 +24,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
             this.Id = id;
         }
 
-        public static EntityDto FromEfEntityDto(EfEntityDto efEntityDto)
+        public static new EntityDto FromEfEntityDto(EfEntityDto efEntityDto)
         {
             if (efEntityDto == null)
             {

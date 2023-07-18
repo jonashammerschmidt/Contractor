@@ -14,7 +14,7 @@ namespace GeneratedProjectName.Modules.Domain.Entities
         {
         }
 
-        public new static EntityDtoExpanded FromEfEntityDto(EfEntityDto efEntityDto)
+        public static new EntityDtoExpanded FromEfEntityDto(EfEntityDto efEntityDto)
         {
             if (efEntityDto == null)
             {

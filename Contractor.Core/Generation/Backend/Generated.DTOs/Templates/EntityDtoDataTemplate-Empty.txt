@@ -15,6 +15,16 @@ namespace GeneratedProjectName.Modules.Domain.Entities
         {
         }
 
+        public static EntityDtoData FromEfEntityDto(EfEntityDto efEntityDto)
+        {
+            if (efEntityDto == null)
+            {
+                return null;
+            }
+
+            return new EntityDtoData(efEntityDto);
+        }
+
         public static void UpdateEfEntityDto(EfEntityDto efEntityDto, EntityDtoData entityDtoData)
         {
         }
