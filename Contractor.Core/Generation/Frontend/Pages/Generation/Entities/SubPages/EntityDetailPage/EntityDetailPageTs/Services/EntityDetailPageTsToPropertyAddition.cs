@@ -14,7 +14,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
-            fileData = ImportStatements.Add(fileData, "DropdownPaginationDataSource",
+            fileData = ImportStatements.Add(fileData, "DropdownDataSource",
                 "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
 
             fileData = ImportStatements.Add(fileData, $"{relationSide.OtherEntity.NamePlural}CrudService",
@@ -29,8 +29,12 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
+            stringEditor.NextThatContains($"export interface {relationSide.Entity.Name}DetailPageForm");
+            stringEditor.NextThatContains("}");
+            stringEditor.InsertLine($"  {relationSide.NameLower}Id{(relationSide.IsOptional ? "?" : "" )}: string;");
+
             stringEditor.NextThatContains("constructor(");
-            stringEditor.InsertLine($"  {relationSide.NameLower}DataSource: DropdownPaginationDataSource<I{relationSide.OtherEntity.Name}DtoExpanded>;");
+            stringEditor.InsertLine($"  {relationSide.NameLower}DataSource: DropdownDataSource<I{relationSide.OtherEntity.Name}DtoExpanded>;");
             stringEditor.InsertNewLine();
 
             stringEditor.NextThatContains("private formBuilder: UntypedFormBuilder");
@@ -40,19 +44,23 @@ namespace Contractor.Core.Generation.Frontend.Pages
             {
                 stringEditor.InsertLine(constructorLine);
             }
-            stringEditor.NextThatContains("this.formBuilder.group({");
-            stringEditor.NextThatContains("});");
-            stringEditor.InsertLine($"      {relationSide.NameLower}Id: new UntypedFormControl(null, [" +
-                ((!relationSide.IsOptional) ? "Validators.required" : "") +
-                "]),");
 
-            stringEditor.MoveToStart();
-            stringEditor.NextThatContains("ngOnInit()");
+            stringEditor.NextThatContains("initializeDataSources() {");
             stringEditor.NextThatStartsWith("  }");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"    this.{relationSide.NameLower}DataSource = new DropdownPaginationDataSource(");
-            stringEditor.InsertLine($"      (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),");
-            stringEditor.InsertLine($"      '{relationSide.OtherEntity.DisplayProperty.NameLower}');");
+            stringEditor.InsertLine($"    this.{relationSide.NameLower}DataSource = new DropdownDataSource({{");
+            stringEditor.InsertLine($"      filterField: '{relationSide.OtherEntity.DisplayProperty.NameLower}',");
+            stringEditor.InsertLine($"      getPagedData: (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),");
+            stringEditor.InsertLine($"    }});");
+            
+            stringEditor.NextThatContains("setupFormController() {");
+            stringEditor.NextThatContains("});");
+            stringEditor.InsertLine($"      {relationSide.NameLower}Id: {{");
+            if (!relationSide.IsOptional)
+            {
+                stringEditor.InsertLine($"        validators: [Validators.required],");
+            }
+            stringEditor.InsertLine($"      }},");
 
             return stringEditor.GetText();
         }

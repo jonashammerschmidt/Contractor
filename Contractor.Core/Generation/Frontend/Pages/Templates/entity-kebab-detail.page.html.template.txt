@@ -21,7 +21,7 @@
     </div>
 
     <div class="fst-content" *ngIf="entity">
-        <form [formGroup]="formGroup" class="form-layout-container">
+        <form [formGroup]="formController.formGroup" class="form-layout-container">
             <div class="form-layout-card">
             </div>
         </form>

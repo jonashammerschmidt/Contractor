@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormController } from '@krz/material';
 import { ConfirmationDialogService } from 'src/app/components/ui/confirmation-dialog/confirmation-dialog.service';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 import { IEntityDtoExpanded } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
 import { AppEventService } from 'src/app/services/event/app-event.service';
-import { guidRegex, integerRegex } from 'src/app/helpers/regex.helper';
+
+export interface EntityDetailPageForm {
+  id: string;
+}
 
 @Component({
   selector: 'app-entity-kebab-detail',
@@ -16,8 +20,8 @@ export class EntityDetailPage implements OnInit {
 
   entityId: string;
   entity: IEntityDtoExpanded;
-  
-  formGroup: FormGroup;
+
+  formController: FormController<EntityDetailPageForm>;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
@@ -29,9 +33,8 @@ export class EntityDetailPage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.formGroup = this.formBuilder.group({
-      id: new UntypedFormControl({ value: '', disabled: true }, [Validators.required]),
-    });
+    this.initializeDataSources();
+    this.setupFormController();
 
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
@@ -43,13 +46,21 @@ export class EntityDetailPage implements OnInit {
     });
   }
 
+  initializeDataSources() {
+  }
+
+  setupFormController() {
+    this.formController = new FormController(this.formBuilder, {
+    });
+  }
+
   async onSaveClicked(): Promise<void> {
-    this.formGroup.markAllAsTouched();
-    if (!this.formGroup.valid) {
+    this.formController.formGroup.markAllAsTouched();
+    if (!this.formController.formGroup.valid) {
       return;
     }
 
-    const entityUpdate = this.formGroup.getRawValue();
+    const entityUpdate = this.formController.formGroup.getRawValue();
     await this.entitiesCrudService.updateEntity(entityUpdate);
     this.appEventService.newSuccess("EntityReadable wurde gespeichert.");
   }
@@ -65,7 +76,7 @@ export class EntityDetailPage implements OnInit {
     this.entity = null;
     this.entity = await this.entitiesCrudService.getEntityDetail(this.entityId);
 
-    this.formGroup.patchValue(this.entity);
+    this.formController.formGroup.patchValue(this.entity);
   }
 
 }

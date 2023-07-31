@@ -12,7 +12,7 @@ namespace Contractor.Core.Tools
             {
                 case PropertyType.Boolean:
                     return
-                        $"                <div formLayoutRow [formGroupInstance]=\"formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
+                        $"                <div formLayoutRow [formGroupInstance]=\"formController.formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                         $"                    <div class=\"form-layout-inputs\">\n" +
                         $"                        <mat-checkbox formControlName=\"{property.Name.LowerFirstChar()}\"></mat-checkbox>\n" +
@@ -21,7 +21,7 @@ namespace Contractor.Core.Tools
 
                 case PropertyType.ByteArray:
                     return
-                        $"                <div formLayoutRow [formGroupInstance]=\"formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
+                        $"                <div formLayoutRow [formGroupInstance]=\"formController.formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                          "                    <div class=\"form-layout-inputs\">\n" +
                          "                        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
@@ -39,7 +39,7 @@ namespace Contractor.Core.Tools
 
                 case PropertyType.DateTime:
                     return
-                        $"                <div formLayoutRow [formGroupInstance]=\"formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
+                        $"                <div formLayoutRow [formGroupInstance]=\"formController.formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                          "                    <div class=\"form-layout-inputs\">\n" +
                          "                        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
@@ -61,7 +61,7 @@ namespace Contractor.Core.Tools
                 case PropertyType.Integer:
                 case PropertyType.Double:
                     return
-                        $"                <div formLayoutRow [formGroupInstance]=\"formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
+                        $"                <div formLayoutRow [formGroupInstance]=\"formController.formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                          "                    <div class=\"form-layout-inputs\">\n" +
                          "                        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
@@ -79,7 +79,7 @@ namespace Contractor.Core.Tools
 
                 case PropertyType.String:
                     return
-                        $"                <div formLayoutRow [formGroupInstance]=\"formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
+                        $"                <div formLayoutRow [formGroupInstance]=\"formController.formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                          "                    <div class=\"form-layout-inputs\">\n" +
                          "                        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
@@ -97,7 +97,7 @@ namespace Contractor.Core.Tools
 
                 case PropertyType.Guid:
                     return
-                        $"                <div formLayoutRow [formGroupInstance]=\"formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
+                        $"                <div formLayoutRow [formGroupInstance]=\"formController.formGroup\" formControlNameInstance=\"{property.Name.LowerFirstChar()}\">\n" +
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                          "                    <div class=\"form-layout-inputs\">\n" +
                          "                        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +

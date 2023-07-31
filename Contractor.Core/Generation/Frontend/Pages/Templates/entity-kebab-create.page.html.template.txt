@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="fst-content">
-        <form [formGroup]="formGroup" class="form-layout-container">
+        <form [formGroup]="formController.formGroup" class="form-layout-container">
             <div class="form-layout-card">
             </div>
 

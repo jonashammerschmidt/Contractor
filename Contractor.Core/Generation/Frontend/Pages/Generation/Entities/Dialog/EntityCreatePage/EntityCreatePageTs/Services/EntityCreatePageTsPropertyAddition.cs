@@ -14,9 +14,24 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override string UpdateFileData(Property property, string fileData)
         {
-            StringEditor stringEditor = new StringEditor(fileData);
+            if (property.Type == PropertyType.Integer)
+            {
+                fileData = ImportStatements.Add(fileData, "integerRegex",
+                    "src/app/helpers/regex.helper");
+            }
+            if (property.Type == PropertyType.Guid)
+            {
+                fileData = ImportStatements.Add(fileData, "guidRegex",
+                    "src/app/helpers/regex.helper");
+            }
 
-            stringEditor.NextThatContains("this.formBuilder.group({");
+            StringEditor stringEditor = new StringEditor(fileData);
+            
+            stringEditor.NextThatContains($"export interface {property.Entity.Name}CreateDialogForm");
+            stringEditor.NextThatContains("}");
+            stringEditor.InsertLine("  " + FrontendDtoPropertyLine.GetPropertyLine(property).Trim());
+
+            stringEditor.NextThatContains("setupFormController() {");
             stringEditor.NextThatContains("});");
             stringEditor.InsertLine(FrontendFormBuilderPropertyLine.GetPropertyLine(property));
 

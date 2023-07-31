@@ -14,7 +14,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
-            fileData = ImportStatements.Add(fileData, "DropdownPaginationDataSource",
+            fileData = ImportStatements.Add(fileData, "DropdownDataSource",
                 "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
 
             fileData = ImportStatements.Add(fileData, $"{relationSide.OtherEntity.NamePlural}CrudService",
