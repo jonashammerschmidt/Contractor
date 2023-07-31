@@ -14,7 +14,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
-            fileData = ImportStatements.Add(fileData, "DropdownPaginationDataSource",
+            fileData = ImportStatements.Add(fileData, "DropdownDataSource",
                 "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
 
             fileData = ImportStatements.Add(fileData, $"{relationSide.OtherEntity.NamePlural}CrudService",
@@ -40,13 +40,10 @@ namespace Contractor.Core.Generation.Frontend.Pages
                 stringEditor.InsertLine(constructorLine);
             }
 
-            stringEditor.NextThatContains("PaginationDataSource");
-            stringEditor.NextThatContains("() => [");
-            stringEditor.NextThatContains("]);");
-            stringEditor.InsertLine("        {");
-            stringEditor.InsertLine($"          filterField: '" + relationSide.NameLower + "Id',");
-            stringEditor.InsertLine($"          equalsFilters: this.{relationSide.NameLower}SelectedValues");
-            stringEditor.InsertLine("        },");
+            stringEditor.NextThatContains("TableDataSource");
+            stringEditor.NextThatContains("AddContainsFilters");
+            stringEditor.NextThatContains("});");
+            stringEditor.InsertLine($"        .AddEqualsFilters('{relationSide.NameLower}Id', () => this.{relationSide.NameLower}SelectedValues)");
 
             return stringEditor.GetText();
         }
@@ -55,9 +52,10 @@ namespace Contractor.Core.Generation.Frontend.Pages
         {
             return
                 $"  {relationSide.NameLower}SelectedValues = [];\n" +
-                $"  {relationSide.NameLower}DataSource = new DropdownPaginationDataSource(\n" +
-                $"    (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),\n" +
-                $"      '{relationSide.OtherEntity.DisplayProperty.NameLower}');";
+                $"  {relationSide.NameLower}DataSource = new DropdownDataSource({{\n" +
+                $"    filterField: '{relationSide.OtherEntity.DisplayProperty.NameLower}',\n" +
+                $"    getPagedData: (options) => this.{relationSide.OtherEntity.NamePluralLower}CrudService.getPaged{relationSide.OtherEntity.NamePlural}(options),\n" +
+                $"  }});";
         }
     }
 }

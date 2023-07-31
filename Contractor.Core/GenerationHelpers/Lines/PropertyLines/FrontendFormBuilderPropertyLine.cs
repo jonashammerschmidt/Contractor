@@ -15,19 +15,27 @@ namespace Contractor.Core.Tools
                     case PropertyType.ByteArray:
                     case PropertyType.DateTime:
                     case PropertyType.Double:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, []),";
+                        return $"      {property.Name.LowerFirstChar()}: {{ }},";
 
                     case PropertyType.Integer:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.pattern(integerRegex)]),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        validators: [Validators.pattern(integerRegex)],\n" +
+                               $"      }},";
 
                     case PropertyType.Guid:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.pattern(guidRegex)]),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        validators: [Validators.pattern(guidRegex)],\n" +
+                               $"      }},";
 
                     case PropertyType.String:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl('', [Validators.maxLength({property.TypeExtra})]),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        validators: [Validators.maxLength({property.TypeExtra})],\n" +
+                               $"      }},";
 
                     case PropertyType.Boolean:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(false, []),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        initialValue: false,\n" +
+                               $"      }},";
                 }
             }
             else
@@ -37,19 +45,30 @@ namespace Contractor.Core.Tools
                     case PropertyType.ByteArray:
                     case PropertyType.DateTime:
                     case PropertyType.Double:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.required]),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        validators: [Validators.required],\n" +
+                               $"      }},";
 
                     case PropertyType.Integer:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.required, Validators.pattern(integerRegex)]),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        validators: [Validators.required, Validators.pattern(integerRegex)],\n" +
+                               $"      }},";
 
                     case PropertyType.Guid:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(null, [Validators.required, Validators.pattern(guidRegex)]),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        validators: [Validators.required, Validators.pattern(guidRegex)],\n" +
+                               $"      }},";
 
                     case PropertyType.String:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength({property.TypeExtra})]),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        validators: [Validators.required, Validators.minLength(1), Validators.maxLength({property.TypeExtra})],\n" +
+                               $"      }},";
 
                     case PropertyType.Boolean:
-                        return $"      {property.Name.LowerFirstChar()}: new UntypedFormControl(false, [Validators.required]),";
+                        return $"      {property.Name.LowerFirstChar()}: {{\n" +
+                               $"        initialValue: false,\n" +
+                               $"        validators: [Validators.required],\n" +
+                               $"      }},";
                 }
             }
 

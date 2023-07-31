@@ -28,10 +28,10 @@ namespace Contractor.Core.Generation.Frontend.Pages
         private string GetLine(RelationSide relationSide)
         {
             return
-                $"                    <div formLayoutRow [formGroupInstance]=\"formGroup\" formControlNameInstance=\"{relationSide.NameLower}Id\" >\n" +
+                $"                    <div formLayoutRow [formGroupInstance]=\"formController.formGroup\" formControlNameInstance=\"{relationSide.NameLower}Id\" >\n" +
                 $"                        <mat-label>{relationSide.Name.ToReadable()}:</mat-label>\n" +
                  "                        <div class=\"form-layout-inputs\">\n" +
-                $"                            <app-search-dropdown [formGroupInstance]=\"formGroup\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
+                $"                            <app-search-dropdown [formGroupInstance]=\"formController.formGroup\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
                 $"                                label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>" +
                  "                        </div>\n" +
                  "                        <form-layout-row-status></form-layout-row-status>\n" +

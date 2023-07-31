@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { guidRegex, integerRegex } from 'src/app/helpers/regex.helper';
+import { FormController } from '@krz/material';
 import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
+
+export interface EntityCreateDialogForm {
+}
 
 @Component({
   selector: 'app-entity-kebab-create',
@@ -12,7 +15,7 @@ import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/e
 })
 export class EntityCreateDialog implements OnInit {
 
-  formGroup: UntypedFormGroup;
+  formController: FormController<EntityCreateDialogForm>;
 
   constructor(
     private entitiesCrudService: EntitiesCrudService,
@@ -22,18 +25,26 @@ export class EntityCreateDialog implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.formGroup = this.formBuilder.group({
+    this.initializeDataSources();
+    this.setupFormController();
+  }
+
+  initializeDataSources() {
+  }
+
+  setupFormController() {
+    this.formController = new FormController(this.formBuilder, {
     });
   }
 
   async onCreateClicked(): Promise<void> {
-    this.formGroup.markAllAsTouched();
-    if (!this.formGroup.valid) {
+    this.formController.formGroup.markAllAsTouched();
+    if (!this.formController.formGroup.valid) {
       this.scrollToFirstInvalidControl();
       return;
     }
 
-    const entityId = await this.entitiesCrudService.createEntity(this.formGroup.getRawValue());
+    const entityId = await this.entitiesCrudService.createEntity(this.formController.formGroup.getRawValue());
     this.dialogRef.close();
     await this.router.navigate(['/domain-kebab/entities-kebab/detail', entityId]);
   }
