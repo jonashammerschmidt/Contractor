@@ -33,7 +33,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
                 $"                    <mat-label>{relationSide.Name.ToReadable()}:</mat-label>\n" +
                  "                    <div class=\"form-layout-inputs\">\n" +
                 $"                        <app-search-dropdown [formGroupInstance]=\"formController.formGroup\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
-                $"                            label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>" +
+                $"                            label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>\n" +
                  "                    </div>\n" +
                  "                    <form-layout-row-status></form-layout-row-status>\n" +
                  "                    <div class=\"form-layout-side-bar\" >\n" +
