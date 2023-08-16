@@ -51,6 +51,8 @@ export class EntityDetailPage implements OnInit {
 
   setupFormController() {
     this.formController = new FormController(this.formBuilder, {
+      id: {
+      },
     });
   }
 
@@ -77,6 +79,7 @@ export class EntityDetailPage implements OnInit {
     this.entity = await this.entitiesCrudService.getEntityDetail(this.entityId);
 
     this.formController.formGroup.patchValue(this.entity);
+    this.formController.setupRegistrations();
   }
 
 }
