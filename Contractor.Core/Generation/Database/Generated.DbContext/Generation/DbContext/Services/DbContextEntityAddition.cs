@@ -57,20 +57,18 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
             if (entity.HasScope)
             {
                 stringEditor.InsertLine($"                entity.HasKey(c => new {{ c.{entity.ScopeEntity.Name}Id, c.Id }})");
-            }
-            else
-            {
-                stringEditor.InsertLine($"                entity.HasKey(c => c.Id)");
-            }
-
-            stringEditor.InsertLine($"                    .IsClustered({(!entity.Indices.Any(index => index.IsClustered)).ToString().ToLower()});");
-
-            if (entity.HasScope)
-            {
+                stringEditor.InsertLine($"                    .IsClustered(false);");
                 stringEditor.InsertNewLine();
                 stringEditor.InsertLine($"                entity.HasIndex(c => new {{ c.Id }})");
                 stringEditor.InsertLine($"                    .IsUnique(true)");
+                stringEditor.InsertLine($"                    .IsClustered({(!entity.Indices.Any(index => index.IsClustered)).ToString().ToLower()});");
+                stringEditor.InsertNewLine();
+                stringEditor.InsertLine($"                entity.HasIndex(c => new {{ c.{entity.ScopeEntity.Name}Id }})");
+                stringEditor.InsertLine($"                    .IsUnique(false)");
                 stringEditor.InsertLine($"                    .IsClustered(false);");
+            } else {
+                stringEditor.InsertLine($"                entity.HasKey(c => c.Id)");
+                stringEditor.InsertLine($"                    .IsClustered({(!entity.Indices.Any(index => index.IsClustered)).ToString().ToLower()});");
             }
 
             foreach (var index in entity.Indices)
