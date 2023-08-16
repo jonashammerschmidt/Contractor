@@ -17,7 +17,6 @@ namespace Contractor.Core.Generation.Backend.Persistence
         private readonly EntitiesCrudRepositoryToRelationAddition entitiesCrudRepositoryToRelationAddition;
         private readonly EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition;
         private readonly EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition;
-        private readonly EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition;
         private readonly EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition;
 
         public EntitiesCrudRepositoryGeneration(
@@ -25,14 +24,12 @@ namespace Contractor.Core.Generation.Backend.Persistence
             EntitiesCrudRepositoryToRelationAddition entitiesCrudRepositoryToRelationAddition,
             EntitiesCrudRepositoryFromIncludeAddition dtoFromRepositoryIncludeAddition,
             EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition,
-            EntitiesCrudRepositoryFromOneToOneIncludeAddition entitiesCrudRepositoryFromOneToOneIncludeAddition,
             EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.entitiesCrudRepositoryToRelationAddition = entitiesCrudRepositoryToRelationAddition;
             this.dtoFromRepositoryIncludeAddition = dtoFromRepositoryIncludeAddition;
             this.dtoToRepositoryIncludeAddition = dtoToRepositoryIncludeAddition;
-            this.entitiesCrudRepositoryFromOneToOneIncludeAddition = entitiesCrudRepositoryFromOneToOneIncludeAddition;
             this.entitiesCrudRepositoryToOneToOneIncludeAddition = entitiesCrudRepositoryToOneToOneIncludeAddition;
         }
 
@@ -78,7 +75,6 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "", "");
 
-            this.entitiesCrudRepositoryFromOneToOneIncludeAddition.AddRelationSideToBackendFile(relationSideFrom, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
