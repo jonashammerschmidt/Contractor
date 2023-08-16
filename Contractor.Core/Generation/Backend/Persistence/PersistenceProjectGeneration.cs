@@ -19,7 +19,6 @@ namespace Contractor.Core.Generation.Backend.Persistence
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToRelationAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryFromIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToIncludeAddition>();
-            serviceCollection.AddSingleton<EntitiesCrudRepositoryFromOneToOneIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToOneToOneIncludeAddition>();
         }
     }
