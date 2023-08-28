@@ -69,7 +69,8 @@ namespace Contractor.CLI
             var contractorXmlFileInfo = new FileInfo(contractorXmlFilePath);
             if (!contractorXmlFileInfo.Exists)
             {
-                contractorXmlFilePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..", args[1]));
+                contractorXmlFilePath =
+                    Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..", args[1]));
                 contractorXmlFileInfo = new FileInfo(contractorXmlFilePath);
 
                 if (!contractorXmlFileInfo.Exists)
@@ -85,19 +86,35 @@ namespace Contractor.CLI
             var contractorXmlSerializer = new XmlSerializer(typeof(ContractorXml));
             ContractorXml contractorXml = (ContractorXml)contractorXmlSerializer.Deserialize(contractorXmlReader);
 
-            if (Assembly.GetExecutingAssembly().GetName().Version.CompareTo(Version.Parse(contractorXml.MinContractorVersion)) < 0)
+            if (Assembly.GetExecutingAssembly().GetName().Version
+                    .CompareTo(Version.Parse(contractorXml.MinContractorVersion)) < 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Es muss mindestens die Contractor Version {0} verwendet werden.", contractorXml.MinContractorVersion);
+                Console.WriteLine("Es muss mindestens die Contractor Version {0} verwendet werden.",
+                    contractorXml.MinContractorVersion);
                 Console.WriteLine("");
                 Console.WriteLine("Update-Befehl: dotnet tool update --global contractor");
                 Console.WriteLine("");
-                Console.ResetColor(); 
-                return;
+                Console.ResetColor();
+                Environment.Exit(1);
+            }
+
+            try
+            {
+                ContractorXmlValidator.Validate(contractorXml);
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("");
+                Console.ResetColor();
+                Environment.Exit(1);
             }
 
             ContractorGenerationOptions contractorGenerationOptions = ContractorXmlConverter
-                .ToContractorGenerationOptions(contractorXml, contractorXmlDocument, contractorXmlFileInfo.Directory.FullName);
+                .ToContractorGenerationOptions(contractorXml, contractorXmlDocument,
+                    contractorXmlFileInfo.Directory.FullName);
 
             if (contractorXml.Includes is not null)
             {
@@ -112,9 +129,11 @@ namespace Contractor.CLI
                     XmlReader contractorIncludeXmlReader = new XmlNodeReader(contractorIncludeXmlDocument);
 
                     var contractorIncludeXmlSerializer = new XmlSerializer(typeof(ContractorIncludeXml));
-                    ContractorIncludeXml contractorIncludeXml = (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
+                    ContractorIncludeXml contractorIncludeXml =
+                        (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
 
-                    ContractorXmlConverter.AddToContractorGenerationOptions(contractorGenerationOptions, contractorIncludeXml, contractorIncludeXmlDocument);
+                    ContractorXmlConverter.AddToContractorGenerationOptions(contractorGenerationOptions,
+                        contractorIncludeXml, contractorIncludeXmlDocument);
                 }
             }
 
