@@ -8,6 +8,9 @@
     <Compile Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
     <EmbeddedResource Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
     <None Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-dto.template-RequestScope.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
