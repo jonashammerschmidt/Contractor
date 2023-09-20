@@ -37,6 +37,18 @@ namespace Contractor.Core.Generation.Frontend.Model
         protected override void AddEntity(Entity entity)
         {
             this.entityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
+            
+            if (entity.HasScope)
+            {      
+                RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(entity.ScopeEntity, entity, "I", "Dto");
+                
+                string toImportStatementPath = $"src/app/model/{relationSideTo.OtherEntity.Module.NameKebab}" +
+                                               $"/{relationSideTo.OtherEntity.NamePluralKebab}" +
+                                               $"/dtos/i-{relationSideTo.OtherEntity.NameKebab}-dto";
+
+                this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName,
+                    $"I{relationSideTo.OtherEntity.Name}Dto", toImportStatementPath);
+            }
         }
 
         protected override void AddProperty(Property property)

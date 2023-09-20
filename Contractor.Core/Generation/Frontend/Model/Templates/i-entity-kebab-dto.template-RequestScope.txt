@@ -1,0 +1,6 @@
+import { IEntityDtoData } from './i-entity-kebab-dto-data';
+
+export interface IEntityDto extends IEntityDtoData {
+    id: string;
+    requestScopeId: string;
+}

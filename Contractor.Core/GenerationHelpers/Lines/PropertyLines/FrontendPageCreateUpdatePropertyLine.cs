@@ -65,7 +65,7 @@ namespace Contractor.Core.Tools
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                          "                    <div class=\"form-layout-inputs\">\n" +
                          "                        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
-                        $"                            <input matInput formControlName=\"{property.Name.LowerFirstChar()}\" maxlength=\"50\"\n" +
+                        $"                            <input matInput formControlName=\"{property.Name.LowerFirstChar()}\"\n" +
                         $"                                type=\"number\" placeholder=\"{property.Name.ToReadable()}\">\n" +
                          "                        </mat-form-field>\n" +
                          "                    </div>\n" +
@@ -83,7 +83,7 @@ namespace Contractor.Core.Tools
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                          "                    <div class=\"form-layout-inputs\">\n" +
                          "                        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
-                        $"                            <input matInput formControlName=\"{property.Name.LowerFirstChar()}\" maxlength=\"50\"\n" +
+                        $"                            <input matInput formControlName=\"{property.Name.LowerFirstChar()}\" maxlength=\"{property.TypeExtra}\"\n" +
                         $"                                placeholder=\"{property.Name.ToReadable()}\">\n" +
                          "                        </mat-form-field>\n" +
                          "                    </div>\n" +
@@ -101,7 +101,7 @@ namespace Contractor.Core.Tools
                         $"                    <mat-label>{property.Name.ToReadable()}:</mat-label>\n" +
                          "                    <div class=\"form-layout-inputs\">\n" +
                          "                        <mat-form-field appearance=\"outline\" floatLabel=\"always\">\n" +
-                        $"                            <input matInput formControlName=\"{property.Name.LowerFirstChar()}\" maxlength=\"50\"\n" +
+                        $"                            <input matInput formControlName=\"{property.Name.LowerFirstChar()}\" maxlength=\"36\"\n" +
                         $"                                placeholder=\"z.B. 00000000-0000-0000-0000-000000000000\">\n" +
                          "                        </mat-form-field>\n" +
                          "                    </div>\n" +

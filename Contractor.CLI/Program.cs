@@ -99,18 +99,18 @@ namespace Contractor.CLI
                 Environment.Exit(1);
             }
 
-            try
-            {
-                ContractorXmlValidator.Validate(contractorXml);
-            }
-            catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("");
-                Console.ResetColor();
-                Environment.Exit(1);
-            }
+            // try
+            // {
+            //     ContractorXmlValidator.Validate(contractorXml);
+            // }
+            // catch (Exception ex)
+            // {
+            //     Console.ForegroundColor = ConsoleColor.Red;
+            //     Console.WriteLine(ex.Message);
+            //     Console.WriteLine("");
+            //     Console.ResetColor();
+            //     Environment.Exit(1);
+            // }
 
             ContractorGenerationOptions contractorGenerationOptions = ContractorXmlConverter
                 .ToContractorGenerationOptions(contractorXml, contractorXmlDocument,
