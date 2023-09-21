@@ -30,7 +30,8 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
+            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
+            this.entityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
