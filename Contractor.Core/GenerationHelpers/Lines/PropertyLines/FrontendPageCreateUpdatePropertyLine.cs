@@ -29,12 +29,11 @@ namespace Contractor.Core.Tools
                         $"                            <file-picker formControlName=\"{property.Name.LowerFirstChar()}\" placeholder=\"{property.Name.ToReadable()}\"></file-picker>\n" +
                          "                        </mat-form-field>\n" +
                          "                    </div>\n" +
-                         "                    <form-layout-row-status></form-layout-row-status>\n" +
-                         "                    <div class=\"form-layout-side-bar\">\n" +
+                         "                    <form-layout-row-status>\n" +
                         $"                        <form-layout-error formControlNameInstance=\"{property.Name.LowerFirstChar()}\" errorType=\"required\"\n" +
                          "                            title=\"Eingabe fehlt\" description=\"Dieses Feld ist erforderlich.\">\n" +
                          "                        </form-layout-error>\n" +
-                         "                    </div>\n" +
+                         "                    </form-layout-row-status>\n" +
                          "                </div>";
 
                 case PropertyType.DateTime:
@@ -50,12 +49,11 @@ namespace Contractor.Core.Tools
                         $"                            <mat-datepicker #picker{property.Name}></mat-datepicker>\n" +
                          "                        </mat-form-field>\n" +
                          "                    </div>\n" +
-                         "                    <form-layout-row-status></form-layout-row-status>\n" +
-                         "                    <div class=\"form-layout-side-bar\">\n" +
+                         "                    <form-layout-row-status>\n" +
                         $"                        <form-layout-error formControlNameInstance=\"{property.Name.LowerFirstChar()}\" errorType=\"required\"\n" +
                          "                            title=\"Eingabe fehlt\" description=\"Dieses Feld ist erforderlich.\">\n" +
                          "                        </form-layout-error>\n" +
-                         "                    </div>\n" +
+                         "                    </form-layout-row-status>\n" +
                          "                </div>";
 
                 case PropertyType.Integer:
@@ -69,12 +67,11 @@ namespace Contractor.Core.Tools
                         $"                                type=\"number\" placeholder=\"{property.Name.ToReadable()}\">\n" +
                          "                        </mat-form-field>\n" +
                          "                    </div>\n" +
-                         "                    <form-layout-row-status></form-layout-row-status>\n" +
-                         "                    <div class=\"form-layout-side-bar\">\n" +
+                         "                    <form-layout-row-status>\n" +
                         $"                        <form-layout-error formControlNameInstance=\"{property.Name.LowerFirstChar()}\" errorType=\"required\"\n" +
                          "                            title=\"Eingabe fehlt\" description=\"Dieses Feld ist erforderlich.\">\n" +
                          "                        </form-layout-error>\n" +
-                         "                    </div>\n" +
+                         "                    </form-layout-row-status>\n" +
                          "                </div>";
 
                 case PropertyType.String:
@@ -87,12 +84,11 @@ namespace Contractor.Core.Tools
                         $"                                placeholder=\"{property.Name.ToReadable()}\">\n" +
                          "                        </mat-form-field>\n" +
                          "                    </div>\n" +
-                         "                    <form-layout-row-status></form-layout-row-status>\n" +
-                         "                    <div class=\"form-layout-side-bar\">\n" +
+                         "                    <form-layout-row-status>\n" +
                         $"                        <form-layout-error formControlNameInstance=\"{property.Name.LowerFirstChar()}\" errorType=\"required\"\n" +
                          "                            title=\"Eingabe fehlt\" description=\"Dieses Feld ist erforderlich.\">\n" +
                          "                        </form-layout-error>\n" +
-                         "                    </div>\n" +
+                         "                    </form-layout-row-status>\n" +
                          "                </div>";
 
                 case PropertyType.Guid:
@@ -105,15 +101,14 @@ namespace Contractor.Core.Tools
                         $"                                placeholder=\"z.B. 00000000-0000-0000-0000-000000000000\">\n" +
                          "                        </mat-form-field>\n" +
                          "                    </div>\n" +
-                         "                    <form-layout-row-status></form-layout-row-status>\n" +
-                         "                    <div class=\"form-layout-side-bar\">\n" +
+                         "                    <form-layout-row-status>\n" +
                         $"                        <form-layout-error formControlNameInstance=\"{property.Name.LowerFirstChar()}\" errorType=\"required\"\n" +
                          "                            title=\"Eingabe fehlt\" description=\"Dieses Feld ist erforderlich.\">\n" +
                          "                        </form-layout-error>\n" +
                         $"                        <form-layout-error formControlNameInstance=\"{property.Name.LowerFirstChar()}\" errorType=\"pattern\"\n" +
                          "                            title=\"Eingabe ungültig\" description=\"Dieses Feld ist ungültig. Beispiel: 00000000-0000-0000-0000-000000000000\">\n" +
                          "                        </form-layout-error>\n" +
-                         "                    </div>\n" +
+                         "                    </form-layout-row-status>\n" +
                          "                </div>";
 
                 default:

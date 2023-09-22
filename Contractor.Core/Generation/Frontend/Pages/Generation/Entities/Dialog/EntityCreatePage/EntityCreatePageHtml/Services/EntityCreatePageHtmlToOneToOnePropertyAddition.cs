@@ -35,12 +35,11 @@ namespace Contractor.Core.Generation.Frontend.Pages
                 $"                        <app-search-dropdown [formGroupInstance]=\"formController.formGroup\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
                 $"                            label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>\n" +
                  "                    </div>\n" +
-                 "                    <form-layout-row-status></form-layout-row-status>\n" +
-                 "                    <div class=\"form-layout-side-bar\" >\n" +
+                 "                    <form-layout-row-status>\n" +
                 $"                        <form-layout-error formControlNameInstance=\"{relationSide.NameLower}Id\" errorType=\"required\"\n" +
                  "                            title=\"Eingabe fehlt\" description=\"Dieses Feld ist erforderlich.\">\n" +
                  "                        </form-layout-error>\n" +
-                 "                    </div>\n" +
+                 "                    </form-layout-row-status>\n" +
                  "                </div>";
         }
     }
