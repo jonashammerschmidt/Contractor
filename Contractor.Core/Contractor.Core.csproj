@@ -5,26 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
-    <EmbeddedResource Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
-    <None Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
-    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-dto.template-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Generation\Backend\Api\ApiCreateDto.txt" />
-    <None Remove="Generation\Backend\Api\ApiUpdateDto.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Glob" Version="1.1.9" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
+    <EmbeddedResource Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
+    <None Remove="Generation\Backend\Api\ApiCreateDto.txt" />
+    <None Remove="Generation\Backend\Api\ApiUpdateDto.txt" />
+    <None Remove="Generation\Backend\Persistence.Tests\DtoTestMethods\**" />
+    <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-dto.template-RequestScope.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Generation\Backend\Api\Templates\EntitiesCrudControllerTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

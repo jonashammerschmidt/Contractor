@@ -32,8 +32,8 @@ namespace Contractor.Core.Generation.Frontend.Pages
                 $"                <div formLayoutRow [formGroupInstance]=\"formController.formGroup\" formControlNameInstance=\"{relationSide.NameLower}Id\" >\n" +
                 $"                    <mat-label>{relationSide.Name.ToReadable()}:</mat-label>\n" +
                  "                    <div class=\"form-layout-inputs\">\n" +
-                $"                        <app-search-dropdown [formGroupInstance]=\"formController.formGroup\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
-                $"                            label=\"{relationSide.Name.ToReadable()}\" idExpr=\"id\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown>\n" +
+                $"                        <app-search-dropdown-v2 [formGroupInstance]=\"formController.formGroup\" [formControlNameInstance]=\"'{relationSide.NameLower}Id'\"\n" +
+                $"                            label=\"{relationSide.Name.ToReadable()}\" displayExpr=\"{relationSide.OtherEntity.DisplayProperty.NameLower}\" [dataSource]=\"{relationSide.NameLower}DataSource\"></app-search-dropdown-v2>\n" +
                  "                    </div>\n" +
                  "                    <form-layout-row-status>\n" +
                 $"                        <form-layout-error formControlNameInstance=\"{relationSide.NameLower}Id\" errorType=\"required\"\n" +
