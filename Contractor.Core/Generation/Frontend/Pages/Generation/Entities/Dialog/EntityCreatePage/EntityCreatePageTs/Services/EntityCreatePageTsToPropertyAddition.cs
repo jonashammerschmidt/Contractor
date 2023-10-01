@@ -56,6 +56,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
             stringEditor.NextThatContains("setupFormController() {");
             stringEditor.NextThatContains("});");
             stringEditor.InsertLine($"      {relationSide.NameLower}Id: {{");
+            stringEditor.InsertLine($"        dataSource: this.{relationSide.NameLower}DataSource,");
             if (!relationSide.IsOptional)
             {
                 stringEditor.InsertLine($"        validators: [Validators.required],");
