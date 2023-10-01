@@ -21,7 +21,7 @@ import { EntityCreateDialog } from './dialogs/create/entity-kebab-create.dialog'
 import { EntityDetailPage } from './sub-pages/detail/entity-kebab-detail.page';
 import { EntitiesPagesRouting } from './entities-kebab-pages.routing';
 import { EntitiesPage } from './entities-kebab.page';
-import { SearchDropdownModule} from 'src/app/components/ui/search-dropdown/search-dropdown.module';
+import { SearchDropdownV2Module} from 'src/app/components/ui/search-dropdown-v2/search-dropdown-v2.module';
 import { TableFilterBarModule } from 'src/app/components/ui/table-filter-bar/table-filter-bar.module';
 import { FilePickerModule } from 'src/app/components/ui/file-picker/file-picker.module';
 import { FormLayoutModule } from 'src/app/components/ui/form-layout/form-layout.module';
@@ -41,7 +41,7 @@ import { FormLayoutModule } from 'src/app/components/ui/form-layout/form-layout.
 
     // UI Components
     UiComponentsModule,
-    SearchDropdownModule,
+    SearchDropdownV2Module,
     TableFilterBarModule,
     FilePickerModule,
     FormLayoutModule,
