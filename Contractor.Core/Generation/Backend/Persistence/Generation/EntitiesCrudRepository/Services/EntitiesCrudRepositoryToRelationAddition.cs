@@ -61,7 +61,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
                 stringEditor.InsertLine($"                throw new NotFoundResultException(\"{relationSide.RelationBeforePreProcessor.EntityFrom.NameReadable} ({{id}}) konnte nicht gefunden werden.\", {relationSide.RelationBeforePreProcessor.EntityFrom.NameLower}Id);");
                 stringEditor.InsertLine("            }");
                 stringEditor.InsertLine("");
-                stringEditor.InsertLine($"            return ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}Dto.MandantId;");
+                stringEditor.InsertLine($"            return ef{relationSide.RelationBeforePreProcessor.EntityFrom.Name}Dto.{relationSide.RelationBeforePreProcessor.EntityFrom.ScopeEntity.Name}Id;");
                 stringEditor.InsertLine("        }");
             }
 
