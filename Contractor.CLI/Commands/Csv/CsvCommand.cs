@@ -1,6 +1,5 @@
+using Contractor.Core.Csv;
 using Contractor.Core.Csv.Sql;
-using Contractor.Core.CsvExport;
-using Contractor.Core.CsvInsert;
 
 namespace Contractor.CLI.Commands.Csv;
 

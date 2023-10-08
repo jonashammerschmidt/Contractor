@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Contractor.Core.Csv.Sql;
 
-namespace Contractor.Core.CsvInsert
+namespace Contractor.Core.Csv
 {
     public class CsvInsertFacade
     {
