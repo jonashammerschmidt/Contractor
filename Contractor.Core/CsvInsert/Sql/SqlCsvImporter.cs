@@ -21,18 +21,11 @@ namespace Contractor.Core.CsvInsert.Sql
             this.sqlOptions = sqlOptions;
         }
 
-        public void Import(string moduleName, string entityNamePlural)
+        public void Import(string csvFilePath, string tableName)
         {
-            Console.WriteLine($"Importiere {entityNamePlural}...");
+            Console.WriteLine($"Importiere {tableName}...");
 
-            string csvFilePath = Path.Combine(moduleName, $"dbo.{entityNamePlural}.csv");
-            this.InsertCsvIntoTable(csvFilePath, entityNamePlural);
-        }
-
-        private void InsertCsvIntoTable(string csvFilePath, string entityNamePlural)
-        {
             string connectionString = this.sqlOptions.GetConnectionString();
-
             var csvConfiguration = new CsvConfiguration(cultureInfo)
             {
                 HasHeaderRecord = true,
@@ -49,7 +42,7 @@ namespace Contractor.Core.CsvInsert.Sql
 
                 var dataTable = new DataTable();
                 dataTable.Locale = cultureInfo;
-                this.ApplySchemaToDataTable(sqlConnection, dataTable, entityNamePlural);
+                this.ApplySchemaToDataTable(sqlConnection, dataTable, tableName);
 
                 bool containsByteArrayColumn = dataTable.Columns
                     .Cast<DataColumn>()
@@ -69,7 +62,7 @@ namespace Contractor.Core.CsvInsert.Sql
 
                 sqlConnection.Open();
 
-                sqlBulkCopy.DestinationTableName = entityNamePlural;
+                sqlBulkCopy.DestinationTableName = tableName;
                 sqlBulkCopy.WriteToServer(dataTable);
             }
         }

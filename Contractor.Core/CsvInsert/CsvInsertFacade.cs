@@ -20,12 +20,11 @@ namespace Contractor.Core.CsvInsert
             {
                 var filePath = csvFile.Split(Path.DirectorySeparatorChar);
                 var fileName = filePath[^1];
-                var moduleName = filePath[^2];
 
                 var entityNamePlural = fileName.Replace("dbo.", string.Empty);
                 entityNamePlural = entityNamePlural.Replace(".csv", string.Empty);
 
-                sqlCsvImporter.Import(moduleName, entityNamePlural);
+                sqlCsvImporter.Import(csvFile, entityNamePlural);
             }
 
             sqlDatabaseHelper.EnableConstraints();
