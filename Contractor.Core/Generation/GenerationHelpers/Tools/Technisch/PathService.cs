@@ -8,7 +8,7 @@ namespace Contractor.Core.Tools
     {
         // Backend
 
-        public string GetAbsolutePathForBackend(ContractorGenerationOptions options, params string[] paths)
+        public string GetAbsolutePathForBackend(GenerationOptions options, params string[] paths)
         {
             string absolutePath = Path.Combine(options.Paths.BackendDestinationFolder, paths.Aggregate(Path.Combine));
             absolutePath = ModellNameReplacements.ReplaceOptionsPlaceholders(options, absolutePath);
@@ -41,7 +41,7 @@ namespace Contractor.Core.Tools
 
         // Backend.Generated
 
-        public string GetAbsolutePathForBackendGenerated(ContractorGenerationOptions options, params string[] paths)
+        public string GetAbsolutePathForBackendGenerated(GenerationOptions options, params string[] paths)
         {
             string absolutePath = Path.Combine(options.Paths.BackendGeneratedDestinationFolder, paths.Aggregate(Path.Combine));
             absolutePath = ModellNameReplacements.ReplaceOptionsPlaceholders(options, absolutePath);
@@ -74,7 +74,7 @@ namespace Contractor.Core.Tools
 
         // Database
 
-        public string GetAbsolutePathForDatabase(ContractorGenerationOptions options, params string[] paths)
+        public string GetAbsolutePathForDatabase(GenerationOptions options, params string[] paths)
         {
             string absolutePath = Path.Combine(options.Paths.DbDestinationFolder, paths.Aggregate(Path.Combine));
             absolutePath = ModellNameReplacements.ReplaceOptionsPlaceholders(options, absolutePath);
@@ -107,7 +107,7 @@ namespace Contractor.Core.Tools
 
         // Frontend
 
-        public string GetAbsolutePathForFrontend(ContractorGenerationOptions options, params string[] paths)
+        public string GetAbsolutePathForFrontend(GenerationOptions options, params string[] paths)
         {
             string absolutePath = Path.Combine(options.Paths.FrontendDestinationFolder, paths.Aggregate(Path.Combine));
             absolutePath = ModellNameReplacements.ReplaceOptionsPlaceholders(options, absolutePath);

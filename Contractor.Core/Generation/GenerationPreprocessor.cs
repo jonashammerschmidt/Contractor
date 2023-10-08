@@ -6,12 +6,12 @@ using System.Linq;
 
 namespace Contractor.Core
 {
-    public class ContractorPreprocessor
+    public class GenerationPreprocessor
     {
         public static IEnumerable<Entity> PreProcess(
-            ContractorGenerationOptions contractorGenerationOptions)
+            GenerationOptions generationOptions)
         {
-            foreach (var module in contractorGenerationOptions.Modules.Where(module => !module.Skip))
+            foreach (var module in generationOptions.Modules.Where(module => !module.Skip))
             {
                 foreach (Entity entity in module.Entities.Where(entity => !entity.Skip))
                 {
@@ -57,12 +57,12 @@ namespace Contractor.Core
                 }
             }
 
-            return SortEntities(contractorGenerationOptions);
+            return SortEntities(generationOptions);
         }
 
-        private static IEnumerable<Entity> SortEntities(ContractorGenerationOptions contractorGenerationOptions)
+        private static IEnumerable<Entity> SortEntities(GenerationOptions generationOptions)
         {
-            IEnumerable<Entity> entities = contractorGenerationOptions.Modules
+            IEnumerable<Entity> entities = generationOptions.Modules
                 .SelectMany(module => module.Entities);
 
             var circularRelationPath = DependencyCycleHelper.FindCycle(entities, GetDependencyBuilder(true));
@@ -74,7 +74,7 @@ namespace Contractor.Core
 
             IEnumerable<Entity> sortedEntities = DependencySortHelper.Sort(entities, GetDependencyBuilder(false));
 
-            contractorGenerationOptions.Sort(sortedEntities);
+            generationOptions.Sort(sortedEntities);
             return sortedEntities;
         }
 

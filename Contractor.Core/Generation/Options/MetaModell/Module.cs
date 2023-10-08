@@ -28,9 +28,9 @@ namespace Contractor.Core.MetaModell
 
         public bool Skip { get; set; }
 
-        public ContractorGenerationOptions Options { get; private set; }
+        public GenerationOptions Options { get; private set; }
 
-        public void AddLinks(ContractorGenerationOptions options)
+        public void AddLinks(GenerationOptions options)
         {
             Options = options;
         }

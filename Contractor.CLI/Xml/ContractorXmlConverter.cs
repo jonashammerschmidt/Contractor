@@ -8,12 +8,12 @@ namespace Contractor.CLI
 {
     internal class ContractorXmlConverter
     {
-        internal static ContractorGenerationOptions ToContractorGenerationOptions(
+        internal static GenerationOptions ToContractorGenerationOptions(
             ContractorXml contractorXml,
             XmlDocument xmlDocument,
             string contractorXmlFolderPath)
         {
-            var contractorGenerationOptions = new ContractorGenerationOptions()
+            var contractorGenerationOptions = new GenerationOptions()
             {
                 Paths = new Paths()
                 {
@@ -45,7 +45,7 @@ namespace Contractor.CLI
         }
 
         internal static void AddToContractorGenerationOptions(
-            ContractorGenerationOptions contractorGenerationOptions,
+            GenerationOptions generationOptions,
             ContractorIncludeXml contractorIncludeXml,
             XmlDocument contractorIncludeXmlDocument)
         {
@@ -53,7 +53,7 @@ namespace Contractor.CLI
                     contractorIncludeXml.Modules,
                     entityName => contractorIncludeXmlDocument.SelectSingleNode($"//Entity[@name='{entityName}']"));
 
-            contractorGenerationOptions.Modules = contractorGenerationOptions.Modules
+            generationOptions.Modules = generationOptions.Modules
                 .Concat(modules);
         }
 

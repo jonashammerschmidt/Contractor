@@ -10,7 +10,7 @@ namespace Contractor.Core.Tools
 
         public Dictionary<string, string> fileWriteCache = new Dictionary<string, string>();
 
-        public string ReadAllText(ContractorGenerationOptions options, params string[] pathParts)
+        public string ReadAllText(GenerationOptions options, params string[] pathParts)
         {
             string path = Path.Combine(pathParts);
             bool isTemplate = path.Contains("Templates") && path.EndsWith(".txt");
@@ -111,13 +111,13 @@ namespace Contractor.Core.Tools
             }
         }
 
-        public void SaveAll(ContractorGenerationOptions contractorGenerationOptions)
+        public void SaveAll(GenerationOptions generationOptions)
         {
             foreach (var fileCacheItem in this.fileWriteCache)
             {
                 var filePath = fileCacheItem.Key;
                 var fileContent = fileCacheItem.Value;
-                foreach (var replacement in contractorGenerationOptions.Replacements)
+                foreach (var replacement in generationOptions.Replacements)
                 {
                     fileContent = fileContent.Replace(replacement.Pattern, replacement.ReplaceWith);
                 }
