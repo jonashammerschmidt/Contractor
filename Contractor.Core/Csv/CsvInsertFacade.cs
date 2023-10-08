@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Contractor.Core.CsvInsert.Sql;
+using Contractor.Core.Csv.Sql;
 
 namespace Contractor.Core.CsvInsert
 {

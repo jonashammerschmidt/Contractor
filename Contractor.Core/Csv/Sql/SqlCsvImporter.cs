@@ -8,7 +8,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.Data.SqlClient;
 
-namespace Contractor.Core.CsvInsert.Sql
+namespace Contractor.Core.Csv.Sql
 {
     public class SqlCsvImporter
     {

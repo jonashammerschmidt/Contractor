@@ -1,4 +1,4 @@
-namespace Contractor.Core.CsvInsert
+namespace Contractor.Core.Csv.Sql
 {
     public class SqlOptions
     {
