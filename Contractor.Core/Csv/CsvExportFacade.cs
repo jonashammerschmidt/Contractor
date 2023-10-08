@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using Contractor.Core.Csv.Sql;
 using Microsoft.Data.SqlClient;
 
-namespace Contractor.Core.CsvExport
+namespace Contractor.Core.Csv
 {
     public static class CsvExportFacade
     {
@@ -17,9 +18,21 @@ namespace Contractor.Core.CsvExport
                 string[] tabellenNamen = GetTableNames(sqlConnection);
                 foreach (string tabellenName in tabellenNamen)
                 {
-                    string csvFilePath = Path.Combine(path, "dbo." + tabellenName + ".csv");
+                    string csvFilePath = Directory.GetFiles(path, $"*{tabellenName}.csv", SearchOption.AllDirectories).FirstOrDefault();
+                    if (csvFilePath == null)
+                    {
+                        csvFilePath = Path.Combine(path, "dbo." + tabellenName + ".csv");
+                    }
+                    else
+                    {
+                        File.Delete(csvFilePath);
+                    }
+
                     DataTable dataTable = LoadDataTable(sqlConnection, tabellenName);
-                    SqlCsvExporter.Export(csvFilePath, tabellenName, dataTable);
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        SqlCsvExporter.Export(csvFilePath, tabellenName, dataTable);
+                    }
                 }
             }
         }
@@ -57,7 +70,7 @@ namespace Contractor.Core.CsvExport
             scom.CommandText = $@"SELECT * FROM {tabellenName}";
             if (!tabellenName.Contains("__EFMigrationsHistory"))
             {
-                scom.CommandText = $@" ORDER BY Id";
+                scom.CommandText += $@" ORDER BY Id";
             }
 
             SqlDataReader sqlDataReader = scom.ExecuteReader();

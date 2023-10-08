@@ -83,7 +83,7 @@ namespace Contractor.Core.Csv.Sql
                 var row = dataTable.NewRow();
                 foreach (DataColumn column in dataTable.Columns)
                 {
-                    object? value = record.Single(property => property.Key == column.ColumnName).Value;
+                    object value = record.Single(property => property.Key == column.ColumnName).Value;
                     row[column.ColumnName] = this.ConvertStringToType(column.DataType, value);
                 }
 
