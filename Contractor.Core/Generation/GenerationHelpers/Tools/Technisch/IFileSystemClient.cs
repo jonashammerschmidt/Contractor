@@ -4,7 +4,7 @@ namespace Contractor.Core.Tools
 {
     internal interface IFileSystemClient
     {
-        string ReadAllText(ContractorGenerationOptions options, params string[] pathParts);
+        string ReadAllText(GenerationOptions options, params string[] pathParts);
 
         string ReadAllText(Module module, params string[] pathParts);
 
@@ -14,6 +14,6 @@ namespace Contractor.Core.Tools
 
         void WriteAllText(string contents, params string[] pathParts);
 
-        void SaveAll(ContractorGenerationOptions contractorGenerationOptions);
+        void SaveAll(GenerationOptions generationOptions);
     }
 }

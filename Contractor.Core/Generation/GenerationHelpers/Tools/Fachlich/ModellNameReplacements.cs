@@ -7,7 +7,7 @@ namespace Contractor.Core.Tools
 {
     public class ModellNameReplacements
     {
-        public static string ReplaceOptionsPlaceholders(ContractorGenerationOptions options, string text)
+        public static string ReplaceOptionsPlaceholders(GenerationOptions options, string text)
         {
             text = text.Replace("DbContextName", options.Paths.DbContextName);
             text = text.Replace("DbProjectName", options.Paths.DbProjectName);

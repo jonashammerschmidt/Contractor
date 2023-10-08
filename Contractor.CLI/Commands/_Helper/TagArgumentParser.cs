@@ -9,7 +9,7 @@ namespace Contractor.CLI.Commands._Helper
 {
     internal class TagArgumentParser
     {
-        public static void AddTags(string[] args, ContractorGenerationOptions options)
+        public static void AddTags(string[] args, GenerationOptions options)
         {
             if (ArgumentParser.HasArgument(args, "-t", "--tags"))
             {

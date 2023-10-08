@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Contractor.Core.MetaModell
 {
-    public class ContractorGenerationOptions
+    public class GenerationOptions
     {
         public Paths Paths { get; set; }
 

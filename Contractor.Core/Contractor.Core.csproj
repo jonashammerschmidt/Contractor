@@ -19,55 +19,10 @@
     <None Update="Generation\Frontend\Model\Templates\i-entity-kebab-dto.template-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Api\Templates\EntitiesCrudControllerTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoExpandedTemplate-RequestScope.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoTemplate-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoExpandedTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDefaultUpdateTemplate-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDefaultUpdateTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDataTemplate-Empty.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Generated.DTOs\Templates\EntityDtoDataTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Generated.Persistence\Templates\IEntitiesReadRepositoryDefaultTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Generated.Persistence\Templates\EntitiesReadRepositoryDefaultTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Logic\Templates\EntitiesCrudLogicTemplate-RequestScope.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Logic\Templates\EntitiesCrudLogicTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Logic\Templates\IEntitiesCrudLogicTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence\Templates\EntitiesCrudRepositoryTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\Persistence\Templates\IEntitiesCrudRepositoryTemplate.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Generation\Backend\_Misc\Templates\E2ePostmanTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Generation\Database\Generated.DbContext\Templates\EfEntityDtoTemplate-RequestScope.txt">

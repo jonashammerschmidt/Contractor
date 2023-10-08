@@ -7,31 +7,34 @@ using System.Linq;
 
 namespace Contractor.Core
 {
-    public class ContractorCoreApi
+    public class GenerationFacade
     {
-        private readonly ContractorGenerationOptions contractorGenerationOptions;
+        private readonly GenerationOptions generationOptions;
         private readonly IEnumerable<Entity> sortedEntities;
 
         private readonly IFileSystemClient fileSystemClient;
         private readonly List<ClassGeneration> classGenerations = new List<ClassGeneration>();
 
-        public ContractorCoreApi(ContractorGenerationOptions contractorGenerationOptions)
+        public GenerationFacade(GenerationOptions generationOptions)
         {
-            this.contractorGenerationOptions = contractorGenerationOptions;
-            this.sortedEntities = ContractorPreprocessor.PreProcess(this.contractorGenerationOptions);
+            this.generationOptions = generationOptions;
+            this.sortedEntities = GenerationPreprocessor.PreProcess(this.generationOptions);
 
-            ServiceProvider serviceProvider = DependencyProvider.GetServiceProvider();
+            
+            IServiceCollection serviceCollection = new ServiceCollection();
+            GenerationDependencyProvider.ConfigureServices(serviceCollection);
+            ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
             this.fileSystemClient = serviceProvider.GetRequiredService<IFileSystemClient>();
             this.classGenerations = serviceProvider.GetServices<ClassGeneration>().ToList();
         }
 
         public void Generate()
         {
-            foreach (var module in this.contractorGenerationOptions.Modules.Where(module => !module.Skip))
+            foreach (var module in this.generationOptions.Modules.Where(module => !module.Skip))
             {
                 foreach (var classGeneration in this.classGenerations)
                 {
-                    if (ShouldGenerate(this.contractorGenerationOptions.Tags, classGeneration))
+                    if (ShouldGenerate(this.generationOptions.Tags, classGeneration))
                     {
                         classGeneration.AddModule(module);
                     }
@@ -42,7 +45,7 @@ namespace Contractor.Core
             {
                 foreach (var classGeneration in this.classGenerations)
                 {
-                    if (ShouldGenerate(this.contractorGenerationOptions.Tags, classGeneration))
+                    if (ShouldGenerate(this.generationOptions.Tags, classGeneration))
                     {
                         classGeneration.PerformAddEntityCommand(entity);
                     }
@@ -56,7 +59,7 @@ namespace Contractor.Core
                     {
                         foreach (var classGeneration in this.classGenerations)
                         {
-                            if (ShouldGenerate(this.contractorGenerationOptions.Tags, classGeneration))
+                            if (ShouldGenerate(this.generationOptions.Tags, classGeneration))
                             {
                                 classGeneration.PerformAddPropertyCommand(property);
                             }
@@ -125,7 +128,7 @@ namespace Contractor.Core
             {
                 foreach (var classGeneration in this.classGenerations)
                 {
-                    if (ShouldGenerate(this.contractorGenerationOptions.Tags, classGeneration))
+                    if (ShouldGenerate(this.generationOptions.Tags, classGeneration))
                     {
                         classGeneration.PerformPostGenerationCommand(entity);
                     }
@@ -135,7 +138,7 @@ namespace Contractor.Core
 
         public void SaveChanges()
         {
-            this.fileSystemClient.SaveAll(contractorGenerationOptions);
+            this.fileSystemClient.SaveAll(generationOptions);
         }
 
         private bool ShouldGenerate(IEnumerable<ClassGenerationTag> tags, ClassGeneration classGeneration)
