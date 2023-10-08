@@ -1,4 +1,6 @@
-﻿namespace Contractor.CLI
+﻿using Contractor.CLI.Commands.InsertCsv;
+
+namespace Contractor.CLI
 {
     public class Program
     {
@@ -33,6 +35,10 @@
 
                 case "migrate":
                     MigrateCommand.HandleMigrationJob(args);
+                    break;
+
+                case "csv":
+                    CsvCommand.HandleCsvJob(args);
                     break;
 
                 default:
