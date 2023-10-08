@@ -1,8 +1,10 @@
+using Contractor.Core.Csv.Sql;
+using Contractor.Core.CsvExport;
 using Contractor.Core.CsvInsert;
 
-namespace Contractor.CLI.Commands.InsertCsv;
+namespace Contractor.CLI.Commands.Csv;
 
-public class CsvCommand
+public static class CsvCommand
 {
     public static void HandleCsvJob(string[] args)
     {
@@ -22,6 +24,10 @@ public class CsvCommand
         if (args[1] == "insert")
         {
             CsvInsertFacade.Insert(Directory.GetCurrentDirectory(), sqlOptions);
+        } 
+        else if (args[1] == "export")
+        {
+            CsvExportFacade.Export(Directory.GetCurrentDirectory(), sqlOptions);
         }
     }
 }

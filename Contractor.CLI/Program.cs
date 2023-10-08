@@ -1,4 +1,4 @@
-﻿using Contractor.CLI.Commands.InsertCsv;
+﻿using Contractor.CLI.Commands.Csv;
 
 namespace Contractor.CLI
 {

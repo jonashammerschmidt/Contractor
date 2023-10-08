@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 
-namespace Contractor.Core.CsvInsert.Sql
+namespace Contractor.Core.Csv.Sql
 {
     public class SqlDatabaseHelper
     {
