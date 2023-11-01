@@ -10,7 +10,7 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
         public static readonly string DomainFolder = Path.Combine("API", "Modules", "Domain", "Entities", "Persistence");
 
-        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Backend", "Persistence", "Templates");
+        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Backend", "Persistence", "Templates");
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudRepositoryGeneration>();

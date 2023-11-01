@@ -8,7 +8,7 @@ namespace Contractor.Core.Generation.Frontend.Model
     {
         internal static readonly string DomainFolder = Path.Combine("src", "app", "model", "domain-kebab", "entities-kebab");
 
-        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Frontend", "Model", "Templates");
+        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Frontend", "Model", "Templates");
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {

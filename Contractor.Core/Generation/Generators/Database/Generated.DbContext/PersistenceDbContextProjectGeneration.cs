@@ -11,7 +11,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
         public static readonly string DomainFolder = Path.Combine("Generated.DbContext", "Modules", "Domain", "Entities");
         public static readonly string DtoFolder = Path.Combine(DomainFolder, "DTOs");
 
-        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Database", "Generated.DbContext", "Templates");
+        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Database", "Generated.DbContext", "Templates");
 
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {

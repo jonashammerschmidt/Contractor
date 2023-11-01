@@ -8,7 +8,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
     {
         public static readonly string DomainFolder = Path.Combine("Modules", "Domain", "Entities", "DTOs");
 
-        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Backend", "Generated.DTOs", "Templates");
+        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Backend", "Generated.DTOs", "Templates");
         
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
