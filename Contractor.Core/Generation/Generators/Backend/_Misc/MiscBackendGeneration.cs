@@ -6,7 +6,7 @@ namespace Contractor.Core.Generation.Backend.Misc
 {
     internal class MiscBackendGeneration
     {
-        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Backend", "_Misc", "Templates");
+        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Backend", "_Misc", "Templates");
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, E2ePostmanGeneration>();

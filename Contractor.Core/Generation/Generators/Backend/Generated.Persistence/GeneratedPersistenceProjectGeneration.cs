@@ -8,7 +8,7 @@ namespace Contractor.Core.Generation.Backend.Generated.Persistence
     {
         public static readonly string DomainFolder = Path.Combine("Modules", "Domain", "Entities", "Persistence");
 
-        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Backend", "Generated.Persistence", "Templates");
+        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Backend", "Generated.Persistence", "Templates");
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {

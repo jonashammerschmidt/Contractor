@@ -9,7 +9,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
         internal static readonly string PagesFolder = Path.Combine("src", "app", "pages", "domain-kebab");
         internal static readonly string DomainFolder = Path.Combine("src", "app", "pages", "domain-kebab", "entities-kebab");
 
-        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Frontend", "Pages", "Templates");
+        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Frontend", "Pages", "Templates");
 
         internal static void ConfigureServices(IServiceCollection serviceCollection)
         {
