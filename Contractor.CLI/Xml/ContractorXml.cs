@@ -62,7 +62,7 @@ namespace Contractor.CLI
     public class ReplacementsXml
     {
         [XmlElement(ElementName = "Replacement")]
-        public List<ReplacementXml> Replacements { get; set; }
+        public List<ReplacementXml> Replacements { get; set; } = new ();
     }
 
     [XmlRoot(ElementName = "Replacement")]
@@ -79,7 +79,7 @@ namespace Contractor.CLI
     public class IncludesXml
     {
         [XmlElement(ElementName = "Include")]
-        public List<IncludeXml> Includes { get; set; }
+        public List<IncludeXml> Includes { get; set; } = new ();
     }
 
     [XmlRoot(ElementName = "Include")]
@@ -93,14 +93,14 @@ namespace Contractor.CLI
     public class ModulesXml
     {
         [XmlElement(ElementName = "Module")]
-        public List<ModuleXml> Modules { get; set; }
+        public List<ModuleXml> Modules { get; set; } = new ();
     }
 
     [XmlRoot(ElementName = "Module")]
     public class ModuleXml
     {
         [XmlElement(ElementName = "Entity")]
-        public List<EntityXml> Entities { get; set; }
+        public List<EntityXml> Entities { get; set; } = new ();
 
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
@@ -128,19 +128,19 @@ namespace Contractor.CLI
         public bool Skip { get; set; }
 
         [XmlElement(ElementName = "Property")]
-        public List<PropertyXml> Properties { get; set; }
+        public List<PropertyXml> Properties { get; set; } = new ();
 
         [XmlElement(ElementName = "Relation1ToN")]
-        public List<Relation1ToNXml> Relation1ToN { get; set; }
+        public List<Relation1ToNXml> Relation1ToN { get; set; } = new ();
 
         [XmlElement(ElementName = "Relation1To1")]
-        public List<Relation1To1Xml> Relations1To1 { get; set; }
+        public List<Relation1To1Xml> Relations1To1 { get; set; } = new ();
 
         [XmlElement(ElementName = "Index")]
-        public List<IndexXml> Indices { get; set; }
+        public List<IndexXml> Indices { get; set; } = new ();
 
         [XmlElement(ElementName = "Check")]
-        public List<CheckXml> Checks { get; set; }
+        public List<CheckXml> Checks { get; set; } = new ();
     }
 
     [XmlRoot(ElementName = "Property")]
