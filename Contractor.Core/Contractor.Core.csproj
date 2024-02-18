@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>contractor-core</PackageId>
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
