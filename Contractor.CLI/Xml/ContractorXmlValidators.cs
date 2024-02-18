@@ -5,12 +5,26 @@ public class ContractorXmlValidator
     public static void Validate(ContractorXml contractorXml)
     {
         var entities = contractorXml.Modules.Modules.SelectMany(module => module.Entities);
+        ValidateModuleNames(contractorXml); // Neue Modulnamen-Validierung
         ValidateEntities(entities);
         ValidateRelations(entities);
         ValidateProperties(entities);
         ValidateIndices(entities);
+        ValidateUniqueRelations(entities); 
     }
 
+    private static void ValidateModuleNames(ContractorXml contractorXml)
+    {
+        var moduleNames = new HashSet<string>();
+        foreach (var module in contractorXml.Modules.Modules)
+        {
+            if (!moduleNames.Add(module.Name))
+            {
+                throw new FormatException($"Duplicate module name '{module.Name}' found.");
+            }
+        }
+    }
+    
     private static void ValidateEntities(IEnumerable<EntityXml> entities)
     {
         var entityNames = new HashSet<string>(entities.Select(e => e.Name));
@@ -109,5 +123,47 @@ public class ContractorXmlValidator
         return propertyNames;
     }
     
-    
+    private static void ValidateUniqueRelations(IEnumerable<EntityXml> entities)
+    {
+        // Ein Set zur Überwachung der Einzigartigkeit der Relationen
+        var relationSignatures = new HashSet<string>();
+
+        foreach (var entity in entities)
+        {
+            // Überprüfung der 1:N-Relationen
+            foreach (var relation in entity.Relation1ToN)
+            {
+                // Erstellung der Signatur für die direkte Relation
+                var directSignature = $"{entity.Name}.{relation.PropertyNameFrom ?? relation.EntityNameFrom}Id->{entity.Name}";
+                // Erstellung der Signatur für die umgekehrte Relation, unter Berücksichtigung der Plurals
+                var reverseSignature = $"{entity.Name}.{relation.PropertyNameTo ?? entity.Name}Ids->{entity.Name}";
+
+                // Überprüfung der Einzigartigkeit der Signaturen
+                if (!relationSignatures.Add(directSignature))
+                {
+                    throw new FormatException($"Duplicate relation found: {directSignature}");
+                }
+                if (!relationSignatures.Add(reverseSignature))
+                {
+                    throw new FormatException($"Duplicate reverse relation found: {reverseSignature}");
+                }
+            }
+
+            // Überprüfung der 1:1-Relationen
+            foreach (var relation in entity.Relations1To1)
+            {
+                var directSignature = $"{entity.Name}.{relation.PropertyNameFrom ?? relation.EntityNameFrom}Id->{entity.Name}";
+                var reverseSignature = $"{entity.Name}.{relation.PropertyNameTo ?? entity.Name}Id->{entity.Name}";
+
+                if (!relationSignatures.Add(directSignature))
+                {
+                    throw new FormatException($"Duplicate relation found: {directSignature}");
+                }
+                if (!relationSignatures.Add(reverseSignature))
+                {
+                    throw new FormatException($"Duplicate reverse relation found: {reverseSignature}");
+                }
+            }
+        }
+    }
 }
