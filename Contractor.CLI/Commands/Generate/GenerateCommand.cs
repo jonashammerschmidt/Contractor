@@ -53,19 +53,19 @@ public class GenerateCommand
             Console.ResetColor();
             Environment.Exit(1);
         }
-
-        // try
-        // {
-        //     ContractorXmlValidator.Validate(contractorXml);
-        // }
-        // catch (Exception ex)
-        // {
-        //     Console.ForegroundColor = ConsoleColor.Red;
-        //     Console.WriteLine(ex.Message);
-        //     Console.WriteLine("");
-        //     Console.ResetColor();
-        //     Environment.Exit(1);
-        // }
+        
+        try
+        {
+            ContractorXmlValidator.Validate(contractorXml);
+        }
+        catch (Exception ex)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(ex.Message);
+            Console.WriteLine("");
+            Console.ResetColor();
+            Environment.Exit(1);
+        }
 
         GenerationOptions generationOptions = ContractorXmlConverter
             .ToContractorGenerationOptions(contractorXml, contractorXmlDocument,
