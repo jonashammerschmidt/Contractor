@@ -50,15 +50,28 @@ public class ContractorXmlValidator
     {
         foreach (var entity in entities)
         {
-            var propertyNames = GetPropertyNames(entity);
-            var firstDuplicatation = propertyNames
+            // Use a List<string> to collect property names, allowing duplicates
+            var propertyNames = entity.Properties.Select(p => p.Name).ToList();
+        
+            // Add relation-based property names, which may include duplicates
+            entity.Relation1ToN.ForEach(relation =>
+                propertyNames.Add((relation.PropertyNameFrom ?? relation.EntityNameFrom) + "Id"));
+
+            if (!string.IsNullOrWhiteSpace(entity.ScopeEntityName))
+            {
+                propertyNames.Add(entity.ScopeEntityName + "Id");
+            }
+
+            // Find the first duplicate property name, if any
+            var firstDuplicate = propertyNames
                 .GroupBy(x => x)
                 .Where(g => g.Count() > 1)
+                .Select(g => g.Key)
                 .FirstOrDefault();
 
-            if (firstDuplicatation != null)
+            if (firstDuplicate != null)
             {
-                throw new FormatException($"Entity '{entity.Name}': Duplicate property name '{firstDuplicatation}'.");
+                throw new FormatException($"Entity '{entity.Name}': Duplicate property name '{firstDuplicate}'.");
             }
         }
     }
