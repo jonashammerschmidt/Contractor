@@ -141,7 +141,7 @@ namespace Contractor.CLI.Tests
                     .WithRelation1ToN("Order", "Order", "OrderOrderDetails") // Assuming Order has many OrderDetails
                     .WithRelation1ToN("Product", "Product", "ProductOrderDetails") // Assuming Product can be in many OrderDetails
                     .WithProperty("Quantity")
-                    .WithIndex("OrderId,ProductId")) // Composite index for OrderId and ProductId
+                    .WithIndex("OrderId, ProductId, Quantity")) // Composite index for OrderId and ProductId
                 .Build();
 
             // Act & Assert
