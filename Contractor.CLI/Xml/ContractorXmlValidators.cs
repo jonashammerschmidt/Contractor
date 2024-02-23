@@ -97,7 +97,7 @@ public class ContractorXmlValidator
             var propertyNames = GetPropertyNames(entity);
             foreach (var index in entity.Indices)
             {
-                foreach (var propertyName in index.PropertyNames.Split(','))
+                foreach (var propertyName in index.PropertyNames.Split(',').Select(p => p.Trim()))
                 {
                     if (!propertyNames.Contains(propertyName))
                     {
@@ -113,6 +113,8 @@ public class ContractorXmlValidator
     {
         var propertyNames = new HashSet<string>(entity.Properties.Select(p => p.Name));
         entity.Relation1ToN.ForEach(relation =>
+            propertyNames.Add((relation.PropertyNameFrom ?? relation.EntityNameFrom) + "Id"));
+        entity.Relations1To1.ForEach(relation =>
             propertyNames.Add((relation.PropertyNameFrom ?? relation.EntityNameFrom) + "Id"));
 
         if (!string.IsNullOrWhiteSpace(entity.ScopeEntityName))
@@ -134,9 +136,9 @@ public class ContractorXmlValidator
             foreach (var relation in entity.Relation1ToN)
             {
                 // Erstellung der Signatur für die direkte Relation
-                var directSignature = $"{entity.Name}.{relation.PropertyNameFrom ?? relation.EntityNameFrom}Id->{entity.Name}";
+                var directSignature = $"{entity.Name}.{relation.PropertyNameFrom ?? relation.EntityNameFrom}->{relation.EntityNameFrom}";
                 // Erstellung der Signatur für die umgekehrte Relation, unter Berücksichtigung der Plurals
-                var reverseSignature = $"{entity.Name}.{relation.PropertyNameTo ?? entity.Name}Ids->{entity.Name}";
+                var reverseSignature = $"{relation.EntityNameFrom}.{relation.PropertyNameTo ?? entity.NamePlural}->{entity.Name}";
 
                 // Überprüfung der Einzigartigkeit der Signaturen
                 if (!relationSignatures.Add(directSignature))
@@ -152,8 +154,10 @@ public class ContractorXmlValidator
             // Überprüfung der 1:1-Relationen
             foreach (var relation in entity.Relations1To1)
             {
-                var directSignature = $"{entity.Name}.{relation.PropertyNameFrom ?? relation.EntityNameFrom}Id->{entity.Name}";
-                var reverseSignature = $"{entity.Name}.{relation.PropertyNameTo ?? entity.Name}Id->{entity.Name}";
+                // Erstellung der Signatur für die direkte Relation
+                var directSignature = $"{entity.Name}.{relation.PropertyNameFrom ?? relation.EntityNameFrom}->{relation.EntityNameFrom}";
+                // Erstellung der Signatur für die umgekehrte Relation, unter Berücksichtigung der Plurals
+                var reverseSignature = $"{relation.EntityNameFrom}.{relation.PropertyNameTo ?? entity.Name}->{entity.Name}";
 
                 if (!relationSignatures.Add(directSignature))
                 {
