@@ -1,4 +1,5 @@
-﻿using Contractor.Core.Helpers;
+﻿using System.Linq;
+using Contractor.Core.Helpers;
 
 namespace Contractor.Core.MetaModell
 {
@@ -26,7 +27,7 @@ namespace Contractor.Core.MetaModell
 
         public string TypeExtra
         {
-            get { return type.Split(':')[1]; }
+            get { return type.Split(':').ElementAtOrDefault(1); }
         }
 
         public bool IsOptional { get; set; }

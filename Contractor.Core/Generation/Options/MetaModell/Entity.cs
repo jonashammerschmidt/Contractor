@@ -75,15 +75,15 @@ namespace Contractor.Core.MetaModell
 
         public string DisplayPropertyFallback { get; set; }
 
-        public IEnumerable<Property> Properties { get; set; }
+        public List<Property> Properties { get; set; }
 
-        public IEnumerable<Relation1ToN> Relations1ToN { get; set; }
+        public List<Relation1ToN> Relations1ToN { get; set; }
 
-        public IEnumerable<Relation1To1> Relations1To1 { get; set; }
+        public List<Relation1To1> Relations1To1 { get; set; }
 
-        public IEnumerable<Index> Indices { get; set; }
+        public List<Index> Indices { get; set; }
 
-        public IEnumerable<Check> Checks { get; set; }
+        public List<Check> Checks { get; set; }
 
         public Module Module { get; private set; }
 

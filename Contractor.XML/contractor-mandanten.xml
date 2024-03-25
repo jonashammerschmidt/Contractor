@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor-include.xsd">
+<Contractor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor-include.xsd">
   <Modules>
     <Module name="Mandantentrennung" skip="true">
       <Entity name="Mandant" namePlural="Mandanten" skip="true">
@@ -7,4 +7,4 @@
       </Entity>
     </Module>
   </Modules>
-</Include>
+</Contractor>

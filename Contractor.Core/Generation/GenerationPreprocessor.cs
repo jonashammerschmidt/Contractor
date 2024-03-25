@@ -31,7 +31,9 @@ namespace Contractor.Core
                                 RelationBeforePreProcessor = relation1To1,
                             };
                             scopeRelation1ToN.AddLinks(entity);
-                            entity.Relations1ToN = entity.Relations1ToN.Concat(new List<Relation1ToN>() { scopeRelation1ToN });
+                            entity.Relations1ToN = entity.Relations1ToN
+                                .Concat(new List<Relation1ToN>() { scopeRelation1ToN })
+                                .ToList();
                         }
                     }
 
@@ -51,7 +53,9 @@ namespace Contractor.Core
                                 RelationBeforePreProcessor = relation1ToN,
                             };
                             scopeRelation1ToN.AddLinks(entity);
-                            entity.Relations1ToN = entity.Relations1ToN.Concat(new List<Relation1ToN>() { scopeRelation1ToN });
+                            entity.Relations1ToN = entity.Relations1ToN
+                                .Concat(new List<Relation1ToN>() { scopeRelation1ToN })
+                                .ToList();
                         }
                     }
                 }
