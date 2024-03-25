@@ -3,7 +3,7 @@
 namespace Contractor.Core.Generation.Frontend.Pages
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_PAGES })]
-    internal class AppComponentGeneration : ClassGeneration
+    public class AppComponentGeneration : ClassGeneration
     {
         private readonly AppComponentModuleAddition appComponentModuleAddition;
         private readonly AppComponentEntityAddition appComponentEntityAddition;

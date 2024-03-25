@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Contractor.CLI.Migration
 {
-    internal class ContractorOptionsLoader
+    public class ContractorOptionsLoader
     {
         public static IContractorOptions Load(string folder)
         {

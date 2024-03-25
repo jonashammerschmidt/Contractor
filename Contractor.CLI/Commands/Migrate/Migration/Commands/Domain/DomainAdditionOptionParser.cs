@@ -3,7 +3,7 @@ using Contractor.Core.Helpers;
 
 namespace Contractor.CLI.Migration
 {
-    internal class DomainAdditionOptionParser
+    public class DomainAdditionOptionParser
     {
         public static DomainAdditionOptions ParseOptions(IContractorOptions options, string[] args)
         {

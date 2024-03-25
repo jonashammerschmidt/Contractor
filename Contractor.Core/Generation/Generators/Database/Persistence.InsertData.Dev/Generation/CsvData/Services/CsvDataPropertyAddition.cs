@@ -5,7 +5,7 @@ using System;
 
 namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
 {
-    internal class CsvDataPropertyAddition
+    public class CsvDataPropertyAddition
     {
         private IFileSystemClient fileSystemClient;
 

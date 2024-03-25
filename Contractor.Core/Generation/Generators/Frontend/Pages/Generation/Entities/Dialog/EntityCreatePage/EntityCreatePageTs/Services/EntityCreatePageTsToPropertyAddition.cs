@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class EntityCreatePageTsToPropertyAddition : RelationSideAdditionToExisitingFileGeneration
+    public class EntityCreatePageTsToPropertyAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntityCreatePageTsToPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

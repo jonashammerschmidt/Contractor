@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
-    internal class DtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
+    public class DtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public DtoPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

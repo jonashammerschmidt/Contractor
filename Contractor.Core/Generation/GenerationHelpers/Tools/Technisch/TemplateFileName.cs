@@ -2,7 +2,7 @@
 
 namespace Contractor.Core.Tools
 {
-    internal class TemplateFileName
+    public class TemplateFileName
     {
         public static string GetFileNameForEntityAddition(Entity entity, string originalTemplateFileName)
         {

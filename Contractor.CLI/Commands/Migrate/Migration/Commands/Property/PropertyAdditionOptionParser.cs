@@ -3,7 +3,7 @@ using System;
 
 namespace Contractor.CLI.Migration
 {
-    internal class PropertyAdditionOptionParser
+    public class PropertyAdditionOptionParser
     {
         public static IPropertyAdditionOptions ParseOptions(IContractorOptions contractorOptions, string[] args)
         {

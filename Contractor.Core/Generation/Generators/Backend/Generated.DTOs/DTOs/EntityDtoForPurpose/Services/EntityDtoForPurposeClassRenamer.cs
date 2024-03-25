@@ -3,7 +3,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    internal class EntityDtoForPurposeClassRenamer
+    public class EntityDtoForPurposeClassRenamer
     {
         private readonly IFileSystemClient fileSystemClient;
         private readonly PathService pathService;

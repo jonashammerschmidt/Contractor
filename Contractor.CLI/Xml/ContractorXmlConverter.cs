@@ -39,7 +39,7 @@ namespace Contractor.CLI
             return Path.Combine(path.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries));
         }
 
-        internal static void AddToContractorGenerationOptions(
+        public static void AddToContractorGenerationOptions(
             GenerationOptions generationOptions,
             ContractorIncludeXml contractorIncludeXml)
         {

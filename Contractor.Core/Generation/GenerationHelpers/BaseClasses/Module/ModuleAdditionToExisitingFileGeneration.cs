@@ -3,7 +3,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.BaseClasses
 {
-    internal abstract class ModuleAdditionToExisitingFileGeneration
+    public abstract class ModuleAdditionToExisitingFileGeneration
     {
         private readonly IFileSystemClient fileSystemClient;
         private readonly PathService pathService;

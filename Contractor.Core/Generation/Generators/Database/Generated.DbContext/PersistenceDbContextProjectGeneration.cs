@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
-    internal static class PersistenceDbContextProjectGeneration
+    public static class PersistenceDbContextProjectGeneration
     {
         public static readonly string DomainFolder = Path.Combine("Generated.DbContext", "Modules", "Domain", "Entities");
         public static readonly string DtoFolder = Path.Combine(DomainFolder, "DTOs");

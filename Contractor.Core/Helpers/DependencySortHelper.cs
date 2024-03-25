@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Contractor.Core.Helpers
 {
-    internal static class DependencySortHelper
+    public static class DependencySortHelper
     {
         public static IEnumerable<T> Sort<T>(
             this IEnumerable<T> source,

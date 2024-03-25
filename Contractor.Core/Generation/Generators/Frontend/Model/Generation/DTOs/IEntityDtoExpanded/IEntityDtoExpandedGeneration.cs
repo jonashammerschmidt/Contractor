@@ -6,7 +6,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Frontend.Model
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
-    internal class IEntityDtoExpandedGeneration : ClassGeneration
+    public class IEntityDtoExpandedGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto-expanded.template.txt");

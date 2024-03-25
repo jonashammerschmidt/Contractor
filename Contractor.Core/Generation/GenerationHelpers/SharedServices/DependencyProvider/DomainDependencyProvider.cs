@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    internal class DomainDependencyProvider
+    public class DomainDependencyProvider
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

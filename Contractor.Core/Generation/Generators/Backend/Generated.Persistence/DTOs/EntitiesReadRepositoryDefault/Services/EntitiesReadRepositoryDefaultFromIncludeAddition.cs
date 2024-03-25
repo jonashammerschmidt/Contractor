@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.Persistence
 {
-    internal class EntitiesReadRepositoryDefaultFromIncludeAddition : RelationSideAdditionToExisitingFileGeneration
+    public class EntitiesReadRepositoryDefaultFromIncludeAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntitiesReadRepositoryDefaultFromIncludeAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

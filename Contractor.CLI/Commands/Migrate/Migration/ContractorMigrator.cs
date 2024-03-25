@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Contractor.CLI.Migration
 {
-    internal static class ContractorMigrator
+    public static class ContractorMigrator
     {
         public static void Migrate(ContractorXml contractorXml, IContractorOptions options, string[] args)
         {

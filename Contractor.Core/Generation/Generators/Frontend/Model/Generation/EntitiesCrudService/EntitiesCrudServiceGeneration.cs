@@ -5,7 +5,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Frontend.Model
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
-    internal class EntitiesCrudServiceGeneration : ClassGeneration
+    public class EntitiesCrudServiceGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(ModelProjectGeneration.TemplateFolder, "entities-kebab-crud.service.template.txt");

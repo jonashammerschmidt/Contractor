@@ -5,7 +5,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Frontend.Pages
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_PAGES })]
-    internal class EntitiesPagesRoutingGeneration : ClassGeneration
+    public class EntitiesPagesRoutingGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(PagesProjectGeneration.TemplateFolder, "entities-kebab-pages.routing.template.txt");

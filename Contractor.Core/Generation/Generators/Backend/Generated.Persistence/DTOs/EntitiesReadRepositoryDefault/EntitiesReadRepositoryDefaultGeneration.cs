@@ -6,7 +6,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Generated.Persistence
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_GENERATED, ClassGenerationTag.BACKEND_GENERATED_PERSISTENCE })]
-    internal class EntitiesReadRepositoryDefaultGeneration : ClassGeneration
+    public class EntitiesReadRepositoryDefaultGeneration : ClassGeneration
     {
         public static readonly string TemplatePath =
             Path.Combine(GeneratedPersistenceProjectGeneration.TemplateFolder, "EntitiesReadRepositoryDefaultTemplate.txt");

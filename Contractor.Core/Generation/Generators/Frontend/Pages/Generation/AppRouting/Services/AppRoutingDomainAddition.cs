@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class AppRoutingDomainAddition
+    public class AppRoutingDomainAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

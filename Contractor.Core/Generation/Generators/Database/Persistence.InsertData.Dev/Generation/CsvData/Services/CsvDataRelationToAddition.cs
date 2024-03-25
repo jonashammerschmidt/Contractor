@@ -6,7 +6,7 @@ using System;
 
 namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
 {
-    internal class CsvDataRelationToAddition : RelationSideAdditionToExisitingFileGeneration
+    public class CsvDataRelationToAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public CsvDataRelationToAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

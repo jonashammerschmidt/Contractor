@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Contractor.Core.Generation.Backend.Misc
 {
-    internal class E2ePostmanRelationSideAddition : RelationSideAdditionToExisitingFileGeneration
+    public class E2ePostmanRelationSideAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public E2ePostmanRelationSideAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Contractor.CLI.Commands._Helper
 {
-    internal class TagArgumentParser
+    public class TagArgumentParser
     {
         public static void AddTags(string[] args, GenerationOptions options)
         {

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
 {
-    internal class PersistenceInsertDataDevProjectGeneration
+    public class PersistenceInsertDataDevProjectGeneration
     {
         public static readonly string DomainFolder = Path.Combine("InsertData.Dev", "CsvData", "Domain");
 

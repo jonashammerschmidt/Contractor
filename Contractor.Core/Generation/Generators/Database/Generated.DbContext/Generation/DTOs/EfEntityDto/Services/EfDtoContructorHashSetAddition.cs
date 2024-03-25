@@ -4,7 +4,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Persistence
 {
-    internal class EfDtoContructorHashSetAddition
+    public class EfDtoContructorHashSetAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

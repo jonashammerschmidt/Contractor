@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Contractor.Core.Helpers
 {
-    internal class IntHash
+    public class IntHash
     {
         public static int ComputeIntHash(string rawData)
         {

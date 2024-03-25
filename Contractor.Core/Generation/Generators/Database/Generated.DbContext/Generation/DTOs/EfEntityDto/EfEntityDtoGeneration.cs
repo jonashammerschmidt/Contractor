@@ -7,7 +7,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
-    internal class EfEntityDtoGeneration : ClassGeneration
+    public class EfEntityDtoGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(PersistenceDbContextProjectGeneration.TemplateFolder, "EfEntityDtoTemplate.txt");

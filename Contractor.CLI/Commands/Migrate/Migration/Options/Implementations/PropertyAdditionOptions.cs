@@ -42,7 +42,7 @@ namespace Contractor.CLI.Migration
             this.IsOptional = options.IsOptional;
         }
 
-        internal PropertyAdditionOptions(IRelationSideAdditionOptions options) : base(options)
+        public PropertyAdditionOptions(IRelationSideAdditionOptions options) : base(options)
         {
             this.PropertyName = options.PropertyName;
             this.IsOptional = options.IsOptional;

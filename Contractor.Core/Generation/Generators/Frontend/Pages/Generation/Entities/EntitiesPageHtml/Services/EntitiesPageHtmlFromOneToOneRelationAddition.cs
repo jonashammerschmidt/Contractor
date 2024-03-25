@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class EntitiesPageHtmlFromOneToOneRelationAddition : RelationSideAdditionToExisitingFileGeneration
+    public class EntitiesPageHtmlFromOneToOneRelationAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntitiesPageHtmlFromOneToOneRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
