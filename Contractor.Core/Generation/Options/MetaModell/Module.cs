@@ -8,7 +8,7 @@ namespace Contractor.Core.MetaModell
     {
         private string name;
 
-        public IEnumerable<Entity> Entities { get; set; }
+        public List<Entity> Entities { get; set; }
 
         public string Name
         {
@@ -51,7 +51,8 @@ namespace Contractor.Core.MetaModell
         public void Sort(IEnumerable<Entity> sortedEntities)
         {
             Entities = sortedEntities
-                .Where(entity => entity.Module == this);
+                .Where(entity => entity.Module == this)
+                .ToList();
         }
     }
 }

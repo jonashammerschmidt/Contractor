@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Contractor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor-include.xsd">
+  <CustomDtos>
+    <CustomDto entity="EmailUser" purpose="Detail">
+        <Property path="Mandant" />
+        <Property path="Permission" />
+        <Property path="EmailUserMemberships.Parent.Permission" />
+        <Property path="EmailUserMemberships.Parent.Mandant" />
+    </CustomDto>
+  </CustomDtos>
+</Contractor>

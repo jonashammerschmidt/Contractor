@@ -17,14 +17,15 @@ namespace Contractor.CLI.Commands._Helper
             }
         }
 
-        private static IEnumerable<ClassGenerationTag> FromString(string data)
+        private static List<ClassGenerationTag> FromString(string data)
         {
             return data
                 .Split(",")
                 .Select(item => Parse(item))
                 .Where(item => item.HasValue)
                 .Select(item => item.Value)
-                .SelectMany(item => GetChildren(item).Append(item));
+                .SelectMany(item => GetChildren(item).Append(item))
+                .ToList();
         }
 
         private static ClassGenerationTag? Parse(string text)

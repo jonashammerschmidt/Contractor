@@ -20,7 +20,6 @@ namespace Contractor.Core
             this.generationOptions = generationOptions;
             this.sortedEntities = GenerationPreprocessor.PreProcess(this.generationOptions);
 
-            
             IServiceCollection serviceCollection = new ServiceCollection();
             GenerationDependencyProvider.ConfigureServices(serviceCollection);
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();

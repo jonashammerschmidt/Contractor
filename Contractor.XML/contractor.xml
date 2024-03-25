@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Contractor minContractorVersion="2.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor.xsd">
+<Contractor minContractorVersion="2.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor.xsd">
   <Paths>
     <BackendDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Core</BackendDestinationFolder>
     <BackendGeneratedDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Backends\Krz.FullstackTemplate.Backend.Generated</BackendGeneratedDestinationFolder>
     <DbDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Databases\Krz.FullstackTemplate.Database.Core</DbDestinationFolder>
     <FrontendDestinationFolder>..\FullstackTemplate\Krz.FullstackTemplate.Frontends\Krz.FullstackTemplate.Web.Core</FrontendDestinationFolder>
     <ProjectName>Krz.FullstackTemplate.Backend.Core</ProjectName>
+    <GeneratedProjectName>Krz.FullstackTemplate.Backend.Generated</GeneratedProjectName>
     <DbProjectName>Krz.FullstackTemplate.Database.Core</DbProjectName>
     <DbContextName>FullstackTemplateCoreDbContext</DbContextName>
   </Paths>
@@ -13,7 +14,9 @@
     <Replacement pattern="app-search-dropdown" replaceWith="search-dropdown" />
     <Replacement pattern="app-table-filter-bar" replaceWith="table-filter-bar" />
     <Replacement pattern="src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source" replaceWith="@krz/material" />
+    <Replacement pattern="src/app/components/ui/form-layout/form-layout.module" replaceWith="@krz/material" />
     <Replacement pattern="src/app/components/ui/search-dropdown/search-dropdown.module" replaceWith="@krz/material" />
+    <Replacement pattern="src/app/components/ui/search-dropdown-v2/search-dropdown-v2.module" replaceWith="@krz/material" />
     <Replacement pattern="src/app/components/ui/table-filter-bar/table-filter-bar.module" replaceWith="@krz/material" />
     <Replacement pattern="src/app/components/ui/file-picker/file-picker.module" replaceWith="@krz/material" />
     <Replacement pattern="src/app/services/backend/pagination/i-paged-result" replaceWith="@krz/material" />

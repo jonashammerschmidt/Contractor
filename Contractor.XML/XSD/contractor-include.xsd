@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" vc:minVersion="1.1" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
   <xs:include schemaLocation="contractor-modules.xsd" />
-  <xs:element name="Include">
+  <xs:element name="Contractor">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="Modules"></xs:element>
+        <xs:element ref="Modules" minOccurs="0" maxOccurs="1"></xs:element>
+        <xs:element name="CustomDtos" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CustomDto" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Property" minOccurs="1" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="path" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="entity" type="xs:string" use="required"/>
+                  <xs:attribute name="purpose" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

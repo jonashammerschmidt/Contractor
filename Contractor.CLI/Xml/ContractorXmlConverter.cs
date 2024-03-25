@@ -1,40 +1,51 @@
 ﻿using Contractor.Core.MetaModell;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Xml;
 
 namespace Contractor.CLI
 {
-    internal class ContractorXmlConverter
+    public class ContractorXmlConverter
     {
-        internal static GenerationOptions ToContractorGenerationOptions(
+        public static GenerationOptions ToContractorGenerationOptions(
             ContractorXml contractorXml,
-            XmlDocument xmlDocument,
             string contractorXmlFolderPath)
         {
-            var contractorGenerationOptions = new GenerationOptions()
-            {
-                Paths = new Paths()
+            var contractorGenerationOptions = new GenerationOptions();
+            contractorGenerationOptions.Paths = new Paths();
+            contractorGenerationOptions.Paths.BackendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.BackendDestinationFolder)));
+            contractorGenerationOptions.Paths.BackendGeneratedDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.BackendGeneratedDestinationFolder)));
+            contractorGenerationOptions.Paths.DbDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.DbDestinationFolder)));
+            contractorGenerationOptions.Paths.FrontendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.FrontendDestinationFolder)));
+            contractorGenerationOptions.Paths.ProjectName = contractorXml.Paths.ProjectName;
+            contractorGenerationOptions.Paths.GeneratedProjectName = contractorXml.Paths.GeneratedProjectName;
+            contractorGenerationOptions.Paths.DbProjectName = contractorXml.Paths.DbProjectName;
+            contractorGenerationOptions.Paths.DbContextName = contractorXml.Paths.DbContextName;
+            contractorGenerationOptions.Replacements = contractorXml.Replacements.Replacements
+                .Select(replacement =>
                 {
-                    BackendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.BackendDestinationFolder))),
-                    BackendGeneratedDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.BackendGeneratedDestinationFolder))),
-                    DbDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.DbDestinationFolder))),
-                    FrontendDestinationFolder = Path.GetFullPath(Path.Combine(contractorXmlFolderPath, FixPath(contractorXml.Paths.FrontendDestinationFolder))),
-                    ProjectName = contractorXml.Paths.ProjectName,
-                    GeneratedProjectName = contractorXml.Paths.GeneratedProjectName,
-                    DbProjectName = contractorXml.Paths.DbProjectName,
-                    DbContextName = contractorXml.Paths.DbContextName,
-                },
-                Replacements = contractorXml.Replacements.Replacements.Select(replacement => new Replacement()
+                    var replacement1 = new Replacement();
+                    replacement1.Pattern = replacement.Pattern;
+                    replacement1.ReplaceWith = replacement.ReplaceWith;
+                    return replacement1;
+                })
+                .ToList();
+            contractorGenerationOptions.Modules = ConvertModules(contractorXml.Modules);
+            contractorGenerationOptions.CustomDtos = contractorXml.CustomDtos.CustomDtos
+                .Select(customDto =>
                 {
-                    Pattern = replacement.Pattern,
-                    ReplaceWith = replacement.ReplaceWith,
-                }),
-                Modules = ConvertModules(
-                    contractorXml.Modules,
-                    entityName => xmlDocument.SelectSingleNode($"//Entity[@name='{entityName}']")),
-            };
+                    var dto = new CustomDto();
+                    dto.EntityName = customDto.Entity;
+                    dto.Purpose = customDto.Purpose;
+                    dto.Properties = customDto.Properties
+                        .Select(property =>
+                        {
+                            var dtoProperty = new CustomDtoProperty();
+                            dtoProperty.Path = property.Path;
+                            return dtoProperty;
+                        })
+                        .ToList();
+                    return dto;
+                })
+                .ToList();
 
             return contractorGenerationOptions;
         }
@@ -46,18 +57,16 @@ namespace Contractor.CLI
 
         internal static void AddToContractorGenerationOptions(
             GenerationOptions generationOptions,
-            ContractorIncludeXml contractorIncludeXml,
-            XmlDocument contractorIncludeXmlDocument)
+            ContractorIncludeXml contractorIncludeXml)
         {
-            List<Module> modules = ConvertModules(
-                    contractorIncludeXml.Modules,
-                    entityName => contractorIncludeXmlDocument.SelectSingleNode($"//Entity[@name='{entityName}']"));
+            List<Module> modules = ConvertModules(contractorIncludeXml.Modules);
 
             generationOptions.Modules = generationOptions.Modules
-                .Concat(modules);
+                .Concat(modules)
+                .ToList();
         }
 
-        private static List<Module> ConvertModules(ModulesXml modules, System.Func<string, XmlNode> entityNodeProvider)
+        private static List<Module> ConvertModules(ModulesXml modules)
         {
             return modules.Modules.Select(module => new Module()
             {
@@ -65,9 +74,6 @@ namespace Contractor.CLI
                 Skip = module.Skip,
                 Entities = module.Entities.Select(entity =>
                 {
-                    XmlNode xmlNode = entityNodeProvider.Invoke(entity.Name);
-                    XmlNodeList xmlNodeList = xmlNode.ChildNodes;
-
                     return new Entity()
                     {
                         Name = entity.Name,
@@ -82,12 +88,6 @@ namespace Contractor.CLI
                             IsOptional = property.IsOptional,
                             IsDisplayProperty = property.IsDisplayProperty,
                             IsHidden = property.IsHidden,
-                            Order = xmlNodeList.Cast<XmlNode>()
-                                .Select((xmlNode, index) => new { index, xmlNode })
-                                .Where(element => element.xmlNode.Name == "Property")
-                                .Where(element => element.xmlNode.Attributes["name"].Value == property.Name)
-                                .Single()
-                                .index,
                         }).ToList(),
                         Relations1To1 = entity.Relations1To1.Select(relation1To1 => new Relation1To1()
                         {
@@ -96,13 +96,6 @@ namespace Contractor.CLI
                             PropertyNameTo = relation1To1.PropertyNameTo,
                             IsOptional = relation1To1.IsOptional,
                             OnDelete = ParseRelationDeleteBehaviour(relation1To1.OnDelete),
-                            Order = xmlNodeList.Cast<XmlNode>()
-                                .Select((xmlNode, index) => new { index, xmlNode })
-                                .Where(element => element.xmlNode.Name == "Relation1To1")
-                                .Where(element => element.xmlNode.Attributes["entityNameFrom"].Value == relation1To1.EntityNameFrom)
-                                .Where(element => element.xmlNode.Attributes["propertyNameFrom"]?.Value == relation1To1.PropertyNameFrom)
-                                .Single()
-                                .index,
                         }).ToList(),
                         Relations1ToN = entity.Relation1ToN.Select(relation1ToN => new Relation1ToN()
                         {
@@ -111,13 +104,6 @@ namespace Contractor.CLI
                             PropertyNameTo = relation1ToN.PropertyNameTo,
                             IsOptional = relation1ToN.IsOptional,
                             OnDelete = ParseRelationDeleteBehaviour(relation1ToN.OnDelete),
-                            Order = xmlNodeList.Cast<XmlNode>()
-                                .Select((xmlNode, index) => new { index, xmlNode })
-                                .Where(element => element.xmlNode.Name == "Relation1ToN")
-                                .Where(element => element.xmlNode.Attributes["entityNameFrom"].Value == relation1ToN.EntityNameFrom)
-                                .Where(element => element.xmlNode.Attributes["propertyNameFrom"]?.Value == relation1ToN.PropertyNameFrom)
-                                .Single()
-                                .index,
                         }).ToList(),
                         Indices = entity.Indices.Select(index => new Contractor.Core.MetaModell.Index()
                         {
