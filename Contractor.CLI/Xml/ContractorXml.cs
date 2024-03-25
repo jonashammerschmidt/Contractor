@@ -26,11 +26,14 @@ namespace Contractor.CLI
         public string MinContractorVersion { get; set; }
     }
 
-    [XmlRoot(ElementName = "Include")]
+    [XmlRoot(ElementName = "Contractor")]
     public class ContractorIncludeXml
     {
         [XmlElement(ElementName = "Modules")]
         public ModulesXml Modules { get; set; }
+
+        [XmlElement(ElementName = "CustomDtos")]
+        public CustomDtosXml CustomDtos { get; set; }
     }
 
     [XmlRoot(ElementName = "Paths")]
@@ -245,11 +248,11 @@ namespace Contractor.CLI
         [XmlAttribute(AttributeName = "purpose")]
         public string Purpose { get; set; }
 
-        [XmlElement(ElementName = "CustomDto")]
+        [XmlElement(ElementName = "Property")]
         public List<CustomDtoPropertyXml> Properties { get; set; } = new ();
     }
 
-    [XmlRoot(ElementName = "CustomDto")]
+    [XmlRoot(ElementName = "Property")]
     public class CustomDtoPropertyXml
     {
         [XmlAttribute(AttributeName = "path")]

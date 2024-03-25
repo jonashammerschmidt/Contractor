@@ -29,23 +29,7 @@ namespace Contractor.CLI
                 })
                 .ToList();
             contractorGenerationOptions.Modules = ConvertModules(contractorXml.Modules);
-            contractorGenerationOptions.CustomDtos = contractorXml.CustomDtos.CustomDtos
-                .Select(customDto =>
-                {
-                    var dto = new CustomDto();
-                    dto.EntityName = customDto.Entity;
-                    dto.Purpose = customDto.Purpose;
-                    dto.Properties = customDto.Properties
-                        .Select(property =>
-                        {
-                            var dtoProperty = new CustomDtoProperty();
-                            dtoProperty.Path = property.Path;
-                            return dtoProperty;
-                        })
-                        .ToList();
-                    return dto;
-                })
-                .ToList();
+            contractorGenerationOptions.CustomDtos = ConvertCustomDtos(contractorXml.CustomDtos);
 
             return contractorGenerationOptions;
         }
@@ -59,10 +43,12 @@ namespace Contractor.CLI
             GenerationOptions generationOptions,
             ContractorIncludeXml contractorIncludeXml)
         {
-            List<Module> modules = ConvertModules(contractorIncludeXml.Modules);
-
             generationOptions.Modules = generationOptions.Modules
-                .Concat(modules)
+                .Concat(ConvertModules(contractorIncludeXml.Modules))
+                .ToList();
+
+            generationOptions.CustomDtos = generationOptions.CustomDtos
+                .Concat(ConvertCustomDtos(contractorIncludeXml.CustomDtos))
                 .ToList();
         }
 
@@ -120,6 +106,27 @@ namespace Contractor.CLI
                     };
                 }).ToList(),
             }).ToList();
+        }
+
+        private static List<CustomDto> ConvertCustomDtos(CustomDtosXml customDtos)
+        {
+            return customDtos.CustomDtos
+                .Select(customDto =>
+                {
+                    var dto = new CustomDto();
+                    dto.EntityName = customDto.Entity;
+                    dto.Purpose = customDto.Purpose;
+                    dto.Properties = customDto.Properties
+                        .Select(property =>
+                        {
+                            var dtoProperty = new CustomDtoProperty();
+                            dtoProperty.Path = property.Path;
+                            return dtoProperty;
+                        })
+                        .ToList();
+                    return dto;
+                })
+                .ToList();
         }
 
         private static string ParseRelationDeleteBehaviour(string relationDeleteBehaviour)

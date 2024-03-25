@@ -54,9 +54,9 @@ namespace Contractor.Core.MetaModell
 
         public string OnDelete { get; set; }
 
-        public Entity EntityFrom { get; private set; }
+        public Entity EntityFrom { get; set; }
 
-        public Entity EntityTo { get; private set; }
+        public Entity EntityTo { get; set; }
 
         public void AddLinks(Entity entity)
         {

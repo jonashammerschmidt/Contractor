@@ -19,6 +19,7 @@ namespace Contractor.Core.MetaModell
                     var relation = options.FindRelation(currentEntity, pathItem);
                     var customDtoPathItem = new CustomDtoPathItem()
                     {
+                        PropertyName = pathItem,
                         Entity = currentEntity,
                         Relation = relation,
                     };

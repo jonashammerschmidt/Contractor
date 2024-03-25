@@ -69,8 +69,8 @@ public class GenerateCommand
 
         GenerationOptions generationOptions = ContractorXmlConverter
             .ToContractorGenerationOptions(contractorXml, contractorXmlFileInfo.Directory.FullName);
-        ContractorXmlOrderSetter.SetOrder(generationOptions, contractorXmlDocument);
 
+        // Includes
         if (contractorXml.Includes is not null)
         {
             foreach (var include in contractorXml.Includes.Includes)
@@ -88,11 +88,28 @@ public class GenerateCommand
                     (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
 
                 ContractorXmlConverter.AddToContractorGenerationOptions(generationOptions, contractorIncludeXml);
-                ContractorXmlOrderSetter.SetOrder(generationOptions, contractorIncludeXmlDocument);
             }
         }
 
+        // Add Links
         generationOptions.AddLinks();
+        
+        // Set Order
+        ContractorXmlOrderSetter.SetOrder(generationOptions, contractorXmlDocument);
+        if (contractorXml.Includes is not null)
+        {
+            foreach (var include in contractorXml.Includes.Includes)
+            {
+                string contractorIncludeXmlFilePath = Path.GetFullPath(Path.Combine(
+                    contractorXmlFileInfo.Directory.FullName,
+                    include.Src));
+
+                var contractorIncludeXmlDocument = new XmlDocument();
+                contractorIncludeXmlDocument.Load(File.OpenRead(contractorIncludeXmlFilePath));
+
+                ContractorXmlOrderSetter.SetOrder(generationOptions, contractorIncludeXmlDocument);
+            }
+        }
 
         TagArgumentParser.AddTags(args, generationOptions);
         generationOptions.IsVerbose = ArgumentParser.HasArgument(args, "-v", "--verbose");
