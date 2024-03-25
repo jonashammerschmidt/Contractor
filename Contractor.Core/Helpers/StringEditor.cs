@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Contractor.Core.Helpers
 {
-    internal class StringEditor
+    public class StringEditor
     {
         private int lineNumber;
         private readonly List<string> lines;

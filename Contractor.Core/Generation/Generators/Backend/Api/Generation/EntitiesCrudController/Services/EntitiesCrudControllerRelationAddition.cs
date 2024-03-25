@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Api
 {
-    internal class EntitiesCrudControllerRelationAddition : RelationSideAdditionToExisitingFileGeneration
+    public class EntitiesCrudControllerRelationAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntitiesCrudControllerRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

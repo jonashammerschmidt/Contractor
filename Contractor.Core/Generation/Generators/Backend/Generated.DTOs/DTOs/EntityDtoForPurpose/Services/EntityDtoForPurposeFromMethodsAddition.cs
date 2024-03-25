@@ -4,7 +4,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    internal class EntityDtoForPurposeFromMethodsAddition
+    public class EntityDtoForPurposeFromMethodsAddition
     {
         private readonly IFileSystemClient fileSystemClient;
         private readonly PathService pathService;

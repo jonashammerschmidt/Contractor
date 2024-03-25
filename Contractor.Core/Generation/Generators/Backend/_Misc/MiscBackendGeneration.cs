@@ -4,10 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Backend.Misc
 {
-    internal class MiscBackendGeneration
+    public class MiscBackendGeneration
     {
-        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Backend", "_Misc", "Templates");
-        internal static void ConfigureServices(IServiceCollection serviceCollection)
+        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Backend", "_Misc", "Templates");
+        public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, E2ePostmanGeneration>();
             serviceCollection.AddSingleton<E2ePostmanEntityAddition>();

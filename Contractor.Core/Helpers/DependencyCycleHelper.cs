@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Contractor.Core.Helpers
 {
-    internal static class DependencyCycleHelper
+    public static class DependencyCycleHelper
     {
         public static IEnumerable<T> FindCycle<T>(
             this IEnumerable<T> source,

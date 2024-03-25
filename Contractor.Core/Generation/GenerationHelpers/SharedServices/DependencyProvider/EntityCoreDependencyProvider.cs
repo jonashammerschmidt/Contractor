@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    internal class EntityCoreDependencyProvider
+    public class EntityCoreDependencyProvider
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

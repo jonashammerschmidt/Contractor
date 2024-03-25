@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Backend.Persistence
 {
-    internal class PersistenceProjectGeneration
+    public class PersistenceProjectGeneration
     {
         public static readonly string ProjectFolder = "API";
 

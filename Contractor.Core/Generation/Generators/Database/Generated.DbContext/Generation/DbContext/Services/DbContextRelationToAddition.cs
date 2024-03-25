@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
-    internal class DbContextRelationToAddition : RelationSideAdditionToExisitingFileGeneration
+    public class DbContextRelationToAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public DbContextRelationToAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Contractor.CLI.Tools
 {
-    internal static class ArgumentParser
+    public static class ArgumentParser
     {
         public static bool HasArgument(string[] args, params string[] argumentAlternatives)
         {

@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Contractor.Core.Tools
 {
-    internal class FileSystemCacheClient : IFileSystemClient
+    public class FileSystemCacheClient : IFileSystemClient
     {
         public Dictionary<string, string> fileCache = new Dictionary<string, string>();
 

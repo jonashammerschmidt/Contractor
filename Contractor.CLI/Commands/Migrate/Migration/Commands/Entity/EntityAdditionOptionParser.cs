@@ -2,7 +2,7 @@
 
 namespace Contractor.CLI.Migration
 {
-    internal class EntityAdditionOptionParser
+    public class EntityAdditionOptionParser
     {
         public static EntityAdditionOptions ParseOptions(IContractorOptions contractorOptions, string[] args)
         {

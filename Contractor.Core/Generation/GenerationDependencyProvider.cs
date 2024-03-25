@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core
 {
-    internal class GenerationDependencyProvider
+    public class GenerationDependencyProvider
     {
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {

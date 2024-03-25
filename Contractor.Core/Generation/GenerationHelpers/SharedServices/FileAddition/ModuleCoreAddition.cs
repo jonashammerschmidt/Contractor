@@ -3,7 +3,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.BaseClasses
 {
-    internal class ModuleCoreAddition
+    public class ModuleCoreAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

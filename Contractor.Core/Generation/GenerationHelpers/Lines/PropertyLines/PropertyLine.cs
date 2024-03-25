@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Tools
 {
-    internal class PropertyLine
+    public class PropertyLine
     {
         public static void FindStartingLineForNewProperty(string file, string entityName, StringEditor stringEditor)
         {

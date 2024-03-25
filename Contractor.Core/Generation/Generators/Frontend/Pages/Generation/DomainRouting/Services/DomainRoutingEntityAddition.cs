@@ -4,7 +4,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class DomainRoutingEntityAddition
+    public class DomainRoutingEntityAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

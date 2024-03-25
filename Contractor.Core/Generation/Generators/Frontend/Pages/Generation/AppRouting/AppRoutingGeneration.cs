@@ -3,7 +3,7 @@
 namespace Contractor.Core.Generation.Frontend.Pages
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_PAGES })]
-    internal class AppRoutingGeneration : ClassGeneration
+    public class AppRoutingGeneration : ClassGeneration
     {
         private readonly AppRoutingDomainAddition appRoutingDomainAddition;
 

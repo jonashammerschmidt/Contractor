@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Contractor.Core.Generation.Backend.Misc
 {
-    internal class E2ePostmanPropertyAddition : PropertyAdditionToExisitingFileGeneration
+    public class E2ePostmanPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public E2ePostmanPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

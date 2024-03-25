@@ -2,7 +2,7 @@
 
 namespace Contractor.Core.Tools
 {
-    internal interface IFileSystemClient
+    public interface IFileSystemClient
     {
         string ReadAllText(GenerationOptions options, params string[] pathParts);
 

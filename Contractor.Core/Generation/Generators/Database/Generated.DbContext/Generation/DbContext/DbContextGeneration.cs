@@ -3,7 +3,7 @@
 namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
-    internal class DbContextGeneration : ClassGeneration
+    public class DbContextGeneration : ClassGeneration
     {
         private readonly DbContextEntityAddition dbContextEntityAddition;
         private readonly DbContextPropertyAddition dbContextPropertyAddition;

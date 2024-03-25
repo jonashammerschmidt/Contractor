@@ -2,7 +2,7 @@
 
 namespace Contractor.CLI.Migration
 {
-    internal class Relation1ToNAdditionOptionParser
+    public class Relation1ToNAdditionOptionParser
     {
         public static IRelationAdditionOptions ParseOptions(IContractorOptions contractorOptions, string[] args)
         {

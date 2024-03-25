@@ -5,7 +5,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Logic
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_CONTRACT_LOGIC })]
-    internal class IEntitiesCrudLogicGeneration : ClassGeneration
+    public class IEntitiesCrudLogicGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(LogicProjectGeneration.TemplateFolder, "IEntitiesCrudLogicTemplate.txt");

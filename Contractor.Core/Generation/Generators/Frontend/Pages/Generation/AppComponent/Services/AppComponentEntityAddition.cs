@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class AppComponentEntityAddition
+    public class AppComponentEntityAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

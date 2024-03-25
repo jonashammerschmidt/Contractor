@@ -3,7 +3,7 @@
 namespace Contractor.Core.Generation.Database.Persistence.InsertData.Dev
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_PERSISTENCE_DB_CONTEXT })]
-    internal class CsvDataGeneration : ClassGeneration
+    public class CsvDataGeneration : ClassGeneration
     {
         private static readonly string FileName = "dbo.Entities.csv";
 

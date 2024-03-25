@@ -5,7 +5,7 @@ using System;
 
 namespace Contractor.Core.Tools
 {
-    internal class ApiDtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
+    public class ApiDtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public ApiDtoPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

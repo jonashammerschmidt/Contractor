@@ -3,7 +3,7 @@ using Contractor.Core.MetaModell;
 
 namespace Contractor.Core.Tools
 {
-    internal class FrontendDtoRelationAddition
+    public class FrontendDtoRelationAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

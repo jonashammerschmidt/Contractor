@@ -129,7 +129,7 @@ namespace Contractor.CLI.Migration
             };
         }
 
-        internal static IRelationSideAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options, string propertyType)
+        public static IRelationSideAdditionOptions GetPropertyForFrom(IRelationAdditionOptions options, string propertyType)
         {
             return new RelationSideAdditionOptions(options)
             {
@@ -142,7 +142,7 @@ namespace Contractor.CLI.Migration
             };
         }
 
-        internal static IRelationSideAdditionOptions GetPropertyForTo(IRelationAdditionOptions options, string propertyType)
+        public static IRelationSideAdditionOptions GetPropertyForTo(IRelationAdditionOptions options, string propertyType)
         {
             return new RelationSideAdditionOptions(options)
             {

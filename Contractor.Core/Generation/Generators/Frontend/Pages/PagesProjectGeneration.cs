@@ -4,14 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class PagesProjectGeneration
+    public class PagesProjectGeneration
     {
-        internal static readonly string PagesFolder = Path.Combine("src", "app", "pages", "domain-kebab");
-        internal static readonly string DomainFolder = Path.Combine("src", "app", "pages", "domain-kebab", "entities-kebab");
+        public static readonly string PagesFolder = Path.Combine("src", "app", "pages", "domain-kebab");
+        public static readonly string DomainFolder = Path.Combine("src", "app", "pages", "domain-kebab", "entities-kebab");
 
-        internal static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Frontend", "Pages", "Templates");
+        public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Frontend", "Pages", "Templates");
 
-        internal static void ConfigureServices(IServiceCollection serviceCollection)
+        public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             // App-Routing
             serviceCollection.AddSingleton<ClassGeneration, AppRoutingGeneration>();

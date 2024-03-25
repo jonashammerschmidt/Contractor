@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    internal class EntityDtoExpandedFromOneToOneMethodsAddition : RelationSideAdditionToExisitingFileGeneration
+    public class EntityDtoExpandedFromOneToOneMethodsAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntityDtoExpandedFromOneToOneMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)
