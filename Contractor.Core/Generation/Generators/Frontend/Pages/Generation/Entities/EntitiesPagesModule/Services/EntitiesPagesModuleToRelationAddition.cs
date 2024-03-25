@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class EntitiesPagesModuleToRelationAddition : RelationSideAdditionToExisitingFileGeneration
+    public class EntitiesPagesModuleToRelationAddition : RelationSideAdditionToExisitingFileGeneration
     {
         public EntitiesPagesModuleToRelationAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

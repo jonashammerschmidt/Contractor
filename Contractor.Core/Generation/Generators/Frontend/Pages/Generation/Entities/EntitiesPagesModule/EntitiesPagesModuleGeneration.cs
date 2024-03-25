@@ -5,7 +5,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Frontend.Pages
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_PAGES })]
-    internal class EntitiesPagesModuleGeneration : ClassGeneration
+    public class EntitiesPagesModuleGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(PagesProjectGeneration.TemplateFolder, "entities-kebab-pages.module.template.txt");

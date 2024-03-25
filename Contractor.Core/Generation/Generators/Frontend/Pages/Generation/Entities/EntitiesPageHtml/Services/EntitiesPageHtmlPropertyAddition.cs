@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Frontend.Pages
 {
-    internal class EntitiesPageHtmlPropertyAddition : PropertyAdditionToExisitingFileGeneration
+    public class EntitiesPageHtmlPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public EntitiesPageHtmlPropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

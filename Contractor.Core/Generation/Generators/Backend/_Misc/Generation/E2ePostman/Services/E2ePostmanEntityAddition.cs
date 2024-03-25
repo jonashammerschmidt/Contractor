@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Misc
 {
-    internal class E2ePostmanEntityAddition : EntityAdditionToExisitingFileGeneration
+    public class E2ePostmanEntityAddition : EntityAdditionToExisitingFileGeneration
     {
         public E2ePostmanEntityAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

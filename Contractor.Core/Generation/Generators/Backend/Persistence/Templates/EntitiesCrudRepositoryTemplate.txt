@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace ProjectName.Modules.Domain.Entities
 {
-    internal class EntitiesCrudRepository : IEntitiesCrudRepository
+    public class EntitiesCrudRepository : IEntitiesCrudRepository
     {
         private readonly IPaginationContext paginationContext;
 

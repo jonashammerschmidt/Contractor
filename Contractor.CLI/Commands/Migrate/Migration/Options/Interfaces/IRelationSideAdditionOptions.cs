@@ -1,6 +1,6 @@
 ﻿namespace Contractor.CLI.Migration
 {
-    internal interface IRelationSideAdditionOptions : IEntityAdditionOptions
+    public interface IRelationSideAdditionOptions : IEntityAdditionOptions
     {
         string PropertyType { get; set; }
 

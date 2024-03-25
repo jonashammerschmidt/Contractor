@@ -48,9 +48,9 @@ namespace Contractor.Core.MetaModell
 
         public int Order { get; set; }
 
-        public bool IsCreatedByPreProcessor { get; internal set; }
+        public bool IsCreatedByPreProcessor { get; public set; }
 
-        public Relation RelationBeforePreProcessor { get; internal set; }
+        public Relation RelationBeforePreProcessor { get; public set; }
 
         public string OnDelete { get; set; }
 

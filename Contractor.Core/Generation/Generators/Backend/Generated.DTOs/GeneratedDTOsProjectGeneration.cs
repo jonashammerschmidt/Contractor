@@ -4,13 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    internal class GeneratedDTOsProjectGeneration
+    public class GeneratedDTOsProjectGeneration
     {
         public static readonly string DomainFolder = Path.Combine("Modules", "Domain", "Entities", "DTOs");
 
         public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Backend", "Generated.DTOs", "Templates");
         
-        internal static void ConfigureServices(IServiceCollection serviceCollection)
+        public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, EntityDtoGeneration>();
             serviceCollection.AddSingleton<EntityDtoMethodsAddition>();

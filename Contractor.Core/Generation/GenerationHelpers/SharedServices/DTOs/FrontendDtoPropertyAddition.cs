@@ -4,7 +4,7 @@ using Contractor.Core.MetaModell;
 
 namespace Contractor.Core.Tools
 {
-    internal class FrontendDtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
+    public class FrontendDtoPropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public FrontendDtoPropertyAddition(
             IFileSystemClient fileSystemClient,

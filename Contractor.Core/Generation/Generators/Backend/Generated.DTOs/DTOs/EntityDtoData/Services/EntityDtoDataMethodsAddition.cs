@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    internal class EntityDtoDataMethodsAddition : PropertyAdditionToExisitingFileGeneration
+    public class EntityDtoDataMethodsAddition : PropertyAdditionToExisitingFileGeneration
     {
         public EntityDtoDataMethodsAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

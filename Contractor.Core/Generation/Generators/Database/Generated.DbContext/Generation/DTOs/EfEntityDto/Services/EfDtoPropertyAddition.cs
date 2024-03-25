@@ -3,7 +3,7 @@ using Contractor.Core.MetaModell;
 
 namespace Contractor.Core.Tools
 {
-    internal class EfDtoPropertyAddition
+    public class EfDtoPropertyAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

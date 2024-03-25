@@ -5,7 +5,7 @@ using Contractor.Core.Tools;
 namespace Contractor.Core.Generation.Backend.Api
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND })]
-    internal class DependencyProviderGeneration : ClassGeneration
+    public class DependencyProviderGeneration : ClassGeneration
     {
         private static readonly string FileName = Path.Combine("API", "DependencyProvider.cs");
 

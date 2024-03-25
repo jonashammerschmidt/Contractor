@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace Contractor.CLI
 {
-    internal class ContractorInitialize
+    public class ContractorInitialize
     {
         public static void PerformInitialize(string[] args)
         {

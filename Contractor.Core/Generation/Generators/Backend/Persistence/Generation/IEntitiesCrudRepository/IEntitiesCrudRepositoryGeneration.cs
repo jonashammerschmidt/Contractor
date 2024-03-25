@@ -5,7 +5,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Persistence
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_CONTRACT_PERSISTENCE })]
-    internal class IEntitiesCrudRepositoryGeneration : ClassGeneration
+    public class IEntitiesCrudRepositoryGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(PersistenceProjectGeneration.TemplateFolder, "IEntitiesCrudRepositoryTemplate.txt");

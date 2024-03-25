@@ -2,7 +2,7 @@
 
 namespace Contractor.Core.Tools
 {
-    internal class EfDtoEntityAddition
+    public class EfDtoEntityAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

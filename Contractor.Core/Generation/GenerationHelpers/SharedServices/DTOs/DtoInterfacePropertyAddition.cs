@@ -4,7 +4,7 @@ using Contractor.Core.MetaModell;
 
 namespace Contractor.Core.Tools
 {
-    internal class DtoInterfacePropertyAddition : PropertyAdditionToExisitingFileGeneration
+    public class DtoInterfacePropertyAddition : PropertyAdditionToExisitingFileGeneration
     {
         public DtoInterfacePropertyAddition(IFileSystemClient fileSystemClient, PathService pathService)
             : base(fileSystemClient, pathService)

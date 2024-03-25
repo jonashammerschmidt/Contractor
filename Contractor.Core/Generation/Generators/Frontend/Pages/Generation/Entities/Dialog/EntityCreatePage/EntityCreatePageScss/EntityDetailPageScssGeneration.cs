@@ -5,7 +5,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Frontend.Pages
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_PAGES })]
-    internal class EntityCreatePageScssGeneration : ClassGeneration
+    public class EntityCreatePageScssGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(PagesProjectGeneration.TemplateFolder, "entity-kebab-create.page.scss.template.txt");

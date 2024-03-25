@@ -6,7 +6,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_GENERATED, ClassGenerationTag.BACKEND_GENERATED_DTOS })]
-    internal class EntityDtoGeneration : ClassGeneration
+    public class EntityDtoGeneration : ClassGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoTemplate.txt");

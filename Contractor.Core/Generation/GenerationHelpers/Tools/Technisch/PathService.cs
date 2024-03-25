@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Contractor.Core.Tools
 {
-    internal class PathService
+    public class PathService
     {
         // Backend
 
@@ -15,26 +15,26 @@ namespace Contractor.Core.Tools
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForBackend(Module module, params string[] paths)
+        public string GetAbsolutePathForBackend(Module module, params string[] paths)
         {
             string absolutePath = GetAbsolutePathForBackend(module.Options, paths);
             absolutePath = ModellNameReplacements.ReplaceModulePlaceholders(module, absolutePath);
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForBackend(Entity entity, params string[] paths)
+        public string GetAbsolutePathForBackend(Entity entity, params string[] paths)
         {
             string absolutePath = GetAbsolutePathForBackend(entity.Module, paths);
             absolutePath = ModellNameReplacements.ReplaceEntityPlaceholders(entity, absolutePath);
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForBackend(Property property, params string[] paths)
+        public string GetAbsolutePathForBackend(Property property, params string[] paths)
         {
             return GetAbsolutePathForBackend(property.Entity, paths);
         }
 
-        internal string GetAbsolutePathForBackend(Relation relation, params string[] paths)
+        public string GetAbsolutePathForBackend(Relation relation, params string[] paths)
         {
             return GetAbsolutePathForBackend(relation.EntityTo, paths);
         }
@@ -48,26 +48,26 @@ namespace Contractor.Core.Tools
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForBackendGenerated(Module module, params string[] paths)
+        public string GetAbsolutePathForBackendGenerated(Module module, params string[] paths)
         {
             string absolutePath = GetAbsolutePathForBackendGenerated(module.Options, paths);
             absolutePath = ModellNameReplacements.ReplaceModulePlaceholders(module, absolutePath);
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForBackendGenerated(Entity entity, params string[] paths)
+        public string GetAbsolutePathForBackendGenerated(Entity entity, params string[] paths)
         {
             string absolutePath = GetAbsolutePathForBackendGenerated(entity.Module, paths);
             absolutePath = ModellNameReplacements.ReplaceEntityPlaceholders(entity, absolutePath);
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForBackendGenerated(Property property, params string[] paths)
+        public string GetAbsolutePathForBackendGenerated(Property property, params string[] paths)
         {
             return GetAbsolutePathForBackendGenerated(property.Entity, paths);
         }
 
-        internal string GetAbsolutePathForBackendGenerated(Relation relation, params string[] paths)
+        public string GetAbsolutePathForBackendGenerated(Relation relation, params string[] paths)
         {
             return GetAbsolutePathForBackendGenerated(relation.EntityTo, paths);
         }
@@ -81,26 +81,26 @@ namespace Contractor.Core.Tools
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForDatabase(Module module, params string[] paths)
+        public string GetAbsolutePathForDatabase(Module module, params string[] paths)
         {
             string absolutePath = GetAbsolutePathForDatabase(module.Options, paths);
             absolutePath = ModellNameReplacements.ReplaceModulePlaceholders(module, absolutePath);
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForDatabase(Entity entity, params string[] paths)
+        public string GetAbsolutePathForDatabase(Entity entity, params string[] paths)
         {
             string absolutePath = GetAbsolutePathForDatabase(entity.Module, paths);
             absolutePath = ModellNameReplacements.ReplaceEntityPlaceholders(entity, absolutePath);
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForDatabase(Property property, params string[] paths)
+        public string GetAbsolutePathForDatabase(Property property, params string[] paths)
         {
             return GetAbsolutePathForDatabase(property.Entity, paths);
         }
 
-        internal string GetAbsolutePathForDatabase(Relation relation, params string[] paths)
+        public string GetAbsolutePathForDatabase(Relation relation, params string[] paths)
         {
             return GetAbsolutePathForDatabase(relation.EntityTo, paths);
         }
@@ -114,26 +114,26 @@ namespace Contractor.Core.Tools
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForFrontend(Module module, params string[] paths)
+        public string GetAbsolutePathForFrontend(Module module, params string[] paths)
         {
             string absolutePath = GetAbsolutePathForFrontend(module.Options, paths);
             absolutePath = ModellNameReplacements.ReplaceModulePlaceholders(module, absolutePath);
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForFrontend(Entity entity, params string[] paths)
+        public string GetAbsolutePathForFrontend(Entity entity, params string[] paths)
         {
             string absolutePath = GetAbsolutePathForFrontend(entity.Module, paths);
             absolutePath = ModellNameReplacements.ReplaceEntityPlaceholders(entity, absolutePath);
             return absolutePath;
         }
 
-        internal string GetAbsolutePathForFrontend(Property property, params string[] paths)
+        public string GetAbsolutePathForFrontend(Property property, params string[] paths)
         {
             return GetAbsolutePathForFrontend(property.Entity, paths);
         }
 
-        internal string GetAbsolutePathForFrontend(Relation relation, params string[] paths)
+        public string GetAbsolutePathForFrontend(Relation relation, params string[] paths)
         {
             return GetAbsolutePathForFrontend(relation.EntityTo, paths);
         }

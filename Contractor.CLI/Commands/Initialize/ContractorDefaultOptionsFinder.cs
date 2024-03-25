@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Contractor.CLI
 {
-    internal static class ContractorDefaultOptionsFinder
+    public static class ContractorDefaultOptionsFinder
     {
-        internal static ContractorXml FindDefaultOptions(string currentFolder)
+        public static ContractorXml FindDefaultOptions(string currentFolder)
         {
             string bestDbDestinationFolder = FindBestDbDestinationFolder(currentFolder);
             return new ContractorXml()

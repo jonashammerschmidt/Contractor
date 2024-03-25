@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Contractor.Core.Generation.Database.Generated.DbContext
 {
-    internal class DbContextEntityAddition
+    public class DbContextEntityAddition
     {
         public IFileSystemClient fileSystemClient;
         public PathService pathService;

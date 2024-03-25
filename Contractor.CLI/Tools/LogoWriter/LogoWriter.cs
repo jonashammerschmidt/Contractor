@@ -2,7 +2,7 @@
 
 namespace Contractor.CLI.Tools
 {
-    internal static class LogoWriter
+    public static class LogoWriter
     {
         private static readonly string Logo = string.Join(
             Environment.NewLine,

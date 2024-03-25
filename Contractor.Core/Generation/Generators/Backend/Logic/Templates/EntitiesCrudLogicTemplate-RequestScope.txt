@@ -8,7 +8,7 @@ using System;
 
 namespace ProjectName.Modules.Domain.Entities
 {
-    internal class EntitiesCrudLogic : IEntitiesCrudLogic
+    public class EntitiesCrudLogic : IEntitiesCrudLogic
     {
         private readonly IEntitiesCrudRepository entitiesCrudRepository;
 
