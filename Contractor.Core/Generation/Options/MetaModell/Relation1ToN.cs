@@ -12,6 +12,8 @@
 
         public Relation1ToN(Entity scopeEntity, Entity scopedEntity)
         {
+            this.EntityFrom = scopeEntity;
+            this.EntityTo = scopedEntity;
             this.EntityNameFrom = scopeEntity.Name;
             this.PropertyNameFrom = scopeEntity.Name;
             this.PropertyNameTo = scopedEntity.NamePlural;

@@ -96,10 +96,11 @@ namespace Contractor.Core.Tools
             }
 
             string optionalText = (relationSide.IsOptional && relationSide.Type == "Guid") ? "?" : "";
+            string newText = (relationSide.IsNew) ? "new " : "";
             if (forInterface)
                 stringEditor.InsertLine($"        {relationSide.Type}{optionalText} {relationSide.Name} {{ get; set; }}");
             else
-                stringEditor.InsertLine($"        public {relationSide.Type}{optionalText} {relationSide.Name} {{ get; set; }}");
+                stringEditor.InsertLine($"        public {newText}{relationSide.Type}{optionalText} {relationSide.Name} {{ get; set; }}");
 
             if (stringEditor.GetLine().Trim() != "}" && stringEditor.GetLine().Trim() != "")
             {

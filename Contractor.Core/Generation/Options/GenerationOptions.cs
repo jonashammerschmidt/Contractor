@@ -58,17 +58,30 @@ namespace Contractor.Core.MetaModell
             {
                 foreach (var entity in module.Entities)
                 {
-                    var relations1To1From = entity.Relations1To1.SingleOrDefault(relation => relation.EntityFrom.Name == searchedEntity.Name && relation.PropertyNameTo.ToLower() == searchedPropertyName.ToLower());
-                    var relations1To1To = entity.Relations1To1.SingleOrDefault(relation => relation.EntityTo.Name == searchedEntity.Name && relation.PropertyNameFrom.ToLower() == searchedPropertyName.ToLower());
-                    var relations1ToNFrom = entity.Relations1ToN.SingleOrDefault(relation => relation.EntityFrom.Name == searchedEntity.Name && relation.PropertyNameTo.ToLower() == searchedPropertyName.ToLower());
-                    var relations1ToNTo = entity.Relations1ToN.SingleOrDefault(relation => relation.EntityTo.Name == searchedEntity.Name && relation.PropertyNameFrom.ToLower() == searchedPropertyName.ToLower());
-                    var foundRelation = (relations1To1From as Relation) ?? (relations1To1To as Relation) ?? (relations1ToNFrom as Relation) ?? (relations1ToNTo as Relation);
+                    var relations1To1From = entity.Relations1To1.SingleOrDefault(relation =>
+                    {
+                        return relation.EntityFrom.Name == searchedEntity.Name
+                               && (relation.PropertyNameTo ?? relation.EntityTo.Name).ToLower() == searchedPropertyName.ToLower();
+                    });
+                    var relations1To1To = entity.Relations1To1.SingleOrDefault(relation => 
+                        relation.EntityTo.Name == searchedEntity.Name
+                        && (relation.PropertyNameFrom ?? relation.EntityFrom.Name).ToLower() == searchedPropertyName.ToLower());
+                    var relations1ToNFrom = entity.Relations1ToN.SingleOrDefault(relation => 
+                        relation.EntityFrom.Name == searchedEntity.Name
+                        && (relation.PropertyNameTo ?? relation.EntityTo.Name).ToLower() == searchedPropertyName.ToLower());
+                    var relations1ToNTo = entity.Relations1ToN.SingleOrDefault(relation => 
+                        relation.EntityTo.Name == searchedEntity.Name
+                        && (relation.PropertyNameFrom ?? relation.EntityFrom.Name).ToLower() == searchedPropertyName.ToLower());
+                    var foundRelation = (relations1To1From as Relation)
+                        ?? (relations1To1To as Relation)
+                        ?? (relations1ToNFrom as Relation)
+                        ?? (relations1ToNTo as Relation);
                     if (foundRelation != null)
                     {
                         return foundRelation;
                     }
-
-                    if (entity.HasScope)
+                    
+                    if (entity.HasScope && searchedEntity == entity)
                     {
                         if (entity.ScopeEntity.NameLower == searchedPropertyName.ToLower())
                         {
@@ -78,7 +91,7 @@ namespace Contractor.Core.MetaModell
 
                     foreach (var scopedEntity in entity.ScopedEntities)
                     {
-                        if (scopedEntity.NamePluralLower == searchedPropertyName.ToLower())
+                        if (scopedEntity.NamePluralLower == searchedPropertyName.ToLower() && searchedEntity == scopedEntity)
                         {
                             return new Relation1ToN(entity.ScopeEntity, scopedEntity);
                         }

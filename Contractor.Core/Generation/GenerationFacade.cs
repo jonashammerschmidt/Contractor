@@ -4,6 +4,7 @@ using Contractor.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
+using Contractor.Core.Generation.Backend.Generated.DTOs;
 
 namespace Contractor.Core
 {
@@ -14,6 +15,7 @@ namespace Contractor.Core
 
         private readonly IFileSystemClient fileSystemClient;
         private readonly List<ClassGeneration> classGenerations = new List<ClassGeneration>();
+        private readonly EntityDtoForPurposeGeneration entityDtoForPurposeGeneration;
 
         public GenerationFacade(GenerationOptions generationOptions)
         {
@@ -25,6 +27,7 @@ namespace Contractor.Core
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
             this.fileSystemClient = serviceProvider.GetRequiredService<IFileSystemClient>();
             this.classGenerations = serviceProvider.GetServices<ClassGeneration>().ToList();
+            this.entityDtoForPurposeGeneration = serviceProvider.GetService<EntityDtoForPurposeGeneration>();
         }
 
         public void Generate()
@@ -121,6 +124,11 @@ namespace Contractor.Core
                         }
                     }
                 }
+            }
+
+            foreach (var customDto in generationOptions.CustomDtos)
+            {
+                entityDtoForPurposeGeneration.Generate(customDto);
             }
 
             foreach (Entity entity in this.sortedEntities.Where(entity => !entity.Skip))

@@ -10,6 +10,8 @@ namespace Contractor.Core.MetaModell
 
         public string OnDelete { get; private set; }
 
+        public bool IsNew { get; set; }
+
         public bool IsCreatedByPreProcessor { get; set; }
 
         public Relation RelationBeforePreProcessor { get; set; }

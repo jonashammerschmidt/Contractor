@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>contractor-core</PackageId>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

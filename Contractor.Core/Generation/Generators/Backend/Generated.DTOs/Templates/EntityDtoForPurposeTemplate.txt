@@ -1,0 +1,27 @@
+using DbProjectName.Generated.DbContext.Modules.Domain.Entities;
+
+namespace GeneratedProjectName.Modules.Domain.Entities
+{
+    public class EntityDtoForPurpose : EntityDtoExpanded
+    {
+        public EntityDtoForPurpose() { }
+
+        public EntityDtoForPurpose(EntityDtoForPurpose entity) : base(entity)
+        {
+        }
+
+        protected EntityDtoForPurpose(EfEntityDto efEntityDto) : base(efEntityDto)
+        {
+        }
+
+        public static new EntityDtoForPurpose FromEfEntityDto(EfEntityDto efEntityDto)
+        {
+            if (efEntityDto == null)
+            {
+                return null;
+            }
+
+            return new EntityDtoForPurpose(efEntityDto);
+        }
+    }
+}
