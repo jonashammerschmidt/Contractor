@@ -4,9 +4,10 @@ public class EntityXmlBuilder
 {
     private readonly EntityXml _entity = new ();
 
-    public EntityXmlBuilder WithName(string name)
+    public EntityXmlBuilder WithName(string name, string plural)
     {
         _entity.Name = name;
+        _entity.NamePlural = plural;
         return this;
     }
 
@@ -16,9 +17,13 @@ public class EntityXmlBuilder
         return this;
     }
 
-    public EntityXmlBuilder WithProperty(string name)
+    public EntityXmlBuilder WithProperty(string type, string name)
     {
-        _entity.Properties.Add(new PropertyXml { Name = name });
+        _entity.Properties.Add(new PropertyXml
+        {
+            Type = type,
+            Name = name
+        });
         return this;
     }
 
@@ -42,7 +47,8 @@ public class EntityXmlBuilder
 
     public EntityXmlBuilder WithRelation1To1(string entityNameFrom, string propertyNameFrom, string propertyNameTo)
     {
-        _entity.Relations1To1.Add(new Relation1To1Xml { EntityNameFrom = entityNameFrom, PropertyNameFrom = propertyNameFrom, PropertyNameTo = propertyNameTo });
+        _entity.Relations1To1.Add(new Relation1To1Xml
+            { EntityNameFrom = entityNameFrom, PropertyNameFrom = propertyNameFrom, PropertyNameTo = propertyNameTo });
         return this;
     }
 
@@ -59,14 +65,37 @@ public class ContractorXmlBuilder
 {
     private ContractorXml _contractorXml = new ContractorXml
     {
-        Modules = new ModulesXml { Modules = new List<ModuleXml>() }
+        Modules = new ModulesXml
+        {
+            Modules = new List<ModuleXml>()
+            {
+                new ModuleXml
+                {
+                    Name = "TestModul",
+                    Entities = new List<EntityXml>(),
+                },
+            },
+        },
+        Replacements = new ReplacementsXml()
+        {
+            Replacements = new List<ReplacementXml>(),
+        },
+        CustomDtos = new CustomDtosXml()
+        {
+            CustomDtos = new List<CustomDtoXml>(),
+        },
+        Paths = new PathsXml
+        {
+            BackendDestinationFolder = "BackendDestinationFolder",
+            BackendGeneratedDestinationFolder = "BackendGeneratedDestinationFolder",
+            DbContextName = "DbContextName",
+            DbDestinationFolder = "DbDestinationFolder",
+            DbProjectName = "DbProjectName",
+            FrontendDestinationFolder = "FrontendDestinationFolder",
+            GeneratedProjectName = "GeneratedProjectName",
+            ProjectName = "ProjectName",
+        },
     };
-
-    public ContractorXmlBuilder()
-    {
-        // Initialize the first module to add entities to.
-        _contractorXml.Modules.Modules.Add(new ModuleXml { Entities = new List<EntityXml>() });
-    }
 
     public ContractorXmlBuilder AddEntity(Action<EntityXmlBuilder> configure)
     {

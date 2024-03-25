@@ -10,7 +10,7 @@ namespace Contractor.CLI.Tests
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
-                    .WithName("Entity1")
+                    .WithName("Entity1", "Entity1s")
                     .WithScopeEntityName("NonexistentEntity"))
                 .Build();
 
@@ -25,7 +25,7 @@ namespace Contractor.CLI.Tests
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
-                    .WithName("Entity1")
+                    .WithName("Entity1", "Entity1s")
                     .WithRelation1ToN("NonexistentEntity", "NonexistentProperty", "Entity1s"))
                 .Build();
 
@@ -40,9 +40,9 @@ namespace Contractor.CLI.Tests
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
-                    .WithName("Entity1")
-                    .WithProperty("Property1")
-                    .WithProperty("Property1")) // Duplicate
+                    .WithName("Entity1", "Entity1s")
+                    .WithProperty("String", "Property1")
+                    .WithProperty("String", "Property1")) // Duplicate
                 .Build();
 
             // Act & Assert
@@ -56,7 +56,7 @@ namespace Contractor.CLI.Tests
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
-                    .WithName("Entity1")
+                    .WithName("Entity1", "Entity1s")
                     .WithIndex("NonexistentProperty"))
                 .Build();
 
@@ -70,10 +70,10 @@ namespace Contractor.CLI.Tests
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
-                    .WithName("Entity1")
+                    .WithName("Entity1", "Entity1s")
                     .WithRelation1ToN("Entity2", "Entity2s", "Entity1s"))
                 .AddEntity(entity => entity
-                    .WithName("Entity2"))
+                    .WithName("Entity2", "Entity2s"))
                 .Build();
 
             // Act & Assert
@@ -87,11 +87,11 @@ namespace Contractor.CLI.Tests
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
-                    .WithName("Entity1")
+                    .WithName("Entity1", "Entity1s")
                     .WithRelation1ToN("Entity2", "Entity2", "Entity1s")
                     .WithRelation1ToN("Entity2", "Entity2", "Entity1s")) // Duplicate
                 .AddEntity(entity => entity
-                    .WithName("Entity2"))
+                    .WithName("Entity2", "Entity2s"))
                 .Build();
 
             // Act & Assert
@@ -105,10 +105,10 @@ namespace Contractor.CLI.Tests
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
-                    .WithName("Entity1")
+                    .WithName("Entity1", "Entity1s")
                     .WithRelation1ToN("Entities2", "Entity2", "Entity1s")) // Pluralized might be intended as a mistake
                 .AddEntity(entity => entity
-                    .WithName("Entity2"))
+                    .WithName("Entity2", "Entity2s"))
                 .Build();
 
             // Act & Assert
@@ -116,32 +116,28 @@ namespace Contractor.CLI.Tests
         }
         
         [TestMethod]
-        public void ValidateECommerceModel_WithComplexRelations_DoesNotThrowException()
+        public void ValidateComplexModel_DoesNotThrowException()
         {
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
-                    .WithName("Customer")
-                    .WithProperty("CustomerId")
-                    .WithProperty("Name")
-                    .WithProperty("Email"))
+                    .WithName("Customer", "Customers")
+                    .WithProperty("String", "Name")
+                    .WithProperty("String", "Email"))
                 .AddEntity(entity => entity
-                    .WithName("Order")
-                    .WithProperty("OrderId")
-                    .WithRelation1ToN("Customer", "Customer", "Orders") // Assuming Customer has many Orders
-                    .WithProperty("OrderDate"))
+                    .WithName("Order", "Orders")
+                    .WithRelation1ToN("Customer", "Customer", "Orders")
+                    .WithProperty("DateTime", "OrderDate"))
                 .AddEntity(entity => entity
-                    .WithName("Product")
-                    .WithProperty("ProductId")
-                    .WithProperty("Name")
-                    .WithProperty("Price"))
+                    .WithName("Product", "Products")
+                    .WithProperty("String", "Name")
+                    .WithProperty("Double", "Price"))
                 .AddEntity(entity => entity
-                    .WithName("OrderDetail")
-                    .WithProperty("OrderDetailId")
-                    .WithRelation1ToN("Order", "Order", "OrderOrderDetails") // Assuming Order has many OrderDetails
-                    .WithRelation1ToN("Product", "Product", "ProductOrderDetails") // Assuming Product can be in many OrderDetails
-                    .WithProperty("Quantity")
-                    .WithIndex("OrderId, ProductId, Quantity")) // Composite index for OrderId and ProductId
+                    .WithName("OrderDetail", "OrderDetails")
+                    .WithRelation1ToN("Order", "Order", "OrderOrderDetails")
+                    .WithRelation1ToN("Product", "Product", "ProductOrderDetails")
+                    .WithProperty("Integer", "Quantity")
+                    .WithIndex("OrderId, ProductId, Quantity"))
                 .Build();
 
             // Act & Assert

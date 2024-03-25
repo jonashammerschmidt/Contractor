@@ -68,8 +68,8 @@ public class GenerateCommand
         }
 
         GenerationOptions generationOptions = ContractorXmlConverter
-            .ToContractorGenerationOptions(contractorXml, contractorXmlDocument,
-                contractorXmlFileInfo.Directory.FullName);
+            .ToContractorGenerationOptions(contractorXml, contractorXmlFileInfo.Directory.FullName);
+        ContractorXmlOrderSetter.SetOrder(generationOptions, contractorXmlDocument);
 
         if (contractorXml.Includes is not null)
         {
@@ -87,8 +87,8 @@ public class GenerateCommand
                 ContractorIncludeXml contractorIncludeXml =
                     (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
 
-                ContractorXmlConverter.AddToContractorGenerationOptions(generationOptions,
-                    contractorIncludeXml, contractorIncludeXmlDocument);
+                ContractorXmlConverter.AddToContractorGenerationOptions(generationOptions, contractorIncludeXml);
+                ContractorXmlOrderSetter.SetOrder(generationOptions, contractorIncludeXmlDocument);
             }
         }
 
