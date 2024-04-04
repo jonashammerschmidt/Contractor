@@ -30,11 +30,11 @@ namespace Contractor.CLI.Tests
                     .WithIndex("OrderId, ProductId, Quantity"))
                 .Build();
 
-            contractorXml.CustomDtos.CustomDtos.Add(new CustomDtoXml()
+            contractorXml.PurposeDtos.PurposeDtos.Add(new PurposeDtoXml()
             {
                 Entity = "Order",
                 Purpose = "Detail",
-                Properties = new List<CustomDtoPropertyXml>()
+                Properties = new List<PurposeDtoPropertyXml>()
                 {
                     new() { Path = "Customer" },
                     new() { Path = "OrderOrderDetails.Product" },
@@ -59,10 +59,10 @@ namespace Contractor.CLI.Tests
             Assert.AreEqual(2, contractorOptions.Modules.First().Entities.First(e => e.Name == "Product").Properties.Count());
             Assert.AreEqual(1, contractorOptions.Modules.First().Entities.First(e => e.Name == "OrderDetail").Properties.Count());
             Assert.AreEqual(2, contractorOptions.Modules.First().Entities.First(e => e.Name == "OrderDetail").Relations1ToN.Count());
-            Assert.AreEqual(1, contractorOptions.CustomDtos.Count());
-            Assert.AreEqual(2, contractorOptions.CustomDtos.First().Properties.Count());
-            Assert.AreEqual(1, contractorOptions.CustomDtos.First().Properties.First().PathItems.Count());
-            Assert.AreEqual(2, contractorOptions.CustomDtos.First().Properties.Last().PathItems.Count());
+            Assert.AreEqual(1, contractorOptions.PurposeDtos.Count());
+            Assert.AreEqual(2, contractorOptions.PurposeDtos.First().Properties.Count());
+            Assert.AreEqual(1, contractorOptions.PurposeDtos.First().Properties.First().PathItems.Count());
+            Assert.AreEqual(2, contractorOptions.PurposeDtos.First().Properties.Last().PathItems.Count());
         }
     }
 }

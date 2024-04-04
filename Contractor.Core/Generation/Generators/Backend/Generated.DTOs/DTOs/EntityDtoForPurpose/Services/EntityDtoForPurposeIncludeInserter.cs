@@ -16,10 +16,10 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.pathService = pathService;
         }
         
-        public void Insert(CustomDto customDto, params string[] paths)
+        public void Insert(PurposeDto purposeDto, params string[] paths)
         {
-            string filePath = pathService.GetAbsolutePathForBackendGenerated(customDto.Entity, paths);
-            string fileData = fileSystemClient.ReadAllText(customDto.Entity, filePath);
+            string filePath = pathService.GetAbsolutePathForBackendGenerated(purposeDto.Entity, paths);
+            string fileData = fileSystemClient.ReadAllText(purposeDto.Entity, filePath);
             fileData = UsingStatements.Add(fileData, "Microsoft.EntityFrameworkCore");
 
             StringEditor stringEditor = new StringEditor(fileData);
@@ -31,10 +31,10 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
             stringEditor.PrevThatContains("}");
             stringEditor.InsertNewLine();
-            stringEditor.InsertLine($"        public static IQueryable<Ef{customDto.Entity.Name}Dto> AddIncludesToQuery(IQueryable<Ef{customDto.Entity.Name}Dto> ef{customDto.Entity.NamePlural})");
+            stringEditor.InsertLine($"        public static IQueryable<Ef{purposeDto.Entity.Name}Dto> AddIncludesToQuery(IQueryable<Ef{purposeDto.Entity.Name}Dto> ef{purposeDto.Entity.NamePlural})");
             stringEditor.InsertLine("        {");
-            stringEditor.InsertLine($"            return ef{customDto.Entity.NamePlural}");
-            stringEditor.InsertLine(CustomDtoIncludeHelper.GetIncludeString(customDto) + ";", 4);
+            stringEditor.InsertLine($"            return ef{purposeDto.Entity.NamePlural}");
+            stringEditor.InsertLine(PurposeDtoIncludeHelper.GetIncludeString(purposeDto) + ";", 4);
             stringEditor.InsertLine("        }");
 
             fileSystemClient.WriteAllText(stringEditor.GetText(), filePath);

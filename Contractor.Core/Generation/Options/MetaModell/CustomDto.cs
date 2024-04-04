@@ -2,22 +2,22 @@
 
 namespace Contractor.Core.MetaModell
 {
-    public class CustomDto
+    public class PurposeDto
     {
         public string EntityName { get; set; }
         
         public string Purpose { get; set; }
 
-        public List<CustomDtoProperty> Properties { get; set; }
+        public List<PurposeDtoProperty> Properties { get; set; }
 
         public Entity Entity { get; set; }
         
         public void AddLinks(GenerationOptions options)
         {
             this.Entity = options.FindEntity(EntityName);
-            foreach (var customDtoProperty in Properties)
+            foreach (var purposeDtoProperty in Properties)
             {
-                customDtoProperty.AddLinks(options, this.Entity);
+                purposeDtoProperty.AddLinks(options, this.Entity);
             }
         }
     }

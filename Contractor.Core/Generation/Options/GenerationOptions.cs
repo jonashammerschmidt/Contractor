@@ -12,7 +12,7 @@ namespace Contractor.Core.MetaModell
 
         public List<Module> Modules { get; set; }
 
-        public List<CustomDto> CustomDtos { get; set; }
+        public List<PurposeDto> PurposeDtos { get; set; }
 
         public bool IsVerbose { get; set; }
 
@@ -30,9 +30,9 @@ namespace Contractor.Core.MetaModell
                 module.AddLinksForChildren();
             }
 
-            foreach (var customDto in CustomDtos)
+            foreach (var purposeDto in PurposeDtos)
             {
-                customDto.AddLinks(this);
+                purposeDto.AddLinks(this);
             }
         }
 
