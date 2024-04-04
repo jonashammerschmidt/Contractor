@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" vc:minVersion="1.1" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
+  <xs:element name="PurposeDtos" >
+    <xs:annotation>
+      <xs:documentation xml:lang="de">Generierung von zusätzlichen verschachtelten DTOs für einen bestimmten Zweck.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PurposeDto" minOccurs="1" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation xml:lang="de">Definition eines zusätzlichen verschachtelten DTOs für einen bestimmten Zweck.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Property" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Definition eines Verschachtelungspfades innerhalb des Purpose-DTOs.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="path" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Verschachtelungspfad</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="entity" type="xs:string" use="required">
+              <xs:annotation>
+                <xs:documentation xml:lang="de">Name (Singular) der Entität, für die das verschachtelte DTO erstellt werden soll</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="purpose" type="xs:string" use="required">
+              <xs:annotation>
+                <xs:documentation xml:lang="de">Zweck des verschachtelten DTOs</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
