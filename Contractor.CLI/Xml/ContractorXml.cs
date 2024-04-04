@@ -19,8 +19,8 @@ namespace Contractor.CLI
         [XmlElement(ElementName = "Includes")]
         public IncludesXml Includes { get; set; }
 
-        [XmlElement(ElementName = "CustomDtos")]
-        public CustomDtosXml CustomDtos { get; set; }
+        [XmlElement(ElementName = "PurposeDtos")]
+        public PurposeDtosXml PurposeDtos { get; set; }
 
         [XmlAttribute(AttributeName = "minContractorVersion")]
         public string MinContractorVersion { get; set; }
@@ -32,8 +32,8 @@ namespace Contractor.CLI
         [XmlElement(ElementName = "Modules")]
         public ModulesXml Modules { get; set; }
 
-        [XmlElement(ElementName = "CustomDtos")]
-        public CustomDtosXml CustomDtos { get; set; }
+        [XmlElement(ElementName = "PurposeDtos")]
+        public PurposeDtosXml PurposeDtos { get; set; }
     }
 
     [XmlRoot(ElementName = "Paths")]
@@ -232,15 +232,15 @@ namespace Contractor.CLI
         public string OnDelete { get; set; }
     }
 
-    [XmlRoot(ElementName = "CustomDtos")]
-    public class CustomDtosXml
+    [XmlRoot(ElementName = "PurposeDtos")]
+    public class PurposeDtosXml
     {
-        [XmlElement(ElementName = "CustomDto")]
-        public List<CustomDtoXml> CustomDtos { get; set; } = new ();
+        [XmlElement(ElementName = "PurposeDto")]
+        public List<PurposeDtoXml> PurposeDtos { get; set; } = new ();
     }
 
-    [XmlRoot(ElementName = "CustomDto")]
-    public class CustomDtoXml
+    [XmlRoot(ElementName = "PurposeDto")]
+    public class PurposeDtoXml
     {
         [XmlAttribute(AttributeName = "entity")]
         public string Entity { get; set; }
@@ -249,11 +249,11 @@ namespace Contractor.CLI
         public string Purpose { get; set; }
 
         [XmlElement(ElementName = "Property")]
-        public List<CustomDtoPropertyXml> Properties { get; set; } = new ();
+        public List<PurposeDtoPropertyXml> Properties { get; set; } = new ();
     }
 
     [XmlRoot(ElementName = "Property")]
-    public class CustomDtoPropertyXml
+    public class PurposeDtoPropertyXml
     {
         [XmlAttribute(AttributeName = "path")]
         public string Path { get; set; }

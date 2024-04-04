@@ -29,7 +29,7 @@ namespace Contractor.CLI
                 })
                 .ToList();
             contractorGenerationOptions.Modules = ConvertModules(contractorXml.Modules);
-            contractorGenerationOptions.CustomDtos = ConvertCustomDtos(contractorXml.CustomDtos);
+            contractorGenerationOptions.PurposeDtos = ConvertPurposeDtos(contractorXml.PurposeDtos);
 
             return contractorGenerationOptions;
         }
@@ -47,8 +47,8 @@ namespace Contractor.CLI
                 .Concat(ConvertModules(contractorIncludeXml.Modules))
                 .ToList();
 
-            generationOptions.CustomDtos = generationOptions.CustomDtos
-                .Concat(ConvertCustomDtos(contractorIncludeXml.CustomDtos))
+            generationOptions.PurposeDtos = generationOptions.PurposeDtos
+                .Concat(ConvertPurposeDtos(contractorIncludeXml.PurposeDtos))
                 .ToList();
         }
 
@@ -108,18 +108,18 @@ namespace Contractor.CLI
             }).ToList();
         }
 
-        private static List<CustomDto> ConvertCustomDtos(CustomDtosXml customDtos)
+        private static List<PurposeDto> ConvertPurposeDtos(PurposeDtosXml purposeDtos)
         {
-            return customDtos.CustomDtos
-                .Select(customDto =>
+            return purposeDtos.PurposeDtos
+                .Select(purposeDto =>
                 {
-                    var dto = new CustomDto();
-                    dto.EntityName = customDto.Entity;
-                    dto.Purpose = customDto.Purpose;
-                    dto.Properties = customDto.Properties
+                    var dto = new PurposeDto();
+                    dto.EntityName = purposeDto.Entity;
+                    dto.Purpose = purposeDto.Purpose;
+                    dto.Properties = purposeDto.Properties
                         .Select(property =>
                         {
-                            var dtoProperty = new CustomDtoProperty();
+                            var dtoProperty = new PurposeDtoProperty();
                             dtoProperty.Path = property.Path;
                             return dtoProperty;
                         })

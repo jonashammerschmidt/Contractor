@@ -133,12 +133,12 @@ namespace Contractor.Core
                 }
             }
 
-            foreach (var customDto in generationOptions.CustomDtos)
+            foreach (var purposeDto in generationOptions.PurposeDtos)
             {
-                entityDtoForPurposeGeneration.Generate(customDto);
+                entityDtoForPurposeGeneration.Generate(purposeDto);
 
-                iEntitiesCrudRepositoryGeneration.AddCustomDto(customDto);
-                entitiesCrudRepositoryGeneration.AddCustomDto(customDto);
+                iEntitiesCrudRepositoryGeneration.AddPurposeDto(purposeDto);
+                entitiesCrudRepositoryGeneration.AddPurposeDto(purposeDto);
             }
 
             foreach (Entity entity in this.sortedEntities.Where(entity => !entity.Skip))

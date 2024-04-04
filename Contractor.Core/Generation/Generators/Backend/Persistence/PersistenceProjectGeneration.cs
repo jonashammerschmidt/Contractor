@@ -16,11 +16,11 @@ namespace Contractor.Core.Generation.Backend.Persistence
         {
             serviceCollection.AddSingleton<ClassGeneration, IEntitiesCrudRepositoryGeneration>();
             serviceCollection.AddSingleton<IEntitiesCrudRepositoryGeneration>();
-            serviceCollection.AddSingleton<IEntitiesCrudRepositoryCustomDtoInserter>();
+            serviceCollection.AddSingleton<IEntitiesCrudRepositoryPurposeDtoInserter>();
 
             serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudRepositoryGeneration>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryGeneration>();
-            serviceCollection.AddSingleton<EntitiesCrudRepositoryCustomDtoInserter>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryPurposeDtoInserter>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToRelationAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToOneToOneIncludeAddition>();

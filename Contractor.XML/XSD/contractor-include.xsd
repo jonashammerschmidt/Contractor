@@ -5,10 +5,10 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="Modules" minOccurs="0" maxOccurs="1"></xs:element>
-        <xs:element name="CustomDtos" minOccurs="0" maxOccurs="1">
+        <xs:element name="PurposeDtos" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="CustomDto" minOccurs="1" maxOccurs="unbounded">
+              <xs:element name="PurposeDto" minOccurs="1" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="Property" minOccurs="1" maxOccurs="unbounded">

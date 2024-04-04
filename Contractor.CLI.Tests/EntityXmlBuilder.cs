@@ -80,9 +80,9 @@ public class ContractorXmlBuilder
         {
             Replacements = new List<ReplacementXml>(),
         },
-        CustomDtos = new CustomDtosXml()
+        PurposeDtos = new PurposeDtosXml()
         {
-            CustomDtos = new List<CustomDtoXml>(),
+            PurposeDtos = new List<PurposeDtoXml>(),
         },
         Paths = new PathsXml
         {

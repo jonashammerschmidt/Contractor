@@ -21,8 +21,8 @@ namespace Contractor.CLI.Tests.Generators.Backend.Generated.DTOs.DTOs
         public void DetermineEntitiesWithVia_IdentifiesEntitiesCorrectly(string propertyPath1, string propertyPath2, string[] expected)
         {
             // Arrange
-            var builder = new CustomDtoBuilder();
-            var customDto = builder
+            var builder = new PurposeDtoBuilder();
+            var purposeDto = builder
                 .SetEntity("EntityA")
                 .WithPurpose("Test")
                 .AddPropertyPath(propertyPath1)
@@ -32,7 +32,7 @@ namespace Contractor.CLI.Tests.Generators.Backend.Generated.DTOs.DTOs
             var entityDtoForPurposeGeneration = new EntityDtoForPurposeGeneration(null, null, null, null, null, null, null);
 
             // Act
-            var result = entityDtoForPurposeGeneration.DetermineEntitiesWithVia(customDto);
+            var result = entityDtoForPurposeGeneration.DetermineEntitiesWithVia(purposeDto);
 
             // Assert
             var expectedEntitiesWithVia = expected.Select(e => new Entity { Name = e }).ToHashSet();

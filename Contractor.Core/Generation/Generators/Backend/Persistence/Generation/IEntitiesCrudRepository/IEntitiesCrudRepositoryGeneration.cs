@@ -14,14 +14,14 @@ namespace Contractor.Core.Generation.Backend.Persistence
         private static readonly string FileName = Path.Combine("Interfaces", "IEntitiesCrudRepository.cs");
 
         private readonly EntityCoreAddition entityCoreAddition;
-        private readonly IEntitiesCrudRepositoryCustomDtoInserter iEntitiesCrudRepositoryCustomDtoInserter;
+        private readonly IEntitiesCrudRepositoryPurposeDtoInserter iEntitiesCrudRepositoryPurposeDtoInserter;
 
         public IEntitiesCrudRepositoryGeneration(
             EntityCoreAddition entityCoreAddition,
-            IEntitiesCrudRepositoryCustomDtoInserter iEntitiesCrudRepositoryCustomDtoInserter)
+            IEntitiesCrudRepositoryPurposeDtoInserter iEntitiesCrudRepositoryPurposeDtoInserter)
         {
             this.entityCoreAddition = entityCoreAddition;
-            this.iEntitiesCrudRepositoryCustomDtoInserter = iEntitiesCrudRepositoryCustomDtoInserter;
+            this.iEntitiesCrudRepositoryPurposeDtoInserter = iEntitiesCrudRepositoryPurposeDtoInserter;
         }
 
         protected override void AddModuleActions(Module module)
@@ -53,9 +53,9 @@ namespace Contractor.Core.Generation.Backend.Persistence
         {
         }
 
-        public void AddCustomDto(CustomDto customDto)
+        public void AddPurposeDto(PurposeDto purposeDto)
         {
-            this.iEntitiesCrudRepositoryCustomDtoInserter.Insert(customDto, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.iEntitiesCrudRepositoryPurposeDtoInserter.Insert(purposeDto, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }
