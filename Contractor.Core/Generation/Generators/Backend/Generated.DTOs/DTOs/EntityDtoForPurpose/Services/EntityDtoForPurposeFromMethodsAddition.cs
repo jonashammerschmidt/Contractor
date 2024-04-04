@@ -19,6 +19,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         {
             string filePath = pathService.GetAbsolutePathForBackendGenerated(relationSide, paths);
             string fileData = fileSystemClient.ReadAllText(relationSide, filePath);
+            fileData = UsingStatements.Add(fileData, "System.Linq");
             fileData = UpdateFileData(relationSide, fileData, otherEntityDtoName);
 
             fileSystemClient.WriteAllText(fileData, filePath);

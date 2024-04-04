@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using Contractor.Core.Generation.Backend.Generated.DTOs;
+using Contractor.Core.Generation.Backend.Persistence;
 
 namespace Contractor.Core
 {
@@ -14,8 +15,11 @@ namespace Contractor.Core
         private readonly IEnumerable<Entity> sortedEntities;
 
         private readonly IFileSystemClient fileSystemClient;
-        private readonly List<ClassGeneration> classGenerations = new List<ClassGeneration>();
+        private readonly List<ClassGeneration> classGenerations = new();
+        
         private readonly EntityDtoForPurposeGeneration entityDtoForPurposeGeneration;
+        private readonly EntitiesCrudRepositoryGeneration entitiesCrudRepositoryGeneration;
+        private readonly IEntitiesCrudRepositoryGeneration iEntitiesCrudRepositoryGeneration;
 
         public GenerationFacade(GenerationOptions generationOptions)
         {
@@ -27,7 +31,10 @@ namespace Contractor.Core
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
             this.fileSystemClient = serviceProvider.GetRequiredService<IFileSystemClient>();
             this.classGenerations = serviceProvider.GetServices<ClassGeneration>().ToList();
+
             this.entityDtoForPurposeGeneration = serviceProvider.GetService<EntityDtoForPurposeGeneration>();
+            this.entitiesCrudRepositoryGeneration = serviceProvider.GetService<EntitiesCrudRepositoryGeneration>();
+            this.iEntitiesCrudRepositoryGeneration = serviceProvider.GetService<IEntitiesCrudRepositoryGeneration>();
         }
 
         public void Generate()
@@ -129,6 +136,9 @@ namespace Contractor.Core
             foreach (var customDto in generationOptions.CustomDtos)
             {
                 entityDtoForPurposeGeneration.Generate(customDto);
+
+                iEntitiesCrudRepositoryGeneration.AddCustomDto(customDto);
+                entitiesCrudRepositoryGeneration.AddCustomDto(customDto);
             }
 
             foreach (Entity entity in this.sortedEntities.Where(entity => !entity.Skip))

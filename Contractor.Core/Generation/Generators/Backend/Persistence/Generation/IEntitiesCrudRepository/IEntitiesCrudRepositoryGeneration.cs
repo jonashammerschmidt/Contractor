@@ -1,6 +1,7 @@
 ﻿using Contractor.Core.BaseClasses;
 using Contractor.Core.MetaModell;
 using System.IO;
+using Contractor.Core.Generation.Backend.Generated.DTOs;
 
 namespace Contractor.Core.Generation.Backend.Persistence
 {
@@ -13,11 +14,14 @@ namespace Contractor.Core.Generation.Backend.Persistence
         private static readonly string FileName = Path.Combine("Interfaces", "IEntitiesCrudRepository.cs");
 
         private readonly EntityCoreAddition entityCoreAddition;
+        private readonly IEntitiesCrudRepositoryCustomDtoInserter iEntitiesCrudRepositoryCustomDtoInserter;
 
         public IEntitiesCrudRepositoryGeneration(
-            EntityCoreAddition entityCoreAddition)
+            EntityCoreAddition entityCoreAddition,
+            IEntitiesCrudRepositoryCustomDtoInserter iEntitiesCrudRepositoryCustomDtoInserter)
         {
             this.entityCoreAddition = entityCoreAddition;
+            this.iEntitiesCrudRepositoryCustomDtoInserter = iEntitiesCrudRepositoryCustomDtoInserter;
         }
 
         protected override void AddModuleActions(Module module)
@@ -47,6 +51,11 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
+        }
+
+        public void AddCustomDto(CustomDto customDto)
+        {
+            this.iEntitiesCrudRepositoryCustomDtoInserter.Insert(customDto, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

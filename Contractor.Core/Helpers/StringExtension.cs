@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Contractor.Core.Helpers
@@ -53,6 +54,18 @@ namespace Contractor.Core.Helpers
         public static string ToKebab(this string text)
         {
             return StringConverter.PascalToKebabCase(text);
+        }
+
+        public static string RemoveFirstOccurrence(this string source, string toRemove)
+        {
+            int index = source.IndexOf(toRemove, StringComparison.Ordinal);
+            if (index < 0)
+            {
+                // The string to remove was not found.
+                return source;
+            }
+
+            return source.Remove(index, toRemove.Length);
         }
     }
 }

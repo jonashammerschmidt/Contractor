@@ -25,10 +25,11 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             serviceCollection.AddSingleton<EntityDtoDataMethodsAddition>();
             
             serviceCollection.AddSingleton<EntityDtoForPurposeGeneration>();
-            serviceCollection.AddSingleton<EntityDtoForPurposeClassRenamer>();
             serviceCollection.AddSingleton<EntityDtoForPurposeFromMethodsAddition>();
             serviceCollection.AddSingleton<EntityDtoForPurposeFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<EntityDtoForPurposeToMethodsAddition>();
+            serviceCollection.AddSingleton<EntityDtoForPurposeClassRenamer>();
+            serviceCollection.AddSingleton<EntityDtoForPurposeIncludeInserter>();
         }
     }
 }
