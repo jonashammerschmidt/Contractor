@@ -25,10 +25,10 @@ namespace ProjectName.Modules.Domain.Entities
             this.logger = logger;
         }
 
-        public Guid CreateEntity(EntityDtoData entityDtoData)
+        public Guid CreateEntity(EntityDtoData entityData)
         {
             Guid newEntityId = this.guidGenerator.NewGuid();
-            EntityDto entityToCreate = EntityDto.FromEntityDtoData(newEntityId, entityDtoData);
+            EntityDto entityToCreate = EntityDto.FromEntityDtoData(newEntityId, entityData);
             this.entitiesCrudRepository.CreateEntity(entityToCreate);
 
             this.logger.LogInformation("Entity ({id}) angelegt", newEntityId);
@@ -59,11 +59,11 @@ namespace ProjectName.Modules.Domain.Entities
             return entitiesPagedResult;
         }
 
-        public void UpdateEntity(EntityDtoDefaultUpdate entityDto)
+        public void UpdateEntity(EntityDtoDefaultUpdate entity)
         {
-            this.entitiesCrudRepository.UpdateEntity(entityDto);
+            this.entitiesCrudRepository.UpdateEntity(entity);
 
-            this.logger.LogInformation("Entity ({id}) aktualisiert", entityDto.Id);
+            this.logger.LogInformation("Entity ({id}) aktualisiert", entity.Id);
         }
     }
 }
