@@ -5,23 +5,23 @@ using Contractor.Core.MetaModell;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    public static class CustomDtoIncludeHelper
+    public static class PurposeDtoIncludeHelper
     {
-        public static string GetIncludeString(CustomDto customDto)
+        public static string GetIncludeString(PurposeDto purposeDto)
         {
-            var customDtoEntityTree = GetEntityTree(customDto);
+            var purposeDtoEntityTree = GetEntityTree(purposeDto);
             var includePaths = new List<List<KeyValuePair<string, string>>>();
-            GenerateIncludePaths(customDtoEntityTree, new List<KeyValuePair<string, string>>(), includePaths);
+            GenerateIncludePaths(purposeDtoEntityTree, new List<KeyValuePair<string, string>>(), includePaths);
             var result = ConvertIncludePathsToIncludeString(includePaths);
 
             return result.Remove(result.Length - 1, 1);
         }
 
-        private static List<ChildableEntry<KeyValuePair<string, string>>> GetEntityTree(CustomDto customDto)
+        private static List<ChildableEntry<KeyValuePair<string, string>>> GetEntityTree(PurposeDto purposeDto)
         {
             var entityTreeRoot = new List<ChildableEntry<KeyValuePair<string, string>>>() { new(new(null, null)) };
 
-            foreach (var property in customDto.Properties)
+            foreach (var property in purposeDto.Properties)
             {
                 var currentEntityTreeNode = entityTreeRoot.First();
                 foreach (var pathItems in property.PathItems)

@@ -39,36 +39,36 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.entityDtoForPurposeIncludeInserter = entityDtoForPurposeIncludeInserter;
         }
 
-        public void Generate(CustomDto customDto)
+        public void Generate(PurposeDto purposeDto)
         {
-            var entitiesWithVia = DetermineEntitiesWithVia(customDto);
+            var entitiesWithVia = DetermineEntitiesWithVia(purposeDto);
             var entitiesAlreadyGenerated = new HashSet<string>();
             var pathItemsAlreadyGenerated = new HashSet<string>();
 
-            foreach (var customDtoProperty in customDto.Properties)
+            foreach (var purposeDtoProperty in purposeDto.Properties)
             {
-                for (var index = 0; index < customDtoProperty.PathItems.Count; index++)
+                for (var index = 0; index < purposeDtoProperty.PathItems.Count; index++)
                 {
-                    var pathItem = customDtoProperty.PathItems[index];
+                    var pathItem = purposeDtoProperty.PathItems[index];
 
                     bool isRoot = index == 0;
                     var withVia = !isRoot && entitiesWithVia.Any(entity => entity.Name == pathItem.Entity.Name);
-                    string dtoName = GetDtoName(customDto, pathItem, withVia);
+                    string dtoName = GetDtoName(purposeDto, pathItem, withVia);
                     if (entitiesAlreadyGenerated.Add(dtoName))
                     {
                         GenerateDtoCore(dtoName, pathItem);
 
                         if (isRoot)
                         {
-                            this.entityDtoForPurposeIncludeInserter.Insert(customDto, GeneratedDTOsProjectGeneration.DomainFolder, $"{dtoName}.cs");
+                            this.entityDtoForPurposeIncludeInserter.Insert(purposeDto, GeneratedDTOsProjectGeneration.DomainFolder, $"{dtoName}.cs");
                         }
                     }
 
                     var otherWithVia = entitiesWithVia.Any(entity => entity.Name == pathItem.OtherEntity.Name);
-                    string relationDtoName = GetRelationDtoName(customDto, pathItem, otherWithVia);
+                    string relationDtoName = GetRelationDtoName(purposeDto, pathItem, otherWithVia);
                     if (pathItemsAlreadyGenerated.Add(pathItem.ToString()))
                     {
-                        if (index < customDtoProperty.PathItems.Count - 1)
+                        if (index < purposeDtoProperty.PathItems.Count - 1)
                         {
                             HandleRelation(dtoName, relationDtoName.RemoveFirstOccurrence(pathItem.OtherEntity.Name), pathItem);
                         }
@@ -81,13 +81,13 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             }
         }
 
-        public HashSet<Entity> DetermineEntitiesWithVia(CustomDto customDto)
+        public HashSet<Entity> DetermineEntitiesWithVia(PurposeDto purposeDto)
         {
-            var entitiesWithMultiplePaths = CustomDtoPathHelper.FindEntitiesWithMultiplePathsAndIncludes(customDto);
+            var entitiesWithMultiplePaths = PurposeDtoPathHelper.FindEntitiesWithMultiplePathsAndIncludes(purposeDto);
             return entitiesWithMultiplePaths;
         }
 
-        private void GenerateDtoCore(string dtoName, CustomDtoPathItem pathItem)
+        private void GenerateDtoCore(string dtoName, PurposeDtoPathItem pathItem)
         {
             this.entityCoreAddition.AddEntityToBackendGenerated(
                 pathItem.Entity,
@@ -98,7 +98,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.entityDtoForPurposeClassRenamer.Rename(pathItem.Entity, dtoName, GeneratedDTOsProjectGeneration.DomainFolder, $"{dtoName}.cs");
         }
 
-        private void HandleRelation(string dtoName, string dtoPostfix, CustomDtoPathItem lastPathItem)
+        private void HandleRelation(string dtoName, string dtoPostfix, PurposeDtoPathItem lastPathItem)
         {
             var isOneToOne = lastPathItem.Relation is Relation1To1;
             var isFrom = lastPathItem.Relation.EntityFrom == lastPathItem.Entity;
@@ -138,38 +138,38 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             }
         }
 
-        private string GetDtoName(CustomDto customDto, CustomDtoPathItem pathItem, bool withVia)
+        private string GetDtoName(PurposeDto purposeDto, PurposeDtoPathItem pathItem, bool withVia)
         {
             string viaSuffix = "";
             if (withVia)
             {
-                viaSuffix = "Via" + FindViaPath(customDto, pathItem, true);
+                viaSuffix = "Via" + FindViaPath(purposeDto, pathItem, true);
             }
 
-            return $"{pathItem.Entity}DtoFor{customDto.Purpose}{viaSuffix}";
+            return $"{pathItem.Entity}DtoFor{purposeDto.Purpose}{viaSuffix}";
         }
 
-        private string GetRelationDtoName(CustomDto customDto, CustomDtoPathItem pathItem, bool withVia)
+        private string GetRelationDtoName(PurposeDto purposeDto, PurposeDtoPathItem pathItem, bool withVia)
         {
             string viaSuffix = "";
             if (withVia)
             {
-                viaSuffix = "Via" + FindViaPath(customDto, pathItem, false);
+                viaSuffix = "Via" + FindViaPath(purposeDto, pathItem, false);
             }
 
             var otherEntityName = (pathItem.Relation.EntityFrom == pathItem.Entity ? pathItem.Relation.EntityTo : pathItem.Relation.EntityFrom).Name;
-            return $"{otherEntityName}DtoFor{customDto.Purpose}{viaSuffix}";
+            return $"{otherEntityName}DtoFor{purposeDto.Purpose}{viaSuffix}";
         }
 
-        private string FindViaPath(CustomDto customDto, CustomDtoPathItem targetPathItem, bool trimTargetEnd)
+        private string FindViaPath(PurposeDto purposeDto, PurposeDtoPathItem targetPathItem, bool trimTargetEnd)
         {
             var delimiter = $"And";
 
-            foreach (var customDtoProperty in customDto.Properties)
+            foreach (var purposeDtoProperty in purposeDto.Properties)
             {
                 var path = string.Empty;
 
-                foreach (var pathItem in customDtoProperty.PathItems)
+                foreach (var pathItem in purposeDtoProperty.PathItems)
                 {
                     if (trimTargetEnd && pathItem == targetPathItem)
                     {

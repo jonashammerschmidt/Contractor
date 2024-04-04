@@ -5,22 +5,22 @@ using Contractor.Core.MetaModell;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    public static class CustomDtoPathHelper
+    public static class PurposeDtoPathHelper
     {
-        public static HashSet<Entity> FindEntitiesWithMultiplePathsAndIncludes(CustomDto customDto)
+        public static HashSet<Entity> FindEntitiesWithMultiplePathsAndIncludes(PurposeDto purposeDto)
         {
             var result = new HashSet<Entity>();
-            var entities = customDto.Properties
+            var entities = purposeDto.Properties
                 .SelectMany(property => property.PathItems)
                 .Select(pathItem => pathItem.OtherEntity)
                 .ToHashSet();
 
-            var customDtoEntityTree = GetEntityTree(customDto);
-            SortEntityTree(customDtoEntityTree);
+            var purposeDtoEntityTree = GetEntityTree(purposeDto);
+            SortEntityTree(purposeDtoEntityTree);
 
             foreach (var entity in entities)
             {
-                var treesOfEntity = GetTreesOfEntity(entity.Name, customDtoEntityTree);
+                var treesOfEntity = GetTreesOfEntity(entity.Name, purposeDtoEntityTree);
                 if (treesOfEntity.Count() > 1)
                 {
                     var countOfDistinctTrees = treesOfEntity
@@ -38,11 +38,11 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             return result;
         }
 
-        private static List<ChildableEntry<string>> GetEntityTree(CustomDto customDto)
+        private static List<ChildableEntry<string>> GetEntityTree(PurposeDto purposeDto)
         {
             var entityTreeRoot = new List<ChildableEntry<string>>() { new("root") };
 
-            foreach (var property in customDto.Properties)
+            foreach (var property in purposeDto.Properties)
             {
                 var currentEntityTreeNode = entityTreeRoot.First();
                 foreach (var pathItems in property.PathItems)
@@ -63,17 +63,17 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             return entityTreeRoot.First().Children;
         }
 
-        private static ChildableEntry<string> FindEntityInPath(string entityName, List<ChildableEntry<string>> customDtoEntityTree)
+        private static ChildableEntry<string> FindEntityInPath(string entityName, List<ChildableEntry<string>> purposeDtoEntityTree)
         {
-            ChildableEntry<string> entity = customDtoEntityTree.SingleOrDefault(item => item.Entry == entityName);
+            ChildableEntry<string> entity = purposeDtoEntityTree.SingleOrDefault(item => item.Entry == entityName);
             if (entity != null)
             {
                 return entity;
             }
 
-            foreach (var customDtoEntityTreeItem in customDtoEntityTree)
+            foreach (var purposeDtoEntityTreeItem in purposeDtoEntityTree)
             {
-                entity = FindEntityInPath(entityName, customDtoEntityTreeItem.Children);
+                entity = FindEntityInPath(entityName, purposeDtoEntityTreeItem.Children);
                 if (entity != null)
                 {
                     return entity;
@@ -83,36 +83,36 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             return null;
         }
 
-        private static List<ChildableEntry<string>> GetTreesOfEntity(string entityName, List<ChildableEntry<string>> customDtoEntityTree)
+        private static List<ChildableEntry<string>> GetTreesOfEntity(string entityName, List<ChildableEntry<string>> purposeDtoEntityTree)
         {
             var result = new List<ChildableEntry<string>>();
-            foreach (var customDtoEntityTreeItem in customDtoEntityTree)
+            foreach (var purposeDtoEntityTreeItem in purposeDtoEntityTree)
             {
-                result.AddRange(GetTreesOfEntity(entityName, customDtoEntityTreeItem.Children));
+                result.AddRange(GetTreesOfEntity(entityName, purposeDtoEntityTreeItem.Children));
             }
 
-            var customDtoEntityItem = customDtoEntityTree.SingleOrDefault(item => item.Entry == entityName);
-            if (customDtoEntityItem != null && customDtoEntityItem.Children.Count() > 0)
+            var purposeDtoEntityItem = purposeDtoEntityTree.SingleOrDefault(item => item.Entry == entityName);
+            if (purposeDtoEntityItem != null && purposeDtoEntityItem.Children.Count() > 0)
             {
-                result.Add(customDtoEntityItem);
+                result.Add(purposeDtoEntityItem);
             }
 
             return result;
         }
 
-        private static void SortEntityTree(List<ChildableEntry<string>> customDtoEntityTree)
+        private static void SortEntityTree(List<ChildableEntry<string>> purposeDtoEntityTree)
         {
-            customDtoEntityTree.Sort((item1, item2) => String.Compare(item1.Entry, item2.Entry, StringComparison.Ordinal));
-            foreach (var treeItem in customDtoEntityTree)
+            purposeDtoEntityTree.Sort((item1, item2) => String.Compare(item1.Entry, item2.Entry, StringComparison.Ordinal));
+            foreach (var treeItem in purposeDtoEntityTree)
             {
                 SortEntityTree(treeItem.Children);
             }
         }
 
-        private static string StringifyEntityTree(List<ChildableEntry<string>> customDtoEntityTree)
+        private static string StringifyEntityTree(List<ChildableEntry<string>> purposeDtoEntityTree)
         {
             string currentString = "";
-            foreach (var treeItem in customDtoEntityTree)
+            foreach (var treeItem in purposeDtoEntityTree)
             {
                 currentString += "->" + treeItem.Entry;
                 currentString += "(" + StringifyEntityTree(treeItem.Children) + ")";

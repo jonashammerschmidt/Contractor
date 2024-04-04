@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Contractor.Core.MetaModell
 {
-    public class CustomDtoProperty
+    public class PurposeDtoProperty
     {
         public string Path { get; set; }
 
-        public List<CustomDtoPathItem> PathItems { get; set; }
+        public List<PurposeDtoPathItem> PathItems { get; set; }
 
         public void AddLinks(GenerationOptions options, Entity entity)
         {
@@ -18,7 +18,7 @@ namespace Contractor.Core.MetaModell
                 {
                     var relation = options.FindRelation(currentEntity, pathItem);
                     var otherEntity = relation.EntityFrom == currentEntity ? relation.EntityTo : relation.EntityFrom;
-                    var customDtoPathItem = new CustomDtoPathItem()
+                    var purposeDtoPathItem = new PurposeDtoPathItem()
                     {
                         PropertyName = pathItem,
                         Entity = currentEntity,
@@ -26,7 +26,7 @@ namespace Contractor.Core.MetaModell
                         Relation = relation,
                     };
                     currentEntity = otherEntity;
-                    return customDtoPathItem;
+                    return purposeDtoPathItem;
                 })
                 .ToList();
         }

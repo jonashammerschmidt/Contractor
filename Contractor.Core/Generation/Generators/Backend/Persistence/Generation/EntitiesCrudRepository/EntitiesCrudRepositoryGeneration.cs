@@ -18,20 +18,20 @@ namespace Contractor.Core.Generation.Backend.Persistence
         private readonly EntitiesCrudRepositoryToRelationAddition entitiesCrudRepositoryToRelationAddition;
         private readonly EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition;
         private readonly EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition;
-        private readonly EntitiesCrudRepositoryCustomDtoInserter entitiesCrudRepositoryCustomDtoInserter;
+        private readonly EntitiesCrudRepositoryPurposeDtoInserter entitiesCrudRepositoryPurposeDtoInserter;
 
         public EntitiesCrudRepositoryGeneration(
             EntityCoreAddition entityCoreAddition,
             EntitiesCrudRepositoryToRelationAddition entitiesCrudRepositoryToRelationAddition,
             EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition,
             EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition,
-            EntitiesCrudRepositoryCustomDtoInserter entitiesCrudRepositoryCustomDtoInserter)
+            EntitiesCrudRepositoryPurposeDtoInserter entitiesCrudRepositoryPurposeDtoInserter)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.entitiesCrudRepositoryToRelationAddition = entitiesCrudRepositoryToRelationAddition;
             this.dtoToRepositoryIncludeAddition = dtoToRepositoryIncludeAddition;
             this.entitiesCrudRepositoryToOneToOneIncludeAddition = entitiesCrudRepositoryToOneToOneIncludeAddition;
-            this.entitiesCrudRepositoryCustomDtoInserter = entitiesCrudRepositoryCustomDtoInserter;
+            this.entitiesCrudRepositoryPurposeDtoInserter = entitiesCrudRepositoryPurposeDtoInserter;
         }
 
         protected override void AddModuleActions(Module module)
@@ -78,9 +78,9 @@ namespace Contractor.Core.Generation.Backend.Persistence
             this.entitiesCrudRepositoryToRelationAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
         }
 
-        public void AddCustomDto(CustomDto customDto)
+        public void AddPurposeDto(PurposeDto purposeDto)
         {
-            this.entitiesCrudRepositoryCustomDtoInserter.Insert(customDto, PersistenceProjectGeneration.DomainFolder, FileName);
+            this.entitiesCrudRepositoryPurposeDtoInserter.Insert(purposeDto, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

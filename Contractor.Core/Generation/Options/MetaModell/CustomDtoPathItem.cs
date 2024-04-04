@@ -1,6 +1,6 @@
 namespace Contractor.Core.MetaModell
 {
-    public class CustomDtoPathItem
+    public class PurposeDtoPathItem
     {
         public Entity Entity { get; set; }
         

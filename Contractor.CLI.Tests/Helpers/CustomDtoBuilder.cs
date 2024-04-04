@@ -2,35 +2,35 @@ using Contractor.Core.MetaModell;
 
 namespace Contractor.CLI.Tests.Helpers
 {
-    public class CustomDtoBuilder
+    public class PurposeDtoBuilder
     {
-        private CustomDto customDto = new CustomDto();
+        private PurposeDto purposeDto = new PurposeDto();
         private Dictionary<string, Entity> entities = new();
 
-        public CustomDtoBuilder SetEntity(string name)
+        public PurposeDtoBuilder SetEntity(string name)
         {
             var entity = GetOrCreateEntity(name);
-            customDto.Entity = entity;
-            customDto.EntityName = name;
+            purposeDto.Entity = entity;
+            purposeDto.EntityName = name;
             return this;
         }
 
-        public CustomDtoBuilder WithPurpose(string purpose)
+        public PurposeDtoBuilder WithPurpose(string purpose)
         {
-            customDto.Purpose = purpose;
+            purposeDto.Purpose = purpose;
             return this;
         }
 
-        public CustomDtoBuilder AddPropertyPath(string fullPath)
+        public PurposeDtoBuilder AddPropertyPath(string fullPath)
         {
             var pathSteps = fullPath.Split('.');
-            var pathItems = new List<CustomDtoPathItem>();
-            Entity lastEntity = customDto.Entity;
+            var pathItems = new List<PurposeDtoPathItem>();
+            Entity lastEntity = purposeDto.Entity;
 
             foreach (var step in pathSteps)
             {
                 var nextEntity = GetOrCreateEntity(step);
-                pathItems.Add(new CustomDtoPathItem
+                pathItems.Add(new PurposeDtoPathItem
                 {
                     Entity = lastEntity,
                     OtherEntity = nextEntity,
@@ -39,8 +39,8 @@ namespace Contractor.CLI.Tests.Helpers
                 lastEntity = nextEntity;
             }
 
-            customDto.Properties ??= new List<CustomDtoProperty>();
-            customDto.Properties.Add(new CustomDtoProperty
+            purposeDto.Properties ??= new List<PurposeDtoProperty>();
+            purposeDto.Properties.Add(new PurposeDtoProperty
             {
                 Path = fullPath,
                 PathItems = pathItems
@@ -59,6 +59,6 @@ namespace Contractor.CLI.Tests.Helpers
             return entities[name];
         }
 
-        public CustomDto Build() => customDto;
+        public PurposeDto Build() => purposeDto;
     }
 }
