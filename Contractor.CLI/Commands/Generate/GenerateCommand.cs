@@ -40,6 +40,9 @@ public class GenerateCommand
 
         var contractorXmlSerializer = new XmlSerializer(typeof(ContractorXml));
         ContractorXml contractorXml = (ContractorXml)contractorXmlSerializer.Deserialize(contractorXmlReader);
+        contractorXml.Includes ??= new(); 
+        contractorXml.PurposeDtos ??= new(); 
+        contractorXml.Modules ??= new();  
 
         if (Assembly.GetExecutingAssembly().GetName().Version
                 .CompareTo(Version.Parse(contractorXml.MinContractorVersion)) < 0)
@@ -86,6 +89,8 @@ public class GenerateCommand
                 var contractorIncludeXmlSerializer = new XmlSerializer(typeof(ContractorIncludeXml));
                 ContractorIncludeXml contractorIncludeXml =
                     (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
+                contractorIncludeXml.Modules ??= new();  
+                contractorIncludeXml.PurposeDtos ??= new(); 
 
                 ContractorXmlConverter.AddToContractorGenerationOptions(generationOptions, contractorIncludeXml);
             }
