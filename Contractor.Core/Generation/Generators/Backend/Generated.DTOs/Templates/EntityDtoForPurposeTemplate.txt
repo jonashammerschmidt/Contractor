@@ -2,7 +2,7 @@ using DbProjectName.Generated.DbContext.Modules.Domain.Entities;
 
 namespace GeneratedProjectName.Modules.Domain.Entities
 {
-    public class EntityDtoForPurpose : EntityDtoExpanded
+    public class EntityDtoForPurpose : EntityDto
     {
         public EntityDtoForPurpose() { }
 
