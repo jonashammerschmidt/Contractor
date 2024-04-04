@@ -40,9 +40,9 @@ namespace ProjectName.Modules.Domain.Entities
         [HttpPost]
         [Authorized]
         [SwaggerOperation(Summary = "Create EntityReadable", Tags = new[] { "Domain" })]
-        public ActionResult<DataBody<Guid>> CreateEntity([FromBody] EntityDtoData entity)
+        public ActionResult<DataBody<Guid>> CreateEntity([FromBody] EntityDtoData entityData)
         {
-            return this.Ok(new DataBody<Guid>(this.entitiesCrudLogic.CreateEntity(entity)));
+            return this.Ok(new DataBody<Guid>(this.entitiesCrudLogic.CreateEntity(entityData)));
         }
 
         [HttpPut]
