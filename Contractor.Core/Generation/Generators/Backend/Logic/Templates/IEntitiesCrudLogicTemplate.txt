@@ -6,7 +6,7 @@ namespace ProjectName.Modules.Domain.Entities
 {
     public interface IEntitiesCrudLogic
     {
-        Guid CreateEntity(EntityDtoData entityCreate);
+        Guid CreateEntity(EntityDtoData entityData);
 
         void DeleteEntity(Guid entityId);
 
@@ -14,6 +14,6 @@ namespace ProjectName.Modules.Domain.Entities
 
         IDbPagedResult<EntityDtoExpanded> GetPagedEntities();
 
-        void UpdateEntity(EntityDtoDefaultUpdate entityUpdate);
+        void UpdateEntity(EntityDtoDefaultUpdate entity);
     }
 }
