@@ -28,7 +28,7 @@ namespace Contractor.CLI.Tests.Generators.Backend.Generated.DTOs.DTOs.Helpers
                 "        .ThenInclude(efEntityC => efEntityC.EntityD)\n" +
                 ".Include(efEntityA => efEntityA.EntityB)\n" +
                 "    .ThenInclude(efEntityB => efEntityB.EntityC)\n" +
-                "        .ThenInclude(efEntityC => efEntityC.EntityE)\n",
+                "        .ThenInclude(efEntityC => efEntityC.EntityE)",
                 result);
         }
     }
