@@ -2,6 +2,7 @@
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
+using Contractor.Core.Generation.Backend.Generated.DTOs;
 
 namespace Contractor.Core.Generation.Backend.Persistence
 {
@@ -17,17 +18,20 @@ namespace Contractor.Core.Generation.Backend.Persistence
         private readonly EntitiesCrudRepositoryToRelationAddition entitiesCrudRepositoryToRelationAddition;
         private readonly EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition;
         private readonly EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition;
+        private readonly EntitiesCrudRepositoryCustomDtoInserter entitiesCrudRepositoryCustomDtoInserter;
 
         public EntitiesCrudRepositoryGeneration(
             EntityCoreAddition entityCoreAddition,
             EntitiesCrudRepositoryToRelationAddition entitiesCrudRepositoryToRelationAddition,
             EntitiesCrudRepositoryToIncludeAddition dtoToRepositoryIncludeAddition,
-            EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition)
+            EntitiesCrudRepositoryToOneToOneIncludeAddition entitiesCrudRepositoryToOneToOneIncludeAddition,
+            EntitiesCrudRepositoryCustomDtoInserter entitiesCrudRepositoryCustomDtoInserter)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.entitiesCrudRepositoryToRelationAddition = entitiesCrudRepositoryToRelationAddition;
             this.dtoToRepositoryIncludeAddition = dtoToRepositoryIncludeAddition;
             this.entitiesCrudRepositoryToOneToOneIncludeAddition = entitiesCrudRepositoryToOneToOneIncludeAddition;
+            this.entitiesCrudRepositoryCustomDtoInserter = entitiesCrudRepositoryCustomDtoInserter;
         }
 
         protected override void AddModuleActions(Module module)
@@ -72,6 +76,11 @@ namespace Contractor.Core.Generation.Backend.Persistence
 
             this.entitiesCrudRepositoryToOneToOneIncludeAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
             this.entitiesCrudRepositoryToRelationAddition.AddRelationSideToBackendFile(relationSideTo, PersistenceProjectGeneration.DomainFolder, FileName);
+        }
+
+        public void AddCustomDto(CustomDto customDto)
+        {
+            this.entitiesCrudRepositoryCustomDtoInserter.Insert(customDto, PersistenceProjectGeneration.DomainFolder, FileName);
         }
     }
 }

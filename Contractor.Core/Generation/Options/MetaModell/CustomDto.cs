@@ -10,7 +10,7 @@ namespace Contractor.Core.MetaModell
 
         public List<CustomDtoProperty> Properties { get; set; }
 
-        public Entity Entity { get; private set; }
+        public Entity Entity { get; set; }
         
         public void AddLinks(GenerationOptions options)
         {

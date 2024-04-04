@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Contractor.Core.Generation.Backend.Generated.DTOs;
 using Contractor.Core.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,9 +14,13 @@ namespace Contractor.Core.Generation.Backend.Persistence
         public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Backend", "Persistence", "Templates");
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudRepositoryGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntitiesCrudRepositoryGeneration>();
+            serviceCollection.AddSingleton<IEntitiesCrudRepositoryGeneration>();
+            serviceCollection.AddSingleton<IEntitiesCrudRepositoryCustomDtoInserter>();
 
+            serviceCollection.AddSingleton<ClassGeneration, EntitiesCrudRepositoryGeneration>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryGeneration>();
+            serviceCollection.AddSingleton<EntitiesCrudRepositoryCustomDtoInserter>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToRelationAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToIncludeAddition>();
             serviceCollection.AddSingleton<EntitiesCrudRepositoryToOneToOneIncludeAddition>();
