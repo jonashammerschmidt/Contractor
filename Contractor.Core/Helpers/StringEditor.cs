@@ -72,7 +72,7 @@ namespace Contractor.Core.Helpers
             this.lineNumber = startLineNumber;
         }
 
-        public StringEditor InsertLine(string line)
+        public StringEditor InsertLine(string line, int indentation = 0)
         {
             var splittedLines = line.Split(
                 new[] { "\r\n", "\r", "\n" },
@@ -80,7 +80,13 @@ namespace Contractor.Core.Helpers
 
             foreach (var splittedLine in splittedLines)
             {
-                this.lines.Insert(this.lineNumber, splittedLine);
+                string lineToBeInserted = splittedLine;
+                for (int i = 0; i < indentation; i++)
+                {
+                    lineToBeInserted = "    " + lineToBeInserted;
+                }
+
+                this.lines.Insert(this.lineNumber, lineToBeInserted);
                 this.lineNumber++;
             }
 

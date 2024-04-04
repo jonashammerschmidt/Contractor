@@ -17,13 +17,15 @@ namespace Contractor.Core.MetaModell
                 .Select(pathItem =>
                 {
                     var relation = options.FindRelation(currentEntity, pathItem);
+                    var otherEntity = relation.EntityFrom == currentEntity ? relation.EntityTo : relation.EntityFrom;
                     var customDtoPathItem = new CustomDtoPathItem()
                     {
                         PropertyName = pathItem,
                         Entity = currentEntity,
+                        OtherEntity = otherEntity,
                         Relation = relation,
                     };
-                    currentEntity = relation.EntityFrom == currentEntity ? relation.EntityTo : relation.EntityFrom;
+                    currentEntity = otherEntity;
                     return customDtoPathItem;
                 })
                 .ToList();
