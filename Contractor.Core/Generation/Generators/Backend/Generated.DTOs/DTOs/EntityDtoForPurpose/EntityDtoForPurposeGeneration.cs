@@ -74,7 +74,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                         }
                         else
                         {
-                            HandleRelation(dtoName, "DtoExpanded", pathItem);
+                            HandleRelation(dtoName, "Dto", pathItem);
                         }
                     }
                 }
@@ -108,7 +108,6 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                 if (isOneToOne)
                 {
                     RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(lastPathItem.Relation, "", dtoPostfix);
-                    relationSideFrom.IsNew = true;
 
                     this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideFrom, GeneratedDTOsProjectGeneration.DomainFolder, $"{dtoName}.cs",
                         $"{relationSideFrom.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
@@ -119,7 +118,6 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                 else
                 {
                     RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(lastPathItem.Relation, "IEnumerable<", dtoPostfix + ">");
-                    relationSideFrom.IsNew = true;
 
                     this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideFrom, GeneratedDTOsProjectGeneration.DomainFolder, $"{dtoName}.cs",
                         $"{relationSideFrom.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
@@ -131,7 +129,6 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             else
             {
                 RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(lastPathItem.Relation, "", dtoPostfix);
-                relationSideTo.IsNew = true;
 
                 this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, $"{dtoName}.cs",
                     $"{relationSideTo.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
