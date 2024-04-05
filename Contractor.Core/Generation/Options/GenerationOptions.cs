@@ -14,6 +14,8 @@ namespace Contractor.Core.MetaModell
 
         public List<PurposeDto> PurposeDtos { get; set; }
 
+        public List<Interface> Interfaces { get; set; }
+
         public bool IsVerbose { get; set; }
 
         public List<ClassGenerationTag> Tags { get; set; }
