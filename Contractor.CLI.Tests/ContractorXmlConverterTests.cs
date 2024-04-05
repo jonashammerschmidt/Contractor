@@ -41,15 +41,23 @@ namespace Contractor.CLI.Tests
                 }
             });
 
+            contractorXml.Interfaces.Interfaces.Add(new InterfaceXml()
+            {
+                Name = "Nameable",
+                Properties = new List<InterfacePropertyXml>()
+                {
+                    new() { Name = "Name" },
+                },
+                Relations = new List<InterfaceRelationXml>()
+                {
+                    new() { EntityNameFrom = "Order" },
+                }
+            });
+
             // Act
             var contractorOptions = ContractorXmlConverter.ToContractorGenerationOptions(contractorXml, ".");
             contractorOptions.AddLinks();
 
-            var test = JsonConvert.SerializeObject(contractorOptions, new JsonSerializerSettings 
-            { 
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
-            
             // Assert
             Assert.AreEqual(1, contractorOptions.Modules.Count());
             Assert.AreEqual(4, contractorOptions.Modules.First().Entities.Count());
@@ -63,6 +71,9 @@ namespace Contractor.CLI.Tests
             Assert.AreEqual(2, contractorOptions.PurposeDtos.First().Properties.Count());
             Assert.AreEqual(1, contractorOptions.PurposeDtos.First().Properties.First().PathItems.Count());
             Assert.AreEqual(2, contractorOptions.PurposeDtos.First().Properties.Last().PathItems.Count());
+            Assert.AreEqual(1, contractorOptions.Interfaces.Count());
+            Assert.AreEqual(1, contractorOptions.Interfaces.First().Properties.Count());
+            Assert.AreEqual(1, contractorOptions.Interfaces.First().Relations.Count());
         }
     }
 }
