@@ -22,6 +22,9 @@ namespace Contractor.CLI
         [XmlElement(ElementName = "PurposeDtos")]
         public PurposeDtosXml PurposeDtos { get; set; }
 
+        [XmlElement(ElementName = "Interfaces")]
+        public InterfacesXml Interfaces { get; set; }
+
         [XmlAttribute(AttributeName = "minContractorVersion")]
         public string MinContractorVersion { get; set; }
     }
@@ -34,6 +37,9 @@ namespace Contractor.CLI
 
         [XmlElement(ElementName = "PurposeDtos")]
         public PurposeDtosXml PurposeDtos { get; set; }
+
+        [XmlElement(ElementName = "Interfaces")]
+        public InterfacesXml Interfaces { get; set; }
     }
 
     [XmlRoot(ElementName = "Paths")]
@@ -257,5 +263,42 @@ namespace Contractor.CLI
     {
         [XmlAttribute(AttributeName = "path")]
         public string Path { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Interfaces")]
+    public class InterfacesXml
+    {
+        [XmlElement(ElementName = "Interface")]
+        public List<InterfaceXml> Interfaces { get; set; } = new ();
+    }
+
+    [XmlRoot(ElementName = "Interface")]
+    public class InterfaceXml
+    {
+        [XmlAttribute(AttributeName = "name")]
+        public string Name { get; set; }
+        
+        [XmlElement(ElementName = "Property")]
+        public List<InterfacePropertyXml> Properties { get; set; } = new ();
+        
+        [XmlElement(ElementName = "Relation")]
+        public List<InterfaceRelationXml> Relations { get; set; } = new ();
+    }
+
+    [XmlRoot(ElementName = "Property")]
+    public class InterfacePropertyXml
+    {
+        [XmlAttribute(AttributeName = "name")]
+        public string Name { get; set; }
+    }
+    
+    [XmlRoot(ElementName = "Relation")]
+    public class InterfaceRelationXml
+    {
+        [XmlAttribute(AttributeName = "entityNameFrom")]
+        public string EntityNameFrom { get; set; }
+        
+        [XmlAttribute(AttributeName = "propertyNameFrom")]
+        public string PropertyNameFrom { get; set; }
     }
 }

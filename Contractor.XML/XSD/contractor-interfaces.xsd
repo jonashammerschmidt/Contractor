@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" vc:minVersion="1.1" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
+  <xs:element name="Interfaces" >
+    <xs:annotation>
+      <xs:documentation xml:lang="de">Generierung von zusätzlichen verschachtelten DTOs für einen bestimmten Zweck.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Interface" minOccurs="1" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation xml:lang="de">Definition eines zusätzlichen verschachtelten DTOs für einen bestimmten Zweck.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Relation, die Teil des Interfaces sein soll</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="entityNameFrom" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Name (Singular) der Entität auf die diese Relation zeigt.</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="propertyNameFrom" type="xs:string" use="optional">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Optional. Alternativer Name (Singular) der Relation-Property für die andere Entität **in dieser Entität**. Default: Name der anderen Entität</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Property" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation xml:lang="de">Property, die Teil des Interfaces sein soll</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="de">Name der Property</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required">
+              <xs:annotation>
+                <xs:documentation xml:lang="de">Name des Interfaces (exkl. des I-Prefixes)</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

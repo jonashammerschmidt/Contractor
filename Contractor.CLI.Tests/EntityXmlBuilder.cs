@@ -84,6 +84,10 @@ public class ContractorXmlBuilder
         {
             PurposeDtos = new List<PurposeDtoXml>(),
         },
+        Interfaces = new InterfacesXml()
+        {
+            Interfaces = new List<InterfaceXml>(),
+        },
         Paths = new PathsXml
         {
             BackendDestinationFolder = "BackendDestinationFolder",

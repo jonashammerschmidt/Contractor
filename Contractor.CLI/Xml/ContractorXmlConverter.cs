@@ -30,6 +30,7 @@ namespace Contractor.CLI
                 .ToList();
             contractorGenerationOptions.Modules = ConvertModules(contractorXml.Modules);
             contractorGenerationOptions.PurposeDtos = ConvertPurposeDtos(contractorXml.PurposeDtos);
+            contractorGenerationOptions.Interfaces = ConvertInterfaces(contractorXml.Interfaces);
 
             return contractorGenerationOptions;
         }
@@ -49,6 +50,10 @@ namespace Contractor.CLI
 
             generationOptions.PurposeDtos = generationOptions.PurposeDtos
                 .Concat(ConvertPurposeDtos(contractorIncludeXml.PurposeDtos))
+                .ToList();
+
+            generationOptions.Interfaces = generationOptions.Interfaces
+                .Concat(ConvertInterfaces(contractorIncludeXml.Interfaces))
                 .ToList();
         }
 
@@ -122,6 +127,35 @@ namespace Contractor.CLI
                             var dtoProperty = new PurposeDtoProperty();
                             dtoProperty.Path = property.Path;
                             return dtoProperty;
+                        })
+                        .ToList();
+                    return dto;
+                })
+                .ToList();
+        }
+
+        private static List<Interface> ConvertInterfaces(InterfacesXml purposeDtos)
+        {
+            return purposeDtos.Interfaces
+                .Select(interfaceItem =>
+                {
+                    var dto = new Interface();
+                    dto.Name = interfaceItem.Name;
+                    dto.Properties = interfaceItem.Properties
+                        .Select(property =>
+                        {
+                            var interfaceProperty = new InterfaceProperty();
+                            interfaceProperty.Name = property.Name;
+                            return interfaceProperty;
+                        })
+                        .ToList();
+                    dto.Relations = interfaceItem.Relations
+                        .Select(relation =>
+                        {
+                            var interfaceRelation = new InterfaceRelation();
+                            interfaceRelation.EntityNameFrom = relation.EntityNameFrom;
+                            interfaceRelation.PropertyNameFrom = relation.PropertyNameFrom;
+                            return interfaceRelation;
                         })
                         .ToList();
                     return dto;

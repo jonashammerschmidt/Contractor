@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Contractor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/contractor-include.xsd">
+<Contractor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="XSD/contractor-include.xsd">
   <PurposeDtos>
     <PurposeDto entity="EmailUser" purpose="Detail">
-        <Property path="Mandant" />
-        <Property path="Permission" />
-        <Property path="EmailUserMemberships.Parent.Permission" />
-        <Property path="EmailUserMemberships.Parent.Mandant" />
+      <Property path="Mandant" />
+      <Property path="Permission" />
+      <Property path="EmailUserMemberships.Parent.Permission" />
+      <Property path="EmailUserMemberships.Parent.Mandant" />
     </PurposeDto>
   </PurposeDtos>
+  <Interfaces>
+    <Interface name="EmailUserMandantable">
+      <Relation entityNameFrom="Mandant" propertyNameFrom="Mandant" />
+      <Property name="Email" />
+    </Interface>
+  </Interfaces>
 </Contractor>
