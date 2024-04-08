@@ -89,5 +89,10 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
 
             this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }
+
+        protected void AddInterface(Interface interfaceItem)
+        {
+            
+        }
     }
 }
