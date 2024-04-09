@@ -28,6 +28,12 @@ namespace Contractor.Core.Tools
             AddRelationToDTO(relationSide, domainFolder, templateFileName, false, filePath, namespacesToAdd);
         }
 
+        public void AddRelationToDTOForBackendGenerated(RelationSide relationSide, string domainFolder, string templateFileName, bool forInterface, params string[] namespacesToAdd)
+        {
+            string filePath = this.pathService.GetAbsolutePathForBackendGenerated(relationSide, domainFolder, templateFileName);
+            AddRelationToDTO(relationSide, domainFolder, templateFileName, forInterface, filePath, namespacesToAdd);
+        }
+
         public void AddRelationToDTOForDatabase(RelationSide relationSide, string domainFolder, string templateFileName, params string[] namespacesToAdd)
         {
             string filePath = this.pathService.GetAbsolutePathForDatabase(relationSide, domainFolder, templateFileName);

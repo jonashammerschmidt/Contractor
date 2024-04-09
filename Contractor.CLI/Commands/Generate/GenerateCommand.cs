@@ -42,6 +42,7 @@ public class GenerateCommand
         ContractorXml contractorXml = (ContractorXml)contractorXmlSerializer.Deserialize(contractorXmlReader);
         contractorXml.Includes ??= new(); 
         contractorXml.PurposeDtos ??= new(); 
+        contractorXml.Interfaces ??= new(); 
         contractorXml.Modules ??= new();  
 
         if (Assembly.GetExecutingAssembly().GetName().Version

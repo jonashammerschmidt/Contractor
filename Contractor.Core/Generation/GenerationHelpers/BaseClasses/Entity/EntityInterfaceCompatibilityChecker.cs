@@ -14,14 +14,14 @@ namespace Contractor.Core.BaseClasses
 
     public class EntityInterfaceCompatibilityChecker
     {
-        public EntityInterfaceCompatibility IsInterfaceCompatible(Entity entity, Interface interfaceItem)
+        public static EntityInterfaceCompatibility IsInterfaceCompatible(Entity entity, Interface interfaceItem)
         {
             var compatibility = GetBaseCompatible(entity, interfaceItem);
             
             foreach (var interfaceProperty in interfaceItem.Properties)
             {
                 bool isId = interfaceProperty.Name == "Id";
-                bool isScopeId = interfaceProperty.Name == entity.ScopeEntity?.Name;
+                bool isScopeId = entity.ScopeEntity is not null && interfaceProperty.Name == entity.ScopeEntity.Name + "Id";
                 bool isProperty = entity.Properties.Any(p => p.Name == interfaceProperty.Name);
                 bool isRelation1To1IdProperty = entity.Relations1To1
                     .Any(relation => interfaceProperty.Name == (relation.PropertyNameInSource ?? relation.TargetEntity.Name) + "Id");
@@ -45,7 +45,7 @@ namespace Contractor.Core.BaseClasses
             return compatibility;
         }
 
-        private bool HasSimpleRelation(Entity entity, string otherEntityName, string propertyName)
+        private static bool HasSimpleRelation(Entity entity, string otherEntityName, string propertyName)
         {
             var relation = entity.Module.Options.FindRelationOrDefault(entity, propertyName ?? otherEntityName);
             
@@ -57,13 +57,13 @@ namespace Contractor.Core.BaseClasses
             return relation.TargetEntity != entity || relation is not Relation1ToN;
         }
         
-        public EntityInterfaceCompatibility GetBaseCompatible(Entity entity, Interface interfaceItem)
+        public static EntityInterfaceCompatibility GetBaseCompatible(Entity entity, Interface interfaceItem)
         {
             if (interfaceItem.Relations.Count > 0)
             {
                 return EntityInterfaceCompatibility.DtoExpanded;
             }
-            else if (interfaceItem.Properties.Any(p => p.Name == "Id" || p.Name == entity.ScopeEntity?.Name))
+            else if (interfaceItem.Properties.Any(p => p.Name == "Id" || p.Name == entity.ScopeEntity?.Name + "Id"))
             {
                 return EntityInterfaceCompatibility.Dto;
             }

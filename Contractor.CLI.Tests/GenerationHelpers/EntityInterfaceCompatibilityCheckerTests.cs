@@ -7,9 +7,6 @@ namespace Contractor.CLI.Tests.GenerationHelpers;
 [TestClass]
 public class ModuleEntityInterfaceCompatibilityTests
 {
-
-    private EntityInterfaceCompatibilityChecker checker = new EntityInterfaceCompatibilityChecker();
-
     private Entity employeeEntity;
     private Entity deskEntity;
     private Entity departmentEntity;
@@ -74,7 +71,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.None, result);
@@ -99,7 +96,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.None, result);
@@ -119,7 +116,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoData, result);
@@ -140,7 +137,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoData, result);
@@ -161,7 +158,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoData, result);
@@ -182,7 +179,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.None, result);
@@ -207,7 +204,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoExpanded, result);
@@ -232,7 +229,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoExpanded, result);
@@ -257,7 +254,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoExpanded, result);
@@ -282,7 +279,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(deskEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(deskEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoExpanded, result);
@@ -307,7 +304,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(departmentEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(departmentEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoExpanded, result);
@@ -332,7 +329,7 @@ public class ModuleEntityInterfaceCompatibilityTests
         };
 
         // Überprüfung der Kompatibilität
-        var result = checker.IsInterfaceCompatible(departmentEntity, interfaceItem);
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(departmentEntity, interfaceItem);
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.None, result);

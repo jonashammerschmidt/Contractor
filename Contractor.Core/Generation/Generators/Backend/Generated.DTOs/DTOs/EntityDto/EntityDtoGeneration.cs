@@ -6,7 +6,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_GENERATED, ClassGenerationTag.BACKEND_GENERATED_DTOS })]
-    public class EntityDtoGeneration : ClassGeneration
+    public class EntityDtoGeneration : ClassGeneration, IInterfaceGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoTemplate.txt");
@@ -16,15 +16,18 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly ApiDtoPropertyAddition apiPropertyAddition;
         private readonly EntityDtoMethodsAddition entityDtoMethodsAddition;
+        private readonly ClassInterfaceExtender classInterfaceExtender;
 
         public EntityDtoGeneration(
             EntityCoreAddition entityCoreAddition,
             ApiDtoPropertyAddition apiPropertyAddition,
-            EntityDtoMethodsAddition entityDtoMethodsAddition)
+            EntityDtoMethodsAddition entityDtoMethodsAddition,
+            ClassInterfaceExtender classInterfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.apiPropertyAddition = apiPropertyAddition;
             this.entityDtoMethodsAddition = entityDtoMethodsAddition;
+            this.classInterfaceExtender = classInterfaceExtender;
         }
 
         protected override void AddModuleActions(Module module)
@@ -64,6 +67,21 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
         {
             this.Add1ToNRelationSideTo(new Relation1ToN(relation));
+        }
+
+        public void AddInterface(GenerationOptions options, Interface interfaceItem)
+        {
+            foreach (var module in options.Modules)
+            {
+                foreach (var entity in module.Entities)
+                {
+                    var entityInterfaceCompatibility = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(entity, interfaceItem);
+                    if (entityInterfaceCompatibility == EntityInterfaceCompatibility.Dto)
+                    {
+                        this.classInterfaceExtender.AddInterfaceToClass(entity, interfaceItem.Name, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
+                    }
+                }
+            }
         }
     }
 }
