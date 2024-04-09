@@ -24,8 +24,8 @@ namespace Contractor.CLI.Tests
                     .WithProperty("Double", "Price"))
                 .AddEntity(entity => entity
                     .WithName("OrderDetail", "OrderDetails")
-                    .WithRelation1ToN("Order", "Order", "OrderOrderDetails")
-                    .WithRelation1ToN("Product", "Product", "ProductOrderDetails")
+                    .WithRelation1ToN("Order", "Order", "OrderDetails")
+                    .WithRelation1ToN("Product", "Product", "OrderDetails")
                     .WithProperty("Integer", "Quantity")
                     .WithIndex("OrderId, ProductId, Quantity"))
                 .Build();
@@ -37,7 +37,7 @@ namespace Contractor.CLI.Tests
                 Properties = new List<PurposeDtoPropertyXml>()
                 {
                     new() { Path = "Customer" },
-                    new() { Path = "OrderOrderDetails.Product" },
+                    new() { Path = "OrderDetails.Product" },
                 }
             });
 

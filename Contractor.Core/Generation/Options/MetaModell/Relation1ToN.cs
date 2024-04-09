@@ -10,13 +10,13 @@
         {
         }
 
-        public Relation1ToN(Entity scopeEntity, Entity scopedEntity)
+        public Relation1ToN(Entity targetEntity, Entity sourceEntity)
         {
-            this.EntityFrom = scopeEntity;
-            this.EntityTo = scopedEntity;
-            this.EntityNameFrom = scopeEntity.Name;
-            this.PropertyNameFrom = scopeEntity.Name;
-            this.PropertyNameTo = scopedEntity.NamePlural;
+            this.TargetEntity = targetEntity;
+            this.SourceEntity = sourceEntity;
+            this.TargetEntityName = targetEntity.Name;
+            this.PropertyNameInSource = targetEntity.Name;
+            this.PropertyNameInTarget = sourceEntity.NamePlural;
             this.IsOptional = false;
             this.OnDelete = "NoAction";
             this.Order = -1;

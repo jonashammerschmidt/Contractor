@@ -69,7 +69,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { EntityNameFrom = "Department" },
+                new() { TargetEntityName = "Department" },
             }
         };
 
@@ -94,7 +94,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { EntityNameFrom = "Unbekannt" },
+                new() { TargetEntityName = "Unbekannt" },
             }
         };
 
@@ -115,6 +115,48 @@ public class ModuleEntityInterfaceCompatibilityTests
             Properties = new List<InterfaceProperty>()
             {
                 new() { Name = "Name" },
+            },
+        };
+
+        // Überprüfung der Kompatibilität
+        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+
+        // Assertion
+        Assert.AreEqual(EntityInterfaceCompatibility.DtoData, result);
+    }
+
+    [TestMethod]
+    public void TestModuleWithEntitiesPropertiesAndRelations_DtoData_1To1_PerId()
+    {
+        // Definition des Interfaces
+        var interfaceItem = new Interface()
+        {
+            Name = "Test",
+            Properties = new List<InterfaceProperty>()
+            {
+                new() { Name = "Name" },
+                new() { Name = "DeskId" },
+            },
+        };
+
+        // Überprüfung der Kompatibilität
+        var result = checker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+
+        // Assertion
+        Assert.AreEqual(EntityInterfaceCompatibility.DtoData, result);
+    }
+
+    [TestMethod]
+    public void TestModuleWithEntitiesPropertiesAndRelations_DtoData_1ToN_PerId()
+    {
+        // Definition des Interfaces
+        var interfaceItem = new Interface()
+        {
+            Name = "Test",
+            Properties = new List<InterfaceProperty>()
+            {
+                new() { Name = "Name" },
+                new() { Name = "DepartmentId" },
             },
         };
 
@@ -160,7 +202,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { EntityNameFrom = "Department" },
+                new() { TargetEntityName = "Department" },
             }
         };
 
@@ -185,7 +227,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { EntityNameFrom = "Department" },
+                new() { TargetEntityName = "Department" },
             }
         };
 
@@ -210,7 +252,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { EntityNameFrom = "Desk" },
+                new() { TargetEntityName = "Desk" },
             }
         };
 
@@ -235,7 +277,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { EntityNameFrom = "Employee" },
+                new() { TargetEntityName = "Employee" },
             }
         };
 
@@ -260,7 +302,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { EntityNameFrom = "Employee", PropertyNameFrom = "EmployeeOfTheMonth"},
+                new() { TargetEntityName = "Employee", PropertyName = "EmployeeOfTheMonth"},
             }
         };
 
@@ -285,7 +327,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { EntityNameFrom = "Employee" },
+                new() { TargetEntityName = "Employee" },
             }
         };
 

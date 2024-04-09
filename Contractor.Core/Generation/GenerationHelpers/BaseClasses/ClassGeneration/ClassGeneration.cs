@@ -86,9 +86,9 @@ namespace Contractor.Core.Generation
             //try
             //{
             this.Add1ToNRelationSideFrom(new Relation1ToN(relation));
-            if (relation.EntityFrom.Module.Options.IsVerbose)
+            if (relation.TargetEntity.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.TargetEntity.Name + " -> " + relation.SourceEntity.Name);
             }
             //}
             //catch (Exception e)
@@ -106,9 +106,9 @@ namespace Contractor.Core.Generation
             //try
             //{
             this.AddOneToOneRelationSideFrom(relation);
-            if (relation.EntityFrom.Module.Options.IsVerbose)
+            if (relation.TargetEntity.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.TargetEntity.Name + " -> " + relation.SourceEntity.Name);
             }
             //}
             //catch (Exception e)
@@ -126,9 +126,9 @@ namespace Contractor.Core.Generation
             //try
             //{
             this.Add1ToNRelationSideTo(new Relation1ToN(relation));
-            if (relation.EntityTo.Module.Options.IsVerbose)
+            if (relation.SourceEntity.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.TargetEntity.Name + " -> " + relation.SourceEntity.Name);
             }
             //}
             //catch (Exception e)
@@ -146,9 +146,9 @@ namespace Contractor.Core.Generation
             //try
             //{
             this.AddOneToOneRelationSideTo(relation);
-            if (relation.EntityTo.Module.Options.IsVerbose)
+            if (relation.SourceEntity.Module.Options.IsVerbose)
             {
-                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.EntityFrom.Name + " -> " + relation.EntityTo.Name);
+                Console.WriteLine(this.GetType().Name + " completed successfully: " + relation.TargetEntity.Name + " -> " + relation.SourceEntity.Name);
             }
             //}
             //catch (Exception e)

@@ -17,7 +17,7 @@ namespace Contractor.Core.MetaModell
                 .Select(pathItem =>
                 {
                     var relation = options.FindRelation(currentEntity, pathItem);
-                    var otherEntity = relation.EntityFrom == currentEntity ? relation.EntityTo : relation.EntityFrom;
+                    var otherEntity = relation.TargetEntity == currentEntity ? relation.SourceEntity : relation.TargetEntity;
                     var purposeDtoPathItem = new PurposeDtoPathItem()
                     {
                         PropertyName = pathItem,

@@ -17,13 +17,13 @@ namespace Contractor.Core
                 {
                     foreach (var relation1To1 in entity.Relations1To1)
                     {
-                        if ((relation1To1.EntityFrom.HasScope && !relation1To1.EntityTo.HasScope) || relation1To1.EntityTo.HasOtherScope(relation1To1.EntityFrom))
+                        if ((relation1To1.TargetEntity.HasScope && !relation1To1.SourceEntity.HasScope) || relation1To1.SourceEntity.HasOtherScope(relation1To1.TargetEntity))
                         {
                             Relation1ToN scopeRelation1ToN = new Relation1ToN()
                             {
-                                EntityNameFrom = relation1To1.EntityFrom.ScopeEntity.Name,
-                                PropertyNameFrom = (relation1To1.PropertyNameFrom ?? relation1To1.EntityFrom.Name) + relation1To1.EntityFrom.ScopeEntity.Name,
-                                PropertyNameTo = (relation1To1.PropertyNameTo ?? relation1To1.EntityTo.Name) + relation1To1.EntityFrom.Name,
+                                TargetEntityName = relation1To1.TargetEntity.ScopeEntity.Name,
+                                PropertyNameInSource = (relation1To1.PropertyNameInSource ?? relation1To1.TargetEntity.Name) + relation1To1.TargetEntity.ScopeEntity.Name,
+                                PropertyNameInTarget = (relation1To1.PropertyNameInTarget ?? relation1To1.SourceEntity.Name) + relation1To1.TargetEntity.Name,
                                 IsOptional = relation1To1.IsOptional,
                                 OnDelete = "NoAction",
                                 Order = relation1To1.Order,
@@ -39,13 +39,13 @@ namespace Contractor.Core
 
                     foreach (var relation1ToN in entity.Relations1ToN)
                     {
-                        if ((relation1ToN.EntityFrom.HasScope && !relation1ToN.EntityTo.HasScope) || relation1ToN.EntityTo.HasOtherScope(relation1ToN.EntityFrom))
+                        if ((relation1ToN.TargetEntity.HasScope && !relation1ToN.SourceEntity.HasScope) || relation1ToN.SourceEntity.HasOtherScope(relation1ToN.TargetEntity))
                         {
                             Relation1ToN scopeRelation1ToN = new Relation1ToN()
                             {
-                                EntityNameFrom = relation1ToN.EntityFrom.ScopeEntity.Name,
-                                PropertyNameFrom = (relation1ToN.PropertyNameFrom ?? relation1ToN.EntityFrom.Name) + relation1ToN.EntityFrom.ScopeEntity.Name,
-                                PropertyNameTo = (relation1ToN.PropertyNameTo ?? relation1ToN.EntityTo.Name) + relation1ToN.EntityFrom.Name,
+                                TargetEntityName = relation1ToN.TargetEntity.ScopeEntity.Name,
+                                PropertyNameInSource = (relation1ToN.PropertyNameInSource ?? relation1ToN.TargetEntity.Name) + relation1ToN.TargetEntity.ScopeEntity.Name,
+                                PropertyNameInTarget = (relation1ToN.PropertyNameInTarget ?? relation1ToN.SourceEntity.Name) + relation1ToN.TargetEntity.Name,
                                 IsOptional = relation1ToN.IsOptional,
                                 OnDelete = "NoAction",
                                 Order = relation1ToN.Order,
@@ -88,10 +88,10 @@ namespace Contractor.Core
             {
                 var dependencies1To1 = entity.Relations1To1
                     .Where(relation => !excludeOptionalRelations || !relation.IsOptional)
-                    .Select(relation => relation.EntityFrom);
+                    .Select(relation => relation.TargetEntity);
                 var dependencies1ToN = entity.Relations1ToN
                     .Where(relation => !excludeOptionalRelations || !relation.IsOptional)
-                    .Select(relation => relation.EntityFrom);
+                    .Select(relation => relation.TargetEntity);
                 var dependencies = dependencies1To1
                     .Concat(dependencies1ToN)
                     .Where(dependency => dependency != entity);

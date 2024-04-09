@@ -48,7 +48,7 @@ namespace Contractor.CLI
                 {
                     string entityNameFrom = relationNode.Attributes?["entityNameFrom"]?.Value;
                     string propertyNameFrom = relationNode.Attributes?["propertyNameFrom"]?.Value;
-                    var relation = entity.Relations1To1.FirstOrDefault(r => r.EntityFrom.Name == entityNameFrom && r.PropertyNameFrom == propertyNameFrom);
+                    var relation = entity.Relations1To1.FirstOrDefault(r => r.TargetEntity.Name == entityNameFrom && r.PropertyNameInSource == propertyNameFrom);
                     if (relation != null)
                     {
                         relation.Order = relationNode.GetNodeIndex();
@@ -66,7 +66,7 @@ namespace Contractor.CLI
                 {
                     string entityNameFrom = relationNode.Attributes?["entityNameFrom"]?.Value;
                     string propertyNameFrom = relationNode.Attributes?["propertyNameFrom"]?.Value;
-                    var relation = entity.Relations1ToN.FirstOrDefault(r => r.EntityFrom.Name == entityNameFrom && r.PropertyNameFrom == propertyNameFrom);
+                    var relation = entity.Relations1ToN.FirstOrDefault(r => r.TargetEntity.Name == entityNameFrom && r.PropertyNameInSource == propertyNameFrom);
                     if (relation != null)
                     {
                         relation.Order = relationNode.GetNodeIndex();

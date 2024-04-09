@@ -2,7 +2,7 @@
 {
     public enum RelationSideType
     {
-        From,
-        To,
+        Target,
+        Source,
     }
 }

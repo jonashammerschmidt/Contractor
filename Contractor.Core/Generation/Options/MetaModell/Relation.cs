@@ -4,9 +4,9 @@ namespace Contractor.Core.MetaModell
 {
     public abstract class Relation
     {
-        private string entityNameFrom;
-        protected string propertyNameFrom;
-        private string propertyNameTo;
+        private string targetEntityName;
+        protected string propertyNameInSource;
+        private string propertyNameInTarget;
 
         protected Relation()
         {
@@ -14,34 +14,34 @@ namespace Contractor.Core.MetaModell
 
         protected Relation(Relation relation)
         {
-            entityNameFrom = relation.entityNameFrom;
-            propertyNameFrom = relation.propertyNameFrom;
-            propertyNameTo = relation.propertyNameTo;
+            targetEntityName = relation.targetEntityName;
+            propertyNameInSource = relation.propertyNameInSource;
+            propertyNameInTarget = relation.propertyNameInTarget;
 
             IsOptional = relation.IsOptional;
             OnDelete = relation.OnDelete;
             IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor;
             RelationBeforePreProcessor = relation.RelationBeforePreProcessor;
             Order = relation.Order;
-            EntityFrom = relation.EntityFrom;
-            EntityTo = relation.EntityTo;
+            TargetEntity = relation.TargetEntity;
+            SourceEntity = relation.SourceEntity;
         }
 
-        public string EntityNameFrom
+        public string TargetEntityName
         {
-            set { entityNameFrom = value.ToVariableName(); }
+            set { targetEntityName = value.ToVariableName(); }
         }
 
-        public string PropertyNameFrom
+        public string PropertyNameInSource
         {
-            get { return propertyNameFrom; }
-            set { propertyNameFrom = value?.ToVariableName(); }
+            get { return propertyNameInSource; }
+            set { propertyNameInSource = value?.ToVariableName(); }
         }
 
-        public string PropertyNameTo
+        public string PropertyNameInTarget
         {
-            get { return propertyNameTo; }
-            set { propertyNameTo = value?.ToVariableName(); }
+            get { return propertyNameInTarget; }
+            set { propertyNameInTarget = value?.ToVariableName(); }
         }
 
         public bool IsOptional { get; set; }
@@ -54,14 +54,14 @@ namespace Contractor.Core.MetaModell
 
         public string OnDelete { get; set; }
 
-        public Entity EntityFrom { get; set; }
+        public Entity TargetEntity { get; set; }
 
-        public Entity EntityTo { get; set; }
+        public Entity SourceEntity { get; set; }
 
         public void AddLinks(Entity entity)
         {
-            EntityTo = entity;
-            EntityFrom = entity.Module.Options.FindEntity(entityNameFrom);
+            SourceEntity = entity;
+            TargetEntity = entity.Module.Options.FindEntity(targetEntityName);
         }
     }
 }

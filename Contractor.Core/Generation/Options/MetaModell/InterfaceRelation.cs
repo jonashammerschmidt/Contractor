@@ -4,19 +4,19 @@ namespace Contractor.Core.MetaModell
 {
     public class InterfaceRelation
     {
-        private string entityNameFrom;
-        private string propertyNameFrom;
+        private string targetEntityName;
+        private string propertyName;
 
-        public string EntityNameFrom
+        public string TargetEntityName
         {
-            get => entityNameFrom;
-            set => entityNameFrom = value.ToVariableName();
+            get => targetEntityName;
+            set => targetEntityName = value.ToVariableName();
         }
 
-        public string PropertyNameFrom
+        public string PropertyName
         {
-            get => propertyNameFrom;
-            set => propertyNameFrom = value?.ToVariableName();
+            get => propertyName;
+            set => propertyName = value?.ToVariableName();
         }
     }
 }
