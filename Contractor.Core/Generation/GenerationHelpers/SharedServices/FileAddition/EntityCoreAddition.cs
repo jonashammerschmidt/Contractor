@@ -58,6 +58,16 @@ namespace Contractor.Core.BaseClasses
             fileSystemClient.WriteAllText(fileData, filePath);
         }
 
+        public void AddInterfaceToBackendGenerated(Interface interfaceItem, Entity compatibleEntity, string domainFolder, string templateFilePath, string templateFileName)
+        {
+            string filePath = pathService.GetAbsolutePathForBackendGenerated(compatibleEntity, domainFolder, templateFileName);
+            string fileData = fileSystemClient.ReadAllText(compatibleEntity, templateFilePath);
+
+            fileData = fileData.Replace("InterfaceName", interfaceItem.Name);
+
+            fileSystemClient.WriteAllText(fileData, filePath);
+        }
+
         public void AddEntityToDatabase(Entity entity, string domainFolder, string templateFilePath, string templateFileName)
         {
             string filePath = pathService.GetAbsolutePathForDatabase(entity, domainFolder, templateFileName);

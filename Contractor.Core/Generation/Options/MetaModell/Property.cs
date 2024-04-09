@@ -38,7 +38,7 @@ namespace Contractor.Core.MetaModell
 
         public int Order { get; set; }
 
-        public Entity Entity { get; protected set; }
+        public Entity Entity { get; set; }
 
         public void AddLinks(Entity entity)
         {

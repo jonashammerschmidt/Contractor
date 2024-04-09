@@ -177,6 +177,64 @@ namespace Contractor.Core.MetaModell
             return null;
         }
 
+        public Property FindPropertyIncludingIds(string propertyName)
+        {
+            foreach (var property in Properties)
+            {
+                if (property.Name.ToLower() == propertyName.ToLower())
+                {
+                    return property;
+                }
+            }
+
+            var relations1To1IdProperty = this.Relations1To1
+                .SingleOrDefault(relation => propertyName == (relation.PropertyNameInSource ?? relation.TargetEntity.Name) + "Id");
+            var relations1ToNIdProperty = this.Relations1ToN
+                .SingleOrDefault(relation => propertyName == (relation.PropertyNameInSource ?? relation.TargetEntity.Name) + "Id");
+
+            Property idProperty = null;
+            if (propertyName == "Id")
+            {
+                idProperty = new Property()
+                {
+                    Name = propertyName,
+                    Entity = this,
+                    Type = "Guid",
+                    IsDisplayProperty = this.DisplayProperty.Name == "Id",
+                };
+            }
+            else if (propertyName == this.ScopeEntity?.Name + "Id")
+            {
+                idProperty = new Property()
+                {
+                    Name = this.ScopeEntity?.Name + "Id",
+                    Type = "Guid",
+                };
+            }
+            else if (relations1To1IdProperty != null)
+            {
+                idProperty = new Property()
+                {
+                    Name = (relations1To1IdProperty.PropertyNameInSource ?? relations1To1IdProperty.TargetEntity.Name) + "Id",
+                    Type = "Guid",
+                    IsOptional = relations1To1IdProperty.IsOptional,
+                };
+            }
+            else if (relations1ToNIdProperty != null)
+            {
+                idProperty = new Property()
+                {
+                    Name = (relations1ToNIdProperty.PropertyNameInSource ?? relations1ToNIdProperty.TargetEntity.Name) + "Id",
+                    Type = "Guid",
+                    IsOptional = relations1ToNIdProperty.IsOptional,
+                };
+            }
+            
+            idProperty?.AddLinks(this);
+
+            return idProperty;
+        }
+
         public bool HasPropertiesOrRelations()
         {
             return this.Properties.Count() + this.Relations1To1.Count() + this.Relations1ToN.Count() > 0;

@@ -16,6 +16,7 @@ namespace Contractor.Core
 
         private readonly IFileSystemClient fileSystemClient;
         private readonly List<ClassGeneration> classGenerations = new();
+        private readonly List<IInterfaceGeneration> interfaceGenerations = new();
         
         private readonly EntityDtoForPurposeGeneration entityDtoForPurposeGeneration;
         private readonly EntitiesCrudRepositoryGeneration entitiesCrudRepositoryGeneration;
@@ -31,6 +32,7 @@ namespace Contractor.Core
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
             this.fileSystemClient = serviceProvider.GetRequiredService<IFileSystemClient>();
             this.classGenerations = serviceProvider.GetServices<ClassGeneration>().ToList();
+            this.interfaceGenerations = serviceProvider.GetServices<IInterfaceGeneration>().ToList();
 
             this.entityDtoForPurposeGeneration = serviceProvider.GetService<EntityDtoForPurposeGeneration>();
             this.entitiesCrudRepositoryGeneration = serviceProvider.GetService<EntitiesCrudRepositoryGeneration>();
@@ -139,6 +141,14 @@ namespace Contractor.Core
 
                 iEntitiesCrudRepositoryGeneration.AddPurposeDto(purposeDto);
                 entitiesCrudRepositoryGeneration.AddPurposeDto(purposeDto);
+            }
+
+            foreach (var interfaceItem in generationOptions.Interfaces)
+            {
+                foreach (var interfaceGeneration in this.interfaceGenerations)
+                {
+                    interfaceGeneration.AddInterface(generationOptions, interfaceItem);
+                }
             }
 
             foreach (Entity entity in this.sortedEntities.Where(entity => !entity.Skip))
