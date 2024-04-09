@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" vc:minVersion="1.1" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
   <xs:include schemaLocation="contractor-modules.xsd" />
-  <xs:include schemaLocation="contractor-purpose-dto.xsd" />
   <xs:element name="Contractor">
     <xs:complexType>
       <xs:sequence>
@@ -80,7 +79,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Includes" minOccurs="0" maxOccurs="1">
+        <xs:element name="Includes">
           <xs:annotation>
             <xs:documentation xml:lang="de">Inkludierung anderer XML-Dateien, zur Auslagerung von Modulen in andere Dateien.</xs:documentation>
           </xs:annotation>
@@ -101,7 +100,6 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element ref="PurposeDtos" minOccurs="0" maxOccurs="1"></xs:element>
         <xs:element ref="Modules" minOccurs="0" maxOccurs="1"></xs:element>
       </xs:sequence>
       <xs:attribute name="minContractorVersion" use="required">
