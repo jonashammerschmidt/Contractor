@@ -62,6 +62,7 @@ namespace Contractor.Core.Csv.Sql
 
                 sqlConnection.Open();
 
+                sqlBulkCopy.BulkCopyTimeout = this.sqlOptions.CommandTimeout;
                 sqlBulkCopy.DestinationTableName = tableName;
                 sqlBulkCopy.WriteToServer(dataTable);
             }
