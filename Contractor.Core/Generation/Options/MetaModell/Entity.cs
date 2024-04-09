@@ -146,10 +146,10 @@ namespace Contractor.Core.MetaModell
                 FindProperty("Name", true)?.Name ??
                 Properties.FirstOrDefault()?.Name ??
                 (Relations1To1.FirstOrDefault() != null
-                    ? (Relations1To1.FirstOrDefault().PropertyNameFrom ?? Relations1To1.FirstOrDefault().EntityFrom.Name) + "Id"
+                    ? (Relations1To1.FirstOrDefault().PropertyNameInSource ?? Relations1To1.FirstOrDefault().TargetEntity.Name) + "Id"
                     : null) ??
                 (Relations1ToN.FirstOrDefault() != null
-                    ? (Relations1ToN.FirstOrDefault().PropertyNameFrom ?? Relations1ToN.FirstOrDefault().EntityFrom.Name) + "Id"
+                    ? (Relations1ToN.FirstOrDefault().PropertyNameInSource ?? Relations1ToN.FirstOrDefault().TargetEntity.Name) + "Id"
                     : null) ??
                 "Id";
         }

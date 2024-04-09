@@ -82,17 +82,17 @@ namespace Contractor.CLI
                         }).ToList(),
                         Relations1To1 = entity.Relations1To1.Select(relation1To1 => new Relation1To1()
                         {
-                            EntityNameFrom = relation1To1.EntityNameFrom,
-                            PropertyNameFrom = relation1To1.PropertyNameFrom,
-                            PropertyNameTo = relation1To1.PropertyNameTo,
+                            TargetEntityName = relation1To1.EntityNameFrom,
+                            PropertyNameInSource = relation1To1.PropertyNameFrom,
+                            PropertyNameInTarget = relation1To1.PropertyNameTo,
                             IsOptional = relation1To1.IsOptional,
                             OnDelete = ParseRelationDeleteBehaviour(relation1To1.OnDelete),
                         }).ToList(),
                         Relations1ToN = entity.Relation1ToN.Select(relation1ToN => new Relation1ToN()
                         {
-                            EntityNameFrom = relation1ToN.EntityNameFrom,
-                            PropertyNameFrom = relation1ToN.PropertyNameFrom,
-                            PropertyNameTo = relation1ToN.PropertyNameTo,
+                            TargetEntityName = relation1ToN.EntityNameFrom,
+                            PropertyNameInSource = relation1ToN.PropertyNameFrom,
+                            PropertyNameInTarget = relation1ToN.PropertyNameTo,
                             IsOptional = relation1ToN.IsOptional,
                             OnDelete = ParseRelationDeleteBehaviour(relation1ToN.OnDelete),
                         }).ToList(),
@@ -153,8 +153,8 @@ namespace Contractor.CLI
                         .Select(relation =>
                         {
                             var interfaceRelation = new InterfaceRelation();
-                            interfaceRelation.EntityNameFrom = relation.EntityNameFrom;
-                            interfaceRelation.PropertyNameFrom = relation.PropertyNameFrom;
+                            interfaceRelation.TargetEntityName = relation.EntityNameFrom;
+                            interfaceRelation.PropertyName = relation.PropertyNameFrom;
                             return interfaceRelation;
                         })
                         .ToList();

@@ -106,7 +106,7 @@ namespace Contractor.Core
                 {
                     foreach (var relation1To1 in entity.Relations1To1.Where(p => p.Order == i))
                     {
-                        if (relation1To1 != null && !relation1To1.EntityFrom.Skip)
+                        if (relation1To1 != null && !relation1To1.TargetEntity.Skip)
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
@@ -119,7 +119,7 @@ namespace Contractor.Core
                     }
                     foreach (var relation1ToN in entity.Relations1ToN.Where(p => p.Order == i))
                     {
-                        if (relation1ToN != null && !relation1ToN.EntityFrom.Skip)
+                        if (relation1ToN != null && !relation1ToN.TargetEntity.Skip)
                         {
                             foreach (var classGeneration in this.classGenerations)
                             {
@@ -182,7 +182,7 @@ namespace Contractor.Core
         {
             if (!relation.IsCreatedByPreProcessor)
             {
-                return ShouldGenerate(relation.EntityTo.Module.Options.Tags, classGeneration);
+                return ShouldGenerate(relation.SourceEntity.Module.Options.Tags, classGeneration);
             }
 
             IEnumerable<ClassGenerationTag> tagIntersection = new List<ClassGenerationTag>()
@@ -192,9 +192,9 @@ namespace Contractor.Core
                 ClassGenerationTag.BACKEND_PERSISTENCE_REPOSITORY,
             };
 
-            if (relation.EntityTo.Module.Options.Tags != null && relation.EntityTo.Module.Options.Tags.Count() > 0)
+            if (relation.SourceEntity.Module.Options.Tags != null && relation.SourceEntity.Module.Options.Tags.Count() > 0)
             {
-                tagIntersection = tagIntersection.Intersect(relation.EntityTo.Module.Options.Tags);
+                tagIntersection = tagIntersection.Intersect(relation.SourceEntity.Module.Options.Tags);
             }
 
             return ShouldGenerate(tagIntersection, classGeneration, true);

@@ -101,7 +101,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         private void HandleRelation(string dtoName, string dtoPostfix, PurposeDtoPathItem lastPathItem)
         {
             var isOneToOne = lastPathItem.Relation is Relation1To1;
-            var isFrom = lastPathItem.Relation.EntityFrom == lastPathItem.Entity;
+            var isFrom = lastPathItem.Relation.TargetEntity == lastPathItem.Entity;
 
             if (isFrom)
             {
@@ -157,7 +157,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                 viaSuffix = "Via" + FindViaPath(purposeDto, pathItem, false);
             }
 
-            var otherEntityName = (pathItem.Relation.EntityFrom == pathItem.Entity ? pathItem.Relation.EntityTo : pathItem.Relation.EntityFrom).Name;
+            var otherEntityName = (pathItem.Relation.TargetEntity == pathItem.Entity ? pathItem.Relation.SourceEntity : pathItem.Relation.TargetEntity).Name;
             return $"{otherEntityName}DtoFor{purposeDto.Purpose}{viaSuffix}";
         }
 

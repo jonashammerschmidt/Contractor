@@ -36,14 +36,14 @@ public class EntityBuilder
     public EntityBuilder AddRelation1To1(Relation1To1 relation)
     {
         _entity.Relations1To1.Add(relation);
-        relation.EntityTo = this._entity;
+        relation.SourceEntity = this._entity;
         return this;
     }
 
     public EntityBuilder AddRelation1ToN(Relation1ToN relation)
     {
         _entity.Relations1ToN.Add(relation);
-        relation.EntityTo = this._entity;
+        relation.SourceEntity = this._entity;
         return this;
     }
 

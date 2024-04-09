@@ -54,7 +54,18 @@ namespace Contractor.Core.MetaModell
             throw new KeyNotFoundException(entityName);
         }
         
-        public Relation FindRelation(Entity searchedEntity, string searchedPropertyName)
+        public Relation FindRelation(Entity searchedEntity, string propertyNameInSearchedEntity)
+        {
+            var relation = FindRelationOrDefault(searchedEntity, propertyNameInSearchedEntity);
+            if (relation is null)
+            {
+                throw new KeyNotFoundException(searchedEntity.Name + "." + propertyNameInSearchedEntity);
+            }
+
+            return relation;
+        }
+
+        public Relation FindRelationOrDefault(Entity searchedEntity, string propertyNameInSearchedEntity)
         {
             Relation relation = null;
             foreach (var module in Modules)
@@ -62,8 +73,8 @@ namespace Contractor.Core.MetaModell
                 foreach (var entity in module.Entities)
                 {
                     relation = 
-                        FindSimpleRelation(searchedEntity, searchedPropertyName, entity) ??
-                        FindScopeRelation(searchedEntity, searchedPropertyName, entity);
+                        FindSimpleRelation(searchedEntity, propertyNameInSearchedEntity, entity) ??
+                        FindScopeRelation(searchedEntity, propertyNameInSearchedEntity, entity);
                     
                     if (relation != null)
                     {
@@ -72,33 +83,27 @@ namespace Contractor.Core.MetaModell
                 }
             }
             
-            relation = FindScopeUnscopedRelation(searchedEntity, searchedPropertyName);
-            if (relation != null)
-            {
-                return relation;
-            }
-
-            throw new KeyNotFoundException(searchedEntity.Name + "." + searchedPropertyName);
+            return FindScopeUnscopedRelation(searchedEntity, propertyNameInSearchedEntity);
         }
 
-        private Relation FindSimpleRelation(Entity searchedEntity, string searchedPropertyName, Entity entity)
+        private Relation FindSimpleRelation(Entity entity, string propertyName, Entity otherEntity)
         {
-            var relations1To1From = entity.Relations1To1.SingleOrDefault(relation => 
-                relation.EntityFrom.Name == searchedEntity.Name
-                && (relation.PropertyNameTo ?? relation.EntityTo.Name).ToLower() == searchedPropertyName.ToLower());
-            var relations1To1To = entity.Relations1To1.SingleOrDefault(relation => 
-                relation.EntityTo.Name == searchedEntity.Name
-                && (relation.PropertyNameFrom ?? relation.EntityFrom.Name).ToLower() == searchedPropertyName.ToLower());
-            var relations1ToNFrom = entity.Relations1ToN.SingleOrDefault(relation => 
-                relation.EntityFrom.Name == searchedEntity.Name
-                && (relation.PropertyNameTo ?? relation.EntityTo.NamePlural).ToLower() == searchedPropertyName.ToLower());
-            var relations1ToNTo = entity.Relations1ToN.SingleOrDefault(relation => 
-                relation.EntityTo.Name == searchedEntity.Name
-                && (relation.PropertyNameFrom ?? relation.EntityFrom.Name).ToLower() == searchedPropertyName.ToLower());
-            var foundRelation = (relations1To1From as Relation)
-                                ?? (relations1To1To as Relation)
-                                ?? (relations1ToNFrom as Relation)
-                                ?? (relations1ToNTo as Relation);
+            var relations1To1TargetSide = otherEntity.Relations1To1.SingleOrDefault(relation => 
+                relation.TargetEntity.Name == entity.Name
+                && (relation.PropertyNameInTarget ?? relation.SourceEntity.Name).ToLower() == propertyName.ToLower());
+            var relations1To1SourceSide = otherEntity.Relations1To1.SingleOrDefault(relation => 
+                relation.SourceEntity.Name == entity.Name
+                && (relation.PropertyNameInSource ?? relation.TargetEntity.Name).ToLower() == propertyName.ToLower());
+            var relations1ToNTargetSide = otherEntity.Relations1ToN.SingleOrDefault(relation => 
+                relation.TargetEntity.Name == entity.Name
+                && (relation.PropertyNameInTarget ?? relation.SourceEntity.NamePlural).ToLower() == propertyName.ToLower());
+            var relations1ToNSourceSide = otherEntity.Relations1ToN.SingleOrDefault(relation => 
+                relation.SourceEntity.Name == entity.Name
+                && (relation.PropertyNameInSource ?? relation.TargetEntity.Name).ToLower() == propertyName.ToLower());
+            var foundRelation = (relations1To1TargetSide as Relation)
+                                ?? (relations1To1SourceSide as Relation)
+                                ?? (relations1ToNTargetSide as Relation)
+                                ?? (relations1ToNSourceSide as Relation);
             return foundRelation;
         }
 
@@ -131,22 +136,22 @@ namespace Contractor.Core.MetaModell
         {
             foreach (var relation1To1 in searchedEntity.Relations1To1)
             {
-                if ((relation1To1.EntityFrom.HasScope && !relation1To1.EntityTo.HasScope) || relation1To1.EntityTo.HasOtherScope(relation1To1.EntityFrom))
+                if ((relation1To1.TargetEntity.HasScope && !relation1To1.SourceEntity.HasScope) || relation1To1.SourceEntity.HasOtherScope(relation1To1.TargetEntity))
                 {
                     Relation1To1 scopeRelation1To1 = new Relation1To1()
                     {
-                        EntityFrom = relation1To1.EntityFrom.ScopeEntity,
-                        EntityNameFrom = relation1To1.EntityFrom.ScopeEntity.Name,
-                        PropertyNameFrom = (relation1To1.PropertyNameFrom ?? relation1To1.EntityFrom.Name) + relation1To1.EntityFrom.ScopeEntity.Name,
-                        EntityTo = relation1To1.EntityTo,
-                        PropertyNameTo = (relation1To1.PropertyNameTo ?? relation1To1.EntityTo.Name) + relation1To1.EntityFrom.Name,
+                        TargetEntity = relation1To1.TargetEntity.ScopeEntity,
+                        TargetEntityName = relation1To1.TargetEntity.ScopeEntity.Name,
+                        PropertyNameInSource = (relation1To1.PropertyNameInSource ?? relation1To1.TargetEntity.Name) + relation1To1.TargetEntity.ScopeEntity.Name,
+                        SourceEntity = relation1To1.SourceEntity,
+                        PropertyNameInTarget = (relation1To1.PropertyNameInTarget ?? relation1To1.SourceEntity.Name) + relation1To1.TargetEntity.Name,
                         IsOptional = relation1To1.IsOptional,
                         OnDelete = "NoAction",
                         Order = relation1To1.Order,
                         IsCreatedByPreProcessor = true,
                         RelationBeforePreProcessor = relation1To1,
                     };
-                    if (scopeRelation1To1.PropertyNameTo == searchedPropertyName)
+                    if (scopeRelation1To1.PropertyNameInTarget == searchedPropertyName)
                     {
                         return scopeRelation1To1;
                     }
@@ -155,15 +160,15 @@ namespace Contractor.Core.MetaModell
 
             foreach (var relation1ToN in searchedEntity.Relations1ToN)
             {
-                if ((relation1ToN.EntityFrom.HasScope && !relation1ToN.EntityTo.HasScope) || relation1ToN.EntityTo.HasOtherScope(relation1ToN.EntityFrom))
+                if ((relation1ToN.TargetEntity.HasScope && !relation1ToN.SourceEntity.HasScope) || relation1ToN.SourceEntity.HasOtherScope(relation1ToN.TargetEntity))
                 {
                     Relation1ToN scopeRelation1ToN = new Relation1ToN()
                     {
-                        EntityFrom = relation1ToN.EntityFrom.ScopeEntity,
-                        EntityNameFrom = relation1ToN.EntityFrom.ScopeEntity.Name,
-                        PropertyNameFrom = (relation1ToN.PropertyNameFrom ?? relation1ToN.EntityFrom.Name) + relation1ToN.EntityFrom.ScopeEntity.Name,
-                        EntityTo = relation1ToN.EntityTo,
-                        PropertyNameTo = (relation1ToN.PropertyNameTo ?? relation1ToN.EntityTo.Name) + relation1ToN.EntityFrom.Name,
+                        TargetEntity = relation1ToN.TargetEntity.ScopeEntity,
+                        TargetEntityName = relation1ToN.TargetEntity.ScopeEntity.Name,
+                        PropertyNameInSource = (relation1ToN.PropertyNameInSource ?? relation1ToN.TargetEntity.Name) + relation1ToN.TargetEntity.ScopeEntity.Name,
+                        SourceEntity = relation1ToN.SourceEntity,
+                        PropertyNameInTarget = (relation1ToN.PropertyNameInTarget ?? relation1ToN.SourceEntity.Name) + relation1ToN.TargetEntity.Name,
                         IsOptional = relation1ToN.IsOptional,
                         OnDelete = "NoAction",
                         Order = relation1ToN.Order,
@@ -171,7 +176,7 @@ namespace Contractor.Core.MetaModell
                         RelationBeforePreProcessor = relation1ToN,
                     };
 
-                    if (scopeRelation1ToN.PropertyNameFrom == searchedPropertyName)
+                    if (scopeRelation1ToN.PropertyNameInSource == searchedPropertyName)
                     {
                         return scopeRelation1ToN;
                     }
