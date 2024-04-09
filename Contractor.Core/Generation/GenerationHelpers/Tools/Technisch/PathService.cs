@@ -36,7 +36,7 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForBackend(Relation relation, params string[] paths)
         {
-            return GetAbsolutePathForBackend(relation.EntityTo, paths);
+            return GetAbsolutePathForBackend(relation.SourceEntity, paths);
         }
 
         // Backend.Generated
@@ -69,7 +69,7 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForBackendGenerated(Relation relation, params string[] paths)
         {
-            return GetAbsolutePathForBackendGenerated(relation.EntityTo, paths);
+            return GetAbsolutePathForBackendGenerated(relation.SourceEntity, paths);
         }
 
         // Database
@@ -102,7 +102,7 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForDatabase(Relation relation, params string[] paths)
         {
-            return GetAbsolutePathForDatabase(relation.EntityTo, paths);
+            return GetAbsolutePathForDatabase(relation.SourceEntity, paths);
         }
 
         // Frontend
@@ -135,7 +135,7 @@ namespace Contractor.Core.Tools
 
         public string GetAbsolutePathForFrontend(Relation relation, params string[] paths)
         {
-            return GetAbsolutePathForFrontend(relation.EntityTo, paths);
+            return GetAbsolutePathForFrontend(relation.SourceEntity, paths);
         }
     }
 }

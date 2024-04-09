@@ -35,7 +35,7 @@ namespace Contractor.Core.MetaModell
                 Name = name,
                 Order = int.MaxValue,
                 Type = prefix + entityTo.Name + postfix,
-                RelationSideType = RelationSideType.From,
+                RelationSideType = RelationSideType.Target,
                 OtherEntity = entityTo,
                 OtherName = otherName,
                 IsCreatedByPreProcessor = false,
@@ -57,7 +57,7 @@ namespace Contractor.Core.MetaModell
                 Name = name,
                 Order = int.MaxValue,
                 Type = prefix + entityFrom.Name + postfix,
-                RelationSideType = RelationSideType.To,
+                RelationSideType = RelationSideType.Source,
                 OtherEntity = entityFrom,
                 OtherName = otherName,
                 IsCreatedByPreProcessor = false,
@@ -68,20 +68,20 @@ namespace Contractor.Core.MetaModell
         public static RelationSide FromObjectRelationEndFrom(Relation relation, string prefix, string postfix)
         {
             var is1ToN = relation.GetType() == typeof(Relation1ToN);
-            string name = relation.PropertyNameTo ?? (is1ToN ? relation.EntityTo.NamePlural : relation.EntityTo.Name);
-            string otherName = relation.PropertyNameFrom ?? relation.EntityFrom.Name;
+            string name = relation.PropertyNameInTarget ?? (is1ToN ? relation.SourceEntity.NamePlural : relation.SourceEntity.Name);
+            string otherName = relation.PropertyNameInSource ?? relation.TargetEntity.Name;
 
             return new RelationSide()
             {
-                Entity = relation.EntityFrom,
+                Entity = relation.TargetEntity,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
                 OnDelete = relation.OnDelete,
                 Name = name,
                 Order = int.MaxValue,
-                Type = prefix + relation.EntityTo.Name + postfix,
-                RelationSideType = RelationSideType.From,
-                OtherEntity = relation.EntityTo,
+                Type = prefix + relation.SourceEntity.Name + postfix,
+                RelationSideType = RelationSideType.Target,
+                OtherEntity = relation.SourceEntity,
                 OtherName = otherName,
                 IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
                 RelationBeforePreProcessor = relation.RelationBeforePreProcessor
@@ -90,22 +90,22 @@ namespace Contractor.Core.MetaModell
 
         public static RelationSide FromGuidRelationEndTo(Relation relation)
         {
-            string name = relation.PropertyNameFrom ?? relation.EntityFrom.Name;
-            string otherName = relation.PropertyNameTo ?? relation.EntityTo.Name;
+            string name = relation.PropertyNameInSource ?? relation.TargetEntity.Name;
+            string otherName = relation.PropertyNameInTarget ?? relation.SourceEntity.Name;
             name = name + "Id";
             otherName = otherName + "Id";
 
             return new RelationSide()
             {
-                Entity = relation.EntityTo,
+                Entity = relation.SourceEntity,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
                 OnDelete = relation.OnDelete,
                 Name = name,
                 Order = int.MaxValue,
                 Type = "Guid",
-                RelationSideType = RelationSideType.To,
-                OtherEntity = relation.EntityFrom,
+                RelationSideType = RelationSideType.Source,
+                OtherEntity = relation.TargetEntity,
                 OtherName = otherName,
                 IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
                 RelationBeforePreProcessor = relation.RelationBeforePreProcessor
@@ -115,20 +115,20 @@ namespace Contractor.Core.MetaModell
         public static RelationSide FromObjectRelationEndTo(Relation relation, string prefix, string postfix)
         {
             var is1ToN = relation.GetType() == typeof(Relation1ToN);
-            string name = relation.PropertyNameFrom ?? relation.EntityFrom.Name;
-            string otherName = relation.PropertyNameTo ?? (is1ToN ? relation.EntityTo.NamePlural : relation.EntityTo.Name);
+            string name = relation.PropertyNameInSource ?? relation.TargetEntity.Name;
+            string otherName = relation.PropertyNameInTarget ?? (is1ToN ? relation.SourceEntity.NamePlural : relation.SourceEntity.Name);
 
             return new RelationSide()
             {
-                Entity = relation.EntityTo,
+                Entity = relation.SourceEntity,
                 IsDisplayProperty = false,
                 IsOptional = relation.IsOptional,
                 OnDelete = relation.OnDelete,
                 Name = name,
                 Order = int.MaxValue,
-                Type = prefix + relation.EntityFrom.Name + postfix,
-                RelationSideType = RelationSideType.To,
-                OtherEntity = relation.EntityFrom,
+                Type = prefix + relation.TargetEntity.Name + postfix,
+                RelationSideType = RelationSideType.Source,
+                OtherEntity = relation.TargetEntity,
                 OtherName = otherName,
                 IsCreatedByPreProcessor = relation.IsCreatedByPreProcessor,
                 RelationBeforePreProcessor = relation.RelationBeforePreProcessor
