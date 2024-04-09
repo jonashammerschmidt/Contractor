@@ -13,15 +13,18 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ClassGeneration, EntityDtoGeneration>();
+            serviceCollection.AddSingleton<IInterfaceGeneration, EntityDtoGeneration>();
             serviceCollection.AddSingleton<EntityDtoMethodsAddition>();
 
             serviceCollection.AddSingleton<ClassGeneration, EntityDtoDefaultUpdateGeneration>();
 
             serviceCollection.AddSingleton<ClassGeneration, EntityDtoExpandedGeneration>();
+            serviceCollection.AddSingleton<IInterfaceGeneration, EntityDtoExpandedGeneration>();
             serviceCollection.AddSingleton<EntityDtoExpandedToMethodsAddition>();
             serviceCollection.AddSingleton<EntityDtoExpandedFromOneToOneMethodsAddition>();
 
             serviceCollection.AddSingleton<ClassGeneration, EntityDtoDataGeneration>();
+            serviceCollection.AddSingleton<IInterfaceGeneration, EntityDtoDataGeneration>();
             serviceCollection.AddSingleton<EntityDtoDataMethodsAddition>();
             
             serviceCollection.AddSingleton<EntityDtoForPurposeGeneration>();

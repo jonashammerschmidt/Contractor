@@ -1,6 +1,7 @@
 ﻿using Contractor.Core.BaseClasses;
 using Contractor.Core.Generation.Backend.Api;
 using Contractor.Core.Generation.Backend.Generated.DTOs;
+using Contractor.Core.Generation.Backend.Generated.Interfaces;
 using Contractor.Core.Generation.Backend.Generated.Persistence;
 using Contractor.Core.Generation.Backend.Logic;
 using Contractor.Core.Generation.Backend.Misc;
@@ -26,6 +27,7 @@ namespace Contractor.Core
             PersistenceProjectGeneration.ConfigureServices(serviceCollection);
 
             GeneratedDTOsProjectGeneration.ConfigureServices(serviceCollection);
+            GeneratedInterfacesProjectGeneration.ConfigureServices(serviceCollection);
             GeneratedPersistenceProjectGeneration.ConfigureServices(serviceCollection);
 
             PersistenceDbContextProjectGeneration.ConfigureServices(serviceCollection);

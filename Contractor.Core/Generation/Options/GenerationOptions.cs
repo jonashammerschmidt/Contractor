@@ -113,9 +113,7 @@ namespace Contractor.Core.MetaModell
             {
                 if (otherEntity.ScopeEntity.Name.ToLower() == searchedPropertyName.ToLower())
                 {
-                    {
-                        return new Relation1ToN(otherEntity.ScopeEntity, otherEntity);
-                    }
+                    return new Relation1ToN(otherEntity.ScopeEntity, otherEntity);
                 }
             }
 

@@ -6,7 +6,7 @@ using System.IO;
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.BACKEND, ClassGenerationTag.BACKEND_GENERATED, ClassGenerationTag.BACKEND_GENERATED_DTOS })]
-    public class EntityDtoExpandedGeneration : ClassGeneration
+    public class EntityDtoExpandedGeneration : ClassGeneration, IInterfaceGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoExpandedTemplate.txt");
@@ -18,19 +18,22 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         private readonly DtoRelationAddition relationAddition;
         private readonly EntityDtoExpandedToMethodsAddition entityDtoExpandedToMethodsAddition;
         private readonly EntityDtoExpandedFromOneToOneMethodsAddition entityDtoExpandedFromOneToOneMethodsAddition;
+        private readonly ClassInterfaceExtender classInterfaceExtender;
 
         public EntityDtoExpandedGeneration(
             EntityCoreAddition entityCoreAddition,
             DtoPropertyAddition propertyAddition,
             DtoRelationAddition relationAddition,
             EntityDtoExpandedToMethodsAddition entityDtoExpandedToMethodsAddition,
-            EntityDtoExpandedFromOneToOneMethodsAddition entityDtoExpandedFromOneToOneMethodsAddition)
+            EntityDtoExpandedFromOneToOneMethodsAddition entityDtoExpandedFromOneToOneMethodsAddition,
+            ClassInterfaceExtender classInterfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.propertyAddition = propertyAddition;
             this.relationAddition = relationAddition;
             this.entityDtoExpandedToMethodsAddition = entityDtoExpandedToMethodsAddition;
             this.entityDtoExpandedFromOneToOneMethodsAddition = entityDtoExpandedFromOneToOneMethodsAddition;
+            this.classInterfaceExtender = classInterfaceExtender;
         }
 
         protected override void AddModuleActions(Module module)
@@ -42,13 +45,14 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.entityCoreAddition.AddEntityToBackendGenerated(entity, GeneratedDTOsProjectGeneration.DomainFolder, TemplatePath, FileName);
 
             if (entity.HasScope)
-            {      
+            {
                 RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(entity.ScopeEntity, entity, "", "Dto");
 
                 this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName,
                     $"{relationSideTo.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
-                this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
+                this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder,
+                    FileName);
             }
         }
 
@@ -67,7 +71,8 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
-            this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
+            this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder,
+                FileName);
         }
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
@@ -77,7 +82,8 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideFrom, GeneratedDTOsProjectGeneration.DomainFolder, FileName,
                 $"{relationSideFrom.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
 
-            this.entityDtoExpandedFromOneToOneMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideFrom, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
+            this.entityDtoExpandedFromOneToOneMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideFrom,
+                GeneratedDTOsProjectGeneration.DomainFolder, FileName);
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
@@ -87,12 +93,23 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName,
                 $"{relationSideTo.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideTo.OtherEntity.Module.Name}.{relationSideTo.OtherEntity.NamePlural}");
 
-            this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
+            this.entityDtoExpandedToMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideTo, GeneratedDTOsProjectGeneration.DomainFolder,
+                FileName);
         }
 
-        protected void AddInterface(Interface interfaceItem)
+        public void AddInterface(GenerationOptions options, Interface interfaceItem)
         {
-            
+            foreach (var module in options.Modules)
+            {
+                foreach (var entity in module.Entities)
+                {
+                    var entityInterfaceCompatibility = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(entity, interfaceItem);
+                    if (entityInterfaceCompatibility == EntityInterfaceCompatibility.DtoExpanded)
+                    {
+                        this.classInterfaceExtender.AddInterfaceToClass(entity, interfaceItem.Name, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
+                    }
+                }
+            }
         }
     }
 }
