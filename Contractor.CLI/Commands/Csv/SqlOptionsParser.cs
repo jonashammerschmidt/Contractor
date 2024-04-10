@@ -9,13 +9,13 @@ namespace Contractor.CLI.Commands.Csv
         {
             SqlOptions sqlOptions = new SqlOptions()
             {
-                CommandTimeout = 99999, 
+                CommandTimeout = 99999,
                 ConnectionTimeout = 10,
             };
 
             var username = Environment.GetEnvironmentVariable("localdb_user");
             var password = Environment.GetEnvironmentVariable("localdb_password");
-        
+
             string loginType = (username != null && password != null)
                 ? "sql"
                 : ArgumentParser.ExtractArgument(args, "-t", "--login-type");
@@ -23,7 +23,7 @@ namespace Contractor.CLI.Commands.Csv
             {
                 Console.WriteLine("Der Login Type [-l, --login-type] ist ungültig.");
                 Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
-                return null;
+                Environment.Exit(1);
             }
 
             if (loginType == "integrated")
@@ -43,15 +43,15 @@ namespace Contractor.CLI.Commands.Csv
             {
                 Console.WriteLine("Die Server-Adresse (bzw. Data Source) [-s, --server-address] wurde nicht angegeben.");
                 Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
-                return null;
+                Environment.Exit(1);
             }
-        
+
             sqlOptions.DatabaseName = ArgumentParser.ExtractArgument(args, "-d", "--database-name");
             if (sqlOptions.DatabaseName == null)
             {
                 Console.WriteLine("Der Datenbankname [-d, --database-name] wurde nicht angegeben.");
                 Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
-                return null;
+                Environment.Exit(1);
             }
 
             if (loginType == "sql")
@@ -61,15 +61,15 @@ namespace Contractor.CLI.Commands.Csv
                 {
                     Console.WriteLine("Der Nutzername [-u, --user] wurde nicht angegeben.");
                     Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
-                    return null;
+                    Environment.Exit(1);
                 }
-        
+
                 sqlOptions.Password = password ?? ArgumentParser.ExtractArgument(args, "-p", "--password");
                 if (sqlOptions.Password == null)
                 {
                     Console.WriteLine("Das Passwort [-p, --password] wurde nicht angegeben.");
                     Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
-                    return null;
+                    Environment.Exit(1);
                 }
             }
 

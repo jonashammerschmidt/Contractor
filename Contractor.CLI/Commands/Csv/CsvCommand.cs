@@ -11,13 +11,13 @@ public static class CsvCommand
         {
             Console.WriteLine("Es wurde kein korrekter Csv-Job ('insert', 'export') angegeben.");
             Console.WriteLine("Benutze 'contractor help' um die Hilfe anzuzeigen.");
-            return;
+            Environment.Exit(1);
         }
 
         SqlOptions sqlOptions = SqlOptionsParser.ParseSqlOptions(args);
         if (sqlOptions == null)
         {
-            return;
+            Environment.Exit(1);
         }
         
         if (args[1] == "insert")
