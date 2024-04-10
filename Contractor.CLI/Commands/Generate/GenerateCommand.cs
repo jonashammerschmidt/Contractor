@@ -92,6 +92,7 @@ public class GenerateCommand
                     (ContractorIncludeXml)contractorIncludeXmlSerializer.Deserialize(contractorIncludeXmlReader);
                 contractorIncludeXml.Modules ??= new();  
                 contractorIncludeXml.PurposeDtos ??= new(); 
+                contractorIncludeXml.Interfaces ??= new(); 
 
                 ContractorXmlConverter.AddToContractorGenerationOptions(generationOptions, contractorIncludeXml);
             }
