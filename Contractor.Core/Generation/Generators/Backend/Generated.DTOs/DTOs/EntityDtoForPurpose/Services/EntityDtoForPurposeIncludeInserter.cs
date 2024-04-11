@@ -20,6 +20,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         {
             string filePath = pathService.GetAbsolutePathForBackendGenerated(purposeDto.Entity, paths);
             string fileData = fileSystemClient.ReadAllText(purposeDto.Entity, filePath);
+            fileData = UsingStatements.Add(fileData, "System.Linq");
             fileData = UsingStatements.Add(fileData, "Microsoft.EntityFrameworkCore");
 
             StringEditor stringEditor = new StringEditor(fileData);

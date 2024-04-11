@@ -51,7 +51,7 @@ namespace Contractor.CLI.Tests
                 Relations = new List<InterfaceRelationXml>()
                 {
                     new() { EntityNameFrom = "Order" },
-                }
+                },
             });
 
             // Act

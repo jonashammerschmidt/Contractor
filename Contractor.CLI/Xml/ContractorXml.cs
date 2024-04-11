@@ -277,6 +277,9 @@ namespace Contractor.CLI
     {
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
+
+        [XmlAttribute(AttributeName = "extends")]
+        public string Extends { get; set; }
         
         [XmlElement(ElementName = "Property")]
         public List<InterfacePropertyXml> Properties { get; set; } = new ();

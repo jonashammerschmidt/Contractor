@@ -14,7 +14,7 @@ namespace Contractor.Core.Generation.Backend.Generated.Interfaces
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IInterfaceGeneration, InterfaceGeneration>();
-            serviceCollection.AddSingleton<ClassInterfaceExtender>();
+            serviceCollection.AddSingleton<InterfaceExtender>();
         }
     }
 }

@@ -8,10 +8,10 @@
       <xs:sequence>
         <xs:element name="Interface" minOccurs="1" maxOccurs="unbounded">
           <xs:annotation>
-            <xs:documentation xml:lang="de">Definition eines zusätzlichen verschachtelten DTOs für einen bestimmten Zweck.</xs:documentation>
+            <xs:documentation xml:lang="de">Definition eines Interfaces, von dem alle kompatiblen generierten DTOs erben sollten.</xs:documentation>
           </xs:annotation>
           <xs:complexType>
-            <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
               <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
                   <xs:documentation xml:lang="de">Relation, die Teil des Interfaces sein soll</xs:documentation>
@@ -41,10 +41,15 @@
                   </xs:attribute>
                 </xs:complexType>
               </xs:element>
-            </xs:sequence>
+            </xs:choice>
             <xs:attribute name="name" type="xs:string" use="required">
               <xs:annotation>
                 <xs:documentation xml:lang="de">Name des Interfaces (exkl. des I-Prefixes)</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="extends" type="xs:string" use="optional">
+              <xs:annotation>
+                <xs:documentation xml:lang="de">Namen der Interfaces (exkl. des I-Prefixes), von denen geerbt werden soll</xs:documentation>
               </xs:annotation>
             </xs:attribute>
           </xs:complexType>
