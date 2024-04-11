@@ -16,6 +16,8 @@ namespace Contractor.Core.BaseClasses
     {
         public static EntityInterfaceCompatibility IsInterfaceCompatible(Entity entity, Interface interfaceItem)
         {
+            interfaceItem = interfaceItem.ToFlatInterface();
+            
             var compatibility = GetBaseCompatible(entity, interfaceItem);
             
             foreach (var interfaceProperty in interfaceItem.Properties)

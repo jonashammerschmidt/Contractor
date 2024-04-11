@@ -18,15 +18,18 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly DtoInterfacePropertyAddition dtoInterfacePropertyAddition;
         private readonly DtoRelationAddition dtoRelationAddition;
+        private readonly InterfaceExtender interfaceExtender;
 
         public InterfaceGeneration(
             EntityCoreAddition entityCoreAddition,
             DtoInterfacePropertyAddition dtoInterfacePropertyAddition,
-            DtoRelationAddition dtoRelationAddition)
+            DtoRelationAddition dtoRelationAddition,
+            InterfaceExtender interfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.dtoInterfacePropertyAddition = dtoInterfacePropertyAddition;
             this.dtoRelationAddition = dtoRelationAddition;
+            this.interfaceExtender = interfaceExtender;
         }
 
         public void AddInterface(GenerationOptions options, Interface interfaceItem)
@@ -45,6 +48,15 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                     GeneratedInterfacesProjectGeneration.DomainFolder,
                     TemplatePath,
                     FileName.Replace("InterfaceName", interfaceItem.Name));
+
+                foreach (var extendedInterface in interfaceItem.ExtendedInterfaces)
+                {
+                    this.interfaceExtender.AddInterfaceToInterface(
+                        compatibleEntity,
+                        extendedInterface.Name,
+                        GeneratedInterfacesProjectGeneration.DomainFolder,
+                        FileName.Replace("InterfaceName", interfaceItem.Name));
+                }
 
                 foreach (var interfaceProperty in interfaceItem.Properties)
                 {

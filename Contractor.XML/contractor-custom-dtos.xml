@@ -10,9 +10,12 @@
     </PurposeDto>
   </PurposeDtos>
   <Interfaces>
-    <Interface name="EmailUserMandantable">
-      <Relation entityNameFrom="Mandant" propertyNameFrom="Mandant" />
+    <Interface name="Mailable" extends="Mandantable">
       <Property name="Email" />
+    </Interface>
+    <Interface name="Mandantable">
+      <Property name="MandantId" />
+      <Relation entityNameFrom="Mandant" propertyNameFrom="Mandant" />
     </Interface>
   </Interfaces>
 </Contractor>

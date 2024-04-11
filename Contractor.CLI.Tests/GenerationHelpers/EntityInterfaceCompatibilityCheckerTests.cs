@@ -18,8 +18,10 @@ public class ModuleEntityInterfaceCompatibilityTests
         this.departmentEntity = new EntityBuilder()
             .WithName("Department", "Departments")
             .AddProperty(new PropertyBuilder().WithName("Name").Build())
-            .AddRelation1To1(new Relation1To1Builder().WithEntity("Employee").WithPropertyNameFrom("EmployeeOfTheMonth").WithPropertyNameTo("DepartmentOfTheMonth").Build())
-            .AddRelation1To1(new Relation1To1Builder().WithEntity("Employee").WithPropertyNameFrom("BaddestEmployeeOfTheMonth").WithPropertyNameTo("BaddestDepartmentOfTheMonth").Build())
+            .AddRelation1To1(new Relation1To1Builder().WithEntity("Employee").WithPropertyNameFrom("EmployeeOfTheMonth")
+                .WithPropertyNameTo("DepartmentOfTheMonth").Build())
+            .AddRelation1To1(new Relation1To1Builder().WithEntity("Employee").WithPropertyNameFrom("BaddestEmployeeOfTheMonth")
+                .WithPropertyNameTo("BaddestDepartmentOfTheMonth").Build())
             .Build();
 
         // Erstellen der Employee Entity
@@ -47,11 +49,11 @@ public class ModuleEntityInterfaceCompatibilityTests
         var generationOptionsBuilder = new GenerationOptionsBuilder()
             .AddModule(module)
             .Build();
-        
+
         module.AddLinks(generationOptionsBuilder);
         module.AddLinksForChildren();
     }
-    
+
     [TestMethod]
     public void TestModuleWithEntitiesPropertiesAndRelations_None_PropertyUnbekannt()
     {
@@ -141,6 +143,38 @@ public class ModuleEntityInterfaceCompatibilityTests
 
         // Assertion
         Assert.AreEqual(EntityInterfaceCompatibility.DtoData, result);
+    }
+
+    [TestMethod]
+    public void TestModuleWithEntitiesPropertiesAndRelations_DtoData_1To1_PerId_Inherited()
+    {
+        // Definition des Interfaces
+        var interfaceItem = new Interface()
+        {
+            Name = "Test",
+            Extends = "TestBase",
+            Properties = new()
+            {
+                new() { Name = "Name" },
+            },
+            ExtendedInterfaces = new()
+            {
+                new()
+                {
+                    Name = "TestBase",
+                    Relations = new()
+                    {
+                        new() { PropertyName = "Desk" },
+                    },
+                }
+            }
+        };
+
+        // Überprüfung der Kompatibilität
+        var result = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(employeeEntity, interfaceItem);
+
+        // Assertion
+        Assert.AreEqual(EntityInterfaceCompatibility.DtoExpanded, result);
     }
 
     [TestMethod]
@@ -299,7 +333,7 @@ public class ModuleEntityInterfaceCompatibilityTests
             },
             Relations = new List<InterfaceRelation>()
             {
-                new() { TargetEntityName = "Employee", PropertyName = "EmployeeOfTheMonth"},
+                new() { TargetEntityName = "Employee", PropertyName = "EmployeeOfTheMonth" },
             }
         };
 

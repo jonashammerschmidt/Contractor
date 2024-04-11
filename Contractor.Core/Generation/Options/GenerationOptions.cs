@@ -36,6 +36,11 @@ namespace Contractor.Core.MetaModell
             {
                 purposeDto.AddLinks(this);
             }
+
+            foreach (var interfaceItem in Interfaces)
+            {
+                interfaceItem.AddLinks(this);
+            }
         }
 
         public Entity FindEntity(string entityName)
