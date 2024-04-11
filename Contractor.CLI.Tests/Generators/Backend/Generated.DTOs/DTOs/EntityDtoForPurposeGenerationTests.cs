@@ -29,7 +29,7 @@ namespace Contractor.CLI.Tests.Generators.Backend.Generated.DTOs.DTOs
                 .AddPropertyPath(propertyPath2)
                 .Build();
 
-            var entityDtoForPurposeGeneration = new EntityDtoForPurposeGeneration(null, null, null, null, null, null, null);
+            var entityDtoForPurposeGeneration = new EntityDtoForPurposeGeneration(null, null, null, null, null, null, null, null);
 
             // Act
             var result = entityDtoForPurposeGeneration.DetermineEntitiesWithVia(purposeDto);

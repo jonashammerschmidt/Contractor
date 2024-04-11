@@ -1,4 +1,5 @@
 using System.IO;
+using Contractor.Core.BaseClasses;
 using Contractor.Core.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,11 +29,14 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             serviceCollection.AddSingleton<EntityDtoDataMethodsAddition>();
             
             serviceCollection.AddSingleton<EntityDtoForPurposeGeneration>();
+            serviceCollection.AddSingleton<IInterfaceGeneration, EntityDtoForPurposeGeneration>();
             serviceCollection.AddSingleton<EntityDtoForPurposeFromMethodsAddition>();
             serviceCollection.AddSingleton<EntityDtoForPurposeFromOneToOneMethodsAddition>();
             serviceCollection.AddSingleton<EntityDtoForPurposeToMethodsAddition>();
             serviceCollection.AddSingleton<EntityDtoForPurposeClassRenamer>();
             serviceCollection.AddSingleton<EntityDtoForPurposeIncludeInserter>();
+
+            serviceCollection.AddSingleton<PurposeDtoInterfaceCompatibilityChecker>();
         }
     }
 }

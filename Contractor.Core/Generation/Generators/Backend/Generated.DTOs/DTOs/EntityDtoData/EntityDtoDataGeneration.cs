@@ -18,18 +18,18 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly ApiDtoPropertyAddition apiPropertyAddition;
         private readonly EntityDtoDataMethodsAddition entityDtoDataMethodsAddition;
-        private readonly ClassInterfaceExtender classInterfaceExtender;
+        private readonly InterfaceExtender interfaceExtender;
 
         public EntityDtoDataGeneration(
             EntityCoreAddition entityCoreAddition,
             ApiDtoPropertyAddition apiPropertyAddition,
             EntityDtoDataMethodsAddition entityDtoDataMethodsAddition,
-            ClassInterfaceExtender classInterfaceExtender)
+            InterfaceExtender interfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.apiPropertyAddition = apiPropertyAddition;
             this.entityDtoDataMethodsAddition = entityDtoDataMethodsAddition;
-            this.classInterfaceExtender = classInterfaceExtender;
+            this.interfaceExtender = interfaceExtender;
         }
 
         protected override void AddModuleActions(Module module)
@@ -86,7 +86,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                     var entityInterfaceCompatibility = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(entity, interfaceItem);
                     if (entityInterfaceCompatibility == EntityInterfaceCompatibility.DtoData)
                     {
-                        this.classInterfaceExtender.AddInterfaceToClass(entity, interfaceItem.Name, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
+                        this.interfaceExtender.AddInterfaceToClass(entity, interfaceItem.Name, GeneratedDTOsProjectGeneration.DomainFolder, FileName);
                     }
                 }
             }

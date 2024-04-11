@@ -8,7 +8,7 @@ using Contractor.Core.Tools;
 
 namespace Contractor.Core.Generation.Backend.Generated.DTOs
 {
-    public class EntityDtoForPurposeGeneration
+    public class EntityDtoForPurposeGeneration : IInterfaceGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(GeneratedDTOsProjectGeneration.TemplateFolder, "EntityDtoForPurposeTemplate.txt");
@@ -20,6 +20,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
         private readonly EntityDtoForPurposeFromOneToOneMethodsAddition entityDtoForPurposeFromOneToOneMethodsAddition;
         private readonly EntityDtoForPurposeToMethodsAddition entityDtoForPurposeToMethodsAddition;
         private readonly EntityDtoForPurposeIncludeInserter entityDtoForPurposeIncludeInserter;
+        private readonly InterfaceExtender interfaceExtender;
 
         public EntityDtoForPurposeGeneration(
             EntityCoreAddition entityCoreAddition,
@@ -28,7 +29,8 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             EntityDtoForPurposeFromMethodsAddition entityDtoForPurposeFromMethodsAddition,
             EntityDtoForPurposeFromOneToOneMethodsAddition entityDtoForPurposeFromOneToOneMethodsAddition,
             EntityDtoForPurposeToMethodsAddition entityDtoForPurposeToMethodsAddition,
-            EntityDtoForPurposeIncludeInserter entityDtoForPurposeIncludeInserter)
+            EntityDtoForPurposeIncludeInserter entityDtoForPurposeIncludeInserter,
+            InterfaceExtender interfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.relationAddition = relationAddition;
@@ -37,6 +39,7 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             this.entityDtoForPurposeFromOneToOneMethodsAddition = entityDtoForPurposeFromOneToOneMethodsAddition;
             this.entityDtoForPurposeToMethodsAddition = entityDtoForPurposeToMethodsAddition;
             this.entityDtoForPurposeIncludeInserter = entityDtoForPurposeIncludeInserter;
+            this.interfaceExtender = interfaceExtender;
         }
 
         public void Generate(PurposeDto purposeDto)
@@ -191,6 +194,22 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             }
 
             throw new KeyNotFoundException($"Der Pfad zur angegebenen Entität '{targetPathItem.PropertyName}' konnte nicht gefunden werden.");
+        }
+
+        public void AddInterface(GenerationOptions options, Interface interfaceItem)
+        {
+            foreach (var purposeDto in options.PurposeDtos)
+            {
+                string dtoName = GetDtoName(purposeDto, purposeDto.Properties.First().PathItems.First(), false);
+                if (PurposeDtoInterfaceCompatibilityChecker.IsInterfaceCompatible(purposeDto, interfaceItem))
+                {
+                    this.interfaceExtender.AddInterfaceToClass(
+                        purposeDto.Entity,
+                        interfaceItem.Name,
+                        GeneratedDTOsProjectGeneration.DomainFolder,
+                        $"{dtoName}.cs");
+                }
+            }
         }
     }
 }

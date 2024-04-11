@@ -141,6 +141,7 @@ namespace Contractor.CLI
                 {
                     var dto = new Interface();
                     dto.Name = interfaceItem.Name;
+                    dto.Extends = interfaceItem.Extends;
                     dto.Properties = interfaceItem.Properties
                         .Select(property =>
                         {
