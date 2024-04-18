@@ -2,7 +2,6 @@ using Contract.Architecture.Backend.Common.Contract.Logic;
 using Contract.Architecture.Backend.Common.Contract.Persistence;
 using Contract.Architecture.Backend.Common.Logic;
 using GeneratedProjectName.Modules.Domain.Entities;
-using Microsoft.Extensions.Logging;
 using System;
 
 namespace ProjectName.Modules.Domain.Entities
@@ -12,17 +11,14 @@ namespace ProjectName.Modules.Domain.Entities
         private readonly IEntitiesCrudRepository entitiesCrudRepository;
 
         private readonly IGuidGenerator guidGenerator;
-        private readonly ILogger<EntitiesCrudLogic> logger;
 
         public EntitiesCrudLogic(
             IEntitiesCrudRepository entitiesCrudRepository,
-            IGuidGenerator guidGenerator,
-            ILogger<EntitiesCrudLogic> logger)
+            IGuidGenerator guidGenerator)
         {
             this.entitiesCrudRepository = entitiesCrudRepository;
 
             this.guidGenerator = guidGenerator;
-            this.logger = logger;
         }
 
         public Guid CreateEntity(EntityDtoData entityData)
@@ -31,39 +27,27 @@ namespace ProjectName.Modules.Domain.Entities
             EntityDto entityToCreate = EntityDto.FromEntityDtoData(newEntityId, entityData);
             this.entitiesCrudRepository.CreateEntity(entityToCreate);
 
-            this.logger.LogInformation("Entity ({id}) angelegt", newEntityId);
             return newEntityId;
         }
 
         public void DeleteEntity(Guid entityId)
         {
             this.entitiesCrudRepository.DeleteEntity(entityId);
-
-            this.logger.LogInformation("Entity ({id}) gelöscht", entityId);
         }
 
         public EntityDtoExpanded GetEntityDetail(Guid entityId)
         {
-            EntityDtoExpanded entityDtoExpanded = this.entitiesCrudRepository.GetEntityDetail(entityId);
-
-            this.logger.LogDebug("Details für Entity ({id}) wurde geladen", entityId);
-            return entityDtoExpanded;
+            return this.entitiesCrudRepository.GetEntityDetail(entityId);
         }
 
         public IDbPagedResult<EntityDtoExpanded> GetPagedEntities()
         {
-            IDbPagedResult<EntityDtoExpanded> entitiesPagedResult =
-                this.entitiesCrudRepository.GetPagedEntities();
-
-            this.logger.LogDebug("Entities wurden geladen");
-            return entitiesPagedResult;
+            return this.entitiesCrudRepository.GetPagedEntities();
         }
 
         public void UpdateEntity(EntityDtoDefaultUpdate entity)
         {
             this.entitiesCrudRepository.UpdateEntity(entity);
-
-            this.logger.LogInformation("Entity ({id}) aktualisiert", entity.Id);
         }
     }
 }
