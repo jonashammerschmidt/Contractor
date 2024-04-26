@@ -180,6 +180,9 @@ namespace Contractor.CLI
         [XmlAttribute(AttributeName = "property")]
         public string PropertyNames { get; set; }
 
+        [XmlAttribute(AttributeName = "includes")]
+        public string IncludeNames { get; set; }
+
         [XmlAttribute(AttributeName = "clustered")]
         public bool IsClustered { get; set; }
 

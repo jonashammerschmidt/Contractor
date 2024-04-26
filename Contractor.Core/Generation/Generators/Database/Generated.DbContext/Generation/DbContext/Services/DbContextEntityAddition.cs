@@ -77,6 +77,13 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
 
                 stringEditor.InsertNewLine();
                 stringEditor.InsertLine($"                entity.HasIndex(c => new {{ {indexProperties} }})");
+
+                if (index.IncludeNames.Any())
+                {
+                    string indexIncludeProperties = string.Join(", ", index.IncludeNames.Select(columnName => "c." + columnName));
+                    stringEditor.InsertLine($"                    .IncludeProperties(c => new {{ {indexIncludeProperties} }})");
+                } 
+                    
                 stringEditor.InsertLine($"                    .IsUnique({index.IsUnique.ToString().ToLower()})");
 
                 if (!string.IsNullOrWhiteSpace(index.Where))

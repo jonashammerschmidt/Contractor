@@ -99,6 +99,7 @@ namespace Contractor.CLI
                         Indices = entity.Indices.Select(index => new Contractor.Core.MetaModell.Index()
                         {
                             PropertyNames = index.PropertyNames,
+                            Includes = index.IncludeNames,
                             IsUnique = index.IsUnique,
                             IsClustered = index.IsClustered,
                             Where = index.Where,
