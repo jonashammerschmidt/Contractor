@@ -58,6 +58,12 @@ public class EntityXmlBuilder
         return this;
     }
 
+    public EntityXmlBuilder WithIndex(string propertyNames, string includeNames)
+    {
+        _entity.Indices.Add(new IndexXml { PropertyNames = propertyNames, IncludeNames = includeNames });
+        return this;
+    }
+
     public EntityXml Build() => _entity;
 }
 

@@ -65,6 +65,22 @@ namespace Contractor.CLI.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void ValidateIndices_WithNonexistentIncludeNameInIndex_ThrowsFormatException()
+        {
+            // Arrange
+            var contractorXml = new ContractorXmlBuilder()
+                .AddEntity(entity => entity
+                    .WithName("Entity1", "Entity1s")
+                    .WithProperty("String", "Property1")
+                    .WithIndex("Property1", "NonexistentProperty"))
+                .Build();
+
+            // Act & Assert
+            ContractorXmlValidator.Validate(contractorXml);
+        }
+
+        [TestMethod]
         public void ValidateUniqueRelations_WithUniqueRelations_DoesNotThrowException()
         {
             // Arrange
@@ -137,7 +153,7 @@ namespace Contractor.CLI.Tests
                     .WithRelation1ToN("Order", "Order", "OrderOrderDetails")
                     .WithRelation1ToN("Product", "Product", "ProductOrderDetails")
                     .WithProperty("Integer", "Quantity")
-                    .WithIndex("OrderId, ProductId, Quantity"))
+                    .WithIndex("OrderId, Quantity", "ProductId"))
                 .Build();
 
             // Act & Assert

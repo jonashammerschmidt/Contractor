@@ -105,6 +105,18 @@ public class ContractorXmlValidator
                             $"Entity '{entity.Name}': Index property '{propertyName}' does not exist. " + string.Join(',', propertyNames));
                     }   
                 }
+
+                if (!string.IsNullOrWhiteSpace(index.IncludeNames))
+                {
+                    foreach (var includeName in index.IncludeNames.Split(',').Select(p => p.Trim()))
+                    {
+                        if (!propertyNames.Contains(includeName))
+                        {
+                            throw new FormatException(
+                                $"Entity '{entity.Name}': Index include property '{includeName}' does not exist. " + string.Join(',', propertyNames));
+                        }   
+                    }
+                }
             }
         }
     }
