@@ -139,6 +139,11 @@
                             <xs:documentation xml:lang="de">Eine oder mehrere Properties (komma-separiert), die Teil des Index sein sollen. Hier können auch Scope-, bzw Relation-Properties verwendet werden. Hierbei den Suffix "Id" nicht vergessen. Beispiel: Name,MandantId</xs:documentation>
                           </xs:annotation>
                         </xs:attribute>
+                        <xs:attribute name="includes" type="xs:string" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Angabe zusätzlicher Spalten, die in den Index eingefügt werden sollen, um Abfragen zu optimieren.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
                         <xs:attribute name="clustered" type="xs:boolean" use="optional">
                           <xs:annotation>
                             <xs:documentation xml:lang="de">Optional. Definition, ob der Index clustered sein soll. Es kann nur einen clustered Index pro Entität geben. Default: false.</xs:documentation>
