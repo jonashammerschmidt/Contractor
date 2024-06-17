@@ -3,28 +3,26 @@ using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 using Contractor.Core.Generation.Backend.Generated.DTOs;
+using Contractor.Core.Generation.Frontend.Interfaces;
 
-namespace Contractor.Core.Generation.Frontend.Model
+namespace Contractor.Core.Generation.Frontend.DTOs
 {
-    [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
-    public class IEntityDtoDataGeneration : ClassGeneration, IInterfaceGeneration
+    [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_DTOS })]
+    public class IEntityDtoGeneration : ClassGeneration, IInterfaceGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto-data.template.txt");
+            Path.Combine(DTOsProjectGeneration.TemplateFolder, "i-entity-kebab-dto.template.txt");
 
-        private static readonly string FileName = "i-entity-kebab-dto-data.ts";
+        private static readonly string FileName = "i-entity-kebab-dto.ts";
 
         private readonly EntityCoreAddition entityCoreAddition;
-        private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendInterfaceExtender interfaceExtender;
 
-        public IEntityDtoDataGeneration(
+        public IEntityDtoGeneration(
             EntityCoreAddition entityCoreAddition,
-            FrontendDtoPropertyAddition frontendDtoPropertyAddition,
             FrontendInterfaceExtender interfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
-            this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.interfaceExtender = interfaceExtender;
         }
 
@@ -34,18 +32,16 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainDtoFolder, TemplatePath, FileName);
+            string templatePath = TemplateFileName.GetFileNameForEntityAddition(entity, TemplatePath);
+            this.entityCoreAddition.AddEntityToFrontend(entity, DTOsProjectGeneration.DomainFolder, templatePath, FileName);
         }
 
         protected override void AddProperty(Property property)
         {
-            this.frontendDtoPropertyAddition.AddPropertyToFrontendFile(property, ModelProjectGeneration.DomainDtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideFrom(Relation1ToN relation)
         {
-            RelationSide relationSideTo = RelationSide.FromGuidRelationEndTo(relation);
-            this.frontendDtoPropertyAddition.AddPropertyToFrontendFile(relationSideTo, ModelProjectGeneration.DomainDtoFolder, FileName);
         }
 
         protected override void Add1ToNRelationSideTo(Relation1ToN relation)
@@ -54,7 +50,6 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddOneToOneRelationSideFrom(Relation1To1 relation)
         {
-            this.Add1ToNRelationSideFrom(new Relation1ToN(relation));
         }
 
         protected override void AddOneToOneRelationSideTo(Relation1To1 relation)
@@ -68,12 +63,12 @@ namespace Contractor.Core.Generation.Frontend.Model
                 foreach (var entity in module.Entities)
                 {
                     var entityInterfaceCompatibility = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(entity, interfaceItem);
-                    if (entityInterfaceCompatibility == EntityInterfaceCompatibility.DtoData)
+                    if (entityInterfaceCompatibility == EntityInterfaceCompatibility.Dto)
                     {
                         this.interfaceExtender.AddInterface(
                             entity,
                             interfaceItem.Name,
-                            ModelProjectGeneration.DomainDtoFolder,
+                            DTOsProjectGeneration.DomainFolder,
                             FileName);
                     }
                 }

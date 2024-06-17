@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormController } from '@krz/material';
-import { ConfirmationDialogService } from 'src/app/components/ui/confirmation-dialog/confirmation-dialog.service';
-import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
-import { IEntityDtoExpanded } from 'src/app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
-import { AppEventService } from 'src/app/services/event/app-event.service';
+import { ConfirmationDialogService } from '@core-app/components/ui/confirmation-dialog/confirmation-dialog.service';
+import { EntitiesCrudService } from '@core-app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
+import { IEntityDtoExpanded } from '@generated-app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
+import { AppEventService } from '@core-app/services/event/app-event.service';
 
 export interface EntityDetailPageForm {
   id: string;

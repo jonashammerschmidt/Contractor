@@ -3,34 +3,29 @@ using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
 using Contractor.Core.Generation.Backend.Generated.DTOs;
+using Contractor.Core.Generation.Frontend.Interfaces;
 
-namespace Contractor.Core.Generation.Frontend.Model
+namespace Contractor.Core.Generation.Frontend.DTOs
 {
-    [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
+    [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_DTOS })]
     public class IEntityDtoExpandedGeneration : ClassGeneration, IInterfaceGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto-expanded.template.txt");
+            Path.Combine(DTOsProjectGeneration.TemplateFolder, "i-entity-kebab-dto-expanded.template.txt");
 
         private static readonly string FileName = "i-entity-kebab-dto-expanded.ts";
 
         private readonly EntityCoreAddition entityCoreAddition;
-        private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendDtoRelationAddition frontendDtoRelationAddition;
-        private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
         private readonly FrontendInterfaceExtender interfaceExtender;
 
         public IEntityDtoExpandedGeneration(
             EntityCoreAddition entityCoreAddition,
-            FrontendDtoPropertyAddition frontendDtoPropertyAddition,
             FrontendDtoRelationAddition frontendDtoRelationAddition,
-            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
             FrontendInterfaceExtender interfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
-            this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.frontendDtoRelationAddition = frontendDtoRelationAddition;
-            this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
             this.interfaceExtender = interfaceExtender;
         }
 
@@ -40,17 +35,17 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainDtoFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToFrontend(entity, DTOsProjectGeneration.DomainFolder, TemplatePath, FileName);
             
             if (entity.HasScope)
             {      
                 RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(entity.ScopeEntity, entity, "I", "Dto");
                 
-                string toImportStatementPath = $"src/app/model/{relationSideTo.OtherEntity.Module.NameKebab}" +
+                string toImportStatementPath = $"@generated-app/model/{relationSideTo.OtherEntity.Module.NameKebab}" +
                                                $"/{relationSideTo.OtherEntity.NamePluralKebab}" +
                                                $"/dtos/i-{relationSideTo.OtherEntity.NameKebab}-dto";
 
-                this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainDtoFolder, FileName,
+                this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, DTOsProjectGeneration.DomainFolder, FileName,
                     $"I{relationSideTo.OtherEntity.Name}Dto", toImportStatementPath);
             }
         }
@@ -67,11 +62,11 @@ namespace Contractor.Core.Generation.Frontend.Model
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "Dto");
 
-            string toImportStatementPath = $"src/app/model/{relation.TargetEntity.Module.NameKebab}" +
+            string toImportStatementPath = $"@generated-app/model/{relation.TargetEntity.Module.NameKebab}" +
                 $"/{relation.TargetEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.TargetEntity.NameKebab}-dto";
 
-            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainDtoFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, DTOsProjectGeneration.DomainFolder, FileName,
                 $"I{relation.TargetEntity.Name}Dto", toImportStatementPath);
         }
 
@@ -79,11 +74,11 @@ namespace Contractor.Core.Generation.Frontend.Model
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "Dto");
 
-            string fromImportStatementPath = $"src/app/model/{relation.SourceEntity.Module.NameKebab}" +
+            string fromImportStatementPath = $"@generated-app/model/{relation.SourceEntity.Module.NameKebab}" +
                 $"/{relation.SourceEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.SourceEntity.NameKebab}-dto";
 
-            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainDtoFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, DTOsProjectGeneration.DomainFolder, FileName,
                 $"I{relation.SourceEntity.Name}Dto", fromImportStatementPath);
         }
 
@@ -91,11 +86,11 @@ namespace Contractor.Core.Generation.Frontend.Model
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "Dto");
 
-            string toImportStatementPath = $"src/app/model/{relation.TargetEntity.Module.NameKebab}" +
+            string toImportStatementPath = $"@generated-app/model/{relation.TargetEntity.Module.NameKebab}" +
                 $"/{relation.TargetEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.TargetEntity.NameKebab}-dto";
 
-            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainDtoFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, DTOsProjectGeneration.DomainFolder, FileName,
                 $"I{relation.TargetEntity.Name}Dto", toImportStatementPath);
         }
 
@@ -111,7 +106,7 @@ namespace Contractor.Core.Generation.Frontend.Model
                         this.interfaceExtender.AddInterface(
                             entity,
                             interfaceItem.Name,
-                            ModelProjectGeneration.DomainDtoFolder,
+                            DTOsProjectGeneration.DomainFolder,
                             FileName);
                     }
                 }

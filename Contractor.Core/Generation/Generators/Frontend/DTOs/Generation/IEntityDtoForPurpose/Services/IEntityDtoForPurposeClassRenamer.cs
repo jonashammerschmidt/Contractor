@@ -1,8 +1,7 @@
-using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
-namespace Contractor.Core.Generation.Frontend.Generated.DTOs
+namespace Contractor.Core.Generation.Frontend.DTOs
 {
     public class IEntityDtoForPurposeClassRenamer
     {

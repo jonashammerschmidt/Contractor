@@ -3,12 +3,13 @@ using Contractor.Core.BaseClasses;
 using System.IO;
 using System.Linq;
 using Contractor.Core.Generation.Backend.Generated.DTOs;
+using Contractor.Core.Generation.Frontend.Interfaces;
 using Contractor.Core.Generation.Frontend.Model;
 using Contractor.Core.Helpers;
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 
-namespace Contractor.Core.Generation.Frontend.Generated.DTOs
+namespace Contractor.Core.Generation.Frontend.DTOs
 {
     public class IEntityDtoForPurposeGeneration : IInterfaceGeneration
     {

@@ -1,10 +1,10 @@
 ﻿import { Injectable } from '@angular/core';
-import { BackendCoreService } from 'src/app/services/backend/backend-core.service';
-import { IPagedResult } from 'src/app/services/backend/pagination/i-paged-result';
-import { IPaginationOptions, toPaginationParams } from 'src/app/services/backend/pagination/i-pagination-options';
-import { IEntityDto } from './dtos/i-entity-kebab-dto';
-import { IEntityDtoData } from './dtos/i-entity-kebab-dto-data';
-import { IEntityDtoExpanded } from './dtos/i-entity-kebab-dto-expanded';
+import { BackendCoreService } from '@core-app/services/backend/backend-core.service';
+import { IPagedResult } from '@core-app/services/backend/pagination/i-paged-result';
+import { IPaginationOptions, toPaginationParams } from '@core-app/services/backend/pagination/i-pagination-options';
+import { IEntityDto } from '@generated-app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto';
+import { IEntityDtoData } from '@generated-app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-data';
+import { IEntityDtoExpanded } from '@generated-app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
 
 @Injectable()
 export class EntitiesCrudService {

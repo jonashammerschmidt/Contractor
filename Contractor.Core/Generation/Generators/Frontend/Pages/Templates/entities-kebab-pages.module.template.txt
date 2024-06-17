@@ -15,16 +15,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { UiComponentsModule } from 'src/app/components/ui/ui-components.module';
-import { EntitiesModule } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab.module';
+import { UiComponentsModule } from '@core-app/components/ui/ui-components.module';
+import { EntitiesModule } from '@core-app/model/domain-kebab/entities-kebab/entities-kebab.module';
 import { EntityCreateDialog } from './dialogs/create/entity-kebab-create.dialog';
 import { EntityDetailPage } from './sub-pages/detail/entity-kebab-detail.page';
 import { EntitiesPagesRouting } from './entities-kebab-pages.routing';
 import { EntitiesPage } from './entities-kebab.page';
-import { SearchDropdownV2Module} from 'src/app/components/ui/search-dropdown-v2/search-dropdown-v2.module';
-import { TableFilterBarModule } from 'src/app/components/ui/table-filter-bar/table-filter-bar.module';
-import { FilePickerModule } from 'src/app/components/ui/file-picker/file-picker.module';
-import { FormLayoutModule } from 'src/app/components/ui/form-layout/form-layout.module';
+import { SearchDropdownV2Module} from '@core-app/components/ui/search-dropdown-v2/search-dropdown-v2.module';
+import { TableFilterBarModule } from '@core-app/components/ui/table-filter-bar/table-filter-bar.module';
+import { FilePickerModule } from '@core-app/components/ui/file-picker/file-picker.module';
+import { FormLayoutModule } from '@core-app/components/ui/form-layout/form-layout.module';
 
 @NgModule({
   declarations: [

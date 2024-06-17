@@ -3,7 +3,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormController } from '@krz/material';
-import { EntitiesCrudService } from 'src/app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
+import { EntitiesCrudService } from '@core-app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
 
 export interface EntityCreateDialogForm {
 }

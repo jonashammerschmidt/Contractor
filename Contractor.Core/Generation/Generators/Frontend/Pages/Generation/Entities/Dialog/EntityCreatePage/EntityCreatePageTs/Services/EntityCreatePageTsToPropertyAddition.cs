@@ -15,15 +15,15 @@ namespace Contractor.Core.Generation.Frontend.Pages
         protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
             fileData = ImportStatements.Add(fileData, "DropdownDataSource",
-                "src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
+                "@core-app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
 
             fileData = ImportStatements.Add(fileData, $"{relationSide.OtherEntity.NamePlural}CrudService",
-                $"src/app/model/{relationSide.OtherEntity.Module.NameKebab}" +
+                $"@core-app/model/{relationSide.OtherEntity.Module.NameKebab}" +
                 $"/{relationSide.OtherEntity.NamePluralKebab}" +
                 $"/{relationSide.OtherEntity.NamePluralKebab}-crud.service");
 
             fileData = ImportStatements.Add(fileData, $"I{relationSide.OtherEntity.Name}DtoExpanded",
-                $"src/app/model/{relationSide.OtherEntity.Module.NameKebab}" +
+                $"@generated-app/model/{relationSide.OtherEntity.Module.NameKebab}" +
                 $"/{relationSide.OtherEntity.NamePluralKebab}" +
                 $"/dtos/i-{StringConverter.PascalToKebabCase(relationSide.OtherEntity.Name)}-dto-expanded");
 
