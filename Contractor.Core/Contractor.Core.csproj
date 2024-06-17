@@ -18,8 +18,5 @@
     <None Update="Generation\**\*.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Generation\Generators\Backend\Generated.Interfaces\Templates\InterfaceTemplate.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>

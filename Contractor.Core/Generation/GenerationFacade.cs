@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Contractor.Core.Generation.Backend.Generated.DTOs;
 using Contractor.Core.Generation.Backend.Persistence;
+using Contractor.Core.Generation.Frontend.Generated.DTOs;
 
 namespace Contractor.Core
 {
@@ -19,6 +20,7 @@ namespace Contractor.Core
         private readonly List<IInterfaceGeneration> interfaceGenerations = new();
         
         private readonly EntityDtoForPurposeGeneration entityDtoForPurposeGeneration;
+        private readonly IEntityDtoForPurposeGeneration iEntityDtoForPurposeGeneration;
         private readonly EntitiesCrudRepositoryGeneration entitiesCrudRepositoryGeneration;
         private readonly IEntitiesCrudRepositoryGeneration iEntitiesCrudRepositoryGeneration;
 
@@ -35,6 +37,7 @@ namespace Contractor.Core
             this.interfaceGenerations = serviceProvider.GetServices<IInterfaceGeneration>().ToList();
 
             this.entityDtoForPurposeGeneration = serviceProvider.GetService<EntityDtoForPurposeGeneration>();
+            this.iEntityDtoForPurposeGeneration = serviceProvider.GetService<IEntityDtoForPurposeGeneration>();
             this.entitiesCrudRepositoryGeneration = serviceProvider.GetService<EntitiesCrudRepositoryGeneration>();
             this.iEntitiesCrudRepositoryGeneration = serviceProvider.GetService<IEntitiesCrudRepositoryGeneration>();
         }
@@ -138,6 +141,7 @@ namespace Contractor.Core
             foreach (var purposeDto in generationOptions.PurposeDtos)
             {
                 entityDtoForPurposeGeneration.Generate(purposeDto);
+                iEntityDtoForPurposeGeneration.Generate(purposeDto);
 
                 iEntitiesCrudRepositoryGeneration.AddPurposeDto(purposeDto);
                 entitiesCrudRepositoryGeneration.AddPurposeDto(purposeDto);
