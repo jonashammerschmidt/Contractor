@@ -17,12 +17,12 @@ namespace Contractor.Core.Generation.Frontend.Pages
             if (property.Type == PropertyType.Integer)
             {
                 fileData = ImportStatements.Add(fileData, "integerRegex",
-                    "src/app/helpers/regex.helper");
+                    "@core-app/helpers/regex.helper");
             }
             if (property.Type == PropertyType.Guid)
             {
                 fileData = ImportStatements.Add(fileData, "guidRegex",
-                    "src/app/helpers/regex.helper");
+                    "@core-app/helpers/regex.helper");
             }
 
             StringEditor stringEditor = new StringEditor(fileData);

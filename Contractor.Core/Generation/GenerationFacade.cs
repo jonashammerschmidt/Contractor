@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Contractor.Core.Generation.Backend.Generated.DTOs;
 using Contractor.Core.Generation.Backend.Persistence;
-using Contractor.Core.Generation.Frontend.Generated.DTOs;
+using Contractor.Core.Generation.Frontend.DTOs;
 
 namespace Contractor.Core
 {

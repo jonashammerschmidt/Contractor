@@ -20,7 +20,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
             }
 
             fileData = ImportStatements.Add(fileData, $"{relationSide.OtherEntity.NamePlural}Module",
-                $"src/app/model/{relationSide.OtherEntity.Module.NameKebab}" +
+                $"@core-app/model/{relationSide.OtherEntity.Module.NameKebab}" +
                 $"/{relationSide.OtherEntity.NamePluralKebab}" +
                 $"/{relationSide.OtherEntity.NamePluralKebab}.module");
 

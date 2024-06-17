@@ -9,6 +9,7 @@ using Contractor.Core.Generation.Backend.Persistence;
 using Contractor.Core.Generation.Database.Generated.DbContext;
 using Contractor.Core.Generation.Database.Persistence.InsertData.Dev;
 using Contractor.Core.Generation.Frontend.Interfaces;
+using Contractor.Core.Generation.Frontend.DTOs;
 using Contractor.Core.Generation.Frontend.Model;
 using Contractor.Core.Generation.Frontend.Pages;
 using Contractor.Core.Tools;
@@ -35,6 +36,7 @@ namespace Contractor.Core
             PersistenceInsertDataDevProjectGeneration.ConfigureServices(serviceCollection);
 
             FrontendInterfacesProjectGeneration.ConfigureServices(serviceCollection);
+            DTOsProjectGeneration.ConfigureServices(serviceCollection);
             ModelProjectGeneration.ConfigureServices(serviceCollection);
             PagesProjectGeneration.ConfigureServices(serviceCollection);
         }

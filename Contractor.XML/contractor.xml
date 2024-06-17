@@ -13,15 +13,15 @@
   <Replacements>
     <Replacement pattern="app-search-dropdown" replaceWith="search-dropdown" />
     <Replacement pattern="app-table-filter-bar" replaceWith="table-filter-bar" />
-    <Replacement pattern="src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source" replaceWith="@krz/material" />
-    <Replacement pattern="src/app/components/ui/form-layout/form-layout.module" replaceWith="@krz/material" />
-    <Replacement pattern="src/app/components/ui/search-dropdown/search-dropdown.module" replaceWith="@krz/material" />
-    <Replacement pattern="src/app/components/ui/search-dropdown-v2/search-dropdown-v2.module" replaceWith="@krz/material" />
-    <Replacement pattern="src/app/components/ui/table-filter-bar/table-filter-bar.module" replaceWith="@krz/material" />
-    <Replacement pattern="src/app/components/ui/file-picker/file-picker.module" replaceWith="@krz/material" />
-    <Replacement pattern="src/app/services/backend/pagination/i-paged-result" replaceWith="@krz/material" />
-    <Replacement pattern="src/app/services/backend/pagination/i-pagination-options" replaceWith="@krz/material" />
-    <Replacement pattern="src/app/services/backend/pagination/pagination.data-source" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/components/ui/dropdown-data-source/dropdown-pagination-data-source" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/components/ui/form-layout/form-layout.module" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/components/ui/search-dropdown/search-dropdown.module" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/components/ui/search-dropdown-v2/search-dropdown-v2.module" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/components/ui/table-filter-bar/table-filter-bar.module" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/components/ui/file-picker/file-picker.module" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/services/backend/pagination/i-paged-result" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/services/backend/pagination/i-pagination-options" replaceWith="@krz/material" />
+    <Replacement pattern="@core-app/services/backend/pagination/pagination.data-source" replaceWith="@krz/material" />
     <Replacement pattern="Contract.Architecture.Backend.Common" replaceWith="Krz.FullstackTemplate.Backend.Common" />
   </Replacements>
   <Includes>
