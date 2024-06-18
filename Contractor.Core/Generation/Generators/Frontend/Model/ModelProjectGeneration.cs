@@ -21,10 +21,12 @@ namespace Contractor.Core.Generation.Frontend.Model
 
             // dtos
             serviceCollection.AddSingleton<ClassGeneration, IEntityDtoGeneration>();
+            serviceCollection.AddSingleton<IInterfaceGeneration, IEntityDtoGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntityDtoDataGeneration>();
+            serviceCollection.AddSingleton<IInterfaceGeneration, IEntityDtoDataGeneration>();
             serviceCollection.AddSingleton<ClassGeneration, IEntityDtoExpandedGeneration>();
-            
-            
+            serviceCollection.AddSingleton<IInterfaceGeneration, IEntityDtoExpandedGeneration>();
+
             serviceCollection.AddSingleton<IEntityDtoForPurposeGeneration>();
             serviceCollection.AddSingleton<IInterfaceGeneration, IEntityDtoForPurposeGeneration>();
             serviceCollection.AddSingleton<IEntityDtoForPurposeClassRenamer>();

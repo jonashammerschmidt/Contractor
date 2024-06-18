@@ -29,7 +29,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains($"export interface {relationSide.Entity.Name}CreateDialogForm");
+            stringEditor.NextThatStartsWith($"export interface {relationSide.Entity.Name}CreateDialogForm");
             stringEditor.NextThatContains("}");
             stringEditor.InsertLine($"  {relationSide.NameLower}Id{(relationSide.IsOptional ? "?" : "" )}: string;");
 

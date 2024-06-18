@@ -18,7 +18,7 @@ namespace Contractor.Core.Tools
             StringEditor stringEditor = new StringEditor(fileData);
             if (!stringEditor.GetLine().Contains("export interface"))
             {
-                stringEditor.NextThatContains($"export interface");
+                stringEditor.NextThatStartsWith($"export interface");
             }
             stringEditor.NextThatContains("}");
 
