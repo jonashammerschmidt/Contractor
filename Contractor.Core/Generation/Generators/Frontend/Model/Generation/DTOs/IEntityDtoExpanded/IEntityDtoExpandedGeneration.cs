@@ -2,32 +2,36 @@
 using Contractor.Core.MetaModell;
 using Contractor.Core.Tools;
 using System.IO;
+using Contractor.Core.Generation.Backend.Generated.DTOs;
 
 namespace Contractor.Core.Generation.Frontend.Model
 {
     [ClassGenerationTags(new[] { ClassGenerationTag.FRONTEND, ClassGenerationTag.FRONTEND_MODEL })]
-    public class IEntityDtoExpandedGeneration : ClassGeneration
+    public class IEntityDtoExpandedGeneration : ClassGeneration, IInterfaceGeneration
     {
         private static readonly string TemplatePath =
             Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto-expanded.template.txt");
 
-        private static readonly string FileName = Path.Combine("dtos", "i-entity-kebab-dto-expanded.ts");
+        private static readonly string FileName = "i-entity-kebab-dto-expanded.ts";
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly FrontendDtoPropertyAddition frontendDtoPropertyAddition;
         private readonly FrontendDtoRelationAddition frontendDtoRelationAddition;
         private readonly FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition;
+        private readonly FrontendInterfaceExtender interfaceExtender;
 
         public IEntityDtoExpandedGeneration(
             EntityCoreAddition entityCoreAddition,
             FrontendDtoPropertyAddition frontendDtoPropertyAddition,
             FrontendDtoRelationAddition frontendDtoRelationAddition,
-            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition)
+            FrontendDtoPropertyMethodAddition frontendDtoPropertyMethodAddition,
+            FrontendInterfaceExtender interfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.frontendDtoPropertyAddition = frontendDtoPropertyAddition;
             this.frontendDtoRelationAddition = frontendDtoRelationAddition;
             this.frontendDtoPropertyMethodAddition = frontendDtoPropertyMethodAddition;
+            this.interfaceExtender = interfaceExtender;
         }
 
         protected override void AddModuleActions(Module module)
@@ -36,7 +40,7 @@ namespace Contractor.Core.Generation.Frontend.Model
 
         protected override void AddEntity(Entity entity)
         {
-            this.entityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainFolder, TemplatePath, FileName);
+            this.entityCoreAddition.AddEntityToFrontend(entity, ModelProjectGeneration.DomainDtoFolder, TemplatePath, FileName);
             
             if (entity.HasScope)
             {      
@@ -46,7 +50,7 @@ namespace Contractor.Core.Generation.Frontend.Model
                                                $"/{relationSideTo.OtherEntity.NamePluralKebab}" +
                                                $"/dtos/i-{relationSideTo.OtherEntity.NameKebab}-dto";
 
-                this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName,
+                this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainDtoFolder, FileName,
                     $"I{relationSideTo.OtherEntity.Name}Dto", toImportStatementPath);
             }
         }
@@ -67,7 +71,7 @@ namespace Contractor.Core.Generation.Frontend.Model
                 $"/{relation.TargetEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.TargetEntity.NameKebab}-dto";
 
-            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainDtoFolder, FileName,
                 $"I{relation.TargetEntity.Name}Dto", toImportStatementPath);
         }
 
@@ -79,7 +83,7 @@ namespace Contractor.Core.Generation.Frontend.Model
                 $"/{relation.SourceEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.SourceEntity.NameKebab}-dto";
 
-            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainDtoFolder, FileName,
                 $"I{relation.SourceEntity.Name}Dto", fromImportStatementPath);
         }
 
@@ -91,8 +95,27 @@ namespace Contractor.Core.Generation.Frontend.Model
                 $"/{relation.TargetEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.TargetEntity.NameKebab}-dto";
 
-            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainFolder, FileName,
+            this.frontendDtoRelationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainDtoFolder, FileName,
                 $"I{relation.TargetEntity.Name}Dto", toImportStatementPath);
+        }
+
+        public void AddInterface(GenerationOptions options, Interface interfaceItem)
+        {
+            foreach (var module in options.Modules)
+            {
+                foreach (var entity in module.Entities)
+                {
+                    var entityInterfaceCompatibility = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(entity, interfaceItem);
+                    if (entityInterfaceCompatibility == EntityInterfaceCompatibility.DtoExpanded)
+                    {
+                        this.interfaceExtender.AddInterface(
+                            entity,
+                            interfaceItem.Name,
+                            ModelProjectGeneration.DomainDtoFolder,
+                            FileName);
+                    }
+                }
+            }
         }
     }
 }

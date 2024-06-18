@@ -27,7 +27,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains($"export interface {property.Entity.Name}DetailPageForm");
+            stringEditor.NextThatStartsWith($"export interface {property.Entity.Name}DetailPageForm");
             stringEditor.NextThatContains("}");
             stringEditor.InsertLine("  " + FrontendDtoPropertyLine.GetPropertyLine(property).Trim());
 

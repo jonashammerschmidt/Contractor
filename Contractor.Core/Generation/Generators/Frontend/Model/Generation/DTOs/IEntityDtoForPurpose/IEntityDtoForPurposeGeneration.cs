@@ -18,13 +18,13 @@ namespace Contractor.Core.Generation.Frontend.Generated.DTOs
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly FrontendDtoRelationAddition relationAddition;
         private readonly IEntityDtoForPurposeClassRenamer iEntityDtoForPurposeClassRenamer;
-        private readonly InterfaceExtender interfaceExtender;
+        private readonly FrontendInterfaceExtender interfaceExtender;
 
         public IEntityDtoForPurposeGeneration(
             EntityCoreAddition entityCoreAddition,
             FrontendDtoRelationAddition relationAddition,
             IEntityDtoForPurposeClassRenamer iEntityDtoForPurposeClassRenamer,
-            InterfaceExtender interfaceExtender)
+            FrontendInterfaceExtender interfaceExtender)
         {
             this.entityCoreAddition = entityCoreAddition;
             this.relationAddition = relationAddition;
@@ -186,18 +186,21 @@ namespace Contractor.Core.Generation.Frontend.Generated.DTOs
 
         public void AddInterface(GenerationOptions options, Interface interfaceItem)
         {
-            // foreach (var purposeDto in options.PurposeDtos)
-            // {
-            //     string dtoName = GetDtoName(purposeDto, purposeDto.Properties.First().PathItems.First(), false);
-            //     if (PurposeDtoInterfaceCompatibilityChecker.IsInterfaceCompatible(purposeDto, interfaceItem))
-            //     {
-            //         this.interfaceExtender.AddInterfaceToClass(
-            //             purposeDto.Entity,
-            //             interfaceItem.Name,
-            //             ModelProjectGeneration.DomainFolder,
-            //             $"{dtoName.ToKebab()}.cs");
-            //     }
-            // }
+            foreach (var purposeDto in options.PurposeDtos)
+            {
+                string dtoName = GetDtoName(purposeDto, purposeDto.Properties.First().PathItems.First(), false);
+                var entityInterfaceCompatibility = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(purposeDto.Entity, interfaceItem);
+                if (entityInterfaceCompatibility != EntityInterfaceCompatibility.DtoData &&
+                    entityInterfaceCompatibility != EntityInterfaceCompatibility.Dto &&
+                    PurposeDtoInterfaceCompatibilityChecker.IsInterfaceCompatible(purposeDto, interfaceItem))
+                {
+                    this.interfaceExtender.AddInterface(
+                        purposeDto.Entity,
+                        interfaceItem.Name,
+                        ModelProjectGeneration.DomainDtoFolder,
+                        $"{dtoName.ToKebab()}.ts");
+                }
+            }
         }
     }
 }

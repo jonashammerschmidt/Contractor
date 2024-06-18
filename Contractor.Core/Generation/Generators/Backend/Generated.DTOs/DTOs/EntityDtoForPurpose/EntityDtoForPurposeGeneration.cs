@@ -201,7 +201,10 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
             foreach (var purposeDto in options.PurposeDtos)
             {
                 string dtoName = GetDtoName(purposeDto, purposeDto.Properties.First().PathItems.First(), false);
-                if (PurposeDtoInterfaceCompatibilityChecker.IsInterfaceCompatible(purposeDto, interfaceItem))
+                var entityInterfaceCompatibility = EntityInterfaceCompatibilityChecker.IsInterfaceCompatible(purposeDto.Entity, interfaceItem);
+                if (entityInterfaceCompatibility != EntityInterfaceCompatibility.DtoData &&
+                    entityInterfaceCompatibility != EntityInterfaceCompatibility.Dto &&
+                    PurposeDtoInterfaceCompatibilityChecker.IsInterfaceCompatible(purposeDto, interfaceItem))
                 {
                     this.interfaceExtender.AddInterfaceToClass(
                         purposeDto.Entity,
