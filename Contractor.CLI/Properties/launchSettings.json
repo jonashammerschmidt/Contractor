@@ -2,7 +2,7 @@
   "profiles": {
     "Contractor.CLI": {
       "commandName": "Project",
-      "commandLineArgs": "execute /Users/jonas/dev/FullstackTemplate/Krz.FullstackTemplate.CodeGeneration/contractor.xml",
+      "commandLineArgs": "execute /Users/jonas/dev/FullstackTemplate/codegen/contractor.xml",
       "sqlDebugging": false
     }
   }
