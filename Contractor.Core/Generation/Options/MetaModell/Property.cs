@@ -44,5 +44,10 @@ namespace Contractor.Core.MetaModell
         {
             Entity = entity;
         }
+
+        public override string ToString()
+        {
+            return $"{this.Name}: {this.Type} (Order: {this.Order})";
+        }
     }
 }

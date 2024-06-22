@@ -23,7 +23,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
                 $"/{relationSide.OtherEntity.NamePluralKebab}-crud.service");
 
             fileData = ImportStatements.Add(fileData, $"I{relationSide.OtherEntity.Name}DtoExpanded",
-                $"@generated-app/model/{relationSide.OtherEntity.Module.NameKebab}" +
+                $"@generated-app/dtos/{relationSide.OtherEntity.Module.NameKebab}" +
                 $"/{relationSide.OtherEntity.NamePluralKebab}" +
                 $"/dtos/i-{StringConverter.PascalToKebabCase(relationSide.OtherEntity.Name)}-dto-expanded");
 

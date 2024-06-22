@@ -41,7 +41,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
             {      
                 RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(entity.ScopeEntity, entity, "I", "Dto");
                 
-                string toImportStatementPath = $"@generated-app/model/{relationSideTo.OtherEntity.Module.NameKebab}" +
+                string toImportStatementPath = $"@generated-app/dtos/{relationSideTo.OtherEntity.Module.NameKebab}" +
                                                $"/{relationSideTo.OtherEntity.NamePluralKebab}" +
                                                $"/dtos/i-{relationSideTo.OtherEntity.NameKebab}-dto";
 
@@ -74,7 +74,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
         {
             RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(relation, "I", "Dto");
 
-            string fromImportStatementPath = $"@generated-app/model/{relation.SourceEntity.Module.NameKebab}" +
+            string fromImportStatementPath = $"@generated-app/dtos/{relation.SourceEntity.Module.NameKebab}" +
                 $"/{relation.SourceEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.SourceEntity.NameKebab}-dto";
 
@@ -86,7 +86,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "Dto");
 
-            string toImportStatementPath = $"@generated-app/model/{relation.TargetEntity.Module.NameKebab}" +
+            string toImportStatementPath = $"@generated-app/dtos/{relation.TargetEntity.Module.NameKebab}" +
                 $"/{relation.TargetEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.TargetEntity.NameKebab}-dto";
 

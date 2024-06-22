@@ -14,14 +14,6 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
         protected override string UpdateFileData(RelationSide relationSide, string fileData)
         {
-            fileData = ImportStatements.Add(fileData, "DropdownDataSource",
-                "@core-app/components/ui/dropdown-data-source/dropdown-pagination-data-source");
-
-            fileData = ImportStatements.Add(fileData, $"{relationSide.Entity.NamePlural}CrudService",
-                $"@core-app/model/{relationSide.Entity.Module.NameKebab}" +
-                $"/{relationSide.Entity.NamePluralKebab}" +
-                $"/{relationSide.Entity.NamePluralKebab}-crud.service");
-
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains("GridColumns: string[]");
