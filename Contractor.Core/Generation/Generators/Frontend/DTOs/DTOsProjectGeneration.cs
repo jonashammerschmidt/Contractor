@@ -7,7 +7,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
 {
     public class DTOsProjectGeneration
     {
-        public static readonly string DomainFolder = Path.Combine("src", "app", "dtos", "domain-kebab", "entities-kebab");
+        public static readonly string DomainFolder = Path.Combine("src", "app", "dtos", "domain-kebab", "entities-kebab", "dtos");
 
         public static readonly string TemplateFolder = Path.Combine(Folder.Executable, "Generation", "Generators", "Frontend", "DTOs", "Templates");
 

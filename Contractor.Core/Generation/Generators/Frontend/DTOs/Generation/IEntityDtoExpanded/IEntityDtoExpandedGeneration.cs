@@ -62,7 +62,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
         {
             RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(relation, "I", "Dto");
 
-            string toImportStatementPath = $"@generated-app/model/{relation.TargetEntity.Module.NameKebab}" +
+            string toImportStatementPath = $"@generated-app/dtos/{relation.TargetEntity.Module.NameKebab}" +
                 $"/{relation.TargetEntity.NamePluralKebab}" +
                 $"/dtos/i-{relation.TargetEntity.NameKebab}-dto";
 

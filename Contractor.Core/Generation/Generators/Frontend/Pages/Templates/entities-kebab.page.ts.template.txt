@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesCrudService } from '@core-app/model/domain-kebab/entities-kebab/entities-kebab-crud.service';
-import { IEntityDtoExpanded } from '@generated-app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
+import { IEntityDtoExpanded } from '@generated-app/dtos/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
 import { TableDataSource } from '@core-app/services/backend/pagination/pagination.data-source';
 import { EntityCreateDialog } from './dialogs/create/entity-kebab-create.dialog';
 
