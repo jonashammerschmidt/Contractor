@@ -1,7 +1,11 @@
+using System.Text.RegularExpressions;
+
 namespace Contractor.CLI;
 
 public class ContractorXmlValidator
 {
+    private static readonly Regex NameTester = new Regex("^[a-zA-Z][a-zA-Z0-9]*$");
+    
     public static void Validate(ContractorXml contractorXml)
     {
         var entities = contractorXml.Modules.Modules.SelectMany(module => module.Entities);
@@ -10,7 +14,8 @@ public class ContractorXmlValidator
         ValidateRelations(entities);
         ValidateProperties(entities);
         ValidateIndices(entities);
-        ValidateUniqueRelations(entities); 
+        ValidateUniqueRelations(entities);
+        ValidateChecks(entities);
     }
 
     private static void ValidateModuleNames(ContractorXml contractorXml)
@@ -21,6 +26,11 @@ public class ContractorXmlValidator
             if (!moduleNames.Add(module.Name))
             {
                 throw new FormatException($"Duplicate module name '{module.Name}' found.");
+            }
+
+            if (!NameTester.IsMatch(module.Name))
+            {
+                throw new FormatException($"Module name '{module.Name}' should only contain letters and numbers, and cannot start with a number.");
             }
         }
     }
@@ -33,6 +43,11 @@ public class ContractorXmlValidator
             if (!string.IsNullOrWhiteSpace(entity.ScopeEntityName) && !entityNames.Contains(entity.ScopeEntityName))
             {
                 throw new FormatException($"Entity '{entity.Name}': Scope entity name '{entity.ScopeEntityName}' does not exist.");
+            }
+
+            if (!NameTester.IsMatch(entity.Name))
+            {
+                throw new FormatException($"Entity name '{entity.Name}' should only contain letters and numbers, and cannot start with a number.");
             }
         }
     }
@@ -48,6 +63,16 @@ public class ContractorXmlValidator
                 {
                     throw new FormatException($"Entity '{entity.Name}': Entity name '{relation.EntityNameFrom}' in relation does not exist.");
                 }
+
+                if (relation.PropertyNameFrom != null && !NameTester.IsMatch(relation.PropertyNameFrom))
+                {
+                    throw new FormatException($"PropertyNameFrom '{relation.PropertyNameFrom}' should only contain letters and numbers, and cannot start with a number.");
+                }
+
+                if (relation.PropertyNameTo != null && !NameTester.IsMatch(relation.PropertyNameTo))
+                {
+                    throw new FormatException($"PropertyNameTo '{relation.PropertyNameTo}' should only contain letters and numbers, and cannot start with a number.");
+                }
             }
 
             foreach (var relation in entity.Relations1To1)
@@ -55,6 +80,16 @@ public class ContractorXmlValidator
                 if (!entityNames.Contains(relation.EntityNameFrom))
                 {
                     throw new FormatException($"Entity '{entity.Name}': Entity name '{relation.EntityNameFrom}' in relation does not exist.");
+                }
+
+                if (relation.PropertyNameFrom != null && !NameTester.IsMatch(relation.PropertyNameFrom))
+                {
+                    throw new FormatException($"PropertyNameFrom name '{relation.PropertyNameFrom}' should only contain letters and numbers, and cannot start with a number.");
+                }
+
+                if (relation.PropertyNameTo != null && !NameTester.IsMatch(relation.PropertyNameTo))
+                {
+                    throw new FormatException($"PropertyNameTo name '{relation.PropertyNameTo}' should only contain letters and numbers, and cannot start with a number.");
                 }
             }
         }
@@ -66,6 +101,14 @@ public class ContractorXmlValidator
         {
             // Use a List<string> to collect property names, allowing duplicates
             var propertyNames = entity.Properties.Select(p => p.Name).ToList();
+
+            foreach (var propertyName in propertyNames)
+            {
+                if (!NameTester.IsMatch(propertyName))
+                {
+                    throw new FormatException($"Property name '{propertyName}' should only contain letters and numbers, and cannot start with a number.");
+                }
+            }
         
             // Add relation-based property names, which may include duplicates
             entity.Relation1ToN.ForEach(relation =>
@@ -178,6 +221,20 @@ public class ContractorXmlValidator
                 if (!relationSignatures.Add(reverseSignature))
                 {
                     throw new FormatException($"Duplicate reverse relation found: {reverseSignature}");
+                }
+            }
+        }
+    }
+
+    private static void ValidateChecks(IEnumerable<EntityXml> entities)
+    {
+        foreach (var entity in entities)
+        {
+            foreach (var check in entity.Checks)
+            {
+                if (!NameTester.IsMatch(check.Name))
+                {
+                    throw new FormatException($"Check name '{check.Name}' should only contain letters and numbers, and cannot start with a number.");
                 }
             }
         }

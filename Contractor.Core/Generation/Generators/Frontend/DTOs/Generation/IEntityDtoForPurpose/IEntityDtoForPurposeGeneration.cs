@@ -98,7 +98,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
                 {
                     RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(lastPathItem.Relation, "I", dtoPostfix);
 
-                    string fromImportStatementPath = $"@generated-app/model/{lastPathItem.Relation.SourceEntity.Module.NameKebab}" +
+                    string fromImportStatementPath = $"@generated-app/dtos/{lastPathItem.Relation.SourceEntity.Module.NameKebab}" +
                                                      $"/{lastPathItem.Relation.SourceEntity.NamePluralKebab}" +
                                                      $"/dtos/i-{lastPathItem.Relation.SourceEntity.NameKebab}-" + dtoPostfix.ToKebab();
 
@@ -109,7 +109,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
                 {
                     RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(lastPathItem.Relation, "I", dtoPostfix + "[]");
 
-                    string toImportStatementPath = $"@generated-app/model/{lastPathItem.Relation.SourceEntity.Module.NameKebab}" +
+                    string toImportStatementPath = $"@generated-app/dtos/{lastPathItem.Relation.SourceEntity.Module.NameKebab}" +
                                                    $"/{lastPathItem.Relation.SourceEntity.NamePluralKebab}" +
                                                    $"/dtos/i-{lastPathItem.Relation.SourceEntity.NameKebab}-" + dtoPostfix.ToKebab();
 
@@ -121,7 +121,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
             {
                 RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(lastPathItem.Relation, "I", dtoPostfix);
                 
-                string toImportStatementPath = $"@generated-app/model/{lastPathItem.Relation.TargetEntity.Module.NameKebab}" +
+                string toImportStatementPath = $"@generated-app/dtos/{lastPathItem.Relation.TargetEntity.Module.NameKebab}" +
                                                $"/{lastPathItem.Relation.TargetEntity.NamePluralKebab}" +
                                                $"/dtos/i-{lastPathItem.Relation.TargetEntity.NameKebab}-" + dtoPostfix.ToKebab();
                 
