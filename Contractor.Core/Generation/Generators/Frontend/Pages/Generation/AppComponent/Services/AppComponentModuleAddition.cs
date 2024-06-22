@@ -32,18 +32,16 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
             StringEditor stringEditor = new StringEditor(fileData);
 
-            stringEditor.NextThatContains(" addMainMenuItems(");
-            stringEditor.NextThatContains("if (permission.benutzerVerwalten === 1");
-            stringEditor.Prev();
+            stringEditor.NextThatContains("this.mainMenu[1].menu.push");
 
-            stringEditor.InsertNewLine();
             stringEditor.InsertLine(
-                 "    this.mainMenu.push({\n" +
+                 "    this.mainMenu[0].menu.push({\n" +
                 $"      text: '{module.Name}',\n" +
                 $"      routerLink: '/{module.NameKebab}',\n" +
                  "      subMenu: [\n" +
                  "      ]\n" +
                  "    });");
+            stringEditor.InsertNewLine();
 
             return stringEditor.GetText();
         }

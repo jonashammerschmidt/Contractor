@@ -7,15 +7,12 @@ namespace Contractor.Core.Generation.Frontend.Pages
 {
     public class AppComponentEntityAddition
     {
-        public IFileSystemClient fileSystemClient;
-        public PathService pathService;
+        private IFileSystemClient fileSystemClient;
 
         public AppComponentEntityAddition(
-            IFileSystemClient fileSystemClient,
-            PathService pathService)
+            IFileSystemClient fileSystemClient)
         {
             this.fileSystemClient = fileSystemClient;
-            this.pathService = pathService;
         }
 
         public void Add(Entity entity)
