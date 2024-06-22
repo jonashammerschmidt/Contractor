@@ -20,7 +20,7 @@ namespace Contractor.Core.Generation.Frontend.Interfaces
             string filePath = pathService.GetAbsolutePathForFrontend(entity, paths);
             string fileData = fileSystemClient.ReadAllText(entity, filePath);
 
-            string interfacesPath = $"src/app/model/_interfaces/i-{interfaceName.ToKebab()}";
+            string interfacesPath = $"@generated-app/model/_interfaces/i-{interfaceName.ToKebab()}";
             fileData = ImportStatements.Add(fileData, "I" + interfaceName, interfacesPath);
 
             StringEditor stringEditor = new StringEditor(fileData);

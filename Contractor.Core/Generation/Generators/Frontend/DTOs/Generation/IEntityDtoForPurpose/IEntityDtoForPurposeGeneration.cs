@@ -14,7 +14,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
     public class IEntityDtoForPurposeGeneration : IInterfaceGeneration
     {
         private static readonly string TemplatePath =
-            Path.Combine(ModelProjectGeneration.TemplateFolder, "i-entity-kebab-dto-for-purpose.template.txt");
+            Path.Combine(DTOsProjectGeneration.TemplateFolder, "i-entity-kebab-dto-for-purpose.template.txt");
 
         private readonly EntityCoreAddition entityCoreAddition;
         private readonly FrontendDtoRelationAddition relationAddition;
@@ -80,11 +80,11 @@ namespace Contractor.Core.Generation.Frontend.DTOs
         {
             this.entityCoreAddition.AddEntityToFrontend(
                 pathItem.Entity,
-                ModelProjectGeneration.DomainDtoFolder,
+                DTOsProjectGeneration.DomainFolder,
                 TemplatePath,
                 $"{dtoName.ToKebab()}.ts");
             
-            this.iEntityDtoForPurposeClassRenamer.Rename(pathItem.Entity, dtoName, ModelProjectGeneration.DomainFolder, "dtos", $"{dtoName.ToKebab()}.ts");
+            this.iEntityDtoForPurposeClassRenamer.Rename(pathItem.Entity, dtoName, DTOsProjectGeneration.DomainFolder, $"{dtoName.ToKebab()}.ts");
         }
 
         private void HandleRelation(string dtoName, string dtoPostfix, PurposeDtoPathItem lastPathItem)
@@ -98,22 +98,22 @@ namespace Contractor.Core.Generation.Frontend.DTOs
                 {
                     RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(lastPathItem.Relation, "I", dtoPostfix);
 
-                    string fromImportStatementPath = $"src/app/model/{lastPathItem.Relation.SourceEntity.Module.NameKebab}" +
+                    string fromImportStatementPath = $"@generated-app/model/{lastPathItem.Relation.SourceEntity.Module.NameKebab}" +
                                                      $"/{lastPathItem.Relation.SourceEntity.NamePluralKebab}" +
                                                      $"/dtos/i-{lastPathItem.Relation.SourceEntity.NameKebab}-" + dtoPostfix.ToKebab();
 
-                    this.relationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainDtoFolder, $"{dtoName.ToKebab()}.ts",
+                    this.relationAddition.AddPropertyToDTO(relationSideFrom, DTOsProjectGeneration.DomainFolder, $"{dtoName.ToKebab()}.ts",
                         $"I{lastPathItem.Relation.SourceEntity.Name}{dtoPostfix}", fromImportStatementPath);
                 }
                 else
                 {
                     RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(lastPathItem.Relation, "I", dtoPostfix + "[]");
 
-                    string toImportStatementPath = $"src/app/model/{lastPathItem.Relation.SourceEntity.Module.NameKebab}" +
+                    string toImportStatementPath = $"@generated-app/model/{lastPathItem.Relation.SourceEntity.Module.NameKebab}" +
                                                    $"/{lastPathItem.Relation.SourceEntity.NamePluralKebab}" +
                                                    $"/dtos/i-{lastPathItem.Relation.SourceEntity.NameKebab}-" + dtoPostfix.ToKebab();
 
-                    this.relationAddition.AddPropertyToDTO(relationSideFrom, ModelProjectGeneration.DomainDtoFolder, $"{dtoName.ToKebab()}.ts",
+                    this.relationAddition.AddPropertyToDTO(relationSideFrom, DTOsProjectGeneration.DomainFolder, $"{dtoName.ToKebab()}.ts",
                         $"I{lastPathItem.Relation.SourceEntity.Name}{dtoPostfix}", toImportStatementPath);
                 }
             }
@@ -121,11 +121,11 @@ namespace Contractor.Core.Generation.Frontend.DTOs
             {
                 RelationSide relationSideTo = RelationSide.FromObjectRelationEndTo(lastPathItem.Relation, "I", dtoPostfix);
                 
-                string toImportStatementPath = $"src/app/model/{lastPathItem.Relation.TargetEntity.Module.NameKebab}" +
+                string toImportStatementPath = $"@generated-app/model/{lastPathItem.Relation.TargetEntity.Module.NameKebab}" +
                                                $"/{lastPathItem.Relation.TargetEntity.NamePluralKebab}" +
                                                $"/dtos/i-{lastPathItem.Relation.TargetEntity.NameKebab}-" + dtoPostfix.ToKebab();
                 
-                this.relationAddition.AddPropertyToDTO(relationSideTo, ModelProjectGeneration.DomainDtoFolder, $"{dtoName.ToKebab()}.ts",
+                this.relationAddition.AddPropertyToDTO(relationSideTo, DTOsProjectGeneration.DomainFolder, $"{dtoName.ToKebab()}.ts",
                     $"I{lastPathItem.Relation.TargetEntity.Name}{dtoPostfix}", toImportStatementPath);
             }
         }
@@ -198,7 +198,7 @@ namespace Contractor.Core.Generation.Frontend.DTOs
                     this.interfaceExtender.AddInterface(
                         purposeDto.Entity,
                         interfaceItem.Name,
-                        ModelProjectGeneration.DomainDtoFolder,
+                        DTOsProjectGeneration.DomainFolder,
                         $"{dtoName.ToKebab()}.ts");
                 }
             }

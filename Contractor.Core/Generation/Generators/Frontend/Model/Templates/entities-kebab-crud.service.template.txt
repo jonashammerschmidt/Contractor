@@ -2,9 +2,9 @@
 import { BackendCoreService } from '@core-app/services/backend/backend-core.service';
 import { IPagedResult } from '@core-app/services/backend/pagination/i-paged-result';
 import { IPaginationOptions, toPaginationParams } from '@core-app/services/backend/pagination/i-pagination-options';
-import { IEntityDto } from '@generated-app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto';
-import { IEntityDtoData } from '@generated-app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-data';
-import { IEntityDtoExpanded } from '@generated-app/model/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
+import { IEntityDto } from '@generated-app/dtos/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto';
+import { IEntityDtoData } from '@generated-app/dtos/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-data';
+import { IEntityDtoExpanded } from '@generated-app/dtos/domain-kebab/entities-kebab/dtos/i-entity-kebab-dto-expanded';
 
 @Injectable()
 export class EntitiesCrudService {
