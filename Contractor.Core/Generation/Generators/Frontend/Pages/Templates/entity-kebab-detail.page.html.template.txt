@@ -2,15 +2,19 @@
     <div class="fst-header">
         <div class="fst-toolbar">
             <h1>EntityReadable: {{entity?.displayProperty}}</h1>
-            <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']">
+            <div class="divider"></div>
+            <button mat-flat-button [routerLink]="['/domain-kebab/entities-kebab']"
+                data-testid="domain-kebab-entities-kebab-detail-close-button">
                 Schließen
             </button>
-            <button mat-flat-button color="primary" class="save-button" (click)="onSaveClicked()">
-                <mat-icon class="mat-icon-button-fix">save</mat-icon>
+            <button mat-flat-button color="primary" (click)="onSaveClicked()"
+                data-testid="domain-kebab-entities-kebab-detail-save-button">
+                <mat-icon>save</mat-icon>
                 Speichern
             </button>
-            <button mat-flat-button color="warn" class="save-button" (click)="onDeleteClicked()">
-                <mat-icon class="mat-icon-button-fix">delete</mat-icon>
+            <button mat-flat-button color="warn" (click)="onDeleteClicked()"
+                data-testid="domain-kebab-entities-kebab-detail-delete-button">
+                <mat-icon>delete</mat-icon>
                 Löschen
             </button>
         </div>

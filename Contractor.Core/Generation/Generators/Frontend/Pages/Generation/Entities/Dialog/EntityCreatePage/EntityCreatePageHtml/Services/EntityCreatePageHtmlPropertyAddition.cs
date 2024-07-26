@@ -21,7 +21,7 @@ namespace Contractor.Core.Generation.Frontend.Pages
 
             stringEditor.InsertNewLine();
 
-            stringEditor.InsertLine(FrontendPageCreateUpdatePropertyLine.GetPropertyLine(property));
+            stringEditor.InsertLine(FrontendPageCreateUpdatePropertyLine.GetPropertyLine(property, FrontendPageCreateUpdatePropertyLine.FormType.CreateDialog));
 
             return stringEditor.GetText();
         }
