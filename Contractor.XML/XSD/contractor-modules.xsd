@@ -34,7 +34,7 @@
                           </xs:annotation>
                           <xs:simpleType>
                             <xs:restriction base="xs:string">
-                              <xs:pattern value="Boolean|ByteArray|DateTime|Double|Guid|Integer|(String(:[0-9]+)?)" />
+                              <xs:pattern value="Boolean|ByteArray|DateTime|Double|Guid|Integer|(String:[0-9]+)" />
                             </xs:restriction>
                           </xs:simpleType>
                         </xs:attribute>
@@ -51,6 +51,11 @@
                         <xs:attribute name="hidden" type="xs:boolean" use="optional">
                           <xs:annotation>
                             <xs:documentation xml:lang="de">Optional. Definition, ob diese Property aus den generierten DTOs entfernt werden soll. Default: False.</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="minLength" type="xs:integer" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Angabe für die Mindestlänge dieser Property. Wird nur bei Property-Type "String" angewandt. Default: 1</xs:documentation>
                           </xs:annotation>
                         </xs:attribute>
                       </xs:complexType>
