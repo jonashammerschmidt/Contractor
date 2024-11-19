@@ -34,9 +34,15 @@ namespace Contractor.Core.Tools
                 stringEditor.InsertNewLine();
             }
 
-            if (!property.IsOptional)
+            bool areEmptyStringsAllowed = property.Type == PropertyType.String && property.MinLength == 0;
+            if (!property.IsOptional && !areEmptyStringsAllowed)
             {
                 stringEditor.InsertLine("        [Required]");
+            }
+
+            if (!property.IsOptional && areEmptyStringsAllowed)
+            {
+                stringEditor.InsertLine("        [Required(AllowEmptyStrings = true)]");
             }
 
             if (property.Type == PropertyType.String && property.TypeExtra != null && property.IsOptional)
