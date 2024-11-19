@@ -46,7 +46,7 @@ namespace Contractor.Core.Tools
 
             if (property.Type == PropertyType.String && property.TypeExtra != null && !property.IsOptional)
             {
-                stringEditor.InsertLine($"        [StringLength({property.TypeExtra}, MinimumLength = 1)]");
+                stringEditor.InsertLine($"        [StringLength({property.TypeExtra}, MinimumLength = {property.MinLength})]");
             }
 
             stringEditor.InsertLine(BackendDtoPropertyLine.GetPropertyLine(property));
