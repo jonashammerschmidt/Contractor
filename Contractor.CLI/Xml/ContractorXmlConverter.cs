@@ -79,6 +79,7 @@ namespace Contractor.CLI
                             IsOptional = property.IsOptional,
                             IsDisplayProperty = property.IsDisplayProperty,
                             IsHidden = property.IsHidden,
+                            MinLength = string.IsNullOrWhiteSpace(property.MinLength) ? 1 : int.Parse(property.MinLength),
                         }).ToList(),
                         Relations1To1 = entity.Relations1To1.Select(relation1To1 => new Relation1To1()
                         {

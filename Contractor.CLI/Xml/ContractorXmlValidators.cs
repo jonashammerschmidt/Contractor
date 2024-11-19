@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace Contractor.CLI;
 
 public class ContractorXmlValidator
@@ -87,6 +89,42 @@ public class ContractorXmlValidator
             {
                 throw new FormatException($"Entity '{entity.Name}': Duplicate property name '{firstDuplicate}'.");
             }
+
+            foreach (var property in entity.Properties)
+            {
+                var isValidType = Regex.IsMatch(property.Type, @"^(Boolean|ByteArray|DateTime|Double|Guid|Integer|String:\d+)$");
+                if (!isValidType)
+                {
+                    throw new FormatException($"Entity '{entity.Name}': Property '{property.Name}': Invalid type '{property.Type}'");
+                }
+
+                var isTypeStringMatchResult = Regex.Match(property.Type, "^String:([0-9]+)$");
+                
+                if (isTypeStringMatchResult.Success)
+                {
+                    string maxLengthString = isTypeStringMatchResult.Groups[1].Value;
+                    int maxLengthInt = int.Parse(maxLengthString);
+
+                    if (maxLengthInt <= 0)
+                    {
+                        throw new FormatException($"Entity '{entity.Name}': Property '{property.Name}' of type 'String': maxLength cannot be smaller than 1.");
+                    }
+
+                    if (int.TryParse(property.MinLength, out int minLength))
+                    {
+                        if (minLength < 0)
+                        {
+                            throw new FormatException($"Entity '{entity.Name}': Property '{property.Name}' of type 'String': minLength cannot be smaller than 0.");
+                        }
+                        
+                        if (maxLengthInt < minLength)
+                        {
+                            throw new FormatException($"Entity '{entity.Name}': Property '{property.Name}' of type 'String': maxLength cannot be smaller than minLength.");
+                        }
+                    }
+                }
+            }
+            
         }
     }
 

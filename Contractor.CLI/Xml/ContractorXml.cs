@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Contractor.CLI
 {
@@ -172,6 +170,9 @@ namespace Contractor.CLI
 
         [XmlAttribute(AttributeName = "hidden")]
         public bool IsHidden { get; set; }
+        
+        [XmlAttribute(AttributeName = "minLength")]
+        public string MinLength { get; set; }
     }
 
     [XmlRoot(ElementName = "Index")]

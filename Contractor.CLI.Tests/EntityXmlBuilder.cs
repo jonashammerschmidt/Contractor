@@ -27,6 +27,17 @@ public class EntityXmlBuilder
         return this;
     }
 
+    public EntityXmlBuilder WithProperty(string type, string name, int minLength)
+    {
+        _entity.Properties.Add(new PropertyXml
+        {
+            Type = type,
+            Name = name,
+            MinLength = minLength.ToString(),
+        });
+        return this;
+    }
+
     public EntityXmlBuilder WithRelation1ToN(string entityNameFrom)
     {
         _entity.Relation1ToN.Add(new Relation1ToNXml { EntityNameFrom = entityNameFrom });
