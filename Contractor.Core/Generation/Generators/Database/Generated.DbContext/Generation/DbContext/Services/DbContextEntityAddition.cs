@@ -45,14 +45,26 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
 
             stringEditor.InsertLine($"            modelBuilder.Entity<Ef{entity.Name}Dto>(entity =>");
             stringEditor.InsertLine("            {");
-            stringEditor.InsertLine($"                entity.ToTable(\"{entity.NamePlural}\");");
-            stringEditor.InsertLine("");
 
-            foreach (var check in entity.Checks)
+            if (!entity.Checks.Any())
             {
-                stringEditor.InsertLine($"                entity.HasCheckConstraint(\"CHK_{check.Entity.NamePlural}_{check.Name}\", \"{check.Query}\");");
-                stringEditor.InsertLine("");
+                stringEditor.InsertLine($"                entity.ToTable(\"{entity.NamePlural}\");");
             }
+            else
+            {
+
+                stringEditor.InsertLine("                entity.ToTable(");
+                stringEditor.InsertLine($"                    \"{entity.NamePlural}\",");
+                stringEditor.InsertLine("                    (e) =>");
+                stringEditor.InsertLine("                    {");
+                foreach (var check in entity.Checks)
+                {
+                    stringEditor.InsertLine($"                        e.HasCheckConstraint(\"CHK_{check.Entity.NamePlural}_{check.Name}\", \"{check.Query}\");");
+                }
+                stringEditor.InsertLine("                    });");
+            }
+
+            stringEditor.InsertLine("");
 
             if (entity.HasScope)
             {

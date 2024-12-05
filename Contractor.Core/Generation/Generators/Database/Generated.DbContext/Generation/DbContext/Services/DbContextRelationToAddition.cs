@@ -17,7 +17,7 @@ namespace Contractor.Core.Generation.Database.Generated.DbContext
             StringEditor stringEditor = new StringEditor(fileData);
 
             stringEditor.NextThatContains($"modelBuilder.Entity<Ef{relationSide.Entity.Name}Dto>");
-            stringEditor.NextThatContains("});");
+            stringEditor.NextThatStartsWith("            });");
 
             stringEditor.InsertNewLine();
 
