@@ -7,6 +7,18 @@ namespace GeneratedProjectName.Modules.Domain.Entities
     {
         public Guid Id { get; set; }
 
+        public EntityDtoDefaultUpdate() { }
+
+        protected EntityDtoDefaultUpdate(Guid id, EntityDtoData entityDtoData) : base(entityDtoData)
+        {
+            this.Id = id;
+        }
+
+        public static EntityDtoDefaultUpdate FromEntityDtoData(Guid id, EntityDtoData entityDtoData)
+        {
+            return new EntityDtoDefaultUpdate(id, entityDtoData);
+        }
+
         public override string ToString()
         {
             return $"{this.DisplayProperty} ({this.Id})";
