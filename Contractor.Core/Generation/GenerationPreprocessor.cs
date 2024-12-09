@@ -17,6 +17,7 @@ namespace Contractor.Core
                 {
                     foreach (var relation1To1 in entity.Relations1To1)
                     {
+                        // Adding ScopeRelations from unscoped source entities to scoped target entities
                         if ((relation1To1.TargetEntity.HasScope && !relation1To1.SourceEntity.HasScope) || relation1To1.SourceEntity.HasOtherScope(relation1To1.TargetEntity))
                         {
                             Relation1ToN scopeRelation1ToN = new Relation1ToN()
@@ -39,6 +40,7 @@ namespace Contractor.Core
 
                     foreach (var relation1ToN in entity.Relations1ToN)
                     {
+                        // Adding ScopeRelations from unscoped source entities to scoped target entities
                         if ((relation1ToN.TargetEntity.HasScope && !relation1ToN.SourceEntity.HasScope) || relation1ToN.SourceEntity.HasOtherScope(relation1ToN.TargetEntity))
                         {
                             Relation1ToN scopeRelation1ToN = new Relation1ToN()

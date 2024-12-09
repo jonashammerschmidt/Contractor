@@ -1,4 +1,6 @@
-﻿namespace Contractor.Core.MetaModell
+﻿using System.Transactions;
+
+namespace Contractor.Core.MetaModell
 {
     public class Relation1ToN : Relation
     {
@@ -21,6 +23,14 @@
             this.OnDelete = "NoAction";
             this.Order = -1;
             this.IsCreatedByPreProcessor = true;
+        }
+
+        public override void AddLinks(Entity entity)
+        {
+            base.AddLinks(entity);
+
+            this.PropertyNameInSource ??= TargetEntity.Name;
+            this.PropertyNameInTarget ??= SourceEntity.NamePlural;
         }
     }
 }
