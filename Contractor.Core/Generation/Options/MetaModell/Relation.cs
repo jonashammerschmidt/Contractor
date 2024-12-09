@@ -58,7 +58,7 @@ namespace Contractor.Core.MetaModell
 
         public Entity SourceEntity { get; set; }
 
-        public void AddLinks(Entity entity)
+        public virtual void AddLinks(Entity entity)
         {
             SourceEntity = entity;
             TargetEntity = entity.Module.Options.FindEntity(targetEntityName);
