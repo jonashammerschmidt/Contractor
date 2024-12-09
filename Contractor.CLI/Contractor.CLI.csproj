@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageId>contractor</PackageId>
     <Title>contractor</Title>
-    <Version>3.0.1</Version>
+    <Version>3.0.2</Version>
     <Summary>Der Contractor ist eine CLI um Domänen, Entitäten, Eigenschaften und Beziehungen zur Contract Architektur hinzuzufügen.</Summary>
     <Description>Der Contractor ist eine CLI um Domänen, Entitäten, Eigenschaften und Beziehungen zur Contract Architektur hinzuzufügen.</Description>
     <Authors>Jonas Hammerschmidt</Authors>
