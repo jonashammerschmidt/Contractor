@@ -112,10 +112,16 @@ namespace Contractor.Core.Generation.Backend.Generated.DTOs
                 {
                     RelationSide relationSideFrom = RelationSide.FromObjectRelationEndFrom(lastPathItem.Relation, "", dtoPostfix);
 
-                    this.relationAddition.AddRelationToDTOForBackendGenerated(relationSideFrom, GeneratedDTOsProjectGeneration.DomainFolder, $"{dtoName}.cs",
+                    this.relationAddition.AddRelationToDTOForBackendGenerated(
+                        relationSideFrom,
+                        GeneratedDTOsProjectGeneration.DomainFolder,
+                        $"{dtoName}.cs",
                         $"{relationSideFrom.Entity.Module.Options.Paths.GeneratedProjectName}.Modules.{relationSideFrom.OtherEntity.Module.Name}.{relationSideFrom.OtherEntity.NamePlural}");
 
-                    this.entityDtoForPurposeFromOneToOneMethodsAddition.AddRelationSideToBackendGeneratedFile(relationSideFrom, GeneratedDTOsProjectGeneration.DomainFolder,
+                    this.entityDtoForPurposeFromOneToOneMethodsAddition.AddRelationSideToBackendGeneratedFile(
+                        relationSideFrom,
+                        relationSideFrom.OtherEntity.Name + dtoPostfix,
+                        GeneratedDTOsProjectGeneration.DomainFolder,
                         $"{dtoName}.cs");
                 }
                 else
