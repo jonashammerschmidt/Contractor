@@ -37,7 +37,8 @@ namespace Contractor.Core.Tools
             }
             stringEditor.NextThatContains("}");
 
-            stringEditor.InsertLine($"    {relationSide.NameLower}: {relationSide.Type};");
+            string optionalText = (relationSide.IsOptional) ? "?" : "";
+            stringEditor.InsertLine($"    {relationSide.NameLower}{optionalText}: {relationSide.Type};");
 
             return stringEditor.GetText();
         }
