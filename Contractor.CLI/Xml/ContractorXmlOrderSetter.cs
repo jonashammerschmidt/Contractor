@@ -30,7 +30,7 @@ namespace Contractor.CLI
                 foreach (XmlNode propertyNode in propertyNodes)
                 {
                     var propertyName = propertyNode.Attributes?["name"]?.Value;
-                    var property = entity.Properties.FirstOrDefault(p => p.Name == propertyName);
+                    var property = entity.Properties.FirstOrDefault(p => string.Equals(p.Name, propertyName, StringComparison.OrdinalIgnoreCase));
                     if (property != null)
                     {
                         property.Order = propertyNode.GetNodeIndex();
@@ -48,7 +48,9 @@ namespace Contractor.CLI
                 {
                     string entityNameFrom = relationNode.Attributes?["entityNameFrom"]?.Value;
                     string propertyNameFrom = relationNode.Attributes?["propertyNameFrom"]?.Value;
-                    var relation = entity.Relations1To1.FirstOrDefault(r => r.TargetEntity.Name == entityNameFrom && r.PropertyNameInSource == propertyNameFrom);
+                    var relation = entity.Relations1To1.FirstOrDefault(r =>
+                        string.Equals(r.TargetEntity.Name, entityNameFrom, StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(r.PropertyNameInSource, propertyNameFrom, StringComparison.OrdinalIgnoreCase));
                     if (relation != null)
                     {
                         relation.Order = relationNode.GetNodeIndex();
@@ -66,7 +68,9 @@ namespace Contractor.CLI
                 {
                     string entityNameFrom = relationNode.Attributes?["entityNameFrom"]?.Value;
                     string propertyNameFrom = relationNode.Attributes?["propertyNameFrom"]?.Value;
-                    var relation = entity.Relations1ToN.FirstOrDefault(r => r.TargetEntity.Name == entityNameFrom && r.PropertyNameInSource == propertyNameFrom);
+                    var relation = entity.Relations1ToN.FirstOrDefault(r =>
+                        string.Equals(r.TargetEntity.Name, entityNameFrom, StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(r.PropertyNameInSource, propertyNameFrom, StringComparison.OrdinalIgnoreCase));
                     if (relation != null)
                     {
                         relation.Order = relationNode.GetNodeIndex();
