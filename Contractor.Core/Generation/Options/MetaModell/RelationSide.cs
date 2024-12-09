@@ -75,7 +75,7 @@ namespace Contractor.Core.MetaModell
             {
                 Entity = relation.TargetEntity,
                 IsDisplayProperty = false,
-                IsOptional = relation.IsOptional,
+                IsOptional = true,
                 OnDelete = relation.OnDelete,
                 Name = name,
                 Order = int.MaxValue,
