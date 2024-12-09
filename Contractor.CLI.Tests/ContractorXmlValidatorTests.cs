@@ -41,8 +41,8 @@ namespace Contractor.CLI.Tests
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
                     .WithName("Entity1", "Entity1s")
-                    .WithProperty("String", "Property1")
-                    .WithProperty("String", "Property1")) // Duplicate
+                    .WithProperty("String:50", "Property1")
+                    .WithProperty("String:50", "Property1")) // Duplicate
                 .Build();
 
             // Act & Assert
@@ -72,7 +72,7 @@ namespace Contractor.CLI.Tests
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
                     .WithName("Entity1", "Entity1s")
-                    .WithProperty("String", "Property1")
+                    .WithProperty("String:50", "Property1")
                     .WithIndex("Property1", "NonexistentProperty"))
                 .Build();
 
@@ -132,21 +132,66 @@ namespace Contractor.CLI.Tests
         }
         
         [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void ValidateUniqueRelations_StringMissingMaxLength_ThrowsFormatException()
+        {
+            // Arrange
+            var contractorXml = new ContractorXmlBuilder()
+                .AddEntity(entity => entity
+                    .WithName("Customer", "Customers")
+                    .WithProperty("String", "Name"))
+                .Build();
+
+            // Act & Assert
+            ContractorXmlValidator.Validate(contractorXml);
+        }
+        
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void ValidateUniqueRelations_MaxLengthLowerThanMinLength_ThrowsFormatException()
+        {
+            // Arrange
+            var contractorXml = new ContractorXmlBuilder()
+                .AddEntity(entity => entity
+                    .WithName("Customer", "Customers")
+                    .WithProperty("String:15", "Name", 50))
+                .Build();
+
+            // Act & Assert
+            ContractorXmlValidator.Validate(contractorXml);
+        }
+        
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void ValidateUniqueRelations_MinLengthLowerZero_ThrowsFormatException()
+        {
+            // Arrange
+            var contractorXml = new ContractorXmlBuilder()
+                .AddEntity(entity => entity
+                    .WithName("Customer", "Customers")
+                    .WithProperty("String:15", "Name", -1))
+                .Build();
+
+            // Act & Assert
+            ContractorXmlValidator.Validate(contractorXml);
+        }
+        
+        [TestMethod]
         public void ValidateComplexModel_DoesNotThrowException()
         {
             // Arrange
             var contractorXml = new ContractorXmlBuilder()
                 .AddEntity(entity => entity
                     .WithName("Customer", "Customers")
-                    .WithProperty("String", "Name")
-                    .WithProperty("String", "Email"))
+                    .WithProperty("String:50", "Name", 3)
+                    .WithProperty("String:50", "Email", 0))
                 .AddEntity(entity => entity
                     .WithName("Order", "Orders")
                     .WithRelation1ToN("Customer", "Customer", "Orders")
                     .WithProperty("DateTime", "OrderDate"))
                 .AddEntity(entity => entity
                     .WithName("Product", "Products")
-                    .WithProperty("String", "Name")
+                    .WithProperty("String:50", "Name")
                     .WithProperty("Double", "Price"))
                 .AddEntity(entity => entity
                     .WithName("OrderDetail", "OrderDetails")

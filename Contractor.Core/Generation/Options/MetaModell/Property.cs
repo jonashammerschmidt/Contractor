@@ -36,6 +36,8 @@ namespace Contractor.Core.MetaModell
 
         public bool IsHidden { get; set; }
 
+        public int MinLength { get; set; }
+
         public int Order { get; set; }
 
         public Entity Entity { get; set; }
