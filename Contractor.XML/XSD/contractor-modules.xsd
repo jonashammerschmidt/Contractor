@@ -122,6 +122,16 @@
                             <xs:documentation xml:lang="de">Optional. Definition, ob diese Relation NULL als Wert erlaubt. Default: false</xs:documentation>
                           </xs:annotation>
                         </xs:attribute>
+                        <xs:attribute name="hideIn" use="optional">
+                          <xs:annotation>
+                            <xs:documentation xml:lang="de">Optional. Legt fest, auf welcher Seite der Relation diese Entität im Expanded Dto nicht generiert wird.</xs:documentation>
+                          </xs:annotation>
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="to-side|from-side|both-sides" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
                         <xs:attribute name="onDelete" use="optional">
                           <xs:annotation>
                             <xs:documentation xml:lang="de">Optional. Setzt das Löschverhalten der Entitäten für diese Relation. Default: NoAction</xs:documentation>
